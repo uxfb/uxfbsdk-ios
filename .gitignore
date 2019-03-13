@@ -1,0 +1,116 @@
+Pods/Manifest.lock
+Pods/Alamofire/LICENSE
+Pods/Alamofire/README.md
+Pods/Alamofire/Source/AFError.swift
+Pods/Alamofire/Source/Alamofire.swift
+Pods/Alamofire/Source/DispatchQueue+Alamofire.swift
+Pods/Alamofire/Source/MultipartFormData.swift
+Pods/Alamofire/Source/NetworkReachabilityManager.swift
+Pods/Alamofire/Source/Notifications.swift
+Pods/Alamofire/Source/ParameterEncoding.swift
+Pods/Alamofire/Source/Request.swift
+Pods/Alamofire/Source/Response.swift
+Pods/Alamofire/Source/ResponseSerialization.swift
+Pods/Alamofire/Source/Result.swift
+Pods/Alamofire/Source/ServerTrustPolicy.swift
+Pods/Alamofire/Source/SessionDelegate.swift
+Pods/Alamofire/Source/SessionManager.swift
+Pods/Alamofire/Source/TaskDelegate.swift
+Pods/Alamofire/Source/Timeline.swift
+Pods/Alamofire/Source/Validation.swift
+Pods/CocoaLumberjack/LICENSE
+Pods/CocoaLumberjack/README.md
+Pods/CocoaLumberjack/Classes/CocoaLumberjack.h
+Pods/CocoaLumberjack/Classes/CocoaLumberjack.swift
+Pods/CocoaLumberjack/Classes/DDAbstractDatabaseLogger.h
+Pods/CocoaLumberjack/Classes/DDAbstractDatabaseLogger.m
+Pods/CocoaLumberjack/Classes/DDASLLogCapture.h
+Pods/CocoaLumberjack/Classes/DDASLLogCapture.m
+Pods/CocoaLumberjack/Classes/DDASLLogger.h
+Pods/CocoaLumberjack/Classes/DDASLLogger.m
+Pods/CocoaLumberjack/Classes/DDAssert.swift
+Pods/CocoaLumberjack/Classes/DDAssertMacros.h
+Pods/CocoaLumberjack/Classes/DDFileLogger+Internal.h
+Pods/CocoaLumberjack/Classes/DDFileLogger.h
+Pods/CocoaLumberjack/Classes/DDFileLogger.m
+Pods/CocoaLumberjack/Classes/DDLegacyMacros.h
+Pods/CocoaLumberjack/Classes/DDLog+LOGV.h
+Pods/CocoaLumberjack/Classes/DDLog.h
+Pods/CocoaLumberjack/Classes/DDLog.m
+Pods/CocoaLumberjack/Classes/DDLoggerNames.h
+Pods/CocoaLumberjack/Classes/DDLoggerNames.m
+Pods/CocoaLumberjack/Classes/DDLogMacros.h
+Pods/CocoaLumberjack/Classes/DDOSLogger.h
+Pods/CocoaLumberjack/Classes/DDOSLogger.m
+Pods/CocoaLumberjack/Classes/DDTTYLogger.h
+Pods/CocoaLumberjack/Classes/DDTTYLogger.m
+Pods/CocoaLumberjack/Classes/SwiftLogLevel.h
+Pods/CocoaLumberjack/Classes/CLI/CLIColor.h
+Pods/CocoaLumberjack/Classes/CLI/CLIColor.m
+Pods/CocoaLumberjack/Classes/Extensions/DDContextFilterLogFormatter.h
+Pods/CocoaLumberjack/Classes/Extensions/DDContextFilterLogFormatter.m
+Pods/CocoaLumberjack/Classes/Extensions/DDDispatchQueueLogFormatter.h
+Pods/CocoaLumberjack/Classes/Extensions/DDDispatchQueueLogFormatter.m
+Pods/CocoaLumberjack/Classes/Extensions/DDFileLogger+Buffering.h
+Pods/CocoaLumberjack/Classes/Extensions/DDFileLogger+Buffering.m
+Pods/CocoaLumberjack/Classes/Extensions/DDMultiFormatter.h
+Pods/CocoaLumberjack/Classes/Extensions/DDMultiFormatter.m
+Pods/CodableAlamofire/LICENSE
+Pods/CodableAlamofire/README.md
+Pods/CodableAlamofire/Sources/CodableAlamofire/AlamofireDecodableError.swift
+Pods/CodableAlamofire/Sources/CodableAlamofire/DataRequest+Decodable.swift
+Pods/CodableAlamofire/Sources/Supporting Files/CodableAlamofire.h
+Pods/Pods.xcodeproj/project.pbxproj
+Pods/Pods.xcodeproj/xcuserdata/Dmitry.xcuserdatad/xcschemes/Alamofire.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/Dmitry.xcuserdatad/xcschemes/CocoaLumberjack.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/Dmitry.xcuserdatad/xcschemes/CodableAlamofire.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/Dmitry.xcuserdatad/xcschemes/Pods-UX Feedback Demo.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/Dmitry.xcuserdatad/xcschemes/Usabilla.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/Dmitry.xcuserdatad/xcschemes/xcschememanagement.plist
+Pods/Target Support Files/Alamofire/Alamofire-dummy.m
+Pods/Target Support Files/Alamofire/Alamofire-Info.plist
+Pods/Target Support Files/Alamofire/Alamofire-prefix.pch
+Pods/Target Support Files/Alamofire/Alamofire-umbrella.h
+Pods/Target Support Files/Alamofire/Alamofire.modulemap
+Pods/Target Support Files/Alamofire/Alamofire.xcconfig
+Pods/Target Support Files/CocoaLumberjack/CocoaLumberjack-dummy.m
+Pods/Target Support Files/CocoaLumberjack/CocoaLumberjack-Info.plist
+Pods/Target Support Files/CocoaLumberjack/CocoaLumberjack-prefix.pch
+Pods/Target Support Files/CocoaLumberjack/CocoaLumberjack-umbrella.h
+Pods/Target Support Files/CocoaLumberjack/CocoaLumberjack.modulemap
+Pods/Target Support Files/CocoaLumberjack/CocoaLumberjack.xcconfig
+Pods/Target Support Files/CodableAlamofire/CodableAlamofire-dummy.m
+Pods/Target Support Files/CodableAlamofire/CodableAlamofire-Info.plist
+Pods/Target Support Files/CodableAlamofire/CodableAlamofire-prefix.pch
+Pods/Target Support Files/CodableAlamofire/CodableAlamofire-umbrella.h
+Pods/Target Support Files/CodableAlamofire/CodableAlamofire.modulemap
+Pods/Target Support Files/CodableAlamofire/CodableAlamofire.xcconfig
+Pods/Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo-acknowledgements.markdown
+Pods/Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo-acknowledgements.plist
+Pods/Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo-dummy.m
+Pods/Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo-frameworks.sh
+Pods/Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo-Info.plist
+Pods/Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo-umbrella.h
+Pods/Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo.debug.xcconfig
+Pods/Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo.modulemap
+Pods/Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo.release.xcconfig
+Pods/Target Support Files/Usabilla/Usabilla.xcconfig
+Pods/Usabilla/LICENSE
+Pods/Usabilla/Readme.MD
+Pods/Usabilla/Usabilla.framework/Assets.car
+Pods/Usabilla/Usabilla.framework/Info.plist
+Pods/Usabilla/Usabilla.framework/usa_localizable.strings
+Pods/Usabilla/Usabilla.framework/Usabilla
+Pods/Usabilla/Usabilla.framework.dSYM/Contents/Info.plist
+Pods/Usabilla/Usabilla.framework.dSYM/Contents/Resources/DWARF/Usabilla
+Pods/Usabilla/Usabilla.framework/Headers/Usabilla-Swift.h
+Pods/Usabilla/Usabilla.framework/Headers/Usabilla.h
+Pods/Usabilla/Usabilla.framework/Modules/module.modulemap
+Pods/Usabilla/Usabilla.framework/Modules/Usabilla.swiftmodule/arm.swiftdoc
+Pods/Usabilla/Usabilla.framework/Modules/Usabilla.swiftmodule/arm.swiftmodule
+Pods/Usabilla/Usabilla.framework/Modules/Usabilla.swiftmodule/arm64.swiftdoc
+Pods/Usabilla/Usabilla.framework/Modules/Usabilla.swiftmodule/arm64.swiftmodule
+Pods/Usabilla/Usabilla.framework/Modules/Usabilla.swiftmodule/i386.swiftdoc
+Pods/Usabilla/Usabilla.framework/Modules/Usabilla.swiftmodule/i386.swiftmodule
+Pods/Usabilla/Usabilla.framework/Modules/Usabilla.swiftmodule/x86_64.swiftdoc
+Pods/Usabilla/Usabilla.framework/Modules/Usabilla.swiftmodule/x86_64.swiftmodule
