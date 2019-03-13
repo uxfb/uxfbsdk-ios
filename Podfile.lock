@@ -1,0 +1,30 @@
+PODS:
+  - Alamofire (4.8.1)
+  - CocoaLumberjack/Core (3.5.1)
+  - CocoaLumberjack/Swift (3.5.1):
+    - CocoaLumberjack/Core
+  - CodableAlamofire (1.1.0):
+    - Alamofire (~> 4.0)
+  - Usabilla (6.0.2)
+
+DEPENDENCIES:
+  - CocoaLumberjack/Swift
+  - CodableAlamofire
+  - Usabilla (~> 6.0.2)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - CocoaLumberjack
+    - CodableAlamofire
+    - Usabilla
+
+SPEC CHECKSUMS:
+  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
+  CocoaLumberjack: 2101f8a5508197a305e737d16c5c2e9e2157628c
+  CodableAlamofire: e2d2edcec7cf413f7862c30c8fa98eded27a83f9
+  Usabilla: 9c7396fb00d9c7b1d7d0412b8fa28e8ab9a8753a
+
+PODFILE CHECKSUM: 8aa0f1c45cf800606de428feb274078065f862eb
+
+COCOAPODS: 1.6.1
