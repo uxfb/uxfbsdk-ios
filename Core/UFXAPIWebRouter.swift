@@ -7,6 +7,7 @@
 //
 
 import Alamofire
+import CocoaLumberjack
 
 enum HTTPHeaderField: String {
     case authentication = "Authorization"
@@ -15,6 +16,11 @@ enum HTTPHeaderField: String {
     case acceptEncoding = "Accept-Encoding"
     case token = "token"
     case appID = "appID"
+}
+
+extension Error {
+    var code: Int { return (self as NSError).code }
+    var domain: String { return (self as NSError).domain }
 }
 
 enum ContentType: String {
@@ -31,11 +37,7 @@ enum UFXAPIWebRouter {
         #endif
     }
     
-    private var  appID: String?{
-        return ""
-    }
-    
-    case getCampaing(campaingID: String)
+    case getCampaing(appID: String, campaingID: String)
     
     var method: HTTPMethod {
         switch self {
@@ -52,13 +54,8 @@ enum UFXAPIWebRouter {
     
     var path: String {
        switch self {
-       case .getCampaing(let campaingID):
-            if let appIdentificator = self.appID {
-               return "/forms/" + appIdentificator + "/campaings/\(campaingID)"
-           }
-            else{
-                return ""
-            }
+       case .getCampaing(let appID, let campaingID):
+            return "/forms/" + appID + "/campaigns/\(campaingID)"
         }
     }
     
@@ -79,10 +76,6 @@ enum UFXAPIWebRouter {
         default:
             break
         }
-        /*
-        if self.appID != nil {
-          parameters["appID"] = self.appID
-        }*/
   
         return parameters
     }
@@ -93,9 +86,8 @@ extension UFXAPIWebRouter: URLRequestConvertible{
     func asURLRequest() throws -> URLRequest {
         
         let url = try self.asURL()
-        #if DEBUG
-        print(url)
-        #endif
+        DDLogDebug(url.absoluteString)
+       
         var urlRequest = URLRequest(url: url)
 
         // HTTP Method
@@ -104,14 +96,15 @@ extension UFXAPIWebRouter: URLRequestConvertible{
         // Common Headers
         urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.acceptType.rawValue)
         urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
-        if self.appID != nil {
+        /*if self.token != nil {
             urlRequest.setValue( self.appID!, forHTTPHeaderField: HTTPHeaderField.appID.rawValue)
-        }
+        }*/
         
         // Parameters
-        if let parameters = parameters {
+        if let bodyParameters = parameters, bodyParameters.count > 0 {
             do {
-                urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
+                let data = try JSONSerialization.data(withJSONObject: bodyParameters, options: [])
+                urlRequest.httpBody = data
             } catch {
                 throw AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error))
             }

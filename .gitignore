@@ -114,3 +114,13 @@ Pods/Usabilla/Usabilla.framework/Modules/Usabilla.swiftmodule/i386.swiftdoc
 Pods/Usabilla/Usabilla.framework/Modules/Usabilla.swiftmodule/i386.swiftmodule
 Pods/Usabilla/Usabilla.framework/Modules/Usabilla.swiftmodule/x86_64.swiftdoc
 Pods/Usabilla/Usabilla.framework/Modules/Usabilla.swiftmodule/x86_64.swiftmodule
+Pods/AlamofireNetworkActivityLogger/LICENSE
+Pods/AlamofireNetworkActivityLogger/README.md
+Pods/AlamofireNetworkActivityLogger/Source/NetworkActivityLogger.swift
+Pods/Pods.xcodeproj/xcuserdata/Dmitry.xcuserdatad/xcschemes/AlamofireNetworkActivityLogger.xcscheme
+Pods/Target Support Files/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger-dummy.m
+Pods/Target Support Files/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger-Info.plist
+Pods/Target Support Files/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger-prefix.pch
+Pods/Target Support Files/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger-umbrella.h
+Pods/Target Support Files/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger.modulemap
+Pods/Target Support Files/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger.xcconfig

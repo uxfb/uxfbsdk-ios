@@ -24,6 +24,10 @@
 		0A019A6B22367F0C002FD4F8 /* UIAlertController+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6A22367F0C002FD4F8 /* UIAlertController+Show.swift */; };
 		0A019A6D2237B773002FD4F8 /* UFXAPIWebRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6C2237B773002FD4F8 /* UFXAPIWebRouter.swift */; };
 		0A019A6F2237C503002FD4F8 /* UXFURLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6E2237C503002FD4F8 /* UXFURLComponents.swift */; };
+		0A6CDB67223A487000C17007 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 0A6CDB66223A486F00C17007 /* Podfile */; };
+		0A6CDB69223A499700C17007 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */; };
+		0A6CDB6B223A499900C17007 /* CodableAlamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */; };
+		0A6CDB6D223A499D00C17007 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB6C223A499D00C17007 /* Alamofire.framework */; };
 		B9C53F8FD758222F0AB72EF0 /* Pods_UX_Feedback_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37DC0658862D1C4AD29E3B0 /* Pods_UX_Feedback_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +51,10 @@
 		0A019A6A22367F0C002FD4F8 /* UIAlertController+Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Show.swift"; sourceTree = "<group>"; };
 		0A019A6C2237B773002FD4F8 /* UFXAPIWebRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UFXAPIWebRouter.swift; sourceTree = "<group>"; };
 		0A019A6E2237C503002FD4F8 /* UXFURLComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFURLComponents.swift; sourceTree = "<group>"; };
+		0A6CDB66223A486F00C17007 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
+		0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodableAlamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A6CDB6C223A499D00C17007 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ECEFD8BB28ED850EA4CCC49 /* Pods-UX Feedback Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UX Feedback Demo.release.xcconfig"; path = "Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo.release.xcconfig"; sourceTree = "<group>"; };
 		A37DC0658862D1C4AD29E3B0 /* Pods_UX_Feedback_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UX_Feedback_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC6B66F9C3D158E60BC3EBD2 /* Pods-UX Feedback Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UX Feedback Demo.debug.xcconfig"; path = "Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -57,6 +65,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A6CDB69223A499700C17007 /* CocoaLumberjack.framework in Frameworks */,
+				0A6CDB6D223A499D00C17007 /* Alamofire.framework in Frameworks */,
+				0A6CDB6B223A499900C17007 /* CodableAlamofire.framework in Frameworks */,
 				B9C53F8FD758222F0AB72EF0 /* Pods_UX_Feedback_Demo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,6 +97,7 @@
 		0A019A3E22365E02002FD4F8 /* UX Feedback Demo */ = {
 			isa = PBXGroup;
 			children = (
+				0A6CDB66223A486F00C17007 /* Podfile */,
 				0A019A3F22365E03002FD4F8 /* AppDelegate.swift */,
 				0A019A4122365E03002FD4F8 /* ViewController.swift */,
 				0A019A4322365E03002FD4F8 /* Main.storyboard */,
@@ -135,6 +147,9 @@
 			isa = PBXGroup;
 			children = (
 				A37DC0658862D1C4AD29E3B0 /* Pods_UX_Feedback_Demo.framework */,
+				0A6CDB6C223A499D00C17007 /* Alamofire.framework */,
+				0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */,
+				0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -210,6 +225,7 @@
 			files = (
 				0A019A4A22365E04002FD4F8 /* LaunchScreen.storyboard in Resources */,
 				0A019A4722365E04002FD4F8 /* Assets.xcassets in Resources */,
+				0A6CDB67223A487000C17007 /* Podfile in Resources */,
 				0A019A4522365E03002FD4F8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,6 +243,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/CodableAlamofire/CodableAlamofire.framework",
 				"${PODS_ROOT}/Usabilla/Usabilla.framework",
@@ -237,6 +254,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireNetworkActivityLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableAlamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Usabilla.framework",

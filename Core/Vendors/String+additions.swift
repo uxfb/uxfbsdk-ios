@@ -14,9 +14,7 @@ extension String {
         let boundingBox = self.boundingRect(with: constraintRect, options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: [NSAttributedString.Key.font: font], context: nil)
         return boundingBox.height
     }
-}
 
-extension String{
     func convertHtml() -> NSAttributedString{
         guard let data = data(using: .utf8) else { return NSAttributedString() }
         do{
@@ -28,5 +26,9 @@ extension String{
         }catch{
             return NSAttributedString()
         }
+    }
+    
+    func localized() -> String{
+        return NSLocalizedString(self, comment: "")
     }
 }

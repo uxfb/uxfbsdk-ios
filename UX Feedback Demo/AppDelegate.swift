@@ -8,9 +8,10 @@
 
 import UIKit
 import Usabilla
+import AlamofireNetworkActivityLogger
 
 let usabillaAppID = ""
-let uxfAppID = ""
+let uxfAppID = "5b587ce3bd4d6b7e562a519f"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,7 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        Usabilla.initialize(appID: usabillaAppID)
+        #if DEBUG
+        NetworkActivityLogger.shared.level = .debug
+        NetworkActivityLogger.shared.startLogging()
+        #endif
+        
+        //Usabilla.initialize(appID: usabillaAppID)
         UXFeedback.setup(appID: uxfAppID)
         
         return true

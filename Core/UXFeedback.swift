@@ -18,8 +18,13 @@ open class UXFeedback{
     public static var delegate: UXFeedbackDelegate?
     public static var debugEnabled: Bool = false
     
-    open class func setup(appID: String?, completion: (() -> Void)? = nil){
-        
+    private static var _apiClient: UFXAPIClient!
+    
+    open class func setup(appID: String, completion: (() -> Void)? = nil){
+        _apiClient = UFXAPIClient.init(appID: appID)
+        _apiClient.getAllCampaings { (success, message) in
+            completion?()
+        }
     }
     
     open class func sendEvent(event: String){
