@@ -124,3 +124,16 @@ Pods/Target Support Files/AlamofireNetworkActivityLogger/AlamofireNetworkActivit
 Pods/Target Support Files/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger-umbrella.h
 Pods/Target Support Files/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger.modulemap
 Pods/Target Support Files/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger.xcconfig
+Pods/Pods.xcodeproj/xcuserdata/Dmitry.xcuserdatad/xcschemes/UIColor_Hex_Swift.xcscheme
+Pods/Target Support Files/UIColor_Hex_Swift/UIColor_Hex_Swift-dummy.m
+Pods/Target Support Files/UIColor_Hex_Swift/UIColor_Hex_Swift-Info.plist
+Pods/Target Support Files/UIColor_Hex_Swift/UIColor_Hex_Swift-prefix.pch
+Pods/Target Support Files/UIColor_Hex_Swift/UIColor_Hex_Swift-umbrella.h
+Pods/Target Support Files/UIColor_Hex_Swift/UIColor_Hex_Swift.modulemap
+Pods/Target Support Files/UIColor_Hex_Swift/UIColor_Hex_Swift.xcconfig
+Pods/UIColor_Hex_Swift/LICENSE
+Pods/UIColor_Hex_Swift/README.md
+Pods/UIColor_Hex_Swift/HEXColor/HEXColor.h
+Pods/UIColor_Hex_Swift/HEXColor/StringExtension.swift
+Pods/UIColor_Hex_Swift/HEXColor/UIColorExtension.swift
+Pods/UIColor_Hex_Swift/HEXColor/UIColorInputError.swift

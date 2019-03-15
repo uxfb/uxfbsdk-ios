@@ -11,5 +11,6 @@ pod 'Usabilla', '~> 6.0.2'
 pod 'CodableAlamofire'
 pod 'CocoaLumberjack/Swift'
 pod 'AlamofireNetworkActivityLogger'
+pod 'UIColor_Hex_Swift', '~> 4.2.0'
 
 end

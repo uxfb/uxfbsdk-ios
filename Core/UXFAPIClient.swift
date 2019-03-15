@@ -30,7 +30,7 @@ class UFXAPIClient{
     }
     
     func getAllCampaings(completion: ((_ success: Bool, _ message: String?)->())?){
-      self.performRequest(route: UFXAPIWebRouter.getCampaing(appID: _appID, campaingID: "5bf80e921b42fa4386b268e2")) { (status, message, result) in
+      self.performRequest(route: UXFAPIWebRouter.getCampaing(appID: _appID, campaingID: "5bf80e921b42fa4386b268e2")) { (status, message, result) in
         
         if status == .success {
             if let theme =  result!["theme"] as? Dictionary<String, Any>{
@@ -50,7 +50,7 @@ class UFXAPIClient{
     
     //MARK: internal request
     
-    internal func performRequest(route:UFXAPIWebRouter, completion:@escaping (UFXAPIClientResponseResult, String?, Dictionary<String, Any>?)->()) -> DataRequest?{
+    internal func performRequest(route:UXFAPIWebRouter, completion:@escaping (UFXAPIClientResponseResult, String?, Dictionary<String, Any>?)->()) -> DataRequest?{
         
         let urlRequest = try? route.asURLRequest()
         if urlRequest != nil {
@@ -113,7 +113,7 @@ class UFXAPIClient{
         }
     }
     
-    internal func performObjectRequest<T:Decodable>(route: UFXAPIWebRouter,
+    internal func performObjectRequest<T:Decodable>(route: UXFAPIWebRouter,
                                                            keyPath: String? = nil,
                                                            decoder: JSONDecoder = JSONDecoder(),
                                                            completion:@escaping (T?)->Void) -> DataRequest?{
@@ -148,7 +148,7 @@ class UFXAPIClient{
         }
     }
     
-    internal func performObjectArrayRequest<T:Decodable>(route: UFXAPIWebRouter,
+    internal func performObjectArrayRequest<T:Decodable>(route: UXFAPIWebRouter,
                                                        keyPath: String? = nil,
                                                        decoder: JSONDecoder = JSONDecoder(),
                                                     completion: @escaping (Result<[T]>)->Void) -> DataRequest{

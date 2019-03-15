@@ -27,7 +27,7 @@ enum ContentType: String {
     case json = "application/json"
 }
 
-enum UFXAPIWebRouter {
+enum UXFAPIWebRouter {
     
     static var baseURL: String {
         #if DEBUG
@@ -81,7 +81,7 @@ enum UFXAPIWebRouter {
     }
 }
 
-extension UFXAPIWebRouter: URLRequestConvertible{
+extension UXFAPIWebRouter: URLRequestConvertible{
     
     func asURLRequest() throws -> URLRequest {
         
@@ -114,7 +114,7 @@ extension UFXAPIWebRouter: URLRequestConvertible{
     }
     
     func asURL() throws -> URL{
-        let urlComponents = UXFURLComponents(baseUrl: UFXAPIWebRouter.baseURL,
+        let urlComponents = UXFURLComponents(baseUrl: UXFAPIWebRouter.baseURL,
                                              path: path,
                                              queryParameters: pathParameters)
         return urlComponents.url!

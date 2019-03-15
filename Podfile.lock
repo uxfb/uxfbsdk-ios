@@ -7,12 +7,14 @@ PODS:
     - CocoaLumberjack/Core
   - CodableAlamofire (1.1.0):
     - Alamofire (~> 4.0)
+  - UIColor_Hex_Swift (4.2.0)
   - Usabilla (6.0.2)
 
 DEPENDENCIES:
   - AlamofireNetworkActivityLogger
   - CocoaLumberjack/Swift
   - CodableAlamofire
+  - UIColor_Hex_Swift (~> 4.2.0)
   - Usabilla (~> 6.0.2)
 
 SPEC REPOS:
@@ -21,6 +23,7 @@ SPEC REPOS:
     - AlamofireNetworkActivityLogger
     - CocoaLumberjack
     - CodableAlamofire
+    - UIColor_Hex_Swift
     - Usabilla
 
 SPEC CHECKSUMS:
@@ -28,8 +31,9 @@ SPEC CHECKSUMS:
   AlamofireNetworkActivityLogger: 6f3076652ab7fa6c819b59be08ea038d339e36d8
   CocoaLumberjack: 2101f8a5508197a305e737d16c5c2e9e2157628c
   CodableAlamofire: e2d2edcec7cf413f7862c30c8fa98eded27a83f9
+  UIColor_Hex_Swift: bc07fc197421ee896b9ed6dcfa2054b7fbf75145
   Usabilla: 9c7396fb00d9c7b1d7d0412b8fa28e8ab9a8753a
 
-PODFILE CHECKSUM: 61226e477f36c32664ae9960a9593491d9ce4035
+PODFILE CHECKSUM: 2bef79b4c3dd072f4ec15b3e66a6e0eb3fd3686f
 
 COCOAPODS: 1.6.1
