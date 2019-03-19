@@ -30,7 +30,7 @@ class UFXAPIClient{
     }
     
     func getAllCampaings(completion: ((_ success: Bool, _ message: String?)->())?){
-      self.performRequest(route: UXFAPIWebRouter.getCampaing(appID: _appID, campaingID: "5bf80e921b42fa4386b268e2")) { (status, message, result) in
+      self.performRequest(route: UXFAPIWebRouter.getCampaing(appID: _appID, campaingID: "5c908a553300006b006496d3")) { (status, message, result) in
         
         if status == .success {
             if let theme =  result!["theme"] as? Dictionary<String, Any>{
@@ -52,12 +52,12 @@ class UFXAPIClient{
     
     internal func performRequest(route:UXFAPIWebRouter, completion:@escaping (UFXAPIClientResponseResult, String?, Dictionary<String, Any>?)->()) -> DataRequest?{
         
-        let urlRequest = try? route.asURLRequest()
+        /*let urlRequest = try? route.asURLRequest()
         if urlRequest != nil {
             if let httpBodyData = urlRequest!.httpBody {
-               // DDLogDebug(String.init(data: httpBodyData, encoding: String.Encoding.utf8) as Any)
+                DDLogDebug(String.init(data: httpBodyData, encoding: String.Encoding.utf8) as Any)
             }
-        }
+        }*/
         
         return Alamofire.request(route).responseJSON { response in
             
@@ -108,7 +108,7 @@ class UFXAPIClient{
                 return
             }*/
             
-            let data = values["site"] as? [String: AnyObject]
+            let data = values["data"] as? [String: AnyObject]
             completion(.success, nil, data)
         }
     }

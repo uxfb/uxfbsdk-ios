@@ -15,7 +15,7 @@ enum HTTPHeaderField: String {
     case acceptType = "Accept"
     case acceptEncoding = "Accept-Encoding"
     case token = "token"
-    case appID = "appID"
+    case appID = "appId"
 }
 
 extension Error {
@@ -31,7 +31,7 @@ enum UXFAPIWebRouter {
     
     static var baseURL: String {
         #if DEBUG
-         return "https://pub-api.uxfeedback.ru/v1"
+         return "http://www.mocky.io/v2"
         #else
          return "https://pub-api.uxfeedback.ru/v1"
         #endif
@@ -55,7 +55,8 @@ enum UXFAPIWebRouter {
     var path: String {
        switch self {
        case .getCampaing(let appID, let campaingID):
-            return "/forms/" + appID + "/campaigns/\(campaingID)"
+           return "/\(campaingID)"
+            //return "/forms/" + appID + "/campaigns/\(campaingID)"
         }
     }
     
