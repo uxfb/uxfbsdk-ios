@@ -9,8 +9,38 @@
 import Foundation
 import UIColor_Hex_Swift
 
-struct UXFTheme : Decodable {
+class UXFTheme : NSObject {
     
+    private(set) var titleColor: UIColor
+    private(set) var textColor: UIColor!
+    private(set) var accendentTextColor: UIColor!
+    private(set) var accentColor: UIColor!
+    private(set) var backgroundColor: UIColor!
+    private(set) var errorColor: UIColor!
+    private(set) var cardColor: UIColor!
+    private(set) var smiles: Array<String>!
+    
+    init(colorsDict: Dictionary<String, String>,
+         smilesDict: Dictionary<String, String>,
+         pages: Array<UIView>) {
+ 
+        titleColor = UIColor(colorsDict["title"] ?? "")
+        textColor = UIColor(colorsDict["text"] ?? "")
+        accendentTextColor = UIColor(colorsDict["accentedText"] ?? "")
+        accentColor = UIColor(colorsDict["accent"] ?? "")
+        backgroundColor = UIColor(colorsDict["background"] ?? "")
+        errorColor = UIColor(colorsDict["error"] ?? "")
+        cardColor = UIColor(colorsDict["card"] ?? "")
+    
+        for key in smilesDict.keys.sorted(){
+            if let value = smilesDict[key] as? String{
+              smiles.append(value)
+            }
+        }
+       // smiles = smilesDict.values.sorted()
+    }
+   
+    /*
     let colors: Dictionary<String, String>!
     let smiles: Dictionary<String, String>!
     
@@ -34,5 +64,5 @@ struct UXFTheme : Decodable {
     }
     var cardColor: UIColor{
         return UIColor(colors["card"] ?? "")
-    }
+    }*/
 }

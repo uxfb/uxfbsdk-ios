@@ -22,7 +22,8 @@ open class UXFeedback{
     
     open class func setup(appID: String, completion: (() -> Void)? = nil){
         _apiClient = UFXAPIClient.init(appID: appID)
-        _apiClient.getAllCampaings { (success, message) in
+        _apiClient.getAllCampaings { (success, message, theme) in
+            print(theme)
             completion?()
         }
     }

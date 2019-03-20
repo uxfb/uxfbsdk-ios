@@ -6,8 +6,9 @@
 //  Copyright © 2019 UXF. All rights reserved.
 //
 
-protocol UXFPageElementProtocol: Decodable{
-    var _id: String {get set}
-    var type: String {get set}
-    var value: String {get set}
+class UXFPageElementProtocol: Decodable{
+    let _id: String
+    let type: String
+    let value: String
 }
+
