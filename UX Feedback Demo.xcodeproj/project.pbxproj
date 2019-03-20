@@ -33,6 +33,8 @@
 		0A6CDB7A224110FE00C17007 /* UXFLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB79224110FE00C17007 /* UXFLabel.swift */; };
 		0A6CDB7C224111EC00C17007 /* UXFCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB7B224111EC00C17007 /* UXFCheckbox.swift */; };
 		0A6CDB7E224113F900C17007 /* UXFUIFabric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB7D224113F900C17007 /* UXFUIFabric.swift */; };
+		0A6CDB80224241DE00C17007 /* UXFPageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB7F224241DE00C17007 /* UXFPageResponse.swift */; };
+		0A6CDB822242424300C17007 /* UXFPageElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB812242424300C17007 /* UXFPageElement.swift */; };
 		B9C53F8FD758222F0AB72EF0 /* Pods_UX_Feedback_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37DC0658862D1C4AD29E3B0 /* Pods_UX_Feedback_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +67,8 @@
 		0A6CDB79224110FE00C17007 /* UXFLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFLabel.swift; sourceTree = "<group>"; };
 		0A6CDB7B224111EC00C17007 /* UXFCheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCheckbox.swift; sourceTree = "<group>"; };
 		0A6CDB7D224113F900C17007 /* UXFUIFabric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFUIFabric.swift; sourceTree = "<group>"; };
+		0A6CDB7F224241DE00C17007 /* UXFPageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFPageResponse.swift; sourceTree = "<group>"; };
+		0A6CDB812242424300C17007 /* UXFPageElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFPageElement.swift; sourceTree = "<group>"; };
 		0ECEFD8BB28ED850EA4CCC49 /* Pods-UX Feedback Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UX Feedback Demo.release.xcconfig"; path = "Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo.release.xcconfig"; sourceTree = "<group>"; };
 		A37DC0658862D1C4AD29E3B0 /* Pods_UX_Feedback_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UX_Feedback_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC6B66F9C3D158E60BC3EBD2 /* Pods-UX Feedback Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UX Feedback Demo.debug.xcconfig"; path = "Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -162,6 +166,8 @@
 				0A6CDB75223B960500C17007 /* UXFButton.swift */,
 				0A6CDB7B224111EC00C17007 /* UXFCheckbox.swift */,
 				0A6CDB79224110FE00C17007 /* UXFLabel.swift */,
+				0A6CDB7F224241DE00C17007 /* UXFPageResponse.swift */,
+				0A6CDB812242424300C17007 /* UXFPageElement.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -269,6 +275,7 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/CodableAlamofire/CodableAlamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/UIColor_Hex_Swift/UIColor_Hex_Swift.framework",
 				"${PODS_ROOT}/Usabilla/Usabilla.framework",
 				"${PODS_ROOT}/Usabilla/Usabilla.framework.dSYM",
@@ -281,6 +288,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireNetworkActivityLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableAlamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIColor_Hex_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Usabilla.framework",
 				"${DWARF_DSYM_FOLDER_PATH}/Usabilla.framework.dSYM",
@@ -321,6 +329,7 @@
 			files = (
 				0A019A56223670CA002FD4F8 /* UXFeedbackDelegate.swift in Sources */,
 				0A6CDB7A224110FE00C17007 /* UXFLabel.swift in Sources */,
+				0A6CDB822242424300C17007 /* UXFPageElement.swift in Sources */,
 				0A019A6822367EF3002FD4F8 /* UISearchBar+color.swift in Sources */,
 				0A019A6622367EF3002FD4F8 /* NSLayoutConstraint+additions.swift in Sources */,
 				0A6CDB7C224111EC00C17007 /* UXFCheckbox.swift in Sources */,
@@ -338,6 +347,7 @@
 				0A6CDB78223BD47800C17007 /* UXFText.swift in Sources */,
 				0A6CDB7E224113F900C17007 /* UXFUIFabric.swift in Sources */,
 				0A019A6722367EF3002FD4F8 /* String+additions.swift in Sources */,
+				0A6CDB80224241DE00C17007 /* UXFPageResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
