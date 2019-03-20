@@ -12,5 +12,6 @@ pod 'CodableAlamofire'
 pod 'CocoaLumberjack/Swift'
 pod 'AlamofireNetworkActivityLogger'
 pod 'UIColor_Hex_Swift', '~> 4.2.0'
+pod "pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'"
 
 end

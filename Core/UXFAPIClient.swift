@@ -30,18 +30,29 @@ class UFXAPIClient{
     }
     
     func getAllCampaings(completion: ((_ success: Bool, _ message: String?)->())?){
-      self.performRequest(route: UXFAPIWebRouter.getCampaing(appID: _appID, campaingID: "5c908a553300006b006496d3")) { (status, message, result) in
+    /*  self.performRequest(route: UXFAPIWebRouter.getCampaing(appID: _appID,
+                                                             campaingID: "5c908a553300006b006496d3"))
+      {[weak self] (status, message, result) in
         
         if status == .success {
             if let theme =  result!["theme"] as? Dictionary<String, Any>{
-                self.parseTheme(themeInfo: theme)
+                self?.parseTheme(themeInfo: theme)
                 completion?(true, nil)
                 return
             }
         }
         
         completion?(false, message)
-      }
+      }*/
+        
+        
+        performObjectRequest(route: UXFAPIWebRouter.getCampaing(appID: _appID, campaingID: "5c908a553300006b006496d3"),
+                             keyPath: "theme") { (theme: UXFTheme?) in
+                                DDLogDebug(theme.debugDescription)
+                                if let color = theme?.accentColor{
+                                    DDLogDebug(color.hexString())
+                                }
+        }
     }
     
     private func getRequest(){
@@ -175,6 +186,6 @@ class UFXAPIClient{
     
     //MARK: internal
     func parseTheme(themeInfo: Dictionary<String, Any>){
-        DDLogVerbose( themeInfo.description)
+        DDLogVerbose(themeInfo.description)
     }
 }
