@@ -29,20 +29,56 @@ class UFXAPIClient{
         _appID = appID
     }
     
-    func getAllCampaings(completion: ((_ success: Bool, _ message: String?, _ theme: UXFTheme?)->())?){
+    func getAllCampaings(completion: ((_ success: Bool, _ message: String?, _ theme: UXFTheme?, _ campaign: UXFCampaign?)->())?){
         
      self.performRequest(route: UXFAPIWebRouter.getCampaing(appID: _appID,
                                                        campaingID: "5c908a553300006b006496d3"))
-      {[weak self] (status, message, result) in
+      {(status, message, result) in
         
         if status == .success {
-            if let theme =  result!["theme"] as? Dictionary<String, Any>{
-                let theme = self?.parseTheme(themeInfo: theme)
-                completion?(true, nil, theme)
+            var theme: UXFTheme?
+            var campaign: UXFCampaign?
+            if let themeInfo =  result!["theme"] as? Dictionary<String, Any>{
+                theme = UXFTheme.init(colorsDict: themeInfo["colors"] as! Dictionary<String, String>,
+                                          smilesDict: themeInfo["smiles"] as! Dictionary<String, String>)
+                
+
             }
+            
+            if let compaignInfo = result!["campaign"] as? Dictionary<String, Any>{
+                
+                var pages = Array<UXFPage>()
+                if let pagesArrayOfDict = compaignInfo["pages"] as? Array<Dictionary<String, Any>> {
+               
+                    for pageDict in pagesArrayOfDict{
+                        var fields: Array<UIView> = []
+                        if let filedsInfoArr = pageDict["fields"] as? Array<Dictionary<String, Any>> {
+                            for fieldInfo in  filedsInfoArr{
+                                if let filed = UXFUIFabric.sharedInstance.parseUIElement(dictionary: fieldInfo){
+                                   fields.append(filed)
+                                }
+                            }
+                        }
+                        var button: UXFButton?
+                        if let buttonInfo = pageDict["button"] as? Dictionary<String, Any>{
+                            button = UXFUIFabric.sharedInstance.parseUIElement(dictionary: buttonInfo) as? UXFButton
+                        }
+                        let page = UXFPage.init(_id: pageDict["_id"] as? String,
+                                                button: button,
+                                                fields: fields)
+                        pages.append(page)
+                    }
+                }
+                
+                campaign = UXFCampaign(pages: pages,
+                                       type: UXFCampaignType.init(rawValue:  compaignInfo["type"] as! String))
+            }
+            
+           completion?(true, nil, theme, campaign)
         }
-        
-        completion?(false, message, nil)
+        else{
+           completion?(false, message, nil, nil)
+        }
       }
         
         /*
@@ -182,20 +218,4 @@ class UFXAPIClient{
     
     //MARK: internal
     //выделить тему и кампании
-    func parseTheme(themeInfo: Dictionary<String, Any>) -> (UXFTheme){
-        DDLogVerbose(themeInfo.description)
-        var pages = Array<UIView>()
-        if let pagesArrayOfDict = themeInfo["pages"] as? Array<Dictionary<String, Any>> {
-           for pageDict in pagesArrayOfDict{
-              if let uiElement = UXFUIFabric.sharedInstance.parseUIElement(dictionary: pageDict) {
-                 pages.append(uiElement)
-              }
-           }
-        }
-        
-        let theme = UXFTheme.init(colorsDict: themeInfo["colors"] as! Dictionary<String, String>,
-                                  smilesDict: themeInfo["smiles"] as! Dictionary<String, String>,
-                                  pages: pages)
-        return theme
-    }
 }

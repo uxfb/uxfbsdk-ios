@@ -11,18 +11,17 @@ import UIColor_Hex_Swift
 
 class UXFTheme : NSObject {
     
-    private(set) var titleColor: UIColor
+    private(set) var titleColor: UIColor!
     private(set) var textColor: UIColor!
     private(set) var accendentTextColor: UIColor!
     private(set) var accentColor: UIColor!
     private(set) var backgroundColor: UIColor!
     private(set) var errorColor: UIColor!
     private(set) var cardColor: UIColor!
-    private(set) var smiles: Array<String>!
+    private(set) var smiles: Array<String> = []
     
     init(colorsDict: Dictionary<String, String>,
-         smilesDict: Dictionary<String, String>,
-         pages: Array<UIView>) {
+         smilesDict: Dictionary<String, String>) {
  
         titleColor = UIColor(colorsDict["title"] ?? "")
         textColor = UIColor(colorsDict["text"] ?? "")
@@ -33,7 +32,7 @@ class UXFTheme : NSObject {
         cardColor = UIColor(colorsDict["card"] ?? "")
     
         for key in smilesDict.keys.sorted(){
-            if let value = smilesDict[key] as? String{
+            if let value = smilesDict[key]{
               smiles.append(value)
             }
         }

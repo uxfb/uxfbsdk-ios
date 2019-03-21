@@ -32,8 +32,8 @@ class UXFUIFabric{
        return nil
     }
     
-    private func createButton(dictionary: Dictionary<String, Any>)->(UIButton){
-        let button = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 80, height: 33))
+    private func createButton(dictionary: Dictionary<String, Any>)->(UXFButton){
+        let button = UXFButton.init(frame: CGRect.init(x: 0, y: 0, width: 80, height: 33))
         button.titleLabel?.text = dictionary["value"] as? String
         return button
     }

@@ -35,6 +35,8 @@
 		0A6CDB7E224113F900C17007 /* UXFUIFabric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB7D224113F900C17007 /* UXFUIFabric.swift */; };
 		0A6CDB80224241DE00C17007 /* UXFPageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB7F224241DE00C17007 /* UXFPageResponse.swift */; };
 		0A6CDB822242424300C17007 /* UXFPageElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB812242424300C17007 /* UXFPageElement.swift */; };
+		0A6CDB842243B4FB00C17007 /* UXFCampaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB832243B4FB00C17007 /* UXFCampaign.swift */; };
+		0A6CDB862243BD5500C17007 /* UXFPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB852243BD5500C17007 /* UXFPage.swift */; };
 		B9C53F8FD758222F0AB72EF0 /* Pods_UX_Feedback_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37DC0658862D1C4AD29E3B0 /* Pods_UX_Feedback_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +71,8 @@
 		0A6CDB7D224113F900C17007 /* UXFUIFabric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFUIFabric.swift; sourceTree = "<group>"; };
 		0A6CDB7F224241DE00C17007 /* UXFPageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFPageResponse.swift; sourceTree = "<group>"; };
 		0A6CDB812242424300C17007 /* UXFPageElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFPageElement.swift; sourceTree = "<group>"; };
+		0A6CDB832243B4FB00C17007 /* UXFCampaign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCampaign.swift; sourceTree = "<group>"; };
+		0A6CDB852243BD5500C17007 /* UXFPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFPage.swift; sourceTree = "<group>"; };
 		0ECEFD8BB28ED850EA4CCC49 /* Pods-UX Feedback Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UX Feedback Demo.release.xcconfig"; path = "Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo.release.xcconfig"; sourceTree = "<group>"; };
 		A37DC0658862D1C4AD29E3B0 /* Pods_UX_Feedback_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UX_Feedback_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC6B66F9C3D158E60BC3EBD2 /* Pods-UX Feedback Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UX Feedback Demo.debug.xcconfig"; path = "Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -126,8 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				0A019A5B22367E7E002FD4F8 /* Vendors */,
-				0A019A5322366A29002FD4F8 /* UXFeedback.swift */,
 				0A6CDB70223B903500C17007 /* DataModel */,
+				0A019A5322366A29002FD4F8 /* UXFeedback.swift */,
 				0A019A5922367CD6002FD4F8 /* UXFAPIClient.swift */,
 				0A019A6E2237C503002FD4F8 /* UXFURLComponents.swift */,
 				0A019A6C2237B773002FD4F8 /* UXFAPIWebRouter.swift */,
@@ -161,6 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				0A019A57223673FE002FD4F8 /* UXFTheme.swift */,
+				0A6CDB832243B4FB00C17007 /* UXFCampaign.swift */,
+				0A6CDB852243BD5500C17007 /* UXFPage.swift */,
 				0A6CDB7D224113F900C17007 /* UXFUIFabric.swift */,
 				0A6CDB77223BD47800C17007 /* UXFText.swift */,
 				0A6CDB75223B960500C17007 /* UXFButton.swift */,
@@ -328,9 +334,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A019A56223670CA002FD4F8 /* UXFeedbackDelegate.swift in Sources */,
+				0A6CDB842243B4FB00C17007 /* UXFCampaign.swift in Sources */,
 				0A6CDB7A224110FE00C17007 /* UXFLabel.swift in Sources */,
 				0A6CDB822242424300C17007 /* UXFPageElement.swift in Sources */,
 				0A019A6822367EF3002FD4F8 /* UISearchBar+color.swift in Sources */,
+				0A6CDB862243BD5500C17007 /* UXFPage.swift in Sources */,
 				0A019A6622367EF3002FD4F8 /* NSLayoutConstraint+additions.swift in Sources */,
 				0A6CDB7C224111EC00C17007 /* UXFCheckbox.swift in Sources */,
 				0A019A6F2237C503002FD4F8 /* UXFURLComponents.swift in Sources */,

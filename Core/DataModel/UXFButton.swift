@@ -8,5 +8,5 @@
 import UIKit
 
 class UXFButton: UIButton{
-  var _id: String?
+ 
 }
