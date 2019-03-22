@@ -10,13 +10,9 @@ import UIKit
 
 class UXFViewController: UIViewController{
     
-    internal var _theme: UXFTheme!
-    
-    init(theme: UXFTheme) {
-        _theme = theme
-    }
+    internal var _theme: UXFTheme?
     
     @IBAction  func closeButtonDidTap(_ sender: UIButton){
-        
+        print("tap")
     }
 }

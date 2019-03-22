@@ -17,17 +17,24 @@ class UXFRateViewController: UXFViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let buttonsCount = 5
-        for smile in _theme.smiles {
-            let button = UXFButton.init(frame: CGRect.init(x: 0, y: 0, width: 44, height: 44))
-            button.imageView?.image = nil
-            self.rateView.addSubview(button)
+        
+        if (_theme != nil) {
+            var buttonIndex = 0
+            for smile in _theme!.smiles {
+                let button = UXFButton.init(frame: CGRect.init(x: 0, y: 0, width: 44, height: 44))
+                button.imageView?.image = nil
+                button.tag = buttonIndex
+                button.backgroundColor = UIColor.lightGray
+                button.addTarget(self, action: #selector(rateButtonTap), for: .touchUpInside)
+                self.rateView.addSubview(button)
+                buttonIndex += 1
+            }
         }
-       
+      
     }
 
     
-    func rateButtonTap(_ sender: UIButton){
+    @objc func rateButtonTap(_ sender: UIButton){
         
     }
 

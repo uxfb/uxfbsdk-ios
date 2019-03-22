@@ -13,6 +13,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        if let theme = UXFeedback.theme {
+           let controller = UXFRateViewController.init()
+           controller._theme = theme
+           self.present(controller, animated: true, completion: nil)
+        }
     }
 
 
