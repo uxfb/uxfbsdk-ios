@@ -81,8 +81,10 @@ class UFXAPIClient{
                     }
                 }
                 
-                campaign = UXFCampaign(pages: pages,
-                                       type: UXFCampaignType.init(rawValue:  compaignInfo["type"] as! String))
+                campaign = UXFCampaign.init(pages: pages,
+                                            type: UXFCampaignType.init(rawValue:  compaignInfo["type"] as! String),
+                                            showAttemptCount: 3,
+                                            showDelay: 1.0)
             }
             
            DDLogDebug("Get all campaings successful")

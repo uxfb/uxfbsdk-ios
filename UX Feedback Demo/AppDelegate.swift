@@ -16,7 +16,7 @@ let uxfAppID = "5b587ce3bd4d6b7e562a519f"
 
 enum UXFedbackCompanyEvents: String {
     case mainScreen
-    case infoScreen
+    case secondScreen
     case aboutScreen
 }
 
@@ -35,9 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NetworkActivityLogger.shared.level = .debug
         NetworkActivityLogger.shared.startLogging()
         #endif
+        
+        print(String(describing: UIDevice.current.identifierForVendor?.uuidString))
 
         //Usabilla.initialize(appID: usabillaAppID)
-        UXFeedback.setup(appID: uxfAppID, applicationWindow: self.window){ success in
+        UXFeedback.setup(appID: uxfAppID, applicationWindow: self.window!){ success in
             DDLogDebug("UXFeedback initialization " + (success == true ? "successful" : "failed"))
         }
         

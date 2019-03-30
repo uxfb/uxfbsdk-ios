@@ -11,8 +11,11 @@ import UIKit
 class UXFViewController: UIViewController{
     
     internal var _theme: UXFTheme?
+    var presentationAnimated = true
+    var didCloseHandler: (()->())?
     
     @IBAction  func closeButtonDidTap(_ sender: UIButton){
-        print("tap")
+        self.dismiss(animated: presentationAnimated, completion: didCloseHandler)
+        didCloseHandler = nil
     }
 }

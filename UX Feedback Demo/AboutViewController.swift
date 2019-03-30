@@ -1,0 +1,21 @@
+//
+//  AboutViewController.swift
+//  UX Feedback Demo
+//
+//  Created by Dmitry Kudryavtsev on 30.03.2019.
+//  Copyright © 2019 UXF. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+class AboutViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        
+        UXFeedback.sendEvent(event: UXFedbackCompanyEvents.aboutScreen.rawValue)
+    }
+    
+}

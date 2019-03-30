@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A019A4022365E03002FD4F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A3F22365E03002FD4F8 /* AppDelegate.swift */; };
-		0A019A4222365E03002FD4F8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A4122365E03002FD4F8 /* ViewController.swift */; };
+		0A019A4222365E03002FD4F8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A4122365E03002FD4F8 /* MainViewController.swift */; };
 		0A019A4522365E03002FD4F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4322365E03002FD4F8 /* Main.storyboard */; };
 		0A019A4722365E04002FD4F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4622365E04002FD4F8 /* Assets.xcassets */; };
 		0A019A4A22365E04002FD4F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4822365E04002FD4F8 /* LaunchScreen.storyboard */; };
@@ -24,7 +24,9 @@
 		0A019A6B22367F0C002FD4F8 /* UIAlertController+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6A22367F0C002FD4F8 /* UIAlertController+Show.swift */; };
 		0A019A6D2237B773002FD4F8 /* UXFAPIWebRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6C2237B773002FD4F8 /* UXFAPIWebRouter.swift */; };
 		0A019A6F2237C503002FD4F8 /* UXFURLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6E2237C503002FD4F8 /* UXFURLComponents.swift */; };
-		0A6CDB67223A487000C17007 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 0A6CDB66223A486F00C17007 /* Podfile */; };
+		0A0CDEA6224F42E900E1C092 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEA5224F42E900E1C092 /* Queue.swift */; };
+		0A0CDEA8224F4B6B00E1C092 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEA7224F4B6B00E1C092 /* SecondViewController.swift */; };
+		0A0CDEAA224F4B7A00E1C092 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEA9224F4B7A00E1C092 /* AboutViewController.swift */; };
 		0A6CDB69223A499700C17007 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */; };
 		0A6CDB6B223A499900C17007 /* CodableAlamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */; };
 		0A6CDB6D223A499D00C17007 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB6C223A499D00C17007 /* Alamofire.framework */; };
@@ -46,7 +48,7 @@
 /* Begin PBXFileReference section */
 		0A019A3C22365E02002FD4F8 /* UX Feedback Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UX Feedback Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A019A3F22365E03002FD4F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0A019A4122365E03002FD4F8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0A019A4122365E03002FD4F8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0A019A4422365E03002FD4F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A019A4622365E04002FD4F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A019A4922365E04002FD4F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -63,7 +65,9 @@
 		0A019A6A22367F0C002FD4F8 /* UIAlertController+Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Show.swift"; sourceTree = "<group>"; };
 		0A019A6C2237B773002FD4F8 /* UXFAPIWebRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFAPIWebRouter.swift; sourceTree = "<group>"; };
 		0A019A6E2237C503002FD4F8 /* UXFURLComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFURLComponents.swift; sourceTree = "<group>"; };
-		0A6CDB66223A486F00C17007 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		0A0CDEA5224F42E900E1C092 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		0A0CDEA7224F4B6B00E1C092 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		0A0CDEA9224F4B7A00E1C092 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodableAlamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6CDB6C223A499D00C17007 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,9 +125,10 @@
 		0A019A3E22365E02002FD4F8 /* UX Feedback Demo */ = {
 			isa = PBXGroup;
 			children = (
-				0A6CDB66223A486F00C17007 /* Podfile */,
 				0A019A3F22365E03002FD4F8 /* AppDelegate.swift */,
-				0A019A4122365E03002FD4F8 /* ViewController.swift */,
+				0A019A4122365E03002FD4F8 /* MainViewController.swift */,
+				0A0CDEA7224F4B6B00E1C092 /* SecondViewController.swift */,
+				0A0CDEA9224F4B7A00E1C092 /* AboutViewController.swift */,
 				0A019A4322365E03002FD4F8 /* Main.storyboard */,
 				0A019A4622365E04002FD4F8 /* Assets.xcassets */,
 				0A019A4822365E04002FD4F8 /* LaunchScreen.storyboard */,
@@ -156,6 +161,7 @@
 				0A019A6022367EF2002FD4F8 /* UIImage+Tinting.swift */,
 				0A019A6322367EF2002FD4F8 /* UISearchBar+color.swift */,
 				0A019A5F22367EF2002FD4F8 /* UIVIewAddition.swift */,
+				0A0CDEA5224F42E900E1C092 /* Queue.swift */,
 			);
 			path = Vendors;
 			sourceTree = "<group>";
@@ -278,7 +284,6 @@
 				0A6CDB8D2243C95B00C17007 /* UXFRateViewController.xib in Resources */,
 				0A019A4A22365E04002FD4F8 /* LaunchScreen.storyboard in Resources */,
 				0A019A4722365E04002FD4F8 /* Assets.xcassets in Resources */,
-				0A6CDB67223A487000C17007 /* Podfile in Resources */,
 				0A019A4522365E03002FD4F8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,16 +366,19 @@
 				0A019A6622367EF3002FD4F8 /* NSLayoutConstraint+additions.swift in Sources */,
 				0A6CDB7C224111EC00C17007 /* UXFCheckbox.swift in Sources */,
 				0A019A6F2237C503002FD4F8 /* UXFURLComponents.swift in Sources */,
-				0A019A4222365E03002FD4F8 /* ViewController.swift in Sources */,
+				0A0CDEAA224F4B7A00E1C092 /* AboutViewController.swift in Sources */,
+				0A019A4222365E03002FD4F8 /* MainViewController.swift in Sources */,
 				0A019A6522367EF3002FD4F8 /* UIImage+Tinting.swift in Sources */,
 				0A019A6B22367F0C002FD4F8 /* UIAlertController+Show.swift in Sources */,
 				0A6CDB8C2243C95B00C17007 /* UXFRateViewController.swift in Sources */,
 				0A019A4022365E03002FD4F8 /* AppDelegate.swift in Sources */,
 				0A019A5422366A29002FD4F8 /* UXFeedback.swift in Sources */,
 				0A019A6422367EF3002FD4F8 /* UIVIewAddition.swift in Sources */,
+				0A0CDEA6224F42E900E1C092 /* Queue.swift in Sources */,
 				0A019A58223673FE002FD4F8 /* UXFTheme.swift in Sources */,
 				0A019A5A22367CD6002FD4F8 /* UXFAPIClient.swift in Sources */,
 				0A6CDB76223B960500C17007 /* UXFButton.swift in Sources */,
+				0A0CDEA8224F4B6B00E1C092 /* SecondViewController.swift in Sources */,
 				0A019A6D2237B773002FD4F8 /* UXFAPIWebRouter.swift in Sources */,
 				0A6CDB78223BD47800C17007 /* UXFText.swift in Sources */,
 				0A6CDB7E224113F900C17007 /* UXFUIFabric.swift in Sources */,

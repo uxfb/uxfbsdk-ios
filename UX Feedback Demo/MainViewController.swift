@@ -9,19 +9,18 @@
 import UIKit
 import CocoaLumberjack
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        UXFeedback.sendEvent(event: "")
+        UXFeedback.sendEvent(event: UXFedbackCompanyEvents.mainScreen.rawValue)
     }
 
 }
 
-
-extension ViewController: UXFeedbackDelegate{
+extension MainViewController: UXFeedbackDelegate{
     func formDidLoaded(form: UINavigationController) {
         DDLogDebug(#function)
     }
