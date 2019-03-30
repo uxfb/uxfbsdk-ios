@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CocoaLumberjack
 
 class ViewController: UIViewController {
 
@@ -14,13 +15,30 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        if let theme = UXFeedback.theme {
-           let controller = UXFRateViewController.init()
-           controller._theme = theme
-           self.present(controller, animated: true, completion: nil)
-        }
+        UXFeedback.sendEvent(event: "")
     }
-
 
 }
 
+
+extension ViewController: UXFeedbackDelegate{
+    func formDidLoaded(form: UINavigationController) {
+        DDLogDebug(#function)
+    }
+    
+    func formDidFailLoading(error: UXFError) {
+        DDLogDebug(#function)
+    }
+    
+    func formDidClose(formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
+        DDLogDebug(#function)
+    }
+    
+    func formWillClose(form: UINavigationController, formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
+        DDLogDebug(#function)
+    }
+    
+    func campaignDidClose(withFeedbackResult result: UXFeedbackResult, isRedirectToAppStoreEnabled: Bool) {
+        DDLogDebug(#function)
+    }
+}
