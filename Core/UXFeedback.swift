@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 public struct UXFError : Error {
     
@@ -17,21 +18,34 @@ open class UXFeedback{
     
     public static var delegate: UXFeedbackDelegate?
     public static var debugEnabled: Bool = false
+    public static var animationEnabled: Bool = true
     
+    private static weak var _appWindow: UIWindow?
     private static var _apiClient: UFXAPIClient!
     static var theme: UXFTheme?
     static var campaign: UXFCampaign?
     
-    open class func setup(appID: String, completion: (() -> Void)? = nil){
+    //Initialization SDK
+    open class func setup(appID: String,
+                          applicationWindow: UIWindow?,
+                          completion: ((_ success: Bool) -> Void)? = nil){
+        
         _apiClient = UFXAPIClient.init(appID: appID)
         _apiClient.getAllCampaings { (success, message, aTheme, aCampaign) in
             theme = aTheme
             campaign = aCampaign
-            completion?()
+            _appWindow = applicationWindow
+            completion?(success)
         }
     }
     
+    //Requrst event to show campaing form with specific name
     open class func sendEvent(event: String){
         
+        if let theme = UXFeedback.theme {
+            let controller = UXFRateViewController.init()
+            controller._theme = theme
+            _appWindow?.rootViewController?.present(controller, animated: animationEnabled, completion: nil)
+        }
     }
 }

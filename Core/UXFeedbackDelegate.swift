@@ -19,10 +19,9 @@ public struct UXFeedbackResult {
 }
 
 public protocol UXFeedbackDelegate: AnyObject {
-    func formDidLoaded(form: UINavigationController)
-    func formDidFailLoading(error: UXFError)
-    func formDidClose(formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool)
-    func formWillClose(form: UINavigationController, formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool)
-    
-    func campaignDidClose(withFeedbackResult result: UXFeedbackResult, isRedirectToAppStoreEnabled: Bool)
+    optional func formDidLoaded(form: UINavigationController)
+    optional func formDidFailLoading(error: UXFError)
+    optional func formDidClose(formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool)
+    optional func formWillClose(form: UINavigationController, formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool)
+    optional func campaignDidClose(withFeedbackResult result: UXFeedbackResult, isRedirectToAppStoreEnabled: Bool)
 }

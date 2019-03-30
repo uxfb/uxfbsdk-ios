@@ -27,10 +27,21 @@ class UFXAPIClient{
     init(appID: String){
         DDLog.add(DDOSLogger.sharedInstance, with: DDLogLevel.debug)
         _appID = appID
+  
+        NotificationCenter.default.addObserver(self,selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+    
+    @objc private func applicationDidBecomeActive(){
+        self.getAllCampaings(completion: nil)
     }
     
     func getAllCampaings(completion: ((_ success: Bool, _ message: String?, _ theme: UXFTheme?, _ campaign: UXFCampaign?)->())?){
-        
+    
+     DDLogDebug("Get all campaings:")
      self.performRequest(route: UXFAPIWebRouter.getCampaing(appID: _appID,
                                                        campaingID: "5c908a553300006b006496d3"))
       {(status, message, result) in
@@ -74,9 +85,11 @@ class UFXAPIClient{
                                        type: UXFCampaignType.init(rawValue:  compaignInfo["type"] as! String))
             }
             
+           DDLogDebug("Get all campaings successful")
            completion?(true, nil, theme, campaign)
         }
         else{
+           DDLogDebug("Get all campaings failed")
            completion?(false, message, nil, nil)
         }
       }
@@ -215,7 +228,4 @@ class UFXAPIClient{
             }
         }
     }
-    
-    //MARK: internal
-    //выделить тему и кампании
 }

@@ -63,7 +63,7 @@
 		0A019A6A22367F0C002FD4F8 /* UIAlertController+Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Show.swift"; sourceTree = "<group>"; };
 		0A019A6C2237B773002FD4F8 /* UXFAPIWebRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFAPIWebRouter.swift; sourceTree = "<group>"; };
 		0A019A6E2237C503002FD4F8 /* UXFURLComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFURLComponents.swift; sourceTree = "<group>"; };
-		0A6CDB66223A486F00C17007 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
+		0A6CDB66223A486F00C17007 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodableAlamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6CDB6C223A499D00C17007 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };

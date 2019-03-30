@@ -9,9 +9,16 @@
 import UIKit
 import Usabilla
 import AlamofireNetworkActivityLogger
+import CocoaLumberjack
 
 let usabillaAppID = ""
 let uxfAppID = "5b587ce3bd4d6b7e562a519f"
+
+enum UXFedbackCompanyEvents: String {
+    case mainScreen
+    case infoScreen
+    case aboutScreen
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,13 +29,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        DDLog.add(DDOSLogger.sharedInstance)
+        
         #if DEBUG
         NetworkActivityLogger.shared.level = .debug
         NetworkActivityLogger.shared.startLogging()
         #endif
-        
+
         //Usabilla.initialize(appID: usabillaAppID)
-        UXFeedback.setup(appID: uxfAppID)
+        UXFeedback.setup(appID: uxfAppID, applicationWindow: self.window){ success in
+            DDLogDebug("UXFeedback initialization " + (success == true ? "successful" : "failed"))
+        }
         
         return true
     }
