@@ -8,26 +8,38 @@
 
 
 import UIKit
+import CoreGraphics
 
 class UXFRateViewController: UXFViewController {
     
     @IBOutlet var rateView: UIStackView!
+    @IBOutlet var titleLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        if (_theme != nil) {
-            var buttonIndex = 0
-            for smile in _theme!.smiles {
-                let button = UXFButton.init(frame: CGRect.init(x: 0, y: 0, width: 44, height: 44))
-                button.imageView?.image = nil
+        if (theme != nil) {
+            let smilesCount = theme!.smiles.count
+            for buttonIndex in 0..<smilesCount{
+                let layoutButtonsView = self.rateView as UIView
+                var buttonWidth = layoutButtonsView.bounds.size.width/CGFloat(smilesCount)
+                let buttonHeight = self.rateView.bounds.size.height
+                if buttonWidth > buttonHeight{
+                    buttonWidth = buttonHeight
+                }
+                let button = UXFButton.init(frame: CGRect.init(x: 0,
+                                                               y: 0,
+                                                               width: buttonWidth,
+                                                               height: buttonHeight))
+                theme?.getSmile(index: buttonIndex, completion: { (image) in
+                    button.setImage(image, for: UIControl.State.normal)
+                })
+                
                 button.tag = buttonIndex
-                button.backgroundColor = UIColor.lightGray
                 button.addTarget(self, action: #selector(rateButtonTap), for: .touchUpInside)
-                self.rateView.addSubview(button)
-                buttonIndex += 1
+                self.rateView.addArrangedSubview(button)
             }
         }
       
@@ -35,7 +47,7 @@ class UXFRateViewController: UXFViewController {
 
     
     @objc func rateButtonTap(_ sender: UIButton){
-        
+        nextHandler?()
     }
 
 }

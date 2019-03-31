@@ -379,3 +379,23 @@ Pods/Target Support Files/SVGKit/SVGKit-Info.plist
 Pods/Target Support Files/SVGKit/SVGKit-prefix.pch
 Pods/Target Support Files/SVGKit/SVGKit.modulemap
 Pods/Target Support Files/SVGKit/SVGKit.xcconfig
+Pods/Nuke/LICENSE
+Pods/Nuke/README.md
+Pods/Nuke/Sources/DataCache.swift
+Pods/Nuke/Sources/DataLoader.swift
+Pods/Nuke/Sources/ImageCache.swift
+Pods/Nuke/Sources/ImageDecoding.swift
+Pods/Nuke/Sources/ImagePipeline.swift
+Pods/Nuke/Sources/ImagePreheater.swift
+Pods/Nuke/Sources/ImageProcessing.swift
+Pods/Nuke/Sources/ImageRequest.swift
+Pods/Nuke/Sources/ImageTaskMetrics.swift
+Pods/Nuke/Sources/ImageView.swift
+Pods/Nuke/Sources/Internal.swift
+Pods/Pods.xcodeproj/xcuserdata/Dmitry.xcuserdatad/xcschemes/Nuke.xcscheme
+Pods/Target Support Files/Nuke/Nuke-dummy.m
+Pods/Target Support Files/Nuke/Nuke-Info.plist
+Pods/Target Support Files/Nuke/Nuke-prefix.pch
+Pods/Target Support Files/Nuke/Nuke-umbrella.h
+Pods/Target Support Files/Nuke/Nuke.modulemap
+Pods/Target Support Files/Nuke/Nuke.xcconfig

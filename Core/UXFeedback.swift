@@ -23,9 +23,10 @@ open class UXFeedback: NSObject{
     private static weak var _activeEventController: UIViewController?
     private static weak var _appWindow: UIWindow!
     private static var _apiClient: UFXAPIClient!
-    static var theme: UXFTheme?
-    static var _campaign: UXFCampaign?
+    private static var _theme: UXFTheme?
+    private static var _campaign: UXFCampaign?
     private static var _eventToSend: String?
+    private static var _formPresentor: UXFCampaignFormPresentor?
     
     //Initialization SDK
     open class func setup(appID: String,
@@ -34,7 +35,7 @@ open class UXFeedback: NSObject{
         
         _apiClient = UFXAPIClient.init(appID: appID)
         _apiClient.getAllCampaings { (success, message, aTheme, aCampaign) in
-            theme = aTheme
+            _theme = aTheme
             _campaign = aCampaign
             _appWindow = applicationWindow
         
@@ -55,18 +56,11 @@ open class UXFeedback: NSObject{
         if let campaign = _campaign, campaign.show() == true{
             _eventToSend = nil
             DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay), execute: {
-                showCampaingForm(campaignToShow: campaign)
+                _formPresentor?.dismissForm()
+                _formPresentor = UXFCampaignFormPresentor.init(window: self._appWindow, campaign:  campaign, theme: _theme)
+                _formPresentor?.isAnimationFormEnabled = animationEnabled
+                _formPresentor?.showForm()
             })
         }
-    }
-    
-     private class func showCampaingForm(campaignToShow: UXFCampaign){
-        let controller = UXFRateViewController.init()
-        controller.modalPresentationStyle = .overCurrentContext
-        controller._theme = theme
-        controller.didCloseHandler = {
-            
-        }
-        _appWindow.rootViewController?.present(controller, animated: animationEnabled, completion: nil)
     }
 }

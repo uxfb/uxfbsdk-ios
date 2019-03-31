@@ -21,6 +21,10 @@ struct UXFCampaign{
     #warning("implement campaign ID here")
     private let attemptKey = "campaingAttempt"
     
+    var formsCount: Int{
+        return 2
+    }
+    
     private(set) var pages: Array<UXFPage> = []
     private(set) var type: UXFCampaignType!
     //private(set) var position: UXFCampaignPosition!
@@ -38,6 +42,7 @@ struct UXFCampaign{
             return true
         }
         
-        return false
+        return true//false
     }
+    
 }

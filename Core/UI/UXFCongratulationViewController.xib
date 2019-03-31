@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UXFCongratulationViewController" customModule="UX_Feedback_Demo" customModuleProvider="target">
+            <connections>
+                <outlet property="titleLabel" destination="yNv-N1-VgY" id="Mem-09-jWW"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dhs-Wv-StQ">
+                    <rect key="frame" x="8" y="507" width="359" height="152"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNv-N1-VgY">
+                            <rect key="frame" x="8" y="89" width="343" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="Fuo-KI-DFy"/>
+                            </constraints>
+                            <string key="text">Спасибо за обратную связь!
+Мы постараемся быть лучше!</string>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XcL-Jy-isi">
+                            <rect key="frame" x="326" y="0.0" width="33" height="33"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="33" id="F3c-vh-cni"/>
+                                <constraint firstAttribute="height" constant="33" id="btN-c5-gIu"/>
+                            </constraints>
+                            <state key="normal" image="close_image"/>
+                            <connections>
+                                <action selector="closeButtonDidTap:" destination="-1" eventType="touchUpInside" id="1hd-dn-V7G"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="YLc-bg-a5z">
+                            <rect key="frame" x="151.5" y="27" width="56" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="5gf-Va-Bi5"/>
+                                <constraint firstAttribute="width" constant="56" id="xg5-FQ-ZaP"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="yNv-N1-VgY" firstAttribute="top" secondItem="YLc-bg-a5z" secondAttribute="bottom" constant="12" id="7Zz-da-rFL"/>
+                        <constraint firstAttribute="bottom" secondItem="yNv-N1-VgY" secondAttribute="bottom" constant="15" id="8sx-aL-Qeo"/>
+                        <constraint firstAttribute="trailing" secondItem="yNv-N1-VgY" secondAttribute="trailing" constant="8" id="JBK-a2-8Ig"/>
+                        <constraint firstItem="YLc-bg-a5z" firstAttribute="centerX" secondItem="dhs-Wv-StQ" secondAttribute="centerX" id="Scw-NC-6P7"/>
+                        <constraint firstAttribute="trailing" secondItem="XcL-Jy-isi" secondAttribute="trailing" id="Try-mF-TAY"/>
+                        <constraint firstItem="YLc-bg-a5z" firstAttribute="top" secondItem="dhs-Wv-StQ" secondAttribute="top" constant="27" id="ZcL-nW-BFE"/>
+                        <constraint firstItem="yNv-N1-VgY" firstAttribute="leading" secondItem="dhs-Wv-StQ" secondAttribute="leading" constant="8" id="gSB-n6-7bd"/>
+                        <constraint firstItem="XcL-Jy-isi" firstAttribute="top" secondItem="dhs-Wv-StQ" secondAttribute="top" id="ptD-EX-qT0"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dhs-Wv-StQ" secondAttribute="trailing" constant="8" id="C35-yW-SCc"/>
+                <constraint firstItem="dhs-Wv-StQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="P4m-KE-K80"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="dhs-Wv-StQ" secondAttribute="bottom" constant="8" id="Vmo-G1-1Cl"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="close_image" width="14" height="14"/>
+        <image name="heart" width="56" height="50"/>
+    </resources>
+</document>

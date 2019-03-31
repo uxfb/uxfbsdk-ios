@@ -27,6 +27,12 @@
 		0A0CDEA6224F42E900E1C092 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEA5224F42E900E1C092 /* Queue.swift */; };
 		0A0CDEA8224F4B6B00E1C092 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEA7224F4B6B00E1C092 /* SecondViewController.swift */; };
 		0A0CDEAA224F4B7A00E1C092 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEA9224F4B7A00E1C092 /* AboutViewController.swift */; };
+		0A0CDEAC2250598800E1C092 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A0CDEAB2250598800E1C092 /* Images.xcassets */; };
+		0A0CDEAE2250664C00E1C092 /* UXFCampaignFormPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEAD2250664C00E1C092 /* UXFCampaignFormPresentor.swift */; };
+		0A0CDEB122506E0C00E1C092 /* UXFCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEAF22506E0C00E1C092 /* UXFCommentViewController.swift */; };
+		0A0CDEB222506E0C00E1C092 /* UXFCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB022506E0C00E1C092 /* UXFCommentViewController.xib */; };
+		0A0CDEB522506F7800E1C092 /* UXFCongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB322506F7800E1C092 /* UXFCongratulationViewController.swift */; };
+		0A0CDEB622506F7800E1C092 /* UXFCongratulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB422506F7800E1C092 /* UXFCongratulationViewController.xib */; };
 		0A6CDB69223A499700C17007 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */; };
 		0A6CDB6B223A499900C17007 /* CodableAlamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */; };
 		0A6CDB6D223A499D00C17007 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB6C223A499D00C17007 /* Alamofire.framework */; };
@@ -68,6 +74,12 @@
 		0A0CDEA5224F42E900E1C092 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		0A0CDEA7224F4B6B00E1C092 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		0A0CDEA9224F4B7A00E1C092 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		0A0CDEAB2250598800E1C092 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0A0CDEAD2250664C00E1C092 /* UXFCampaignFormPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCampaignFormPresentor.swift; sourceTree = "<group>"; };
+		0A0CDEAF22506E0C00E1C092 /* UXFCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCommentViewController.swift; sourceTree = "<group>"; };
+		0A0CDEB022506E0C00E1C092 /* UXFCommentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFCommentViewController.xib; sourceTree = "<group>"; };
+		0A0CDEB322506F7800E1C092 /* UXFCongratulationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCongratulationViewController.swift; sourceTree = "<group>"; };
+		0A0CDEB422506F7800E1C092 /* UXFCongratulationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFCongratulationViewController.xib; sourceTree = "<group>"; };
 		0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodableAlamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6CDB6C223A499D00C17007 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,10 +156,12 @@
 				0A6CDB70223B903500C17007 /* DataModel */,
 				0A6CDB872243C8F900C17007 /* UI */,
 				0A019A5322366A29002FD4F8 /* UXFeedback.swift */,
+				0A0CDEAD2250664C00E1C092 /* UXFCampaignFormPresentor.swift */,
 				0A019A5922367CD6002FD4F8 /* UXFAPIClient.swift */,
 				0A019A6E2237C503002FD4F8 /* UXFURLComponents.swift */,
 				0A019A6C2237B773002FD4F8 /* UXFAPIWebRouter.swift */,
 				0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */,
+				0A0CDEAB2250598800E1C092 /* Images.xcassets */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -197,6 +211,10 @@
 				0A6CDB8E22446EC900C17007 /* UXFViewController.swift */,
 				0A6CDB8A2243C95B00C17007 /* UXFRateViewController.swift */,
 				0A6CDB8B2243C95B00C17007 /* UXFRateViewController.xib */,
+				0A0CDEAF22506E0C00E1C092 /* UXFCommentViewController.swift */,
+				0A0CDEB022506E0C00E1C092 /* UXFCommentViewController.xib */,
+				0A0CDEB322506F7800E1C092 /* UXFCongratulationViewController.swift */,
+				0A0CDEB422506F7800E1C092 /* UXFCongratulationViewController.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -282,9 +300,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A6CDB8D2243C95B00C17007 /* UXFRateViewController.xib in Resources */,
+				0A0CDEAC2250598800E1C092 /* Images.xcassets in Resources */,
 				0A019A4A22365E04002FD4F8 /* LaunchScreen.storyboard in Resources */,
 				0A019A4722365E04002FD4F8 /* Assets.xcassets in Resources */,
+				0A0CDEB222506E0C00E1C092 /* UXFCommentViewController.xib in Resources */,
 				0A019A4522365E03002FD4F8 /* Main.storyboard in Resources */,
+				0A0CDEB622506F7800E1C092 /* UXFCongratulationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +325,7 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/CodableAlamofire/CodableAlamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/UIColor_Hex_Swift/UIColor_Hex_Swift.framework",
 				"${PODS_ROOT}/Usabilla/Usabilla.framework",
@@ -317,6 +339,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireNetworkActivityLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableAlamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIColor_Hex_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Usabilla.framework",
@@ -366,6 +389,7 @@
 				0A019A6622367EF3002FD4F8 /* NSLayoutConstraint+additions.swift in Sources */,
 				0A6CDB7C224111EC00C17007 /* UXFCheckbox.swift in Sources */,
 				0A019A6F2237C503002FD4F8 /* UXFURLComponents.swift in Sources */,
+				0A0CDEB122506E0C00E1C092 /* UXFCommentViewController.swift in Sources */,
 				0A0CDEAA224F4B7A00E1C092 /* AboutViewController.swift in Sources */,
 				0A019A4222365E03002FD4F8 /* MainViewController.swift in Sources */,
 				0A019A6522367EF3002FD4F8 /* UIImage+Tinting.swift in Sources */,
@@ -375,6 +399,7 @@
 				0A019A5422366A29002FD4F8 /* UXFeedback.swift in Sources */,
 				0A019A6422367EF3002FD4F8 /* UIVIewAddition.swift in Sources */,
 				0A0CDEA6224F42E900E1C092 /* Queue.swift in Sources */,
+				0A0CDEAE2250664C00E1C092 /* UXFCampaignFormPresentor.swift in Sources */,
 				0A019A58223673FE002FD4F8 /* UXFTheme.swift in Sources */,
 				0A019A5A22367CD6002FD4F8 /* UXFAPIClient.swift in Sources */,
 				0A6CDB76223B960500C17007 /* UXFButton.swift in Sources */,
@@ -383,6 +408,7 @@
 				0A6CDB78223BD47800C17007 /* UXFText.swift in Sources */,
 				0A6CDB7E224113F900C17007 /* UXFUIFabric.swift in Sources */,
 				0A019A6722367EF3002FD4F8 /* String+additions.swift in Sources */,
+				0A0CDEB522506F7800E1C092 /* UXFCongratulationViewController.swift in Sources */,
 				0A6CDB80224241DE00C17007 /* UXFPageResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,15 +7,32 @@
 //
 
 import UIKit
+import CocoaLumberjack
 
 class UXFViewController: UIViewController{
     
-    internal var _theme: UXFTheme?
+    @IBOutlet var progressLabel: UILabel?
+    
+    internal var theme: UXFTheme?
     var presentationAnimated = true
     var didCloseHandler: (()->())?
+    var nextHandler: (()->())?
+    var backHandler: (()->())?
+    
+    @IBAction func backButtonTap(_ sender: UIButton){
+        backHandler?()
+    }
     
     @IBAction  func closeButtonDidTap(_ sender: UIButton){
-        self.dismiss(animated: presentationAnimated, completion: didCloseHandler)
+        close(animated: presentationAnimated)
+    }
+    
+    func close(animated: Bool = false){
+        self.dismiss(animated: animated, completion: didCloseHandler)
         didCloseHandler = nil
+    }
+    
+    deinit {
+        DDLogDebug(#function)
     }
 }

@@ -24,7 +24,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A some label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AdX-D3-9YW">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HwC-cB-aH6">
@@ -47,7 +47,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="F2h-oK-8EG" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="98j-hy-pyH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="F2h-oK-8EG" secondAttribute="trailing" constant="16" id="B4t-S2-kr9"/>
@@ -82,7 +82,7 @@
                                 <state key="normal" title="Button"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                         <constraints>
                             <constraint firstItem="9lI-AI-BYi" firstAttribute="top" secondItem="W6I-vj-OPE" secondAttribute="top" constant="30" id="APA-ez-Yf2"/>
                             <constraint firstItem="AmZ-aN-JaK" firstAttribute="centerX" secondItem="9Zr-EA-2wp" secondAttribute="centerX" id="NAS-un-dX7"/>
@@ -112,7 +112,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                         <constraints>
                             <constraint firstItem="L4K-pL-1dg" firstAttribute="trailing" secondItem="2Cn-L9-fHq" secondAttribute="trailing" constant="16" id="Qat-JO-C9n"/>
                             <constraint firstItem="2Cn-L9-fHq" firstAttribute="top" secondItem="L4K-pL-1dg" secondAttribute="top" id="TTg-Rw-0mA"/>

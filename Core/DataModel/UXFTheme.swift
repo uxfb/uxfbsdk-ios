@@ -20,6 +20,7 @@ class UXFTheme : NSObject {
     private(set) var cardColor: UIColor!
     private(set) var smiles: Array<String> = []
     
+    
     init(colorsDict: Dictionary<String, String>,
          smilesDict: Dictionary<String, String>) {
  
@@ -64,4 +65,12 @@ class UXFTheme : NSObject {
     var cardColor: UIColor{
         return UIColor(colors["card"] ?? "")
     }*/
+    
+    func getSmile(index: Int, completion: (_ smileImage: UIImage)->()){
+        let previewImageNames = ["mad", "angry", "confused", "in-love", "happy"]
+        if index < previewImageNames.count, let image = UIImage.init(named: previewImageNames[index]){
+            completion(image)
+        }
+   
+    }
 }
