@@ -33,6 +33,7 @@
 		0A0CDEB222506E0C00E1C092 /* UXFCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB022506E0C00E1C092 /* UXFCommentViewController.xib */; };
 		0A0CDEB522506F7800E1C092 /* UXFCongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB322506F7800E1C092 /* UXFCongratulationViewController.swift */; };
 		0A0CDEB622506F7800E1C092 /* UXFCongratulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB422506F7800E1C092 /* UXFCongratulationViewController.xib */; };
+		0A0CDEB82250965100E1C092 /* UXFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB72250965100E1C092 /* UXFTextField.swift */; };
 		0A6CDB69223A499700C17007 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */; };
 		0A6CDB6B223A499900C17007 /* CodableAlamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */; };
 		0A6CDB6D223A499D00C17007 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB6C223A499D00C17007 /* Alamofire.framework */; };
@@ -80,6 +81,7 @@
 		0A0CDEB022506E0C00E1C092 /* UXFCommentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFCommentViewController.xib; sourceTree = "<group>"; };
 		0A0CDEB322506F7800E1C092 /* UXFCongratulationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCongratulationViewController.swift; sourceTree = "<group>"; };
 		0A0CDEB422506F7800E1C092 /* UXFCongratulationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFCongratulationViewController.xib; sourceTree = "<group>"; };
+		0A0CDEB72250965100E1C092 /* UXFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFTextField.swift; sourceTree = "<group>"; };
 		0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodableAlamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6CDB6C223A499D00C17007 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,6 +217,7 @@
 				0A0CDEB022506E0C00E1C092 /* UXFCommentViewController.xib */,
 				0A0CDEB322506F7800E1C092 /* UXFCongratulationViewController.swift */,
 				0A0CDEB422506F7800E1C092 /* UXFCongratulationViewController.xib */,
+				0A0CDEB72250965100E1C092 /* UXFTextField.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				0A6CDB862243BD5500C17007 /* UXFPage.swift in Sources */,
 				0A019A6622367EF3002FD4F8 /* NSLayoutConstraint+additions.swift in Sources */,
 				0A6CDB7C224111EC00C17007 /* UXFCheckbox.swift in Sources */,
+				0A0CDEB82250965100E1C092 /* UXFTextField.swift in Sources */,
 				0A019A6F2237C503002FD4F8 /* UXFURLComponents.swift in Sources */,
 				0A0CDEB122506E0C00E1C092 /* UXFCommentViewController.swift in Sources */,
 				0A0CDEAA224F4B7A00E1C092 /* AboutViewController.swift in Sources */,

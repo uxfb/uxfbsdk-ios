@@ -13,13 +13,15 @@ class UXFCommentViewController: UXFViewController{
     @IBOutlet var textInput: UITextField!
     @IBOutlet var sendButton: UIButton!
     @IBOutlet var alertLabel: UILabel!
-    //@IBOutlet var lertHeight: NSLayoutConstraint!
-
+    var isMandatoryField:Bool  = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
         alertLabel.text = ""
+        //sendButton.isEnabled = !mandatoryField
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(commentDidChanged),
@@ -32,7 +34,17 @@ class UXFCommentViewController: UXFViewController{
     }
 
     @IBAction func sendButtonTap(_ sender: UIButton){
-        nextHandler?()
+        if isMandatoryField == false || textInput.text?.count ?? 0 > 0{
+             nextHandler?()
+        }
+        else{
+            if isMandatoryField{
+                alertLabel.text = "Комментарий обязателен. Без него\nмы не узнаем, как стать лучше"
+            }
+            else {
+                alertLabel.text = ""
+            }
+        }
     }
     
     deinit {

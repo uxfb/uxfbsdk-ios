@@ -92,6 +92,7 @@ class UXFCampaignFormPresentor{
         controller.nextHandler = { [weak self] in
             self?.nextForm()
         }
+        controller.isMandatoryField = true
         showController(controller: controller)
     }
     
@@ -105,7 +106,7 @@ class UXFCampaignFormPresentor{
     
     private func showController(controller: UXFViewController){
         
-        _currentForm?.close(animated: false)
+        _currentForm?.remove(animated: false, completion: nil)
         
          controller.modalPresentationStyle = .overCurrentContext
          controller.progressLabel?.text = self.progressString

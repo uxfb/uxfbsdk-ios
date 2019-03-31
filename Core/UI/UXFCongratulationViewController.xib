@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UXFCongratulationViewController" customModule="UX_Feedback_Demo" customModuleProvider="target">
             <connections>
+                <outlet property="bottomOffset" destination="Vmo-G1-1Cl" id="Qfd-hZ-SWQ"/>
+                <outlet property="contentView" destination="dhs-Wv-StQ" id="lW5-gR-i7h"/>
                 <outlet property="titleLabel" destination="yNv-N1-VgY" id="Mem-09-jWW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -66,11 +68,6 @@
                         <constraint firstItem="yNv-N1-VgY" firstAttribute="leading" secondItem="dhs-Wv-StQ" secondAttribute="leading" constant="8" id="gSB-n6-7bd"/>
                         <constraint firstItem="XcL-Jy-isi" firstAttribute="top" secondItem="dhs-Wv-StQ" secondAttribute="top" id="ptD-EX-qT0"/>
                     </constraints>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <integer key="value" value="8"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

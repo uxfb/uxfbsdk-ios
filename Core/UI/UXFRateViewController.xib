@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UXFRateViewController" customModule="UX_Feedback_Demo" customModuleProvider="target">
             <connections>
+                <outlet property="bottomOffset" destination="NwX-8u-PNu" id="0ld-P9-KA4"/>
+                <outlet property="contentView" destination="j1J-aB-pVd" id="4gr-Wh-eG9"/>
                 <outlet property="progressLabel" destination="XyQ-jn-lxx" id="zCZ-e5-5v9"/>
                 <outlet property="rateView" destination="Nsm-Ue-0Mq" id="3S6-VV-din"/>
                 <outlet property="titleLabel" destination="mik-We-fOE" id="OY5-ef-g4G"/>
@@ -86,11 +88,6 @@
                         <constraint firstItem="Nsm-Ue-0Mq" firstAttribute="top" secondItem="mik-We-fOE" secondAttribute="bottom" constant="15" id="vxP-2b-3Gd"/>
                         <constraint firstItem="yWd-CR-rxX" firstAttribute="top" secondItem="j1J-aB-pVd" secondAttribute="top" id="zl3-i8-zC6"/>
                     </constraints>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <integer key="value" value="8"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

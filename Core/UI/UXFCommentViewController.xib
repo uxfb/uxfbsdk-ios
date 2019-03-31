@@ -13,6 +13,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UXFCommentViewController" customModule="UX_Feedback_Demo" customModuleProvider="target">
             <connections>
                 <outlet property="alertLabel" destination="k5W-IW-z3N" id="OFP-MJ-QHp"/>
+                <outlet property="bottomOffset" destination="qjl-m9-aZS" id="nPG-Xc-lgw"/>
+                <outlet property="contentView" destination="jyy-Qz-Fc6" id="el3-rL-U7K"/>
                 <outlet property="progressLabel" destination="Ih5-Xm-O2O" id="17d-Rp-g0X"/>
                 <outlet property="sendButton" destination="WWs-eR-ZVC" id="b6H-l9-u2e"/>
                 <outlet property="textInput" destination="wAD-WX-AsN" id="wb4-X3-sly"/>
@@ -25,7 +27,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jyy-Qz-Fc6">
-                    <rect key="frame" x="8" y="400.5" width="359" height="258.5"/>
+                    <rect key="frame" x="8" y="417" width="359" height="242"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZd-lw-5LU">
                             <rect key="frame" x="8" y="41" width="343" height="72"/>
@@ -61,16 +63,14 @@
                             <color key="textColor" red="0.58823529409999997" green="0.59999999999999998" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5W-IW-z3N">
-                            <rect key="frame" x="16" y="169" width="327" height="33.5"/>
-                            <string key="text">Комментарий обязателен. Без него мы
-не узнаем, как стать лучше</string>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Заполните обязательное поле" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5W-IW-z3N">
+                            <rect key="frame" x="16" y="169" width="327" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.9137254901960784" green="0.14117647058823529" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WWs-eR-ZVC">
-                            <rect key="frame" x="16" y="202.5" width="327" height="48"/>
+                            <rect key="frame" x="16" y="186" width="327" height="48"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="48" id="GZV-jZ-N7u"/>
                             </constraints>
@@ -95,12 +95,17 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1hK-v1-dYj">
                             <rect key="frame" x="16" y="121" width="327" height="48"/>
                             <subviews>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="     Обязательное поле" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wAD-WX-AsN">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Обязательное поле" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wAD-WX-AsN" customClass="UXFTextField" customModule="UX_Feedback_Demo" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="327" height="48"/>
                                     <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="contentLeftPadding">
+                                            <real key="value" value="16"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                 </textField>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -135,11 +140,6 @@
                         <constraint firstAttribute="trailing" secondItem="1hK-v1-dYj" secondAttribute="trailing" constant="16" id="uxO-Dx-jb2"/>
                         <constraint firstItem="1hK-v1-dYj" firstAttribute="top" secondItem="qZd-lw-5LU" secondAttribute="bottom" constant="8" id="x13-xC-Hkz"/>
                     </constraints>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <integer key="value" value="8"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
