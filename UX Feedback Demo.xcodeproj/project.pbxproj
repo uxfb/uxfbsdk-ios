@@ -34,6 +34,7 @@
 		0A0CDEB522506F7800E1C092 /* UXFCongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB322506F7800E1C092 /* UXFCongratulationViewController.swift */; };
 		0A0CDEB622506F7800E1C092 /* UXFCongratulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB422506F7800E1C092 /* UXFCongratulationViewController.xib */; };
 		0A0CDEB82250965100E1C092 /* UXFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB72250965100E1C092 /* UXFTextField.swift */; };
+		0A0CDEBA2250A16B00E1C092 /* UIViewController+present.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB92250A16B00E1C092 /* UIViewController+present.swift */; };
 		0A6CDB69223A499700C17007 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */; };
 		0A6CDB6B223A499900C17007 /* CodableAlamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */; };
 		0A6CDB6D223A499D00C17007 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB6C223A499D00C17007 /* Alamofire.framework */; };
@@ -82,6 +83,7 @@
 		0A0CDEB322506F7800E1C092 /* UXFCongratulationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCongratulationViewController.swift; sourceTree = "<group>"; };
 		0A0CDEB422506F7800E1C092 /* UXFCongratulationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFCongratulationViewController.xib; sourceTree = "<group>"; };
 		0A0CDEB72250965100E1C092 /* UXFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFTextField.swift; sourceTree = "<group>"; };
+		0A0CDEB92250A16B00E1C092 /* UIViewController+present.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+present.swift"; sourceTree = "<group>"; };
 		0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodableAlamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6CDB6C223A499D00C17007 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,6 +179,7 @@
 				0A019A6022367EF2002FD4F8 /* UIImage+Tinting.swift */,
 				0A019A6322367EF2002FD4F8 /* UISearchBar+color.swift */,
 				0A019A5F22367EF2002FD4F8 /* UIVIewAddition.swift */,
+				0A0CDEB92250A16B00E1C092 /* UIViewController+present.swift */,
 				0A0CDEA5224F42E900E1C092 /* Queue.swift */,
 			);
 			path = Vendors;
@@ -389,6 +392,7 @@
 				0A6CDB8F22446EC900C17007 /* UXFViewController.swift in Sources */,
 				0A019A6822367EF3002FD4F8 /* UISearchBar+color.swift in Sources */,
 				0A6CDB862243BD5500C17007 /* UXFPage.swift in Sources */,
+				0A0CDEBA2250A16B00E1C092 /* UIViewController+present.swift in Sources */,
 				0A019A6622367EF3002FD4F8 /* NSLayoutConstraint+additions.swift in Sources */,
 				0A6CDB7C224111EC00C17007 /* UXFCheckbox.swift in Sources */,
 				0A0CDEB82250965100E1C092 /* UXFTextField.swift in Sources */,

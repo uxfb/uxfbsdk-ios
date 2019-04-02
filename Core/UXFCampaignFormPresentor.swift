@@ -19,7 +19,7 @@ class UXFCampaignFormPresentor{
         return 3
     }
     
-    private(set) var currentFormIndex: UInt = 0
+    private(set) var currentFormIndex: Int = -1
     private var _campaign: UXFCampaign!
     private var _theme: UXFTheme?
     var isAnimationFormEnabled: Bool = true
@@ -44,7 +44,7 @@ class UXFCampaignFormPresentor{
     //MARK: - Form navogation presentation
     
     private func nextForm(){
-        if self.currentFormIndex < _campaign.formsCount{
+        if self.currentFormIndex < (_campaign.formsCount - 1){
            self.currentFormIndex += 1
            showCurrentForm()
         }
@@ -54,7 +54,7 @@ class UXFCampaignFormPresentor{
     }
     
     private func prevForm(){
-        if (self.currentFormIndex > 1){
+        if (self.currentFormIndex > 0){
             self.currentFormIndex -= 1
             showCurrentForm()
         }
@@ -62,10 +62,10 @@ class UXFCampaignFormPresentor{
     
     private func showCurrentForm(){
         
-        if self.currentFormIndex == 1{
+        if self.currentFormIndex == 0{
             showRateForm()
         }
-        else if self.currentFormIndex == 2{
+        else if self.currentFormIndex == 1{
             showCommentForm()
         }
     }
@@ -111,7 +111,15 @@ class UXFCampaignFormPresentor{
          controller.modalPresentationStyle = .overCurrentContext
          controller.progressLabel?.text = self.progressString
          controller.theme = _theme
-        _appWindow.rootViewController?.present(controller, animated: isAnimationFormEnabled, completion: nil)
+        
+        let parentViewController = _appWindow.rootViewController
+        if self.currentFormIndex == 0 {
+           parentViewController?.present(controller, animated: isAnimationFormEnabled, completion: nil)
+        }
+        else{
+           parentViewController?.presentDetail(controller)
+        }
+        
         _currentForm = controller
     }
     

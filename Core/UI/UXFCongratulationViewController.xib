@@ -38,11 +38,11 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XcL-Jy-isi">
-                            <rect key="frame" x="326" y="0.0" width="33" height="33"/>
+                            <rect key="frame" x="327" y="8" width="24" height="24"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="33" id="F3c-vh-cni"/>
-                                <constraint firstAttribute="height" constant="33" id="btN-c5-gIu"/>
+                                <constraint firstAttribute="width" constant="24" id="F3c-vh-cni"/>
+                                <constraint firstAttribute="height" constant="24" id="btN-c5-gIu"/>
                             </constraints>
                             <state key="normal" image="close_image"/>
                             <connections>
@@ -63,10 +63,10 @@
                         <constraint firstAttribute="bottom" secondItem="yNv-N1-VgY" secondAttribute="bottom" constant="15" id="8sx-aL-Qeo"/>
                         <constraint firstAttribute="trailing" secondItem="yNv-N1-VgY" secondAttribute="trailing" constant="8" id="JBK-a2-8Ig"/>
                         <constraint firstItem="YLc-bg-a5z" firstAttribute="centerX" secondItem="dhs-Wv-StQ" secondAttribute="centerX" id="Scw-NC-6P7"/>
-                        <constraint firstAttribute="trailing" secondItem="XcL-Jy-isi" secondAttribute="trailing" id="Try-mF-TAY"/>
+                        <constraint firstAttribute="trailing" secondItem="XcL-Jy-isi" secondAttribute="trailing" constant="8" id="Try-mF-TAY"/>
                         <constraint firstItem="YLc-bg-a5z" firstAttribute="top" secondItem="dhs-Wv-StQ" secondAttribute="top" constant="27" id="ZcL-nW-BFE"/>
                         <constraint firstItem="yNv-N1-VgY" firstAttribute="leading" secondItem="dhs-Wv-StQ" secondAttribute="leading" constant="8" id="gSB-n6-7bd"/>
-                        <constraint firstItem="XcL-Jy-isi" firstAttribute="top" secondItem="dhs-Wv-StQ" secondAttribute="top" id="ptD-EX-qT0"/>
+                        <constraint firstItem="XcL-Jy-isi" firstAttribute="top" secondItem="dhs-Wv-StQ" secondAttribute="top" constant="8" id="ptD-EX-qT0"/>
                     </constraints>
                 </view>
             </subviews>
