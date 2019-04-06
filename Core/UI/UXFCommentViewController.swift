@@ -12,10 +12,9 @@ class UXFCommentViewController: UXFViewController{
     
     @IBOutlet var textInput: UXFTextField!
     @IBOutlet var sendButton: UIButton!
+    @IBOutlet var sendRightButton: UIButton!
     @IBOutlet var skipButton: UIButton!
     @IBOutlet var alertLabel: UILabel!
-    @IBOutlet var sendButtonCenterConstraint: NSLayoutConstraint!
-    @IBOutlet var sendButtonTrailingConstraint: NSLayoutConstraint!
     
     var isMandatoryField:Bool  = false
     
@@ -25,9 +24,10 @@ class UXFCommentViewController: UXFViewController{
         // Do any additional setup after loading the view.
         
         alertLabel.text = ""
-        //sendButton.isEnabled = !mandatoryField
         
         skipButton.isHidden = isMandatoryField
+        sendRightButton.isHidden = isMandatoryField
+        sendButton.isHidden = !isMandatoryField
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(commentDidChanged),
@@ -39,13 +39,8 @@ class UXFCommentViewController: UXFViewController{
         //sendButton.isEnabled = (textInput.text?.count ?? 0 > 0)
         textInput.inputState = textInput.text?.count ?? 0 > 0 ? .input : .normal
     }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        sendButtonCenterConstraint.isActive = isMandatoryField
-        sendButtonTrailingConstraint.isActive = !isMandatoryField
-    }
 
+    
     @IBAction func sendButtonTap(_ sender: UIButton){
         if isMandatoryField == false || textInput.text?.count ?? 0 > 0{
              nextHandler?()
