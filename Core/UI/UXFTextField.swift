@@ -7,6 +7,13 @@
 //
 
 import UIKit
+import UIColor_Hex_Swift
+
+enum UXFTextFieldState{
+    case normal
+    case alert
+    case input
+}
 
 class UXFTextField: UITextField {
     
@@ -14,6 +21,24 @@ class UXFTextField: UITextField {
     @IBInspectable var contentRightPadding:CGFloat = 0
     @IBInspectable var contentTopPadding:CGFloat = 0
     @IBInspectable var contentBottomPadding:CGFloat = 0
+    
+    var inputState: UXFTextFieldState = UXFTextFieldState.normal {
+        didSet{
+            switch inputState {
+            case .normal:
+                layer.borderColor = UIColor.clear.cgColor
+                break
+            case .alert:
+                layer.borderColor = UIColor("#E91436").cgColor
+                break
+            case .input:
+                layer.borderColor = UIColor("#1F45EB").cgColor
+                break
+            }
+            layer.masksToBounds = true
+            layer.borderWidth = 0.5
+        }
+    }
     
     var contentPadding: UIEdgeInsets{
         return  UIEdgeInsets(top: contentTopPadding,

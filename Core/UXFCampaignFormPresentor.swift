@@ -92,7 +92,7 @@ class UXFCampaignFormPresentor{
         controller.nextHandler = { [weak self] in
             self?.nextForm()
         }
-        controller.isMandatoryField = true
+        controller.isMandatoryField = false
         showController(controller: controller)
     }
     

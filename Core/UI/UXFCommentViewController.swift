@@ -10,9 +10,13 @@ import UIKit
 
 class UXFCommentViewController: UXFViewController{
     
-    @IBOutlet var textInput: UITextField!
+    @IBOutlet var textInput: UXFTextField!
     @IBOutlet var sendButton: UIButton!
+    @IBOutlet var skipButton: UIButton!
     @IBOutlet var alertLabel: UILabel!
+    @IBOutlet var sendButtonCenterConstraint: NSLayoutConstraint!
+    @IBOutlet var sendButtonTrailingConstraint: NSLayoutConstraint!
+    
     var isMandatoryField:Bool  = false
     
     override func viewDidLoad() {
@@ -23,6 +27,8 @@ class UXFCommentViewController: UXFViewController{
         alertLabel.text = ""
         //sendButton.isEnabled = !mandatoryField
         
+        skipButton.isHidden = isMandatoryField
+        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(commentDidChanged),
                                                name: UITextField.textDidChangeNotification,
@@ -30,7 +36,14 @@ class UXFCommentViewController: UXFViewController{
     }
     
     @objc private func commentDidChanged(){
-        sendButton.isEnabled = (textInput.text?.count ?? 0 > 0)
+        //sendButton.isEnabled = (textInput.text?.count ?? 0 > 0)
+        textInput.inputState = textInput.text?.count ?? 0 > 0 ? .input : .normal
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        sendButtonCenterConstraint.isActive = isMandatoryField
+        sendButtonTrailingConstraint.isActive = !isMandatoryField
     }
 
     @IBAction func sendButtonTap(_ sender: UIButton){
@@ -39,12 +52,17 @@ class UXFCommentViewController: UXFViewController{
         }
         else{
             if isMandatoryField{
+                textInput.inputState = .alert
                 alertLabel.text = "Комментарий обязателен. Без него\nмы не узнаем, как стать лучше"
             }
             else {
                 alertLabel.text = ""
             }
         }
+    }
+    
+    @IBAction func skipButtonTap(_ sender: UIButton){
+        nextHandler?()
     }
     
     deinit {
