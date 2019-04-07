@@ -9,6 +9,13 @@
 import UIKit
 import CocoaLumberjack
 
+enum UXFViewPopupDirection{
+    case rightToLeft
+    case leftToRight
+    case upToDown
+    case downToUp
+}
+
 class UXFViewController: UIViewController{
     
     @IBOutlet var progressLabel: UILabel?
@@ -22,6 +29,9 @@ class UXFViewController: UIViewController{
     var didCloseHandler: (()->(Void))?
     var nextHandler: (()->())?
     var backHandler: (()->())?
+    
+    var presentDirection: UXFViewPopupDirection = .leftToRight
+    var dismissDirection: UXFViewPopupDirection = .upToDown
     
     @IBOutlet  var contentView: UIView!
     
