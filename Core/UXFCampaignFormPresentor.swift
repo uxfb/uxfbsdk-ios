@@ -46,17 +46,17 @@ class UXFCampaignFormPresentor: NSObject{
     private func nextForm(){
         if self.currentFormIndex < (_campaign.formsCount - 1){
             self.currentFormIndex += 1
-            showCurrentForm(direction: currentFormIndex == 0 ? .downToUp : .leftToRight)
+            showCurrentForm(direction: currentFormIndex == 0 ? .downToUp : .alphaIn)
         }
         else{
-            showCongratulationForm(direction: currentFormIndex == 0 ? .downToUp : .leftToRight)
+            showCongratulationForm(direction: currentFormIndex == 0 ? .downToUp : .alphaIn)
         }
     }
     
     private func prevForm(){
         if (self.currentFormIndex > 0){
             self.currentFormIndex -= 1
-            showCurrentForm(direction: .rightToLeft)
+            showCurrentForm(direction: .alphaIn)
         }
     }
     
@@ -101,12 +101,16 @@ class UXFCampaignFormPresentor: NSObject{
         controller.didCloseHandler = {
             
         }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+            controller.close(animated:  true)
+        }
+        
         showController(controller: controller, direction:  direction)
     }
     
     private func showController(controller: UXFViewController, direction: UXFViewPopupDirection){
         
-        _currentForm?.remove(animated: false, completion: nil)
+        _currentForm?.remove(animated: true, completion: nil)
         
         controller.modalPresentationStyle = .overCurrentContext
         controller.progressLabel?.text = self.progressString
@@ -114,7 +118,9 @@ class UXFCampaignFormPresentor: NSObject{
         controller.presentDirection = direction
         let parentViewController = _appWindow.rootViewController
         controller.transitioningDelegate = self
-        parentViewController?.present(controller, animated: isAnimationFormEnabled, completion: nil)
+        parentViewController?.present(controller, animated: isAnimationFormEnabled){
+            controller.state = .presented
+        }
         _currentForm = controller
     }
 }
@@ -142,23 +148,42 @@ private class UXFFormPresenter: NSObject, UIViewControllerAnimatedTransitioning 
         let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as! UXFViewController
         let finalFrameForVC = transitionContext.finalFrame(for: toViewController)
         let containerView = transitionContext.containerView
+        
+        //animation params
         let bounds = UIScreen.main.bounds
+        var animationOptions: UIView.AnimationOptions = .curveEaseOut
+        var startAlpha: CGFloat = 1.0
+        var endAlpha: CGFloat = 1.0
+        let animationDuration: TimeInterval = 0.3
+        let damping: CGFloat = 1.0//0.8
+        let delay: TimeInterval = 0.0
         
         switch toViewController.presentDirection {
         case .leftToRight:
+            animationOptions = .curveEaseInOut
             toViewController.view.frame = CGRect.init(origin: CGPoint.init(x: finalFrameForVC.origin.x + bounds.size.width,
                                                                            y: finalFrameForVC.origin.y),
                                                       size: finalFrameForVC.size)
             break
         case .rightToLeft:
+            animationOptions = .curveEaseInOut
             toViewController.view.frame = CGRect.init(origin: CGPoint.init(x: finalFrameForVC.origin.x - bounds.size.width,
                                                                            y: finalFrameForVC.origin.y),
                                                       size: finalFrameForVC.size)
             break
         case .upToDown:
+            animationOptions = .curveEaseIn
             toViewController.view.frame = CGRect.init(origin: CGPoint.init(x: finalFrameForVC.origin.x,
                                                                            y: finalFrameForVC.origin.y - bounds.size.height),
                                                       size: finalFrameForVC.size)
+            break
+        case .alphaIn:
+            startAlpha = 0.0
+            endAlpha = 1.0
+            break
+        case .alphaOut:
+            startAlpha = 1.0
+            endAlpha = 0.0
             break
         default:
             toViewController.view.frame = CGRect.init(origin: CGPoint.init(x: finalFrameForVC.origin.x,
@@ -169,14 +194,15 @@ private class UXFFormPresenter: NSObject, UIViewControllerAnimatedTransitioning 
         
         containerView.addSubview(toViewController.view)
     
-       
-        UIView.animate(withDuration: 0.5,
-                       delay: 0,
-                       usingSpringWithDamping: 0.8,
+        toViewController.contentView.alpha = startAlpha
+        UIView.animate(withDuration: animationDuration,
+                       delay: delay,
+                       usingSpringWithDamping: damping,
                        initialSpringVelocity: 0,
-                       options: .curveLinear,
+                       options: animationOptions,
                        animations: {
             toViewController.view.frame = finalFrameForVC
+            toViewController.contentView.alpha = endAlpha
         }){ (completed) in
             transitionContext.completeTransition(completed)
         }
@@ -191,9 +217,31 @@ private class UXFFormDismisser: NSObject, UIViewControllerAnimatedTransitioning 
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let container = transitionContext.containerView
-        let fromView = transitionContext.view(forKey: .from)!
-        UIView.animate(withDuration: 0.5, animations: {
-            fromView.frame.origin.y += (container.frame.height - fromView.frame.minY)
+ 
+        let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as! UXFViewController
+        
+        let animationOptions: UIView.AnimationOptions = .curveEaseOut
+        var endAlpha: CGFloat = 1.0
+        let animationDuration: TimeInterval = 0.3
+        let damping: CGFloat = 1.0//0.8
+        let delay: TimeInterval = 0.0
+        var endYOfset: CGFloat = 0.0
+        
+        if fromViewController.state == .closeDismiss {
+            endYOfset = (container.frame.height - fromViewController.view.frame.minY)
+        }
+        else {
+            endAlpha = 0.0
+        }
+        
+        UIView.animate(withDuration: animationDuration,
+                       delay: delay,
+                       usingSpringWithDamping: damping,
+                       initialSpringVelocity: 0,
+                       options: animationOptions,
+                       animations:  {
+               fromViewController.contentView.alpha = endAlpha
+               fromViewController.view.frame.origin.y += endYOfset
         }) { (completed) in
             transitionContext.completeTransition(completed)
         }

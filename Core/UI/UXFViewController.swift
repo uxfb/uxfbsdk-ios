@@ -14,6 +14,15 @@ enum UXFViewPopupDirection{
     case leftToRight
     case upToDown
     case downToUp
+    case alphaIn
+    case alphaOut
+}
+
+enum UXFViewControllerState{
+    case presenting
+    case presented
+    case outDismiss
+    case closeDismiss
 }
 
 class UXFViewController: UIViewController{
@@ -24,6 +33,8 @@ class UXFViewController: UIViewController{
     static let defaulViewOffset: CGFloat = 8.0
     static let animationTime = 0.5
     
+    var state:UXFViewControllerState = .presenting
+    
     internal var theme: UXFTheme?
     var presentationAnimated = true
     var didCloseHandler: (()->(Void))?
@@ -32,6 +43,7 @@ class UXFViewController: UIViewController{
     
     var presentDirection: UXFViewPopupDirection = .leftToRight
     var dismissDirection: UXFViewPopupDirection = .upToDown
+    var backDirection: UXFViewPopupDirection = .alphaOut
     
     @IBOutlet  var contentView: UIView!
     
@@ -74,6 +86,7 @@ class UXFViewController: UIViewController{
     //MARK: actions
     
     @IBAction func backButtonTap(_ sender: UIButton){
+        state = .outDismiss
         backHandler?()
     }
     
@@ -86,6 +99,7 @@ class UXFViewController: UIViewController{
     }
     
     func close(animated: Bool = false){
+        state = .closeDismiss
         self.remove(animated: presentationAnimated, completion: didCloseHandler)
         didCloseHandler = nil
     }
