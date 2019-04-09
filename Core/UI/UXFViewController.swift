@@ -36,6 +36,7 @@ class UXFViewController: UIViewController{
     var state:UXFViewControllerState = .presenting
     
     internal var theme: UXFTheme?
+    var progressString: String = ""
     var presentationAnimated = true
     var didCloseHandler: (()->(Void))?
     var nextHandler: (()->())?
@@ -50,6 +51,7 @@ class UXFViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.progressLabel?.text = self.progressString
         contentView?.layer.cornerRadius = 8.0
         contentView?.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.24).cgColor
         contentView?.layer.shadowOffset = CGSize(width: 0, height: 2)

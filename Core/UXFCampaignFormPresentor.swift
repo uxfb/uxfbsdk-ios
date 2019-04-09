@@ -12,11 +12,11 @@ import UIKit
 class UXFCampaignFormPresentor: NSObject{
     
     var progressString: String {
-        return "\(currentFormIndex + 1)/\(formsCount)"
+        return "\(self.currentFormIndex + 1)/\(formsCount)"
     }
     
     var formsCount: UInt{
-        return 3
+        return UInt(_campaign?.formsCount ?? 0)
     }
     
     private(set) var currentFormIndex: Int = -1
@@ -113,7 +113,7 @@ class UXFCampaignFormPresentor: NSObject{
         _currentForm?.remove(animated: true, completion: nil)
         
         controller.modalPresentationStyle = .overCurrentContext
-        controller.progressLabel?.text = self.progressString
+        controller.progressString = self.progressString
         controller.theme = _theme
         controller.presentDirection = direction
         let parentViewController = _appWindow.rootViewController
