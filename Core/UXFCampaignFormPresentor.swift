@@ -220,7 +220,7 @@ private class UXFFormDismisser: NSObject, UIViewControllerAnimatedTransitioning 
  
         let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as! UXFViewController
         
-        let animationOptions: UIView.AnimationOptions = .curveEaseOut
+        var animationOptions: UIView.AnimationOptions = .curveEaseOut
         var endAlpha: CGFloat = 1.0
         let animationDuration: TimeInterval = 0.3
         let damping: CGFloat = 1.0//0.8
@@ -228,7 +228,8 @@ private class UXFFormDismisser: NSObject, UIViewControllerAnimatedTransitioning 
         var endYOfset: CGFloat = 0.0
         
         if fromViewController.state == .closeDismiss {
-            endYOfset = (container.frame.height - fromViewController.view.frame.minY)
+            animationOptions = .curveEaseIn
+            endYOfset = (container.frame.height - fromViewController.contentView.frame.origin.y)
         }
         else {
             endAlpha = 0.0
