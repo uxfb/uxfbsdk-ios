@@ -13,7 +13,6 @@ PODS:
   - SVGKit (2.1.0):
     - CocoaLumberjack (~> 3.0)
   - UIColor_Hex_Swift (4.2.0)
-  - Usabilla (6.0.2)
 
 DEPENDENCIES:
   - AlamofireNetworkActivityLogger
@@ -22,7 +21,6 @@ DEPENDENCIES:
   - Nuke
   - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `2.x`)
   - UIColor_Hex_Swift (~> 4.2.0)
-  - Usabilla (~> 6.0.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -32,7 +30,6 @@ SPEC REPOS:
     - CodableAlamofire
     - Nuke
     - UIColor_Hex_Swift
-    - Usabilla
 
 EXTERNAL SOURCES:
   SVGKit:
@@ -52,8 +49,7 @@ SPEC CHECKSUMS:
   Nuke: 0350d346a688426e8f2331253ef28dc2fc4f6178
   SVGKit: 8a2fc74258bdb2abb54d3b65f3dd68b0277a9c4d
   UIColor_Hex_Swift: bc07fc197421ee896b9ed6dcfa2054b7fbf75145
-  Usabilla: 9c7396fb00d9c7b1d7d0412b8fa28e8ab9a8753a
 
-PODFILE CHECKSUM: d5a6c08aac38140e8395b5d3e81016ab38db6921
+PODFILE CHECKSUM: 540516733bf54cae597871b1f784aa0a1e11ecef
 
 COCOAPODS: 1.6.1

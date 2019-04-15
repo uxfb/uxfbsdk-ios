@@ -7,7 +7,6 @@ target 'UX Feedback Demo' do
 use_frameworks!
 inhibit_all_warnings!
 
-pod 'Usabilla', '~> 6.0.2'
 pod 'CodableAlamofire'
 pod 'Nuke'
 pod 'CocoaLumberjack/Swift'

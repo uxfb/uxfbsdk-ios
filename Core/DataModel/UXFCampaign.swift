@@ -22,7 +22,7 @@ struct UXFCampaign{
     private let attemptKey = "campaingAttempt"
     
     var formsCount: Int{
-        return 2
+        return pages.count
     }
     
     private(set) var pages: Array<UXFPage> = []

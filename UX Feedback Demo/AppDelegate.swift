@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Usabilla
 import AlamofireNetworkActivityLogger
 import CocoaLumberjack
 
