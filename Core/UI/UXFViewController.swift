@@ -29,6 +29,7 @@ class UXFViewController: UIViewController{
     
     @IBOutlet var progressLabel: UILabel?
     @IBOutlet var bottomOffset: NSLayoutConstraint?
+    @IBOutlet var heightConstraint: NSLayoutConstraint?
     
     static let defaulViewOffset: CGFloat = 8.0
     static let animationTime = 0.5

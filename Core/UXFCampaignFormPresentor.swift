@@ -25,6 +25,9 @@ class UXFCampaignFormPresentor: NSObject{
     var isAnimationFormEnabled: Bool = true
     private weak var _appWindow: UIWindow!
     private weak var _currentForm: UXFViewController?
+    private lazy var formCreator: UXFCampaignFormCreator = {
+      return UXFCampaignFormCreator()
+    }()
     
     init(window: UIWindow, campaign: UXFCampaign, theme: UXFTheme? = nil, animationEnabled: Bool = true) {
         _campaign = campaign
@@ -44,7 +47,7 @@ class UXFCampaignFormPresentor: NSObject{
     //MARK: - Form navogation presentation
     
     private func nextForm(){
-        if self.currentFormIndex < (_campaign.formsCount - 1){
+        if self.currentFormIndex <= _campaign.formsCount{
             self.currentFormIndex += 1
             showCurrentForm(direction: currentFormIndex == 0 ? .downToUp : .alphaIn)
         }
@@ -65,8 +68,22 @@ class UXFCampaignFormPresentor: NSObject{
         if self.currentFormIndex == 0{
             showRateForm(direction: direction)
         }
+        /*
         else if self.currentFormIndex == 1{
             showCommentForm(direction: direction)
+        }*/
+        else{
+            let controller = self.formCreator.createForm(page: _campaign.pages[self.currentFormIndex-1])
+            controller.didCloseHandler = {
+                
+            }
+            controller.backHandler = { [weak self] in
+                self?.prevForm()
+            }
+            controller.nextHandler = { [weak self] in
+                self?.nextForm()
+            }
+            showController(controller: controller, direction: direction)
         }
     }
     
