@@ -42,8 +42,10 @@ class UFXAPIClient{
     func getAllCampaings(completion: ((_ success: Bool, _ message: String?, _ theme: UXFTheme?, _ campaign: UXFCampaign?)->())?){
     
      DDLogDebug("Get all campaings:")
+     let systemInfo = UXFStatisticManager.getDeviceInfo()
      self.performRequest(route: UXFAPIWebRouter.getCampaing(appID: _appID,
-                                                       campaingID: "5c908a553300006b006496d3"))
+                                                            campaingID: "5c908a553300006b006496d3",
+                                                            systemInfo: systemInfo))
       {(status, message, result) in
         
         if status == .success {

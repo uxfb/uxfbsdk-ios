@@ -35,6 +35,9 @@
 		0A0CDEB622506F7800E1C092 /* UXFCongratulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB422506F7800E1C092 /* UXFCongratulationViewController.xib */; };
 		0A0CDEB82250965100E1C092 /* UXFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB72250965100E1C092 /* UXFTextField.swift */; };
 		0A0CDEBA2250A16B00E1C092 /* UIViewController+present.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB92250A16B00E1C092 /* UIViewController+present.swift */; };
+		0A160DD52268CDB000A586C4 /* UXFStatisticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A160DD42268CDB000A586C4 /* UXFStatisticManager.swift */; };
+		0A160DD72268D50F00A586C4 /* Reachability+NetworkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */; };
+		0A160DD92268D62700A586C4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A160DD82268D62700A586C4 /* CoreTelephony.framework */; };
 		0A2754A9226628BC000E2E17 /* UXFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2754A8226628BC000E2E17 /* UXFViewController.xib */; };
 		0A2754AB226629A4000E2E17 /* UXFCampaignFormCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2754AA226629A4000E2E17 /* UXFCampaignFormCreator.swift */; };
 		0A6CDB69223A499700C17007 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */; };
@@ -86,6 +89,9 @@
 		0A0CDEB422506F7800E1C092 /* UXFCongratulationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFCongratulationViewController.xib; sourceTree = "<group>"; };
 		0A0CDEB72250965100E1C092 /* UXFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFTextField.swift; sourceTree = "<group>"; };
 		0A0CDEB92250A16B00E1C092 /* UIViewController+present.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+present.swift"; sourceTree = "<group>"; };
+		0A160DD42268CDB000A586C4 /* UXFStatisticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFStatisticManager.swift; sourceTree = "<group>"; };
+		0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reachability+NetworkType.swift"; sourceTree = "<group>"; };
+		0A160DD82268D62700A586C4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		0A2754A8226628BC000E2E17 /* UXFViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFViewController.xib; sourceTree = "<group>"; };
 		0A2754AA226629A4000E2E17 /* UXFCampaignFormCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCampaignFormCreator.swift; sourceTree = "<group>"; };
 		0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A160DD92268D62700A586C4 /* CoreTelephony.framework in Frameworks */,
 				0A6CDB69223A499700C17007 /* CocoaLumberjack.framework in Frameworks */,
 				0A6CDB6D223A499D00C17007 /* Alamofire.framework in Frameworks */,
 				0A6CDB6B223A499900C17007 /* CodableAlamofire.framework in Frameworks */,
@@ -169,6 +176,7 @@
 				0A019A5922367CD6002FD4F8 /* UXFAPIClient.swift */,
 				0A019A6E2237C503002FD4F8 /* UXFURLComponents.swift */,
 				0A019A6C2237B773002FD4F8 /* UXFAPIWebRouter.swift */,
+				0A160DD42268CDB000A586C4 /* UXFStatisticManager.swift */,
 				0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */,
 				0A0CDEAB2250598800E1C092 /* Images.xcassets */,
 			);
@@ -185,6 +193,7 @@
 				0A019A6322367EF2002FD4F8 /* UISearchBar+color.swift */,
 				0A019A5F22367EF2002FD4F8 /* UIVIewAddition.swift */,
 				0A0CDEB92250A16B00E1C092 /* UIViewController+present.swift */,
+				0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */,
 				0A0CDEA5224F42E900E1C092 /* Queue.swift */,
 			);
 			path = Vendors;
@@ -234,6 +243,7 @@
 		3EE1448B815C3AA05E865A6C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A160DD82268D62700A586C4 /* CoreTelephony.framework */,
 				A37DC0658862D1C4AD29E3B0 /* Pods_UX_Feedback_Demo.framework */,
 				0A6CDB6C223A499D00C17007 /* Alamofire.framework */,
 				0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */,
@@ -339,6 +349,7 @@
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/CodableAlamofire/CodableAlamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/UIColor_Hex_Swift/UIColor_Hex_Swift.framework",
 			);
@@ -351,6 +362,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableAlamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIColor_Hex_Swift.framework",
 			);
@@ -397,10 +409,12 @@
 				0A2754AB226629A4000E2E17 /* UXFCampaignFormCreator.swift in Sources */,
 				0A6CDB862243BD5500C17007 /* UXFPage.swift in Sources */,
 				0A0CDEBA2250A16B00E1C092 /* UIViewController+present.swift in Sources */,
+				0A160DD72268D50F00A586C4 /* Reachability+NetworkType.swift in Sources */,
 				0A019A6622367EF3002FD4F8 /* NSLayoutConstraint+additions.swift in Sources */,
 				0A6CDB7C224111EC00C17007 /* UXFCheckbox.swift in Sources */,
 				0A0CDEB82250965100E1C092 /* UXFTextField.swift in Sources */,
 				0A019A6F2237C503002FD4F8 /* UXFURLComponents.swift in Sources */,
+				0A160DD52268CDB000A586C4 /* UXFStatisticManager.swift in Sources */,
 				0A0CDEB122506E0C00E1C092 /* UXFCommentViewController.swift in Sources */,
 				0A0CDEAA224F4B7A00E1C092 /* AboutViewController.swift in Sources */,
 				0A019A4222365E03002FD4F8 /* MainViewController.swift in Sources */,

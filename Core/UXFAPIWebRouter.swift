@@ -37,7 +37,7 @@ enum UXFAPIWebRouter {
         #endif
     }
     
-    case getCampaing(appID: String, campaingID: String)
+    case getCampaing(appID: String, campaingID: String, systemInfo: Dictionary<String, String>)
     
     var method: HTTPMethod {
         switch self {
@@ -54,7 +54,7 @@ enum UXFAPIWebRouter {
     
     var path: String {
        switch self {
-       case .getCampaing(let appID, let campaingID):
+       case .getCampaing(let appID, let campaingID, let systemInfo):
            return "/\(campaingID)"
             //return "/forms/" + appID + "/campaigns/\(campaingID)"
         }
@@ -72,7 +72,11 @@ enum UXFAPIWebRouter {
         
         var parameters: [String: Any] = [:]
         switch self {
-           //case .setup(let appID):
+            case .getCampaing(_, _, let systemInfo):
+            parameters =  systemInfo
+            break
+            
+            //case .setup(let appID):
            // break
         default:
             break

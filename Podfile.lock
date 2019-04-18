@@ -10,6 +10,7 @@ PODS:
   - CodableAlamofire (1.1.0):
     - Alamofire (~> 4.0)
   - Nuke (7.5.2)
+  - ReachabilitySwift (4.3.0)
   - SVGKit (2.1.0):
     - CocoaLumberjack (~> 3.0)
   - UIColor_Hex_Swift (4.2.0)
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - CocoaLumberjack/Swift
   - CodableAlamofire
   - Nuke
+  - ReachabilitySwift
   - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `2.x`)
   - UIColor_Hex_Swift (~> 4.2.0)
 
@@ -29,6 +31,7 @@ SPEC REPOS:
     - CocoaLumberjack
     - CodableAlamofire
     - Nuke
+    - ReachabilitySwift
     - UIColor_Hex_Swift
 
 EXTERNAL SOURCES:
@@ -47,9 +50,10 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 2101f8a5508197a305e737d16c5c2e9e2157628c
   CodableAlamofire: e2d2edcec7cf413f7862c30c8fa98eded27a83f9
   Nuke: 0350d346a688426e8f2331253ef28dc2fc4f6178
+  ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
   SVGKit: 8a2fc74258bdb2abb54d3b65f3dd68b0277a9c4d
   UIColor_Hex_Swift: bc07fc197421ee896b9ed6dcfa2054b7fbf75145
 
-PODFILE CHECKSUM: 540516733bf54cae597871b1f784aa0a1e11ecef
+PODFILE CHECKSUM: 46dfa792a43dc9db262377797965ad9f7a42e5e4
 
 COCOAPODS: 1.6.1
