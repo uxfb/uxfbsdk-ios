@@ -39,6 +39,8 @@ class UXFViewController: UIViewController{
     internal var theme: UXFTheme?
     var progressString: String = ""
     var presentationAnimated = true
+    
+    var didLoadHandler: (()->())?
     var didCloseHandler: (()->(Void))?
     var nextHandler: (()->())?
     var backHandler: (()->())?
@@ -66,6 +68,8 @@ class UXFViewController: UIViewController{
                                                selector: #selector(keyboardDidHide),
                                                name: UITextField.keyboardDidHideNotification,
                                                object: nil)
+        
+        didLoadHandler?()
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {

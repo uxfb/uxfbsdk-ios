@@ -73,7 +73,12 @@ class UXFCampaignFormPresentor: NSObject{
             showCommentForm(direction: direction)
         }*/
         else{
-            let controller = self.formCreator.createForm(page: _campaign.pages[self.currentFormIndex-1])
+            let controller = UXFViewController.init()
+            
+            controller.didLoadHandler = { [unowned self] in
+                self.formCreator.createForm(controller: controller,
+                                            page: self._campaign.pages[self.currentFormIndex-1])
+            }
             controller.didCloseHandler = {
                 
             }
