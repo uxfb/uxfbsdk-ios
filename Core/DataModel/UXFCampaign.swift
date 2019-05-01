@@ -9,6 +9,7 @@
 import UIKit
 
 enum UXFCampaignType: String{
+    case popup = "popup"
     case slidein = "slidein"
 }
 
@@ -18,21 +19,26 @@ enum UXFCampaignPosition: String{
 
 struct UXFCampaign{
 
-    #warning("implement campaign ID here")
     private let attemptKey = "campaingAttempt"
+
+    private(set) var campaignId: String!
+    private(set) var pages: Array<UXFPage> = []
+    private(set) var type: UXFCampaignType!
+    private(set) var targetings: Array<Dictionary<String,Any>>!
+    //private(set) var position: UXFCampaignPosition!
+    private(set) var isProgressEnabled: Bool!
+    var showAttemptCount: Int{
+        return 3
+    }
+    var showDelay: TimeInterval{
+        return 1.0
+    }
+    var currentAttempt: Int{
+        return UserDefaults.standard.integer(forKey: attemptKey)
+    }
     
     var formsCount: Int{
         return pages.count
-    }
-    
-    private(set) var pages: Array<UXFPage> = []
-    private(set) var type: UXFCampaignType!
-    //private(set) var position: UXFCampaignPosition!
-    //private(set) var isProgressEnabled: Bool!
-    var showAttemptCount: Int!
-    var showDelay: TimeInterval!
-    var currentAttempt: Int{
-        return UserDefaults.standard.integer(forKey: attemptKey)
     }
     
     func show() -> (Bool){

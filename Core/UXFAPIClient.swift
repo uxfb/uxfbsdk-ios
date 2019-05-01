@@ -42,53 +42,66 @@ class UFXAPIClient{
     func getAllCampaings(completion: ((_ success: Bool, _ message: String?, _ theme: UXFTheme?, _ campaign: UXFCampaign?)->())?){
     
      DDLogDebug("Get all campaings:")
-     //let systemInfo = UXFStatisticManager.getDeviceInfo()
+     
      _ = self.performRequest(route: UXFAPIWebRouter.getCampaing(appID: _appID))
       {(status, message, result) in
         
         if status == .success {
-            var theme: UXFTheme?
+            let theme: UXFTheme? = nil
             var campaign: UXFCampaign?
-            if let themeInfo =  result!["theme"] as? Dictionary<String, Any>{
-                theme = UXFTheme.init(colorsDict: themeInfo["colors"] as! Dictionary<String, String>,
-                                          smilesDict: themeInfo["smiles"] as! Dictionary<String, String>)
-                
 
-            }
-            
-            if let compaignInfo = result!["campaign"] as? Dictionary<String, Any>{
-                
-                var pages = Array<UXFPage>()
-                if let pagesArrayOfDict = compaignInfo["pages"] as? Array<Dictionary<String, Any>> {
-               
-                    for pageDict in pagesArrayOfDict{
-                        var fields: Array<UIView> = []
-                        if let filedsInfoArr = pageDict["fields"] as? Array<Dictionary<String, Any>> {
-                            for fieldInfo in  filedsInfoArr{
-                                if let filed = UXFUIFabric.sharedInstance.parseUIElement(dictionary: fieldInfo){
-                                   fields.append(filed)
+            if let campaignsResults = result as? Array<Dictionary<String, Any>>{
+                for compaignInfo in campaignsResults{
+                   /* let themeInfo = dict["theme"] as! Dictionary<String, Any>
+                    theme = UXFTheme.init(colorsDict: themeInfo["colors"] as! Dictionary<String, String>,
+                                          smilesDict: themeInfo["smiles"] as! Dictionary<String, String>)*/
+
+                    let type = compaignInfo["type"] as! String
+                    let targetingArr = compaignInfo["targeting"] as! Array<Dictionary<String, Any>>
+                    let campaingId = compaignInfo["campaignId"] as! String
+                    let progressDict = compaignInfo["progress"] as! Dictionary<String, Any>
+                    let progress = progressDict["enabled"] as! Bool
+                    
+                    var pages = Array<UXFPage>()
+                    if let pagesArrayOfDict = compaignInfo["pages"] as? Array<Dictionary<String, Any>> {
+                            
+                            for pageDict in pagesArrayOfDict{
+                                var fields: Array<UIView> = []
+                                if let filedsInfoArr = pageDict["fields"] as? Array<Dictionary<String, Any>> {
+                                    for fieldInfo in  filedsInfoArr{
+                                        if let filed = UXFUIFabric.sharedInstance.parseUIElement(dictionary: fieldInfo){
+                                            fields.append(filed)
+                                        }
+                                    }
                                 }
+                                
+                                var button: UXFButton?
+                                if let buttonInfo = pageDict["button"] as? Dictionary<String, Any>{
+                                    button = UXFUIFabric.sharedInstance.parseUIElement(dictionary: buttonInfo) as? UXFButton
+                                }
+                                let page = UXFPage.init(_id: pageDict["_id"] as? String,
+                                                        button: button,
+                                                        fields: fields)
+                                pages.append(page)
                             }
                         }
-                        var button: UXFButton?
-                        if let buttonInfo = pageDict["button"] as? Dictionary<String, Any>{
-                            button = UXFUIFabric.sharedInstance.parseUIElement(dictionary: buttonInfo) as? UXFButton
-                        }
-                        let page = UXFPage.init(_id: pageDict["_id"] as? String,
-                                                button: button,
-                                                fields: fields)
-                        pages.append(page)
-                    }
+                    
+                    campaign = UXFCampaign.init(campaignId: campaingId,
+                                                    pages: pages,
+                                                    type: UXFCampaignType.init(rawValue: type),
+                                                    targetings: targetingArr,
+                                                    isProgressEnabled: progress)
+                        
+                        break
                 }
                 
-                campaign = UXFCampaign.init(pages: pages,
-                                            type: UXFCampaignType.init(rawValue:  compaignInfo["type"] as! String),
-                                            showAttemptCount: 3,
-                                            showDelay: 1.0)
+                DDLogDebug("Get all campaings successful")
+                completion?(true, nil, theme, campaign)
             }
-            
-           DDLogDebug("Get all campaings successful")
-           completion?(true, nil, theme, campaign)
+            else{
+                DDLogDebug("No campaings detected")
+                completion?(false, "No campaings detected", nil, nil)
+            }
         }
         else{
            DDLogDebug("Get all campaings failed")
@@ -106,9 +119,23 @@ class UFXAPIClient{
         }*/
     }
     
+    
+    func saveFirstFormData(projectId: String, campaignId: String, fields: Dictionary<String,Any>){
+        
+        let systemInfo = UXFStatisticManager.getDeviceInfo()
+        _ = self.performRequest(route: UXFAPIWebRouter.saveFirstFormData(projectId: projectId,
+                                                                         uid: UIDevice.current.identifierForVendor?.uuidString ?? "",
+                                                                         campaignId: campaignId,
+                                                                         fields: fields,
+                                                                         info : systemInfo))
+         {(status, message, result) in
+                                    
+        }
+    }
+    
     //MARK: internal request
     
-    internal func performRequest(route:UXFAPIWebRouter, completion:@escaping (UFXAPIClientResponseResult, String?, Dictionary<String, Any>?)->()) -> DataRequest?{
+    internal func performRequest(route:UXFAPIWebRouter, completion:@escaping (UFXAPIClientResponseResult, String?, Any?)->()) -> DataRequest?{
         
         /*let urlRequest = try? route.asURLRequest()
         if urlRequest != nil {
@@ -165,8 +192,8 @@ class UFXAPIClient{
                 }
                 return
             }*/
-            
-            if  let data = values["data"] as? [String: AnyObject], data.count > 0 {
+    
+            if  let data = values["data"] {
                 completion(.success, nil, data)
             }else{
                 completion(.fail, "Response data is empty", nil)
@@ -184,10 +211,10 @@ class UFXAPIClient{
          }*/
         
         
-        return performRequest(route: route){ (status: UFXAPIClientResponseResult, message: String?, result: Dictionary<String, Any>?) in
+        return performRequest(route: route){ (status: UFXAPIClientResponseResult, message: String?, result: Any?) in
             
             if status == .success && result != nil {
-                var dict: Dictionary = result!
+                var dict: Dictionary = result! as! Dictionary<String, Any>
                 
                 if keyPath != nil {
                     for subPath in keyPath!.components(separatedBy: ".") {

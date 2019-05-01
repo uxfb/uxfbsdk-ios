@@ -24,6 +24,8 @@ class UXFUIFabric{
                 return createUIText(dictionary: dictionary)
             case "checkboxes":
                 return createUICheckbox(dictionary: dictionary)
+          //  case "smiles":
+            //    return nil
             default:
                 return nil
             }

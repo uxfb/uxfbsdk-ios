@@ -21,6 +21,7 @@ enum HTTPHeaderField: String {
     case fields = "fields"
     case answerId = "answerId"
     case projectId = "projectId"
+    case info = "info"
 }
 
 extension Error {
@@ -43,7 +44,7 @@ enum UXFAPIWebRouter {
     }
     
     case getCampaing(appID: String)
-    case saveFirstFormData(projectId: String, uid: String, campaignId: String, fields: Dictionary <String, Any>)
+    case saveFirstFormData(projectId: String, uid: String, campaignId: String, fields: Dictionary <String, Any>, info: Dictionary<String, Any>)
     case saveOtherFormData(projectId: String, answerId: String, fields: Dictionary <String, Any>)
     case showForm(uid: String, campaingId: String)
     
@@ -64,7 +65,7 @@ enum UXFAPIWebRouter {
        switch self {
          case .getCampaing(let appId):
               return "/mobile/campaigns/\(appId)"
-         case .saveFirstFormData(_, _, _, _):
+         case .saveFirstFormData(_, _, _, _, _):
               return "/mobile/answers"
          case .saveOtherFormData(_, _, _):
               return "/mobile/answers"
@@ -76,10 +77,11 @@ enum UXFAPIWebRouter {
     var parameters: Parameters? {
         switch self {
             
-          case .saveFirstFormData(_ , let uid, let campaignId, let fields):
+          case .saveFirstFormData(_ , let uid, let campaignId, let fields, let info):
              return [HTTPHeaderField.uid.rawValue : uid,
                     HTTPHeaderField.campaignId.rawValue : campaignId,
-                    HTTPHeaderField.fields.rawValue : fields]
+                    HTTPHeaderField.fields.rawValue : fields,
+                    HTTPHeaderField.fields.rawValue : info]
             
           case .saveOtherFormData(_ , let answerId, let fields):
             return [HTTPHeaderField.answerId.rawValue : answerId,
@@ -97,7 +99,7 @@ enum UXFAPIWebRouter {
         
         var parameters: [String: Any] = [:]
         switch self {
-        case .saveFirstFormData(let projectId, _, _, _):
+        case .saveFirstFormData(let projectId, _, _, _, _):
             parameters =  [HTTPHeaderField.projectId.rawValue : projectId]
             break
         case .saveOtherFormData(let projectId, _, _):

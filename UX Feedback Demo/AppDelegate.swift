@@ -11,7 +11,7 @@ import AlamofireNetworkActivityLogger
 import CocoaLumberjack
 
 let usabillaAppID = ""
-let uxfAppID = "5b587ce3bd4d6b7e562a519f"
+let uxfAppID = "54444d444a068c157e7f7e14"
 
 enum UXFedbackCompanyEvents: String {
     case mainScreen

@@ -12,22 +12,26 @@ import Reachability
 
 class UXFStatisticManager{
     
-    static let uxfOSVersionKey = "OS"
-    static let uxfScreenOrientationKey = "orientation"
-    static let uxfLanguageKey = "language"
-    static let uxfScreenResolutionKey = "resolution"
-    static let uxfNetworkTypeKey = "network"
-    static let uxfDeviceModelKey = "device"
-    
-    class func getDeviceInfo() -> (Dictionary<String, String>){
+    class func getDeviceInfo() -> (Dictionary<String, Any>){
         
         let networkType = Reachability.getNetworkType()
-        let info: Dictionary<String, String> =  [ uxfOSVersionKey : "\(UIDevice.current.systemName) \(UIDevice.current.systemVersion)",
-            uxfLanguageKey : Locale.current.languageCode ?? "ru",
-            uxfScreenOrientationKey : UIDevice.current.orientation.isPortrait == true ? "portrait" : "landscape",
-            uxfScreenResolutionKey : "\(Int(UIScreen.main.nativeBounds.size.width))x\(Int(UIScreen.main.nativeBounds.size.height))",
-            uxfNetworkTypeKey : networkType.trackingId,
-            uxfDeviceModelKey : UIDevice.current.model
+        var device = "unknown"
+        if UIDevice.current.userInterfaceIdiom == .pad{
+            device = "tablet"
+        }
+        else if UIDevice.current.userInterfaceIdiom == .phone{
+            device = "mobile"
+        }
+            
+        let info: Dictionary<String, Any> =  [ "os" : "\(UIDevice.current.systemName) \(UIDevice.current.systemVersion)",
+            "deviceVendor" : "apple",
+            "deviceModel" : UIDevice.current.model,
+            "language" : Locale.current.languageCode ?? "ru",
+            "orientation" : UIDevice.current.orientation.isPortrait == true ? "portrait" : "landscape",
+            "width" : Int(UIScreen.main.nativeBounds.size.width),
+            "height" : Int(UIScreen.main.nativeBounds.size.height),
+            "network" : networkType.trackingId,
+            "device" : device
         ]
         return info
     }
