@@ -47,7 +47,7 @@ class UXFCampaignFormPresentor: NSObject{
     //MARK: - Form navogation presentation
     
     private func nextForm(){
-        if self.currentFormIndex <= _campaign.formsCount{
+        if (self.currentFormIndex + 1) < _campaign.formsCount{
             self.currentFormIndex += 1
             showCurrentForm(direction: currentFormIndex == 0 ? .downToUp : .alphaIn)
         }
@@ -64,34 +64,34 @@ class UXFCampaignFormPresentor: NSObject{
     }
     
     private func showCurrentForm(direction: UXFViewPopupDirection){
-        
+        /*
         if self.currentFormIndex == 0{
             showRateForm(direction: direction)
         }
-        /*
+        
         else if self.currentFormIndex == 1{
             showCommentForm(direction: direction)
         }*/
-        else{
-            let controller = UXFViewController.init()
-            
-            controller.didLoadHandler = { [unowned self] in
-                self.formCreator.createForm(controller: controller,
-                                            page: self._campaign.pages[self.currentFormIndex-1])
-            }
-            controller.didCloseHandler = {
-                
-            }
-            controller.backHandler = { [weak self] in
-                self?.prevForm()
-            }
-            controller.nextHandler = { [weak self] in
-                self?.nextForm()
-            }
-            showController(controller: controller, direction: direction)
+       
+        let controller = UXFViewController.init()
+        
+        controller.didLoadHandler = { [unowned self] in
+            self.formCreator.createForm(controller: controller,
+                                        page: self._campaign.pages[self.currentFormIndex])
         }
+        controller.didCloseHandler = {
+            
+        }
+        controller.backHandler = { [weak self] in
+            self?.prevForm()
+        }
+        controller.nextHandler = { [weak self] in
+            self?.nextForm()
+        }
+        showController(controller: controller, direction: direction)
+        
     }
-    
+    /*
     private func showRateForm(direction: UXFViewPopupDirection){
         let controller = UXFRateViewController.init()
         controller.didCloseHandler = {
@@ -116,7 +116,7 @@ class UXFCampaignFormPresentor: NSObject{
         }
         controller.isMandatoryField = false
         showController(controller: controller, direction: direction)
-    }
+    }*/
     
     private func showCongratulationForm(direction: UXFViewPopupDirection){
         let controller = UXFCongratulationViewController()

@@ -39,6 +39,13 @@
                                 <action selector="closeButtonDidTap:" destination="-1" eventType="touchUpInside" id="94i-Ks-GNh"/>
                             </connections>
                         </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_small" translatesAutoresizingMaskIntoConstraints="NO" id="4GW-NN-Thv">
+                            <rect key="frame" x="16" y="133" width="22" height="11"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="22" id="2gq-eR-BSP"/>
+                                <constraint firstAttribute="height" constant="11" id="3hu-TW-vp8"/>
+                            </constraints>
+                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zy1-Kq-40p">
                             <rect key="frame" x="135.5" y="16" width="17" height="16"/>
                             <constraints>
@@ -51,10 +58,12 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="4GW-NN-Thv" secondAttribute="bottom" constant="16" id="5K6-QT-wn2"/>
                         <constraint firstItem="zy1-Kq-40p" firstAttribute="top" secondItem="j1J-aB-pVd" secondAttribute="top" constant="16" id="FV1-Xo-6DJ"/>
                         <constraint firstAttribute="height" constant="160" id="I8K-uf-DY9"/>
                         <constraint firstItem="zy1-Kq-40p" firstAttribute="centerX" secondItem="j1J-aB-pVd" secondAttribute="centerX" id="kAv-86-Oyf"/>
                         <constraint firstAttribute="trailing" secondItem="yWd-CR-rxX" secondAttribute="trailing" constant="8" id="rfh-oF-Nc8"/>
+                        <constraint firstItem="4GW-NN-Thv" firstAttribute="leading" secondItem="j1J-aB-pVd" secondAttribute="leading" constant="16" id="vq4-Aa-FOU"/>
                         <constraint firstItem="yWd-CR-rxX" firstAttribute="top" secondItem="j1J-aB-pVd" secondAttribute="top" constant="8" id="zl3-i8-zC6"/>
                     </constraints>
                 </view>
@@ -71,5 +80,6 @@
     </objects>
     <resources>
         <image name="close_image" width="14" height="14"/>
+        <image name="logo_small" width="22" height="11"/>
     </resources>
 </document>

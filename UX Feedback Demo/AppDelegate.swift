@@ -31,8 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DDLog.add(DDOSLogger.sharedInstance)
         
         #if DEBUG
-       // NetworkActivityLogger.shared.level = .debug
-       // NetworkActivityLogger.shared.startLogging()
+        NetworkActivityLogger.shared.level = .debug
+        NetworkActivityLogger.shared.startLogging()
         #endif
         
         print(String(describing: UIDevice.current.identifierForVendor?.uuidString))

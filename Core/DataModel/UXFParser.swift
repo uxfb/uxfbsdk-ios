@@ -70,14 +70,48 @@ class UXFParser : UXFParserProtocol{
                 return createUIText(dictionary: dictionary)
             case "checkboxes":
                 return createUICheckbox(dictionary: dictionary)
-          //  case "smiles":
-            //    return nil
+            case "smiles":
+                return createSmiles(dictionary: dictionary)
             default:
                 return nil
             }
         }
         
        return nil
+    }
+    
+    private func createSmiles(dictionary: Dictionary<String, Any>) ->(UIView){
+        
+        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 64))
+        
+        let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 24))
+        label.text = dictionary["value"] as? String
+        label.font =  label.font.withSize(16)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = true
+        view.addSubview(label)
+ 
+        
+        let stackView = UIStackView.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 32))
+        stackView.translatesAutoresizingMaskIntoConstraints = true
+        stackView.backgroundColor = UIColor.gray
+        view.addSubview(stackView)
+        
+        let views = ["label": label, "stackview": stackView]
+        var allConstraints: [NSLayoutConstraint] = []
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-9-[label]-9-|",
+                                                                    metrics: nil,
+                                                                    views: views as [String : Any])
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-9-[stackview]-9-|",
+                                                                    metrics: nil,
+                                                                    views: views as [String : Any])
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-[label(24)]-15-[stackview(32)]-|",
+                                                                 metrics: nil,
+                                                                 views: views as [String : Any])
+        view.backgroundColor = UIColor.red
+        NSLayoutConstraint.activate(allConstraints)
+        
+        return view
     }
     
     private func createButton(dictionary: Dictionary<String, Any>)->(UXFButton){
