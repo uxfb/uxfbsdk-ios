@@ -38,11 +38,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(String(describing: UIDevice.current.identifierForVendor?.uuidString))
 
         //Usabilla.initialize(appID: usabillaAppID)
-        UXFeedback.setup(appID: uxfAppID, applicationWindow: self.window!){ success in
-            DDLogDebug("UXFeedback initialization " + (success == true ? "successful" : "failed"))
+        UXFeedback.setup(appID: uxfAppID, applicationWindow: self.window!){ [weak self] success in
+            let message = "UXFeedback initialization " + (success == true ? "successful" : "failed")
+            DDLogDebug(message)
+            if success == false {
+                self?.showMessage(title: "Error", text: message, completion: nil)
+            }
         }
         
         return true
+    }
+    
+    func showMessage(title: String? = nil, text: String, completion: ((UIAlertAction)->(Void))?){
+        let alert = UIAlertController.init(title: title,
+                                           message: text,
+                                           preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: "Ок", style: .default, handler: completion))
+        alert.show()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

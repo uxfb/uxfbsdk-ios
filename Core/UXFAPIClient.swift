@@ -166,8 +166,11 @@ class UFXAPIClient{
                 return
             }*/
             
-            let data = values["data"] as? [String: AnyObject]
-            completion(.success, nil, data)
+            if  let data = values["data"] as? [String: AnyObject], data.count > 0 {
+                completion(.success, nil, data)
+            }else{
+                completion(.fail, "Response data is empty", nil)
+            }
         }
     }
     

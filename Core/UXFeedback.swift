@@ -39,7 +39,7 @@ open class UXFeedback: NSObject{
             _campaign = aCampaign
             _appWindow = applicationWindow
         
-            if _eventToSend != nil {
+            if success == true, _eventToSend != nil {
                 sendEvent(event: _eventToSend!)
             }
             

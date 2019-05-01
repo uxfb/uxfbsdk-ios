@@ -36,9 +36,9 @@ enum UXFAPIWebRouter {
     
     static var baseURL: String {
         #if DEBUG
-         return "https://public-api.uxfeedback.ru/v1/"
+         return "https://public-api.uxfeedback.ru/v1"
         #else
-         return "https://public-api.uxfeedback.ru/v1/"
+         return "https://public-api.uxfeedback.ru/v1"
         #endif
     }
     
@@ -62,8 +62,8 @@ enum UXFAPIWebRouter {
     
     var path: String {
        switch self {
-         case .getCampaing(_):
-              return "/mobile/campaigns"
+         case .getCampaing(let appId):
+              return "/mobile/campaigns/\(appId)"
          case .saveFirstFormData(_, _, _, _):
               return "/mobile/answers"
          case .saveOtherFormData(_, _, _):
@@ -97,9 +97,6 @@ enum UXFAPIWebRouter {
         
         var parameters: [String: Any] = [:]
         switch self {
-        case .getCampaing(let appID):
-            parameters = [HTTPHeaderField.appID.rawValue : appID]
-            break
         case .saveFirstFormData(let projectId, _, _, _):
             parameters =  [HTTPHeaderField.projectId.rawValue : projectId]
             break
