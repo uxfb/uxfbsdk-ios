@@ -120,7 +120,10 @@ class UFXAPIClient{
     }
     
     
-    func saveFirstFormData(projectId: String, campaignId: String, fields: Dictionary<String,Any>){
+    func saveFirstFormData(projectId: String,
+                           campaignId: String,
+                           fields: Dictionary<String,Any>,
+                           completion: ((_ success: Bool, _ message: String?)->())?){
         
         let systemInfo = UXFStatisticManager.getDeviceInfo()
         _ = self.performRequest(route: UXFAPIWebRouter.saveFirstFormData(projectId: projectId,
@@ -129,7 +132,27 @@ class UFXAPIClient{
                                                                          fields: fields,
                                                                          info : systemInfo))
          {(status, message, result) in
-                                    
+            DDLogDebug(String(describing: result))
+            completion?(status == .success, message)
+        }
+    }
+    
+    func saveOtherFormData(projectId: String,
+                           answerId: String,
+                           fields: Dictionary <String, Any>,
+                           completion: ((_ success: Bool, _ message: String?)->())?){
+        _ = self.performRequest(route: UXFAPIWebRouter.saveOtherFormData(projectId: projectId, answerId: answerId, fields: fields))
+        {(status, message, result) in
+            DDLogDebug(String(describing: result))
+            completion?(status == .success, message)
+        }
+    }
+    
+    func  showForm(campaingId: String){
+        _ = performRequest(route: UXFAPIWebRouter.showForm(uid: UIDevice.current.identifierForVendor?.uuidString ?? "",
+                                                    campaingId: campaingId))
+        {(status, message, result) in
+            DDLogDebug(String(describing: result))
         }
     }
     
