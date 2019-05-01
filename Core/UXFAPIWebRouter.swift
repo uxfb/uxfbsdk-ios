@@ -16,6 +16,11 @@ enum HTTPHeaderField: String {
     case acceptEncoding = "Accept-Encoding"
     case token = "token"
     case appID = "appId"
+    case uid = "uid"
+    case campaignId = "campaignId"
+    case fields = "fields"
+    case answerId = "answerId"
+    case projectId = "projectId"
 }
 
 extension Error {
@@ -31,21 +36,24 @@ enum UXFAPIWebRouter {
     
     static var baseURL: String {
         #if DEBUG
-         return "http://www.mocky.io/v2"
+         return "https://public-api.uxfeedback.ru/v1/"
         #else
-         return "https://pub-api.uxfeedback.ru/v1"
+         return "https://public-api.uxfeedback.ru/v1/"
         #endif
     }
     
-    case getCampaing(appID: String, campaingID: String, systemInfo: Dictionary<String, String>)
+    case getCampaing(appID: String)
+    case saveFirstFormData(projectId: String, uid: String, campaignId: String, fields: Dictionary <String, Any>)
+    case saveOtherFormData(projectId: String, answerId: String, fields: Dictionary <String, Any>)
+    case showForm(uid: String, campaingId: String)
     
     var method: HTTPMethod {
         switch self {
-        /*
-        case .login, .logout, .register, .refreshToken, .updateCompanyPreferences,
-             .uploadAvatarMultipart, .ask, .viewMessage, .toggleFavorite, .offer:
+
+        case .saveFirstFormData, .showForm:
             return .post
-        */
+        case .saveOtherFormData:
+            return .put
             
         default:
             return .get
@@ -54,30 +62,50 @@ enum UXFAPIWebRouter {
     
     var path: String {
        switch self {
-       case .getCampaing(let appID, let campaingID, let systemInfo):
-           return "/\(campaingID)"
-            //return "/forms/" + appID + "/campaigns/\(campaingID)"
+         case .getCampaing(_):
+              return "/mobile/campaigns"
+         case .saveFirstFormData(_, _, _, _):
+              return "/mobile/answers"
+         case .saveOtherFormData(_, _, _):
+              return "/mobile/answers"
+         case .showForm(_, _):
+              return "/mobile/visits"
         }
     }
     
     var parameters: Parameters? {
         switch self {
             
+          case .saveFirstFormData(_ , let uid, let campaignId, let fields):
+             return [HTTPHeaderField.uid.rawValue : uid,
+                    HTTPHeaderField.campaignId.rawValue : campaignId,
+                    HTTPHeaderField.fields.rawValue : fields]
+            
+          case .saveOtherFormData(_ , let answerId, let fields):
+            return [HTTPHeaderField.answerId.rawValue : answerId,
+                    HTTPHeaderField.fields.rawValue : fields]
+            
+          case .showForm(let uid, let campaingId):
+             return  [HTTPHeaderField.uid.rawValue : uid,
+                    HTTPHeaderField.campaignId.rawValue : campaingId]
           default:
             return [:]
-        }
+         }
     }
     
     var pathParameters: Parameters?{
         
         var parameters: [String: Any] = [:]
         switch self {
-            case .getCampaing(_, _, let systemInfo):
-            parameters =  systemInfo
+        case .getCampaing(let appID):
+            parameters = [HTTPHeaderField.appID.rawValue : appID]
             break
-            
-            //case .setup(let appID):
-           // break
+        case .saveFirstFormData(let projectId, _, _, _):
+            parameters =  [HTTPHeaderField.projectId.rawValue : projectId]
+            break
+        case .saveOtherFormData(let projectId, _, _):
+            parameters =  [HTTPHeaderField.projectId.rawValue : projectId]
+            break
         default:
             break
         }
