@@ -23,6 +23,7 @@ let uxfTokenErrorMessage: String = "Invalid token".localized()
 class UFXAPIClient{
     
     private var _appID: String!
+    private let _apiParser: UXFAPIParserProtocol = UXFAPIParser.init()
     
     init(appID: String){
         DDLog.add(DDOSLogger.sharedInstance, with: DDLogLevel.debug)
@@ -44,7 +45,7 @@ class UFXAPIClient{
      DDLogDebug("Get all campaings:")
      
      _ = self.performRequest(route: UXFAPIWebRouter.getCampaing(appID: _appID))
-      {(status, message, result) in
+      {[weak self] (status, message, result) in
         
         if status == .success {
             let theme: UXFTheme? = nil
@@ -52,47 +53,12 @@ class UFXAPIClient{
 
             if let campaignsResults = result as? Array<Dictionary<String, Any>>{
                 for compaignInfo in campaignsResults{
+                   campaign =  self?._apiParser.parseCampaing(compaignInfo: compaignInfo)
+                    
                    /* let themeInfo = dict["theme"] as! Dictionary<String, Any>
                     theme = UXFTheme.init(colorsDict: themeInfo["colors"] as! Dictionary<String, String>,
                                           smilesDict: themeInfo["smiles"] as! Dictionary<String, String>)*/
-
-                    let type = compaignInfo["type"] as! String
-                    let targetingArr = compaignInfo["targeting"] as! Array<Dictionary<String, Any>>
-                    let campaingId = compaignInfo["campaignId"] as! String
-                    let progressDict = compaignInfo["progress"] as! Dictionary<String, Any>
-                    let progress = progressDict["enabled"] as! Bool
-                    
-                    var pages = Array<UXFPage>()
-                    if let pagesArrayOfDict = compaignInfo["pages"] as? Array<Dictionary<String, Any>> {
-                            
-                            for pageDict in pagesArrayOfDict{
-                                var fields: Array<UIView> = []
-                                if let filedsInfoArr = pageDict["fields"] as? Array<Dictionary<String, Any>> {
-                                    for fieldInfo in  filedsInfoArr{
-                                        if let filed = UXFUIFabric.sharedInstance.parseUIElement(dictionary: fieldInfo){
-                                            fields.append(filed)
-                                        }
-                                    }
-                                }
-                                
-                                var button: UXFButton?
-                                if let buttonInfo = pageDict["button"] as? Dictionary<String, Any>{
-                                    button = UXFUIFabric.sharedInstance.parseUIElement(dictionary: buttonInfo) as? UXFButton
-                                }
-                                let page = UXFPage.init(_id: pageDict["_id"] as? String,
-                                                        button: button,
-                                                        fields: fields)
-                                pages.append(page)
-                            }
-                        }
-                    
-                    campaign = UXFCampaign.init(campaignId: campaingId,
-                                                    pages: pages,
-                                                    type: UXFCampaignType.init(rawValue: type),
-                                                    targetings: targetingArr,
-                                                    isProgressEnabled: progress)
-                        
-                        break
+                    break
                 }
                 
                 DDLogDebug("Get all campaings successful")

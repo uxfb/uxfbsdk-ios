@@ -25,7 +25,6 @@ struct UXFCampaign{
     private(set) var pages: Array<UXFPage> = []
     private(set) var type: UXFCampaignType!
     private(set) var targetings: Array<Dictionary<String,Any>>!
-    //private(set) var position: UXFCampaignPosition!
     private(set) var isProgressEnabled: Bool!
     var showAttemptCount: Int{
         return 3
