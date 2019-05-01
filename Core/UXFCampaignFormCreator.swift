@@ -25,10 +25,11 @@ class UXFCampaignFormCreator{
             controller.contentView.addConstraints(verticalConstraints)
             topView = view
         }
-        
+        /*
         controller.contentView.addSubview(page.button)
         page.button.translatesAutoresizingMaskIntoConstraints = false
         let views = ["topView" : topView, "button": page.button, "superview": controller.contentView]
+ 
         let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[superview]-15-[button(44)]-15-[superview]",
                                                                    options: NSLayoutConstraint.FormatOptions.alignAllCenterY,
                                                                    metrics: nil,
@@ -39,5 +40,6 @@ class UXFCampaignFormCreator{
                                                                  views: views as [String : Any])
         controller.contentView.addConstraints(horizontalConstraints)
         controller.contentView.addConstraints(verticalConstraints)
+     */
     }
 }

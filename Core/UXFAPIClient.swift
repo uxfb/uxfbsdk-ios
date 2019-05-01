@@ -23,7 +23,7 @@ let uxfTokenErrorMessage: String = "Invalid token".localized()
 class UFXAPIClient{
     
     private var _appID: String!
-    private let _apiParser: UXFAPIParserProtocol = UXFAPIParser.init()
+    private let _parser: UXFParserProtocol = UXFParser.init()
     
     init(appID: String){
         DDLog.add(DDOSLogger.sharedInstance, with: DDLogLevel.debug)
@@ -53,7 +53,7 @@ class UFXAPIClient{
 
             if let campaignsResults = result as? Array<Dictionary<String, Any>>{
                 for compaignInfo in campaignsResults{
-                   campaign =  self?._apiParser.parseCampaing(compaignInfo: compaignInfo)
+                   campaign =  self?._parser.parseCampaing(compaignInfo: compaignInfo)
                     
                    /* let themeInfo = dict["theme"] as! Dictionary<String, Any>
                     theme = UXFTheme.init(colorsDict: themeInfo["colors"] as! Dictionary<String, String>,
