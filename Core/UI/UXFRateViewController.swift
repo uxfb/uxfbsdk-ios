@@ -33,6 +33,10 @@ class UXFRateViewController: UXFViewController {
                                                                y: 0,
                                                                width: buttonWidth,
                                                                height: buttonHeight))
+                button.imageView?.contentMode = .scaleAspectFit
+                if #available(iOS 11.0, *) {
+                    button.adjustsImageSizeForAccessibilityContentSizeCategory = true
+                }
                 theme?.getSmile(index: buttonIndex, completion: { (image) in
                     button.setImage(image, for: UIControl.State.normal)
                 })
