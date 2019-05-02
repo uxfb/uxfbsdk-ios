@@ -10,13 +10,9 @@ import UIKit
 import CocoaLumberjack
 import UIColor_Hex_Swift
 
-protocol UXFParserProtocol {
-    func parseCampaing(compaignInfo: Dictionary<String,Any>) -> (UXFCampaign?)
-}
-
-class UXFParser : UXFParserProtocol{
+class UXFParser{
     
-    func parseCampaing(compaignInfo: Dictionary<String,Any>) -> (UXFCampaign?){
+    class func parseCampaing(compaignInfo: Dictionary<String,Any>) -> (UXFCampaign?){
         
         let type = compaignInfo["type"] as! String
         let targetingArr = compaignInfo["targeting"] as! Array<Dictionary<String, Any>>
@@ -29,24 +25,8 @@ class UXFParser : UXFParserProtocol{
             
             for pageDict in pagesArrayOfDict{
                 DDLogDebug("page: \(pageDict)")
-                
                 let pageId =  pageDict["_id"] as! String
-                var fields: Array<UIView> = []
-                if let filedsInfoArr = pageDict["fields"] as? Array<Dictionary<String, Any>> {
-                    for fieldInfo in  filedsInfoArr{
-                        if let filed = self.parseUIElement(dictionary: fieldInfo){
-                            fields.append(filed)
-                        }
-                    }
-                }
-                
-                /*var button: UXFButton?
-                 if let buttonInfo = pageDict["button"] as? Dictionary<String, Any>{
-                 button = UXFUIFabric.sharedInstance.parseUIElement(dictionary: buttonInfo) as? UXFButton
-                 }*/
-                let page = UXFPage.init(_id: pageId,
-                                        //button: button,
-                    fields: fields)
+                let page = UXFPage.init(id: pageId, uiData: pageDict)
                 pages.append(page)
             }
         }
@@ -60,7 +40,7 @@ class UXFParser : UXFParserProtocol{
     
     //MARK: support
     
-    private func parseUIElement(dictionary: Dictionary<String, Any>)->(UIView?){
+    internal class func parseUIElement(dictionary: Dictionary<String, Any>, submitHandler: ((Dictionary<String,Any>)->())?)->(UIView?){
         
         if let type = dictionary["type"] as? String{
             switch type {
@@ -73,7 +53,7 @@ class UXFParser : UXFParserProtocol{
             case "checkboxes":
                 return createUICheckbox(dictionary: dictionary)
             case "smiles":
-                return createSmiles(dictionary: dictionary)
+                return createSmiles(dictionary: dictionary, submitHandler: submitHandler)
             default:
                 return nil
             }
@@ -82,7 +62,7 @@ class UXFParser : UXFParserProtocol{
        return nil
     }
     
-    private func createSmiles(dictionary: Dictionary<String, Any>) ->(UIView){
+    private class func createSmiles(dictionary: Dictionary<String, Any>, submitHandler: ((Dictionary<String,Any>)->())?) ->(UIView){
         
         let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 80, height: 44))
         
@@ -105,7 +85,7 @@ class UXFParser : UXFParserProtocol{
         view.addSubview(stackView)
         
         let smilesInfo = dictionary["smiles"] as! Dictionary<String, Any>
-        self.createSmiles(info: smilesInfo, layoutView: stackView)
+        self.createSmiles(info: smilesInfo, layoutView: stackView, submitHandler: submitHandler)
 
         let views = ["label": label, "stackview": stackView]
         var allConstraints: [NSLayoutConstraint] = []
@@ -125,13 +105,13 @@ class UXFParser : UXFParserProtocol{
         return view
     }
     
-    private func createButton(dictionary: Dictionary<String, Any>)->(UXFButton){
+    private class func createButton(dictionary: Dictionary<String, Any>)->(UXFButton){
         let button = UXFButton.init(frame: CGRect.init(x: 0, y: 0, width: 80, height: 33))
         button.titleLabel?.text = dictionary["value"] as? String
         return button
     }
     
-    private func createUICheckbox(dictionary: Dictionary<String, Any>)->(UIView){
+    private class func createUICheckbox(dictionary: Dictionary<String, Any>)->(UIView){
         let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 33))
         let switchView = UISwitch.init(frame: CGRect.init(x: 0, y: 0, width: 44, height: view.bounds.size.height))
         view.addSubview(switchView)
@@ -139,14 +119,14 @@ class UXFParser : UXFParserProtocol{
         return view
     }
     
-    private func createUIHeader(dictionary: Dictionary<String, Any>)->(UILabel){
+    private class func createUIHeader(dictionary: Dictionary<String, Any>)->(UILabel){
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 33))
         label.text = dictionary["value"] as? String
         label.sizeToFit()
         return label
     }
     
-    private func createUIText(dictionary: Dictionary<String, Any>)->(UILabel){
+    private class func createUIText(dictionary: Dictionary<String, Any>)->(UILabel){
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 33))
         label.text = dictionary["value"] as? String
         label.sizeToFit()
@@ -155,7 +135,9 @@ class UXFParser : UXFParserProtocol{
     
     //MARK: - Smiles
     
-    private func createSmiles(info:  Dictionary<String, Any>, layoutView: UIStackView){
+    private class func createSmiles(info:  Dictionary<String, Any>,
+                              layoutView: UIStackView,
+                              submitHandler: ((Dictionary<String,Any>)->())?){
         let smilesKeys = info.keys.sorted()
         
         for smileKey in smilesKeys{
@@ -172,13 +154,13 @@ class UXFParser : UXFParserProtocol{
                                         width: buttonWidth,
                                         height: buttonHeight)
             layoutView.addArrangedSubview(button)
-            button.addAction(for: .allTouchEvents) {
-               
+            button.addAction(for: .touchUpInside) {
+                submitHandler?(["smiles0" : button.index])
             }
         }
     }
     
-    private func createSmileButton(info: Dictionary<String, Any>,
+    private class func createSmileButton(info: Dictionary<String, Any>,
                                    smileIndex: Int) -> (UXFSmileButton){
         
         let button = UXFSmileButton.init(index: smileIndex,
@@ -198,11 +180,11 @@ class UXFParser : UXFParserProtocol{
         return button
     }
     
-    static func getSmile(imageName: String, completion: (_ smileImage: UIImage)->()) ->(UIImage?){
+    class func getSmile(imageName: String, completion: (_ smileImage: UIImage)->()) ->(UIImage?){
         return UIImage.init(named: imageName)
     }
     
-    static func smileImageName(by index: Int) -> (String){
+    class func smileImageName(by index: Int) -> (String){
         let names = ["angry", "mad", "confused", "happy", "in-love"]
         if index < names.count {
             return names[index]

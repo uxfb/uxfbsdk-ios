@@ -16,19 +16,27 @@ class UXFCampaignFormCreator{
         var topView: UIView? = controller.progressLabel
         var allConstraints: [NSLayoutConstraint] = []
         var viewIndex = 0
-        for view in page.fields{
-            controller.contentView.addSubview(view)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            
-            let views = ["view": view, "topView": topView]
-            allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[view]-16-|", metrics: nil, views: views as [String : Any])
-            let top = (topView == nil ? "|" : "[topView]")
-            let bottom = (viewIndex == (page.fields.count - 1) ? "|" : "")
- 
-            allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:"+top+"-15-[view]-" + bottom, metrics: nil, views: views as [String : Any])
-
-            topView = view
-            viewIndex += 1
+        
+        if let filedsInfoArr = page.uiData["fields"] as? Array<Dictionary<String, Any>> {
+            for fieldInfo in  filedsInfoArr{
+                if let filedView = UXFParser.parseUIElement(dictionary: fieldInfo,
+                                                        submitHandler: {(info) in
+                    controller.nextHandler?(controller.formIndex, info)
+                }){
+                    controller.contentView.addSubview(filedView)
+                    filedView.translatesAutoresizingMaskIntoConstraints = false
+                    
+                    let views = ["view": filedView, "topView": topView]
+                    allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[view]-16-|", metrics: nil, views: views as [String : Any])
+                    let top = (topView == nil ? "|" : "[topView]")
+                    let bottom = (viewIndex == (filedsInfoArr.count - 1) ? "|" : "")
+                    
+                    allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:"+top+"-15-[view]-" + bottom, metrics: nil, views: views as [String : Any])
+                    
+                    topView = filedView
+                    viewIndex += 1
+                }
+            }
         }
         
         controller.contentView.addConstraints(allConstraints)

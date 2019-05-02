@@ -87,7 +87,7 @@ extension UXFeedback: UXFCampaignFormPresentorProtocol {
     
     func formSubmitted(formIndex: Int, info: Dictionary<String, Any>?) {
         if formIndex == 0 {
-            _apiClient.saveFirstFormData(projectId: nil,
+            _apiClient.saveFirstFormData(projectId: "asdsa",
                                         campaignId: _campaign!.campaignId,
                                             fields: info) { (success, message) in
                                                 self.showMessage(text: message ?? (success == true ? "Данные успешно отправлены!" : "Неизвестная ошибка при отправке данных формы"), completion: nil)

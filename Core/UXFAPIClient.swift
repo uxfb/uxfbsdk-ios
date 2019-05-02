@@ -23,7 +23,6 @@ let uxfTokenErrorMessage: String = "Invalid token".localized()
 class UXFAPIClient{
     
     private(set) var appID: String!
-    private let _parser: UXFParserProtocol = UXFParser.init()
     
     init(appID: String){
         DDLog.add(DDOSLogger.sharedInstance, with: DDLogLevel.debug)
@@ -45,7 +44,7 @@ class UXFAPIClient{
      DDLogDebug("Get all campaings:")
      
      _ = self.performRequest(route: UXFAPIWebRouter.getCampaing(appID: self.appID))
-      {[weak self] (status, message, result) in
+      {(status, message, result) in
         
         if status == .success {
             let theme: UXFTheme? = nil
@@ -53,7 +52,7 @@ class UXFAPIClient{
 
             if let campaignsResults = result as? Array<Dictionary<String, Any>>{
                 for compaignInfo in campaignsResults{
-                   campaign =  self?._parser.parseCampaing(compaignInfo: compaignInfo)
+                   campaign =  UXFParser.parseCampaing(compaignInfo: compaignInfo)
                     
                    /* let themeInfo = dict["theme"] as! Dictionary<String, Any>
                     theme = UXFTheme.init(colorsDict: themeInfo["colors"] as! Dictionary<String, String>,
@@ -152,8 +151,13 @@ class UXFAPIClient{
                 return
             }
             
+            if let error = values["error"] as? String{
+                completion(.fail, "\(error): \(values["message"] as? String ?? "Error request result")", nil)
+                return
+            }
             
-           /* guard values["status"] as? String == "ok" else{
+            /*
+            guard values["statusCode"] as? String == "ok" else{
                 
                 
                 if let code  = values["code"] as? String, let errorCode =  APIClientError(rawValue: code){
