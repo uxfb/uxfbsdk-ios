@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j1J-aB-pVd">
-                    <rect key="frame" x="16" y="392" width="288" height="160"/>
+                    <rect key="frame" x="16" y="384" width="288" height="168"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWd-CR-rxX">
                             <rect key="frame" x="256" y="8" width="24" height="24"/>
@@ -40,7 +40,7 @@
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_small" translatesAutoresizingMaskIntoConstraints="NO" id="4GW-NN-Thv">
-                            <rect key="frame" x="16" y="133" width="22" height="11"/>
+                            <rect key="frame" x="16" y="141" width="22" height="11"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="22" id="2gq-eR-BSP"/>
                                 <constraint firstAttribute="height" constant="11" id="3hu-TW-vp8"/>
@@ -60,7 +60,7 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="4GW-NN-Thv" secondAttribute="bottom" constant="16" id="5K6-QT-wn2"/>
                         <constraint firstItem="zy1-Kq-40p" firstAttribute="top" secondItem="j1J-aB-pVd" secondAttribute="top" constant="16" id="FV1-Xo-6DJ"/>
-                        <constraint firstAttribute="height" constant="160" id="I8K-uf-DY9"/>
+                        <constraint firstAttribute="height" constant="168" id="I8K-uf-DY9"/>
                         <constraint firstItem="zy1-Kq-40p" firstAttribute="centerX" secondItem="j1J-aB-pVd" secondAttribute="centerX" id="kAv-86-Oyf"/>
                         <constraint firstAttribute="trailing" secondItem="yWd-CR-rxX" secondAttribute="trailing" constant="8" id="rfh-oF-Nc8"/>
                         <constraint firstItem="4GW-NN-Thv" firstAttribute="leading" secondItem="j1J-aB-pVd" secondAttribute="leading" constant="16" id="vq4-Aa-FOU"/>

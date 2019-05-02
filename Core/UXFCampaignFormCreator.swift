@@ -13,20 +13,26 @@ class UXFCampaignFormCreator{
     
     func createForm(controller: UXFViewController, page: UXFPage) {
 
-        var topView = controller.contentView;
-        
+        var topView: UIView? = controller.progressLabel
         var allConstraints: [NSLayoutConstraint] = []
+        var viewIndex = 0
         for view in page.fields{
             controller.contentView.addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false
             
             let views = ["view": view, "topView": topView]
-            allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[view]-15-|", metrics: nil, views: views as [String : Any])
-            allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:[topView]-15-[view(\(view.frame.size.height))]", metrics: nil, views: views as [String : Any])
+            allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[view]-16-|", metrics: nil, views: views as [String : Any])
+            let top = (topView == nil ? "|" : "[topView]")
+            let bottom = (viewIndex == (page.fields.count - 1) ? "|" : "")
+ 
+            allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:"+top+"-15-[view]-" + bottom, metrics: nil, views: views as [String : Any])
+
             topView = view
+            viewIndex += 1
         }
         
-         NSLayoutConstraint.activate(allConstraints)
+        controller.contentView.addConstraints(allConstraints)
+
         /*
         controller.contentView.addSubview(page.button)
         page.button.translatesAutoresizingMaskIntoConstraints = false

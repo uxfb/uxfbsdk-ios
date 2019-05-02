@@ -55,6 +55,7 @@
 		0A6CDB8C2243C95B00C17007 /* UXFRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB8A2243C95B00C17007 /* UXFRateViewController.swift */; };
 		0A6CDB8D2243C95B00C17007 /* UXFRateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A6CDB8B2243C95B00C17007 /* UXFRateViewController.xib */; };
 		0A6CDB8F22446EC900C17007 /* UXFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB8E22446EC900C17007 /* UXFViewController.swift */; };
+		0AA92D9D227A9410005DBCBA /* UXFSmileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA92D9C227A9410005DBCBA /* UXFSmileButton.swift */; };
 		B9C53F8FD758222F0AB72EF0 /* Pods_UX_Feedback_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37DC0658862D1C4AD29E3B0 /* Pods_UX_Feedback_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +110,7 @@
 		0A6CDB8A2243C95B00C17007 /* UXFRateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFRateViewController.swift; sourceTree = "<group>"; };
 		0A6CDB8B2243C95B00C17007 /* UXFRateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFRateViewController.xib; sourceTree = "<group>"; };
 		0A6CDB8E22446EC900C17007 /* UXFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFViewController.swift; sourceTree = "<group>"; };
+		0AA92D9C227A9410005DBCBA /* UXFSmileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFSmileButton.swift; sourceTree = "<group>"; };
 		0ECEFD8BB28ED850EA4CCC49 /* Pods-UX Feedback Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UX Feedback Demo.release.xcconfig"; path = "Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo.release.xcconfig"; sourceTree = "<group>"; };
 		A37DC0658862D1C4AD29E3B0 /* Pods_UX_Feedback_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UX_Feedback_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC6B66F9C3D158E60BC3EBD2 /* Pods-UX Feedback Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UX Feedback Demo.debug.xcconfig"; path = "Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				0A6CDB7D224113F900C17007 /* UXFParser.swift */,
 				0A6CDB77223BD47800C17007 /* UXFText.swift */,
 				0A6CDB75223B960500C17007 /* UXFButton.swift */,
+				0AA92D9C227A9410005DBCBA /* UXFSmileButton.swift */,
 				0A6CDB7B224111EC00C17007 /* UXFCheckbox.swift */,
 				0A6CDB79224110FE00C17007 /* UXFLabel.swift */,
 			);
@@ -444,6 +447,7 @@
 				0A019A6722367EF3002FD4F8 /* String+additions.swift in Sources */,
 				0A0CDEB522506F7800E1C092 /* UXFCongratulationViewController.swift in Sources */,
 				0A6CDB80224241DE00C17007 /* UXFPageResponse.swift in Sources */,
+				0AA92D9D227A9410005DBCBA /* UXFSmileButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -37,9 +37,12 @@ class UXFRateViewController: UXFViewController {
                 if #available(iOS 11.0, *) {
                     button.adjustsImageSizeForAccessibilityContentSizeCategory = true
                 }
-                theme?.getSmile(index: buttonIndex, completion: { (image) in
-                    button.setImage(image, for: UIControl.State.normal)
-                })
+                
+               let imageName =  UXFParser.smileImageName(by: buttonIndex)
+               let previewImage =  UXFParser.getSmile(imageName: imageName) { (image) in
+                     button.setImage(image, for: UIControl.State.normal)
+                }
+                button.setImage(previewImage, for: UIControl.State.normal)
                 
                 button.tag = buttonIndex
                 button.addTarget(self, action: #selector(rateButtonTap), for: .touchUpInside)

@@ -58,7 +58,9 @@ class UXFParser : UXFParserProtocol{
                                 isProgressEnabled: progress)
     }
     
-    func parseUIElement(dictionary: Dictionary<String, Any>)->(UIView?){
+    //MARK: support
+    
+    private func parseUIElement(dictionary: Dictionary<String, Any>)->(UIView?){
         
         if let type = dictionary["type"] as? String{
             switch type {
@@ -82,34 +84,43 @@ class UXFParser : UXFParserProtocol{
     
     private func createSmiles(dictionary: Dictionary<String, Any>) ->(UIView){
         
-        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 64))
+        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 80, height: 44))
         
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 24))
         label.text = dictionary["value"] as? String
-        label.font =  label.font.withSize(16)
+        let labelFontSize: CGFloat = (IS_IPAD == true ? 24.0 : 16.0)
+        label.font =  label.font.withSize(labelFontSize)
+        label.textAlignment = .center
         label.sizeToFit()
-        label.translatesAutoresizingMaskIntoConstraints = true
+        //label.backgroundColor = UIColor.darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label)
  
-        
-        let stackView = UIStackView.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 32))
-        stackView.translatesAutoresizingMaskIntoConstraints = true
-        stackView.backgroundColor = UIColor.gray
+        let stackViewHeight: CGFloat = IS_IPAD == true ? 48.0 : 40.0
+        let stackView = UIStackView.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: stackViewHeight))
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.backgroundColor = UIColor.darkGray
+        stackView.spacing = 5
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
         view.addSubview(stackView)
         
+        let smilesInfo = dictionary["smiles"] as! Dictionary<String, Any>
+        self.createSmiles(info: smilesInfo, layoutView: stackView)
+
         let views = ["label": label, "stackview": stackView]
         var allConstraints: [NSLayoutConstraint] = []
-        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-9-[label]-9-|",
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-[label]-|",
                                                                     metrics: nil,
                                                                     views: views as [String : Any])
-        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-9-[stackview]-9-|",
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-[stackview]-|",
                                                                     metrics: nil,
                                                                     views: views as [String : Any])
-        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-[label(24)]-15-[stackview(32)]-|",
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-[label(>=\(labelFontSize))]-15-[stackview(\(stackViewHeight))]-33@750-|",
                                                                  metrics: nil,
                                                                  views: views as [String : Any])
-        view.backgroundColor = UIColor.red
-        NSLayoutConstraint.activate(allConstraints)
+        //view.backgroundColor = UIColor.gray
+        view.addConstraints(allConstraints)
         
         return view
     }
@@ -140,5 +151,63 @@ class UXFParser : UXFParserProtocol{
         label.text = dictionary["value"] as? String
         label.sizeToFit()
         return label
+    }
+    
+    //MARK: - Smiles
+    
+    private func createSmiles(info:  Dictionary<String, Any>, layoutView: UIStackView){
+        let smilesKeys = info.keys.sorted()
+        
+        for smileKey in smilesKeys{
+            let smileIndex = Int(smileKey)!
+            let button = self.createSmileButton(info: info[smileKey] as! Dictionary<String, Any>,
+                                                smileIndex: smileIndex)
+            var buttonWidth = layoutView.bounds.size.width/CGFloat(smilesKeys.count)
+            let buttonHeight = layoutView.bounds.size.height
+            if buttonWidth > buttonHeight{
+                buttonWidth = buttonHeight
+            }
+            button.frame =  CGRect.init(x: 0,
+                                        y: 0,
+                                        width: buttonWidth,
+                                        height: buttonHeight)
+            
+            layoutView.addArrangedSubview(button)
+        }
+    }
+    
+    private func createSmileButton(info: Dictionary<String, Any>,
+                                   smileIndex: Int) -> (UXFSmileButton){
+        
+        let button = UXFSmileButton.init(index: smileIndex,
+                                         isRequired: info["isRequered"] as? Bool,
+                                         warning: info["warning"] as? String,
+                                         hint: info["hint"] as? String)
+        button.imageView?.contentMode = .scaleAspectFit
+        if #available(iOS 11.0, *) {
+            button.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        }
+        let imageName =  UXFParser.smileImageName(by: smileIndex)
+        let previewButtonImage =  UXFParser.getSmile(imageName: imageName, completion: { (image) in
+            button.setImage(image, for: UIControl.State.normal)
+        })
+        button.setImage(previewButtonImage, for: UIControl.State.normal)
+        // button.addTarget(self, action: #selector(rateButtonTap), for: .touchUpInside)
+        
+        return button
+    }
+    
+    static func getSmile(imageName: String, completion: (_ smileImage: UIImage)->()) ->(UIImage?){
+        return UIImage.init(named: imageName)
+    }
+    
+    static func smileImageName(by index: Int) -> (String){
+        let names = ["angry", "mad", "confused", "happy", "in-love"]
+        if index < names.count {
+            return names[index]
+        }
+        else{
+            return ""
+        }
     }
 }

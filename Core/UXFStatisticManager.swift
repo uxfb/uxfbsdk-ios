@@ -16,7 +16,7 @@ class UXFStatisticManager{
         
         let networkType = Reachability.getNetworkType()
         var device = "unknown"
-        if UIDevice.current.userInterfaceIdiom == .pad{
+        if IS_IPAD {
             device = "tablet"
         }
         else if UIDevice.current.userInterfaceIdiom == .phone{
