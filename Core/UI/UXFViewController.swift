@@ -34,22 +34,29 @@ class UXFViewController: UIViewController{
     static let defaulViewOffset: CGFloat = 8.0
     static let animationTime = 0.5
     
+    private (set) var formIndex: Int = 0
     var state:UXFViewControllerState = .presenting
     
     internal var theme: UXFTheme?
     var progressString: String = ""
     var presentationAnimated = true
     
-    var didLoadHandler: (()->())?
-    var didCloseHandler: (()->(Void))?
-    var nextHandler: (()->())?
-    var backHandler: (()->())?
+    var didLoadHandler: ((_ formIndex: Int)->())?
+    var didCloseHandler: ((_ formIndex: Int)->(Void))?
+    var nextHandler: ((_ formIndex: Int, _ info: Dictionary<String, Any>?)->())?
+    var backHandler: ((_ formIndex: Int)->())?
     
     var presentDirection: UXFViewPopupDirection = .leftToRight
     var dismissDirection: UXFViewPopupDirection = .upToDown
     var backDirection: UXFViewPopupDirection = .alphaOut
     
     @IBOutlet  var contentView: UIView!
+    
+    
+    convenience init(index: Int) {
+        self.init()
+        self.formIndex = index
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +76,7 @@ class UXFViewController: UIViewController{
                                                name: UITextField.keyboardDidHideNotification,
                                                object: nil)
         
-        didLoadHandler?()
+        didLoadHandler?(self.formIndex)
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
@@ -94,15 +101,17 @@ class UXFViewController: UIViewController{
     
     @IBAction func backButtonTap(_ sender: UIButton){
         state = .outDismiss
-        backHandler?()
+        backHandler?(self.formIndex)
     }
     
     @IBAction  func closeButtonDidTap(_ sender: UIButton){
         close(animated:presentationAnimated)
     }
     
-    func remove(animated: Bool, completion: (()->(Void))?){
-        self.dismiss(animated: animated, completion: completion)
+    func remove(animated: Bool, completion: ((_ index: Int)->(Void))?){
+        self.dismiss(animated: animated){
+            completion?(self.formIndex)
+        }
     }
     
     func close(animated: Bool = false){

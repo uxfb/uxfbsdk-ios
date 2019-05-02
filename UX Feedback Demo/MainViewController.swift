@@ -15,7 +15,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        UXFeedback.sendEvent(event: UXFedbackCompanyEvents.mainScreen.rawValue)
+        UXFeedback.sharedInstance.sendEvent(event: UXFedbackCompanyEvents.mainScreen.rawValue)
     }
 
 }

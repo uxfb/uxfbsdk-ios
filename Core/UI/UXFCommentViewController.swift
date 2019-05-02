@@ -43,7 +43,7 @@ class UXFCommentViewController: UXFViewController{
     
     @IBAction func sendButtonTap(_ sender: UIButton){
         if isMandatoryField == false || textInput.text?.count ?? 0 > 0{
-             nextHandler?()
+             nextHandler?(self.formIndex, nil)
         }
         else{
             if isMandatoryField{
@@ -57,7 +57,7 @@ class UXFCommentViewController: UXFViewController{
     }
     
     @IBAction func skipButtonTap(_ sender: UIButton){
-        nextHandler?()
+        nextHandler?(self.formIndex, nil)
     }
     
     deinit {

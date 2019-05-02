@@ -173,7 +173,7 @@ class UXFParser : UXFParserProtocol{
                                         height: buttonHeight)
             layoutView.addArrangedSubview(button)
             button.addAction(for: .allTouchEvents) {
-                
+               
             }
         }
     }

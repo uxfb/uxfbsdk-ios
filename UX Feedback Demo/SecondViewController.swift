@@ -15,7 +15,7 @@ class SecondViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        UXFeedback.sendEvent(event: UXFedbackCompanyEvents.secondScreen.rawValue)
+        UXFeedback.sharedInstance.sendEvent(event: UXFedbackCompanyEvents.secondScreen.rawValue)
     }
     
 }

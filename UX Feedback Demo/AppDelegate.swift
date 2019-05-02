@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(String(describing: UIDevice.current.identifierForVendor?.uuidString))
 
         //Usabilla.initialize(appID: usabillaAppID)
-        UXFeedback.setup(appID: uxfAppID, applicationWindow: self.window!){ [weak self] success in
+        UXFeedback.sharedInstance.setup(appID: uxfAppID, applicationWindow: self.window!){ [weak self] success in
             let message = "UXFeedback initialization " + (success == true ? "successful" : "failed")
             DDLogDebug(message)
             if success == false {

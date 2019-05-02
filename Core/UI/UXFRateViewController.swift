@@ -53,7 +53,7 @@ class UXFRateViewController: UXFViewController {
     }
     
     @objc func rateButtonTap(_ sender: UIButton){
-        nextHandler?()
+        nextHandler?(self.formIndex, nil)
     }
 
 }

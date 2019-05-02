@@ -11,7 +11,7 @@ import Alamofire
 import CodableAlamofire
 import CocoaLumberjack
 
-enum UFXAPIClientResponseResult{
+enum UXFAPIClientResponseResult{
     case success
     case fail
     case cancelled
@@ -20,14 +20,14 @@ enum UFXAPIClientResponseResult{
 let uxfErrorRequestCancelled = -999
 let uxfTokenErrorMessage: String = "Invalid token".localized()
 
-class UFXAPIClient{
+class UXFAPIClient{
     
-    private var _appID: String!
+    private(set) var appID: String!
     private let _parser: UXFParserProtocol = UXFParser.init()
     
     init(appID: String){
         DDLog.add(DDOSLogger.sharedInstance, with: DDLogLevel.debug)
-        _appID = appID
+        self.appID = appID
   
         NotificationCenter.default.addObserver(self,selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
@@ -44,7 +44,7 @@ class UFXAPIClient{
     
      DDLogDebug("Get all campaings:")
      
-     _ = self.performRequest(route: UXFAPIWebRouter.getCampaing(appID: _appID))
+     _ = self.performRequest(route: UXFAPIWebRouter.getCampaing(appID: self.appID))
       {[weak self] (status, message, result) in
         
         if status == .success {
@@ -86,9 +86,9 @@ class UFXAPIClient{
     }
     
     
-    func saveFirstFormData(projectId: String,
+    func saveFirstFormData(projectId: String?,
                            campaignId: String,
-                           fields: Dictionary<String,Any>,
+                           fields: Dictionary<String,Any>?,
                            completion: ((_ success: Bool, _ message: String?)->())?){
         
         let systemInfo = UXFStatisticManager.getDeviceInfo()
@@ -124,7 +124,7 @@ class UFXAPIClient{
     
     //MARK: internal request
     
-    internal func performRequest(route:UXFAPIWebRouter, completion:@escaping (UFXAPIClientResponseResult, String?, Any?)->()) -> DataRequest?{
+    internal func performRequest(route:UXFAPIWebRouter, completion:@escaping (UXFAPIClientResponseResult, String?, Any?)->()) -> DataRequest?{
         
         /*let urlRequest = try? route.asURLRequest()
         if urlRequest != nil {
@@ -200,7 +200,7 @@ class UFXAPIClient{
          }*/
         
         
-        return performRequest(route: route){ (status: UFXAPIClientResponseResult, message: String?, result: Any?) in
+        return performRequest(route: route){ (status: UXFAPIClientResponseResult, message: String?, result: Any?) in
             
             if status == .success && result != nil {
                 var dict: Dictionary = result! as! Dictionary<String, Any>

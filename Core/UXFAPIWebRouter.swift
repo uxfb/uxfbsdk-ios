@@ -44,8 +44,8 @@ enum UXFAPIWebRouter {
     }
     
     case getCampaing(appID: String)
-    case saveFirstFormData(projectId: String, uid: String, campaignId: String, fields: Dictionary <String, Any>, info: Dictionary<String, Any>)
-    case saveOtherFormData(projectId: String, answerId: String, fields: Dictionary <String, Any>)
+    case saveFirstFormData(projectId: String?, uid: String, campaignId: String, fields: Dictionary <String, Any>?, info: Dictionary<String, Any>)
+    case saveOtherFormData(projectId: String?, answerId: String, fields: Dictionary <String, Any>?)
     case showForm(uid: String, campaingId: String)
     
     var method: HTTPMethod {
@@ -78,14 +78,21 @@ enum UXFAPIWebRouter {
         switch self {
             
           case .saveFirstFormData(_ , let uid, let campaignId, let fields, let info):
-             return [HTTPHeaderField.uid.rawValue : uid,
+             var params = [HTTPHeaderField.uid.rawValue : uid,
                     HTTPHeaderField.campaignId.rawValue : campaignId,
-                    HTTPHeaderField.fields.rawValue : fields,
-                    HTTPHeaderField.fields.rawValue : info]
+                    HTTPHeaderField.info.rawValue : info] as [String : Any]
+             if fields != nil {
+                params[HTTPHeaderField.fields.rawValue] = fields!
+             }
+            return params
             
           case .saveOtherFormData(_ , let answerId, let fields):
-            return [HTTPHeaderField.answerId.rawValue : answerId,
-                    HTTPHeaderField.fields.rawValue : fields]
+          var params =  [HTTPHeaderField.answerId.rawValue : answerId] as [String : Any]
+            
+            if fields != nil {
+                params[HTTPHeaderField.fields.rawValue] = fields!
+            }
+            return params
             
           case .showForm(let uid, let campaingId):
              return  [HTTPHeaderField.uid.rawValue : uid,
@@ -100,10 +107,14 @@ enum UXFAPIWebRouter {
         var parameters: [String: Any] = [:]
         switch self {
         case .saveFirstFormData(let projectId, _, _, _, _):
-            parameters =  [HTTPHeaderField.projectId.rawValue : projectId]
+            if projectId != nil {
+               parameters =  [HTTPHeaderField.projectId.rawValue : projectId!]
+            }
             break
         case .saveOtherFormData(let projectId, _, _):
-            parameters =  [HTTPHeaderField.projectId.rawValue : projectId]
+            if projectId != nil {
+                parameters =  [HTTPHeaderField.projectId.rawValue : projectId!]
+            }
             break
         default:
             break

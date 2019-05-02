@@ -11,6 +11,12 @@ import UIKit
 
 let IS_IPAD = (UIDevice.current.userInterfaceIdiom == .pad)
 
+protocol UXFCampaignFormPresentorProtocol: class {
+    func formDidClosed(formIndex: Int)
+   // func formDidShowed(fromIndex: Int)
+    func formSubmitted(formIndex: Int, info: Dictionary<String, Any>?)
+}
+
 class UXFCampaignFormPresentor: NSObject{
     
     var progressString: String {
@@ -21,10 +27,12 @@ class UXFCampaignFormPresentor: NSObject{
         return UInt(_campaign?.formsCount ?? 0)
     }
     
+    weak var delegate: UXFCampaignFormPresentorProtocol?
+    var isAnimationFormEnabled: Bool = true
+    
     private(set) var currentFormIndex: Int = -1
     private var _campaign: UXFCampaign!
     private var _theme: UXFTheme?
-    var isAnimationFormEnabled: Bool = true
     private weak var _appWindow: UIWindow!
     private weak var _currentForm: UXFViewController?
     private lazy var formCreator: UXFCampaignFormCreator = {
@@ -75,20 +83,22 @@ class UXFCampaignFormPresentor: NSObject{
             showCommentForm(direction: direction)
         }*/
        
-        let controller = UXFViewController.init()
+        let controller = UXFViewController.init(index: self.currentFormIndex)
         
-        controller.didLoadHandler = { [unowned self] in
-            self.formCreator.createForm(controller: controller,
-                                        page: self._campaign.pages[self.currentFormIndex])
+        
+        controller.didCloseHandler = { [weak self]  (formIndex) in
+            self?.delegate?.formDidClosed(formIndex: formIndex)
         }
-        controller.didCloseHandler = {
-            
-        }
-        controller.backHandler = { [weak self] in
+        controller.backHandler = { [weak self]  (formIndex) in
             self?.prevForm()
         }
-        controller.nextHandler = { [weak self] in
+        controller.nextHandler = { [weak self] (formIndex, info) in
+            self?.delegate?.formSubmitted(formIndex: formIndex, info: info)
             self?.nextForm()
+        }
+        controller.didLoadHandler = { [unowned self]  (formIndex) in
+            self.formCreator.createForm(controller: controller,
+                                        page: self._campaign.pages[self.currentFormIndex])
         }
         showController(controller: controller, direction: direction)
         
@@ -122,7 +132,7 @@ class UXFCampaignFormPresentor: NSObject{
     
     private func showCongratulationForm(direction: UXFViewPopupDirection){
         let controller = UXFCongratulationViewController()
-        controller.didCloseHandler = {
+        controller.didCloseHandler = {  (formIndex) in
             
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
