@@ -52,7 +52,7 @@ class UXFAPIClient{
 
             if let campaignsResults = result as? Array<Dictionary<String, Any>>{
                 for compaignInfo in campaignsResults{
-                   campaign =  UXFParser.parseCampaing(compaignInfo: compaignInfo)
+                   campaign =  UXFParser.sharedInstance.parseCampaing(compaignInfo: compaignInfo)
                     
                    /* let themeInfo = dict["theme"] as! Dictionary<String, Any>
                     theme = UXFTheme.init(colorsDict: themeInfo["colors"] as! Dictionary<String, String>,

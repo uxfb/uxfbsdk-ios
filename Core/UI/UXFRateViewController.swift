@@ -38,8 +38,8 @@ class UXFRateViewController: UXFViewController {
                     button.adjustsImageSizeForAccessibilityContentSizeCategory = true
                 }
                 
-               let imageName =  UXFParser.smileImageName(by: buttonIndex)
-               let previewImage =  UXFParser.getSmile(imageName: imageName) { (image) in
+               let imageName =  UXFParser.sharedInstance.smileImageName(by: buttonIndex)
+               let previewImage =  UXFParser.sharedInstance.getSmile(imageName: imageName) { (image) in
                      button.setImage(image, for: UIControl.State.normal)
                 }
                 button.setImage(previewImage, for: UIControl.State.normal)

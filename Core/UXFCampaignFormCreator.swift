@@ -19,7 +19,7 @@ class UXFCampaignFormCreator{
         
         if let filedsInfoArr = page.uiData["fields"] as? Array<Dictionary<String, Any>> {
             for fieldInfo in  filedsInfoArr{
-                if let filedView = UXFParser.parseUIElement(dictionary: fieldInfo,
+                if let filedView = UXFParser.sharedInstance.parseUIElement(dictionary: fieldInfo,
                                                         submitHandler: {(info) in
                     controller.nextHandler?(controller.formIndex, info)
                 }){
