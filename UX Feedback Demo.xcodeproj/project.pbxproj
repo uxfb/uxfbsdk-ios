@@ -56,6 +56,7 @@
 		0A6CDB8D2243C95B00C17007 /* UXFRateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A6CDB8B2243C95B00C17007 /* UXFRateViewController.xib */; };
 		0A6CDB8F22446EC900C17007 /* UXFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB8E22446EC900C17007 /* UXFViewController.swift */; };
 		0AA92D9D227A9410005DBCBA /* UXFSmileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA92D9C227A9410005DBCBA /* UXFSmileButton.swift */; };
+		0AA92D9F227AB0A7005DBCBA /* UIControl+blocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */; };
 		B9C53F8FD758222F0AB72EF0 /* Pods_UX_Feedback_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37DC0658862D1C4AD29E3B0 /* Pods_UX_Feedback_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +112,7 @@
 		0A6CDB8B2243C95B00C17007 /* UXFRateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFRateViewController.xib; sourceTree = "<group>"; };
 		0A6CDB8E22446EC900C17007 /* UXFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFViewController.swift; sourceTree = "<group>"; };
 		0AA92D9C227A9410005DBCBA /* UXFSmileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFSmileButton.swift; sourceTree = "<group>"; };
+		0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+blocks.swift"; sourceTree = "<group>"; };
 		0ECEFD8BB28ED850EA4CCC49 /* Pods-UX Feedback Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UX Feedback Demo.release.xcconfig"; path = "Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo.release.xcconfig"; sourceTree = "<group>"; };
 		A37DC0658862D1C4AD29E3B0 /* Pods_UX_Feedback_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UX_Feedback_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC6B66F9C3D158E60BC3EBD2 /* Pods-UX Feedback Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UX Feedback Demo.debug.xcconfig"; path = "Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				0A019A6122367EF2002FD4F8 /* NSLayoutConstraint+additions.swift */,
 				0A019A6222367EF2002FD4F8 /* String+additions.swift */,
 				0A019A6022367EF2002FD4F8 /* UIImage+Tinting.swift */,
+				0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */,
 				0A019A6322367EF2002FD4F8 /* UISearchBar+color.swift */,
 				0A019A5F22367EF2002FD4F8 /* UIVIewAddition.swift */,
 				0A0CDEB92250A16B00E1C092 /* UIViewController+present.swift */,
@@ -428,6 +431,7 @@
 				0A160DD52268CDB000A586C4 /* UXFStatisticManager.swift in Sources */,
 				0A0CDEB122506E0C00E1C092 /* UXFCommentViewController.swift in Sources */,
 				0A0CDEAA224F4B7A00E1C092 /* AboutViewController.swift in Sources */,
+				0AA92D9F227AB0A7005DBCBA /* UIControl+blocks.swift in Sources */,
 				0A019A4222365E03002FD4F8 /* MainViewController.swift in Sources */,
 				0A019A6522367EF3002FD4F8 /* UIImage+Tinting.swift in Sources */,
 				0A019A6B22367F0C002FD4F8 /* UIAlertController+Show.swift in Sources */,

@@ -12,4 +12,6 @@ struct UXFPage{
     private(set) var _id: String!
     //private(set) var button: UXFButton!
     private(set) var fields: Array<UIView>!
+    
+    var nextHandler: (()->())?
 }

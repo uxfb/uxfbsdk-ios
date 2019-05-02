@@ -99,7 +99,6 @@ class UXFParser : UXFParserProtocol{
         let stackViewHeight: CGFloat = IS_IPAD == true ? 48.0 : 40.0
         let stackView = UIStackView.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: stackViewHeight))
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.backgroundColor = UIColor.darkGray
         stackView.spacing = 5
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
@@ -113,13 +112,14 @@ class UXFParser : UXFParserProtocol{
         allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-[label]-|",
                                                                     metrics: nil,
                                                                     views: views as [String : Any])
-        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-[stackview]-|",
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[stackview(==label@750,<=414)]",
                                                                     metrics: nil,
                                                                     views: views as [String : Any])
         allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-[label(>=\(labelFontSize))]-15-[stackview(\(stackViewHeight))]-33@750-|",
+             options: [.alignAllCenterX],
                                                                  metrics: nil,
                                                                  views: views as [String : Any])
-        //view.backgroundColor = UIColor.gray
+        //view.backgroundColor = UIColor.blue
         view.addConstraints(allConstraints)
         
         return view
@@ -171,8 +171,10 @@ class UXFParser : UXFParserProtocol{
                                         y: 0,
                                         width: buttonWidth,
                                         height: buttonHeight)
-            
             layoutView.addArrangedSubview(button)
+            button.addAction(for: .allTouchEvents) {
+                
+            }
         }
     }
     
@@ -192,7 +194,6 @@ class UXFParser : UXFParserProtocol{
             button.setImage(image, for: UIControl.State.normal)
         })
         button.setImage(previewButtonImage, for: UIControl.State.normal)
-        // button.addTarget(self, action: #selector(rateButtonTap), for: .touchUpInside)
         
         return button
     }
