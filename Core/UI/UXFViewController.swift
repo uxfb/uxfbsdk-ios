@@ -27,6 +27,7 @@ enum UXFViewControllerState{
 
 class UXFViewController: UIViewController{
     
+    @IBOutlet var backButton: UIButton?
     @IBOutlet var progressLabel: UILabel?
     @IBOutlet var bottomOffset: NSLayoutConstraint?
     @IBOutlet var heightConstraint: NSLayoutConstraint?
@@ -60,6 +61,10 @@ class UXFViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if self.formIndex == 0 {
+            self.backButton?.isHidden = true
+        }
         
         self.progressLabel?.text = self.progressString
         contentView?.layer.cornerRadius = 8.0

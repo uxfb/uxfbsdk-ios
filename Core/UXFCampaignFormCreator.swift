@@ -27,11 +27,11 @@ class UXFCampaignFormCreator{
                     filedView.translatesAutoresizingMaskIntoConstraints = false
                     
                     let views = ["view": filedView, "topView": topView]
-                    allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[view]-16-|", metrics: nil, views: views as [String : Any])
+                    allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(UXFParser.formControllerViewOffset)-[view]-\(UXFParser.formControllerViewOffset)-|", metrics: nil, views: views as [String : Any])
                     let top = (topView == nil ? "|" : "[topView]")
                     let bottom = (viewIndex == (filedsInfoArr.count - 1) ? "|" : "")
                     
-                    allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:"+top+"-15-[view]-" + bottom, metrics: nil, views: views as [String : Any])
+                    allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:"+top+"-[view]-" + bottom, metrics: nil, views: views as [String : Any])
                     
                     topView = filedView
                     viewIndex += 1

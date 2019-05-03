@@ -14,6 +14,7 @@ PODS:
   - SVGKit (2.1.0):
     - CocoaLumberjack (~> 3.0)
   - UIColor_Hex_Swift (4.2.0)
+  - "UITextField+Blocks (1.0.0)"
 
 DEPENDENCIES:
   - AlamofireNetworkActivityLogger
@@ -23,6 +24,7 @@ DEPENDENCIES:
   - ReachabilitySwift
   - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `2.x`)
   - UIColor_Hex_Swift (~> 4.2.0)
+  - "UITextField+Blocks"
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -33,6 +35,7 @@ SPEC REPOS:
     - Nuke
     - ReachabilitySwift
     - UIColor_Hex_Swift
+    - "UITextField+Blocks"
 
 EXTERNAL SOURCES:
   SVGKit:
@@ -53,7 +56,8 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
   SVGKit: 8a2fc74258bdb2abb54d3b65f3dd68b0277a9c4d
   UIColor_Hex_Swift: bc07fc197421ee896b9ed6dcfa2054b7fbf75145
+  "UITextField+Blocks": 8cca9c6fb4520348c05821db49fda089367e85c6
 
-PODFILE CHECKSUM: 46dfa792a43dc9db262377797965ad9f7a42e5e4
+PODFILE CHECKSUM: bd908c6bf5245390ffca685fcf995d4521905ef3
 
 COCOAPODS: 1.6.1
