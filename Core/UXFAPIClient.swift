@@ -104,7 +104,7 @@ class UXFAPIClient{
     
     func saveOtherFormData(projectId: String,
                            answerId: String,
-                           fields: Dictionary <String, Any>,
+                           fields: Dictionary <String, Any>?,
                            completion: ((_ success: Bool, _ message: String?)->())?){
         _ = self.performRequest(route: UXFAPIWebRouter.saveOtherFormData(projectId: projectId, answerId: answerId, fields: fields))
         {(status, message, result) in

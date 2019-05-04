@@ -90,7 +90,14 @@ extension UXFeedback: UXFCampaignFormPresentorProtocol {
             _apiClient.saveFirstFormData(projectId: "asdsa",
                                         campaignId: _campaign!.campaignId,
                                             fields: info) { (success, message) in
-                                                self.showMessage(text: message ?? (success == true ? "Данные успешно отправлены!" : "Неизвестная ошибка при отправке данных формы"), completion: nil)
+                                              //  self.showMessage(text: message ?? (success == true ? "Данные успешно отправлены!" : "Неизвестная ошибка при отправке данных формы"), completion: nil)
+            }
+        }
+        else{
+            _apiClient.saveOtherFormData(projectId: "",
+                                         answerId:  "",
+                                         fields: info) { (success, message) in
+                                            //  self.showMessage(text: message ?? (success == true ? "Данные успешно отправлены!" : "Неизвестная ошибка при отправке данных формы"), completion: nil)
             }
         }
     }

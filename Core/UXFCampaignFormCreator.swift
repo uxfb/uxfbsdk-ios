@@ -16,7 +16,7 @@ class UXFCampaignFormCreator{
         var topView: UIView? = controller.progressLabel
         var allConstraints: [NSLayoutConstraint] = []
         var viewIndex = 0
-        
+        var contentHeight: CGFloat = (topView?.frame.size.height ?? 0.0) + (topView?.frame.origin.y ?? 0.0)
         if let filedsInfoArr = page.uiData["fields"] as? Array<Dictionary<String, Any>> {
             for fieldInfo in  filedsInfoArr{
                 if let filedView = UXFParser.sharedInstance.parseUIElement(dictionary: fieldInfo,
@@ -30,15 +30,16 @@ class UXFCampaignFormCreator{
                     allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(UXFParser.formControllerViewOffset)-[view]-\(UXFParser.formControllerViewOffset)-|", metrics: nil, views: views as [String : Any])
                     let top = (topView == nil ? "|" : "[topView]")
                     let bottom = (viewIndex == (filedsInfoArr.count - 1) ? "|" : "")
-                    
+
                     allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:"+top+"-[view]-" + bottom, metrics: nil, views: views as [String : Any])
                     
                     topView = filedView
                     viewIndex += 1
+                    contentHeight += filedView.frame.size.height + 8.0
                 }
             }
         }
-        
+        controller.heightConstraint?.constant = contentHeight
         controller.contentView.addConstraints(allConstraints)
 
         /*

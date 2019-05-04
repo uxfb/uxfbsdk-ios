@@ -107,11 +107,14 @@ class UXFParser{
                                groupID: String,
                                submitHandler: ((Dictionary<String,Any>)->())?) ->(UIView){
         
+        var height: CGFloat = 0.0
         let view = UIView.init(frame: CGRect.init(x: 0,
                                                   y: 0,
                                                   width: (UIScreen.main.bounds.width - (UXFParser.formControllerViewOffset + UXFParser.contenViewOffset)*2),
                                                   height: 44))
         
+        let labelYOffset: CGFloat = 10.0
+        height += labelYOffset
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 24))
         label.text = dictionary["value"] as? String
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
@@ -121,15 +124,17 @@ class UXFParser{
         label.sizeToFit()
         //label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(label)
-  
-        /*var labelHeight = labelFontSize
+        var labelHeight = labelFontSize
         if let text = label.text {
             labelHeight = text.height(withConstrainedWidth: (view.frame.size.width - UXFParser.contentSubviewOffset*2), font: label.font)
-        }*/
-        let labelHeight = labelFontSize * 2.5//label.frame.size.height
+        }
+        height += labelHeight
+        view.addSubview(label)
         
-        let textFieldHeight = 48.0
+        let textFieldHeight: CGFloat = 48.0
+        let textFieldYOffset: CGFloat = 15.0
+        let alertLabelYOffset: CGFloat = 11.0
+        let alertLabelHeight:CGFloat = 17.0
         
         var commentFields:Array<UXFTextField> = []
         var commentAlerts: Array<UILabel> = []
@@ -137,10 +142,13 @@ class UXFParser{
             let enabledComments = commentsInfo["enabled"] as? Bool, enabledComments == true,
             let comments = commentsInfo["comments"] as? Dictionary<String, String>{
             
+            var index = 0
             for commentKey in comments.keys.sorted(){
                 let comment = comments[commentKey]
                 
                 let textField = UXFTextField.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 48))
+                textField.tag = index
+                height += textFieldHeight + textFieldYOffset
                 textField.contentLeftPadding = 16.0
                 //textField.borderStyle = .line
                 //textField.setContentHuggingPriority(UILayoutPriority.init(rawValue: 251), for: .vertical)
@@ -155,19 +163,44 @@ class UXFParser{
                 view.addSubview(textField)
                 commentFields.append(textField)
                 
-                let alertLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 40, height: 24))
+                
+                let alertLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 40, height: alertLabelHeight))
+                height += alertLabelYOffset + alertLabelHeight
                 alertLabel.textAlignment = .left
                 alertLabel.font =  alertLabel.font.withSize(14.0)
                 alertLabel.textColor = UIColor.init("#E92436")
                 alertLabel.text = "Заполните обязательное поле".localized()
                 alertLabel.translatesAutoresizingMaskIntoConstraints = false
-                
+                alertLabel.tag = index
                 view.addSubview(alertLabel)
                 commentAlerts.append(alertLabel)
+                
+                index += 1
+                break
             }
         }
         
-        var views: Dictionary <String, Any> = ["label": label]
+        let sendButton = UIButton.init()
+        sendButton.setTitle("Отправить".localized(), for: .normal)
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        sendButton.setTitleColor(sendButton.tintColor, for: .normal)
+        let sendButtonYOffet: CGFloat = 25.0
+        let sendButtonHeight: CGFloat = 44.0
+        //sendButton.backgroundColor = UIColor.gray
+        sendButton.addAction {
+            var infoDict: Dictionary<String,String> = [:]
+            for textField in commentFields{
+                if let commentText = textField.text{
+                   infoDict[groupID] = commentText
+                }
+            }
+            submitHandler?(infoDict)
+        }
+        height += sendButtonYOffet + sendButtonHeight
+        
+        view.addSubview(sendButton)
+        
+        var views: Dictionary <String, Any> = ["label": label, "sendButton" : sendButton]
         var index = 0
         for textField in commentFields{
             views["textField\(index)"] =  textField
@@ -185,6 +218,9 @@ class UXFParser{
         allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(UXFParser.contentSubviewOffset)-[label]-\(UXFParser.contentSubviewOffset)-|",
                                                          metrics: nil,
                                                          views: views as [String : Any])
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-33-[sendButton]-33-|",
+            metrics: nil,
+            views: views as [String : Any])
         
         for textFieldIndex in 0..<commentFields.count{
             allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(UXFParser.contentSubviewOffset)-[textField\(textFieldIndex)]-\(UXFParser.contentSubviewOffset)-|",
@@ -198,14 +234,19 @@ class UXFParser{
                 views: views as [String : Any])
         }
 
-        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-[label(>=\(labelHeight))]-11-[textField0(\(textFieldHeight))]-11-[alertLabel0(17)]-65@750-|",
+        let bottomOffset: CGFloat = 8
+        height += bottomOffset
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(labelYOffset)-[label(>=\(labelHeight))]-\(textFieldYOffset)-[textField0(\(textFieldHeight))]-\(alertLabelYOffset)-[alertLabel0(\(alertLabelHeight))]-\(sendButtonYOffet)-[sendButton(\(sendButtonHeight))]-\(bottomOffset)-|",
             options: [.alignAllCenterX],
             metrics: nil,
             views: views as [String : Any])
         
         view.addConstraints(allConstraints)
         //view.backgroundColor = UIColor.blue
-        
+        view.frame = CGRect.init(x: 0,
+                                 y: 0,
+                                 width: view.frame.size.width,
+                                 height: height)
         return view
     }
     
@@ -213,8 +254,11 @@ class UXFParser{
                                   groupID: String,
                             submitHandler: ((Dictionary<String,Any>)->())?) ->(UIView){
         
-        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 80, height: 44))
+        var height: CGFloat = 0.0
+        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: (UIScreen.main.bounds.width - (UXFParser.formControllerViewOffset + UXFParser.contenViewOffset)*2), height: 44))
         
+        let labelYOffset: CGFloat = 10.0
+        height += labelYOffset
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 24))
         label.text = dictionary["value"] as? String
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
@@ -224,8 +268,18 @@ class UXFParser{
         //label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label)
+        
+        var labelHeight = labelFontSize
+         if let text = label.text {
+         labelHeight = text.height(withConstrainedWidth: (view.frame.size.width - UXFParser.contentSubviewOffset*2), font: label.font)
+         }
+        height += labelHeight
  
+        let stackViewYOffset: CGFloat = 15.0
+        let stackViewBottom: CGFloat = 43.0
+        height += stackViewYOffset + stackViewBottom
         let stackViewHeight: CGFloat = IS_IPAD == true ? 48.0 : 40.0
+        height += stackViewHeight
         let stackView = UIStackView.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: stackViewHeight))
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 5
@@ -247,12 +301,16 @@ class UXFParser{
         allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[stackview(==label@750,<=414)]",
                                                                     metrics: nil,
                                                                     views: views as [String : Any])
-        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-10-[label(>=\(labelFontSize))]-15-[stackview(\(stackViewHeight))]-33@750-|",
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(labelYOffset)-[label(>=\(labelHeight))]-\(stackViewYOffset)-[stackview(\(stackViewHeight))]-\(stackViewBottom)-|",
              options: [.alignAllCenterX],
                                                                  metrics: nil,
                                                                  views: views as [String : Any])
         //view.backgroundColor = UIColor.blue
         view.addConstraints(allConstraints)
+        view.frame = CGRect.init(x: 0,
+                                 y: 0,
+                             width: view.frame.size.width,
+                            height: height)
         
         return view
     }
