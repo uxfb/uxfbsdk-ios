@@ -18,6 +18,15 @@ open class UXFeedback{
     
     public static let sharedInstance = UXFeedback.init()
     
+    private var answerId: String?{
+        set{
+            UserDefaults.standard.set(newValue, forKey: "answerId")
+            UserDefaults.standard.synchronize()
+        }
+        get{
+            return UserDefaults.standard.object(forKey: "answerId") as? String
+        }
+    }
     public  var delegate: UXFeedbackDelegate?
     public  var debugEnabled: Bool = false
     public  var animationEnabled: Bool = true
@@ -86,19 +95,19 @@ extension UXFeedback: UXFCampaignFormPresentorProtocol {
     }
     
     func formSubmitted(formIndex: Int, info: Dictionary<String, Any>?) {
-        if formIndex == 0 {
-            _apiClient.saveFirstFormData(projectId: "asdsa",
+     
+            _apiClient.saveFormData(isFirstAnswer: (formIndex == 0),
+                                    projectId: _campaign!.projectId,
+                                    answerId: self.answerId,
                                         campaignId: _campaign!.campaignId,
-                                            fields: info) { (success, message) in
-                                              //  self.showMessage(text: message ?? (success == true ? "Данные успешно отправлены!" : "Неизвестная ошибка при отправке данных формы"), completion: nil)
+                                            fields: info) { (success, message, answerId) in
+                                                if answerId != nil {
+                                                  self.answerId = answerId!
+                                                }
+                                                if success == false {
+                                                   self.showMessage(text: message ?? "Неизвестная ошибка при отправке данных формы", completion: nil)
+                                                }
             }
-        }
-        else{
-            _apiClient.saveOtherFormData(projectId: "",
-                                         answerId:  "",
-                                         fields: info) { (success, message) in
-                                            //  self.showMessage(text: message ?? (success == true ? "Данные успешно отправлены!" : "Неизвестная ошибка при отправке данных формы"), completion: nil)
-            }
-        }
+
     }
 }

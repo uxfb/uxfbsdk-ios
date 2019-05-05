@@ -85,32 +85,35 @@ class UXFAPIClient{
     }
     
     
-    func saveFirstFormData(projectId: String?,
-                           campaignId: String,
-                           fields: Dictionary<String,Any>?,
-                           completion: ((_ success: Bool, _ message: String?)->())?){
+    func saveFormData(isFirstAnswer: Bool,
+                      projectId: String?,
+                      answerId: String?,
+                      campaignId: String,
+                      fields: Dictionary<String,Any>?,
+                      completion: ((_ success: Bool, _ message: String?, _ answerId : String?)->())?){
         
-        let systemInfo = UXFStatisticManager.getDeviceInfo()
-        _ = self.performRequest(route: UXFAPIWebRouter.saveFirstFormData(projectId: projectId,
-                                                                         uid: UIDevice.current.identifierForVendor?.uuidString ?? "",
-                                                                         campaignId: campaignId,
-                                                                         fields: fields,
-                                                                         info : systemInfo))
-         {(status, message, result) in
+        let responseHandler = {(status: UXFAPIClientResponseResult, message: String?, result: Any?) in
             DDLogDebug(String(describing: result))
-            completion?(status == .success, message)
+            var answerId: String?
+            if let data = result as? Dictionary<String, Any>{
+                answerId = data["answerId"] as? String
+            }
+            completion?(status == .success, message, answerId)
         }
-    }
-    
-    func saveOtherFormData(projectId: String,
-                           answerId: String,
-                           fields: Dictionary <String, Any>?,
-                           completion: ((_ success: Bool, _ message: String?)->())?){
-        _ = self.performRequest(route: UXFAPIWebRouter.saveOtherFormData(projectId: projectId, answerId: answerId, fields: fields))
-        {(status, message, result) in
-            DDLogDebug(String(describing: result))
-            completion?(status == .success, message)
+
+        if isFirstAnswer == true {
+            let systemInfo = UXFStatisticManager.getDeviceInfo()
+            _ = self.performRequest(route: UXFAPIWebRouter.saveFirstFormData(projectId: projectId,
+                                                                             uid: UIDevice.current.identifierForVendor?.uuidString ?? "",
+                                                                             campaignId: campaignId,
+                                                                             fields: fields,
+                                                                             info : systemInfo),
+                                                                             completion: responseHandler)
         }
+        else{
+                _ = self.performRequest(route: UXFAPIWebRouter.saveOtherFormData(projectId: projectId, answerId: answerId, fields: fields),
+                                        completion: responseHandler)
+            }
     }
     
     func  showForm(campaingId: String){

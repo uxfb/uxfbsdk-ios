@@ -45,7 +45,7 @@ enum UXFAPIWebRouter {
     
     case getCampaing(appID: String)
     case saveFirstFormData(projectId: String?, uid: String, campaignId: String, fields: Dictionary <String, Any>?, info: Dictionary<String, Any>)
-    case saveOtherFormData(projectId: String?, answerId: String, fields: Dictionary <String, Any>?)
+    case saveOtherFormData(projectId: String?, answerId: String?, fields: Dictionary <String, Any>?)
     case showForm(uid: String, campaingId: String)
     
     var method: HTTPMethod {
@@ -87,8 +87,11 @@ enum UXFAPIWebRouter {
             return params
             
           case .saveOtherFormData(_ , let answerId, let fields):
-          var params =  [HTTPHeaderField.answerId.rawValue : answerId] as [String : Any]
-            
+            var params: [String : Any] =  [:]
+            if answerId != nil {
+               params[HTTPHeaderField.answerId.rawValue] = answerId!
+            }
+          
             if fields != nil {
                 params[HTTPHeaderField.fields.rawValue] = fields!
             }

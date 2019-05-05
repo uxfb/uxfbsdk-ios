@@ -47,6 +47,7 @@ class UXFParser{
         let campaingId = compaignInfo["campaignId"] as! String
         let progressDict = compaignInfo["progress"] as! Dictionary<String, Any>
         let progress = progressDict["enabled"] as! Bool
+        let projectId = compaignInfo["projectId"] as! String
         
         var pages = Array<UXFPage>()
         if let pagesArrayOfDict = compaignInfo["pages"] as? Array<Dictionary<String, Any>> {
@@ -63,7 +64,8 @@ class UXFParser{
                                 pages: pages,
                                 type: UXFCampaignType.init(rawValue: type),
                                 targetings: targetingArr,
-                                isProgressEnabled: progress)
+                                isProgressEnabled: progress,
+                                projectId:  projectId)
     }
     
     //MARK: support
