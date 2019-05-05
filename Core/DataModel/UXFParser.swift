@@ -9,7 +9,6 @@
 import UIKit
 import CocoaLumberjack
 import UIColor_Hex_Swift
-import UITextField_Blocks
 
 class UXFParser{
     
@@ -19,6 +18,27 @@ class UXFParser{
     
     public static let sharedInstance = UXFParser.init()
     private var _uiGroupDictionary: Dictionary <String, Array<String>> = [:]
+    
+    private var _selectedSmileIndex: Int? {
+        get {
+            if UserDefaults.standard.object(forKey: "selectedSmileIndex") != nil {
+               return UserDefaults.standard.integer(forKey: "selectedSmileIndex")
+            }
+            return nil
+        }
+        set{
+            UserDefaults.standard.set(newValue, forKey: "selectedSmileIndex")
+        }
+    }
+    private var _selectedSmileInfo: Dictionary <String, Any>?{
+        get {
+            return UserDefaults.standard.object(forKey: "selectedSmileInfo") as? Dictionary<String,Any>
+        }
+        set{
+            UserDefaults.standard.set(newValue, forKey: "selectedSmileInfo")
+            UserDefaults.standard.synchronize()
+        }
+    }
     
      func parseCampaing(compaignInfo: Dictionary<String,Any>) -> (UXFCampaign?){
         
@@ -49,7 +69,7 @@ class UXFParser{
     //MARK: support
     
     internal  func parseUIElement(dictionary: Dictionary<String, Any>,
-                                  submitHandler: ((Dictionary<String,Any>)->())?)->(UIView?){
+                                  submitHandler: ((Dictionary<String,Any>?)->())?)->(UIView?){
         
         var groupView: UIView? = nil
         
@@ -105,7 +125,11 @@ class UXFParser{
     
     private func createComment(dictionary: Dictionary<String, Any>,
                                groupID: String,
-                               submitHandler: ((Dictionary<String,Any>)->())?) ->(UIView){
+                               submitHandler: ((Dictionary<String,Any>?)->())?) ->(UIView?){
+        
+        guard let  commentsInfo = dictionary["customComments"] as? Dictionary<String, Any> else {
+            return nil
+        }
         
         var height: CGFloat = 0.0
         let view = UIView.init(frame: CGRect.init(x: 0,
@@ -116,7 +140,29 @@ class UXFParser{
         let labelYOffset: CGFloat = 10.0
         height += labelYOffset
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 24))
-        label.text = dictionary["value"] as? String
+        
+        var alertCommentText: String?
+        var isCommentRequired = false
+        
+        var titleText: String = (dictionary["value"] as? String)  ?? "Вы чем-то расстроены? Пожалуйста, поделитесь этим с нами"
+        
+        if let selectedSmile = self._selectedSmileIndex,
+            let smileInfo = self._selectedSmileInfo{
+            
+            isCommentRequired = smileInfo["isRequired"] as! Bool
+            if isCommentRequired {
+                alertCommentText = smileInfo["warning"] as? String
+            }
+            
+            if let enabledComments = commentsInfo["enabled"] as? Bool,
+                enabledComments == true,
+                let customCommentInfo = commentsInfo["comments"] as? Dictionary<String, String>,
+                let custimCommentText = customCommentInfo["\(selectedSmile)"]{
+                titleText = custimCommentText
+            }
+        }
+    
+        label.text = titleText
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
         label.font =  label.font.withSize(labelFontSize)
         label.numberOfLines = 0
@@ -134,53 +180,49 @@ class UXFParser{
         let textFieldHeight: CGFloat = 48.0
         let textFieldYOffset: CGFloat = 15.0
         let alertLabelYOffset: CGFloat = 11.0
-        let alertLabelHeight:CGFloat = 17.0
-        
-        var commentFields:Array<UXFTextField> = []
-        var commentAlerts: Array<UILabel> = []
-        if  let commentsInfo = dictionary["customComments"] as? Dictionary<String, Any>,
-            let enabledComments = commentsInfo["enabled"] as? Bool, enabledComments == true,
-            let comments = commentsInfo["comments"] as? Dictionary<String, String>{
-            
-            var index = 0
-            for commentKey in comments.keys.sorted(){
-                let comment = comments[commentKey]
-                
-                let textField = UXFTextField.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 48))
-                textField.tag = index
-                height += textFieldHeight + textFieldYOffset
-                textField.contentLeftPadding = 16.0
-                //textField.borderStyle = .line
-                //textField.setContentHuggingPriority(UILayoutPriority.init(rawValue: 251), for: .vertical)
-                textField.backgroundColor = UIColor.init("#F6F6F7")
-                textField.shouldChangeCharactersInRangeBlock = { (textInput, range, text)->(Bool) in
-                    if let inputTextField = textInput as? UXFTextField{
-                        inputTextField.inputState = inputTextField.text?.count ?? 0 > 0 ? .input : .normal
-                    }
-                    return true
-                }
-                textField.translatesAutoresizingMaskIntoConstraints = false
-                view.addSubview(textField)
-                commentFields.append(textField)
-                
-                
-                let alertLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 40, height: alertLabelHeight))
-                height += alertLabelYOffset + alertLabelHeight
-                alertLabel.textAlignment = .left
-                alertLabel.font =  alertLabel.font.withSize(14.0)
-                alertLabel.textColor = UIColor.init("#E92436")
-                alertLabel.text = "Заполните обязательное поле".localized()
-                alertLabel.translatesAutoresizingMaskIntoConstraints = false
-                alertLabel.tag = index
-                view.addSubview(alertLabel)
-                commentAlerts.append(alertLabel)
-                
-                index += 1
-                break
-            }
-        }
+        let alertLabelFontSize:CGFloat = 14.0
+        var alertLabelHeight = alertLabelFontSize
         
         let sendButton = UIButton.init()
+        sendButton.isEnabled = !isCommentRequired
+        sendButton.alpha = sendButton.isEnabled == true ? 1.0 : 0.3
+        
+        let textField = UXFTextField.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 48))
+        height += textFieldHeight + textFieldYOffset
+        textField.contentLeftPadding = 16.0
+        //textField.borderStyle = .line
+        //textField.setContentHuggingPriority(UILayoutPriority.init(rawValue: 251), for: .vertical)
+        textField.backgroundColor = UIColor.init("#F6F6F7")
+        textField.didChange = { (inputTextField, text) in
+                inputTextField.inputState = text?.count ?? 0 > 0 ? .input : .normal
+                if isCommentRequired == true {
+                    sendButton.isEnabled = (text?.count ?? 0 > 0)
+                    sendButton.alpha = sendButton.isEnabled == true ? 1.0 : 0.5
+                }
+        }
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(textField)
+        
+        var alertLabel: UILabel?
+        if isCommentRequired == true {
+            textField.placeholder = "Обязательное поле".localized()
+            alertLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 40, height: alertLabelHeight))
+            alertLabel!.textAlignment = .left
+            alertLabel!.font =  alertLabel!.font.withSize(alertLabelFontSize)
+            alertLabel!.textColor = UIColor.init("#E92436")
+            alertLabel?.numberOfLines = 0
+            let alertText = alertCommentText ?? "Заполните обязательное поле".localized()
+            alertLabel!.text = alertText
+            alertLabelHeight = alertText.height(withConstrainedWidth: (view.frame.size.width - UXFParser.contentSubviewOffset*2), font: alertLabel!.font)
+            alertLabel!.translatesAutoresizingMaskIntoConstraints = false
+            height += alertLabelYOffset + alertLabelHeight
+            view.addSubview(alertLabel!)
+        }
+        else{
+            textField.placeholder = "Необязательное поле".localized()
+        }
+        
+        
         sendButton.setTitle("Отправить".localized(), for: .normal)
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.setTitleColor(sendButton.tintColor, for: .normal)
@@ -188,32 +230,22 @@ class UXFParser{
         let sendButtonHeight: CGFloat = 44.0
         //sendButton.backgroundColor = UIColor.gray
         sendButton.addAction {
-            var infoDict: Dictionary<String,String> = [:]
-            for textField in commentFields{
-                if let commentText = textField.text{
-                   infoDict[groupID] = commentText
-                }
+            if let commentText = textField.text{
+                submitHandler?([groupID : commentText])
             }
-            submitHandler?(infoDict)
+            else{
+                submitHandler?(nil)
+            }
         }
         height += sendButtonYOffet + sendButtonHeight
         
         view.addSubview(sendButton)
         
-        var views: Dictionary <String, Any> = ["label": label, "sendButton" : sendButton]
-        var index = 0
-        for textField in commentFields{
-            views["textField\(index)"] =  textField
-            index += 1
+        var views: Dictionary <String, Any> = ["label": label, "sendButton" : sendButton, "textField" : textField]
+        if alertLabel != nil {
+            views["alertLabel"] = alertLabel!
         }
         
-        index = 0
-        for alertLabel in commentAlerts{
-             views["alertLabel\(index)"] = alertLabel
-             index += 1
-        }
-    
-       
         var allConstraints: [NSLayoutConstraint] = []
         allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(UXFParser.contentSubviewOffset)-[label]-\(UXFParser.contentSubviewOffset)-|",
                                                          metrics: nil,
@@ -222,21 +254,22 @@ class UXFParser{
             metrics: nil,
             views: views as [String : Any])
         
-        for textFieldIndex in 0..<commentFields.count{
-            allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(UXFParser.contentSubviewOffset)-[textField\(textFieldIndex)]-\(UXFParser.contentSubviewOffset)-|",
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(UXFParser.contentSubviewOffset)-[textField]-\(UXFParser.contentSubviewOffset)-|",
                 metrics: nil,
                 views: views as [String : Any])
-        }
         
-        for alertLabelIndex in 0..<commentAlerts.count{
-            allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(UXFParser.contentSubviewOffset)-[alertLabel\(alertLabelIndex)]-\(UXFParser.contentSubviewOffset)-|",
+        
+        var alertLabelConstraintsText = ""
+        if views["alertLabel"] != nil {
+            allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(UXFParser.contentSubviewOffset)-[alertLabel]-\(UXFParser.contentSubviewOffset)-|",
                 metrics: nil,
                 views: views as [String : Any])
+            alertLabelConstraintsText = "\(alertLabelYOffset)-[alertLabel(\(alertLabelHeight))]-"
         }
 
         let bottomOffset: CGFloat = 8
         height += bottomOffset
-        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(labelYOffset)-[label(>=\(labelHeight))]-\(textFieldYOffset)-[textField0(\(textFieldHeight))]-\(alertLabelYOffset)-[alertLabel0(\(alertLabelHeight))]-\(sendButtonYOffet)-[sendButton(\(sendButtonHeight))]-\(bottomOffset)-|",
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(labelYOffset)-[label(>=\(labelHeight))]-\(textFieldYOffset)-[textField(\(textFieldHeight))]-\(alertLabelConstraintsText)\(sendButtonYOffet)-[sendButton(\(sendButtonHeight))]-\(bottomOffset)-|",
             options: [.alignAllCenterX],
             metrics: nil,
             views: views as [String : Any])
@@ -252,7 +285,7 @@ class UXFParser{
     
     private  func createSmiles(dictionary: Dictionary<String, Any>,
                                   groupID: String,
-                            submitHandler: ((Dictionary<String,Any>)->())?) ->(UIView){
+                            submitHandler: ((Dictionary<String,Any>?)->())?) ->(UIView){
         
         var height: CGFloat = 0.0
         let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: (UIScreen.main.bounds.width - (UXFParser.formControllerViewOffset + UXFParser.contenViewOffset)*2), height: 44))
@@ -353,6 +386,7 @@ class UXFParser{
         
         for smileKey in smilesKeys{
             let smileIndex = Int(smileKey)!
+            let smileInfo = info[smileKey] as! Dictionary <String, Any>
             
             let button = UXFSmileButton.init(index: smileIndex,
                                              isRequired: info["isRequered"] as? Bool,
@@ -367,6 +401,7 @@ class UXFParser{
                 button.setImage(image, for: UIControl.State.normal)
             })
             button.setImage(previewButtonImage, for: UIControl.State.normal)
+            button.setTitle(smileInfo["hint"] as? String, for: .normal)
             
             var buttonWidth = layoutView.bounds.size.width/CGFloat(smilesKeys.count)
             let buttonHeight = layoutView.bounds.size.height
@@ -378,7 +413,9 @@ class UXFParser{
                                         width: buttonWidth,
                                         height: buttonHeight)
             layoutView.addArrangedSubview(button)
-            button.addAction(for: .touchUpInside) {
+            button.addAction(for: .touchUpInside) { [weak self] in
+                self?._selectedSmileInfo = info[smileKey] as? Dictionary<String, Any>
+                self?._selectedSmileIndex = button.index
                 submitHandler?([groupId : button.index])
             }
         }

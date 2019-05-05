@@ -22,6 +22,8 @@ class UXFTextField: UITextField {
     @IBInspectable var contentTopPadding:CGFloat = 0
     @IBInspectable var contentBottomPadding:CGFloat = 0
     
+    var didChange: ((UXFTextField, String?) -> Void)!
+    
     var inputState: UXFTextFieldState = UXFTextFieldState.normal {
         didSet{
             switch inputState {
@@ -57,5 +59,15 @@ class UXFTextField: UITextField {
     
     override open func editingRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: contentPadding)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.addTarget(self, action: #selector(didChangeText(_:)), for: .editingChanged)
+    }
+    
+    @objc func didChangeText(_ sender: UITextField) {
+        weak var textField = sender as? UXFTextField
+        didChange(textField!, textField!.text)
     }
 }
