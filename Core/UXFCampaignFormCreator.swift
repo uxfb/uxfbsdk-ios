@@ -13,31 +13,38 @@ class UXFCampaignFormCreator{
     
     func createForm(controller: UXFViewController, page: UXFPage) {
 
-        var topView: UIView? = controller.progressLabel
         var allConstraints: [NSLayoutConstraint] = []
         var viewIndex = 0
-        var contentHeight: CGFloat = (topView?.frame.size.height ?? 0.0) + (topView?.frame.origin.y ?? 0.0)
+        var contentHeight: CGFloat = (controller.progressLabel?.frame.size.height ?? 0.0) + (controller.progressLabel?.frame.origin.y ?? 0.0)
         if let filedsInfoArr = page.uiData["fields"] as? Array<Dictionary<String, Any>> {
+            
+            var allviews: Dictionary <String, UIView> = ["topView": controller.progressLabel!]
+            var fieldViews: Dictionary <String, UIView> = [:]
             for fieldInfo in  filedsInfoArr{
+                
                 if let filedView = UXFParser.sharedInstance.parseUIElement(dictionary: fieldInfo,
                                                         submitHandler: {(info) in
                     controller.nextHandler?(controller.formIndex, info)
                 }){
                     controller.contentView.addSubview(filedView)
                     filedView.translatesAutoresizingMaskIntoConstraints = false
-                    
-                    let views = ["view": filedView, "topView": topView]
-                    allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(UXFParser.formControllerViewOffset)-[view]-\(UXFParser.formControllerViewOffset)-|", metrics: nil, views: views as [String : Any])
-                    let top = (topView == nil ? "|" : "[topView]")
-                    let bottom = (viewIndex == (filedsInfoArr.count - 1) ? "|" : "")
-
-                    allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:"+top+"-[view]-" + bottom, metrics: nil, views: views as [String : Any])
-                    
-                    topView = filedView
+                    allviews["view\(viewIndex)"] = filedView
+                    fieldViews["view\(viewIndex)"] = filedView
+                    allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-[view\(viewIndex)]-|",
+                                                                     metrics: nil,
+                                                                     views: ["view\(viewIndex)": filedView])
                     viewIndex += 1
                     contentHeight += filedView.frame.size.height + 8.0
                 }
             }
+            var layoutFormat = "V:|-[topView]-"
+            for viewName in fieldViews.keys.sorted(){
+                layoutFormat += "[" + viewName + "]-"
+            }
+            layoutFormat += "|"
+            allConstraints += NSLayoutConstraint.constraints(withVisualFormat: layoutFormat,
+                                                             metrics: nil,
+                                                             views: allviews as [String : Any])
         }
         controller.heightConstraint?.constant = contentHeight
         controller.contentView.addConstraints(allConstraints)
