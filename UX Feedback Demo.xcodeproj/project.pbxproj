@@ -175,13 +175,13 @@
 				0A6CDB70223B903500C17007 /* DataModel */,
 				0A6CDB872243C8F900C17007 /* UI */,
 				0A019A5322366A29002FD4F8 /* UXFeedback.swift */,
+				0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */,
 				0A0CDEAD2250664C00E1C092 /* UXFCampaignFormPresentor.swift */,
 				0A2754AA226629A4000E2E17 /* UXFCampaignFormCreator.swift */,
 				0A019A5922367CD6002FD4F8 /* UXFAPIClient.swift */,
 				0A019A6E2237C503002FD4F8 /* UXFURLComponents.swift */,
 				0A019A6C2237B773002FD4F8 /* UXFAPIWebRouter.swift */,
 				0A160DD42268CDB000A586C4 /* UXFStatisticManager.swift */,
-				0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */,
 				0A0CDEAB2250598800E1C092 /* Images.xcassets */,
 			);
 			path = Core;

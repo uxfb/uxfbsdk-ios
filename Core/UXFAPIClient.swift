@@ -36,7 +36,7 @@ class UXFAPIClient{
     }
     
     @objc private func applicationDidBecomeActive(){
-        self.getAllCampaings(completion: nil)
+        //self.getAllCampaings(completion: nil)
     }
     
     func getAllCampaings(completion: ((_ success: Bool, _ message: String?, _ theme: UXFTheme?, _ campaign: UXFCampaign?)->())?){

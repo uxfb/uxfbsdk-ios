@@ -36,6 +36,7 @@ class UXFViewController: UIViewController{
     static let animationTime = 0.5
     
     private (set) var formIndex: Int = 0
+    private (set) var formID: String = ""
     var state:UXFViewControllerState = .presenting
     
     internal var theme: UXFTheme?
@@ -44,6 +45,7 @@ class UXFViewController: UIViewController{
     
     var didLoadHandler: ((_ formIndex: Int)->())?
     var didCloseHandler: ((_ formIndex: Int)->(Void))?
+    var willCloseHandler: ((_ formIndex: Int)->(Void))?
     var nextHandler: ((_ formIndex: Int, _ info: Dictionary<String, Any>?)->())?
     var backHandler: ((_ formIndex: Int)->())?
     
@@ -120,6 +122,7 @@ class UXFViewController: UIViewController{
     }
     
     func close(animated: Bool = false){
+        self.willCloseHandler?(self.formIndex)
         state = .closeDismiss
         self.remove(animated: presentationAnimated, completion: didCloseHandler)
         didCloseHandler = nil

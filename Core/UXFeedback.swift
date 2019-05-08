@@ -74,6 +74,7 @@ open class UXFeedback{
                                                                     animationEnabled: true)
                 self._formPresentor?.isAnimationFormEnabled = self.animationEnabled
                 self._formPresentor?.delegate = self
+                self._formPresentor?.feedbackDelegate = self.delegate
                 self._formPresentor?.showForm()
             })
         }
@@ -90,9 +91,6 @@ open class UXFeedback{
 }
 
 extension UXFeedback: UXFCampaignFormPresentorProtocol {
-    func formDidClosed(formIndex: Int) {
-        
-    }
     
     func formSubmitted(formIndex: Int, info: Dictionary<String, Any>?) {
      

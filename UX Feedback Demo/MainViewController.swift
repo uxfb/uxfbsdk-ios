@@ -15,13 +15,14 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        UXFeedback.sharedInstance.delegate = self
         UXFeedback.sharedInstance.sendEvent(event: UXFedbackCompanyEvents.mainScreen.rawValue)
     }
 
 }
 
 extension MainViewController: UXFeedbackDelegate{
-    func formDidLoaded(form: UINavigationController) {
+    func formDidLoaded(from: UIViewController) {
         DDLogDebug(#function)
     }
     
@@ -33,7 +34,7 @@ extension MainViewController: UXFeedbackDelegate{
         DDLogDebug(#function)
     }
     
-    func formWillClose(form: UINavigationController, formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
+    func formWillClose(from: UIViewController, formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
         DDLogDebug(#function)
     }
     

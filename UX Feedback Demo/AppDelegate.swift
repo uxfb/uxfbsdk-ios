@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NetworkActivityLogger.shared.startLogging()
         #endif
         
-        print(String(describing: UIDevice.current.identifierForVendor?.uuidString))
+        //print(String(describing: UIDevice.current.identifierForVendor?.uuidString))
 
         //Usabilla.initialize(appID: usabillaAppID)
         UXFeedback.sharedInstance.setup(appID: uxfAppID, applicationWindow: self.window!){ [weak self] success in

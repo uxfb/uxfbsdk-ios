@@ -12,8 +12,6 @@ import UIKit
 let IS_IPAD = (UIDevice.current.userInterfaceIdiom == .pad)
 
 protocol UXFCampaignFormPresentorProtocol: class {
-    func formDidClosed(formIndex: Int)
-   // func formDidShowed(fromIndex: Int)
     func formSubmitted(formIndex: Int, info: Dictionary<String, Any>?)
 }
 
@@ -27,6 +25,7 @@ class UXFCampaignFormPresentor: NSObject{
         return UInt(_campaign?.formsCount ?? 0)
     }
     
+    weak var feedbackDelegate: UXFeedbackDelegate?
     weak var delegate: UXFCampaignFormPresentorProtocol?
     var isAnimationFormEnabled: Bool = true
     
@@ -38,8 +37,13 @@ class UXFCampaignFormPresentor: NSObject{
     private lazy var formCreator: UXFCampaignFormCreator = {
       return UXFCampaignFormCreator()
     }()
+
     
-    init(window: UIWindow, campaign: UXFCampaign, theme: UXFTheme? = nil, animationEnabled: Bool = true) {
+    init(window: UIWindow,
+         campaign: UXFCampaign,
+         theme: UXFTheme? = nil,
+         animationEnabled: Bool = true) {
+        
         _campaign = campaign
         _appWindow = window
         _theme = theme
@@ -61,9 +65,9 @@ class UXFCampaignFormPresentor: NSObject{
             self.currentFormIndex += 1
             showCurrentForm(direction: currentFormIndex == 0 ? .downToUp : .alphaIn)
         }
-        else{
+       /* else{
             showCongratulationForm(direction: currentFormIndex == 0 ? .downToUp : .alphaIn)
-        }
+        }*/
     }
     
     private func prevForm(){
@@ -84,10 +88,20 @@ class UXFCampaignFormPresentor: NSObject{
         }*/
        
         let controller = UXFViewController.init(index: self.currentFormIndex)
-        
-        
-        controller.didCloseHandler = { [weak self]  (formIndex) in
-            self?.delegate?.formDidClosed(formIndex: formIndex)
+        controller.didCloseHandler = { [unowned self]  (formIndex) in
+            self.feedbackDelegate?.formDidClose(formID: controller.formID,
+                                        withFeedbackResults: [],
+                                        isRedirectToAppStoreEnabled: false)
+            if formIndex == (self._campaign.formsCount - 1) {
+                self.feedbackDelegate?.campaignDidClose(withFeedbackResult: UXFeedbackResult(rating: nil, abandonedPageIndex: formIndex, sent: true),
+                                               isRedirectToAppStoreEnabled: false)
+            }
+        }
+        controller.willCloseHandler = { [weak self]  (formIndex) in
+            self?.feedbackDelegate?.formWillClose(from: controller.presentingViewController!,
+                                                  formID: controller.formID,
+                                                  withFeedbackResults: [],
+                                                  isRedirectToAppStoreEnabled: false)
         }
         controller.backHandler = { [weak self]  (formIndex) in
             self?.prevForm()
@@ -97,6 +111,7 @@ class UXFCampaignFormPresentor: NSObject{
             self?.nextForm()
         }
         controller.didLoadHandler = { [unowned self]  (formIndex) in
+            self.feedbackDelegate?.formDidLoaded(from: controller.presentingViewController!)
             self.formCreator.createForm(controller: controller,
                                         page: self._campaign.pages[self.currentFormIndex])
         }
@@ -128,7 +143,7 @@ class UXFCampaignFormPresentor: NSObject{
         }
         controller.isMandatoryField = false
         showController(controller: controller, direction: direction)
-    }*/
+    }
     
     private func showCongratulationForm(direction: UXFViewPopupDirection){
         let controller = UXFCongratulationViewController()
@@ -140,7 +155,7 @@ class UXFCampaignFormPresentor: NSObject{
         }
         
         showController(controller: controller, direction:  direction)
-    }
+    }*/
     
     private func showController(controller: UXFViewController, direction: UXFViewPopupDirection){
         
