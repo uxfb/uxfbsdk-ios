@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import AlamofireNetworkActivityLogger
 import CocoaLumberjack
+import UXFeedbackSDK
 
 let uxfAppID = "54444d444a068c157e7f7e14"
 
@@ -28,11 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         DDLog.add(DDOSLogger.sharedInstance)
-        
-        #if DEBUG
-        NetworkActivityLogger.shared.level = .debug
-        NetworkActivityLogger.shared.startLogging()
-        #endif
         
         //print(String(describing: UIDevice.current.identifierForVendor?.uuidString))
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import UXFeedbackSDK
 
 class AboutViewController: UIViewController {
     

@@ -9,12 +9,18 @@
 import Foundation
 import Alamofire
 import CodableAlamofire
-import CocoaLumberjack
+import AlamofireNetworkActivityLogger
 
 enum UXFAPIClientResponseResult{
     case success
     case fail
     case cancelled
+}
+
+internal func DDLogDebug(_ value: Any){
+    #if DEBUG
+    print(value)
+    #endif
 }
 
 let uxfErrorRequestCancelled = -999
@@ -25,7 +31,11 @@ class UXFAPIClient{
     private(set) var appID: String!
     
     init(appID: String){
-        DDLog.add(DDOSLogger.sharedInstance, with: DDLogLevel.debug)
+        #if DEBUG
+        NetworkActivityLogger.shared.level = .debug
+        NetworkActivityLogger.shared.startLogging()
+        #endif
+        
         self.appID = appID
   
         NotificationCenter.default.addObserver(self,selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
