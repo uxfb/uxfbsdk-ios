@@ -25,10 +25,11 @@ extension SecondViewController: UXFeedbackFormDelegate{
     
     func formDidLoaded(form: UXFViewController) {
         DDLogDebug(#function)
+        self.present(form, animated: true, completion: nil)
     }
     
     func formDidFailLoading(error: UXFError) {
-        DDLogDebug(#function)
+        DDLogDebug(error.localizedDescription)
     }
     
     func formDidClose(formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {

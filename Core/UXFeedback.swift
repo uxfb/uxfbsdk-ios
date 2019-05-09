@@ -78,7 +78,7 @@ open class UXFeedback{
                 self._formPresentor?.isAnimationFormEnabled = self.animationEnabled
                 self._formPresentor?.delegate = self
                 self._formPresentor?.feedbackCampaignDelegate = self.delegate
-                self._formPresentor?.showForm()
+                self._formPresentor?.showCampaign()
             })
         }
     }
@@ -87,8 +87,9 @@ open class UXFeedback{
         
         if let campaign = _campaign{
 
+            
                 self._formPresentor?.dismissForm()
-                self._formPresentor = UXFCampaignFormPresentor.init(window: self._appWindow,
+            /*    self._formPresentor = UXFCampaignFormPresentor.init(window: self._appWindow,
                                                                     campaign:  campaign,
                                                                     theme: self._theme,
                                                                     animationEnabled: true)
@@ -97,6 +98,38 @@ open class UXFeedback{
                 self._formPresentor?.feedbackCampaignDelegate = self.delegate
                 self._formPresentor?.feedbackFormDelegate = self.formDelegate
                 self._formPresentor?.showForm()
+            */
+            
+            let page: UXFPage = campaign.pages[0]
+            
+            let controller = UXFViewController.init()
+            controller.didCloseHandler = { [unowned self]  (formIndex) in
+                self.formDelegate?.formDidClose(formID: controller.formID,
+                                                        withFeedbackResults: [],
+                                                        isRedirectToAppStoreEnabled: false)
+                if formIndex == (campaign.formsCount - 1) {
+                    self.delegate?.campaignDidClose(withFeedbackResult: UXFeedbackResult(rating: nil, abandonedPageIndex: formIndex, sent: true),
+                                                                    isRedirectToAppStoreEnabled: false)
+                }
+            }
+            controller.willCloseHandler = { [weak self]  (formIndex) in
+                self?.formDelegate?.formWillClose(form: controller,
+                                                formID: controller.formID,
+                                   withFeedbackResults: [],
+                           isRedirectToAppStoreEnabled: false)
+            }
+            controller.nextHandler = { [weak self] (formIndex, info) in
+                self?.formSubmitted(formIndex: formIndex, info: info)
+                self?.formDelegate?.formWillClose(form: controller,
+                                                  formID: controller.formID,
+                                                  withFeedbackResults: [],
+                                                  isRedirectToAppStoreEnabled: false)
+            }
+            controller.didLoadHandler = { [unowned self]  (formIndex) in
+               /* self.createForm(controller: controller,
+                                      page: page)*/
+            }
+            self.formDelegate?.formDidLoaded(form: controller)
         }
     }
     

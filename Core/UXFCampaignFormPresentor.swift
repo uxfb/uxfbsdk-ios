@@ -61,7 +61,7 @@ class UXFCampaignFormPresentor: NSObject{
         isAnimationFormEnabled = animationEnabled
     }
     
-    func showForm(){
+    func showCampaign(){
         nextForm()
     }
     
@@ -176,6 +176,7 @@ class UXFCampaignFormPresentor: NSObject{
         
         self.currentFormId = _currentForm?.formID //save current fromID
     }
+    
 }
 
 

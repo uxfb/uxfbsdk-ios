@@ -56,7 +56,7 @@ open class UXFViewController: UIViewController{
     @IBOutlet  var contentView: UIView!
     
     
-    convenience init(index: Int) {
+    convenience init(index: Int = 0) {
         self.init()
         self.formIndex = index
     }
