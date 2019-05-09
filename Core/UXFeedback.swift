@@ -70,7 +70,7 @@ open class UXFeedback{
         if self.canDisplayCampaings == true,  let campaign = _campaign, campaign.show() == true{
             _eventToSend = nil
             DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay), execute: { [unowned self] in
-                self._formPresentor?.dismissForm()
+                self._formPresentor?.dismissCurrentForm()
                 self._formPresentor = UXFCampaignFormPresentor.init(window: self._appWindow,
                                                                     campaign:  campaign,
                                                                     theme: self._theme,
@@ -87,7 +87,7 @@ open class UXFeedback{
         
         if let campaign = _campaign{
 
-            self._formPresentor?.dismissForm()
+            self._formPresentor?.dismissCurrentForm()
             let formIndex = 0
             let presentor = UXFCampaignFormPresentor.init(window: self._appWindow,
                                                                 campaign:  campaign,
@@ -98,7 +98,7 @@ open class UXFeedback{
             presentor.delegate = self
             presentor.feedbackCampaignDelegate = self.delegate
             presentor.feedbackFormDelegate = self.formDelegate
-            let controller = presentor.createForm(fromIndex: formIndex)
+            let controller = presentor.createForm(fromIndex: formIndex, title: "")
             controller.presentDirection = .downToUp
             self.formDelegate?.formDidLoaded(form: controller)
         }

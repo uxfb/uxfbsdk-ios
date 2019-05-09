@@ -16,6 +16,7 @@
                 <outlet property="bottomOffset" destination="NwX-8u-PNu" id="0ld-P9-KA4"/>
                 <outlet property="contentView" destination="j1J-aB-pVd" id="4gr-Wh-eG9"/>
                 <outlet property="heightConstraint" destination="I8K-uf-DY9" id="PHo-Zc-68d"/>
+                <outlet property="logoImageView" destination="4GW-NN-Thv" id="46n-ye-0Mj"/>
                 <outlet property="progressLabel" destination="zy1-Kq-40p" id="gg8-Nk-tZW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -47,8 +48,8 @@
                                 <constraint firstAttribute="height" constant="11" id="3hu-TW-vp8"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zy1-Kq-40p">
-                            <rect key="frame" x="135.5" y="16" width="17" height="16"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zy1-Kq-40p">
+                            <rect key="frame" x="144" y="16" width="0.0" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="geo-f8-H2t"/>
                             </constraints>

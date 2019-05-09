@@ -41,6 +41,43 @@
 		0A2754A9226628BC000E2E17 /* UXFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2754A8226628BC000E2E17 /* UXFViewController.xib */; };
 		0A2754AB226629A4000E2E17 /* UXFCampaignFormCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2754AA226629A4000E2E17 /* UXFCampaignFormCreator.swift */; };
 		0A46898C2283E73C0074E1A3 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A46898B2283E73C0074E1A3 /* AboutViewController.xib */; };
+		0A46899622840B2C0074E1A3 /* UXFeedbackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0A46899922840B2C0074E1A3 /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; };
+		0A46899A22840B2C0074E1A3 /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A46899F22840BB90074E1A3 /* UXFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A5322366A29002FD4F8 /* UXFeedback.swift */; };
+		0A4689A022840BB90074E1A3 /* UXFeedbackDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */; };
+		0A4689A122840BB90074E1A3 /* UXFCampaignFormPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEAD2250664C00E1C092 /* UXFCampaignFormPresentor.swift */; };
+		0A4689A222840BB90074E1A3 /* UXFCampaignFormCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2754AA226629A4000E2E17 /* UXFCampaignFormCreator.swift */; };
+		0A4689A322840BB90074E1A3 /* UXFAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A5922367CD6002FD4F8 /* UXFAPIClient.swift */; };
+		0A4689A422840BB90074E1A3 /* UXFURLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6E2237C503002FD4F8 /* UXFURLComponents.swift */; };
+		0A4689A522840BB90074E1A3 /* UXFAPIWebRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6C2237B773002FD4F8 /* UXFAPIWebRouter.swift */; };
+		0A4689A622840BB90074E1A3 /* UXFStatisticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A160DD42268CDB000A586C4 /* UXFStatisticManager.swift */; };
+		0A4689A722840BB90074E1A3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A0CDEAB2250598800E1C092 /* Images.xcassets */; };
+		0A4689A822840BBF0074E1A3 /* UXFTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A57223673FE002FD4F8 /* UXFTheme.swift */; };
+		0A4689A922840BBF0074E1A3 /* UXFCampaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB832243B4FB00C17007 /* UXFCampaign.swift */; };
+		0A4689AA22840BBF0074E1A3 /* UXFPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB852243BD5500C17007 /* UXFPage.swift */; };
+		0A4689AB22840BBF0074E1A3 /* UXFParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB7D224113F900C17007 /* UXFParser.swift */; };
+		0A4689AC22840BBF0074E1A3 /* UXFText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB77223BD47800C17007 /* UXFText.swift */; };
+		0A4689AD22840BBF0074E1A3 /* UXFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB75223B960500C17007 /* UXFButton.swift */; };
+		0A4689AE22840BBF0074E1A3 /* UXFSmileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA92D9C227A9410005DBCBA /* UXFSmileButton.swift */; };
+		0A4689AF22840BBF0074E1A3 /* UXFCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB7B224111EC00C17007 /* UXFCheckbox.swift */; };
+		0A4689B022840BBF0074E1A3 /* UXFLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB79224110FE00C17007 /* UXFLabel.swift */; };
+		0A4689B122840BC90074E1A3 /* UXFPageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB7F224241DE00C17007 /* UXFPageResponse.swift */; };
+		0A4689B222840BC90074E1A3 /* UXFPageElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB812242424300C17007 /* UXFPageElement.swift */; };
+		0A4689B322840BE00074E1A3 /* NSLayoutConstraint+additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6122367EF2002FD4F8 /* NSLayoutConstraint+additions.swift */; };
+		0A4689B422840BE00074E1A3 /* String+additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6222367EF2002FD4F8 /* String+additions.swift */; };
+		0A4689B522840BE00074E1A3 /* UIImage+Tinting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6022367EF2002FD4F8 /* UIImage+Tinting.swift */; };
+		0A4689B622840BE00074E1A3 /* UIControl+blocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */; };
+		0A4689B722840BE00074E1A3 /* UISearchBar+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6322367EF2002FD4F8 /* UISearchBar+color.swift */; };
+		0A4689B822840BE00074E1A3 /* UIVIewAddition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A5F22367EF2002FD4F8 /* UIVIewAddition.swift */; };
+		0A4689B922840BE00074E1A3 /* UIViewController+present.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB92250A16B00E1C092 /* UIViewController+present.swift */; };
+		0A4689BA22840BE00074E1A3 /* Reachability+NetworkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */; };
+		0A4689BB22840BE00074E1A3 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEA5224F42E900E1C092 /* Queue.swift */; };
+		0A4689C222840F7C0074E1A3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A160DD82268D62700A586C4 /* CoreTelephony.framework */; };
+		0A4689C322840FC80074E1A3 /* UXFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB8E22446EC900C17007 /* UXFViewController.swift */; };
+		0A4689C422840FC80074E1A3 /* UXFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2754A8226628BC000E2E17 /* UXFViewController.xib */; };
+		0A4689C522840FD00074E1A3 /* UXFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB72250965100E1C092 /* UXFTextField.swift */; };
+		0A4689C62284101E0074E1A3 /* UIAlertController+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6A22367F0C002FD4F8 /* UIAlertController+Show.swift */; };
 		0A6CDB69223A499700C17007 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */; };
 		0A6CDB6B223A499900C17007 /* CodableAlamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */; };
 		0A6CDB6D223A499D00C17007 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB6C223A499D00C17007 /* Alamofire.framework */; };
@@ -58,8 +95,33 @@
 		0A6CDB8F22446EC900C17007 /* UXFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB8E22446EC900C17007 /* UXFViewController.swift */; };
 		0AA92D9D227A9410005DBCBA /* UXFSmileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA92D9C227A9410005DBCBA /* UXFSmileButton.swift */; };
 		0AA92D9F227AB0A7005DBCBA /* UIControl+blocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */; };
+		349A7C328ABF9702336987BB /* Pods_UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38739390AEC15BE586A907A0 /* Pods_UXFeedbackSDK.framework */; };
 		616DAC92778804215FB66C3E /* Pods_UX_Feedback_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACC0CD566ACA567E90BB694 /* Pods_UX_Feedback_Demo.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0A46899722840B2C0074E1A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A019A3422365E02002FD4F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0A46899122840B2C0074E1A3;
+			remoteInfo = UXFeedbackSDK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0A46899E22840B2C0074E1A3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0A46899A22840B2C0074E1A3 /* UXFeedbackSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0A019A3C22365E02002FD4F8 /* UX Feedback Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UX Feedback Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +161,9 @@
 		0A2754A8226628BC000E2E17 /* UXFViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFViewController.xib; sourceTree = "<group>"; };
 		0A2754AA226629A4000E2E17 /* UXFCampaignFormCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCampaignFormCreator.swift; sourceTree = "<group>"; };
 		0A46898B2283E73C0074E1A3 /* AboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
+		0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UXFeedbackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UXFeedbackSDK.h; sourceTree = "<group>"; };
+		0A46899522840B2C0074E1A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodableAlamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6CDB6C223A499D00C17007 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,7 +181,10 @@
 		0A6CDB8E22446EC900C17007 /* UXFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFViewController.swift; sourceTree = "<group>"; };
 		0AA92D9C227A9410005DBCBA /* UXFSmileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFSmileButton.swift; sourceTree = "<group>"; };
 		0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+blocks.swift"; sourceTree = "<group>"; };
+		1EEAEFFA3C358C6791078FBC /* Pods-UXFeedbackSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UXFeedbackSDK.debug.xcconfig"; path = "Target Support Files/Pods-UXFeedbackSDK/Pods-UXFeedbackSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		38739390AEC15BE586A907A0 /* Pods_UXFeedbackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UXFeedbackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		896225BC300184D4C219D00B /* Pods-UX Feedback Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UX Feedback Demo.debug.xcconfig"; path = "Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		C0A4DBD5F3D2AE2FF02D7C08 /* Pods-UXFeedbackSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UXFeedbackSDK.release.xcconfig"; path = "Target Support Files/Pods-UXFeedbackSDK/Pods-UXFeedbackSDK.release.xcconfig"; sourceTree = "<group>"; };
 		FACC0CD566ACA567E90BB694 /* Pods_UX_Feedback_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UX_Feedback_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -130,6 +198,16 @@
 				0A6CDB6D223A499D00C17007 /* Alamofire.framework in Frameworks */,
 				0A6CDB6B223A499900C17007 /* CodableAlamofire.framework in Frameworks */,
 				616DAC92778804215FB66C3E /* Pods_UX_Feedback_Demo.framework in Frameworks */,
+				0A46899922840B2C0074E1A3 /* UXFeedbackSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A46898F22840B2C0074E1A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A4689C222840F7C0074E1A3 /* CoreTelephony.framework in Frameworks */,
+				349A7C328ABF9702336987BB /* Pods_UXFeedbackSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +219,7 @@
 			children = (
 				0A019A52223669CC002FD4F8 /* Core */,
 				0A019A3E22365E02002FD4F8 /* UX Feedback Demo */,
+				0A46899322840B2C0074E1A3 /* UXFeedbackSDK */,
 				0A019A3D22365E02002FD4F8 /* Products */,
 				F1FF377DEA3CD2AF6A704781 /* Pods */,
 				3EE1448B815C3AA05E865A6C /* Frameworks */,
@@ -151,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				0A019A3C22365E02002FD4F8 /* UX Feedback Demo.app */,
+				0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -215,6 +295,15 @@
 			path = "UIAlertController+Show";
 			sourceTree = "<group>";
 		};
+		0A46899322840B2C0074E1A3 /* UXFeedbackSDK */ = {
+			isa = PBXGroup;
+			children = (
+				0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */,
+				0A46899522840B2C0074E1A3 /* Info.plist */,
+			);
+			path = UXFeedbackSDK;
+			sourceTree = "<group>";
+		};
 		0A6CDB70223B903500C17007 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +354,7 @@
 				0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */,
 				0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */,
 				FACC0CD566ACA567E90BB694 /* Pods_UX_Feedback_Demo.framework */,
+				38739390AEC15BE586A907A0 /* Pods_UXFeedbackSDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -274,11 +364,24 @@
 			children = (
 				896225BC300184D4C219D00B /* Pods-UX Feedback Demo.debug.xcconfig */,
 				0A2247D83BE4B2975B651B8E /* Pods-UX Feedback Demo.release.xcconfig */,
+				1EEAEFFA3C358C6791078FBC /* Pods-UXFeedbackSDK.debug.xcconfig */,
+				C0A4DBD5F3D2AE2FF02D7C08 /* Pods-UXFeedbackSDK.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		0A46898D22840B2C0074E1A3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A46899622840B2C0074E1A3 /* UXFeedbackSDK.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		0A019A3B22365E02002FD4F8 /* UX Feedback Demo */ = {
@@ -290,15 +393,36 @@
 				0A019A3922365E02002FD4F8 /* Frameworks */,
 				0A019A3A22365E02002FD4F8 /* Resources */,
 				68EE678419EB5F115CE2960A /* [CP] Embed Pods Frameworks */,
+				0A46899E22840B2C0074E1A3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0A46899822840B2C0074E1A3 /* PBXTargetDependency */,
 			);
 			name = "UX Feedback Demo";
 			productName = "UX Feedback Demo";
 			productReference = 0A019A3C22365E02002FD4F8 /* UX Feedback Demo.app */;
 			productType = "com.apple.product-type.application";
+		};
+		0A46899122840B2C0074E1A3 /* UXFeedbackSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A46899B22840B2C0074E1A3 /* Build configuration list for PBXNativeTarget "UXFeedbackSDK" */;
+			buildPhases = (
+				16025EB046113FD9F1B78802 /* [CP] Check Pods Manifest.lock */,
+				0A46898D22840B2C0074E1A3 /* Headers */,
+				0A46898E22840B2C0074E1A3 /* Sources */,
+				0A46898F22840B2C0074E1A3 /* Frameworks */,
+				0A46899022840B2C0074E1A3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UXFeedbackSDK;
+			productName = UXFeedbackSDK;
+			productReference = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -312,6 +436,9 @@
 				TargetAttributes = {
 					0A019A3B22365E02002FD4F8 = {
 						CreatedOnToolsVersion = 10.1;
+					};
+					0A46899122840B2C0074E1A3 = {
+						CreatedOnToolsVersion = 10.2;
 					};
 				};
 			};
@@ -329,6 +456,7 @@
 			projectRoot = "";
 			targets = (
 				0A019A3B22365E02002FD4F8 /* UX Feedback Demo */,
+				0A46899122840B2C0074E1A3 /* UXFeedbackSDK */,
 			);
 		};
 /* End PBXProject section */
@@ -350,9 +478,40 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0A46899022840B2C0074E1A3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A4689C422840FC80074E1A3 /* UXFViewController.xib in Resources */,
+				0A4689A722840BB90074E1A3 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		16025EB046113FD9F1B78802 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-UXFeedbackSDK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		36B0D8566051B73582AC48BA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -457,7 +616,53 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0A46898E22840B2C0074E1A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A4689C322840FC80074E1A3 /* UXFViewController.swift in Sources */,
+				0A4689BA22840BE00074E1A3 /* Reachability+NetworkType.swift in Sources */,
+				0A4689A022840BB90074E1A3 /* UXFeedbackDelegate.swift in Sources */,
+				0A4689C62284101E0074E1A3 /* UIAlertController+Show.swift in Sources */,
+				0A4689B022840BBF0074E1A3 /* UXFLabel.swift in Sources */,
+				0A4689B922840BE00074E1A3 /* UIViewController+present.swift in Sources */,
+				0A4689B422840BE00074E1A3 /* String+additions.swift in Sources */,
+				0A4689AC22840BBF0074E1A3 /* UXFText.swift in Sources */,
+				0A4689A122840BB90074E1A3 /* UXFCampaignFormPresentor.swift in Sources */,
+				0A4689B622840BE00074E1A3 /* UIControl+blocks.swift in Sources */,
+				0A4689B822840BE00074E1A3 /* UIVIewAddition.swift in Sources */,
+				0A4689A622840BB90074E1A3 /* UXFStatisticManager.swift in Sources */,
+				0A4689A222840BB90074E1A3 /* UXFCampaignFormCreator.swift in Sources */,
+				0A4689AA22840BBF0074E1A3 /* UXFPage.swift in Sources */,
+				0A4689AF22840BBF0074E1A3 /* UXFCheckbox.swift in Sources */,
+				0A4689A422840BB90074E1A3 /* UXFURLComponents.swift in Sources */,
+				0A4689A922840BBF0074E1A3 /* UXFCampaign.swift in Sources */,
+				0A4689BB22840BE00074E1A3 /* Queue.swift in Sources */,
+				0A4689A822840BBF0074E1A3 /* UXFTheme.swift in Sources */,
+				0A4689B722840BE00074E1A3 /* UISearchBar+color.swift in Sources */,
+				0A4689B322840BE00074E1A3 /* NSLayoutConstraint+additions.swift in Sources */,
+				0A4689A522840BB90074E1A3 /* UXFAPIWebRouter.swift in Sources */,
+				0A4689B222840BC90074E1A3 /* UXFPageElement.swift in Sources */,
+				0A46899F22840BB90074E1A3 /* UXFeedback.swift in Sources */,
+				0A4689AE22840BBF0074E1A3 /* UXFSmileButton.swift in Sources */,
+				0A4689B522840BE00074E1A3 /* UIImage+Tinting.swift in Sources */,
+				0A4689AD22840BBF0074E1A3 /* UXFButton.swift in Sources */,
+				0A4689B122840BC90074E1A3 /* UXFPageResponse.swift in Sources */,
+				0A4689AB22840BBF0074E1A3 /* UXFParser.swift in Sources */,
+				0A4689A322840BB90074E1A3 /* UXFAPIClient.swift in Sources */,
+				0A4689C522840FD00074E1A3 /* UXFTextField.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0A46899822840B2C0074E1A3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0A46899122840B2C0074E1A3 /* UXFeedbackSDK */;
+			targetProxy = 0A46899722840B2C0074E1A3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0A019A4322365E03002FD4F8 /* Main.storyboard */ = {
@@ -601,6 +806,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 896225BC300184D4C219D00B /* Pods-UX Feedback Demo.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -622,6 +828,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0A2247D83BE4B2975B651B8E /* Pods-UX Feedback Demo.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -636,6 +843,64 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Any App Dev";
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0A46899C22840B2C0074E1A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1EEAEFFA3C358C6791078FBC /* Pods-UXFeedbackSDK.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 5K42YC37US;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = UXFeedbackSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.UXFeedback.UXFeedbackSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0A46899D22840B2C0074E1A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0A4DBD5F3D2AE2FF02D7C08 /* Pods-UXFeedbackSDK.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 5K42YC37US;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = UXFeedbackSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.UXFeedback.UXFeedbackSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -656,6 +921,15 @@
 			buildConfigurations = (
 				0A019A4F22365E04002FD4F8 /* Debug */,
 				0A019A5022365E04002FD4F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0A46899B22840B2C0074E1A3 /* Build configuration list for PBXNativeTarget "UXFeedbackSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A46899C22840B2C0074E1A3 /* Debug */,
+				0A46899D22840B2C0074E1A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -31,6 +31,7 @@ open class UXFViewController: UIViewController{
     @IBOutlet var progressLabel: UILabel?
     @IBOutlet var bottomOffset: NSLayoutConstraint?
     @IBOutlet var heightConstraint: NSLayoutConstraint?
+    @IBOutlet var logoImageView: UIImageView?
     
     static let defaulViewOffset: CGFloat = 8.0
     static let animationTime = 0.5
@@ -39,7 +40,7 @@ open class UXFViewController: UIViewController{
     private (set) var formID: String = ""
     var state:UXFViewControllerState = .presenting
     
-    internal var theme: UXFTheme?
+    internal weak var theme: UXFTheme?
     var progressString: String = ""
     var presentationAnimated = true
     
@@ -66,6 +67,9 @@ open class UXFViewController: UIViewController{
         
         if self.formIndex == 0 {
             self.backButton?.isHidden = true
+        }
+        else{
+            self.logoImageView?.isHidden  = true
         }
         
         self.progressLabel?.text = self.progressString
@@ -113,24 +117,24 @@ open class UXFViewController: UIViewController{
     }
     
     @IBAction  func closeButtonDidTap(_ sender: UIButton){
-        close(animated:presentationAnimated)
-    }
-    
-    func remove(animated: Bool, completion: ((_ index: Int)->(Void))?){
-        self.dismiss(animated: animated){
-            completion?(self.formIndex)
-        }
-    }
-    
-    func close(animated: Bool = false){
-        self.willCloseHandler?(self.formIndex)
         state = .closeDismiss
-        self.remove(animated: presentationAnimated, completion: didCloseHandler)
-        didCloseHandler = nil
+        self.dismiss(animated: presentationAnimated, completion: nil)
+    }
+    
+    override open func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        self.willCloseHandler?(self.formIndex)
+        super.dismiss(animated: presentationAnimated) { [weak self] in
+            if let index = self?.formIndex{
+                self?.didCloseHandler?(index)
+            }
+            self?.didCloseHandler = nil
+            completion?()
+        }
+  
     }
 
     deinit {
         NotificationCenter.default.removeObserver(self)
-        DDLogDebug(String(describing: self) + "." + #function)
+        DDLogDebug("deinit " + String(describing: self))
     }
 }

@@ -28,7 +28,11 @@ class UXFCampaignFormPresentor: NSObject{
     }
     
     var progressString: String {
-        return "\(self.currentFormIndex + 1)/\(formsCount)"
+        if self.currentFormIndex < 0 {
+            return ""
+        }else {
+            return "\(self.currentFormIndex + 1)/\(formsCount)"
+        }
     }
     
     var formsCount: UInt{
@@ -65,8 +69,9 @@ class UXFCampaignFormPresentor: NSObject{
         nextForm()
     }
     
-    func dismissForm(){
-        _currentForm?.close()
+    func dismissCurrentForm(){
+        _currentForm?.dismiss(animated: true, completion: nil)
+        _currentForm?.removeFromParent()
     }
     
     //MARK: - Form navogation presentation
@@ -90,23 +95,25 @@ class UXFCampaignFormPresentor: NSObject{
         }
     }
     
-    open func createForm(fromIndex: Int) -> (UXFViewController){
+    open func createForm(fromIndex: Int, title: String? = nil) -> (UXFViewController){
         
         let page = self._campaign.pages[fromIndex]
-        let controller = UXFViewController.init(index: self.currentFormIndex)
+        let controller = UXFViewController.init(index: fromIndex)
         
         controller.modalPresentationStyle = .overCurrentContext
-        controller.progressString = self.progressString
+        controller.progressString = (title == nil ? self.progressString : title!)
         controller.theme = _theme
         controller.transitioningDelegate = self
         
-        controller.didCloseHandler = { [unowned self]  (formIndex) in
-            self.feedbackFormDelegate?.formDidClose(formID: controller.formID,
+        controller.didCloseHandler = { [weak self]  (formIndex) in
+            self?.feedbackFormDelegate?.formDidClose(formID: controller.formID,
                                             withFeedbackResults: [],
                                             isRedirectToAppStoreEnabled: false)
-            if formIndex == (self._campaign.formsCount - 1) {
-                self.feedbackCampaignDelegate?.campaignDidClose(withFeedbackResult: UXFeedbackResult(rating: nil, abandonedPageIndex: formIndex, sent: true),
-                                                                isRedirectToAppStoreEnabled: false)
+            if let formsCount = self?._campaign.formsCount {
+                if formIndex == (formsCount - 1) {
+                    self?.feedbackCampaignDelegate?.campaignDidClose(withFeedbackResult: UXFeedbackResult(rating: nil, abandonedPageIndex: formIndex, sent: true),
+                                                                     isRedirectToAppStoreEnabled: false)
+                }
             }
         }
         controller.willCloseHandler = { [weak self] (formIndex) in
@@ -123,18 +130,15 @@ class UXFCampaignFormPresentor: NSObject{
             self?.delegate?.formSubmitted(formIndex: formIndex, info: info)
            
             if self?.feedbackFormDelegate != nil {
-               self?.feedbackFormDelegate?.formWillClose(form: controller,
-                                              formID: controller.formID,
-                                              withFeedbackResults: [],
-                                              isRedirectToAppStoreEnabled: false)
+               controller.dismiss(animated: true, completion: nil)
             }
             else{
                  self?.nextForm()
             }
         }
-        controller.didLoadHandler = { [unowned self]  (formIndex) in
-            self.formCreator.createForm(controller: controller,
-                                        page: page)
+        controller.didLoadHandler = { [weak self]  (formIndex) in
+            self?.formCreator.createForm(controller: controller,
+                                               page: page)
         }
         return controller
     }
@@ -179,7 +183,8 @@ class UXFCampaignFormPresentor: NSObject{
     
     private func showCampaignController(controller: UXFViewController, direction: UXFViewPopupDirection){
         
-        _currentForm?.remove(animated: true, completion: nil)
+        self.dismissCurrentForm()
+        
         controller.presentDirection = direction
         
         let parentViewController = _appWindow.rootViewController

@@ -39,6 +39,5 @@ extension SecondViewController: UXFeedbackFormDelegate{
     
     func formWillClose(form: UXFViewController, formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
         DDLogDebug(#function)
-        form.dismiss(animated: true, completion: nil)
     }
 }
