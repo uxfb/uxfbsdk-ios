@@ -25,7 +25,7 @@ enum UXFViewControllerState{
     case closeDismiss
 }
 
-class UXFViewController: UIViewController{
+open class UXFViewController: UIViewController{
     
     @IBOutlet var backButton: UIButton?
     @IBOutlet var progressLabel: UILabel?
@@ -61,7 +61,7 @@ class UXFViewController: UIViewController{
         self.formIndex = index
     }
     
-    override func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         
         if self.formIndex == 0 {

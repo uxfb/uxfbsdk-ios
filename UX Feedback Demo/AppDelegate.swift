@@ -10,7 +10,6 @@ import UIKit
 import AlamofireNetworkActivityLogger
 import CocoaLumberjack
 
-let usabillaAppID = ""
 let uxfAppID = "54444d444a068c157e7f7e14"
 
 enum UXFedbackCompanyEvents: String {
@@ -37,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //print(String(describing: UIDevice.current.identifierForVendor?.uuidString))
 
-        //Usabilla.initialize(appID: usabillaAppID)
         UXFeedback.sharedInstance.setup(appID: uxfAppID, applicationWindow: self.window!){ [weak self] success in
             let message = "UXFeedback initialization " + (success == true ? "successful" : "failed")
             DDLogDebug(message)

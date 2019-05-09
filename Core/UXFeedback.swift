@@ -27,9 +27,12 @@ open class UXFeedback{
             return UserDefaults.standard.object(forKey: "answerId") as? String
         }
     }
-    public  var delegate: UXFeedbackDelegate?
-    public  var debugEnabled: Bool = false
-    public  var animationEnabled: Bool = true
+    
+    open  var delegate: UXFeedbackCampaignDelegate?
+    open  var formDelegate: UXFeedbackFormDelegate?
+    open  var debugEnabled: Bool = false
+    open  var animationEnabled: Bool = true
+    open var canDisplayCampaings: Bool = true
     
     private  weak var _activeEventController: UIViewController?
     private  weak var _appWindow: UIWindow!
@@ -64,7 +67,7 @@ open class UXFeedback{
         _eventToSend = event
 
         #warning("implement API call here")
-        if let campaign = _campaign, campaign.show() == true{
+        if self.canDisplayCampaings == true,  let campaign = _campaign, campaign.show() == true{
             _eventToSend = nil
             DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay), execute: { [unowned self] in
                 self._formPresentor?.dismissForm()
@@ -74,10 +77,31 @@ open class UXFeedback{
                                                                     animationEnabled: true)
                 self._formPresentor?.isAnimationFormEnabled = self.animationEnabled
                 self._formPresentor?.delegate = self
-                self._formPresentor?.feedbackDelegate = self.delegate
+                self._formPresentor?.feedbackCampaignDelegate = self.delegate
                 self._formPresentor?.showForm()
             })
         }
+    }
+    
+    open func loadFeedbackForm(formID: String){
+        
+        if let campaign = _campaign{
+
+                self._formPresentor?.dismissForm()
+                self._formPresentor = UXFCampaignFormPresentor.init(window: self._appWindow,
+                                                                    campaign:  campaign,
+                                                                    theme: self._theme,
+                                                                    animationEnabled: true)
+                self._formPresentor?.isAnimationFormEnabled = self.animationEnabled
+                self._formPresentor?.delegate = self
+                self._formPresentor?.feedbackCampaignDelegate = self.delegate
+                self._formPresentor?.feedbackFormDelegate = self.formDelegate
+                self._formPresentor?.showForm()
+        }
+    }
+    
+    open func resetCampaignData(completion: (()->())?){
+        self.answerId = nil
     }
     
     //MARK: support

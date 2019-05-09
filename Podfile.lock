@@ -2,8 +2,6 @@ PODS:
   - Alamofire (4.8.1)
   - AlamofireNetworkActivityLogger (2.3.0):
     - Alamofire (~> 4.6)
-  - CocoaLumberjack (3.5.1):
-    - CocoaLumberjack/Core (= 3.5.1)
   - CocoaLumberjack/Core (3.5.1)
   - CocoaLumberjack/Swift (3.5.1):
     - CocoaLumberjack/Core
@@ -11,8 +9,6 @@ PODS:
     - Alamofire (~> 4.0)
   - Nuke (7.5.2)
   - ReachabilitySwift (4.3.0)
-  - SVGKit (2.1.0):
-    - CocoaLumberjack (~> 3.0)
   - UIColor_Hex_Swift (4.2.0)
 
 DEPENDENCIES:
@@ -21,7 +17,6 @@ DEPENDENCIES:
   - CodableAlamofire
   - Nuke
   - ReachabilitySwift
-  - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `2.x`)
   - UIColor_Hex_Swift (~> 4.2.0)
 
 SPEC REPOS:
@@ -34,16 +29,6 @@ SPEC REPOS:
     - ReachabilitySwift
     - UIColor_Hex_Swift
 
-EXTERNAL SOURCES:
-  SVGKit:
-    :branch: 2.x
-    :git: https://github.com/SVGKit/SVGKit.git
-
-CHECKOUT OPTIONS:
-  SVGKit:
-    :commit: 4b507e48da30711e25d1bcdd19580f25887a2267
-    :git: https://github.com/SVGKit/SVGKit.git
-
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
   AlamofireNetworkActivityLogger: 6f3076652ab7fa6c819b59be08ea038d339e36d8
@@ -51,9 +36,8 @@ SPEC CHECKSUMS:
   CodableAlamofire: e2d2edcec7cf413f7862c30c8fa98eded27a83f9
   Nuke: 0350d346a688426e8f2331253ef28dc2fc4f6178
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
-  SVGKit: 8a2fc74258bdb2abb54d3b65f3dd68b0277a9c4d
   UIColor_Hex_Swift: bc07fc197421ee896b9ed6dcfa2054b7fbf75145
 
-PODFILE CHECKSUM: 46dfa792a43dc9db262377797965ad9f7a42e5e4
+PODFILE CHECKSUM: adc6646d95deb24be35bb42e1698ab53a194bfdb
 
 COCOAPODS: 1.6.1

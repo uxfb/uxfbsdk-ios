@@ -21,23 +21,7 @@ class MainViewController: UIViewController {
 
 }
 
-extension MainViewController: UXFeedbackDelegate{
-    func formDidLoaded(from: UIViewController) {
-        DDLogDebug(#function)
-    }
-    
-    func formDidFailLoading(error: UXFError) {
-        DDLogDebug(#function)
-    }
-    
-    func formDidClose(formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
-        DDLogDebug(#function)
-    }
-    
-    func formWillClose(from: UIViewController, formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
-        DDLogDebug(#function)
-    }
-    
+extension MainViewController: UXFeedbackCampaignDelegate{
     func campaignDidClose(withFeedbackResult result: UXFeedbackResult, isRedirectToAppStoreEnabled: Bool) {
         DDLogDebug(#function)
     }

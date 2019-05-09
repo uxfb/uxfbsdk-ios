@@ -17,6 +17,16 @@ protocol UXFCampaignFormPresentorProtocol: class {
 
 class UXFCampaignFormPresentor: NSObject{
     
+    internal var currentFormId: String?{
+        set{
+            UserDefaults.standard.set(newValue, forKey: "currentFormId")
+            UserDefaults.standard.synchronize()
+        }
+        get{
+            return UserDefaults.standard.object(forKey: "currentFormId") as? String
+        }
+    }
+    
     var progressString: String {
         return "\(self.currentFormIndex + 1)/\(formsCount)"
     }
@@ -25,7 +35,8 @@ class UXFCampaignFormPresentor: NSObject{
         return UInt(_campaign?.formsCount ?? 0)
     }
     
-    weak var feedbackDelegate: UXFeedbackDelegate?
+    weak var feedbackFormDelegate: UXFeedbackFormDelegate?
+    weak var feedbackCampaignDelegate: UXFeedbackCampaignDelegate?
     weak var delegate: UXFCampaignFormPresentorProtocol?
     var isAnimationFormEnabled: Bool = true
     
@@ -78,28 +89,20 @@ class UXFCampaignFormPresentor: NSObject{
     }
     
     private func showCurrentForm(direction: UXFViewPopupDirection){
-        /*
-        if self.currentFormIndex == 0{
-            showRateForm(direction: direction)
-        }
-        
-        else if self.currentFormIndex == 1{
-            showCommentForm(direction: direction)
-        }*/
        
         let controller = UXFViewController.init(index: self.currentFormIndex)
         controller.didCloseHandler = { [unowned self]  (formIndex) in
-            self.feedbackDelegate?.formDidClose(formID: controller.formID,
+            self.feedbackFormDelegate?.formDidClose(formID: controller.formID,
                                         withFeedbackResults: [],
                                         isRedirectToAppStoreEnabled: false)
             if formIndex == (self._campaign.formsCount - 1) {
-                self.feedbackDelegate?.campaignDidClose(withFeedbackResult: UXFeedbackResult(rating: nil, abandonedPageIndex: formIndex, sent: true),
+                self.feedbackCampaignDelegate?.campaignDidClose(withFeedbackResult: UXFeedbackResult(rating: nil, abandonedPageIndex: formIndex, sent: true),
                                                isRedirectToAppStoreEnabled: false)
             }
         }
         controller.willCloseHandler = { [weak self]  (formIndex) in
-            self?.feedbackDelegate?.formWillClose(from: controller.presentingViewController!,
-                                                  formID: controller.formID,
+            self?.feedbackFormDelegate?.formWillClose(form: controller,
+                                                    formID: controller.formID,
                                                   withFeedbackResults: [],
                                                   isRedirectToAppStoreEnabled: false)
         }
@@ -111,12 +114,11 @@ class UXFCampaignFormPresentor: NSObject{
             self?.nextForm()
         }
         controller.didLoadHandler = { [unowned self]  (formIndex) in
-            self.feedbackDelegate?.formDidLoaded(from: controller.presentingViewController!)
+            self.feedbackFormDelegate?.formDidLoaded(form: controller)
             self.formCreator.createForm(controller: controller,
                                         page: self._campaign.pages[self.currentFormIndex])
         }
-        showController(controller: controller, direction: direction)
-        
+        showController(controller: controller, direction: direction)  
     }
     /*
     private func showRateForm(direction: UXFViewPopupDirection){
@@ -171,6 +173,8 @@ class UXFCampaignFormPresentor: NSObject{
             controller.state = .presented
         }
         _currentForm = controller
+        
+        self.currentFormId = _currentForm?.formID //save current fromID
     }
 }
 

@@ -18,10 +18,13 @@ public struct UXFeedbackResult {
     public var sent: Bool
 }
 
-public protocol UXFeedbackDelegate: AnyObject {
-    func formDidLoaded(from: UIViewController)
-    func formDidFailLoading(error: UXFError)
-    func formDidClose(formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool)
-    func formWillClose(from: UIViewController, formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool)
+public protocol UXFeedbackCampaignDelegate: class{
     func campaignDidClose(withFeedbackResult result: UXFeedbackResult, isRedirectToAppStoreEnabled: Bool)
+}
+
+public protocol UXFeedbackFormDelegate: AnyObject {
+   func formDidLoaded(form: UXFViewController)
+   func formDidFailLoading(error: UXFError)
+   func formDidClose(formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool)
+   func formWillClose(form: UXFViewController, formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool)
 }
