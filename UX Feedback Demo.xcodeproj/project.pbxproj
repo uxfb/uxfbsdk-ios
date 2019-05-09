@@ -40,6 +40,7 @@
 		0A160DD92268D62700A586C4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A160DD82268D62700A586C4 /* CoreTelephony.framework */; };
 		0A2754A9226628BC000E2E17 /* UXFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2754A8226628BC000E2E17 /* UXFViewController.xib */; };
 		0A2754AB226629A4000E2E17 /* UXFCampaignFormCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2754AA226629A4000E2E17 /* UXFCampaignFormCreator.swift */; };
+		0A46898C2283E73C0074E1A3 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A46898B2283E73C0074E1A3 /* AboutViewController.xib */; };
 		0A6CDB69223A499700C17007 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */; };
 		0A6CDB6B223A499900C17007 /* CodableAlamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */; };
 		0A6CDB6D223A499D00C17007 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB6C223A499D00C17007 /* Alamofire.framework */; };
@@ -97,6 +98,7 @@
 		0A2247D83BE4B2975B651B8E /* Pods-UX Feedback Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UX Feedback Demo.release.xcconfig"; path = "Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo.release.xcconfig"; sourceTree = "<group>"; };
 		0A2754A8226628BC000E2E17 /* UXFViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFViewController.xib; sourceTree = "<group>"; };
 		0A2754AA226629A4000E2E17 /* UXFCampaignFormCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCampaignFormCreator.swift; sourceTree = "<group>"; };
+		0A46898B2283E73C0074E1A3 /* AboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 		0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodableAlamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6CDB6C223A499D00C17007 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,6 +160,7 @@
 			children = (
 				0A019A3F22365E03002FD4F8 /* AppDelegate.swift */,
 				0A019A4122365E03002FD4F8 /* MainViewController.swift */,
+				0A46898B2283E73C0074E1A3 /* AboutViewController.xib */,
 				0A0CDEA7224F4B6B00E1C092 /* SecondViewController.swift */,
 				0A0CDEA9224F4B7A00E1C092 /* AboutViewController.swift */,
 				0A019A4322365E03002FD4F8 /* Main.storyboard */,
@@ -339,6 +342,7 @@
 				0A6CDB8D2243C95B00C17007 /* UXFRateViewController.xib in Resources */,
 				0A0CDEAC2250598800E1C092 /* Images.xcassets in Resources */,
 				0A019A4A22365E04002FD4F8 /* LaunchScreen.storyboard in Resources */,
+				0A46898C2283E73C0074E1A3 /* AboutViewController.xib in Resources */,
 				0A019A4722365E04002FD4F8 /* Assets.xcassets in Resources */,
 				0A0CDEB222506E0C00E1C092 /* UXFCommentViewController.xib in Resources */,
 				0A019A4522365E03002FD4F8 /* Main.storyboard in Resources */,
@@ -533,7 +537,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -588,7 +592,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

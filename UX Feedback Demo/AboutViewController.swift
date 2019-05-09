@@ -18,4 +18,8 @@ class AboutViewController: UIViewController {
         UXFeedback.sharedInstance.sendEvent(event: UXFedbackCompanyEvents.aboutScreen.rawValue)
     }
     
+    @IBAction func closeButtonTap(_ sender: Any){
+      self.dismiss(animated: true, completion: nil)
+    }
+    
 }

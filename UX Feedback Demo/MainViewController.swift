@@ -19,6 +19,18 @@ class MainViewController: UIViewController {
         UXFeedback.sharedInstance.sendEvent(event: UXFedbackCompanyEvents.mainScreen.rawValue)
     }
 
+    
+    @IBAction func secondTap(_ sender: Any){
+        
+        if let controller = self.storyboard?.instantiateViewController(withIdentifier: "SecondViewController") {
+           self.navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+    
+    @IBAction func aboutTap(_ sender: Any){
+         let controller = AboutViewController.init(nibName: "AboutViewController", bundle: nil)
+         self.present(controller, animated: true, completion: nil)
+    }
 }
 
 extension MainViewController: UXFeedbackCampaignDelegate{

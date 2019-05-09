@@ -11,6 +11,7 @@ import UIKit
 import CocoaLumberjack
 
 class SecondViewController: UIViewController {
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,5 +39,6 @@ extension SecondViewController: UXFeedbackFormDelegate{
     
     func formWillClose(form: UXFViewController, formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
         DDLogDebug(#function)
+        form.dismiss(animated: true, completion: nil)
     }
 }

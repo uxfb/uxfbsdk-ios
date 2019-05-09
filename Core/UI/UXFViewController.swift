@@ -84,6 +84,7 @@ open class UXFViewController: UIViewController{
                                                object: nil)
         
         didLoadHandler?(self.formIndex)
+        self.state = .presented
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
