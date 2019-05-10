@@ -9,6 +9,7 @@
 import UIKit
 import CocoaLumberjack
 import UIColor_Hex_Swift
+import Nuke
 
 class UXFParser{
     
@@ -121,6 +122,9 @@ class UXFParser{
             case "email":
                 groupView = createEmailInput(dictionary: dictionary, groupID: groupID, submitHandler: submitHandler)
                 break
+            case "image":
+                groupView = createImage(dictionary: dictionary, groupID: groupID)
+                break
             default:
                groupView = nil
                break
@@ -130,6 +134,22 @@ class UXFParser{
         }
         
        return groupView
+    }
+    
+    private func createImage(dictionary: Dictionary<String, Any>,
+                                groupID: String)->(UIView?){
+        let imageView = UIImageView.init(frame: CGRect.init(x: 0,
+                                                            y: 0,
+                                                            width: (UIScreen.main.bounds.width - (UXFParser.formControllerViewOffset + UXFParser.contenViewOffset)*2),
+                                                            height: 100))
+        imageView.contentMode = .center
+        let scale = UIScreen.main.scale
+        if let setInfo = dictionary["set"] as? Dictionary<String, String>,
+           let imagePath = setInfo["\(Int(scale))x"],
+           let imageUrl = URL.init(string:  imagePath){
+               Nuke.loadImage(with: imageUrl, into: imageView)
+        }
+        return imageView
     }
     
     private func createEmailInput(dictionary: Dictionary<String, Any>,
@@ -480,10 +500,10 @@ class UXFParser{
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
         label.font =  label.font.withSize(labelFontSize)
         label.textAlignment = .center
+        label.numberOfLines = 0
         label.sizeToFit()
         //label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
-
         
         var labelHeight = labelFontSize
         if let text = label.text {
@@ -502,10 +522,10 @@ class UXFParser{
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
         label.font =  label.font.withSize(labelFontSize)
         label.textAlignment = .center
+        label.numberOfLines = 0
         label.sizeToFit()
         //label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         
         var labelHeight = labelFontSize
         if let text = label.text {
