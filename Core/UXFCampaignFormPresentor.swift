@@ -98,8 +98,7 @@ class UXFCampaignFormPresentor: NSObject{
     open func createForm(fromIndex: Int, title: String? = nil) -> (UXFViewController){
         
         let page = self._campaign.pages[fromIndex]
-        let controller = UXFViewController.init(index: fromIndex)
-        
+        let controller = UXFViewController.init(index: fromIndex, formID: page.id )
         controller.modalPresentationStyle = .overCurrentContext
         controller.progressString = (title == nil ? self.progressString : title!)
         controller.theme = _theme

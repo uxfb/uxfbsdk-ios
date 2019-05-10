@@ -57,14 +57,21 @@ open class UXFViewController: UIViewController{
     @IBOutlet  var contentView: UIView!
     
     
-    convenience init(index: Int = 0) {
+    convenience init(index: Int = 0, formID: String) {
         self.init()
         self.formIndex = index
+        self.formID = formID
     }
     
     override open func viewDidLoad() {
         super.viewDidLoad()
         
+       // createContentView()
+        
+        #if DEBUG
+        #else
+        self.backButton?.isHidden = true
+        #endif
         if self.formIndex == 0 {
             self.backButton?.isHidden = true
         }
@@ -89,6 +96,15 @@ open class UXFViewController: UIViewController{
         
         didLoadHandler?(self.formIndex)
         self.state = .presented
+    }
+    
+    private func createContentView(){
+        contentView = UIView.init()
+        
+        self.view.addSubview(contentView)
+        
+        progressLabel = UILabel.init()
+        self.contentView.addSubview(progressLabel!)
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
