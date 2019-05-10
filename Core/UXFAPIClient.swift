@@ -8,7 +8,6 @@
 
 import Foundation
 import Alamofire
-import CodableAlamofire
 import AlamofireNetworkActivityLogger
 
 enum UXFAPIClientResponseResult{
@@ -241,7 +240,7 @@ class UXFAPIClient{
             }
         }
     }
-    
+    /*
     internal func performObjectArrayRequest<T:Decodable>(route: UXFAPIWebRouter,
                                                        keyPath: String? = nil,
                                                        decoder: JSONDecoder = JSONDecoder(),
@@ -250,7 +249,7 @@ class UXFAPIClient{
         return Alamofire.request(url!).responseDecodableObject(keyPath: keyPath, decoder: decoder) { (response: DataResponse<[T]>) in
             completion(response.result)
         }
-    }
+    }*/
     
     internal func downloadAttachment(url: URL, fileName: String, completion: ((_ destinationUrlPath: URL)->())?){
         

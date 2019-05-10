@@ -7,7 +7,6 @@
 //
 
 import Alamofire
-import CocoaLumberjack
 
 enum HTTPHeaderField: String {
     case authentication = "Authorization"

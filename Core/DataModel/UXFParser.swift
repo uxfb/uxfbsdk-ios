@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CocoaLumberjack
 import UIColor_Hex_Swift
 import Nuke
 
