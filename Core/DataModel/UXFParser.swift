@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import UIColor_Hex_Swift
+import HEXColor
 import Nuke
 
 class UXFParser{
@@ -291,6 +291,7 @@ class UXFParser{
             }
         }
     
+       // label.textColor = 
         label.text = titleText
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
         label.font =  label.font.withSize(labelFontSize)
@@ -546,11 +547,12 @@ class UXFParser{
         for smileKey in smilesKeys{
             let smileIndex = Int(smileKey)!
             let smileInfo = info[smileKey] as! Dictionary <String, Any>
+            let smileHint = smileInfo["hint"] as? String
             
             let button = UXFSmileButton.init(index: smileIndex,
                                              isRequired: info["isRequered"] as? Bool,
                                              warning: info["warning"] as? String,
-                                             hint: info["hint"] as? String)
+                                             hint: smileHint)
             button.imageView?.contentMode = .scaleAspectFit
             if #available(iOS 11.0, *) {
                 button.adjustsImageSizeForAccessibilityContentSizeCategory = true
@@ -560,7 +562,6 @@ class UXFParser{
                 button.setImage(image, for: UIControl.State.normal)
             })
             button.setImage(previewButtonImage, for: UIControl.State.normal)
-            button.setTitle(smileInfo["hint"] as? String, for: .normal)
             
             var buttonWidth = layoutView.bounds.size.width/CGFloat(smilesKeys.count)
             let buttonHeight = layoutView.bounds.size.height

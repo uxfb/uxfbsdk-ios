@@ -7,29 +7,36 @@
 //
 
 import Foundation
-import UIColor_Hex_Swift
+import HEXColor
 
 class UXFTheme : NSObject {
     
-    private(set) var titleColor: UIColor!
-    private(set) var textColor: UIColor!
+    private(set) var titleColor: UIColor = UIColor.black
+    private(set) var textColor: UIColor = UIColor.black
     private(set) var accendentTextColor: UIColor!
     private(set) var accentColor: UIColor!
-    private(set) var backgroundColor: UIColor!
-    private(set) var errorColor: UIColor!
+    private(set) var backgroundColor: UIColor = UIColor.groupTableViewBackground
+    private(set) var errorColor: UIColor = UIColor.init("#E92436")
     private(set) var cardColor: UIColor!
     private(set) var smiles: Array<String> = []
-    
     
     init(colorsDict: Dictionary<String, String>,
          smilesDict: Dictionary<String, String>) {
  
-        titleColor = UIColor(colorsDict["title"] ?? "")
-        textColor = UIColor(colorsDict["text"] ?? "")
+        if let titleColorString = colorsDict["title"]{
+           titleColor = UIColor(titleColorString)
+        }
+        if let textColorString = colorsDict["text"] {
+           textColor = UIColor(textColorString)
+        }
         accendentTextColor = UIColor(colorsDict["accentedText"] ?? "")
         accentColor = UIColor(colorsDict["accent"] ?? "")
-        backgroundColor = UIColor(colorsDict["background"] ?? "")
-        errorColor = UIColor(colorsDict["error"] ?? "")
+        if let backgroundColorString = colorsDict["background"] {
+            backgroundColor = UIColor(backgroundColorString)
+        }
+        if let errorColorString = colorsDict["error"] {
+           errorColor = UIColor(errorColorString)
+        }
         cardColor = UIColor(colorsDict["card"] ?? "")
     
         for key in smilesDict.keys.sorted(){
@@ -39,30 +46,4 @@ class UXFTheme : NSObject {
         }
        // smiles = smilesDict.values.sorted()
     }
-   
-    /*
-    let colors: Dictionary<String, String>!
-    let smiles: Dictionary<String, String>!
-    
-    var titleColor: UIColor{
-        return UIColor(colors["title"] ?? "")
-    }
-    var textColor: UIColor{
-        return UIColor(colors["text"] ?? "")
-    }
-    var accendentTextColor: UIColor{
-        return UIColor(colors["accentedText"] ?? "")
-    }
-    var accentColor: UIColor{
-        return UIColor(colors["accent"] ?? "")
-    }
-    var backgroundColor: UIColor{
-        return UIColor(colors["background"] ?? "")
-    }
-    var errorColor: UIColor{
-        return UIColor(colors["error"] ?? "")
-    }
-    var cardColor: UIColor{
-        return UIColor(colors["card"] ?? "")
-    }*/
 }

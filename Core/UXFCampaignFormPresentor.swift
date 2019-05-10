@@ -46,17 +46,13 @@ class UXFCampaignFormPresentor: NSObject{
     
     private(set) var currentFormIndex: Int = -1
     private var _campaign: UXFCampaign!
-    private var _theme: UXFTheme?
+    private var _theme: UXFTheme!
     private weak var _appWindow: UIWindow!
     private weak var _currentForm: UXFViewController?
-    private lazy var formCreator: UXFCampaignFormCreator = {
-      return UXFCampaignFormCreator()
-    }()
 
-    
     init(window: UIWindow,
          campaign: UXFCampaign,
-         theme: UXFTheme? = nil,
+         theme: UXFTheme,
          animationEnabled: Bool = true) {
         
         _campaign = campaign
@@ -94,6 +90,8 @@ class UXFCampaignFormPresentor: NSObject{
             showCampaignController(controller: form, direction: .alphaIn)
         }
     }
+    
+    //MARK: - Form controller
     
     open func createForm(fromIndex: Int, title: String? = nil) -> (UXFViewController){
         
@@ -136,11 +134,69 @@ class UXFCampaignFormPresentor: NSObject{
             }
         }
         controller.didLoadHandler = { [weak self]  (formIndex) in
-            self?.formCreator.createForm(controller: controller,
-                                               page: page)
+            self?.prepareUIForm(controller: controller, page: page)
         }
         return controller
     }
+    
+    func prepareUIForm(controller: UXFViewController, page: UXFPage) {
+        
+        controller.contentView.backgroundColor = _theme.backgroundColor
+        
+        var allConstraints: [NSLayoutConstraint] = []
+        var viewIndex = 0
+        var contentHeight: CGFloat = (controller.progressLabel?.frame.size.height ?? 0.0) + (controller.progressLabel?.frame.origin.y ?? 0.0)
+        if let filedsInfoArr = page.uiData["fields"] as? Array<Dictionary<String, Any>> {
+            
+            var allviews: Dictionary <String, UIView> = ["topView": controller.progressLabel!]
+            var fieldViews: Dictionary <String, UIView> = [:]
+            for fieldInfo in  filedsInfoArr{
+                
+                if let filedView = UXFParser.sharedInstance.parseUIElement(dictionary: fieldInfo,
+                                                                           submitHandler: {(info) in
+                                                                            controller.nextHandler?(controller.formIndex, info)
+                }){
+                    controller.contentView.addSubview(filedView)
+                    filedView.translatesAutoresizingMaskIntoConstraints = false
+                    allviews["view\(viewIndex)"] = filedView
+                    fieldViews["view\(viewIndex)"] = filedView
+                    allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-[view\(viewIndex)]-|",
+                        metrics: nil,
+                        views: ["view\(viewIndex)": filedView])
+                    viewIndex += 1
+                    contentHeight += filedView.frame.size.height + 8.0
+                }
+            }
+            var layoutFormat = "V:|-[topView]-"
+            for viewName in fieldViews.keys.sorted(){
+                layoutFormat += "[" + viewName + "]-"
+            }
+            layoutFormat += "|"
+            allConstraints += NSLayoutConstraint.constraints(withVisualFormat: layoutFormat,
+                                                             metrics: nil,
+                                                             views: allviews as [String : Any])
+        }
+        controller.heightConstraint?.constant = contentHeight
+        controller.contentView.addConstraints(allConstraints)
+        
+        /*
+         controller.contentView.addSubview(page.button)
+         page.button.translatesAutoresizingMaskIntoConstraints = false
+         let views = ["topView" : topView, "button": page.button, "superview": controller.contentView]
+         
+         let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[superview]-15-[button(44)]-15-[superview]",
+         options: NSLayoutConstraint.FormatOptions.alignAllCenterY,
+         metrics: nil,
+         views: views as [String : Any])
+         let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[topView]-15-[button(120)]-15-[superview]",
+         options: NSLayoutConstraint.FormatOptions.alignAllCenterX,
+         metrics: nil,
+         views: views as [String : Any])
+         controller.contentView.addConstraints(horizontalConstraints)
+         controller.contentView.addConstraints(verticalConstraints)
+         */
+    }
+    
     /*
     private func showRateForm(direction: UXFViewPopupDirection){
         let controller = UXFRateViewController.init()

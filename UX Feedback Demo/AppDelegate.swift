@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CocoaLumberjack
+import CocoaLumberjackSwift
 import UXFeedbackSDK
 
 let uxfAppID = "54444d444a068c157e7f7e14"

@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import CocoaLumberjack
+import CocoaLumberjackSwift
 import UXFeedbackSDK
 
 class SecondViewController: UIViewController {

@@ -15,13 +15,11 @@
 		0A019A6B22367F0C002FD4F8 /* UIAlertController+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6A22367F0C002FD4F8 /* UIAlertController+Show.swift */; };
 		0A0CDEA8224F4B6B00E1C092 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEA7224F4B6B00E1C092 /* SecondViewController.swift */; };
 		0A0CDEAA224F4B7A00E1C092 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEA9224F4B7A00E1C092 /* AboutViewController.swift */; };
-		0A160DD92268D62700A586C4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A160DD82268D62700A586C4 /* CoreTelephony.framework */; };
 		0A46898C2283E73C0074E1A3 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A46898B2283E73C0074E1A3 /* AboutViewController.xib */; };
 		0A46899622840B2C0074E1A3 /* UXFeedbackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0A46899F22840BB90074E1A3 /* UXFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A5322366A29002FD4F8 /* UXFeedback.swift */; };
 		0A4689A022840BB90074E1A3 /* UXFeedbackDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */; };
 		0A4689A122840BB90074E1A3 /* UXFCampaignFormPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEAD2250664C00E1C092 /* UXFCampaignFormPresentor.swift */; };
-		0A4689A222840BB90074E1A3 /* UXFCampaignFormCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2754AA226629A4000E2E17 /* UXFCampaignFormCreator.swift */; };
 		0A4689A322840BB90074E1A3 /* UXFAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A5922367CD6002FD4F8 /* UXFAPIClient.swift */; };
 		0A4689A422840BB90074E1A3 /* UXFURLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6E2237C503002FD4F8 /* UXFURLComponents.swift */; };
 		0A4689A522840BB90074E1A3 /* UXFAPIWebRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6C2237B773002FD4F8 /* UXFAPIWebRouter.swift */; };
@@ -52,43 +50,36 @@
 		0A4689C422840FC80074E1A3 /* UXFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2754A8226628BC000E2E17 /* UXFViewController.xib */; };
 		0A4689C522840FD00074E1A3 /* UXFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB72250965100E1C092 /* UXFTextField.swift */; };
 		0A4689C62284101E0074E1A3 /* UIAlertController+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6A22367F0C002FD4F8 /* UIAlertController+Show.swift */; };
-		0A4689EB2285510F0074E1A3 /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4689EA2285510F0074E1A3 /* UXFeedbackSDK.framework */; };
-		0A4689EC2285510F0074E1A3 /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4689EA2285510F0074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A468A0722856D9E0074E1A3 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A468A0622856D9E0074E1A3 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A468A0922856DA40074E1A3 /* Nuke.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A468A0822856DA40074E1A3 /* Nuke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A468A0D22856DAD0074E1A3 /* Reachability.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A468A0C22856DAD0074E1A3 /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A468A0F22856DAF0074E1A3 /* UIColor_Hex_Swift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A468A0E22856DAF0074E1A3 /* UIColor_Hex_Swift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A468A1122856DB70074E1A3 /* AlamofireNetworkActivityLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A468A1022856DB70074E1A3 /* AlamofireNetworkActivityLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A6CDB69223A499700C17007 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */; };
-		0A6CDB6D223A499D00C17007 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB6C223A499D00C17007 /* Alamofire.framework */; };
-		349A7C328ABF9702336987BB /* Pods_UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38739390AEC15BE586A907A0 /* Pods_UXFeedbackSDK.framework */; };
-		616DAC92778804215FB66C3E /* Pods_UX_Feedback_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACC0CD566ACA567E90BB694 /* Pods_UX_Feedback_Demo.framework */; };
+		0A468A1322857B970074E1A3 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1222857B970074E1A3 /* Alamofire.framework */; };
+		0A468A1522857B9A0074E1A3 /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1422857B9A0074E1A3 /* AlamofireNetworkActivityLogger.framework */; };
+		0A468A1722857B9D0074E1A3 /* HEXColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1622857B9D0074E1A3 /* HEXColor.framework */; };
+		0A468A1922857BA00074E1A3 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1822857BA00074E1A3 /* Nuke.framework */; };
+		0A468A1B22857BA30074E1A3 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1A22857BA20074E1A3 /* Reachability.framework */; };
+		0A468A2222857DDC0074E1A3 /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1F22857CC20074E1A3 /* UXFeedbackSDK.framework */; };
+		0A468A2322857DDC0074E1A3 /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1F22857CC20074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A468A2B228582850074E1A3 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A29228582850074E1A3 /* CocoaLumberjack.framework */; };
+		0A468A2C228582850074E1A3 /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A2A228582850074E1A3 /* CocoaLumberjackSwift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		0A4689ED2285510F0074E1A3 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				0A4689EC2285510F0074E1A3 /* UXFeedbackSDK.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0A468A0022856BEA0074E1A3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0A468A1122856DB70074E1A3 /* AlamofireNetworkActivityLogger.framework in CopyFiles */,
-				0A468A0F22856DAF0074E1A3 /* UIColor_Hex_Swift.framework in CopyFiles */,
-				0A468A0D22856DAD0074E1A3 /* Reachability.framework in CopyFiles */,
-				0A468A0722856D9E0074E1A3 /* Alamofire.framework in CopyFiles */,
-				0A468A0922856DA40074E1A3 /* Nuke.framework in CopyFiles */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A468A2422857DDC0074E1A3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0A468A2322857DDC0074E1A3 /* UXFeedbackSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -127,21 +118,19 @@
 		0A160DD42268CDB000A586C4 /* UXFStatisticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFStatisticManager.swift; sourceTree = "<group>"; };
 		0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reachability+NetworkType.swift"; sourceTree = "<group>"; };
 		0A160DD82268D62700A586C4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		0A2247D83BE4B2975B651B8E /* Pods-UX Feedback Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UX Feedback Demo.release.xcconfig"; path = "Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo.release.xcconfig"; sourceTree = "<group>"; };
 		0A2754A8226628BC000E2E17 /* UXFViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFViewController.xib; sourceTree = "<group>"; };
-		0A2754AA226629A4000E2E17 /* UXFCampaignFormCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCampaignFormCreator.swift; sourceTree = "<group>"; };
 		0A46898B2283E73C0074E1A3 /* AboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 		0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UXFeedbackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UXFeedbackSDK.h; sourceTree = "<group>"; };
 		0A46899522840B2C0074E1A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0A4689EA2285510F0074E1A3 /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UXFeedbackSDK.framework; sourceTree = "<group>"; };
-		0A468A0622856D9E0074E1A3 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../Library/Developer/Xcode/DerivedData/UX_Feedback_Demo-gwvodhucquwahecelfshwdzpotjh/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
-		0A468A0822856DA40074E1A3 /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = "../../../Library/Developer/Xcode/DerivedData/UX_Feedback_Demo-gwvodhucquwahecelfshwdzpotjh/Build/Products/Debug-iphonesimulator/Nuke/Nuke.framework"; sourceTree = "<group>"; };
-		0A468A0C22856DAD0074E1A3 /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = "../../../Library/Developer/Xcode/DerivedData/UX_Feedback_Demo-gwvodhucquwahecelfshwdzpotjh/Build/Products/Debug-iphonesimulator/ReachabilitySwift/Reachability.framework"; sourceTree = "<group>"; };
-		0A468A0E22856DAF0074E1A3 /* UIColor_Hex_Swift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIColor_Hex_Swift.framework; path = "../../../Library/Developer/Xcode/DerivedData/UX_Feedback_Demo-gwvodhucquwahecelfshwdzpotjh/Build/Products/Debug-iphonesimulator/UIColor_Hex_Swift/UIColor_Hex_Swift.framework"; sourceTree = "<group>"; };
-		0A468A1022856DB70074E1A3 /* AlamofireNetworkActivityLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityLogger.framework; path = "../../../Library/Developer/Xcode/DerivedData/UX_Feedback_Demo-gwvodhucquwahecelfshwdzpotjh/Build/Products/Debug-iphonesimulator/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger.framework"; sourceTree = "<group>"; };
-		0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0A6CDB6C223A499D00C17007 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A468A1222857B970074E1A3 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		0A468A1422857B9A0074E1A3 /* AlamofireNetworkActivityLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityLogger.framework; path = Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework; sourceTree = "<group>"; };
+		0A468A1622857B9D0074E1A3 /* HEXColor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HEXColor.framework; path = Carthage/Build/iOS/HEXColor.framework; sourceTree = "<group>"; };
+		0A468A1822857BA00074E1A3 /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = Carthage/Build/iOS/Nuke.framework; sourceTree = "<group>"; };
+		0A468A1A22857BA20074E1A3 /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
+		0A468A1F22857CC20074E1A3 /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UXFeedbackSDK.framework; sourceTree = "<group>"; };
+		0A468A29228582850074E1A3 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
+		0A468A2A228582850074E1A3 /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/iOS/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
 		0A6CDB75223B960500C17007 /* UXFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFButton.swift; sourceTree = "<group>"; };
 		0A6CDB77223BD47800C17007 /* UXFText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFText.swift; sourceTree = "<group>"; };
 		0A6CDB79224110FE00C17007 /* UXFLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFLabel.swift; sourceTree = "<group>"; };
@@ -156,11 +145,6 @@
 		0A6CDB8E22446EC900C17007 /* UXFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFViewController.swift; sourceTree = "<group>"; };
 		0AA92D9C227A9410005DBCBA /* UXFSmileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFSmileButton.swift; sourceTree = "<group>"; };
 		0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+blocks.swift"; sourceTree = "<group>"; };
-		1EEAEFFA3C358C6791078FBC /* Pods-UXFeedbackSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UXFeedbackSDK.debug.xcconfig"; path = "Target Support Files/Pods-UXFeedbackSDK/Pods-UXFeedbackSDK.debug.xcconfig"; sourceTree = "<group>"; };
-		38739390AEC15BE586A907A0 /* Pods_UXFeedbackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UXFeedbackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		896225BC300184D4C219D00B /* Pods-UX Feedback Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UX Feedback Demo.debug.xcconfig"; path = "Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo.debug.xcconfig"; sourceTree = "<group>"; };
-		C0A4DBD5F3D2AE2FF02D7C08 /* Pods-UXFeedbackSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UXFeedbackSDK.release.xcconfig"; path = "Target Support Files/Pods-UXFeedbackSDK/Pods-UXFeedbackSDK.release.xcconfig"; sourceTree = "<group>"; };
-		FACC0CD566ACA567E90BB694 /* Pods_UX_Feedback_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UX_Feedback_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,11 +152,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A160DD92268D62700A586C4 /* CoreTelephony.framework in Frameworks */,
-				0A6CDB69223A499700C17007 /* CocoaLumberjack.framework in Frameworks */,
-				0A6CDB6D223A499D00C17007 /* Alamofire.framework in Frameworks */,
-				616DAC92778804215FB66C3E /* Pods_UX_Feedback_Demo.framework in Frameworks */,
-				0A4689EB2285510F0074E1A3 /* UXFeedbackSDK.framework in Frameworks */,
+				0A468A2222857DDC0074E1A3 /* UXFeedbackSDK.framework in Frameworks */,
+				0A468A2B228582850074E1A3 /* CocoaLumberjack.framework in Frameworks */,
+				0A468A2C228582850074E1A3 /* CocoaLumberjackSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,7 +163,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A4689C222840F7C0074E1A3 /* CoreTelephony.framework in Frameworks */,
-				349A7C328ABF9702336987BB /* Pods_UXFeedbackSDK.framework in Frameworks */,
+				0A468A1522857B9A0074E1A3 /* AlamofireNetworkActivityLogger.framework in Frameworks */,
+				0A468A1722857B9D0074E1A3 /* HEXColor.framework in Frameworks */,
+				0A468A1922857BA00074E1A3 /* Nuke.framework in Frameworks */,
+				0A468A1B22857BA30074E1A3 /* Reachability.framework in Frameworks */,
+				0A468A1322857B970074E1A3 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,16 +177,10 @@
 		0A019A3322365E02002FD4F8 = {
 			isa = PBXGroup;
 			children = (
-				0A468A1022856DB70074E1A3 /* AlamofireNetworkActivityLogger.framework */,
-				0A468A0E22856DAF0074E1A3 /* UIColor_Hex_Swift.framework */,
-				0A468A0C22856DAD0074E1A3 /* Reachability.framework */,
-				0A468A0822856DA40074E1A3 /* Nuke.framework */,
-				0A468A0622856D9E0074E1A3 /* Alamofire.framework */,
 				0A019A52223669CC002FD4F8 /* Core */,
 				0A019A3E22365E02002FD4F8 /* UX Feedback Demo */,
 				0A46899322840B2C0074E1A3 /* UXFeedbackSDK */,
 				0A019A3D22365E02002FD4F8 /* Products */,
-				F1FF377DEA3CD2AF6A704781 /* Pods */,
 				3EE1448B815C3AA05E865A6C /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -239,7 +219,6 @@
 				0A019A5322366A29002FD4F8 /* UXFeedback.swift */,
 				0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */,
 				0A0CDEAD2250664C00E1C092 /* UXFCampaignFormPresentor.swift */,
-				0A2754AA226629A4000E2E17 /* UXFCampaignFormCreator.swift */,
 				0A019A5922367CD6002FD4F8 /* UXFAPIClient.swift */,
 				0A019A6E2237C503002FD4F8 /* UXFURLComponents.swift */,
 				0A019A6C2237B773002FD4F8 /* UXFAPIWebRouter.swift */,
@@ -283,6 +262,19 @@
 			path = UXFeedbackSDK;
 			sourceTree = "<group>";
 		};
+		0A468A28228580E70074E1A3 /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				0A6CDB8A2243C95B00C17007 /* UXFRateViewController.swift */,
+				0A6CDB8B2243C95B00C17007 /* UXFRateViewController.xib */,
+				0A0CDEAF22506E0C00E1C092 /* UXFCommentViewController.swift */,
+				0A0CDEB022506E0C00E1C092 /* UXFCommentViewController.xib */,
+				0A0CDEB322506F7800E1C092 /* UXFCongratulationViewController.swift */,
+				0A0CDEB422506F7800E1C092 /* UXFCongratulationViewController.xib */,
+			);
+			path = Unused;
+			sourceTree = "<group>";
+		};
 		0A6CDB70223B903500C17007 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,14 +295,9 @@
 		0A6CDB872243C8F900C17007 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				0A468A28228580E70074E1A3 /* Unused */,
 				0A6CDB8E22446EC900C17007 /* UXFViewController.swift */,
 				0A2754A8226628BC000E2E17 /* UXFViewController.xib */,
-				0A6CDB8A2243C95B00C17007 /* UXFRateViewController.swift */,
-				0A6CDB8B2243C95B00C17007 /* UXFRateViewController.xib */,
-				0A0CDEAF22506E0C00E1C092 /* UXFCommentViewController.swift */,
-				0A0CDEB022506E0C00E1C092 /* UXFCommentViewController.xib */,
-				0A0CDEB322506F7800E1C092 /* UXFCongratulationViewController.swift */,
-				0A0CDEB422506F7800E1C092 /* UXFCongratulationViewController.xib */,
 				0A0CDEB72250965100E1C092 /* UXFTextField.swift */,
 			);
 			path = UI;
@@ -328,25 +315,17 @@
 		3EE1448B815C3AA05E865A6C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0A4689EA2285510F0074E1A3 /* UXFeedbackSDK.framework */,
+				0A468A29228582850074E1A3 /* CocoaLumberjack.framework */,
+				0A468A2A228582850074E1A3 /* CocoaLumberjackSwift.framework */,
+				0A468A1F22857CC20074E1A3 /* UXFeedbackSDK.framework */,
+				0A468A1A22857BA20074E1A3 /* Reachability.framework */,
+				0A468A1822857BA00074E1A3 /* Nuke.framework */,
+				0A468A1622857B9D0074E1A3 /* HEXColor.framework */,
+				0A468A1422857B9A0074E1A3 /* AlamofireNetworkActivityLogger.framework */,
+				0A468A1222857B970074E1A3 /* Alamofire.framework */,
 				0A160DD82268D62700A586C4 /* CoreTelephony.framework */,
-				0A6CDB6C223A499D00C17007 /* Alamofire.framework */,
-				0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */,
-				FACC0CD566ACA567E90BB694 /* Pods_UX_Feedback_Demo.framework */,
-				38739390AEC15BE586A907A0 /* Pods_UXFeedbackSDK.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		F1FF377DEA3CD2AF6A704781 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				896225BC300184D4C219D00B /* Pods-UX Feedback Demo.debug.xcconfig */,
-				0A2247D83BE4B2975B651B8E /* Pods-UX Feedback Demo.release.xcconfig */,
-				1EEAEFFA3C358C6791078FBC /* Pods-UXFeedbackSDK.debug.xcconfig */,
-				C0A4DBD5F3D2AE2FF02D7C08 /* Pods-UXFeedbackSDK.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,13 +346,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A019A4E22365E04002FD4F8 /* Build configuration list for PBXNativeTarget "UX Feedback Demo" */;
 			buildPhases = (
-				36B0D8566051B73582AC48BA /* [CP] Check Pods Manifest.lock */,
 				0A4689F6228564FD0074E1A3 /* ShellScript */,
 				0A019A3822365E02002FD4F8 /* Sources */,
 				0A019A3922365E02002FD4F8 /* Frameworks */,
 				0A019A3A22365E02002FD4F8 /* Resources */,
-				68EE678419EB5F115CE2960A /* [CP] Embed Pods Frameworks */,
-				0A4689ED2285510F0074E1A3 /* Embed Frameworks */,
+				0A468A2422857DDC0074E1A3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -388,7 +365,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A46899B22840B2C0074E1A3 /* Build configuration list for PBXNativeTarget "UXFeedbackSDK" */;
 			buildPhases = (
-				16025EB046113FD9F1B78802 /* [CP] Check Pods Manifest.lock */,
 				0A4689FF22856A3B0074E1A3 /* ShellScript */,
 				0A46898D22840B2C0074E1A3 /* Headers */,
 				0A46898E22840B2C0074E1A3 /* Sources */,
@@ -492,6 +468,8 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjackSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjack.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -499,7 +477,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#xcodebuild -target \"UXFeedbackSDK\" ONLY_ACTIVE_ARCH=NO -configuration \"$CONFIGURATION\" -sdk \"iphonesimulator\" build\n#xcodebuild -target \"UXFeedbackSDK\" ONLY_ACTIVE_ARCH=NO -configuration \"$CONFIGURATION\" -sdk \"iphoneos\" build\n";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\nxcodebuild -target \"UXFeedbackSDK\" ONLY_ACTIVE_ARCH=NO -configuration \"$CONFIGURATION\" -sdk \"iphonesimulator\" build\n#xcodebuild -target \"UXFeedbackSDK\" ONLY_ACTIVE_ARCH=NO -configuration \"$CONFIGURATION\" -sdk \"iphoneos\" build\n";
 		};
 		0A4689FF22856A3B0074E1A3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -509,7 +487,11 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftProtobuf.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Reachability.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/HEXColor.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Nuke.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -517,83 +499,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#/usr/local/bin/carthage copy-frameworks\n";
-		};
-		16025EB046113FD9F1B78802 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-UXFeedbackSDK-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		36B0D8566051B73582AC48BA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-UX Feedback Demo-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		68EE678419EB5F115CE2960A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/UIColor_Hex_Swift/UIColor_Hex_Swift.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireNetworkActivityLogger.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIColor_Hex_Swift.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UX Feedback Demo/Pods-UX Feedback Demo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -626,7 +532,6 @@
 				0A4689B622840BE00074E1A3 /* UIControl+blocks.swift in Sources */,
 				0A4689B822840BE00074E1A3 /* UIVIewAddition.swift in Sources */,
 				0A4689A622840BB90074E1A3 /* UXFStatisticManager.swift in Sources */,
-				0A4689A222840BB90074E1A3 /* UXFCampaignFormCreator.swift in Sources */,
 				0A4689AA22840BBF0074E1A3 /* UXFPage.swift in Sources */,
 				0A4689AF22840BBF0074E1A3 /* UXFCheckbox.swift in Sources */,
 				0A4689A422840BB90074E1A3 /* UXFURLComponents.swift in Sources */,
@@ -790,15 +695,14 @@
 		};
 		0A019A4F22365E04002FD4F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 896225BC300184D4C219D00B /* Pods-UX Feedback Demo.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5K42YC37US;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "UX Feedback Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -815,15 +719,14 @@
 		};
 		0A019A5022365E04002FD4F8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A2247D83BE4B2975B651B8E /* Pods-UX Feedback Demo.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5K42YC37US;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "UX Feedback Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -840,7 +743,6 @@
 		};
 		0A46899C22840B2C0074E1A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1EEAEFFA3C358C6791078FBC /* Pods-UXFeedbackSDK.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -850,6 +752,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = UXFeedbackSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -869,7 +775,6 @@
 		};
 		0A46899D22840B2C0074E1A3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C0A4DBD5F3D2AE2FF02D7C08 /* Pods-UXFeedbackSDK.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -879,6 +784,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = UXFeedbackSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CocoaLumberjack
+import CocoaLumberjackSwift
 import UXFeedbackSDK
 
 class MainViewController: UIViewController {

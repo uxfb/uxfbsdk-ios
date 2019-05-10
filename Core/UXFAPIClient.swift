@@ -48,7 +48,7 @@ class UXFAPIClient{
         //self.getAllCampaings(completion: nil)
     }
     
-    func getAllCampaings(completion: ((_ success: Bool, _ message: String?, _ theme: UXFTheme?, _ campaign: UXFCampaign?)->())?){
+    func getAllCampaings(completion: ((_ success: Bool, _ message: String?, _ campaign: UXFCampaign?)->())?){
     
      DDLogDebug("Get all campaings:")
      
@@ -56,9 +56,8 @@ class UXFAPIClient{
       {(status, message, result) in
         
         if status == .success {
-            let theme: UXFTheme? = nil
+            
             var campaign: UXFCampaign?
-
             if let campaignsResults = result as? Array<Dictionary<String, Any>>{
                 for compaignInfo in campaignsResults{
                    campaign =  UXFParser.sharedInstance.parseCampaing(compaignInfo: compaignInfo)
@@ -70,16 +69,16 @@ class UXFAPIClient{
                 }
                 
                 DDLogDebug("Get all campaings successful")
-                completion?(true, nil, theme, campaign)
+                completion?(true, nil, campaign)
             }
             else{
                 DDLogDebug("No campaings detected")
-                completion?(false, "No campaings detected", nil, nil)
+                completion?(false, "No campaings detected", nil)
             }
         }
         else{
            DDLogDebug("Get all campaings failed")
-           completion?(false, message, nil, nil)
+           completion?(false, message, nil)
         }
       }
         

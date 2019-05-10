@@ -4,13 +4,29 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Info-tvOS.plist</key>
+		<data>
+		FXNeXW1F6p/dvGAQwIBEWxMIrqI=
+		</data>
 		<key>Info.plist</key>
 		<data>
-		z5eyt+68gvUQf0RMAHP0oa6Lto4=
+		rma1ng9Dz1dumI3a0125teCIOv4=
 		</data>
 	</dict>
 	<key>files2</key>
-	<dict/>
+	<dict>
+		<key>Info-tvOS.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			FXNeXW1F6p/dvGAQwIBEWxMIrqI=
+			</data>
+			<key>hash2</key>
+			<data>
+			107+ci3/53fa3CvfQB55jfQMh0nGvr59FcrU7yXIsCI=
+			</data>
+		</dict>
+	</dict>
 	<key>rules</key>
 	<dict>
 		<key>^.*</key>

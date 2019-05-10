@@ -37,7 +37,7 @@ open class UXFeedback{
     private  weak var _activeEventController: UIViewController?
     private  weak var _appWindow: UIWindow!
     private  var _apiClient: UXFAPIClient!
-    private  var _theme: UXFTheme?
+    private  var _theme: UXFTheme!
     private  var _campaign: UXFCampaign?
     private  var _eventToSend: String?
     private  var _formPresentor: UXFCampaignFormPresentor?
@@ -48,8 +48,9 @@ open class UXFeedback{
                           completion: ((_ success: Bool) -> Void)? = nil){
         
         _apiClient = UXFAPIClient.init(appID: appID)
-        _apiClient.getAllCampaings { [weak self] (success, message, aTheme, aCampaign) in
-            self?._theme = aTheme
+        _apiClient.getAllCampaings { [weak self] (success, message, aCampaign) in
+            
+            self?._theme = UXFTheme.init(colorsDict: [:], smilesDict: [:])
             self?._campaign = aCampaign
             self?._appWindow = applicationWindow
         

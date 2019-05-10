@@ -1,0 +1,5 @@
+github "kean/Nuke"
+github "ashleymills/Reachability.swift"
+github "konkab/AlamofireNetworkActivityLogger" ~> 2.4
+github "yeahdongcn/UIColor-Hex-Swift" ~> 4.2.0
+github "CocoaLumberjack/CocoaLumberjack"

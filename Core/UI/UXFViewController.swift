@@ -66,8 +66,6 @@ open class UXFViewController: UIViewController{
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-       // createContentView()
-        
         #if DEBUG
         #else
         self.backButton?.isHidden = true
@@ -96,15 +94,6 @@ open class UXFViewController: UIViewController{
         
         didLoadHandler?(self.formIndex)
         self.state = .presented
-    }
-    
-    private func createContentView(){
-        contentView = UIView.init()
-        
-        self.view.addSubview(contentView)
-        
-        progressLabel = UILabel.init()
-        self.contentView.addSubview(progressLabel!)
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
