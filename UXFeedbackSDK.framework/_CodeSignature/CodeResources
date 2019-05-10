@@ -6,7 +6,7 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		eAD0XwskPRs+SQI0pp0p/aziUy4=
+		HYkPoP22Ki5GwbqUTdZotAt4FXg=
 		</data>
 		<key>Frameworks/Alamofire.framework/Alamofire</key>
 		<data>
@@ -90,7 +90,7 @@
 		</data>
 		<key>Modules/UXFeedbackSDK.swiftmodule/i386.swiftmodule</key>
 		<data>
-		oMDOSohVX/bIbYCtID9Onfzk6xA=
+		+khcZD8RcXkLjhQmk3mQQdYSwMQ=
 		</data>
 		<key>Modules/UXFeedbackSDK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -98,7 +98,7 @@
 		</data>
 		<key>Modules/UXFeedbackSDK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		YyX0LjBf3FiCuXz0xxh0w+XQHE0=
+		OqlN7tQooCcszlrHPlzkwfcpA0c=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -106,11 +106,11 @@
 		</data>
 		<key>UXFViewController.nib/objects-11.0+.nib</key>
 		<data>
-		K+bptjdF4aXLSMKkQ9Yv59w/UXI=
+		zEVAixr0kYFqdsPrBWlvDhOXpsg=
 		</data>
 		<key>UXFViewController.nib/runtime.nib</key>
 		<data>
-		guYGkYWCAe+VXHeXmJ38XRiqz+w=
+		ZvRl7Oux2+FIopPk6kxUkyjM180=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -119,11 +119,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			eAD0XwskPRs+SQI0pp0p/aziUy4=
+			HYkPoP22Ki5GwbqUTdZotAt4FXg=
 			</data>
 			<key>hash2</key>
 			<data>
-			0SNzt5S/++y3qNnq2Bv1SIgRiwRrAEyJRec/YfQdFlw=
+			yYRIlRufcUBTG+tYT8QnlliGxXDue8hcS1k1EyDN0nY=
 			</data>
 		</dict>
 		<key>Frameworks/Alamofire.framework/Alamofire</key>
@@ -339,11 +339,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			oMDOSohVX/bIbYCtID9Onfzk6xA=
+			+khcZD8RcXkLjhQmk3mQQdYSwMQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			GKtficGdo2lhBMkNx2QwgFGtUSlz6UgbetSR3Q/tSWs=
+			sni94/goF5w0LwUqcwKKb62Hqha6Cu5st7Mim//+l64=
 			</data>
 		</dict>
 		<key>Modules/UXFeedbackSDK.swiftmodule/x86_64.swiftdoc</key>
@@ -361,11 +361,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			YyX0LjBf3FiCuXz0xxh0w+XQHE0=
+			OqlN7tQooCcszlrHPlzkwfcpA0c=
 			</data>
 			<key>hash2</key>
 			<data>
-			y4kZ6JPxq+OY7cMJ4lAeEimlrVgBn7YC85FdDQZP/Ms=
+			tdJ0RIDz8KFKukOEVlJ3Mj/qOa81ca2xGNPtYgVCEkk=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -383,22 +383,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			K+bptjdF4aXLSMKkQ9Yv59w/UXI=
+			zEVAixr0kYFqdsPrBWlvDhOXpsg=
 			</data>
 			<key>hash2</key>
 			<data>
-			RZhxSnQtCkw+aFrtKU/2BWtKw/NiQM0uzpIDbUl7KxU=
+			yzNDCjLUkj/8YsATM1UCNCGXHgXIS33K+BgEq7ASPb0=
 			</data>
 		</dict>
 		<key>UXFViewController.nib/runtime.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			guYGkYWCAe+VXHeXmJ38XRiqz+w=
+			ZvRl7Oux2+FIopPk6kxUkyjM180=
 			</data>
 			<key>hash2</key>
 			<data>
-			+DNdPZFwTohgnJW7oINJNPPT2ifN86nmt/pCagNrHoI=
+			FamowCdlTrKqxk/S4B4YHrx1iCV09m0MubO0JeOji08=
 			</data>
 		</dict>
 	</dict>

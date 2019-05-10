@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0A019A3B22365E02002FD4F8"
-               BuildableName = "UX Feedback Demo.app"
-               BlueprintName = "UX Feedback Demo"
-               ReferencedContainer = "container:UX Feedback Demo.xcodeproj">
+               BuildableName = "UX Feedback SDK Demo.app"
+               BlueprintName = "UX Feedback SDK Demo"
+               ReferencedContainer = "container:UX Feedback SDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0A019A3B22365E02002FD4F8"
-            BuildableName = "UX Feedback Demo.app"
-            BlueprintName = "UX Feedback Demo"
-            ReferencedContainer = "container:UX Feedback Demo.xcodeproj">
+            BuildableName = "UX Feedback SDK Demo.app"
+            BlueprintName = "UX Feedback SDK Demo"
+            ReferencedContainer = "container:UX Feedback SDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0A019A3B22365E02002FD4F8"
-            BuildableName = "UX Feedback Demo.app"
-            BlueprintName = "UX Feedback Demo"
-            ReferencedContainer = "container:UX Feedback Demo.xcodeproj">
+            BuildableName = "UX Feedback SDK Demo.app"
+            BlueprintName = "UX Feedback SDK Demo"
+            ReferencedContainer = "container:UX Feedback SDK.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0A019A3B22365E02002FD4F8"
-            BuildableName = "UX Feedback Demo.app"
-            BlueprintName = "UX Feedback Demo"
-            ReferencedContainer = "container:UX Feedback Demo.xcodeproj">
+            BuildableName = "UX Feedback SDK Demo.app"
+            BlueprintName = "UX Feedback SDK Demo"
+            ReferencedContainer = "container:UX Feedback SDK.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

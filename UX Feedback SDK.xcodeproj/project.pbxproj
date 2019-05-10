@@ -85,7 +85,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0A019A3C22365E02002FD4F8 /* UX Feedback Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UX Feedback Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A019A3C22365E02002FD4F8 /* UX Feedback SDK Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UX Feedback SDK Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A019A3F22365E03002FD4F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A019A4122365E03002FD4F8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0A019A4422365E03002FD4F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -178,7 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				0A019A52223669CC002FD4F8 /* Core */,
-				0A019A3E22365E02002FD4F8 /* UX Feedback Demo */,
+				0A019A3E22365E02002FD4F8 /* UX Feedback SDK Demo */,
 				0A46899322840B2C0074E1A3 /* UXFeedbackSDK */,
 				0A019A3D22365E02002FD4F8 /* Products */,
 				3EE1448B815C3AA05E865A6C /* Frameworks */,
@@ -188,13 +188,13 @@
 		0A019A3D22365E02002FD4F8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0A019A3C22365E02002FD4F8 /* UX Feedback Demo.app */,
+				0A019A3C22365E02002FD4F8 /* UX Feedback SDK Demo.app */,
 				0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0A019A3E22365E02002FD4F8 /* UX Feedback Demo */ = {
+		0A019A3E22365E02002FD4F8 /* UX Feedback SDK Demo */ = {
 			isa = PBXGroup;
 			children = (
 				0A019A3F22365E03002FD4F8 /* AppDelegate.swift */,
@@ -207,7 +207,7 @@
 				0A019A4822365E04002FD4F8 /* LaunchScreen.storyboard */,
 				0A019A4B22365E04002FD4F8 /* Info.plist */,
 			);
-			path = "UX Feedback Demo";
+			path = "UX Feedback SDK Demo";
 			sourceTree = "<group>";
 		};
 		0A019A52223669CC002FD4F8 /* Core */ = {
@@ -342,9 +342,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0A019A3B22365E02002FD4F8 /* UX Feedback Demo */ = {
+		0A019A3B22365E02002FD4F8 /* UX Feedback SDK Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0A019A4E22365E04002FD4F8 /* Build configuration list for PBXNativeTarget "UX Feedback Demo" */;
+			buildConfigurationList = 0A019A4E22365E04002FD4F8 /* Build configuration list for PBXNativeTarget "UX Feedback SDK Demo" */;
 			buildPhases = (
 				0A4689F6228564FD0074E1A3 /* ShellScript */,
 				0A019A3822365E02002FD4F8 /* Sources */,
@@ -356,9 +356,9 @@
 			);
 			dependencies = (
 			);
-			name = "UX Feedback Demo";
+			name = "UX Feedback SDK Demo";
 			productName = "UX Feedback Demo";
-			productReference = 0A019A3C22365E02002FD4F8 /* UX Feedback Demo.app */;
+			productReference = 0A019A3C22365E02002FD4F8 /* UX Feedback SDK Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0A46899122840B2C0074E1A3 /* UXFeedbackSDK */ = {
@@ -400,7 +400,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0A019A3722365E02002FD4F8 /* Build configuration list for PBXProject "UX Feedback Demo" */;
+			buildConfigurationList = 0A019A3722365E02002FD4F8 /* Build configuration list for PBXProject "UX Feedback SDK" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -413,7 +413,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0A019A3B22365E02002FD4F8 /* UX Feedback Demo */,
+				0A019A3B22365E02002FD4F8 /* UX Feedback SDK Demo */,
 				0A46899122840B2C0074E1A3 /* UXFeedbackSDK */,
 			);
 		};
@@ -704,7 +704,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "UX Feedback Demo/Info.plist";
+				INFOPLIST_FILE = "UX Feedback SDK Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -728,7 +728,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "UX Feedback Demo/Info.plist";
+				INFOPLIST_FILE = "UX Feedback SDK Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -808,7 +808,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0A019A3722365E02002FD4F8 /* Build configuration list for PBXProject "UX Feedback Demo" */ = {
+		0A019A3722365E02002FD4F8 /* Build configuration list for PBXProject "UX Feedback SDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A019A4C22365E04002FD4F8 /* Debug */,
@@ -817,7 +817,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0A019A4E22365E04002FD4F8 /* Build configuration list for PBXNativeTarget "UX Feedback Demo" */ = {
+		0A019A4E22365E04002FD4F8 /* Build configuration list for PBXNativeTarget "UX Feedback SDK Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A019A4F22365E04002FD4F8 /* Debug */,
