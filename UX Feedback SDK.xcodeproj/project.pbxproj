@@ -15,6 +15,10 @@
 		0A019A6B22367F0C002FD4F8 /* UIAlertController+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6A22367F0C002FD4F8 /* UIAlertController+Show.swift */; };
 		0A0CDEA8224F4B6B00E1C092 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEA7224F4B6B00E1C092 /* SecondViewController.swift */; };
 		0A0CDEAA224F4B7A00E1C092 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEA9224F4B7A00E1C092 /* AboutViewController.swift */; };
+		0A224E7E2285AB820049007E /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; };
+		0A224E7F2285AB820049007E /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A224E822285AB890049007E /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; };
+		0A224E832285AB890049007E /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A46898C2283E73C0074E1A3 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A46898B2283E73C0074E1A3 /* AboutViewController.xib */; };
 		0A46899622840B2C0074E1A3 /* UXFeedbackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0A46899F22840BB90074E1A3 /* UXFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A5322366A29002FD4F8 /* UXFeedback.swift */; };
@@ -55,11 +59,19 @@
 		0A468A1722857B9D0074E1A3 /* HEXColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1622857B9D0074E1A3 /* HEXColor.framework */; };
 		0A468A1922857BA00074E1A3 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1822857BA00074E1A3 /* Nuke.framework */; };
 		0A468A1B22857BA30074E1A3 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1A22857BA20074E1A3 /* Reachability.framework */; };
-		0A468A2222857DDC0074E1A3 /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1F22857CC20074E1A3 /* UXFeedbackSDK.framework */; };
-		0A468A2322857DDC0074E1A3 /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1F22857CC20074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A468A2B228582850074E1A3 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A29228582850074E1A3 /* CocoaLumberjack.framework */; };
 		0A468A2C228582850074E1A3 /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A2A228582850074E1A3 /* CocoaLumberjackSwift.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0A224E802285AB820049007E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A019A3422365E02002FD4F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0A46899122840B2C0074E1A3;
+			remoteInfo = UXFeedbackSDK;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		0A468A0022856BEA0074E1A3 /* CopyFiles */ = {
@@ -77,7 +89,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0A468A2322857DDC0074E1A3 /* UXFeedbackSDK.framework in Embed Frameworks */,
+				0A224E7F2285AB820049007E /* UXFeedbackSDK.framework in Embed Frameworks */,
+				0A224E832285AB890049007E /* UXFeedbackSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -128,7 +141,6 @@
 		0A468A1622857B9D0074E1A3 /* HEXColor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HEXColor.framework; path = Carthage/Build/iOS/HEXColor.framework; sourceTree = "<group>"; };
 		0A468A1822857BA00074E1A3 /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = Carthage/Build/iOS/Nuke.framework; sourceTree = "<group>"; };
 		0A468A1A22857BA20074E1A3 /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
-		0A468A1F22857CC20074E1A3 /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UXFeedbackSDK.framework; sourceTree = "<group>"; };
 		0A468A29228582850074E1A3 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		0A468A2A228582850074E1A3 /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/iOS/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
 		0A6CDB75223B960500C17007 /* UXFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFButton.swift; sourceTree = "<group>"; };
@@ -152,9 +164,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A468A2222857DDC0074E1A3 /* UXFeedbackSDK.framework in Frameworks */,
 				0A468A2B228582850074E1A3 /* CocoaLumberjack.framework in Frameworks */,
 				0A468A2C228582850074E1A3 /* CocoaLumberjackSwift.framework in Frameworks */,
+				0A224E7E2285AB820049007E /* UXFeedbackSDK.framework in Frameworks */,
+				0A224E822285AB890049007E /* UXFeedbackSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,7 +330,6 @@
 			children = (
 				0A468A29228582850074E1A3 /* CocoaLumberjack.framework */,
 				0A468A2A228582850074E1A3 /* CocoaLumberjackSwift.framework */,
-				0A468A1F22857CC20074E1A3 /* UXFeedbackSDK.framework */,
 				0A468A1A22857BA20074E1A3 /* Reachability.framework */,
 				0A468A1822857BA00074E1A3 /* Nuke.framework */,
 				0A468A1622857B9D0074E1A3 /* HEXColor.framework */,
@@ -355,6 +367,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0A224E812285AB820049007E /* PBXTargetDependency */,
 			);
 			name = "UX Feedback SDK Demo";
 			productName = "UX Feedback Demo";
@@ -458,7 +471,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\ncp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n#open \"${PROJECT_DIR}\"\n";
+			shellScript = "#BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\n#cp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
 		};
 		0A4689F6228564FD0074E1A3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -477,7 +490,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\nxcodebuild -target \"UXFeedbackSDK\" ONLY_ACTIVE_ARCH=NO -configuration \"$CONFIGURATION\" -sdk \"iphonesimulator\" build\n#xcodebuild -target \"UXFeedbackSDK\" ONLY_ACTIVE_ARCH=NO -configuration \"$CONFIGURATION\" -sdk \"iphoneos\" build\n";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n#xcodebuild -target \"UXFeedbackSDK\" ONLY_ACTIVE_ARCH=NO -configuration \"$CONFIGURATION\" -sdk \"iphonesimulator\" build\n#xcodebuild -target \"UXFeedbackSDK\" ONLY_ACTIVE_ARCH=NO -configuration \"$CONFIGURATION\" -sdk \"iphoneos\" build\n";
 		};
 		0A4689FF22856A3B0074E1A3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -554,6 +567,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0A224E812285AB820049007E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0A46899122840B2C0074E1A3 /* UXFeedbackSDK */;
+			targetProxy = 0A224E802285AB820049007E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0A019A4322365E03002FD4F8 /* Main.storyboard */ = {
@@ -696,6 +717,7 @@
 		0A019A4F22365E04002FD4F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5K42YC37US;
@@ -720,6 +742,7 @@
 		0A019A5022365E04002FD4F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5K42YC37US;
