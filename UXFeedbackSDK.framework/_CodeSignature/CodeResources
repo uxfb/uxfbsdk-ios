@@ -32,18 +32,6 @@
 		<data>
 		P2vX5cSk5uwvCs/buOctrNImNGI=
 		</data>
-		<key>Frameworks/CodableAlamofire.framework/CodableAlamofire</key>
-		<data>
-		hwlsvucNYO1O43yyuWX/y+is1wI=
-		</data>
-		<key>Frameworks/CodableAlamofire.framework/Info.plist</key>
-		<data>
-		jF/DCKSn5fTcJqIDu8uzQUC56i4=
-		</data>
-		<key>Frameworks/CodableAlamofire.framework/_CodeSignature/CodeResources</key>
-		<data>
-		4IAmskphqQJS9uZ1+9NVcO0A/hA=
-		</data>
 		<key>Frameworks/Nuke.framework/Info.plist</key>
 		<data>
 		DfeoyFaHf9qBANXg8W0MpELlt4E=
@@ -190,39 +178,6 @@
 			<key>hash2</key>
 			<data>
 			6mrhLgjE4eng6BEOmIQYDpHsWMH2m0jr5XDxp/DcaEs=
-			</data>
-		</dict>
-		<key>Frameworks/CodableAlamofire.framework/CodableAlamofire</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			hwlsvucNYO1O43yyuWX/y+is1wI=
-			</data>
-			<key>hash2</key>
-			<data>
-			83Gpt53y9EGgJlajXBsnGqcp4mtKQ5xkuHJswjWb114=
-			</data>
-		</dict>
-		<key>Frameworks/CodableAlamofire.framework/Info.plist</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			jF/DCKSn5fTcJqIDu8uzQUC56i4=
-			</data>
-			<key>hash2</key>
-			<data>
-			FkDokMuPGtoXXMK9nybmwZljeACWssxdCe0LFDt2iI4=
-			</data>
-		</dict>
-		<key>Frameworks/CodableAlamofire.framework/_CodeSignature/CodeResources</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			4IAmskphqQJS9uZ1+9NVcO0A/hA=
-			</data>
-			<key>hash2</key>
-			<data>
-			/nHWCALvgxMZaVQoU2rr4iMBd094seQ6GOoGol8sS0o=
 			</data>
 		</dict>
 		<key>Frameworks/Nuke.framework/Info.plist</key>
