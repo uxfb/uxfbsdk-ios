@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CocoaLumberjack
 
 enum UXFViewPopupDirection{
     case rightToLeft
@@ -58,7 +57,8 @@ open class UXFViewController: UIViewController{
     
     
     convenience init(index: Int = 0, formID: String) {
-        self.init()
+        let bundle = Bundle(for: UXFeedback.self)
+        self.init(nibName: "UXFViewController", bundle: bundle)
         self.formIndex = index
         self.formID = formID
     }
@@ -151,6 +151,8 @@ open class UXFViewController: UIViewController{
 
     deinit {
         NotificationCenter.default.removeObserver(self)
-        DDLogDebug("deinit " + String(describing: self))
+        #if DEBUG
+        print("deinit " + String(describing: self))
+        #endif
     }
 }

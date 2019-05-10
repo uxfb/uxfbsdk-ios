@@ -580,10 +580,11 @@ class UXFParser{
             }
         }
     }
-
     
      func getSmile(imageName: String, completion: (_ smileImage: UIImage)->()) ->(UIImage?){
-        return UIImage.init(named: imageName)
+        let bundle = Bundle(for: UXFeedback.self)
+        let image = UIImage.init(named: imageName, in: bundle, compatibleWith: nil)
+        return image
     }
     
      func smileImageName(by index: Int) -> (String){

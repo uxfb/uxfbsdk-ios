@@ -18,8 +18,6 @@
 		0A160DD92268D62700A586C4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A160DD82268D62700A586C4 /* CoreTelephony.framework */; };
 		0A46898C2283E73C0074E1A3 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A46898B2283E73C0074E1A3 /* AboutViewController.xib */; };
 		0A46899622840B2C0074E1A3 /* UXFeedbackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0A46899922840B2C0074E1A3 /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; };
-		0A46899A22840B2C0074E1A3 /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A46899F22840BB90074E1A3 /* UXFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A5322366A29002FD4F8 /* UXFeedback.swift */; };
 		0A4689A022840BB90074E1A3 /* UXFeedbackDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */; };
 		0A4689A122840BB90074E1A3 /* UXFCampaignFormPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEAD2250664C00E1C092 /* UXFCampaignFormPresentor.swift */; };
@@ -54,7 +52,8 @@
 		0A4689C422840FC80074E1A3 /* UXFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2754A8226628BC000E2E17 /* UXFViewController.xib */; };
 		0A4689C522840FD00074E1A3 /* UXFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB72250965100E1C092 /* UXFTextField.swift */; };
 		0A4689C62284101E0074E1A3 /* UIAlertController+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6A22367F0C002FD4F8 /* UIAlertController+Show.swift */; };
-		0A4689C72284183D0074E1A3 /* UXFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2754A8226628BC000E2E17 /* UXFViewController.xib */; };
+		0A4689EB2285510F0074E1A3 /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4689EA2285510F0074E1A3 /* UXFeedbackSDK.framework */; };
+		0A4689EC2285510F0074E1A3 /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4689EA2285510F0074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A6CDB69223A499700C17007 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */; };
 		0A6CDB6B223A499900C17007 /* CodableAlamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */; };
 		0A6CDB6D223A499D00C17007 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6CDB6C223A499D00C17007 /* Alamofire.framework */; };
@@ -62,24 +61,14 @@
 		616DAC92778804215FB66C3E /* Pods_UX_Feedback_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACC0CD566ACA567E90BB694 /* Pods_UX_Feedback_Demo.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		0A46899722840B2C0074E1A3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0A019A3422365E02002FD4F8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0A46899122840B2C0074E1A3;
-			remoteInfo = UXFeedbackSDK;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
-		0A46899E22840B2C0074E1A3 /* Embed Frameworks */ = {
+		0A4689ED2285510F0074E1A3 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0A46899A22840B2C0074E1A3 /* UXFeedbackSDK.framework in Embed Frameworks */,
+				0A4689EC2285510F0074E1A3 /* UXFeedbackSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,6 +116,7 @@
 		0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UXFeedbackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UXFeedbackSDK.h; sourceTree = "<group>"; };
 		0A46899522840B2C0074E1A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A4689EA2285510F0074E1A3 /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UXFeedbackSDK.framework; sourceTree = "<group>"; };
 		0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6CDB6A223A499900C17007 /* CodableAlamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodableAlamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6CDB6C223A499D00C17007 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,7 +151,7 @@
 				0A6CDB6D223A499D00C17007 /* Alamofire.framework in Frameworks */,
 				0A6CDB6B223A499900C17007 /* CodableAlamofire.framework in Frameworks */,
 				616DAC92778804215FB66C3E /* Pods_UX_Feedback_Demo.framework in Frameworks */,
-				0A46899922840B2C0074E1A3 /* UXFeedbackSDK.framework in Frameworks */,
+				0A4689EB2285510F0074E1A3 /* UXFeedbackSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +302,7 @@
 		3EE1448B815C3AA05E865A6C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A4689EA2285510F0074E1A3 /* UXFeedbackSDK.framework */,
 				0A160DD82268D62700A586C4 /* CoreTelephony.framework */,
 				0A6CDB6C223A499D00C17007 /* Alamofire.framework */,
 				0A6CDB68223A499700C17007 /* CocoaLumberjack.framework */,
@@ -351,17 +342,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A019A4E22365E04002FD4F8 /* Build configuration list for PBXNativeTarget "UX Feedback Demo" */;
 			buildPhases = (
+				0A4689F6228564FD0074E1A3 /* ShellScript */,
 				36B0D8566051B73582AC48BA /* [CP] Check Pods Manifest.lock */,
 				0A019A3822365E02002FD4F8 /* Sources */,
 				0A019A3922365E02002FD4F8 /* Frameworks */,
 				0A019A3A22365E02002FD4F8 /* Resources */,
 				68EE678419EB5F115CE2960A /* [CP] Embed Pods Frameworks */,
-				0A46899E22840B2C0074E1A3 /* Embed Frameworks */,
+				0A4689ED2285510F0074E1A3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0A46899822840B2C0074E1A3 /* PBXTargetDependency */,
 			);
 			name = "UX Feedback Demo";
 			productName = "UX Feedback Demo";
@@ -377,6 +368,7 @@
 				0A46898E22840B2C0074E1A3 /* Sources */,
 				0A46898F22840B2C0074E1A3 /* Frameworks */,
 				0A46899022840B2C0074E1A3 /* Resources */,
+				0A4689E922854B9F0074E1A3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -429,7 +421,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A4689C72284183D0074E1A3 /* UXFViewController.xib in Resources */,
 				0A019A4A22365E04002FD4F8 /* LaunchScreen.storyboard in Resources */,
 				0A46898C2283E73C0074E1A3 /* AboutViewController.xib in Resources */,
 				0A019A4722365E04002FD4F8 /* Assets.xcassets in Resources */,
@@ -449,6 +440,40 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0A4689E922854B9F0074E1A3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\ncp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n#open \"${PROJECT_DIR}\"\n";
+		};
+		0A4689F6228564FD0074E1A3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#xcodebuild -target \"UXFeedbackSDK\" ONLY_ACTIVE_ARCH=NO -configuration \"$CONFIGURATION\" -sdk \"iphonesimulator\" build\n#xcodebuild -target \"UXFeedbackSDK\" ONLY_ACTIVE_ARCH=NO -configuration \"$CONFIGURATION\" -sdk \"iphoneos\" build\n";
+		};
 		16025EB046113FD9F1B78802 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -581,14 +606,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		0A46899822840B2C0074E1A3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0A46899122840B2C0074E1A3 /* UXFeedbackSDK */;
-			targetProxy = 0A46899722840B2C0074E1A3 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0A019A4322365E03002FD4F8 /* Main.storyboard */ = {
@@ -732,11 +749,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 896225BC300184D4C219D00B /* Pods-UX Feedback Demo.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5K42YC37US;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "UX Feedback Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -754,11 +774,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0A2247D83BE4B2975B651B8E /* Pods-UX Feedback Demo.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5K42YC37US;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "UX Feedback Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
