@@ -28,13 +28,15 @@ let uxfTokenErrorMessage: String = "Invalid token".localized()
 class UXFAPIClient{
     
     private(set) var appID: String!
+    private var _parser: UXFParser!
     
-    init(appID: String){
+    init(appID: String, parser: UXFParser){
         #if DEBUG
         NetworkActivityLogger.shared.level = .debug
         NetworkActivityLogger.shared.startLogging()
         #endif
         
+        _parser = parser
         self.appID = appID
   
         NotificationCenter.default.addObserver(self,selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
@@ -53,14 +55,15 @@ class UXFAPIClient{
      DDLogDebug("Get all campaings:")
      
      _ = self.performRequest(route: UXFAPIWebRouter.getCampaing(appID: self.appID))
-      {(status, message, result) in
+      {[weak self] (status, message, result) in
         
         if status == .success {
             
             var campaign: UXFCampaign?
             if let campaignsResults = result as? Array<Dictionary<String, Any>>{
+ 
                 for compaignInfo in campaignsResults{
-                   campaign =  UXFParser.sharedInstance.parseCampaing(compaignInfo: compaignInfo)
+                   campaign =  self?._parser.parseCampaing(compaignInfo: compaignInfo)
                     
                    /* let themeInfo = dict["theme"] as! Dictionary<String, Any>
                     theme = UXFTheme.init(colorsDict: themeInfo["colors"] as! Dictionary<String, String>,

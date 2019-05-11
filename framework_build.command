@@ -49,9 +49,9 @@ FRAMEWORKS=(
 #"CoreTelephony"
 )
 
-for FRAMEWORK in "${FRAMEWORKS[@]}"; do
-lipo -create -output "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework/Frameworks/${FRAMEWORK}.framework/${FRAMEWORK}" "${BUILD_PRODUCTS}/${CONFIGURATION}-iphonesimulator/${IOS_TARGET_NAME}.framework/Frameworks/${FRAMEWORK}.framework/${FRAMEWORK}" "${BUILD_PRODUCTS}/${CONFIGURATION}-iphoneos/${IOS_TARGET_NAME}.framework/Frameworks/${FRAMEWORK}.framework/${FRAMEWORK}"
-done
+#for FRAMEWORK in "${FRAMEWORKS[@]}"; do
+#lipo -create -output "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework/Frameworks/${FRAMEWORK}.framework/${FRAMEWORK}" "${BUILD_PRODUCTS}/${CONFIGURATION}-iphonesimulator/${IOS_TARGET_NAME}.framework/Frameworks/${FRAMEWORK}.framework/${FRAMEWORK}" "${BUILD_PRODUCTS}/${CONFIGURATION}-iphoneos/${IOS_TARGET_NAME}.framework/Frameworks/${FRAMEWORK}.framework/${FRAMEWORK}"
+#done
 
 # Step 5. Convenience step to copy the framework to the project's directory
 cp -R "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework" "${PROJECT_DIR}"

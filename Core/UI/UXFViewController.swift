@@ -77,10 +77,13 @@ open class UXFViewController: UIViewController{
             self.logoImageView?.isHidden  = true
         }
         
+        self.progressLabel?.textColor = theme?.titleColor
         self.progressLabel?.text = self.progressString
-        contentView?.layer.cornerRadius = 8.0
+        contentView?.layer.cornerRadius = theme?.formCornerRadius ?? 8.0
         contentView?.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.24).cgColor
         contentView?.layer.shadowOffset = CGSize(width: 0, height: 2)
+        contentView?.layer.masksToBounds = false
+        contentView?.clipsToBounds = false
         contentView?.layer.shadowRadius = 6
         
         NotificationCenter.default.addObserver(self,

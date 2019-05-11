@@ -9,18 +9,22 @@
 import Foundation
 import HEXColor
 
-class UXFTheme : NSObject {
+open class UXFTheme{
     
-    private(set) var titleColor: UIColor = UIColor.black
-    private(set) var textColor: UIColor = UIColor.black
-    private(set) var accendentTextColor: UIColor!
-    private(set) var accentColor: UIColor!
-    private(set) var backgroundColor: UIColor = UIColor.groupTableViewBackground
-    private(set) var errorColor: UIColor = UIColor.init("#E92436")
-    private(set) var cardColor: UIColor!
-    private(set) var smiles: Array<String> = []
+    open var titleColor: UIColor = UIColor.black
+    open var textColor: UIColor = UIColor.black
+    open var accendentTextColor: UIColor = UIColor.green
+    open var accentColor: UIColor  = UIColor.green
+    open var backgroundColor: UIColor = UIColor.white
+    open var errorColor: UIColor = UIColor.init("#E92436")
+    open var cardColor: UIColor = UIColor.yellow
+    open var formCornerRadius: CGFloat = 8.0
     
-    init(colorsDict: Dictionary<String, String>,
+    public init(){
+       
+    }
+    
+    public init(colorsDict: Dictionary<String, String>,
          smilesDict: Dictionary<String, String>) {
  
         if let titleColorString = colorsDict["title"]{
@@ -29,21 +33,36 @@ class UXFTheme : NSObject {
         if let textColorString = colorsDict["text"] {
            textColor = UIColor(textColorString)
         }
-        accendentTextColor = UIColor(colorsDict["accentedText"] ?? "")
-        accentColor = UIColor(colorsDict["accent"] ?? "")
+        if let accendentColorString = colorsDict["accentedText"] {
+          accendentTextColor = UIColor(accendentColorString)
+        }
+        if let accentColorString = colorsDict["accent"] {
+          accentColor = UIColor(accentColorString)
+        }
         if let backgroundColorString = colorsDict["background"] {
             backgroundColor = UIColor(backgroundColorString)
         }
         if let errorColorString = colorsDict["error"] {
            errorColor = UIColor(errorColorString)
         }
-        cardColor = UIColor(colorsDict["card"] ?? "")
-    
-        for key in smilesDict.keys.sorted(){
-            if let value = smilesDict[key]{
-              smiles.append(value)
-            }
+        if let cardColorString = colorsDict["card"] {
+           cardColor = UIColor(cardColorString)
         }
-       // smiles = smilesDict.values.sorted()
+    }
+    
+    open func getSmile(imageName: String, completion: (_ smileImage: UIImage)->()) ->(UIImage?){
+        let bundle = Bundle(for: UXFeedback.self)
+        let image = UIImage.init(named: imageName, in: bundle, compatibleWith: nil)
+        return image
+    }
+    
+    open func smileImageName(by index: Int) -> (String){
+        let names = ["angry", "mad", "confused", "happy", "in-love"]
+        if index < names.count {
+            return names[index]
+        }
+        else{
+            return ""
+        }
     }
 }

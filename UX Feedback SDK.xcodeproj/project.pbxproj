@@ -15,10 +15,6 @@
 		0A019A6B22367F0C002FD4F8 /* UIAlertController+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6A22367F0C002FD4F8 /* UIAlertController+Show.swift */; };
 		0A0CDEA8224F4B6B00E1C092 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEA7224F4B6B00E1C092 /* SecondViewController.swift */; };
 		0A0CDEAA224F4B7A00E1C092 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEA9224F4B7A00E1C092 /* AboutViewController.swift */; };
-		0A224E7E2285AB820049007E /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; };
-		0A224E7F2285AB820049007E /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A224E822285AB890049007E /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; };
-		0A224E832285AB890049007E /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A46898C2283E73C0074E1A3 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A46898B2283E73C0074E1A3 /* AboutViewController.xib */; };
 		0A46899622840B2C0074E1A3 /* UXFeedbackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0A46899F22840BB90074E1A3 /* UXFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A5322366A29002FD4F8 /* UXFeedback.swift */; };
@@ -61,10 +57,12 @@
 		0A468A1B22857BA30074E1A3 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1A22857BA20074E1A3 /* Reachability.framework */; };
 		0A468A2B228582850074E1A3 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A29228582850074E1A3 /* CocoaLumberjack.framework */; };
 		0A468A2C228582850074E1A3 /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A2A228582850074E1A3 /* CocoaLumberjackSwift.framework */; };
+		0A995FA72286619900A90A0A /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; };
+		0A995FA92286619900A90A0A /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0A224E802285AB820049007E /* PBXContainerItemProxy */ = {
+		0A995FAA2286619900A90A0A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0A019A3422365E02002FD4F8 /* Project object */;
 			proxyType = 1;
@@ -83,14 +81,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0A468A2422857DDC0074E1A3 /* Embed Frameworks */ = {
+		0A995FA82286619900A90A0A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0A224E7F2285AB820049007E /* UXFeedbackSDK.framework in Embed Frameworks */,
-				0A224E832285AB890049007E /* UXFeedbackSDK.framework in Embed Frameworks */,
+				0A995FA92286619900A90A0A /* UXFeedbackSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,8 +163,7 @@
 			files = (
 				0A468A2B228582850074E1A3 /* CocoaLumberjack.framework in Frameworks */,
 				0A468A2C228582850074E1A3 /* CocoaLumberjackSwift.framework in Frameworks */,
-				0A224E7E2285AB820049007E /* UXFeedbackSDK.framework in Frameworks */,
-				0A224E822285AB890049007E /* UXFeedbackSDK.framework in Frameworks */,
+				0A995FA72286619900A90A0A /* UXFeedbackSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,12 +358,12 @@
 				0A019A3822365E02002FD4F8 /* Sources */,
 				0A019A3922365E02002FD4F8 /* Frameworks */,
 				0A019A3A22365E02002FD4F8 /* Resources */,
-				0A468A2422857DDC0074E1A3 /* Embed Frameworks */,
+				0A995FA82286619900A90A0A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0A224E812285AB820049007E /* PBXTargetDependency */,
+				0A995FAB2286619900A90A0A /* PBXTargetDependency */,
 			);
 			name = "UX Feedback SDK Demo";
 			productName = "UX Feedback Demo";
@@ -569,10 +565,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0A224E812285AB820049007E /* PBXTargetDependency */ = {
+		0A995FAB2286619900A90A0A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0A46899122840B2C0074E1A3 /* UXFeedbackSDK */;
-			targetProxy = 0A224E802285AB820049007E /* PBXContainerItemProxy */;
+			targetProxy = 0A995FAA2286619900A90A0A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

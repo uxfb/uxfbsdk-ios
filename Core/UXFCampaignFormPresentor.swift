@@ -46,18 +46,18 @@ class UXFCampaignFormPresentor: NSObject{
     
     private(set) var currentFormIndex: Int = -1
     private var _campaign: UXFCampaign!
-    private var _theme: UXFTheme!
     private weak var _appWindow: UIWindow!
     private weak var _currentForm: UXFViewController?
+    private var _parser: UXFParser!
 
     init(window: UIWindow,
          campaign: UXFCampaign,
-         theme: UXFTheme,
+         parser: UXFParser,
          animationEnabled: Bool = true) {
         
         _campaign = campaign
         _appWindow = window
-        _theme = theme
+        _parser = parser
         isAnimationFormEnabled = animationEnabled
     }
     
@@ -99,7 +99,7 @@ class UXFCampaignFormPresentor: NSObject{
         let controller = UXFViewController.init(index: fromIndex, formID: page.id )
         controller.modalPresentationStyle = .overCurrentContext
         controller.progressString = (title == nil ? self.progressString : title!)
-        controller.theme = _theme
+        controller.theme = _parser.theme
         controller.transitioningDelegate = self
         
         controller.didCloseHandler = { [weak self]  (formIndex) in
@@ -141,7 +141,7 @@ class UXFCampaignFormPresentor: NSObject{
     
     func prepareUIForm(controller: UXFViewController, page: UXFPage) {
         
-        controller.contentView.backgroundColor = _theme.backgroundColor
+        controller.contentView.backgroundColor = _parser.theme.backgroundColor
         
         var allConstraints: [NSLayoutConstraint] = []
         var viewIndex = 0
@@ -152,9 +152,9 @@ class UXFCampaignFormPresentor: NSObject{
             var fieldViews: Dictionary <String, UIView> = [:]
             for fieldInfo in  filedsInfoArr{
                 
-                if let filedView = UXFParser.sharedInstance.parseUIElement(dictionary: fieldInfo,
-                                                                           submitHandler: {(info) in
-                                                                            controller.nextHandler?(controller.formIndex, info)
+                if let filedView = _parser.parseUIElement(dictionary: fieldInfo,
+                                                         submitHandler: {(info) in
+                                                        controller.nextHandler?(controller.formIndex, info)
                 }){
                     controller.contentView.addSubview(filedView)
                     filedView.translatesAutoresizingMaskIntoConstraints = false

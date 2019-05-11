@@ -17,7 +17,7 @@ class UXFParser{
     static let formControllerViewOffset: CGFloat = 16.0
     static let bottomOffset: CGFloat = 8
     
-    public static let sharedInstance = UXFParser.init()
+    private(set) var theme: UXFTheme!
     private var _uiGroupDictionary: Dictionary <String, Array<String>> = [:]
     private var containerWidth: CGFloat {
         return (UIScreen.main.bounds.width - (UXFParser.formControllerViewOffset + UXFParser.contenViewOffset)*2)
@@ -42,6 +42,10 @@ class UXFParser{
             UserDefaults.standard.set(newValue, forKey: "selectedSmileInfo")
             UserDefaults.standard.synchronize()
         }
+    }
+    
+    init(theme: UXFTheme) {
+        self.theme = theme
     }
     
      func parseCampaing(compaignInfo: Dictionary<String,Any>) -> (UXFCampaign?){
@@ -167,6 +171,7 @@ class UXFParser{
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
         label.font =  label.font.withSize(labelFontSize)
         label.numberOfLines = 0
+        label.textColor = self.theme.textColor
         label.textAlignment = .center
         label.sizeToFit()
         //label.backgroundColor = UIColor.darkGray
@@ -296,6 +301,7 @@ class UXFParser{
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
         label.font =  label.font.withSize(labelFontSize)
         label.numberOfLines = 0
+        label.textColor = self.theme.textColor
         label.textAlignment = .center
         label.sizeToFit()
         //label.backgroundColor = UIColor.darkGray
@@ -339,7 +345,7 @@ class UXFParser{
             alertLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 40, height: alertLabelHeight))
             alertLabel!.textAlignment = .left
             alertLabel!.font =  alertLabel!.font.withSize(alertLabelFontSize)
-            alertLabel!.textColor = UIColor.init("#E92436")
+            alertLabel!.textColor = self.theme.errorColor
             alertLabel?.numberOfLines = 0
             let alertText = alertCommentText ?? "Заполните обязательное поле".localized()
             alertLabel!.text = alertText
@@ -426,6 +432,7 @@ class UXFParser{
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
         label.font =  label.font.withSize(labelFontSize)
         label.textAlignment = .center
+        label.textColor = theme.textColor
         label.sizeToFit()
         //label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -500,6 +507,7 @@ class UXFParser{
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
         label.font =  label.font.withSize(labelFontSize)
         label.textAlignment = .center
+        label.textColor = self.theme.titleColor
         label.numberOfLines = 0
         label.sizeToFit()
         //label.backgroundColor = UIColor.darkGray
@@ -521,6 +529,7 @@ class UXFParser{
         label.text = dictionary["value"] as? String
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
         label.font =  label.font.withSize(labelFontSize)
+        label.textColor = self.theme.textColor
         label.textAlignment = .center
         label.numberOfLines = 0
         label.sizeToFit()
@@ -557,8 +566,9 @@ class UXFParser{
             if #available(iOS 11.0, *) {
                 button.adjustsImageSizeForAccessibilityContentSizeCategory = true
             }
-            let imageName =  UXFParser.sharedInstance.smileImageName(by: smileIndex)
-            let previewButtonImage =  UXFParser.sharedInstance.getSmile(imageName: imageName, completion: { (image) in
+        
+            let imageName =  self.theme.smileImageName(by: smileIndex)
+            let previewButtonImage =  self.theme.getSmile(imageName: imageName, completion: { (image) in
                 button.setImage(image, for: UIControl.State.normal)
             })
             button.setImage(previewButtonImage, for: UIControl.State.normal)
@@ -579,21 +589,6 @@ class UXFParser{
                 submitHandler?([groupId : button.index])
             }
         }
-    }
-    
-     func getSmile(imageName: String, completion: (_ smileImage: UIImage)->()) ->(UIImage?){
-        let bundle = Bundle(for: UXFeedback.self)
-        let image = UIImage.init(named: imageName, in: bundle, compatibleWith: nil)
-        return image
-    }
-    
-     func smileImageName(by index: Int) -> (String){
-        let names = ["angry", "mad", "confused", "happy", "in-love"]
-        if index < names.count {
-            return names[index]
-        }
-        else{
-            return ""
-        }
-    }
+    } 
+     
 }

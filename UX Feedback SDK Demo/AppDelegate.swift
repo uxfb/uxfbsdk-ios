@@ -30,15 +30,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DDLog.add(DDOSLogger.sharedInstance)
         
         //print(String(describing: UIDevice.current.identifierForVendor?.uuidString))
-
-        UXFeedback.sharedInstance.setup(appID: uxfAppID, applicationWindow: self.window!){ [weak self] success in
+        let customTheme: UXFTheme = UXFTheme.init()
+        customTheme.backgroundColor = UIColor.groupTableViewBackground
+        customTheme.titleColor = UIColor.brown
+        customTheme.textColor = UIColor.blue
+        customTheme.formCornerRadius = 2.0
+        
+        UXFeedback.sharedInstance.setup(appID: uxfAppID,
+                                        applicationWindow: self.window!,
+                                        theme: customTheme){ [weak self] success in
             let message = "UXFeedback initialization " + (success == true ? "successful" : "failed")
             DDLogDebug(message)
             if success == false {
                 self?.showMessage(title: "Error", text: message, completion: nil)
             }
         }
-        
+
         return true
     }
     
