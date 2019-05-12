@@ -33,12 +33,8 @@ open class UXFeedback{
     open  var debugEnabled: Bool = false
     open  var animationEnabled: Bool = true
     open var canDisplayCampaings: Bool = true
-    open var theme: UXFTheme = UXFTheme.init(colorsDict: [:], smilesDict: [:]){
-        didSet{
-            _parser = UXFParser.init(theme: theme)
-        }
-    }
     
+    private var _theme: UXFTheme!
     private  weak var _activeEventController: UIViewController?
     private  weak var _appWindow: UIWindow!
     private  var _apiClient: UXFAPIClient!
@@ -47,6 +43,15 @@ open class UXFeedback{
     private  var _formPresentor: UXFCampaignFormPresentor?
     private var _parser: UXFParser!
     
+    init() {
+        self.setTheme(theme: UXFTheme.init(colorsDict: [:], smilesDict: [:]))
+    }
+    
+    open func setTheme(theme: UXFTheme){
+        _theme = theme
+        _parser = UXFParser.init(theme: theme)
+    }
+    
     //Initialization SDK
     open func setup(appID: String,
                     applicationWindow: UIWindow,
@@ -54,9 +59,10 @@ open class UXFeedback{
                     completion: ((_ success: Bool) -> Void)? = nil){
         
         if theme != nil {
-            self.theme = theme!
+           self.setTheme(theme: theme!)
         }
-        _apiClient = UXFAPIClient.init(appID: appID, parser: _parser)
+
+        _apiClient = UXFAPIClient.init(appID: appID, parser: self._parser)
         _apiClient.getAllCampaings { [weak self] (success, message, aCampaign) in
             self?._campaign = aCampaign
             self?._appWindow = applicationWindow

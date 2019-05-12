@@ -494,7 +494,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\ncp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
+			shellScript = "#BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\n#cp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
 		};
 		0A4689F6228564FD0074E1A3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -747,9 +747,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rockman.UX-Feedback-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Any App Dev";
+				PROVISIONING_PROFILE_SPECIFIER = "UXFeedbackDemo Dev";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -757,7 +757,7 @@
 		0A019A5022365E04002FD4F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5K42YC37US;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -772,9 +772,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rockman.UX-Feedback-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Any App Dev";
+				PROVISIONING_PROFILE_SPECIFIER = "UXFeedbackDemo Distr";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

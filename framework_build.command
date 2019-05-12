@@ -40,22 +40,9 @@ cp -R "${BUILD_PRODUCTS}/${CONFIGURATION}-iphonesimulator/${IOS_TARGET_NAME}.fra
 # Step 4. Create universal binary file using lipo and place the combined executable in the copied framework directory
 lipo -create -output "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework/${IOS_TARGET_NAME}" "${BUILD_PRODUCTS}/${CONFIGURATION}-iphonesimulator/${IOS_TARGET_NAME}.framework/${IOS_TARGET_NAME}" "${BUILD_PRODUCTS}/${CONFIGURATION}-iphoneos/${IOS_TARGET_NAME}.framework/${IOS_TARGET_NAME}"
 
-FRAMEWORKS=(
-"Nuke"
-"Alamofire"
-"Reachability"
-"HEXColor"
-"AlamofireNetworkActivityLogger"
-#"CoreTelephony"
-)
-
-#for FRAMEWORK in "${FRAMEWORKS[@]}"; do
-#lipo -create -output "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework/Frameworks/${FRAMEWORK}.framework/${FRAMEWORK}" "${BUILD_PRODUCTS}/${CONFIGURATION}-iphonesimulator/${IOS_TARGET_NAME}.framework/Frameworks/${FRAMEWORK}.framework/${FRAMEWORK}" "${BUILD_PRODUCTS}/${CONFIGURATION}-iphoneos/${IOS_TARGET_NAME}.framework/Frameworks/${FRAMEWORK}.framework/${FRAMEWORK}"
-#done
-
 # Step 5. Convenience step to copy the framework to the project's directory
 #cp -R "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework" "${PROJECT_DIR}"
 
 # Step 6. Convenience step to open the project's directory in Finder
-open "${BUILD_DIR}"
+open "${UNIVERSAL_OUTPUTFOLDER}"
 #fi

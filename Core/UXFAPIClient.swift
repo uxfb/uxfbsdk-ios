@@ -8,7 +8,9 @@
 
 import Foundation
 import Alamofire
+#if DEBUG
 import AlamofireNetworkActivityLogger
+#endif
 
 enum UXFAPIClientResponseResult{
     case success

@@ -37,8 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         customTheme.formCornerRadius = 2.0
         
         UXFeedback.sharedInstance.setup(appID: uxfAppID,
-                                        applicationWindow: self.window!,
-                                        theme: customTheme){ [weak self] success in
+                                        applicationWindow: self.window!, theme: customTheme)
+        { [weak self] success in
             let message = "UXFeedback initialization " + (success == true ? "successful" : "failed")
             DDLogDebug(message)
             if success == false {
