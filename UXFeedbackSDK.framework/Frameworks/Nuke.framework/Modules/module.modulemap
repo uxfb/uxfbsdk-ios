@@ -1,4 +1,0 @@
-framework module Nuke {
-  header "Nuke-Swift.h"
-  requires objc
-}

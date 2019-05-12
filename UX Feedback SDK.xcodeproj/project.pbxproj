@@ -50,44 +50,56 @@
 		0A4689C422840FC80074E1A3 /* UXFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2754A8226628BC000E2E17 /* UXFViewController.xib */; };
 		0A4689C522840FD00074E1A3 /* UXFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB72250965100E1C092 /* UXFTextField.swift */; };
 		0A4689C62284101E0074E1A3 /* UIAlertController+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6A22367F0C002FD4F8 /* UIAlertController+Show.swift */; };
-		0A468A1322857B970074E1A3 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1222857B970074E1A3 /* Alamofire.framework */; };
-		0A468A1522857B9A0074E1A3 /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1422857B9A0074E1A3 /* AlamofireNetworkActivityLogger.framework */; };
-		0A468A1722857B9D0074E1A3 /* HEXColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1622857B9D0074E1A3 /* HEXColor.framework */; };
-		0A468A1922857BA00074E1A3 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1822857BA00074E1A3 /* Nuke.framework */; };
-		0A468A1B22857BA30074E1A3 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A1A22857BA20074E1A3 /* Reachability.framework */; };
 		0A468A2B228582850074E1A3 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A29228582850074E1A3 /* CocoaLumberjack.framework */; };
 		0A468A2C228582850074E1A3 /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A2A228582850074E1A3 /* CocoaLumberjackSwift.framework */; };
-		0A995FA72286619900A90A0A /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; };
-		0A995FA92286619900A90A0A /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A995FBE2288043B00A90A0A /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB92288043A00A90A0A /* Nuke.framework */; };
+		0A995FC02288043B00A90A0A /* HEXColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FBB2288043A00A90A0A /* HEXColor.framework */; };
+		0A995FC12288043B00A90A0A /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FBC2288043B00A90A0A /* AlamofireNetworkActivityLogger.framework */; };
+		0A995FC22288043B00A90A0A /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FBD2288043B00A90A0A /* Reachability.framework */; };
+		0A995FC4228804CC00A90A0A /* AlamofireNetworkActivityLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A995FBC2288043B00A90A0A /* AlamofireNetworkActivityLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A995FC5228804CC00A90A0A /* HEXColor.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A995FBB2288043A00A90A0A /* HEXColor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A995FC6228804CC00A90A0A /* Nuke.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A995FB92288043A00A90A0A /* Nuke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A995FC7228804CC00A90A0A /* Reachability.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A995FBD2288043B00A90A0A /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A995FC9228807E200A90A0A /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; };
+		0A995FCA228807E200A90A0A /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A995FD82288086800A90A0A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FCC228807F300A90A0A /* Alamofire.framework */; };
+		0A995FD92288086800A90A0A /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FCC228807F300A90A0A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A995FDA2288086E00A90A0A /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FCE228807F300A90A0A /* AlamofireNetworkActivityLogger.framework */; };
+		0A995FDB2288086E00A90A0A /* AlamofireNetworkActivityLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FCE228807F300A90A0A /* AlamofireNetworkActivityLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A995FDC2288087200A90A0A /* HEXColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FD0228807F300A90A0A /* HEXColor.framework */; };
+		0A995FDD2288087200A90A0A /* HEXColor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FD0228807F300A90A0A /* HEXColor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A995FDE2288087600A90A0A /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FD2228807F300A90A0A /* Nuke.framework */; };
+		0A995FDF2288087600A90A0A /* Nuke.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FD2228807F300A90A0A /* Nuke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A995FE02288087900A90A0A /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FD4228807F300A90A0A /* Reachability.framework */; };
+		0A995FE12288087900A90A0A /* Reachability.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FD4228807F300A90A0A /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		0A995FAA2286619900A90A0A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0A019A3422365E02002FD4F8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0A46899122840B2C0074E1A3;
-			remoteInfo = UXFeedbackSDK;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		0A468A0022856BEA0074E1A3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				0A995FC4228804CC00A90A0A /* AlamofireNetworkActivityLogger.framework in CopyFiles */,
+				0A995FC5228804CC00A90A0A /* HEXColor.framework in CopyFiles */,
+				0A995FC6228804CC00A90A0A /* Nuke.framework in CopyFiles */,
+				0A995FC7228804CC00A90A0A /* Reachability.framework in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 		};
-		0A995FA82286619900A90A0A /* Embed Frameworks */ = {
+		0A995FCB228807E200A90A0A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0A995FA92286619900A90A0A /* UXFeedbackSDK.framework in Embed Frameworks */,
+				0A995FCA228807E200A90A0A /* UXFeedbackSDK.framework in Embed Frameworks */,
+				0A995FE12288087900A90A0A /* Reachability.framework in Embed Frameworks */,
+				0A995FD92288086800A90A0A /* Alamofire.framework in Embed Frameworks */,
+				0A995FDF2288087600A90A0A /* Nuke.framework in Embed Frameworks */,
+				0A995FDD2288087200A90A0A /* HEXColor.framework in Embed Frameworks */,
+				0A995FDB2288086E00A90A0A /* AlamofireNetworkActivityLogger.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,11 +145,6 @@
 		0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UXFeedbackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UXFeedbackSDK.h; sourceTree = "<group>"; };
 		0A46899522840B2C0074E1A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0A468A1222857B970074E1A3 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		0A468A1422857B9A0074E1A3 /* AlamofireNetworkActivityLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityLogger.framework; path = Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework; sourceTree = "<group>"; };
-		0A468A1622857B9D0074E1A3 /* HEXColor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HEXColor.framework; path = Carthage/Build/iOS/HEXColor.framework; sourceTree = "<group>"; };
-		0A468A1822857BA00074E1A3 /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = Carthage/Build/iOS/Nuke.framework; sourceTree = "<group>"; };
-		0A468A1A22857BA20074E1A3 /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
 		0A468A29228582850074E1A3 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		0A468A2A228582850074E1A3 /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/iOS/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
 		0A6CDB75223B960500C17007 /* UXFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFButton.swift; sourceTree = "<group>"; };
@@ -152,6 +159,17 @@
 		0A6CDB8A2243C95B00C17007 /* UXFRateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFRateViewController.swift; sourceTree = "<group>"; };
 		0A6CDB8B2243C95B00C17007 /* UXFRateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFRateViewController.xib; sourceTree = "<group>"; };
 		0A6CDB8E22446EC900C17007 /* UXFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFViewController.swift; sourceTree = "<group>"; };
+		0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UXFeedbackSDK.framework; sourceTree = "<group>"; };
+		0A995FB92288043A00A90A0A /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = Carthage/Build/iOS/Nuke.framework; sourceTree = "<group>"; };
+		0A995FBA2288043A00A90A0A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		0A995FBB2288043A00A90A0A /* HEXColor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HEXColor.framework; path = Carthage/Build/iOS/HEXColor.framework; sourceTree = "<group>"; };
+		0A995FBC2288043B00A90A0A /* AlamofireNetworkActivityLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityLogger.framework; path = Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework; sourceTree = "<group>"; };
+		0A995FBD2288043B00A90A0A /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
+		0A995FCC228807F300A90A0A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = UXFeedbackSDK.framework/Frameworks/Alamofire.framework; sourceTree = "<group>"; };
+		0A995FCE228807F300A90A0A /* AlamofireNetworkActivityLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityLogger.framework; path = UXFeedbackSDK.framework/Frameworks/AlamofireNetworkActivityLogger.framework; sourceTree = "<group>"; };
+		0A995FD0228807F300A90A0A /* HEXColor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HEXColor.framework; path = UXFeedbackSDK.framework/Frameworks/HEXColor.framework; sourceTree = "<group>"; };
+		0A995FD2228807F300A90A0A /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = UXFeedbackSDK.framework/Frameworks/Nuke.framework; sourceTree = "<group>"; };
+		0A995FD4228807F300A90A0A /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = UXFeedbackSDK.framework/Frameworks/Reachability.framework; sourceTree = "<group>"; };
 		0AA92D9C227A9410005DBCBA /* UXFSmileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFSmileButton.swift; sourceTree = "<group>"; };
 		0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+blocks.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,7 +181,12 @@
 			files = (
 				0A468A2B228582850074E1A3 /* CocoaLumberjack.framework in Frameworks */,
 				0A468A2C228582850074E1A3 /* CocoaLumberjackSwift.framework in Frameworks */,
-				0A995FA72286619900A90A0A /* UXFeedbackSDK.framework in Frameworks */,
+				0A995FC9228807E200A90A0A /* UXFeedbackSDK.framework in Frameworks */,
+				0A995FE02288087900A90A0A /* Reachability.framework in Frameworks */,
+				0A995FD82288086800A90A0A /* Alamofire.framework in Frameworks */,
+				0A995FDC2288087200A90A0A /* HEXColor.framework in Frameworks */,
+				0A995FDA2288086E00A90A0A /* AlamofireNetworkActivityLogger.framework in Frameworks */,
+				0A995FDE2288087600A90A0A /* Nuke.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,12 +194,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A995FBE2288043B00A90A0A /* Nuke.framework in Frameworks */,
+				0A995FC02288043B00A90A0A /* HEXColor.framework in Frameworks */,
+				0A995FC12288043B00A90A0A /* AlamofireNetworkActivityLogger.framework in Frameworks */,
+				0A995FC22288043B00A90A0A /* Reachability.framework in Frameworks */,
 				0A4689C222840F7C0074E1A3 /* CoreTelephony.framework in Frameworks */,
-				0A468A1522857B9A0074E1A3 /* AlamofireNetworkActivityLogger.framework in Frameworks */,
-				0A468A1722857B9D0074E1A3 /* HEXColor.framework in Frameworks */,
-				0A468A1922857BA00074E1A3 /* Nuke.framework in Frameworks */,
-				0A468A1B22857BA30074E1A3 /* Reachability.framework in Frameworks */,
-				0A468A1322857B970074E1A3 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,13 +346,19 @@
 		3EE1448B815C3AA05E865A6C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A995FBA2288043A00A90A0A /* Alamofire.framework */,
+				0A995FBC2288043B00A90A0A /* AlamofireNetworkActivityLogger.framework */,
+				0A995FCC228807F300A90A0A /* Alamofire.framework */,
+				0A995FCE228807F300A90A0A /* AlamofireNetworkActivityLogger.framework */,
+				0A995FD0228807F300A90A0A /* HEXColor.framework */,
+				0A995FD2228807F300A90A0A /* Nuke.framework */,
+				0A995FD4228807F300A90A0A /* Reachability.framework */,
+				0A995FBB2288043A00A90A0A /* HEXColor.framework */,
+				0A995FB92288043A00A90A0A /* Nuke.framework */,
+				0A995FBD2288043B00A90A0A /* Reachability.framework */,
+				0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */,
 				0A468A29228582850074E1A3 /* CocoaLumberjack.framework */,
 				0A468A2A228582850074E1A3 /* CocoaLumberjackSwift.framework */,
-				0A468A1A22857BA20074E1A3 /* Reachability.framework */,
-				0A468A1822857BA00074E1A3 /* Nuke.framework */,
-				0A468A1622857B9D0074E1A3 /* HEXColor.framework */,
-				0A468A1422857B9A0074E1A3 /* AlamofireNetworkActivityLogger.framework */,
-				0A468A1222857B970074E1A3 /* Alamofire.framework */,
 				0A160DD82268D62700A586C4 /* CoreTelephony.framework */,
 			);
 			name = Frameworks;
@@ -358,12 +386,11 @@
 				0A019A3822365E02002FD4F8 /* Sources */,
 				0A019A3922365E02002FD4F8 /* Frameworks */,
 				0A019A3A22365E02002FD4F8 /* Resources */,
-				0A995FA82286619900A90A0A /* Embed Frameworks */,
+				0A995FCB228807E200A90A0A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0A995FAB2286619900A90A0A /* PBXTargetDependency */,
 			);
 			name = "UX Feedback SDK Demo";
 			productName = "UX Feedback Demo";
@@ -375,9 +402,9 @@
 			buildConfigurationList = 0A46899B22840B2C0074E1A3 /* Build configuration list for PBXNativeTarget "UXFeedbackSDK" */;
 			buildPhases = (
 				0A4689FF22856A3B0074E1A3 /* ShellScript */,
-				0A46898D22840B2C0074E1A3 /* Headers */,
 				0A46898E22840B2C0074E1A3 /* Sources */,
 				0A46898F22840B2C0074E1A3 /* Frameworks */,
+				0A46898D22840B2C0074E1A3 /* Headers */,
 				0A46899022840B2C0074E1A3 /* Resources */,
 				0A4689E922854B9F0074E1A3 /* ShellScript */,
 				0A468A0022856BEA0074E1A3 /* CopyFiles */,
@@ -467,7 +494,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\n#cp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
+			shellScript = "BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\ncp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
 		};
 		0A4689F6228564FD0074E1A3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -563,14 +590,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		0A995FAB2286619900A90A0A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0A46899122840B2C0074E1A3 /* UXFeedbackSDK */;
-			targetProxy = 0A995FAA2286619900A90A0A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0A019A4322365E03002FD4F8 /* Main.storyboard */ = {
@@ -713,7 +732,6 @@
 		0A019A4F22365E04002FD4F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5K42YC37US;
@@ -721,6 +739,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/UXFeedbackSDK.framework/Frameworks",
 				);
 				INFOPLIST_FILE = "UX Feedback SDK Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -738,7 +757,6 @@
 		0A019A5022365E04002FD4F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5K42YC37US;
@@ -746,6 +764,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/UXFeedbackSDK.framework/Frameworks",
 				);
 				INFOPLIST_FILE = "UX Feedback SDK Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -783,8 +802,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.UXFeedback.UXFeedbackSDK;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -815,8 +836,9 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.UXFeedback.UXFeedbackSDK;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";

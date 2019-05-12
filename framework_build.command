@@ -15,11 +15,11 @@ IOS_PLATFORMS=(
 )
 
 
-#xcodebuild clean
+xcodebuild clean
 
 for PLATFORM in "${IOS_PLATFORMS[@]}"; do
  echo "Build for $CONFIGURATION $PLATFORM"
-#xcodebuild -target "$IOS_TARGET_NAME" ONLY_ACTIVE_ARCH=NO -configuration "$CONFIGURATION" -sdk "$PLATFORM" build
+xcodebuild -target "$IOS_TARGET_NAME" ONLY_ACTIVE_ARCH=NO -configuration "$CONFIGURATION" -sdk "$PLATFORM" build
 done
 
 BUILD_PRODUCTS="$MAIN_DIR/build"
@@ -54,7 +54,7 @@ FRAMEWORKS=(
 #done
 
 # Step 5. Convenience step to copy the framework to the project's directory
-cp -R "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework" "${PROJECT_DIR}"
+#cp -R "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework" "${PROJECT_DIR}"
 
 # Step 6. Convenience step to open the project's directory in Finder
 open "${BUILD_DIR}"
