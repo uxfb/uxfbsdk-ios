@@ -53,53 +53,56 @@
 		0A468A2B228582850074E1A3 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A29228582850074E1A3 /* CocoaLumberjack.framework */; };
 		0A468A2C228582850074E1A3 /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A2A228582850074E1A3 /* CocoaLumberjackSwift.framework */; };
 		0A995FBE2288043B00A90A0A /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB92288043A00A90A0A /* Nuke.framework */; };
-		0A995FC02288043B00A90A0A /* HEXColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FBB2288043A00A90A0A /* HEXColor.framework */; };
 		0A995FC12288043B00A90A0A /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FBC2288043B00A90A0A /* AlamofireNetworkActivityLogger.framework */; };
-		0A995FC22288043B00A90A0A /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FBD2288043B00A90A0A /* Reachability.framework */; };
 		0A995FC4228804CC00A90A0A /* AlamofireNetworkActivityLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A995FBC2288043B00A90A0A /* AlamofireNetworkActivityLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A995FC5228804CC00A90A0A /* HEXColor.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A995FBB2288043A00A90A0A /* HEXColor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A995FC6228804CC00A90A0A /* Nuke.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A995FB92288043A00A90A0A /* Nuke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A995FC7228804CC00A90A0A /* Reachability.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A995FBD2288043B00A90A0A /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A995FC9228807E200A90A0A /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; };
-		0A995FCA228807E200A90A0A /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A995FD82288086800A90A0A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FCC228807F300A90A0A /* Alamofire.framework */; };
-		0A995FD92288086800A90A0A /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FCC228807F300A90A0A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A995FDA2288086E00A90A0A /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FCE228807F300A90A0A /* AlamofireNetworkActivityLogger.framework */; };
-		0A995FDB2288086E00A90A0A /* AlamofireNetworkActivityLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FCE228807F300A90A0A /* AlamofireNetworkActivityLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A995FDC2288087200A90A0A /* HEXColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FD0228807F300A90A0A /* HEXColor.framework */; };
-		0A995FDD2288087200A90A0A /* HEXColor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FD0228807F300A90A0A /* HEXColor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A995FDE2288087600A90A0A /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FD2228807F300A90A0A /* Nuke.framework */; };
-		0A995FDF2288087600A90A0A /* Nuke.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FD2228807F300A90A0A /* Nuke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A995FE02288087900A90A0A /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FD4228807F300A90A0A /* Reachability.framework */; };
-		0A995FE12288087900A90A0A /* Reachability.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FD4228807F300A90A0A /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0AA850C822895F7A0040007C /* Reachability.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AA850C522895F7A0040007C /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0AA850C922895F7A0040007C /* HEXColor.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AA850C622895F7A0040007C /* HEXColor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0AA850CA22895F7A0040007C /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AA850C722895F7A0040007C /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0AA850CB22895F880040007C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA850C722895F7A0040007C /* Alamofire.framework */; };
+		0AA850CC22895F880040007C /* HEXColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA850C622895F7A0040007C /* HEXColor.framework */; };
+		0AA850CD22895F880040007C /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA850C522895F7A0040007C /* Reachability.framework */; };
+		0AA850D4228960960040007C /* HEXColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA850CE2289602C0040007C /* HEXColor.framework */; };
+		0AA850D5228960960040007C /* HEXColor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA850CE2289602C0040007C /* HEXColor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0AA850D6228960960040007C /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA850D02289602C0040007C /* Reachability.framework */; };
+		0AA850D7228960960040007C /* Reachability.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA850D02289602C0040007C /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0AA850D8228960960040007C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FCC228807F300A90A0A /* Alamofire.framework */; };
+		0AA850D9228960960040007C /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FCC228807F300A90A0A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0AA850DA228960960040007C /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FCE228807F300A90A0A /* AlamofireNetworkActivityLogger.framework */; };
+		0AA850DB228960960040007C /* AlamofireNetworkActivityLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FCE228807F300A90A0A /* AlamofireNetworkActivityLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0AA850DC228960960040007C /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FD2228807F300A90A0A /* Nuke.framework */; };
+		0AA850DD228960960040007C /* Nuke.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FD2228807F300A90A0A /* Nuke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0AA850DF228960AB0040007C /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; };
+		0AA850E0228960AB0040007C /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		0A468A0022856BEA0074E1A3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
 				0A995FC4228804CC00A90A0A /* AlamofireNetworkActivityLogger.framework in CopyFiles */,
-				0A995FC5228804CC00A90A0A /* HEXColor.framework in CopyFiles */,
 				0A995FC6228804CC00A90A0A /* Nuke.framework in CopyFiles */,
-				0A995FC7228804CC00A90A0A /* Reachability.framework in CopyFiles */,
+				0AA850C822895F7A0040007C /* Reachability.framework in CopyFiles */,
+				0AA850C922895F7A0040007C /* HEXColor.framework in CopyFiles */,
+				0AA850CA22895F7A0040007C /* Alamofire.framework in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0A995FCB228807E200A90A0A /* Embed Frameworks */ = {
+		0AA850DE228960960040007C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0A995FCA228807E200A90A0A /* UXFeedbackSDK.framework in Embed Frameworks */,
-				0A995FE12288087900A90A0A /* Reachability.framework in Embed Frameworks */,
-				0A995FD92288086800A90A0A /* Alamofire.framework in Embed Frameworks */,
-				0A995FDF2288087600A90A0A /* Nuke.framework in Embed Frameworks */,
-				0A995FDD2288087200A90A0A /* HEXColor.framework in Embed Frameworks */,
-				0A995FDB2288086E00A90A0A /* AlamofireNetworkActivityLogger.framework in Embed Frameworks */,
+				0AA850D5228960960040007C /* HEXColor.framework in Embed Frameworks */,
+				0AA850D9228960960040007C /* Alamofire.framework in Embed Frameworks */,
+				0AA850DD228960960040007C /* Nuke.framework in Embed Frameworks */,
+				0AA850D7228960960040007C /* Reachability.framework in Embed Frameworks */,
+				0AA850DB228960960040007C /* AlamofireNetworkActivityLogger.framework in Embed Frameworks */,
+				0AA850E0228960AB0040007C /* UXFeedbackSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,14 +165,15 @@
 		0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UXFeedbackSDK.framework; sourceTree = "<group>"; };
 		0A995FB92288043A00A90A0A /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = Carthage/Build/iOS/Nuke.framework; sourceTree = "<group>"; };
 		0A995FBA2288043A00A90A0A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		0A995FBB2288043A00A90A0A /* HEXColor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HEXColor.framework; path = Carthage/Build/iOS/HEXColor.framework; sourceTree = "<group>"; };
 		0A995FBC2288043B00A90A0A /* AlamofireNetworkActivityLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityLogger.framework; path = Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework; sourceTree = "<group>"; };
-		0A995FBD2288043B00A90A0A /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
 		0A995FCC228807F300A90A0A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = UXFeedbackSDK.framework/Frameworks/Alamofire.framework; sourceTree = "<group>"; };
 		0A995FCE228807F300A90A0A /* AlamofireNetworkActivityLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityLogger.framework; path = UXFeedbackSDK.framework/Frameworks/AlamofireNetworkActivityLogger.framework; sourceTree = "<group>"; };
-		0A995FD0228807F300A90A0A /* HEXColor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HEXColor.framework; path = UXFeedbackSDK.framework/Frameworks/HEXColor.framework; sourceTree = "<group>"; };
 		0A995FD2228807F300A90A0A /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = UXFeedbackSDK.framework/Frameworks/Nuke.framework; sourceTree = "<group>"; };
-		0A995FD4228807F300A90A0A /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = UXFeedbackSDK.framework/Frameworks/Reachability.framework; sourceTree = "<group>"; };
+		0AA850C522895F7A0040007C /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
+		0AA850C622895F7A0040007C /* HEXColor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HEXColor.framework; path = Carthage/Build/iOS/HEXColor.framework; sourceTree = "<group>"; };
+		0AA850C722895F7A0040007C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		0AA850CE2289602C0040007C /* HEXColor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HEXColor.framework; path = UXFeedbackSDK.framework/Frameworks/HEXColor.framework; sourceTree = "<group>"; };
+		0AA850D02289602C0040007C /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = UXFeedbackSDK.framework/Frameworks/Reachability.framework; sourceTree = "<group>"; };
 		0AA92D9C227A9410005DBCBA /* UXFSmileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFSmileButton.swift; sourceTree = "<group>"; };
 		0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+blocks.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,13 +184,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A468A2B228582850074E1A3 /* CocoaLumberjack.framework in Frameworks */,
+				0AA850D4228960960040007C /* HEXColor.framework in Frameworks */,
 				0A468A2C228582850074E1A3 /* CocoaLumberjackSwift.framework in Frameworks */,
-				0A995FC9228807E200A90A0A /* UXFeedbackSDK.framework in Frameworks */,
-				0A995FE02288087900A90A0A /* Reachability.framework in Frameworks */,
-				0A995FD82288086800A90A0A /* Alamofire.framework in Frameworks */,
-				0A995FDC2288087200A90A0A /* HEXColor.framework in Frameworks */,
-				0A995FDA2288086E00A90A0A /* AlamofireNetworkActivityLogger.framework in Frameworks */,
-				0A995FDE2288087600A90A0A /* Nuke.framework in Frameworks */,
+				0AA850D8228960960040007C /* Alamofire.framework in Frameworks */,
+				0AA850D6228960960040007C /* Reachability.framework in Frameworks */,
+				0AA850DA228960960040007C /* AlamofireNetworkActivityLogger.framework in Frameworks */,
+				0AA850DC228960960040007C /* Nuke.framework in Frameworks */,
+				0AA850DF228960AB0040007C /* UXFeedbackSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,9 +199,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A995FBE2288043B00A90A0A /* Nuke.framework in Frameworks */,
-				0A995FC02288043B00A90A0A /* HEXColor.framework in Frameworks */,
 				0A995FC12288043B00A90A0A /* AlamofireNetworkActivityLogger.framework in Frameworks */,
-				0A995FC22288043B00A90A0A /* Reachability.framework in Frameworks */,
+				0AA850CB22895F880040007C /* Alamofire.framework in Frameworks */,
+				0AA850CC22895F880040007C /* HEXColor.framework in Frameworks */,
+				0AA850CD22895F880040007C /* Reachability.framework in Frameworks */,
 				0A4689C222840F7C0074E1A3 /* CoreTelephony.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,6 +213,9 @@
 		0A019A3322365E02002FD4F8 = {
 			isa = PBXGroup;
 			children = (
+				0AA850C722895F7A0040007C /* Alamofire.framework */,
+				0AA850C622895F7A0040007C /* HEXColor.framework */,
+				0AA850C522895F7A0040007C /* Reachability.framework */,
 				0A019A52223669CC002FD4F8 /* Core */,
 				0A019A3E22365E02002FD4F8 /* UX Feedback SDK Demo */,
 				0A46899322840B2C0074E1A3 /* UXFeedbackSDK */,
@@ -348,14 +356,12 @@
 			children = (
 				0A995FBA2288043A00A90A0A /* Alamofire.framework */,
 				0A995FBC2288043B00A90A0A /* AlamofireNetworkActivityLogger.framework */,
+				0AA850CE2289602C0040007C /* HEXColor.framework */,
+				0AA850D02289602C0040007C /* Reachability.framework */,
 				0A995FCC228807F300A90A0A /* Alamofire.framework */,
 				0A995FCE228807F300A90A0A /* AlamofireNetworkActivityLogger.framework */,
-				0A995FD0228807F300A90A0A /* HEXColor.framework */,
 				0A995FD2228807F300A90A0A /* Nuke.framework */,
-				0A995FD4228807F300A90A0A /* Reachability.framework */,
-				0A995FBB2288043A00A90A0A /* HEXColor.framework */,
 				0A995FB92288043A00A90A0A /* Nuke.framework */,
-				0A995FBD2288043B00A90A0A /* Reachability.framework */,
 				0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */,
 				0A468A29228582850074E1A3 /* CocoaLumberjack.framework */,
 				0A468A2A228582850074E1A3 /* CocoaLumberjackSwift.framework */,
@@ -386,7 +392,7 @@
 				0A019A3822365E02002FD4F8 /* Sources */,
 				0A019A3922365E02002FD4F8 /* Frameworks */,
 				0A019A3A22365E02002FD4F8 /* Resources */,
-				0A995FCB228807E200A90A0A /* Embed Frameworks */,
+				0AA850DE228960960040007C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -494,7 +500,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\n#cp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
+			shellScript = "BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\ncp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
 		};
 		0A4689F6228564FD0074E1A3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
