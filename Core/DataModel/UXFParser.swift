@@ -143,9 +143,9 @@ class UXFParser{
                                 groupID: String)->(UIView?){
         let imageView = UIImageView.init(frame: CGRect.init(x: 0,
                                                             y: 0,
-                                                            width: (UIScreen.main.bounds.width - (UXFParser.formControllerViewOffset + UXFParser.contenViewOffset)*2),
-                                                            height: 100))
-        imageView.contentMode = .center
+                                                            width: 56,
+                                                            height: 56))
+        imageView.contentMode = .scaleAspectFit
         let scale = UIScreen.main.scale
         if let setInfo = dictionary["set"] as? Dictionary<String, String>,
            let imagePath = setInfo["\(Int(scale))x"],

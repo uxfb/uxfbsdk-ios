@@ -19,6 +19,7 @@ open class UXFTheme{
     open var errorColor: UIColor = UIColor.init("#E92436")
     open var cardColor: UIColor = UIColor.yellow
     open var formCornerRadius: CGFloat = 8.0
+    open var progressColor: UIColor = UIColor.init("#9699A7")
     
     public init(){
        
@@ -47,6 +48,9 @@ open class UXFTheme{
         }
         if let cardColorString = colorsDict["card"] {
            cardColor = UIColor(cardColorString)
+        }
+        if let progrressColorString = colorsDict["progressColor"] {
+            progressColor = UIColor(progrressColorString)
         }
     }
     

@@ -18,7 +18,7 @@ protocol UXFCampaignFormPresentorProtocol: class {
 class UXFCampaignFormPresentor: NSObject{
     
     var progressString: String {
-        if self.currentFormIndex < 0 {
+        if self.currentFormIndex < 0 || self.currentFormIndex >= (_campaign.pages.count  -  1) {
             return ""
         }else {
             return "\(self.currentFormIndex + 1)/\(formsCount)"
@@ -65,7 +65,7 @@ class UXFCampaignFormPresentor: NSObject{
     private func nextForm(){
         if (self.currentFormIndex + 1) < _campaign.formsCount{
             self.currentFormIndex += 1
-            let form  = createForm(fromIndex: self.currentFormIndex)
+            let form  = createForm(fromIndex: self.currentFormIndex, title: self.progressString)
             showCampaignController(controller: form, direction: (currentFormIndex == 0 ? .downToUp : .alphaIn))
         }
        /* else{
@@ -76,7 +76,7 @@ class UXFCampaignFormPresentor: NSObject{
     private func prevForm(){
         if (self.currentFormIndex > 0){
             self.currentFormIndex -= 1
-            let form =  createForm(fromIndex: self.currentFormIndex)
+            let form =  createForm(fromIndex: self.currentFormIndex, title: self.progressString)
             showCampaignController(controller: form, direction: .alphaIn)
         }
     }
@@ -88,7 +88,7 @@ class UXFCampaignFormPresentor: NSObject{
         let page = self._campaign.pages[fromIndex]
         let controller = UXFViewController.init(index: fromIndex, formID: page.id )
         controller.modalPresentationStyle = .overCurrentContext
-        controller.progressString = (title == nil ? self.progressString : title!)
+        controller.progressString = (title == nil ? "" : title!)
         controller.theme = _parser.theme
         controller.transitioningDelegate = self
         
@@ -239,11 +239,6 @@ class UXFCampaignFormPresentor: NSObject{
         _currentForm = controller
         _campaign.setCurrentFormID(formID: controller.formID) //save current campaign fromID
     }
-    
-    open func presentForm(controller: UXFViewController, direction: UXFViewPopupDirection){
-        
-    }
-    
 }
 
 

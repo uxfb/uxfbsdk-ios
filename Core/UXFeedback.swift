@@ -102,7 +102,7 @@ open class UXFeedback{
             presentor.delegate = self
             presentor.feedbackCampaignDelegate = self.delegate
             presentor.feedbackFormDelegate = self.formDelegate
-            let controller = presentor.createForm(fromIndex: formIndex, title: "")
+            let controller = presentor.createForm(fromIndex: formIndex)
             controller.presentDirection = .downToUp
             self.formDelegate?.formDidLoaded(form: controller)
         }

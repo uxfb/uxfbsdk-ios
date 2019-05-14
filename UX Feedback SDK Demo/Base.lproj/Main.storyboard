@@ -13,7 +13,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="UX_Feedback_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="UX_Feedback_SDK_Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -47,7 +47,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="F2h-oK-8EG" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="98j-hy-pyH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="F2h-oK-8EG" secondAttribute="trailing" constant="16" id="B4t-S2-kr9"/>
@@ -65,7 +65,7 @@
         <!--Second View Controller-->
         <scene sceneID="SUF-Ff-QpI">
             <objects>
-                <viewController storyboardIdentifier="SecondViewController" id="wDv-N7-Zgj" customClass="SecondViewController" customModule="UX_Feedback_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SecondViewController" id="wDv-N7-Zgj" customClass="SecondViewController" customModule="UX_Feedback_SDK_Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Zr-EA-2wp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
