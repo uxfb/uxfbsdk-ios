@@ -6,75 +6,11 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		f+85Jy2/B+1BpI1dL+xy7lA9bwo=
-		</data>
-		<key>Frameworks/Alamofire.framework/Alamofire</key>
-		<data>
-		PIDopZxh5go3nyJMGnmEOZt7ocQ=
-		</data>
-		<key>Frameworks/Alamofire.framework/Info.plist</key>
-		<data>
-		sXXa+tZi6VNA6rrILnsEJpJ4Gng=
-		</data>
-		<key>Frameworks/Alamofire.framework/_CodeSignature/CodeResources</key>
-		<data>
-		dA3rzd49eVfQBLBafu5TMdun3DU=
-		</data>
-		<key>Frameworks/AlamofireNetworkActivityLogger.framework/AlamofireNetworkActivityLogger</key>
-		<data>
-		04ThW30WzYId+V0GrDc3oHEOe6Q=
-		</data>
-		<key>Frameworks/AlamofireNetworkActivityLogger.framework/Info-tvOS.plist</key>
-		<data>
-		FXNeXW1F6p/dvGAQwIBEWxMIrqI=
-		</data>
-		<key>Frameworks/AlamofireNetworkActivityLogger.framework/Info.plist</key>
-		<data>
-		rma1ng9Dz1dumI3a0125teCIOv4=
-		</data>
-		<key>Frameworks/AlamofireNetworkActivityLogger.framework/_CodeSignature/CodeResources</key>
-		<data>
-		sH08f9nH17w4HAjvmS39pvwaR6Q=
-		</data>
-		<key>Frameworks/HEXColor.framework/HEXColor</key>
-		<data>
-		o75ezG8fGr3ky7sY141Lfoq2O9g=
-		</data>
-		<key>Frameworks/HEXColor.framework/Info.plist</key>
-		<data>
-		Zpg1PNWBGuijqGhQB5KGvuu78bo=
-		</data>
-		<key>Frameworks/HEXColor.framework/_CodeSignature/CodeResources</key>
-		<data>
-		NWZay8j/6HNSVAz4RcSfRduGIvg=
-		</data>
-		<key>Frameworks/Nuke.framework/Info.plist</key>
-		<data>
-		odPvKa0m+o6JUJdqAuMnP5uEaxw=
-		</data>
-		<key>Frameworks/Nuke.framework/Nuke</key>
-		<data>
-		4yLGl/CiQGWwN33Avp27I+KHwhk=
-		</data>
-		<key>Frameworks/Nuke.framework/_CodeSignature/CodeResources</key>
-		<data>
-		BOljysX5nyXorOorJlJ9of2eQMU=
-		</data>
-		<key>Frameworks/Reachability.framework/Info.plist</key>
-		<data>
-		VHSUVCfHMYb9fQeGOSIWRZ7pa9E=
-		</data>
-		<key>Frameworks/Reachability.framework/Reachability</key>
-		<data>
-		5QjYsZUiNgrdmyTjfqhjvjGS+00=
-		</data>
-		<key>Frameworks/Reachability.framework/_CodeSignature/CodeResources</key>
-		<data>
-		0y9AM4D9jWtlcwZjqzlBkmigpxw=
+		4cYAgy1VUXxUHHZrwgI6CODUMdA=
 		</data>
 		<key>Headers/UXFeedbackSDK-Swift.h</key>
 		<data>
-		DgAAWyKH9cUrE3TqAIwhnmwaNuc=
+		/w4cXEKJvJLDfaBz5WGzd13MJBY=
 		</data>
 		<key>Headers/UXFeedbackSDK.h</key>
 		<data>
@@ -82,31 +18,23 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		kufyTNoMsRh63CYgw/j/enIn1Ho=
+		FawIU8ErCULVz+Q7jxoKlX6+oDQ=
 		</data>
-		<key>Modules/UXFeedbackSDK.swiftmodule/arm.swiftdoc</key>
+		<key>Modules/UXFeedbackSDK.swiftmodule/i386.swiftdoc</key>
 		<data>
-		mQJR6/22CGujXXboUryE1EtUEEE=
+		pz8Two9f3wBr3Rz9wmQsLzrw8wQ=
 		</data>
-		<key>Modules/UXFeedbackSDK.swiftmodule/arm.swiftmodule</key>
+		<key>Modules/UXFeedbackSDK.swiftmodule/i386.swiftmodule</key>
 		<data>
-		/JE9UxkpLYnlBYDSungQs01rJa0=
+		wRRB88pSY901sotp1hCaqUQgF5I=
 		</data>
-		<key>Modules/UXFeedbackSDK.swiftmodule/arm64.swiftdoc</key>
+		<key>Modules/UXFeedbackSDK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		T9A39UU7L4ZcCT7mYI7RUhCGhP4=
+		UQtEBr814sFcwbU0IXUsX17Peww=
 		</data>
-		<key>Modules/UXFeedbackSDK.swiftmodule/arm64.swiftmodule</key>
+		<key>Modules/UXFeedbackSDK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		4I1gOMcn7dK9RDyqWDoYNBCTFTo=
-		</data>
-		<key>Modules/UXFeedbackSDK.swiftmodule/armv7.swiftdoc</key>
-		<data>
-		mQJR6/22CGujXXboUryE1EtUEEE=
-		</data>
-		<key>Modules/UXFeedbackSDK.swiftmodule/armv7.swiftmodule</key>
-		<data>
-		/JE9UxkpLYnlBYDSungQs01rJa0=
+		Z8oORddaCd/95KCbMP2IwIkRTSs=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -114,11 +42,11 @@
 		</data>
 		<key>UXFViewController.nib/objects-11.0+.nib</key>
 		<data>
-		6R5DtQcU9UetKr3QYeK7MZ8PFOc=
+		lb4E9EwmYZyCO179XJmrMylEE3M=
 		</data>
 		<key>UXFViewController.nib/runtime.nib</key>
 		<data>
-		XGxxYsoUNSOhg2git0oVEMwBMFg=
+		8oWS88u+CP10GaSR4ADkr0Ivc4w=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -127,198 +55,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			f+85Jy2/B+1BpI1dL+xy7lA9bwo=
+			4cYAgy1VUXxUHHZrwgI6CODUMdA=
 			</data>
 			<key>hash2</key>
 			<data>
-			jYuCIfOj591TSRthub4ZCMGnIziuBv5frQ4uzYhwp2Q=
-			</data>
-		</dict>
-		<key>Frameworks/Alamofire.framework/Alamofire</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			PIDopZxh5go3nyJMGnmEOZt7ocQ=
-			</data>
-			<key>hash2</key>
-			<data>
-			J3GW6otT3zklxF8SXMapsMgYLQKF6xx3Z2zk0P+7m6Y=
-			</data>
-		</dict>
-		<key>Frameworks/Alamofire.framework/Info.plist</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			sXXa+tZi6VNA6rrILnsEJpJ4Gng=
-			</data>
-			<key>hash2</key>
-			<data>
-			2cPOtxsaVByFIQ2C8BtX6c9lik2hdEOOJja1a56egGU=
-			</data>
-		</dict>
-		<key>Frameworks/Alamofire.framework/_CodeSignature/CodeResources</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			dA3rzd49eVfQBLBafu5TMdun3DU=
-			</data>
-			<key>hash2</key>
-			<data>
-			dQ8Ei3xXKCOh/oz9uziDH6+IlS4T7KjFFTol1Gv0ydQ=
-			</data>
-		</dict>
-		<key>Frameworks/AlamofireNetworkActivityLogger.framework/AlamofireNetworkActivityLogger</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			04ThW30WzYId+V0GrDc3oHEOe6Q=
-			</data>
-			<key>hash2</key>
-			<data>
-			iY1ZkL/628Aopo1KMGTshT0cr1IDQ9s1ufn8vIg+MJM=
-			</data>
-		</dict>
-		<key>Frameworks/AlamofireNetworkActivityLogger.framework/Info-tvOS.plist</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			FXNeXW1F6p/dvGAQwIBEWxMIrqI=
-			</data>
-			<key>hash2</key>
-			<data>
-			107+ci3/53fa3CvfQB55jfQMh0nGvr59FcrU7yXIsCI=
-			</data>
-		</dict>
-		<key>Frameworks/AlamofireNetworkActivityLogger.framework/Info.plist</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			rma1ng9Dz1dumI3a0125teCIOv4=
-			</data>
-			<key>hash2</key>
-			<data>
-			f+3NkzsGKS8DtCqiqnWUk0htGtqDmLCY6h8KtqFYBgY=
-			</data>
-		</dict>
-		<key>Frameworks/AlamofireNetworkActivityLogger.framework/_CodeSignature/CodeResources</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			sH08f9nH17w4HAjvmS39pvwaR6Q=
-			</data>
-			<key>hash2</key>
-			<data>
-			hMxzSnvl8k5I/qjJhe12uzFO69kIUPqWewvAG+ZoNvQ=
-			</data>
-		</dict>
-		<key>Frameworks/HEXColor.framework/HEXColor</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			o75ezG8fGr3ky7sY141Lfoq2O9g=
-			</data>
-			<key>hash2</key>
-			<data>
-			oXYNbos0OfgXuHJQp6/sXmkqCK05x8DlM4E5mO3vVsM=
-			</data>
-		</dict>
-		<key>Frameworks/HEXColor.framework/Info.plist</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Zpg1PNWBGuijqGhQB5KGvuu78bo=
-			</data>
-			<key>hash2</key>
-			<data>
-			YgXAUASThtmE5SBIYr8xDltXJahdv8jImNr/4I6BWE8=
-			</data>
-		</dict>
-		<key>Frameworks/HEXColor.framework/_CodeSignature/CodeResources</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			NWZay8j/6HNSVAz4RcSfRduGIvg=
-			</data>
-			<key>hash2</key>
-			<data>
-			danpYbWiSdaBT36C0VLd/9eMPt8t2Eonlcn0jn3FtQs=
-			</data>
-		</dict>
-		<key>Frameworks/Nuke.framework/Info.plist</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			odPvKa0m+o6JUJdqAuMnP5uEaxw=
-			</data>
-			<key>hash2</key>
-			<data>
-			qVhD2l6CO/5ppJjZl+vpNizpCOxE2VgsqzoSW2Wkhaw=
-			</data>
-		</dict>
-		<key>Frameworks/Nuke.framework/Nuke</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			4yLGl/CiQGWwN33Avp27I+KHwhk=
-			</data>
-			<key>hash2</key>
-			<data>
-			a+h5LsgsHj6N3q/q5PX+8jWRX8QyOxUfQCC4A+PgJb0=
-			</data>
-		</dict>
-		<key>Frameworks/Nuke.framework/_CodeSignature/CodeResources</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			BOljysX5nyXorOorJlJ9of2eQMU=
-			</data>
-			<key>hash2</key>
-			<data>
-			J9oeVXetu2qAbxqejNJAZ880gy0gc28qQy6twyrWKkU=
-			</data>
-		</dict>
-		<key>Frameworks/Reachability.framework/Info.plist</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			VHSUVCfHMYb9fQeGOSIWRZ7pa9E=
-			</data>
-			<key>hash2</key>
-			<data>
-			Uzg+zQ7K3hSzvb5lOropRyKyq7TrRgguuM9b2iD6LxM=
-			</data>
-		</dict>
-		<key>Frameworks/Reachability.framework/Reachability</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			5QjYsZUiNgrdmyTjfqhjvjGS+00=
-			</data>
-			<key>hash2</key>
-			<data>
-			EARj3eF0vsurT//11SZFsZroMc0WjIIm25pAmOYySH4=
-			</data>
-		</dict>
-		<key>Frameworks/Reachability.framework/_CodeSignature/CodeResources</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			0y9AM4D9jWtlcwZjqzlBkmigpxw=
-			</data>
-			<key>hash2</key>
-			<data>
-			pMstYLDRvHL7Otui9I7g8ZzV4VbspAZKCNI3JrGVMs0=
+			lo+PYJllkexh/2UtgND68W5r+O0/xkVi9JDvJJ4X0QA=
 			</data>
 		</dict>
 		<key>Headers/UXFeedbackSDK-Swift.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			DgAAWyKH9cUrE3TqAIwhnmwaNuc=
+			/w4cXEKJvJLDfaBz5WGzd13MJBY=
 			</data>
 			<key>hash2</key>
 			<data>
-			LW/cTFXsU5/04K5RPrmdPcU8n9MqNGRct+3UANsGp88=
+			AAOd+xL6pBO0rLfES7BkrmVprgDmoBIkTOzcd2+kLes=
 			</data>
 		</dict>
 		<key>Headers/UXFeedbackSDK.h</key>
@@ -332,70 +84,48 @@
 			1l/Wozp6plFjsksNP7OVR2xK6EBcguDmogd6k14SFCs=
 			</data>
 		</dict>
-		<key>Modules/UXFeedbackSDK.swiftmodule/arm.swiftdoc</key>
+		<key>Modules/UXFeedbackSDK.swiftmodule/i386.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			mQJR6/22CGujXXboUryE1EtUEEE=
+			pz8Two9f3wBr3Rz9wmQsLzrw8wQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			GDTl7De6vP5gfdnRQgzpDXH3T2U6/jRQzrLWmsdgmcE=
+			NHk+sFEs8zpXteQMV5R3GvYVJ0C7lkLHhhxUt723l68=
 			</data>
 		</dict>
-		<key>Modules/UXFeedbackSDK.swiftmodule/arm.swiftmodule</key>
+		<key>Modules/UXFeedbackSDK.swiftmodule/i386.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/JE9UxkpLYnlBYDSungQs01rJa0=
+			wRRB88pSY901sotp1hCaqUQgF5I=
 			</data>
 			<key>hash2</key>
 			<data>
-			BIIs/mJ62spWyS37KayRgfeX20cX29l33xW+xQr0xqc=
+			SJEata7aHg5bQ/1IV/NNCTr/PHQyem7PWNyQnM17i2o=
 			</data>
 		</dict>
-		<key>Modules/UXFeedbackSDK.swiftmodule/arm64.swiftdoc</key>
+		<key>Modules/UXFeedbackSDK.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			T9A39UU7L4ZcCT7mYI7RUhCGhP4=
+			UQtEBr814sFcwbU0IXUsX17Peww=
 			</data>
 			<key>hash2</key>
 			<data>
-			WkuIkWg4Pagw4MEPNe2Qq2mAarQwyT7KvYVbUnN29TY=
+			PGj2AXTTgPSpN9wl1lBCgIFtxGGFks3wYpQaXa/4TLc=
 			</data>
 		</dict>
-		<key>Modules/UXFeedbackSDK.swiftmodule/arm64.swiftmodule</key>
+		<key>Modules/UXFeedbackSDK.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			4I1gOMcn7dK9RDyqWDoYNBCTFTo=
+			Z8oORddaCd/95KCbMP2IwIkRTSs=
 			</data>
 			<key>hash2</key>
 			<data>
-			RlDmC2Yy/UY1TX0uNqRRtL8t4sQ/SO9axFr0fe08dnc=
-			</data>
-		</dict>
-		<key>Modules/UXFeedbackSDK.swiftmodule/armv7.swiftdoc</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			mQJR6/22CGujXXboUryE1EtUEEE=
-			</data>
-			<key>hash2</key>
-			<data>
-			GDTl7De6vP5gfdnRQgzpDXH3T2U6/jRQzrLWmsdgmcE=
-			</data>
-		</dict>
-		<key>Modules/UXFeedbackSDK.swiftmodule/armv7.swiftmodule</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			/JE9UxkpLYnlBYDSungQs01rJa0=
-			</data>
-			<key>hash2</key>
-			<data>
-			BIIs/mJ62spWyS37KayRgfeX20cX29l33xW+xQr0xqc=
+			hBoDxeiBDpetRYMB/ZX6W5dWBqdKgZ8FNnJY7gGTwH0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -413,22 +143,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6R5DtQcU9UetKr3QYeK7MZ8PFOc=
+			lb4E9EwmYZyCO179XJmrMylEE3M=
 			</data>
 			<key>hash2</key>
 			<data>
-			erWevuHkEGcxZN7m0g3zEkCuZd4A58q3L7K/h0JyFkI=
+			hasYVAynYrsMCoJ9BvmA5+iDdymXMFYs9C33mnW1Nn4=
 			</data>
 		</dict>
 		<key>UXFViewController.nib/runtime.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			XGxxYsoUNSOhg2git0oVEMwBMFg=
+			8oWS88u+CP10GaSR4ADkr0Ivc4w=
 			</data>
 			<key>hash2</key>
 			<data>
-			p8C2EHYyzoWvdOvkNlsWHibOWJS0A8/Mq5B9SiRhjn0=
+			FrAxsck+JDKsc5oD+asy2CCKD6r1C1zu2/nrFeaKIIo=
 			</data>
 		</dict>
 	</dict>

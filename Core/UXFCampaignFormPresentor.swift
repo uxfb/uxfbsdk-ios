@@ -17,16 +17,6 @@ protocol UXFCampaignFormPresentorProtocol: class {
 
 class UXFCampaignFormPresentor: NSObject{
     
-    internal var currentFormId: String?{
-        set{
-            UserDefaults.standard.set(newValue, forKey: "currentFormId")
-            UserDefaults.standard.synchronize()
-        }
-        get{
-            return UserDefaults.standard.object(forKey: "currentFormId") as? String
-        }
-    }
-    
     var progressString: String {
         if self.currentFormIndex < 0 {
             return ""
@@ -70,7 +60,7 @@ class UXFCampaignFormPresentor: NSObject{
         _currentForm?.removeFromParent()
     }
     
-    //MARK: - Form navogation presentation
+    //MARK: - Form navigation presentation
     
     private func nextForm(){
         if (self.currentFormIndex + 1) < _campaign.formsCount{
@@ -247,8 +237,7 @@ class UXFCampaignFormPresentor: NSObject{
             //controller.state = .presented
         }
         _currentForm = controller
-        
-        self.currentFormId = _currentForm?.formID //save current fromID
+        _campaign.setCurrentFormID(formID: controller.formID) //save current campaign fromID
     }
     
     open func presentForm(controller: UXFViewController, direction: UXFViewPopupDirection){

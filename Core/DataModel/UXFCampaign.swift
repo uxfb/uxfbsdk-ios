@@ -19,7 +19,7 @@ enum UXFCampaignPosition: String{
 
 struct UXFCampaign{
 
-    private let attemptKey = "campaingAttempt"
+    private let attemptKey = "campaignAttempt"
 
     private(set) var campaignId: String!
     private(set) var pages: Array<UXFPage> = []
@@ -27,6 +27,40 @@ struct UXFCampaign{
     private(set) var targetings: Array<Dictionary<String,Any>>!
     private(set) var isProgressEnabled: Bool!
     private(set) var projectId: String!
+    
+    var currentFormID: String? {
+      return UserDefaults.standard.object(forKey: self.campaignId + ".currentFormId") as? String
+    }
+    
+    func setCurrentFormID(formID: String?){
+        if formID != nil {
+           UserDefaults.standard.set(formID!, forKey: self.campaignId + ".currentFormId")
+        }
+        else{
+            UserDefaults.standard.removeObject(forKey: self.campaignId + ".currentFormId")
+        }
+        UserDefaults.standard.synchronize()
+    }
+    
+    var answerId: String?{
+        return UserDefaults.standard.object(forKey:self.campaignId + ".answerId") as? String
+    }
+    
+    func setAnswerID(answerID: String?){
+        if answerID != nil {
+             UserDefaults.standard.set(answerID!, forKey: self.campaignId + ".answerId")
+        }
+        else{
+            UserDefaults.standard.removeObject(forKey: self.campaignId + ".answerId")
+        }
+         UserDefaults.standard.synchronize()
+    }
+    
+    func removeUserData(){
+        self.setAnswerID(answerID:  nil)
+        self.setCurrentFormID(formID: nil)
+        self.resetAttempt()
+    }
     
     var showAttemptCount: Int{
         return 3
@@ -43,13 +77,25 @@ struct UXFCampaign{
     }
     
     func show() -> (Bool){
+        
+        //Временно: выходим если уже показывали форму хотя бы один раз
+        if self.currentFormID != nil {
+            return false
+        }
+        
         #warning("implement API call here")
+        
         if self.currentAttempt < showAttemptCount{
-            UserDefaults.standard.set(self.currentAttempt + 1, forKey: attemptKey)
+            UserDefaults.standard.set(self.currentAttempt + 1, forKey: self.campaignId + "." + attemptKey)
             return true
         }
         
-        return true//false
+        return false
+    }
+    
+    private func resetAttempt(){
+        UserDefaults.standard.removeObject(forKey: self.campaignId + "." + attemptKey)
+        UserDefaults.standard.synchronize()
     }
     
 }

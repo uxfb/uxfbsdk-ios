@@ -18,16 +18,6 @@ open class UXFeedback{
     
     public static let sharedInstance = UXFeedback.init()
     
-    private var answerId: String?{
-        set{
-            UserDefaults.standard.set(newValue, forKey: "answerId")
-            UserDefaults.standard.synchronize()
-        }
-        get{
-            return UserDefaults.standard.object(forKey: "answerId") as? String
-        }
-    }
-    
     open  var delegate: UXFeedbackCampaignDelegate?
     open  var formDelegate: UXFeedbackFormDelegate?
     open  var debugEnabled: Bool = false
@@ -119,7 +109,7 @@ open class UXFeedback{
     }
     
     open func resetCampaignData(completion: (()->())?){
-        self.answerId = nil
+        _campaign?.removeUserData()
     }
     
     //MARK: support
@@ -138,11 +128,11 @@ extension UXFeedback: UXFCampaignFormPresentorProtocol {
      
             _apiClient.saveFormData(isFirstAnswer: (formIndex == 0),
                                     projectId: _campaign!.projectId,
-                                    answerId: self.answerId,
+                                    answerId: _campaign?.answerId,
                                         campaignId: _campaign!.campaignId,
                                             fields: info) { (success, message, answerId) in
                                                 if answerId != nil {
-                                                  self.answerId = answerId!
+                                                    self._campaign?.setAnswerID(answerID: answerId)
                                                 }
                                                 if success == false {
                                                    self.showMessage(text: message ?? "Неизвестная ошибка при отправке данных формы", completion: nil)

@@ -52,26 +52,16 @@
 		0A4689C62284101E0074E1A3 /* UIAlertController+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6A22367F0C002FD4F8 /* UIAlertController+Show.swift */; };
 		0A468A2B228582850074E1A3 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A29228582850074E1A3 /* CocoaLumberjack.framework */; };
 		0A468A2C228582850074E1A3 /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A2A228582850074E1A3 /* CocoaLumberjackSwift.framework */; };
-		0A995FBE2288043B00A90A0A /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB92288043A00A90A0A /* Nuke.framework */; };
-		0A995FC12288043B00A90A0A /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FBC2288043B00A90A0A /* AlamofireNetworkActivityLogger.framework */; };
-		0A995FC4228804CC00A90A0A /* AlamofireNetworkActivityLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A995FBC2288043B00A90A0A /* AlamofireNetworkActivityLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A995FC6228804CC00A90A0A /* Nuke.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A995FB92288043A00A90A0A /* Nuke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0AA850C822895F7A0040007C /* Reachability.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AA850C522895F7A0040007C /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0AA850C922895F7A0040007C /* HEXColor.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AA850C622895F7A0040007C /* HEXColor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0AA850CA22895F7A0040007C /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AA850C722895F7A0040007C /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0AA850CB22895F880040007C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA850C722895F7A0040007C /* Alamofire.framework */; };
-		0AA850CC22895F880040007C /* HEXColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA850C622895F7A0040007C /* HEXColor.framework */; };
-		0AA850CD22895F880040007C /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA850C522895F7A0040007C /* Reachability.framework */; };
-		0AA850D4228960960040007C /* HEXColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA850CE2289602C0040007C /* HEXColor.framework */; };
-		0AA850D5228960960040007C /* HEXColor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA850CE2289602C0040007C /* HEXColor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0AA850D6228960960040007C /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA850D02289602C0040007C /* Reachability.framework */; };
-		0AA850D7228960960040007C /* Reachability.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA850D02289602C0040007C /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0AA850D8228960960040007C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FCC228807F300A90A0A /* Alamofire.framework */; };
-		0AA850D9228960960040007C /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FCC228807F300A90A0A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0AA850DA228960960040007C /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FCE228807F300A90A0A /* AlamofireNetworkActivityLogger.framework */; };
-		0AA850DB228960960040007C /* AlamofireNetworkActivityLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FCE228807F300A90A0A /* AlamofireNetworkActivityLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0AA850DC228960960040007C /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FD2228807F300A90A0A /* Nuke.framework */; };
-		0AA850DD228960960040007C /* Nuke.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FD2228807F300A90A0A /* Nuke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0AA705FA2289D5890091A7A0 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F52289D5890091A7A0 /* Nuke.framework */; };
+		0AA705FB2289D5890091A7A0 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F62289D5890091A7A0 /* Reachability.framework */; };
+		0AA705FC2289D5890091A7A0 /* HEXColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F72289D5890091A7A0 /* HEXColor.framework */; };
+		0AA705FD2289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */; };
+		0AA705FE2289D5890091A7A0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F92289D5890091A7A0 /* Alamofire.framework */; };
+		0AA705FF2289D5970091A7A0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F92289D5890091A7A0 /* Alamofire.framework */; };
+		0AA706002289D5970091A7A0 /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */; };
+		0AA706012289D5970091A7A0 /* HEXColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F72289D5890091A7A0 /* HEXColor.framework */; };
+		0AA706022289D5970091A7A0 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F52289D5890091A7A0 /* Nuke.framework */; };
+		0AA706032289D5970091A7A0 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F62289D5890091A7A0 /* Reachability.framework */; };
 		0AA850DF228960AB0040007C /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; };
 		0AA850E0228960AB0040007C /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -83,11 +73,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0A995FC4228804CC00A90A0A /* AlamofireNetworkActivityLogger.framework in CopyFiles */,
-				0A995FC6228804CC00A90A0A /* Nuke.framework in CopyFiles */,
-				0AA850C822895F7A0040007C /* Reachability.framework in CopyFiles */,
-				0AA850C922895F7A0040007C /* HEXColor.framework in CopyFiles */,
-				0AA850CA22895F7A0040007C /* Alamofire.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,11 +82,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0AA850D5228960960040007C /* HEXColor.framework in Embed Frameworks */,
-				0AA850D9228960960040007C /* Alamofire.framework in Embed Frameworks */,
-				0AA850DD228960960040007C /* Nuke.framework in Embed Frameworks */,
-				0AA850D7228960960040007C /* Reachability.framework in Embed Frameworks */,
-				0AA850DB228960960040007C /* AlamofireNetworkActivityLogger.framework in Embed Frameworks */,
 				0AA850E0228960AB0040007C /* UXFeedbackSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -163,17 +143,11 @@
 		0A6CDB8B2243C95B00C17007 /* UXFRateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFRateViewController.xib; sourceTree = "<group>"; };
 		0A6CDB8E22446EC900C17007 /* UXFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFViewController.swift; sourceTree = "<group>"; };
 		0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UXFeedbackSDK.framework; sourceTree = "<group>"; };
-		0A995FB92288043A00A90A0A /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = Carthage/Build/iOS/Nuke.framework; sourceTree = "<group>"; };
-		0A995FBA2288043A00A90A0A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		0A995FBC2288043B00A90A0A /* AlamofireNetworkActivityLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityLogger.framework; path = Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework; sourceTree = "<group>"; };
-		0A995FCC228807F300A90A0A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = UXFeedbackSDK.framework/Frameworks/Alamofire.framework; sourceTree = "<group>"; };
-		0A995FCE228807F300A90A0A /* AlamofireNetworkActivityLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityLogger.framework; path = UXFeedbackSDK.framework/Frameworks/AlamofireNetworkActivityLogger.framework; sourceTree = "<group>"; };
-		0A995FD2228807F300A90A0A /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = UXFeedbackSDK.framework/Frameworks/Nuke.framework; sourceTree = "<group>"; };
-		0AA850C522895F7A0040007C /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
-		0AA850C622895F7A0040007C /* HEXColor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HEXColor.framework; path = Carthage/Build/iOS/HEXColor.framework; sourceTree = "<group>"; };
-		0AA850C722895F7A0040007C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		0AA850CE2289602C0040007C /* HEXColor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HEXColor.framework; path = UXFeedbackSDK.framework/Frameworks/HEXColor.framework; sourceTree = "<group>"; };
-		0AA850D02289602C0040007C /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = UXFeedbackSDK.framework/Frameworks/Reachability.framework; sourceTree = "<group>"; };
+		0AA705F52289D5890091A7A0 /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = Carthage/Build/iOS/Nuke.framework; sourceTree = "<group>"; };
+		0AA705F62289D5890091A7A0 /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
+		0AA705F72289D5890091A7A0 /* HEXColor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HEXColor.framework; path = Carthage/Build/iOS/HEXColor.framework; sourceTree = "<group>"; };
+		0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityLogger.framework; path = Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework; sourceTree = "<group>"; };
+		0AA705F92289D5890091A7A0 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		0AA92D9C227A9410005DBCBA /* UXFSmileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFSmileButton.swift; sourceTree = "<group>"; };
 		0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+blocks.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -184,12 +158,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A468A2B228582850074E1A3 /* CocoaLumberjack.framework in Frameworks */,
-				0AA850D4228960960040007C /* HEXColor.framework in Frameworks */,
 				0A468A2C228582850074E1A3 /* CocoaLumberjackSwift.framework in Frameworks */,
-				0AA850D8228960960040007C /* Alamofire.framework in Frameworks */,
-				0AA850D6228960960040007C /* Reachability.framework in Frameworks */,
-				0AA850DA228960960040007C /* AlamofireNetworkActivityLogger.framework in Frameworks */,
-				0AA850DC228960960040007C /* Nuke.framework in Frameworks */,
+				0AA705FA2289D5890091A7A0 /* Nuke.framework in Frameworks */,
+				0AA705FB2289D5890091A7A0 /* Reachability.framework in Frameworks */,
+				0AA705FC2289D5890091A7A0 /* HEXColor.framework in Frameworks */,
+				0AA705FD2289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework in Frameworks */,
+				0AA705FE2289D5890091A7A0 /* Alamofire.framework in Frameworks */,
 				0AA850DF228960AB0040007C /* UXFeedbackSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,12 +172,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A995FBE2288043B00A90A0A /* Nuke.framework in Frameworks */,
-				0A995FC12288043B00A90A0A /* AlamofireNetworkActivityLogger.framework in Frameworks */,
-				0AA850CB22895F880040007C /* Alamofire.framework in Frameworks */,
-				0AA850CC22895F880040007C /* HEXColor.framework in Frameworks */,
-				0AA850CD22895F880040007C /* Reachability.framework in Frameworks */,
 				0A4689C222840F7C0074E1A3 /* CoreTelephony.framework in Frameworks */,
+				0AA705FF2289D5970091A7A0 /* Alamofire.framework in Frameworks */,
+				0AA706002289D5970091A7A0 /* AlamofireNetworkActivityLogger.framework in Frameworks */,
+				0AA706012289D5970091A7A0 /* HEXColor.framework in Frameworks */,
+				0AA706022289D5970091A7A0 /* Nuke.framework in Frameworks */,
+				0AA706032289D5970091A7A0 /* Reachability.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,9 +187,6 @@
 		0A019A3322365E02002FD4F8 = {
 			isa = PBXGroup;
 			children = (
-				0AA850C722895F7A0040007C /* Alamofire.framework */,
-				0AA850C622895F7A0040007C /* HEXColor.framework */,
-				0AA850C522895F7A0040007C /* Reachability.framework */,
 				0A019A52223669CC002FD4F8 /* Core */,
 				0A019A3E22365E02002FD4F8 /* UX Feedback SDK Demo */,
 				0A46899322840B2C0074E1A3 /* UXFeedbackSDK */,
@@ -354,14 +325,11 @@
 		3EE1448B815C3AA05E865A6C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0A995FBA2288043A00A90A0A /* Alamofire.framework */,
-				0A995FBC2288043B00A90A0A /* AlamofireNetworkActivityLogger.framework */,
-				0AA850CE2289602C0040007C /* HEXColor.framework */,
-				0AA850D02289602C0040007C /* Reachability.framework */,
-				0A995FCC228807F300A90A0A /* Alamofire.framework */,
-				0A995FCE228807F300A90A0A /* AlamofireNetworkActivityLogger.framework */,
-				0A995FD2228807F300A90A0A /* Nuke.framework */,
-				0A995FB92288043A00A90A0A /* Nuke.framework */,
+				0AA705F92289D5890091A7A0 /* Alamofire.framework */,
+				0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */,
+				0AA705F72289D5890091A7A0 /* HEXColor.framework */,
+				0AA705F52289D5890091A7A0 /* Nuke.framework */,
+				0AA705F62289D5890091A7A0 /* Reachability.framework */,
 				0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */,
 				0A468A29228582850074E1A3 /* CocoaLumberjack.framework */,
 				0A468A2A228582850074E1A3 /* CocoaLumberjackSwift.framework */,
@@ -512,6 +480,11 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjackSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjack.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Reachability.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/HEXColor.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Nuke.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -519,7 +492,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n#xcodebuild -target \"UXFeedbackSDK\" ONLY_ACTIVE_ARCH=NO -configuration \"$CONFIGURATION\" -sdk \"iphonesimulator\" build\n#xcodebuild -target \"UXFeedbackSDK\" ONLY_ACTIVE_ARCH=NO -configuration \"$CONFIGURATION\" -sdk \"iphoneos\" build\n";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		0A4689FF22856A3B0074E1A3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -541,7 +514,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "#/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -780,7 +753,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "UXFeedbackDemo Distr";
+				PROVISIONING_PROFILE_SPECIFIER = "UXFeedbackDemo AdHoc";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
