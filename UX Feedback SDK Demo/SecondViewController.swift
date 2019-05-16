@@ -34,11 +34,11 @@ extension SecondViewController: UXFeedbackFormDelegate{
         DDLogDebug(error.localizedDescription)
     }
     
-    func formDidClose(formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
+    func formDidClose(formID: String?, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
         DDLogDebug(#function)
     }
     
-    func formWillClose(form: UXFViewController, formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
+    func formWillClose(form: UXFViewController, formID: String?, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
         DDLogDebug(#function)
     }
 }

@@ -36,7 +36,7 @@ open class UXFViewController: UIViewController{
     static let animationTime = 0.5
     
     private (set) var formIndex: Int = 0
-    private (set) var formID: String = ""
+    private (set) var formID: String?
     var state:UXFViewControllerState = .presenting
     
     internal weak var theme: UXFTheme?
@@ -56,7 +56,7 @@ open class UXFViewController: UIViewController{
     @IBOutlet  var contentView: UIView!
     
     
-    convenience init(index: Int = 0, formID: String) {
+    convenience init(index: Int = 0, formID: String?) {
         let bundle = Bundle(for: UXFeedback.self)
         self.init(nibName: "UXFViewController", bundle: bundle)
         self.formIndex = index

@@ -11,15 +11,15 @@ import HEXColor
 
 open class UXFTheme{
     
-    open var titleColor: UIColor = UIColor.black
-    open var textColor: UIColor = UIColor.black
+    open var titleColor: UIColor = UIColor.black //header
+    open var textColor: UIColor = UIColor.black //text
     open var accendentTextColor: UIColor = UIColor.green
     open var accentColor: UIColor  = UIColor.green
-    open var backgroundColor: UIColor = UIColor.white
-    open var errorColor: UIColor = UIColor.init("#E92436")
+    open var backgroundColor: UIColor = UIColor.white //form background color
+    open var errorColor: UIColor = UIColor.init("#E92436") //Alert comment color
     open var cardColor: UIColor = UIColor.yellow
     open var formCornerRadius: CGFloat = 8.0
-    open var progressColor: UIColor = UIColor.init("#9699A7")
+    open var progressColor: UIColor = UIColor.init("#9699A7") // navigation label color
     
     public init(){
        

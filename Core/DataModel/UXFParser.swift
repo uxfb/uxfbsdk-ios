@@ -62,7 +62,7 @@ class UXFParser{
             
             for pageDict in pagesArrayOfDict{
                 DDLogDebug("page: \(pageDict)")
-                let pageId =  pageDict["_id"] as! String
+                let pageId: String? = pageDict["_id"] as? String
                 let page = UXFPage.init(id: pageId, uiData: pageDict)
                 pages.append(page)
             }

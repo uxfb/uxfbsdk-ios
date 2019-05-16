@@ -25,6 +25,6 @@ public protocol UXFeedbackCampaignDelegate: class{
 public protocol UXFeedbackFormDelegate: AnyObject {
    func formDidLoaded(form: UXFViewController)
    func formDidFailLoading(error: UXFError)
-   func formDidClose(formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool)
-   func formWillClose(form: UXFViewController, formID: String, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool)
+   func formDidClose(formID: String?, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool)
+   func formWillClose(form: UXFViewController, formID: String?, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool)
 }
