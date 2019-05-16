@@ -79,9 +79,12 @@ struct UXFCampaign{
     func show() -> (Bool){
         
         //Временно: выходим если уже показывали форму хотя бы один раз
+        #if DEBUG
+        #else
         if self.currentFormID != nil {
             return false
         }
+        #endif
         
         #warning("implement API call here")
         

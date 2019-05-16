@@ -425,7 +425,7 @@ class UXFParser{
         var height: CGFloat = 0.0
         let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.containerWidth, height: 44))
         
-        let labelYOffset: CGFloat = 10.0
+        let labelYOffset: CGFloat = 0.0
         height += labelYOffset
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 24))
         label.text = dictionary["value"] as? String
@@ -434,7 +434,7 @@ class UXFParser{
         label.textAlignment = .center
         label.textColor = theme.textColor
         label.sizeToFit()
-        //label.backgroundColor = UIColor.darkGray
+       // label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label)
         
@@ -444,7 +444,7 @@ class UXFParser{
          }
         height += labelHeight
  
-        let stackViewYOffset: CGFloat = 15.0
+        let stackViewYOffset: CGFloat = 24.0
         let stackViewBottom: CGFloat = 43.0
         height += stackViewYOffset + stackViewBottom
         let stackViewHeight: CGFloat = IS_IPAD == true ? 48.0 : 40.0

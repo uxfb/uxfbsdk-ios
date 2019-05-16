@@ -70,6 +70,7 @@ open class UXFViewController: UIViewController{
         #else
         self.backButton?.isHidden = true
         #endif
+        
         if self.formIndex == 0 {
             self.backButton?.isHidden = true
         }
