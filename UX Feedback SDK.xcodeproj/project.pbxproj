@@ -468,7 +468,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\ncp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
+			shellScript = "BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\n#cp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
 		};
 		0A4689F6228564FD0074E1A3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

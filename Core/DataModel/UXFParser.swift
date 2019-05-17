@@ -34,15 +34,6 @@ class UXFParser{
             UserDefaults.standard.set(newValue, forKey: "selectedSmileIndex")
         }
     }
-    private var _selectedSmileInfo: Dictionary <String, Any>?{
-        get {
-            return UserDefaults.standard.object(forKey: "selectedSmileInfo") as? Dictionary<String,Any>
-        }
-        set{
-            UserDefaults.standard.set(newValue, forKey: "selectedSmileInfo")
-            UserDefaults.standard.synchronize()
-        }
-    }
     
     init(theme: UXFTheme) {
         self.theme = theme
@@ -261,10 +252,6 @@ class UXFParser{
                                groupID: String,
                                submitHandler: ((Dictionary<String,Any>?)->())?) ->(UIView?){
         
-        guard let  commentsInfo = dictionary["customComments"] as? Dictionary<String, Any> else {
-            return nil
-        }
-        
         var height: CGFloat = 0.0
         let view = UIView.init(frame: CGRect.init(x: 0,
                                                   y: 0,
@@ -281,18 +268,23 @@ class UXFParser{
         var titleText: String = (dictionary["value"] as? String)  ?? "Вы чем-то расстроены? Пожалуйста, поделитесь этим с нами"
         
         if let selectedSmile = self._selectedSmileIndex,
-            let smileInfo = self._selectedSmileInfo{
+            let messages: Dictionary<String,String> = dictionary["messages"] as? Dictionary<String, String>{
             
-            isCommentRequired = smileInfo["isRequired"] as! Bool
+            isCommentRequired = (selectedSmile <= 2)
             if isCommentRequired {
-                alertCommentText = smileInfo["warning"] as? String
-            }
-            
-            if let enabledComments = commentsInfo["enabled"] as? Bool,
-                enabledComments == true,
-                let customCommentInfo = commentsInfo["comments"] as? Dictionary<String, String>,
-                let custimCommentText = customCommentInfo["\(selectedSmile)"]{
-                titleText = custimCommentText
+                switch selectedSmile{
+                case 0:
+                     alertCommentText  = messages["negative"]
+                     break
+                case 1:
+                    alertCommentText  = messages["warning"]
+                    break
+                case 2:
+                    alertCommentText  = messages["positive"]
+                    break
+                default:
+                    alertCommentText = "Комментарий обязателен"
+                }
             }
         }
     
@@ -456,9 +448,7 @@ class UXFParser{
         stackView.distribution = .fillEqually
         view.addSubview(stackView)
         
-        let smilesInfo = dictionary["smiles"] as! Dictionary<String, Any>
-        self.createSmileButtons(info: smilesInfo,
-                                layoutView: stackView,
+        self.createSmileButtons(layoutView: stackView,
                                 groupId: groupID,
             submitHandler: submitHandler)
 
@@ -547,21 +537,14 @@ class UXFParser{
     
     //MARK: - Smiles
     
-    private func createSmileButtons(info:  Dictionary<String, Any>,
-                              layoutView: UIStackView,
-                              groupId: String,
+    private func createSmileButtons(layoutView: UIStackView,
+                                    groupId: String,
                               submitHandler: ((Dictionary<String,Any>)->())?){
-        let smilesKeys = info.keys.sorted()
         
-        for smileKey in smilesKeys{
-            let smileIndex = Int(smileKey)!
-            let smileInfo = info[smileKey] as! Dictionary <String, Any>
-            let smileHint = smileInfo["hint"] as? String
-            
-            let button = UXFSmileButton.init(index: smileIndex,
-                                             isRequired: info["isRequered"] as? Bool,
-                                             warning: info["warning"] as? String,
-                                             hint: smileHint)
+        let smilesCount = 5
+        for smileIndex in 0..<smilesCount {
+
+            let button = UXFSmileButton.init(index: smileIndex)
             button.imageView?.contentMode = .scaleAspectFit
             if #available(iOS 11.0, *) {
                 button.adjustsImageSizeForAccessibilityContentSizeCategory = true
@@ -573,7 +556,7 @@ class UXFParser{
             })
             button.setImage(previewButtonImage, for: UIControl.State.normal)
             
-            var buttonWidth = layoutView.bounds.size.width/CGFloat(smilesKeys.count)
+            var buttonWidth = layoutView.bounds.size.width/CGFloat(smilesCount)
             let buttonHeight = layoutView.bounds.size.height
             if buttonWidth > buttonHeight{
                 buttonWidth = buttonHeight
@@ -584,7 +567,6 @@ class UXFParser{
                                         height: buttonHeight)
             layoutView.addArrangedSubview(button)
             button.addAction(for: .touchUpInside) { [weak self] in
-                self?._selectedSmileInfo = info[smileKey] as? Dictionary<String, Any>
                 self?._selectedSmileIndex = button.index
                 submitHandler?([groupId : button.index])
             }

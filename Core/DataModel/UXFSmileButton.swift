@@ -11,22 +11,10 @@ import UIKit
 class UXFSmileButton: UXFButton {
 
     private(set) var index: Int = 0
-    private(set) var isRequired = false
-    private(set) var warning: String?
-    private(set) var hint: String?
     
-    convenience init(index: Int,
-                     isRequired: Bool?,
-                     warning: String?,
-                     hint: String?) {
+    convenience init(index: Int) {
         self.init()
-        
         self.index = index
-        if isRequired != nil {
-          self.isRequired = isRequired!
-        }
-        self.warning = warning
-        self.hint = hint
     }
 
 }
