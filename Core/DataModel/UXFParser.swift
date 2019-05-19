@@ -265,26 +265,27 @@ class UXFParser{
         var alertCommentText: String?
         var isCommentRequired = false
         
-        var titleText: String = (dictionary["value"] as? String)  ?? "Вы чем-то расстроены? Пожалуйста, поделитесь этим с нами"
+        let titleText: String = (dictionary["value"] as? String)  ?? "Вы чем-то расстроены? Пожалуйста, поделитесь этим с нами"
         
         if let selectedSmile = self._selectedSmileIndex,
             let messages: Dictionary<String,String> = dictionary["messages"] as? Dictionary<String, String>{
             
-            isCommentRequired = (selectedSmile <= 2)
+            isCommentRequired = (selectedSmile < 2)
+    
             if isCommentRequired {
-                switch selectedSmile{
-                case 0:
-                     alertCommentText  = messages["negative"]
-                     break
-                case 1:
-                    alertCommentText  = messages["warning"]
-                    break
-                case 2:
-                    alertCommentText  = messages["positive"]
-                    break
-                default:
-                    alertCommentText = "Комментарий обязателен"
+                if selectedSmile == 0 {
+                    alertCommentText  = messages["negative"]
                 }
+                else{
+                     alertCommentText  = messages["warning"]
+                }
+             
+                if alertCommentText == nil {
+                    alertCommentText = "Комментарий обязательный"
+                }
+            }
+            else{
+                alertCommentText  = messages["positive"]
             }
         }
     
@@ -312,8 +313,8 @@ class UXFParser{
         var alertLabelHeight = alertLabelFontSize
         
         let sendButton = UIButton.init()
-        sendButton.isEnabled = !isCommentRequired
-        sendButton.alpha = sendButton.isEnabled == true ? 1.0 : 0.3
+        //sendButton.isEnabled = !isCommentRequired
+        sendButton.alpha = isCommentRequired == true ? 1.0 : 0.5
         
         let textField = UXFTextField.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 48))
         height += textFieldHeight + textFieldYOffset
@@ -324,8 +325,8 @@ class UXFParser{
         textField.didChange = { (inputTextField, text) in
                 inputTextField.inputState = text?.count ?? 0 > 0 ? .input : .normal
                 if isCommentRequired == true {
-                    sendButton.isEnabled = (text?.count ?? 0 > 0)
-                    sendButton.alpha = sendButton.isEnabled == true ? 1.0 : 0.5
+                   // sendButton.isEnabled = (text?.count ?? 0 > 0)
+                    sendButton.alpha = (text?.count ?? 0 > 0 ? 1.0 : 0.5)
                 }
         }
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -338,6 +339,7 @@ class UXFParser{
             alertLabel!.textAlignment = .left
             alertLabel!.font =  alertLabel!.font.withSize(alertLabelFontSize)
             alertLabel!.textColor = self.theme.errorColor
+            alertLabel!.alpha = 0
             alertLabel?.numberOfLines = 0
             let alertText = alertCommentText ?? "Заполните обязательное поле".localized()
             alertLabel!.text = alertText
@@ -358,8 +360,12 @@ class UXFParser{
         let sendButtonHeight: CGFloat = 44.0
         //sendButton.backgroundColor = UIColor.gray
         sendButton.addAction {
-            if let commentText = textField.text{
+            if let commentText = textField.text, commentText.count > 0{
                 submitHandler?([groupID : commentText])
+            }
+            else if isCommentRequired == true{
+                alertLabel?.alpha = 1.0
+                textField.inputState = .alert
             }
             else{
                 submitHandler?(nil)

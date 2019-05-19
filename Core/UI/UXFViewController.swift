@@ -66,26 +66,28 @@ open class UXFViewController: UIViewController{
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        #if DEBUG
-        #else
-        self.backButton?.isHidden = true
-        #endif
-        
         if self.formIndex == 0 {
             self.backButton?.isHidden = true
         }
         else{
+            #if DEBUG
+            self.backButton?.isHidden = false
+            #else
+            self.backButton?.isHidden = true
+            #endif
             self.logoImageView?.isHidden  = true
         }
         
         self.progressLabel?.textColor = theme?.progressColor
         self.progressLabel?.text = self.progressString
         contentView?.layer.cornerRadius = theme?.formCornerRadius ?? 8.0
-        contentView?.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.24).cgColor
-        contentView?.layer.shadowOffset = CGSize(width: 0, height: 2)
         contentView?.layer.masksToBounds = false
         contentView?.clipsToBounds = false
+        
         contentView?.layer.shadowRadius = 6
+        contentView?.layer.shadowOffset = CGSize.init(width: 0, height: 8)
+        contentView?.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.24).cgColor
+        contentView?.layer.shadowOpacity = 1.0
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),
@@ -98,6 +100,12 @@ open class UXFViewController: UIViewController{
         
         didLoadHandler?(self.formIndex)
         self.state = .presented
+    }
+    
+    override open func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+      
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {

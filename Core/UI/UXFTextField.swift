@@ -31,7 +31,7 @@ class UXFTextField: UITextField {
                 layer.borderColor = UIColor.clear.cgColor
                 break
             case .alert:
-                layer.borderColor = UIColor("#E91436").cgColor
+                layer.borderColor = UIColor("#E92436").cgColor
                 break
             case .input:
                 layer.borderColor = UIColor("#1F45EB").cgColor
