@@ -47,6 +47,7 @@ class UXFParser{
         let progressDict = compaignInfo["progress"] as! Dictionary<String, Any>
         let progress = progressDict["enabled"] as! Bool
         let projectId = compaignInfo["projectId"] as! String
+        let autocolse: Double = compaignInfo["autocolse"] as? Double ?? 0.0
         
         var pages = Array<UXFPage>()
         if let pagesArrayOfDict = compaignInfo["pages"] as? Array<Dictionary<String, Any>> {
@@ -64,7 +65,8 @@ class UXFParser{
                                 type: UXFCampaignType.init(rawValue: type),
                                 targetings: targetingArr,
                                 isProgressEnabled: progress,
-                                projectId:  projectId)
+                                projectId:  projectId,
+                                autoclose: autocolse)
     }
     
     //MARK: support
@@ -221,7 +223,7 @@ class UXFParser{
         allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(UXFParser.contentSubviewOffset)-[label]-\(UXFParser.contentSubviewOffset)-|",
             metrics: nil,
             views: views as [String : Any])
-        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=0)-[skipButton]-[sendButton]-|",
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=0)-[skipButton]-(24)-[sendButton]-|",
                                                          metrics: nil,
                                                          views: views as [String : Any])
         allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(UXFParser.contentSubviewOffset)-[textField]-\(UXFParser.contentSubviewOffset)-|",
@@ -314,7 +316,7 @@ class UXFParser{
         
         let sendButton = UIButton.init()
         //sendButton.isEnabled = !isCommentRequired
-        sendButton.alpha = isCommentRequired == true ? 1.0 : 0.5
+        sendButton.alpha = isCommentRequired == true ? 0.5 : 1.0
         
         let textField = UXFTextField.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 48))
         height += textFieldHeight + textFieldYOffset
@@ -351,8 +353,7 @@ class UXFParser{
         else{
             textField.placeholder = "Необязательное поле".localized()
         }
-        
-        
+
         sendButton.setTitle("Отправить".localized(), for: .normal)
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.setTitleColor(sendButton.tintColor, for: .normal)

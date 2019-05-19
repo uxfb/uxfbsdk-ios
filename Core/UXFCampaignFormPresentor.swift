@@ -55,7 +55,7 @@ class UXFCampaignFormPresentor: NSObject{
         nextForm()
     }
     
-    func dismissCurrentForm(){
+    @objc func dismissCurrentForm(){
         _currentForm?.dismiss(animated: true, completion: nil)
         _currentForm?.removeFromParent()
     }
@@ -238,6 +238,10 @@ class UXFCampaignFormPresentor: NSObject{
         }
         _currentForm = controller
         _campaign.setCurrentFormID(formID: controller.formID) //save current campaign fromID
+        
+        if _campaign.autoclose > 0 && _currentForm?.formIndex == (_campaign.pages.count - 1) {
+            self.perform(#selector(dismissCurrentForm), with: nil, afterDelay: _campaign.autoclose)
+        }
     }
 }
 
