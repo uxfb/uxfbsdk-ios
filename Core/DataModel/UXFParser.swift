@@ -387,7 +387,7 @@ class UXFParser{
         allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(UXFParser.contentSubviewOffset)-[label]-\(UXFParser.contentSubviewOffset)-|",
                                                          metrics: nil,
                                                          views: views as [String : Any])
-        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-33-[sendButton]-33-|",
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=33)-[sendButton]-(>=33)-|",
             metrics: nil,
             views: views as [String : Any])
         
