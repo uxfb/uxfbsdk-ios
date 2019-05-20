@@ -29,6 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         DDLog.add(DDOSLogger.sharedInstance)
         
+        for family in UIFont.familyNames.sorted() {
+            let names = UIFont.fontNames(forFamilyName: family)
+            print("Family: \(family) Font names: \(names)")
+        }
+        
         //print(String(describing: UIDevice.current.identifierForVendor?.uuidString))
         let customTheme: UXFTheme = UXFTheme.init()
         customTheme.backgroundColor = UIColor.groupTableViewBackground

@@ -65,6 +65,10 @@ open class UXFeedback{
         }
     }
     
+    private func setupFont(){
+        
+    }
+    
     //Requrst event to show campaing form with specific name
     open func sendEvent(event: String, fromController: UIViewController? = nil){
         

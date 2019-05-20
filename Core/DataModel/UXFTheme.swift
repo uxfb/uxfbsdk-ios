@@ -20,6 +20,10 @@ open class UXFTheme{
     open var cardColor: UIColor = UIColor.yellow
     open var formCornerRadius: CGFloat = 8.0
     open var progressColor: UIColor = UIColor.init("#9699A7") // navigation label color
+    open var fontRegularName: String = "Roboto-Regular"
+    open var fontMediumName: String = "Roboto-Medium"
+    open var fontLightName: String = "Roboto-Light"
+    open var fontBoldName: String = "Roboto-Bold"
     
     public init(){
        
@@ -52,6 +56,16 @@ open class UXFTheme{
         if let progrressColorString = colorsDict["progressColor"] {
             progressColor = UIColor(progrressColorString)
         }
+        
+        let fontExtention = "ttf"
+        let fonts = [fontRegularName, fontMediumName, fontLightName, fontBoldName]
+        fonts.forEach { (fontName) in
+            let bundle =  Bundle.init(for: UXFTheme.self)
+            if let fontUrl = bundle.url(forResource: fontName, withExtension: fontExtention){
+               _ = loadFont(fontUrl: fontUrl)
+            }
+        }
+       
     }
     
     open func getSmile(imageName: String, completion: (_ smileImage: UIImage)->()) ->(UIImage?){
@@ -68,5 +82,20 @@ open class UXFTheme{
         else{
             return ""
         }
+    }
+    
+    open func loadFont(fontUrl: URL) -> Bool {
+        if let inData = try? Data(contentsOf: fontUrl) {
+            var error: Unmanaged<CFError>?
+            if let cfdata = CFDataCreate(nil, [UInt8](inData), inData.count),
+                let provider = CGDataProvider(data: cfdata),
+                let font = CGFont(provider) {
+                    if (!CTFontManagerRegisterGraphicsFont(font, &error)) {
+                        DDLogDebug("Failed to load font: \(String(describing: error))")
+                    }
+                    return true
+                }
+            }
+        return false
     }
 }

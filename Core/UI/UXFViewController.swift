@@ -78,6 +78,11 @@ open class UXFViewController: UIViewController{
             self.logoImageView?.isHidden  = true
         }
         
+        if self.progressLabel != nil, self.theme != nil {
+           self.progressLabel?.font = UIFont.init(name: self.theme!.fontRegularName,
+                                                  size: self.progressLabel!.font.pointSize)
+        }
+        
         self.progressLabel?.textColor = theme?.progressColor
         self.progressLabel?.text = self.progressString
         contentView?.layer.cornerRadius = theme?.formCornerRadius ?? 8.0

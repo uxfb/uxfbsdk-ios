@@ -162,7 +162,7 @@ class UXFParser{
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 24))
         label.text = (dictionary["value"] as? String)  ?? "Введите Email и мы ответим Вам в ближайшее время"
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
-        label.font =  label.font.withSize(labelFontSize)
+        label.font = UIFont.init(name: self.theme!.fontMediumName, size: labelFontSize)
         label.numberOfLines = 0
         label.textColor = self.theme.textColor
         label.textAlignment = .center
@@ -179,6 +179,7 @@ class UXFParser{
         let textFieldHeight: CGFloat = 48.0
         let textFieldYOffset: CGFloat = 15.0
         let textField = UXFTextField.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 48))
+        textField.font = UIFont.init(name: self.theme.fontRegularName, size: textField.font!.pointSize)
         height += textFieldHeight + textFieldYOffset
         textField.contentLeftPadding = 16.0
         //textField.borderStyle = .line
@@ -294,7 +295,7 @@ class UXFParser{
        // label.textColor = 
         label.text = titleText
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
-        label.font =  label.font.withSize(labelFontSize)
+        label.font =  UIFont.init(name: self.theme!.fontMediumName, size: labelFontSize)
         label.numberOfLines = 0
         label.textColor = self.theme.textColor
         label.textAlignment = .center
@@ -315,12 +316,11 @@ class UXFParser{
         var alertLabelHeight = alertLabelFontSize
         
         let sendButton = UIButton.init()
-        //sendButton.isEnabled = !isCommentRequired
-        sendButton.alpha = isCommentRequired == true ? 0.5 : 1.0
         
         let textField = UXFTextField.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 48))
         height += textFieldHeight + textFieldYOffset
         textField.contentLeftPadding = 16.0
+        textField.font = UIFont.init(name: self.theme.fontRegularName, size: textField.font!.pointSize)
         //textField.borderStyle = .line
         //textField.setContentHuggingPriority(UILayoutPriority.init(rawValue: 251), for: .vertical)
         textField.backgroundColor = UIColor.init("#F6F6F7")
@@ -335,20 +335,22 @@ class UXFParser{
         view.addSubview(textField)
         
         var alertLabel: UILabel?
-        if isCommentRequired == true {
-            textField.placeholder = "Обязательное поле".localized()
+        if let alertText = alertCommentText {
             alertLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 40, height: alertLabelHeight))
             alertLabel!.textAlignment = .left
-            alertLabel!.font =  alertLabel!.font.withSize(alertLabelFontSize)
-            alertLabel!.textColor = self.theme.errorColor
-            alertLabel!.alpha = 0
+            alertLabel!.font =  UIFont.init(name: self.theme!.fontRegularName, size: alertLabelFontSize)
             alertLabel?.numberOfLines = 0
-            let alertText = alertCommentText ?? "Заполните обязательное поле".localized()
             alertLabel!.text = alertText
             alertLabelHeight = alertText.height(withConstrainedWidth: (view.frame.size.width - UXFParser.contentSubviewOffset*2), font: alertLabel!.font)
             alertLabel!.translatesAutoresizingMaskIntoConstraints = false
             height += alertLabelYOffset + alertLabelHeight
             view.addSubview(alertLabel!)
+        }
+        
+        if isCommentRequired == true {
+            textField.placeholder = "Обязательное поле".localized()
+            alertLabel!.alpha = 0
+            alertLabel!.textColor = self.theme.errorColor
         }
         else{
             textField.placeholder = "Необязательное поле".localized()
@@ -429,7 +431,7 @@ class UXFParser{
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 24))
         label.text = dictionary["value"] as? String
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
-        label.font =  label.font.withSize(labelFontSize)
+        label.font =  UIFont.init(name: self.theme!.fontMediumName, size: labelFontSize)
         label.textAlignment = .center
         label.textColor = theme.textColor
         label.sizeToFit()
@@ -483,7 +485,11 @@ class UXFParser{
     
     private  func createButton(dictionary: Dictionary<String, Any>, groupID: String)->(UXFButton){
         let button = UXFButton.init(frame: CGRect.init(x: 0, y: 0, width: 80, height: 33))
-        button.titleLabel?.text = dictionary["value"] as? String
+        
+        if button.titleLabel != nil {
+          button.titleLabel?.text = dictionary["value"] as? String
+          button.titleLabel?.font = UIFont.init(name: self.theme!.fontMediumName, size: button.titleLabel!.font.pointSize)
+        }
         return button
     }
     
@@ -502,7 +508,7 @@ class UXFParser{
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: self.containerWidth - UXFParser.contentSubviewOffset*2, height: 24))
         label.text = dictionary["value"] as? String
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
-        label.font =  label.font.withSize(labelFontSize)
+        label.font =  UIFont.init(name: self.theme!.fontBoldName, size: labelFontSize)
         label.textAlignment = .center
         label.textColor = self.theme.titleColor
         label.numberOfLines = 0
@@ -525,7 +531,7 @@ class UXFParser{
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: self.containerWidth - UXFParser.contentSubviewOffset*2, height: 24))
         label.text = dictionary["value"] as? String
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
-        label.font =  label.font.withSize(labelFontSize)
+        label.font =  UIFont.init(name: self.theme!.fontMediumName, size: labelFontSize)
         label.textColor = self.theme.textColor
         label.textAlignment = .center
         label.numberOfLines = 0
