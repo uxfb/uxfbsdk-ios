@@ -69,7 +69,47 @@ class UXFParser{
                                 autoclose: autocolse)
     }
     
+    
     //MARK: support
+    
+    private func setLabelText(label: UILabel,
+                              text: String?,
+                              textAlignment: NSTextAlignment = NSTextAlignment.center,
+                              fontName: String? = nil,
+                              fontSize: CGFloat = 17.0,
+                              textColor: UIColor? = nil,
+                              width: CGFloat? = nil) -> CGFloat{
+        
+        label.textAlignment = textAlignment
+        label.numberOfLines = 0
+        if text != nil {
+            let attributedString = NSMutableAttributedString(string: text!)
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = fontSize * 0.5
+            paragraphStyle.alignment = textAlignment
+            
+            let font = UIFont.init(name: fontName ?? self.theme!.fontMediumName, size: fontSize)
+            
+            attributedString.addAttributes([NSAttributedString.Key.font : font as Any,
+                                            NSAttributedString.Key.foregroundColor: textColor ?? theme.textColor],
+                                           range: NSMakeRange(0, attributedString.length))
+            
+            attributedString.addAttribute(NSAttributedString.Key.paragraphStyle,
+                                          value:paragraphStyle,
+                                          range:NSMakeRange(0, attributedString.length))
+            
+            label.attributedText = attributedString
+        }
+        else{
+            label.text = ""
+        }
+        
+        var labelHeight = fontSize
+        if let text = label.attributedText {
+            labelHeight = text.height(withConstrainedWidth: width ?? self.containerWidth)
+        }
+        return labelHeight
+    }
     
     internal  func parseUIElement(dictionary: Dictionary<String, Any>,
                                   submitHandler: ((Dictionary<String,Any>?)->())?)->(UIView?){
@@ -160,19 +200,14 @@ class UXFParser{
         height += labelYOffset
         
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 24))
-        label.text = (dictionary["value"] as? String)  ?? "Введите Email и мы ответим Вам в ближайшее время"
+        let text =  (dictionary["value"] as? String)  ?? "Введите Email и мы ответим Вам в ближайшее время"
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
-        label.font = UIFont.init(name: self.theme!.fontMediumName, size: labelFontSize)
-        label.numberOfLines = 0
-        label.textColor = self.theme.textColor
-        label.textAlignment = .center
-        label.sizeToFit()
+        let labelHeight = self.setLabelText(label: label,
+                          text: text,
+                          fontName: self.theme!.fontMediumName,
+                          fontSize: labelFontSize)
         //label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
-        var labelHeight = labelFontSize
-        if let text = label.text {
-            labelHeight = text.height(withConstrainedWidth: (view.frame.size.width - UXFParser.contentSubviewOffset*2), font: label.font)
-        }
         height += labelHeight
         view.addSubview(label)
         
@@ -292,20 +327,13 @@ class UXFParser{
             }
         }
     
-       // label.textColor = 
-        label.text = titleText
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
-        label.font =  UIFont.init(name: self.theme!.fontMediumName, size: labelFontSize)
-        label.numberOfLines = 0
-        label.textColor = self.theme.textColor
-        label.textAlignment = .center
-        label.sizeToFit()
+        let labelHeight = self.setLabelText(label: label,
+                          text: titleText,
+                          fontName: self.theme!.fontMediumName,
+                          fontSize: labelFontSize)
         //label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
-        var labelHeight = labelFontSize
-        if let text = label.text {
-            labelHeight = text.height(withConstrainedWidth: self.containerWidth, font: label.font)
-        }
         height += labelHeight
         view.addSubview(label)
         
@@ -337,11 +365,11 @@ class UXFParser{
         var alertLabel: UILabel?
         if let alertText = alertCommentText {
             alertLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 40, height: alertLabelHeight))
-            alertLabel!.textAlignment = .left
-            alertLabel!.font =  UIFont.init(name: self.theme!.fontRegularName, size: alertLabelFontSize)
-            alertLabel?.numberOfLines = 0
-            alertLabel!.text = alertText
-            alertLabelHeight = alertText.height(withConstrainedWidth: (view.frame.size.width - UXFParser.contentSubviewOffset*2), font: alertLabel!.font)
+            alertLabelHeight = self.setLabelText(label: alertLabel!,
+                              text: alertText,
+                              textAlignment: .left,
+                              fontName: self.theme!.fontRegularName,
+                              fontSize: alertLabelFontSize)
             alertLabel!.translatesAutoresizingMaskIntoConstraints = false
             height += alertLabelYOffset + alertLabelHeight
             view.addSubview(alertLabel!)
@@ -419,6 +447,7 @@ class UXFParser{
         return view
     }
     
+    
     private  func createSmiles(dictionary: Dictionary<String, Any>,
                                   groupID: String,
                             submitHandler: ((Dictionary<String,Any>?)->())?) ->(UIView){
@@ -429,20 +458,11 @@ class UXFParser{
         let labelYOffset: CGFloat = 0.0
         height += labelYOffset
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 24))
-        label.text = dictionary["value"] as? String
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
-        label.font =  UIFont.init(name: self.theme!.fontMediumName, size: labelFontSize)
-        label.textAlignment = .center
-        label.textColor = theme.textColor
-        label.sizeToFit()
+        let labelHeight =  self.setLabelText(label: label, text: dictionary["value"] as? String, fontSize: labelFontSize)
        // label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label)
-        
-        var labelHeight = labelFontSize
-         if let text = label.text {
-         labelHeight = text.height(withConstrainedWidth: (view.frame.size.width - UXFParser.contentSubviewOffset*2), font: label.font)
-         }
         height += labelHeight
  
         let stackViewYOffset: CGFloat = 24.0
@@ -487,8 +507,8 @@ class UXFParser{
         let button = UXFButton.init(frame: CGRect.init(x: 0, y: 0, width: 80, height: 33))
         
         if button.titleLabel != nil {
-          button.titleLabel?.text = dictionary["value"] as? String
-          button.titleLabel?.font = UIFont.init(name: self.theme!.fontMediumName, size: button.titleLabel!.font.pointSize)
+           button.titleLabel?.text = dictionary["value"] as? String
+           button.titleLabel?.font = UIFont.init(name: self.theme!.fontMediumName, size: button.titleLabel!.font.pointSize)
         }
         return button
     }
@@ -506,46 +526,53 @@ class UXFParser{
         let labelYOffset: CGFloat = 10.0
         var height: CGFloat = labelYOffset
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: self.containerWidth - UXFParser.contentSubviewOffset*2, height: 24))
-        label.text = dictionary["value"] as? String
+        
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
-        label.font =  UIFont.init(name: self.theme!.fontBoldName, size: labelFontSize)
-        label.textAlignment = .center
-        label.textColor = self.theme.titleColor
-        label.numberOfLines = 0
-        label.sizeToFit()
+        let labelHeight = self.setLabelText(label: label, text: dictionary["value"] as? String,
+                          fontName: self.theme!.fontBoldName,
+                          fontSize: labelFontSize,
+                          textColor: self.theme.titleColor)
         //label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
-        
-        var labelHeight = labelFontSize
-        if let text = label.text {
-            labelHeight = text.height(withConstrainedWidth: label.frame.size.width, font: label.font)
-        }
         height += labelHeight
         
         return label
     }
     
-    private  func createUIText(dictionary: Dictionary<String, Any>, groupID: String)->(UILabel){
+    private  func createUIText(dictionary: Dictionary<String, Any>, groupID: String)->(UIView){
+        
+        let view = UIView.init()
+        view.backgroundColor = UIColor.clear
+        
         let labelYOffset: CGFloat = 10.0
         var height: CGFloat = labelYOffset
-        let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: self.containerWidth - UXFParser.contentSubviewOffset*2, height: 24))
-        label.text = dictionary["value"] as? String
+        let label = UILabel.init()
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
-        label.font =  UIFont.init(name: self.theme!.fontMediumName, size: labelFontSize)
-        label.textColor = self.theme.textColor
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.sizeToFit()
+        let labelHeight = self.setLabelText(label: label,
+                          text: dictionary["value"] as? String,
+                          fontName:self.theme!.fontMediumName,
+                          fontSize: labelFontSize)
         //label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
-        
-        var labelHeight = labelFontSize
-        if let text = label.text {
-            labelHeight = text.height(withConstrainedWidth: label.frame.size.width, font: label.font)
-        }
         height += labelHeight
+        view.addSubview(label)
         
-        return label
+        let views = ["label": label]
+        var allConstraints: [NSLayoutConstraint] = []
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-[label]-|",
+                                                         metrics: nil,
+                                                         views: views as [String : Any])
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(labelYOffset)-[label(>=\(labelHeight))]-|",
+            options: [.alignAllCenterX],
+            metrics: nil,
+            views: views as [String : Any])
+        //view.backgroundColor = UIColor.blue
+        view.addConstraints(allConstraints)
+        view.frame = CGRect.init(x: 0,
+                                 y: 0,
+                                 width: view.frame.size.width,
+                                 height: height)
+        return view
     }
     
     //MARK: - Smiles

@@ -11,8 +11,8 @@ import HEXColor
 
 open class UXFTheme{
     
-    open var titleColor: UIColor = UIColor.black //header
-    open var textColor: UIColor = UIColor.black //text
+    open var titleColor: UIColor = UIColor.init("#2F3552") //header
+    open var textColor: UIColor = UIColor.init("#2F3552") //text
     open var accendentTextColor: UIColor = UIColor.green
     open var accentColor: UIColor  = UIColor.green
     open var backgroundColor: UIColor = UIColor.white //form background color
