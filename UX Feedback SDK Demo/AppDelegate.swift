@@ -10,7 +10,7 @@ import UIKit
 import CocoaLumberjackSwift
 import UXFeedbackSDK
 
-let uxfAppID = "54444d444a068c157e7f7e14"
+let uxfAppID = "cjld2cjxh0000qzrmn831i7rn" //"54444d444a068c157e7f7e14"
 
 enum UXFedbackCompanyEvents: String {
     case mainScreen

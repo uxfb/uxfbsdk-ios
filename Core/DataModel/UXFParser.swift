@@ -176,9 +176,10 @@ class UXFParser{
                                 groupID: String)->(UIView?){
         let imageView = UIImageView.init(frame: CGRect.init(x: 0,
                                                             y: 0,
-                                                            width: 56,
-                                                            height: 56))
+                                                            width: 72,
+                                                            height: 72))
         imageView.contentMode = .scaleAspectFit
+        //imageView.backgroundColor = UIColor.blue
         let scale = UIScreen.main.scale
         if let setInfo = dictionary["set"] as? Dictionary<String, String>,
            let imagePath = setInfo["\(Int(scale))x"],
@@ -215,6 +216,7 @@ class UXFParser{
         let textFieldYOffset: CGFloat = 15.0
         let textField = UXFTextField.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 48))
         textField.font = UIFont.init(name: self.theme.fontRegularName, size: textField.font!.pointSize)
+        textField.placeholder = "Email"
         height += textFieldHeight + textFieldYOffset
         textField.contentLeftPadding = 16.0
         //textField.borderStyle = .line
@@ -259,7 +261,7 @@ class UXFParser{
         allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(UXFParser.contentSubviewOffset)-[label]-\(UXFParser.contentSubviewOffset)-|",
             metrics: nil,
             views: views as [String : Any])
-        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=0)-[skipButton]-(24)-[sendButton]-|",
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=0)-[skipButton]-(16)-[sendButton]-|",
                                                          metrics: nil,
                                                          views: views as [String : Any])
         allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(UXFParser.contentSubviewOffset)-[textField]-\(UXFParser.contentSubviewOffset)-|",

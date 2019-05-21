@@ -36,9 +36,9 @@ enum UXFAPIWebRouter {
     
     static var baseURL: String {
         #if DEBUG
-         return "https://public-api.uxfeedback.ru/v1"
+         return "https://public-api-stage.uxfeedback.ru/v1"//"https://public-api.uxfeedback.ru/v1"
         #else
-         return "https://public-api.uxfeedback.ru/v1"
+         return "https://public-api-stage.uxfeedback.ru/v1"//"https://public-api.uxfeedback.ru/v1"
         #endif
     }
     
