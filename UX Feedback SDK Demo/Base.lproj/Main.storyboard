@@ -18,83 +18,89 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="F2h-oK-8EG">
-                                <rect key="frame" x="16" y="273.5" width="343" height="120"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="F2h-oK-8EG">
+                                <rect key="frame" x="16" y="201.5" width="343" height="264"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A some label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AdX-D3-9YW">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HwC-cB-aH6">
-                                        <rect key="frame" x="0.0" y="20.5" width="343" height="69.5"/>
-                                        <state key="normal" title="Tap me"/>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HwC-cB-aH6">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                        <state key="normal" title="Tap Event 1"/>
                                         <connections>
-                                            <action selector="secondTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YGL-4N-9G0"/>
+                                            <action selector="eventTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RGC-id-MTH"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SNL-sy-aZe">
-                                        <rect key="frame" x="0.0" y="90" width="343" height="30"/>
-                                        <state key="normal" title="About"/>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SNL-sy-aZe">
+                                        <rect key="frame" x="0.0" y="44" width="343" height="44"/>
+                                        <state key="normal" title="Tap Event 2"/>
                                         <connections>
-                                            <action selector="aboutTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OfQ-Ka-EaF"/>
+                                            <action selector="eventTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RuI-iq-ggb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3G-lp-4Gc">
+                                        <rect key="frame" x="0.0" y="88" width="343" height="44"/>
+                                        <state key="normal" title="Tap Event 3"/>
+                                        <connections>
+                                            <action selector="eventTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s7V-xS-wV9"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ioQ-7U-qMG">
+                                        <rect key="frame" x="0.0" y="132" width="343" height="44"/>
+                                        <state key="normal" title="Tap Event 4"/>
+                                        <connections>
+                                            <action selector="eventTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EIf-vh-1GZ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24r-Ly-Tw5">
+                                        <rect key="frame" x="0.0" y="176" width="343" height="44"/>
+                                        <state key="normal" title="Tap Event 5"/>
+                                        <connections>
+                                            <action selector="eventTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k9U-sb-wCG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gje-TS-6ag">
+                                        <rect key="frame" x="0.0" y="220" width="343" height="44"/>
+                                        <state key="normal" title="Tap Event 6"/>
+                                        <connections>
+                                            <action selector="eventTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DWZ-Fm-KEc"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="VWx-QM-4iK"/>
+                                    <constraint firstAttribute="height" constant="264" id="VWx-QM-4iK"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your first UXFeedback App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AdX-D3-9YW">
+                                <rect key="frame" x="16" y="80" width="343" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ZPK-qX-FPq">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="F2h-oK-8EG" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="98j-hy-pyH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AdX-D3-9YW" secondAttribute="trailing" constant="16" id="2U4-1t-j7k"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="F2h-oK-8EG" secondAttribute="trailing" constant="16" id="B4t-S2-kr9"/>
+                            <constraint firstItem="ZPK-qX-FPq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="CKc-jA-oNO"/>
+                            <constraint firstItem="AdX-D3-9YW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ix8-AC-P4b"/>
                             <constraint firstItem="F2h-oK-8EG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Nbb-Ty-stg"/>
+                            <constraint firstItem="F2h-oK-8EG" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="QXz-ec-P5E"/>
+                            <constraint firstItem="ZPK-qX-FPq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Rs8-Ol-vhg"/>
                             <constraint firstItem="F2h-oK-8EG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="l9X-Qd-es2"/>
+                            <constraint firstItem="AdX-D3-9YW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="odf-Ix-SJF"/>
+                            <constraint firstItem="AdX-D3-9YW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="zfS-KW-McJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Spc-bU-AnS"/>
+                    <connections>
+                        <outlet property="busyIndicator" destination="ZPK-qX-FPq" id="jhy-IW-fjv"/>
+                        <outlet property="buttonsStackView" destination="F2h-oK-8EG" id="YqC-eU-mvn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="132" y="133.5832083958021"/>
-        </scene>
-        <!--Second View Controller-->
-        <scene sceneID="SUF-Ff-QpI">
-            <objects>
-                <viewController storyboardIdentifier="SecondViewController" id="wDv-N7-Zgj" customClass="SecondViewController" customModule="UX_Feedback_SDK_Demo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="9Zr-EA-2wp">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9lI-AI-BYi">
-                                <rect key="frame" x="127" y="50" width="121" height="29"/>
-                                <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
-                                </segments>
-                            </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AmZ-aN-JaK">
-                                <rect key="frame" x="164.5" y="108" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
-                        <constraints>
-                            <constraint firstItem="9lI-AI-BYi" firstAttribute="top" secondItem="W6I-vj-OPE" secondAttribute="top" constant="30" id="APA-ez-Yf2"/>
-                            <constraint firstItem="AmZ-aN-JaK" firstAttribute="centerX" secondItem="9Zr-EA-2wp" secondAttribute="centerX" id="NAS-un-dX7"/>
-                            <constraint firstItem="9lI-AI-BYi" firstAttribute="centerX" secondItem="9Zr-EA-2wp" secondAttribute="centerX" id="QAO-9v-om7"/>
-                            <constraint firstItem="AmZ-aN-JaK" firstAttribute="top" secondItem="9lI-AI-BYi" secondAttribute="bottom" constant="30" id="lga-d4-CjF"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="W6I-vj-OPE"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W8r-de-Kds" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="905" y="134"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="M8D-Tj-XNW">

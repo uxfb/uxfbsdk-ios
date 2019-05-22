@@ -12,12 +12,6 @@ import UXFeedbackSDK
 
 let uxfAppID =  UXFeedback.isStage == true ? "cjld2cjxh0000qzrmn831i7rn" : "54444d444a068c157e7f7e14"
 
-enum UXFedbackCompanyEvents: String {
-    case mainScreen
-    case secondScreen
-    case aboutScreen
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

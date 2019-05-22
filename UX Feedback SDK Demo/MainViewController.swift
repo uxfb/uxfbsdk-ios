@@ -11,31 +11,61 @@ import CocoaLumberjackSwift
 import UXFeedbackSDK
 
 class MainViewController: UIViewController {
+    
+    @IBOutlet var busyIndicator: UIActivityIndicatorView!
+    @IBOutlet var buttonsStackView: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        self.buttonsStackView.isUserInteractionEnabled = false
+        self.buttonsStackView.alpha = 0.5
+        
         UXFeedback.sharedInstance.delegate = self
-        UXFeedback.sharedInstance.sendEvent(event: UXFedbackCompanyEvents.mainScreen.rawValue)
+        UXFeedback.sharedInstance.formDelegate = self
+        UXFeedback.sharedInstance.sendEvent(event: "main")
+        
+        busyIndicator.startAnimating()
+        UXFeedback.sharedInstance.onCampaignLoaded = { [weak self] (success: Bool) in
+            self?.buttonsStackView.isUserInteractionEnabled = true
+            self?.buttonsStackView.alpha = 1.0
+            self?.busyIndicator.stopAnimating()
+        }
     }
 
     
-    @IBAction func secondTap(_ sender: Any){
+    @IBAction func eventTap(_ sender: UIButton){
         
-        if let controller = self.storyboard?.instantiateViewController(withIdentifier: "SecondViewController") {
-           self.navigationController?.pushViewController(controller, animated: true)
-        }
-    }
-    
-    @IBAction func aboutTap(_ sender: Any){
-         let controller = AboutViewController.init(nibName: "AboutViewController", bundle: nil)
-         self.present(controller, animated: true, completion: nil)
+        let eventNumber = sender.tag
+        assert(eventNumber > 0, "Invalid eventNumber")
+     
+        UXFeedback.sharedInstance.sendEvent(event: "Event\(eventNumber)", fromController: self)
     }
 }
 
 extension MainViewController: UXFeedbackCampaignDelegate{
     func campaignDidClose(withFeedbackResult result: UXFeedbackResult, isRedirectToAppStoreEnabled: Bool) {
+        DDLogDebug(#function)
+    }
+}
+
+extension MainViewController: UXFeedbackFormDelegate{
+    
+    func formDidLoaded(form: UXFViewController) {
+        DDLogDebug(#function)
+        self.present(form, animated: true, completion: nil)
+    }
+    
+    func formDidFailLoading(error: UXFError) {
+        DDLogDebug(error.localizedDescription)
+    }
+    
+    func formDidClose(formID: String?, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
+        DDLogDebug(#function)
+    }
+    
+    func formWillClose(form: UXFViewController, formID: String?, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
         DDLogDebug(#function)
     }
 }

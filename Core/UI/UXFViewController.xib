@@ -75,9 +75,9 @@
                         <constraint firstAttribute="bottom" secondItem="4GW-NN-Thv" secondAttribute="bottom" constant="16" id="5K6-QT-wn2"/>
                         <constraint firstItem="zy1-Kq-40p" firstAttribute="top" secondItem="j1J-aB-pVd" secondAttribute="top" constant="14" id="FV1-Xo-6DJ"/>
                         <constraint firstAttribute="height" constant="168" id="I8K-uf-DY9"/>
-                        <constraint firstItem="yWd-CR-rxX" firstAttribute="centerY" secondItem="zy1-Kq-40p" secondAttribute="centerY" id="OCE-mm-8Rm"/>
                         <constraint firstItem="mho-DN-wol" firstAttribute="leading" secondItem="j1J-aB-pVd" secondAttribute="leading" constant="8" id="Rqn-hk-ZAa"/>
-                        <constraint firstItem="mho-DN-wol" firstAttribute="centerY" secondItem="zy1-Kq-40p" secondAttribute="centerY" id="fyv-PT-TEL"/>
+                        <constraint firstItem="mho-DN-wol" firstAttribute="top" secondItem="j1J-aB-pVd" secondAttribute="top" constant="10" id="XUM-BK-THF"/>
+                        <constraint firstItem="yWd-CR-rxX" firstAttribute="top" secondItem="j1J-aB-pVd" secondAttribute="top" constant="10" id="fsy-S4-OOU"/>
                         <constraint firstItem="zy1-Kq-40p" firstAttribute="centerX" secondItem="j1J-aB-pVd" secondAttribute="centerX" id="kAv-86-Oyf"/>
                         <constraint firstAttribute="trailing" secondItem="yWd-CR-rxX" secondAttribute="trailing" constant="8" id="rfh-oF-Nc8"/>
                         <constraint firstItem="4GW-NN-Thv" firstAttribute="leading" secondItem="j1J-aB-pVd" secondAttribute="leading" constant="16" id="vq4-Aa-FOU"/>

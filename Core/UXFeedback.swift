@@ -24,9 +24,14 @@ open class UXFeedback{
     open  var debugEnabled: Bool = false
     open  var animationEnabled: Bool = true
     open var canDisplayCampaings: Bool = true
+    open var isCampaignLoaded: Bool {
+        return _campaign != nil
+    }
     public static var isStage: Bool {
         return UXFAPIWebRouter.isStageAPI
     }
+    
+    open var onCampaignLoaded: ((_ success: Bool)->())?
     
     private var _theme: UXFTheme!
     private  weak var _activeEventController: UIViewController?
@@ -67,7 +72,8 @@ open class UXFeedback{
                 self?.sendEvent(event: event)
             }
             
-             completion?(success)
+            completion?(success)
+            self?.onCampaignLoaded?(success)
         }
     }
     
