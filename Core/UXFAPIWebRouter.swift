@@ -32,13 +32,31 @@ enum ContentType: String {
     case json = "application/json"
 }
 
+
 enum UXFAPIWebRouter {
     
     static var baseURL: String {
+        
+        if UXFAPIWebRouter.isStageAPI == true{
+            return "https://public-api-stage.uxfeedback.ru/v1"
+        }
+        else{
+            return "https://public-api.uxfeedback.ru/v1"
+        }
+    }
+    
+    static internal var isStageAPI: Bool{
+        
+        return false
+        
         #if DEBUG
-         return "https://public-api-stage.uxfeedback.ru/v1"//"https://public-api.uxfeedback.ru/v1"
+          return true
         #else
-         return "https://public-api-stage.uxfeedback.ru/v1"//"https://public-api.uxfeedback.ru/v1"
+        #if ADHOC
+          return true
+        #else
+          return false
+        #endif
         #endif
     }
     

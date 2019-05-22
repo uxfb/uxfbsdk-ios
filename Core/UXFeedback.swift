@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CocoaLumberjackSwift
 
 public struct UXFError : Error {
     
@@ -23,6 +24,9 @@ open class UXFeedback{
     open  var debugEnabled: Bool = false
     open  var animationEnabled: Bool = true
     open var canDisplayCampaings: Bool = true
+    public static var isStage: Bool {
+        return UXFAPIWebRouter.isStageAPI
+    }
     
     private var _theme: UXFTheme!
     private  weak var _activeEventController: UIViewController?
@@ -47,6 +51,8 @@ open class UXFeedback{
                     applicationWindow: UIWindow,
                     theme: UXFTheme? = nil,
                     completion: ((_ success: Bool) -> Void)? = nil){
+        
+        print(UXFAPIWebRouter.baseURL)
         
         if theme != nil {
            self.setTheme(theme: theme!)

@@ -10,7 +10,7 @@ import UIKit
 import CocoaLumberjackSwift
 import UXFeedbackSDK
 
-let uxfAppID = "cjld2cjxh0000qzrmn831i7rn" //"54444d444a068c157e7f7e14"
+let uxfAppID =  UXFeedback.isStage == true ? "cjld2cjxh0000qzrmn831i7rn" : "54444d444a068c157e7f7e14"
 
 enum UXFedbackCompanyEvents: String {
     case mainScreen
@@ -26,13 +26,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        DDLog.add(DDOSLogger.sharedInstance, with: DDLogLevel.all)
+        print("Start application")
         
-        DDLog.add(DDOSLogger.sharedInstance)
-        
+        /*
         for family in UIFont.familyNames.sorted() {
             let names = UIFont.fontNames(forFamilyName: family)
             print("Family: \(family) Font names: \(names)")
-        }
+        }*/
         
         //print(String(describing: UIDevice.current.identifierForVendor?.uuidString))
         let customTheme: UXFTheme = UXFTheme.init()
