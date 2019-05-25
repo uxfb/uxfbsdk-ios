@@ -52,7 +52,7 @@ class UXFAPIClient{
         //self.getAllCampaings(completion: nil)
     }
     
-    func getAllCampaings(completion: ((_ success: Bool, _ message: String?, _ campaign: UXFCampaign?)->())?){
+    func getAllCampaings(completion: ((_ success: Bool, _ message: String?, _ campaigns: Array<UXFCampaign>)->())?){
     
      DDLogDebug("Get all campaings:")
      
@@ -61,29 +61,31 @@ class UXFAPIClient{
         
         if status == .success {
             
-            var campaign: UXFCampaign?
+            
             if let campaignsResults = result as? Array<Dictionary<String, Any>>{
  
+                var campaigns: Array<UXFCampaign> = []
                 for compaignInfo in campaignsResults{
-                   campaign =  self?._parser.parseCampaing(compaignInfo: compaignInfo)
+                    if let campaign =  self?._parser.parseCampaing(compaignInfo: compaignInfo){
+                       campaigns.append(campaign)
+                    }
                     
                    /* let themeInfo = dict["theme"] as! Dictionary<String, Any>
                     theme = UXFTheme.init(colorsDict: themeInfo["colors"] as! Dictionary<String, String>,
                                           smilesDict: themeInfo["smiles"] as! Dictionary<String, String>)*/
-                    break
                 }
                 
                 DDLogDebug("Get all campaings successful")
-                completion?(true, nil, campaign)
+                completion?(true, nil, campaigns)
             }
             else{
                 DDLogDebug("No campaings detected")
-                completion?(false, "No campaings detected", nil)
+                completion?(false, "No campaings detected", [])
             }
         }
         else{
            DDLogDebug("Get all campaings failed")
-           completion?(false, message, nil)
+           completion?(false, message, [])
         }
       }
         

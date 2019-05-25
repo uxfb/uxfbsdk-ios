@@ -24,7 +24,7 @@ class MainViewController: UIViewController {
         
         UXFeedback.sharedInstance.delegate = self
         UXFeedback.sharedInstance.formDelegate = self
-        UXFeedback.sharedInstance.sendEvent(event: "main")
+        UXFeedback.sharedInstance.sendEvent(event: "event")
         
         busyIndicator.startAnimating()
         UXFeedback.sharedInstance.onCampaignLoaded = { [weak self] (success: Bool) in

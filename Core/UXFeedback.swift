@@ -24,8 +24,8 @@ open class UXFeedback{
     open  var debugEnabled: Bool = false
     open  var animationEnabled: Bool = true
     open var canDisplayCampaings: Bool = true
-    open var isCampaignLoaded: Bool {
-        return _campaign != nil
+    open var isCampaignsLoaded: Bool {
+        return _campaigns.count > 0
     }
     public static var isStage: Bool {
         return UXFAPIWebRouter.isStageAPI
@@ -37,7 +37,7 @@ open class UXFeedback{
     private  weak var _activeEventController: UIViewController?
     private  weak var _appWindow: UIWindow!
     private  var _apiClient: UXFAPIClient!
-    private  var _campaign: UXFCampaign?
+    private var _campaigns: Array<UXFCampaign> = []
     private  var _eventToSend: String?
     private  var _formPresentor: UXFCampaignFormPresentor?
     private var _parser: UXFParser!
@@ -64,9 +64,10 @@ open class UXFeedback{
         }
 
         _apiClient = UXFAPIClient.init(appID: appID, parser: self._parser)
-        _apiClient.getAllCampaings { [weak self] (success, message, aCampaign) in
-            self?._campaign = aCampaign
+        _apiClient.getAllCampaings { [weak self] (success, message, campaigns) in
+
             self?._appWindow = applicationWindow
+            self?._campaigns = campaigns
         
             if success == true, let event = self?._eventToSend {
                 self?.sendEvent(event: event)
@@ -83,49 +84,65 @@ open class UXFeedback{
     
     //Requrst event to show campaing form with specific name
     open func sendEvent(event: String, fromController: UIViewController? = nil){
-        
+    
         _eventToSend = event
-
-        #warning("implement API call here")
-        if self.canDisplayCampaings == true,  let campaign = _campaign, campaign.show() == true{
-            _eventToSend = nil
-            DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay), execute: { [unowned self] in
-                self._formPresentor?.dismissCurrentForm()
-                self._formPresentor = UXFCampaignFormPresentor.init(window: self._appWindow,
-                                                                    campaign: campaign,
-                                                                    parser: self._parser,
-                                                                    animationEnabled: true)
-                self._formPresentor?.isAnimationFormEnabled = self.animationEnabled
-                self._formPresentor?.delegate = self
-                self._formPresentor?.feedbackCampaignDelegate = self.delegate
-                self._formPresentor?.showCampaign()
-            })
+        
+        if self.canDisplayCampaings == true{
+            _campaigns.forEach { (campaign) in
+                campaign.targeting.forEach({ (targeting) in
+                    if targeting["type"] == event &&  campaign.show() == true{
+                        
+                        _eventToSend = nil
+                        DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay), execute: { [unowned self] in
+                            self._formPresentor?.dismissCurrentForm()
+                            self._formPresentor = UXFCampaignFormPresentor.init(window: self._appWindow,
+                                                                                campaign: campaign,
+                                                                                parser: self._parser,
+                                                                                animationEnabled: true)
+                            self._formPresentor?.isAnimationFormEnabled = self.animationEnabled
+                            self._formPresentor?.delegate = self
+                            self._formPresentor?.feedbackCampaignDelegate = self.delegate
+                            self._formPresentor?.showCampaign()
+                        })
+                        
+                    }
+                })
+            }
         }
     }
     
     open func loadFeedbackForm(formID: String){
         
-        if let campaign = _campaign{
-
-            self._formPresentor?.dismissCurrentForm()
-            let formIndex = 0
-            let presentor = UXFCampaignFormPresentor.init(window: self._appWindow,
-                                                                campaign:  campaign,
-                                                                parser: _parser,
-                                                                animationEnabled: true)
-            self._formPresentor  = presentor
-            presentor.isAnimationFormEnabled = self.animationEnabled
-            presentor.delegate = self
-            presentor.feedbackCampaignDelegate = self.delegate
-            presentor.feedbackFormDelegate = self.formDelegate
-            let controller = presentor.createForm(fromIndex: formIndex)
-            controller.presentDirection = .downToUp
-            self.formDelegate?.formDidLoaded(form: controller)
+        _campaigns.forEach { (campaign) in
+            campaign.pages.forEach({ (page) in
+                if page.id == formID {
+                    
+                    self._formPresentor?.dismissCurrentForm()
+                    let formIndex = 0
+                    let presentor = UXFCampaignFormPresentor.init(window: self._appWindow,
+                                                                  campaign:  campaign,
+                                                                  parser: _parser,
+                                                                  animationEnabled: true)
+                    self._formPresentor  = presentor
+                    presentor.isAnimationFormEnabled = self.animationEnabled
+                    presentor.delegate = self
+                    presentor.feedbackCampaignDelegate = self.delegate
+                    presentor.feedbackFormDelegate = self.formDelegate
+                    let controller = presentor.createForm(fromIndex: formIndex)
+                    controller.presentDirection = .downToUp
+                    self.formDelegate?.formDidLoaded(form: controller)
+                    
+                    return
+                }
+            })
         }
     }
     
-    open func resetCampaignData(completion: (()->())?){
-        _campaign?.removeUserData()
+    open func resetAllCampaignsData(completion: (()->())?){
+        
+        _campaigns.forEach { (campaign) in
+            campaign.removeUserData()
+        }
     }
     
     //MARK: support
@@ -140,20 +157,19 @@ open class UXFeedback{
 
 extension UXFeedback: UXFCampaignFormPresentorProtocol {
     
-    func formSubmitted(formIndex: Int, info: Dictionary<String, Any>?) {
+    func formSubmitted(formIndex: Int, info: Dictionary<String, Any>?, campaign: UXFCampaign) {
      
             _apiClient.saveFormData(isFirstAnswer: (formIndex == 0),
-                                    projectId: _campaign!.projectId,
-                                    answerId: _campaign?.answerId,
-                                        campaignId: _campaign!.campaignId,
+                                    projectId: campaign.projectId,
+                                    answerId: campaign.answerId,
+                                        campaignId: campaign.campaignId,
                                             fields: info) { (success, message, answerId) in
                                                 if answerId != nil {
-                                                    self._campaign?.setAnswerID(answerID: answerId)
+                                                    campaign.setAnswerID(answerID: answerId)
                                                 }
                                                 if success == false {
                                                    self.showMessage(text: message ?? "Неизвестная ошибка при отправке данных формы", completion: nil)
                                                 }
             }
-
     }
 }

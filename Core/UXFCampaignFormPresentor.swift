@@ -12,7 +12,7 @@ import UIKit
 let IS_IPAD = (UIDevice.current.userInterfaceIdiom == .pad)
 
 protocol UXFCampaignFormPresentorProtocol: class {
-    func formSubmitted(formIndex: Int, info: Dictionary<String, Any>?)
+    func formSubmitted(formIndex: Int, info: Dictionary<String, Any>?, campaign: UXFCampaign)
 }
 
 class UXFCampaignFormPresentor: NSObject{
@@ -114,7 +114,9 @@ class UXFCampaignFormPresentor: NSObject{
             self?.prevForm()
         }
         controller.nextHandler = { [weak self] (formIndex, info) in
-            self?.delegate?.formSubmitted(formIndex: formIndex, info: info)
+            if let campaign = self?._campaign {
+               self?.delegate?.formSubmitted(formIndex: formIndex, info: info, campaign: campaign)
+            }
            
             if self?.feedbackFormDelegate != nil {
                controller.dismiss(animated: true, completion: nil)

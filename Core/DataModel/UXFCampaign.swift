@@ -28,6 +28,7 @@ struct UXFCampaign{
     private(set) var isProgressEnabled: Bool!
     private(set) var projectId: String!
     private(set) var autoclose: Double!
+    private(set) var targeting: Array<Dictionary<String, String>>
     
     var currentFormID: String? {
       return UserDefaults.standard.object(forKey: self.campaignId + ".currentFormId") as? String
