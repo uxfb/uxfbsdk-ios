@@ -27,11 +27,6 @@ class MainViewController: UIViewController {
         UXFeedback.sharedInstance.sendEvent(event: "event")
         
         busyIndicator.startAnimating()
-        UXFeedback.sharedInstance.onCampaignLoaded = { [weak self] (success: Bool) in
-            self?.buttonsStackView.isUserInteractionEnabled = true
-            self?.buttonsStackView.alpha = 1.0
-            self?.busyIndicator.stopAnimating()
-        }
     }
 
     
@@ -46,6 +41,13 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UXFeedbackCampaignDelegate{
     func campaignDidClose(withFeedbackResult result: UXFeedbackResult, isRedirectToAppStoreEnabled: Bool) {
+        DDLogDebug(#function)
+    }
+    
+    func campaignLoaded(success: Bool){
+        self.buttonsStackView.isUserInteractionEnabled = true
+        self.buttonsStackView.alpha = 1.0
+        self.busyIndicator.stopAnimating()
         DDLogDebug(#function)
     }
 }

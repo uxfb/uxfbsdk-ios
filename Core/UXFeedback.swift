@@ -31,8 +31,6 @@ open class UXFeedback{
         return UXFAPIWebRouter.isStageAPI
     }
     
-    open var onCampaignLoaded: ((_ success: Bool)->())?
-    
     private var _theme: UXFTheme!
     private  weak var _activeEventController: UIViewController?
     private  weak var _appWindow: UIWindow!
@@ -74,7 +72,7 @@ open class UXFeedback{
             }
             
             completion?(success)
-            self?.onCampaignLoaded?(success)
+            self?.delegate?.campaignLoaded(success: success)
         }
     }
     
@@ -103,6 +101,8 @@ open class UXFeedback{
                             self._formPresentor?.delegate = self
                             self._formPresentor?.feedbackCampaignDelegate = self.delegate
                             self._formPresentor?.showCampaign()
+                            self._apiClient.showForm(campaingId: campaign.campaignId)
+
                         })
                         
                     }
