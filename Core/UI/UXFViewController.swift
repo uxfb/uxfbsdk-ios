@@ -31,6 +31,7 @@ open class UXFViewController: UIViewController{
     @IBOutlet var bottomOffset: NSLayoutConstraint?
     @IBOutlet var heightConstraint: NSLayoutConstraint?
     @IBOutlet var logoImageView: UIImageView?
+    @IBOutlet var closeButton: UIButton?
     
     static let defaulViewOffset: CGFloat = 8.0
     static let animationTime = 0.5
@@ -66,22 +67,30 @@ open class UXFViewController: UIViewController{
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.formIndex == 0 {
-            self.backButton?.isHidden = true
-        }
-        else{
-            #if DEBUG
+      
+        self.backButton?.isHidden = true
+
+        #if DEBUG
             self.backButton?.isHidden = false
-            #else
+        #else
             self.backButton?.isHidden = true
-            #endif
+        #endif
+        
             self.logoImageView?.isHidden  = true
-        }
         
         if self.progressLabel != nil, self.theme != nil {
            self.progressLabel?.font = UIFont.init(name: self.theme!.fontRegularName,
                                                   size: self.progressLabel!.font.pointSize)
         }
+        
+        let bundle = Bundle(for: UXFeedback.self)
+        print(bundle.bundleIdentifier)
+        let closeImage = UIImage.init(named: "close_image", in: bundle, compatibleWith: nil)
+        closeButton?.setImage(closeImage, for: .normal)
+        let backImage = UIImage.init(named: "back_arrow", in: bundle, compatibleWith: nil)
+        backButton?.setImage(backImage, for: .normal)
+        let logoImage =  UIImage.init(named: "logo_small", in: bundle, compatibleWith: nil)
+        self.logoImageView?.image = logoImage
         
         self.progressLabel?.textColor = theme?.progressColor
         self.progressLabel?.text = self.progressString

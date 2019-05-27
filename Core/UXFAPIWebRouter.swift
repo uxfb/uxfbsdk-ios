@@ -47,8 +47,6 @@ enum UXFAPIWebRouter {
     
     static internal var isStageAPI: Bool{
         
-        return false
-        
         #if DEBUG
           return true
         #else

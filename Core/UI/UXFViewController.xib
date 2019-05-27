@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="backButton" destination="mho-DN-wol" id="vFU-SD-Ne9"/>
                 <outlet property="bottomOffset" destination="NwX-8u-PNu" id="0ld-P9-KA4"/>
+                <outlet property="closeButton" destination="yWd-CR-rxX" id="L0p-cZ-xo4"/>
                 <outlet property="contentView" destination="j1J-aB-pVd" id="4gr-Wh-eG9"/>
                 <outlet property="heightConstraint" destination="I8K-uf-DY9" id="PHo-Zc-68d"/>
                 <outlet property="logoImageView" destination="4GW-NN-Thv" id="46n-ye-0Mj"/>

@@ -24,7 +24,6 @@ class MainViewController: UIViewController {
         
         UXFeedback.sharedInstance.delegate = self
         UXFeedback.sharedInstance.formDelegate = self
-        UXFeedback.sharedInstance.sendEvent(event: "event")
         
         busyIndicator.startAnimating()
     }
@@ -35,7 +34,7 @@ class MainViewController: UIViewController {
         let eventNumber = sender.tag
         assert(eventNumber > 0, "Invalid eventNumber")
      
-        UXFeedback.sharedInstance.sendEvent(event: "Event\(eventNumber)", fromController: self)
+        UXFeedback.sharedInstance.sendEvent(event: "event\(eventNumber)", fromController: self)
     }
 }
 

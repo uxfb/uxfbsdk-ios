@@ -88,7 +88,7 @@ open class UXFeedback{
         if self.canDisplayCampaings == true{
             _campaigns.forEach { (campaign) in
                 campaign.targeting.forEach({ (targeting) in
-                    if targeting["type"] == event &&  campaign.show() == true{
+                    if targeting["type"] == "event" && targeting["name"] == event &&  campaign.show() == true{
                         
                         _eventToSend = nil
                         DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay), execute: { [unowned self] in
