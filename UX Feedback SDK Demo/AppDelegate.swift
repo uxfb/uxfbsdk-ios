@@ -7,10 +7,15 @@
 //
 
 import UIKit
-import CocoaLumberjackSwift
 import UXFeedbackSDK
 
 let uxfAppID =  UXFeedback.isStage == true ? "cjld2cjxh0000qzrmn831i7rn" : "54444d444a068c157e7f7e14"
+
+internal func DDLogDebug(_ value: Any){
+    #if DEBUG
+    print(value)
+    #endif
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,9 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-
-        DDLog.add(DDOSLogger.sharedInstance, with: DDLogLevel.all)
-        print("Start application")
+        
+        DDLogDebug("Start application")
         
         /*
         for family in UIFont.familyNames.sorted() {
@@ -43,23 +47,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UXFeedback.sharedInstance.setup(appID: uxfAppID,
                                         applicationWindow: self.window!)//, theme: customTheme)
-        { [weak self] success in
+        {  success in
             let message = "UXFeedback initialization " + (success == true ? "successful" : "failed")
             DDLogDebug(message)
             if success == false {
-                self?.showMessage(title: "Error", text: message, completion: nil)
+                DDLogDebug(message)
             }
         }
 
         return true
-    }
-    
-    func showMessage(title: String? = nil, text: String, completion: ((UIAlertAction)->(Void))?){
-        let alert = UIAlertController.init(title: title,
-                                           message: text,
-                                           preferredStyle: .alert)
-        alert.addAction(UIAlertAction.init(title: "Ок", style: .default, handler: completion))
-        alert.show()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -83,7 +79,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 

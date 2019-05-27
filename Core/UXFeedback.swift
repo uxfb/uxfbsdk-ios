@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import CocoaLumberjackSwift
 
 public struct UXFError : Error {
     
@@ -144,15 +143,6 @@ open class UXFeedback{
             campaign.removeUserData()
         }
     }
-    
-    //MARK: support
-    func showMessage(title: String? = nil, text: String, completion: ((UIAlertAction)->(Void))?){
-        let alert = UIAlertController.init(title: title,
-                                           message: text,
-                                           preferredStyle: .alert)
-        alert.addAction(UIAlertAction.init(title: "Ок", style: .default, handler: completion))
-        alert.show()
-    }
 }
 
 extension UXFeedback: UXFCampaignFormPresentorProtocol {
@@ -168,7 +158,7 @@ extension UXFeedback: UXFCampaignFormPresentorProtocol {
                                                     campaign.setAnswerID(answerID: answerId)
                                                 }
                                                 if success == false {
-                                                   self.showMessage(text: message ?? "Неизвестная ошибка при отправке данных формы", completion: nil)
+                                                    self.delegate?.campaignErrorReceived(errorString: "Неизвестная ошибка при отправке данных формы")
                                                 }
             }
     }

@@ -12,7 +12,6 @@
 		0A019A4522365E03002FD4F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4322365E03002FD4F8 /* Main.storyboard */; };
 		0A019A4722365E04002FD4F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4622365E04002FD4F8 /* Assets.xcassets */; };
 		0A019A4A22365E04002FD4F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4822365E04002FD4F8 /* LaunchScreen.storyboard */; };
-		0A019A6B22367F0C002FD4F8 /* UIAlertController+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6A22367F0C002FD4F8 /* UIAlertController+Show.swift */; };
 		0A46899622840B2C0074E1A3 /* UXFeedbackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0A46899F22840BB90074E1A3 /* UXFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A5322366A29002FD4F8 /* UXFeedback.swift */; };
 		0A4689A022840BB90074E1A3 /* UXFeedbackDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */; };
@@ -42,21 +41,14 @@
 		0A4689B922840BE00074E1A3 /* UIViewController+present.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB92250A16B00E1C092 /* UIViewController+present.swift */; };
 		0A4689BA22840BE00074E1A3 /* Reachability+NetworkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */; };
 		0A4689BB22840BE00074E1A3 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEA5224F42E900E1C092 /* Queue.swift */; };
-		0A4689C222840F7C0074E1A3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A160DD82268D62700A586C4 /* CoreTelephony.framework */; };
 		0A4689C322840FC80074E1A3 /* UXFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB8E22446EC900C17007 /* UXFViewController.swift */; };
 		0A4689C422840FC80074E1A3 /* UXFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2754A8226628BC000E2E17 /* UXFViewController.xib */; };
 		0A4689C522840FD00074E1A3 /* UXFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB72250965100E1C092 /* UXFTextField.swift */; };
-		0A4689C62284101E0074E1A3 /* UIAlertController+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6A22367F0C002FD4F8 /* UIAlertController+Show.swift */; };
-		0A468A2B228582850074E1A3 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A29228582850074E1A3 /* CocoaLumberjack.framework */; };
-		0A468A2C228582850074E1A3 /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A468A2A228582850074E1A3 /* CocoaLumberjackSwift.framework */; };
 		0AA705FA2289D5890091A7A0 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F52289D5890091A7A0 /* Nuke.framework */; };
 		0AA705FB2289D5890091A7A0 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F62289D5890091A7A0 /* Reachability.framework */; };
-		0AA705FC2289D5890091A7A0 /* HEXColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F72289D5890091A7A0 /* HEXColor.framework */; };
 		0AA705FD2289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */; };
 		0AA705FE2289D5890091A7A0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F92289D5890091A7A0 /* Alamofire.framework */; };
 		0AA705FF2289D5970091A7A0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F92289D5890091A7A0 /* Alamofire.framework */; };
-		0AA706002289D5970091A7A0 /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */; };
-		0AA706012289D5970091A7A0 /* HEXColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F72289D5890091A7A0 /* HEXColor.framework */; };
 		0AA706022289D5970091A7A0 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F52289D5890091A7A0 /* Nuke.framework */; };
 		0AA706032289D5970091A7A0 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F62289D5890091A7A0 /* Reachability.framework */; };
 		0AA7062B229126B10091A7A0 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA7061F229126AF0091A7A0 /* Roboto-LightItalic.ttf */; };
@@ -73,6 +65,9 @@
 		0AA70636229126B10091A7A0 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA7062A229126B10091A7A0 /* Roboto-Black.ttf */; };
 		0AA850DF228960AB0040007C /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; };
 		0AA850E0228960AB0040007C /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0AF49826229C3D4A000CB7D6 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49824229C3D4A000CB7D6 /* UIColorExtension.swift */; };
+		0AF49827229C3D4A000CB7D6 /* UIColorInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49825229C3D4A000CB7D6 /* UIColorInputError.swift */; };
+		0AF49829229C3D5D000CB7D6 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49828229C3D5C000CB7D6 /* StringExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -115,7 +110,6 @@
 		0A019A6122367EF2002FD4F8 /* NSLayoutConstraint+additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+additions.swift"; sourceTree = "<group>"; };
 		0A019A6222367EF2002FD4F8 /* String+additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+additions.swift"; sourceTree = "<group>"; };
 		0A019A6322367EF2002FD4F8 /* UISearchBar+color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+color.swift"; sourceTree = "<group>"; };
-		0A019A6A22367F0C002FD4F8 /* UIAlertController+Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Show.swift"; sourceTree = "<group>"; };
 		0A019A6C2237B773002FD4F8 /* UXFAPIWebRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFAPIWebRouter.swift; sourceTree = "<group>"; };
 		0A019A6E2237C503002FD4F8 /* UXFURLComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFURLComponents.swift; sourceTree = "<group>"; };
 		0A0CDEA5224F42E900E1C092 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -168,6 +162,9 @@
 		0AA7062A229126B10091A7A0 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		0AA92D9C227A9410005DBCBA /* UXFSmileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFSmileButton.swift; sourceTree = "<group>"; };
 		0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+blocks.swift"; sourceTree = "<group>"; };
+		0AF49824229C3D4A000CB7D6 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		0AF49825229C3D4A000CB7D6 /* UIColorInputError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorInputError.swift; sourceTree = "<group>"; };
+		0AF49828229C3D5C000CB7D6 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,11 +172,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A468A2B228582850074E1A3 /* CocoaLumberjack.framework in Frameworks */,
-				0A468A2C228582850074E1A3 /* CocoaLumberjackSwift.framework in Frameworks */,
 				0AA705FA2289D5890091A7A0 /* Nuke.framework in Frameworks */,
 				0AA705FB2289D5890091A7A0 /* Reachability.framework in Frameworks */,
-				0AA705FC2289D5890091A7A0 /* HEXColor.framework in Frameworks */,
 				0AA705FD2289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework in Frameworks */,
 				0AA705FE2289D5890091A7A0 /* Alamofire.framework in Frameworks */,
 				0AA850DF228960AB0040007C /* UXFeedbackSDK.framework in Frameworks */,
@@ -190,10 +184,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A4689C222840F7C0074E1A3 /* CoreTelephony.framework in Frameworks */,
 				0AA705FF2289D5970091A7A0 /* Alamofire.framework in Frameworks */,
-				0AA706002289D5970091A7A0 /* AlamofireNetworkActivityLogger.framework in Frameworks */,
-				0AA706012289D5970091A7A0 /* HEXColor.framework in Frameworks */,
 				0AA706022289D5970091A7A0 /* Nuke.framework in Frameworks */,
 				0AA706032289D5970091A7A0 /* Reachability.framework in Frameworks */,
 			);
@@ -256,8 +247,9 @@
 		0A019A5B22367E7E002FD4F8 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
-				0A019A6922367F0C002FD4F8 /* UIAlertController+Show */,
+				0AF49823229C3D4A000CB7D6 /* HEXColor */,
 				0A019A6122367EF2002FD4F8 /* NSLayoutConstraint+additions.swift */,
+				0AF49828229C3D5C000CB7D6 /* StringExtension.swift */,
 				0A019A6222367EF2002FD4F8 /* String+additions.swift */,
 				0A019A6022367EF2002FD4F8 /* UIImage+Tinting.swift */,
 				0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */,
@@ -268,14 +260,6 @@
 				0A0CDEA5224F42E900E1C092 /* Queue.swift */,
 			);
 			path = Vendors;
-			sourceTree = "<group>";
-		};
-		0A019A6922367F0C002FD4F8 /* UIAlertController+Show */ = {
-			isa = PBXGroup;
-			children = (
-				0A019A6A22367F0C002FD4F8 /* UIAlertController+Show.swift */,
-			);
-			path = "UIAlertController+Show";
 			sourceTree = "<group>";
 		};
 		0A46899322840B2C0074E1A3 /* UXFeedbackSDK */ = {
@@ -355,6 +339,15 @@
 				0A6CDB812242424300C17007 /* UXFPageElement.swift */,
 			);
 			path = Unused;
+			sourceTree = "<group>";
+		};
+		0AF49823229C3D4A000CB7D6 /* HEXColor */ = {
+			isa = PBXGroup;
+			children = (
+				0AF49824229C3D4A000CB7D6 /* UIColorExtension.swift */,
+				0AF49825229C3D4A000CB7D6 /* UIColorInputError.swift */,
+			);
+			path = HEXColor;
 			sourceTree = "<group>";
 		};
 		3EE1448B815C3AA05E865A6C /* Frameworks */ = {
@@ -514,7 +507,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\n#cp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
+			shellScript = "BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\ncp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
 		};
 		0A4689F6228564FD0074E1A3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -524,11 +517,8 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjackSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjack.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Reachability.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/HEXColor.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Nuke.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework",
 			);
@@ -550,9 +540,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Reachability.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/HEXColor.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Nuke.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -570,7 +558,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A019A4222365E03002FD4F8 /* MainViewController.swift in Sources */,
-				0A019A6B22367F0C002FD4F8 /* UIAlertController+Show.swift in Sources */,
 				0A019A4022365E03002FD4F8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -582,8 +569,8 @@
 				0A4689C322840FC80074E1A3 /* UXFViewController.swift in Sources */,
 				0A4689BA22840BE00074E1A3 /* Reachability+NetworkType.swift in Sources */,
 				0A4689A022840BB90074E1A3 /* UXFeedbackDelegate.swift in Sources */,
-				0A4689C62284101E0074E1A3 /* UIAlertController+Show.swift in Sources */,
 				0A4689B022840BBF0074E1A3 /* UXFLabel.swift in Sources */,
+				0AF49829229C3D5D000CB7D6 /* StringExtension.swift in Sources */,
 				0A4689B922840BE00074E1A3 /* UIViewController+present.swift in Sources */,
 				0A4689B422840BE00074E1A3 /* String+additions.swift in Sources */,
 				0A4689AC22840BBF0074E1A3 /* UXFText.swift in Sources */,
@@ -597,12 +584,14 @@
 				0A4689A922840BBF0074E1A3 /* UXFCampaign.swift in Sources */,
 				0A4689BB22840BE00074E1A3 /* Queue.swift in Sources */,
 				0A4689A822840BBF0074E1A3 /* UXFTheme.swift in Sources */,
+				0AF49826229C3D4A000CB7D6 /* UIColorExtension.swift in Sources */,
 				0A4689B722840BE00074E1A3 /* UISearchBar+color.swift in Sources */,
 				0A4689B322840BE00074E1A3 /* NSLayoutConstraint+additions.swift in Sources */,
 				0A4689A522840BB90074E1A3 /* UXFAPIWebRouter.swift in Sources */,
 				0A4689B222840BC90074E1A3 /* UXFPageElement.swift in Sources */,
 				0A46899F22840BB90074E1A3 /* UXFeedback.swift in Sources */,
 				0A4689AE22840BBF0074E1A3 /* UXFSmileButton.swift in Sources */,
+				0AF49827229C3D4A000CB7D6 /* UIColorInputError.swift in Sources */,
 				0A4689B522840BE00074E1A3 /* UIImage+Tinting.swift in Sources */,
 				0A4689AD22840BBF0074E1A3 /* UXFButton.swift in Sources */,
 				0A4689B122840BC90074E1A3 /* UXFPageResponse.swift in Sources */,

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CocoaLumberjackSwift
 import UXFeedbackSDK
 
 class MainViewController: UIViewController {
@@ -48,6 +47,10 @@ extension MainViewController: UXFeedbackCampaignDelegate{
         self.buttonsStackView.alpha = 1.0
         self.busyIndicator.stopAnimating()
         DDLogDebug(#function)
+    }
+    
+    func campaignErrorReceived(errorString: String){
+        DDLogDebug(errorString)
     }
 }
 

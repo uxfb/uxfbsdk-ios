@@ -21,6 +21,7 @@ public struct UXFeedbackResult {
 public protocol UXFeedbackCampaignDelegate: class{
     func campaignDidClose(withFeedbackResult result: UXFeedbackResult, isRedirectToAppStoreEnabled: Bool)
     func campaignLoaded(success: Bool)
+    func campaignErrorReceived(errorString: String)
 }
 
 public protocol UXFeedbackFormDelegate: AnyObject {
