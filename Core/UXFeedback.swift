@@ -54,7 +54,7 @@ open class UXFeedback{
                     theme: UXFTheme? = nil,
                     completion: ((_ success: Bool) -> Void)? = nil){
         
-        print(UXFAPIWebRouter.baseURL)
+        DDLogDebug(UXFAPIWebRouter.baseURL)
         
         if theme != nil {
            self.setTheme(theme: theme!)

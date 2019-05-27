@@ -72,11 +72,11 @@ open class UXFViewController: UIViewController{
 
         #if DEBUG
             self.backButton?.isHidden = false
-        #else
-            self.backButton?.isHidden = true
         #endif
         
+        if self.formIndex > 0 {
             self.logoImageView?.isHidden  = true
+        }
         
         if self.progressLabel != nil, self.theme != nil {
            self.progressLabel?.font = UIFont.init(name: self.theme!.fontRegularName,
@@ -84,7 +84,7 @@ open class UXFViewController: UIViewController{
         }
         
         let bundle = Bundle(for: UXFeedback.self)
-        print(bundle.bundleIdentifier)
+
         let closeImage = UIImage.init(named: "close_image", in: bundle, compatibleWith: nil)
         closeButton?.setImage(closeImage, for: .normal)
         let backImage = UIImage.init(named: "back_arrow", in: bundle, compatibleWith: nil)
