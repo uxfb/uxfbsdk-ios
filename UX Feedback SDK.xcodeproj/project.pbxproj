@@ -51,18 +51,9 @@
 		0AA705FF2289D5970091A7A0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F92289D5890091A7A0 /* Alamofire.framework */; };
 		0AA706022289D5970091A7A0 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F52289D5890091A7A0 /* Nuke.framework */; };
 		0AA706032289D5970091A7A0 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F62289D5890091A7A0 /* Reachability.framework */; };
-		0AA7062B229126B10091A7A0 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA7061F229126AF0091A7A0 /* Roboto-LightItalic.ttf */; };
-		0AA7062C229126B10091A7A0 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70620229126AF0091A7A0 /* Roboto-MediumItalic.ttf */; };
 		0AA7062D229126B10091A7A0 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70621229126AF0091A7A0 /* Roboto-Bold.ttf */; };
-		0AA7062E229126B10091A7A0 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70622229126B00091A7A0 /* Roboto-Light.ttf */; };
-		0AA7062F229126B10091A7A0 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70623229126B00091A7A0 /* Roboto-Italic.ttf */; };
-		0AA70630229126B10091A7A0 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70624229126B00091A7A0 /* Roboto-BoldItalic.ttf */; };
 		0AA70631229126B10091A7A0 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70625229126B00091A7A0 /* Roboto-Regular.ttf */; };
-		0AA70632229126B10091A7A0 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70626229126B00091A7A0 /* Roboto-BlackItalic.ttf */; };
-		0AA70633229126B10091A7A0 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70627229126B00091A7A0 /* Roboto-Thin.ttf */; };
-		0AA70634229126B10091A7A0 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70628229126B00091A7A0 /* Roboto-ThinItalic.ttf */; };
 		0AA70635229126B10091A7A0 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70629229126B00091A7A0 /* Roboto-Medium.ttf */; };
-		0AA70636229126B10091A7A0 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA7062A229126B10091A7A0 /* Roboto-Black.ttf */; };
 		0AA850DF228960AB0040007C /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; };
 		0AA850E0228960AB0040007C /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0AF49826229C3D4A000CB7D6 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49824229C3D4A000CB7D6 /* UIColorExtension.swift */; };
@@ -473,19 +464,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AA70635229126B10091A7A0 /* Roboto-Medium.ttf in Resources */,
-				0AA70634229126B10091A7A0 /* Roboto-ThinItalic.ttf in Resources */,
-				0AA7062C229126B10091A7A0 /* Roboto-MediumItalic.ttf in Resources */,
 				0A4689C422840FC80074E1A3 /* UXFViewController.xib in Resources */,
-				0AA70630229126B10091A7A0 /* Roboto-BoldItalic.ttf in Resources */,
-				0AA7062E229126B10091A7A0 /* Roboto-Light.ttf in Resources */,
-				0AA70633229126B10091A7A0 /* Roboto-Thin.ttf in Resources */,
 				0AA7062D229126B10091A7A0 /* Roboto-Bold.ttf in Resources */,
-				0AA7062F229126B10091A7A0 /* Roboto-Italic.ttf in Resources */,
 				0AA70631229126B10091A7A0 /* Roboto-Regular.ttf in Resources */,
-				0AA70632229126B10091A7A0 /* Roboto-BlackItalic.ttf in Resources */,
-				0AA70636229126B10091A7A0 /* Roboto-Black.ttf in Resources */,
 				0A4689A722840BB90074E1A3 /* Images.xcassets in Resources */,
-				0AA7062B229126B10091A7A0 /* Roboto-LightItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,7 +489,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\n#cp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
+			shellScript = "BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\ncp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
 		};
 		0A4689F6228564FD0074E1A3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -545,6 +527,9 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Reachability.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Nuke.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

@@ -41,9 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         customTheme.textColor = UIColor.blue
         customTheme.formCornerRadius = 2.0
        // customTheme.fontRegularName = "YourRegularFontName"
-       // customTheme.fontBoldName = ..
-       // customTheme.fontLightName = ..
-       // customTheme.fontMediumName = ..
+       // customTheme.fontBoldName = "YourBoldFontName"
+       // customTheme.fontMediumName = "YourMediumFontName"
         
         UXFeedback.sharedInstance.setup(appID: uxfAppID,
                                         applicationWindow: self.window!)//, theme: customTheme)

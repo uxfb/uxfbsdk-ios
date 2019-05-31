@@ -22,7 +22,6 @@ open class UXFTheme{
     open var progressColor: UIColor = UIColor.init("#9699A7") // navigation label color
     open var fontRegularName: String = "Roboto-Regular"
     open var fontMediumName: String = "Roboto-Medium"
-    open var fontLightName: String = "Roboto-Light"
     open var fontBoldName: String = "Roboto-Bold"
     
     public init(){
@@ -58,7 +57,7 @@ open class UXFTheme{
         }
         
         let fontExtention = "ttf"
-        let fonts = [fontRegularName, fontMediumName, fontLightName, fontBoldName]
+        let fonts = [fontRegularName, fontMediumName, fontBoldName]
         fonts.forEach { (fontName) in
             let bundle =  Bundle.init(for: UXFTheme.self)
             if let fontUrl = bundle.url(forResource: fontName, withExtension: fontExtention){
