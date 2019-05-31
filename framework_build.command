@@ -14,12 +14,11 @@ IOS_PLATFORMS=(
 "iphonesimulator"
 )
 
-
-#xcodebuild clean
+xcodebuild clean
 
 for PLATFORM in "${IOS_PLATFORMS[@]}"; do
  echo "Build for $CONFIGURATION $PLATFORM"
-#xcodebuild -target "$IOS_TARGET_NAME" ONLY_ACTIVE_ARCH=NO -configuration "$CONFIGURATION" -sdk "$PLATFORM" build
+xcodebuild -target "$IOS_TARGET_NAME" ONLY_ACTIVE_ARCH=NO -configuration "$CONFIGURATION" -sdk "$PLATFORM" build
 done
 
 BUILD_PRODUCTS="$MAIN_DIR/build"
