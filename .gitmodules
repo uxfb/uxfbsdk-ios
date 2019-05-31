@@ -1,0 +1,3 @@
+[submodule "build/Release-universal"]
+	path = build/Release-universal
+	url = https://github.com/uxfb/UXFeedbackSDKiOS.git
