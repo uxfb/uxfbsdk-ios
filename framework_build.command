@@ -15,11 +15,11 @@ IOS_PLATFORMS=(
 )
 
 
-xcodebuild clean
+#xcodebuild clean
 
 for PLATFORM in "${IOS_PLATFORMS[@]}"; do
  echo "Build for $CONFIGURATION $PLATFORM"
-xcodebuild -target "$IOS_TARGET_NAME" ONLY_ACTIVE_ARCH=NO -configuration "$CONFIGURATION" -sdk "$PLATFORM" build
+#xcodebuild -target "$IOS_TARGET_NAME" ONLY_ACTIVE_ARCH=NO -configuration "$CONFIGURATION" -sdk "$PLATFORM" build
 done
 
 BUILD_PRODUCTS="$MAIN_DIR/build"
@@ -41,8 +41,10 @@ cp -R "${BUILD_PRODUCTS}/${CONFIGURATION}-iphonesimulator/${IOS_TARGET_NAME}.fra
 lipo -create -output "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework/${IOS_TARGET_NAME}" "${BUILD_PRODUCTS}/${CONFIGURATION}-iphonesimulator/${IOS_TARGET_NAME}.framework/${IOS_TARGET_NAME}" "${BUILD_PRODUCTS}/${CONFIGURATION}-iphoneos/${IOS_TARGET_NAME}.framework/${IOS_TARGET_NAME}"
 
 # Step 5. Convenience step to copy the framework to the project's directory
-#cp -R "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework" "${PROJECT_DIR}"
+FRAMEWORK_REPO_DIR="UXFeedbackSDKFramework//${IOS_TARGET_NAME}.framework"
+rm -rf "$FRAMEWORK_REPO_DIR"
+cp -R "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework" "$FRAMEWORK_REPO_DIR"
 
 # Step 6. Convenience step to open the project's directory in Finder
-open "${UNIVERSAL_OUTPUTFOLDER}"
+open "$FRAMEWORK_REPO_DIR"
 #fi
