@@ -48,7 +48,6 @@ class UXFParser{
         let progress = progressDict["enabled"] as! Bool
         let projectId = compaignInfo["projectId"] as! String
         let autocolse: Double = compaignInfo["autocolse"] as? Double ?? 0.0
-        let targeting = compaignInfo["targeting"] as! Array<Dictionary<String, String>>
         
         var pages = Array<UXFPage>()
         if let pagesArrayOfDict = compaignInfo["pages"] as? Array<Dictionary<String, Any>> {
@@ -67,10 +66,8 @@ class UXFParser{
                                 targetings: targetingArr,
                                 isProgressEnabled: progress,
                                 projectId:  projectId,
-                                autoclose: autocolse,
-                                targeting:  targeting)
+                                autoclose: autocolse)
     }
-    
     
     //MARK: support
     

@@ -86,11 +86,14 @@ open class UXFeedback{
         
         if self.canDisplayCampaings == true{
             _campaigns.forEach { (campaign) in
-                campaign.targeting.forEach({ (targeting) in
-                    if targeting["type"] == "event" && targeting["name"] == event &&  campaign.show() == true{
+                
+                campaign.targetings.forEach({ (targeting) in
+                    if let type = targeting["type"] as? String, type == "event",
+                       let name = targeting["name"] as? String, name == event,
+                        campaign.show() == true{
                         
                         _eventToSend = nil
-                        DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay), execute: { [unowned self] in
+                        DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay(eventName: name)), execute: { [unowned self] in
                             self._formPresentor?.dismissCurrentForm()
                             self._formPresentor = UXFCampaignFormPresentor.init(window: self._appWindow,
                                                                                 campaign: campaign,

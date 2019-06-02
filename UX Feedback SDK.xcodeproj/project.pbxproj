@@ -119,8 +119,6 @@
 		0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UXFeedbackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UXFeedbackSDK.h; sourceTree = "<group>"; };
 		0A46899522840B2C0074E1A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0A468A29228582850074E1A3 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
-		0A468A2A228582850074E1A3 /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/iOS/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
 		0A6CDB75223B960500C17007 /* UXFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFButton.swift; sourceTree = "<group>"; };
 		0A6CDB77223BD47800C17007 /* UXFText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFText.swift; sourceTree = "<group>"; };
 		0A6CDB79224110FE00C17007 /* UXFLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFLabel.swift; sourceTree = "<group>"; };
@@ -136,7 +134,6 @@
 		0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UXFeedbackSDK.framework; sourceTree = "<group>"; };
 		0AA705F52289D5890091A7A0 /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = Carthage/Build/iOS/Nuke.framework; sourceTree = "<group>"; };
 		0AA705F62289D5890091A7A0 /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
-		0AA705F72289D5890091A7A0 /* HEXColor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HEXColor.framework; path = Carthage/Build/iOS/HEXColor.framework; sourceTree = "<group>"; };
 		0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityLogger.framework; path = Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework; sourceTree = "<group>"; };
 		0AA705F92289D5890091A7A0 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		0AA7061F229126AF0091A7A0 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
@@ -346,12 +343,9 @@
 			children = (
 				0AA705F92289D5890091A7A0 /* Alamofire.framework */,
 				0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */,
-				0AA705F72289D5890091A7A0 /* HEXColor.framework */,
 				0AA705F52289D5890091A7A0 /* Nuke.framework */,
 				0AA705F62289D5890091A7A0 /* Reachability.framework */,
 				0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */,
-				0A468A29228582850074E1A3 /* CocoaLumberjack.framework */,
-				0A468A2A228582850074E1A3 /* CocoaLumberjackSwift.framework */,
 				0A160DD82268D62700A586C4 /* CoreTelephony.framework */,
 			);
 			name = Frameworks;

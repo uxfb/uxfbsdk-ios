@@ -28,7 +28,6 @@ struct UXFCampaign{
     private(set) var isProgressEnabled: Bool!
     private(set) var projectId: String!
     private(set) var autoclose: Double!
-    private(set) var targeting: Array<Dictionary<String, String>>
     
     var currentFormID: String? {
       return UserDefaults.standard.object(forKey: self.campaignId + ".currentFormId") as? String
@@ -67,8 +66,24 @@ struct UXFCampaign{
     var showAttemptCount: Int{
         return 3
     }
-    var showDelay: TimeInterval{
-        return 1.0
+    
+    func showDelay(eventName: String) -> TimeInterval{
+        var delay: TimeInterval = 0.0
+        self.targetings.forEach { (targetingDict) in
+            if let name = targetingDict["name"] as? String, eventName == name {
+                if let timeout = targetingDict["timeout"] as? Double{
+                    delay = timeout
+                }
+                else if let timeoutDict = targetingDict["timeout"] as? Dictionary<String,Any>,
+                        let enabled = timeoutDict["enabled"] as? Bool,
+                        let timeout = timeoutDict["value"] as? String{
+                    if enabled == true {
+                       delay = TimeInterval(Double(timeout) ?? 0)
+                    }
+                }
+            }
+        }
+        return delay
     }
     var currentAttempt: Int{
         return UserDefaults.standard.integer(forKey: attemptKey)
@@ -82,6 +97,7 @@ struct UXFCampaign{
         
         //Временно: выходим если уже показывали форму хотя бы один раз
         #if DEBUG
+          return true
         #else
         if self.currentFormID != nil {
             return false
