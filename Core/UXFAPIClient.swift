@@ -66,7 +66,7 @@ class UXFAPIClient{
  
                 var campaigns: Array<UXFCampaign> = []
                 for compaignInfo in campaignsResults{
-                    if let campaign =  self?._parser.parseCampaing(compaignInfo: compaignInfo){
+                    if let campaign =  self?._parser.parseCampaing(campaignInfo: compaignInfo){
                        campaigns.append(campaign)
                     }
                     

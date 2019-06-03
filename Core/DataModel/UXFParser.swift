@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import HEXColor
 import Nuke
 
 class UXFParser{
@@ -17,7 +16,7 @@ class UXFParser{
     static let formControllerViewOffset: CGFloat = 16.0
     static let bottomOffset: CGFloat = 8
     
-    private(set) var theme: UXFTheme!
+    private(set) var customTheme: UXFTheme?
     private var _uiGroupDictionary: Dictionary <String, Array<String>> = [:]
     private var containerWidth: CGFloat {
         return (UIScreen.main.bounds.width - (UXFParser.formControllerViewOffset + UXFParser.contenViewOffset)*2)
@@ -35,22 +34,40 @@ class UXFParser{
         }
     }
     
-    init(theme: UXFTheme) {
-        self.theme = theme
+    init(theme: UXFTheme?) {
+        self.customTheme = theme
     }
     
-     func parseCampaing(compaignInfo: Dictionary<String,Any>) -> (UXFCampaign?){
+    func parseTheme(jsonDict: Dictionary<String,Any>) -> UXFTheme? {
+        if let jsonData = try? JSONSerialization.data(withJSONObject: jsonDict, options: .prettyPrinted) {
+           let theme = try! JSONDecoder().decode(UXFTheme.self, from: jsonData)
+            return theme
+        }
+        return nil
+       // if let controlColorString = jsonDict["controlColor"]
+    }
+    
+     func parseCampaing(campaignInfo: Dictionary<String,Any>) -> (UXFCampaign?){
         
-        let type = compaignInfo["type"] as! String
-        let targetingArr = compaignInfo["targeting"] as! Array<Dictionary<String, Any>>
-        let campaingId = compaignInfo["campaignId"] as! String
-        let progressDict = compaignInfo["progress"] as! Dictionary<String, Any>
+        let type = campaignInfo["type"] as! String
+        let targetingArr = campaignInfo["targeting"] as! Array<Dictionary<String, Any>>
+        let campaingId = campaignInfo["campaignId"] as! String
+        let progressDict = campaignInfo["progress"] as! Dictionary<String, Any>
         let progress = progressDict["enabled"] as! Bool
-        let projectId = compaignInfo["projectId"] as! String
-        let autocolse: Double = compaignInfo["autocolse"] as? Double ?? 0.0
+        let projectId = campaignInfo["projectId"] as! String
+        let autocolse: Double = campaignInfo["autocolse"] as? Double ?? 0.0
+        var theme: UXFTheme = self.customTheme ?? UXFTheme.init()
+        
+        if let design = campaignInfo["design"] as? Dictionary<String, Any>,
+           let themeType = UXFThemeType.init(rawValue: (design["theme"] as? Int) ?? 0),
+               themeType != .custom{
+            if let campaignTheme = parseTheme(jsonDict: design) {
+               theme = campaignTheme
+            }
+        }
         
         var pages = Array<UXFPage>()
-        if let pagesArrayOfDict = compaignInfo["pages"] as? Array<Dictionary<String, Any>> {
+        if let pagesArrayOfDict = campaignInfo["pages"] as? Array<Dictionary<String, Any>> {
             
             for pageDict in pagesArrayOfDict{
                 DDLogDebug("page: \(pageDict)")
@@ -60,7 +77,8 @@ class UXFParser{
             }
         }
         
-        return UXFCampaign.init(campaignId: campaingId,
+        return UXFCampaign.init( campaignId: campaingId,
+                                theme: theme,
                                 pages: pages,
                                 type: UXFCampaignType.init(rawValue: type),
                                 targetings: targetingArr,
@@ -77,7 +95,8 @@ class UXFParser{
                               fontName: String? = nil,
                               fontSize: CGFloat = 17.0,
                               textColor: UIColor? = nil,
-                              width: CGFloat? = nil) -> CGFloat{
+                              width: CGFloat? = nil,
+                              theme: UXFTheme) -> CGFloat{
         
         label.textAlignment = textAlignment
         label.numberOfLines = 0
@@ -87,7 +106,7 @@ class UXFParser{
             paragraphStyle.lineSpacing = fontSize * 0.5
             paragraphStyle.alignment = textAlignment
             
-            let font = UIFont.init(name: fontName ?? self.theme!.fontMediumName, size: fontSize)
+            let font = UIFont.init(name: fontName ?? theme.fontMediumName, size: fontSize)
             
             attributedString.addAttributes([NSAttributedString.Key.font : font as Any,
                                             NSAttributedString.Key.foregroundColor: textColor ?? theme.textColor],
@@ -111,6 +130,7 @@ class UXFParser{
     }
     
     internal  func parseUIElement(dictionary: Dictionary<String, Any>,
+                                  theme: UXFTheme,
                                   submitHandler: ((Dictionary<String,Any>?)->())?)->(UIView?){
         
         var groupView: UIView? = nil
@@ -137,25 +157,25 @@ class UXFParser{
             
             switch type {
             case "button":
-                groupView =  createButton(dictionary: dictionary, groupID: groupID)
+                groupView =  createButton(dictionary: dictionary, groupID: groupID, theme: theme)
                 break
             case "header":
-                groupView =  createUIHeader(dictionary: dictionary, groupID: groupID)
+                groupView =  createUIHeader(dictionary: dictionary, groupID: groupID, theme: theme)
                 break
             case "text":
-                groupView =  createUIText(dictionary: dictionary, groupID: groupID)
+                groupView =  createUIText(dictionary: dictionary, groupID: groupID, theme: theme)
                 break
             case "checkboxes":
-                groupView = createUICheckbox(dictionary: dictionary, groupID: groupID)
+                groupView = createUICheckbox(dictionary: dictionary, groupID: groupID, theme: theme)
                 break
             case "smiles":
-                groupView = createSmiles(dictionary: dictionary, groupID: groupID, submitHandler: submitHandler)
+                groupView = createSmiles(dictionary: dictionary, groupID: groupID, theme: theme,  submitHandler: submitHandler)
                 break
             case "comment":
-                groupView = createComment(dictionary: dictionary, groupID: groupID, submitHandler: submitHandler)
+                groupView = createComment(dictionary: dictionary, groupID: groupID, theme: theme, submitHandler: submitHandler)
                 break
             case "email":
-                groupView = createEmailInput(dictionary: dictionary, groupID: groupID, submitHandler: submitHandler)
+                groupView = createEmailInput(dictionary: dictionary, groupID: groupID, theme: theme, submitHandler: submitHandler)
                 break
             case "image":
                 groupView = createImage(dictionary: dictionary, groupID: groupID)
@@ -190,6 +210,7 @@ class UXFParser{
     
     private func createEmailInput(dictionary: Dictionary<String, Any>,
                                groupID: String,
+                               theme: UXFTheme,
                                submitHandler: ((Dictionary<String,Any>?)->())?) ->(UIView?){
         var height: CGFloat = 0.0
         let view = UIView.init(frame: CGRect.init(x: 0,
@@ -204,8 +225,9 @@ class UXFParser{
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
         let labelHeight = self.setLabelText(label: label,
                           text: text,
-                          fontName: self.theme!.fontMediumName,
-                          fontSize: labelFontSize)
+                          fontName: theme.fontMediumName,
+                          fontSize: labelFontSize,
+                          theme: theme)
         //label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         height += labelHeight
@@ -214,7 +236,7 @@ class UXFParser{
         let textFieldHeight: CGFloat = 48.0
         let textFieldYOffset: CGFloat = 15.0
         let textField = UXFTextField.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 48))
-        textField.font = UIFont.init(name: self.theme.fontRegularName, size: textField.font!.pointSize)
+        textField.font = UIFont.init(name: theme.fontRegularName, size: textField.font!.pointSize)
         textField.placeholder = "Email"
         height += textFieldHeight + textFieldYOffset
         textField.contentLeftPadding = 16.0
@@ -289,6 +311,7 @@ class UXFParser{
     
     private func createComment(dictionary: Dictionary<String, Any>,
                                groupID: String,
+                               theme: UXFTheme,
                                submitHandler: ((Dictionary<String,Any>?)->())?) ->(UIView?){
         
         var height: CGFloat = 0.0
@@ -331,8 +354,9 @@ class UXFParser{
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
         let labelHeight = self.setLabelText(label: label,
                           text: titleText,
-                          fontName: self.theme!.fontMediumName,
-                          fontSize: labelFontSize)
+                          fontName: theme.fontMediumName,
+                          fontSize: labelFontSize,
+                          theme: theme)
         //label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         height += labelHeight
@@ -349,7 +373,7 @@ class UXFParser{
         let textField = UXFTextField.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 48))
         height += textFieldHeight + textFieldYOffset
         textField.contentLeftPadding = 16.0
-        textField.font = UIFont.init(name: self.theme.fontRegularName, size: textField.font!.pointSize)
+        textField.font = UIFont.init(name: theme.fontRegularName, size: textField.font!.pointSize)
         //textField.borderStyle = .line
         //textField.setContentHuggingPriority(UILayoutPriority.init(rawValue: 251), for: .vertical)
         textField.backgroundColor = UIColor.init("#F6F6F7")
@@ -369,8 +393,9 @@ class UXFParser{
             alertLabelHeight = self.setLabelText(label: alertLabel!,
                               text: alertText,
                               textAlignment: .left,
-                              fontName: self.theme!.fontRegularName,
-                              fontSize: alertLabelFontSize)
+                              fontName: theme.fontRegularName,
+                              fontSize: alertLabelFontSize,
+                              theme: theme)
             alertLabel!.translatesAutoresizingMaskIntoConstraints = false
             height += alertLabelYOffset + alertLabelHeight
             view.addSubview(alertLabel!)
@@ -379,7 +404,7 @@ class UXFParser{
         if isCommentRequired == true {
             textField.placeholder = "Обязательное поле".localized()
             alertLabel!.alpha = 0
-            alertLabel!.textColor = self.theme.errorColor
+            alertLabel!.textColor = theme.errorColor
         }
         else{
             textField.placeholder = "Необязательное поле".localized()
@@ -451,6 +476,7 @@ class UXFParser{
     
     private  func createSmiles(dictionary: Dictionary<String, Any>,
                                   groupID: String,
+                                  theme: UXFTheme,
                             submitHandler: ((Dictionary<String,Any>?)->())?) ->(UIView){
         
         var height: CGFloat = 0.0
@@ -460,7 +486,7 @@ class UXFParser{
         height += labelYOffset
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 24))
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
-        let labelHeight =  self.setLabelText(label: label, text: dictionary["value"] as? String, fontSize: labelFontSize)
+        let labelHeight =  self.setLabelText(label: label, text: dictionary["value"] as? String, fontSize: labelFontSize, theme: theme)
        // label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label)
@@ -480,7 +506,8 @@ class UXFParser{
         
         self.createSmileButtons(layoutView: stackView,
                                 groupId: groupID,
-            submitHandler: submitHandler)
+                                theme: theme,
+                                submitHandler: submitHandler)
 
         let views = ["label": label, "stackview": stackView]
         var allConstraints: [NSLayoutConstraint] = []
@@ -504,17 +531,17 @@ class UXFParser{
         return view
     }
     
-    private  func createButton(dictionary: Dictionary<String, Any>, groupID: String)->(UXFButton){
+    private  func createButton(dictionary: Dictionary<String, Any>, groupID: String, theme: UXFTheme)->(UXFButton){
         let button = UXFButton.init(frame: CGRect.init(x: 0, y: 0, width: 80, height: 33))
         
         if button.titleLabel != nil {
            button.titleLabel?.text = dictionary["value"] as? String
-           button.titleLabel?.font = UIFont.init(name: self.theme!.fontMediumName, size: button.titleLabel!.font.pointSize)
+           button.titleLabel?.font = UIFont.init(name: theme.fontMediumName, size: button.titleLabel!.font.pointSize)
         }
         return button
     }
     
-    private  func createUICheckbox(dictionary: Dictionary<String, Any>, groupID: String)->(UIView){
+    private  func createUICheckbox(dictionary: Dictionary<String, Any>, groupID: String, theme: UXFTheme)->(UIView){
         let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 33))
         let switchView = UISwitch.init(frame: CGRect.init(x: 0, y: 0, width: 44, height: view.bounds.size.height))
         view.addSubview(switchView)
@@ -522,7 +549,7 @@ class UXFParser{
         return view
     }
     
-    private  func createUIHeader(dictionary: Dictionary<String, Any>, groupID: String)->(UILabel){
+    private  func createUIHeader(dictionary: Dictionary<String, Any>, groupID: String, theme: UXFTheme)->(UILabel){
         
         let labelYOffset: CGFloat = 10.0
         var height: CGFloat = labelYOffset
@@ -530,9 +557,10 @@ class UXFParser{
         
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
         let labelHeight = self.setLabelText(label: label, text: dictionary["value"] as? String,
-                          fontName: self.theme!.fontBoldName,
+                          fontName: theme.fontBoldName,
                           fontSize: labelFontSize,
-                          textColor: self.theme.titleColor)
+                          textColor: theme.titleColor,
+                          theme: theme)
         //label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         height += labelHeight
@@ -540,7 +568,7 @@ class UXFParser{
         return label
     }
     
-    private  func createUIText(dictionary: Dictionary<String, Any>, groupID: String)->(UIView){
+    private  func createUIText(dictionary: Dictionary<String, Any>, groupID: String, theme: UXFTheme)->(UIView){
         
         let view = UIView.init()
         view.backgroundColor = UIColor.clear
@@ -551,8 +579,9 @@ class UXFParser{
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
         let labelHeight = self.setLabelText(label: label,
                           text: dictionary["value"] as? String,
-                          fontName:self.theme!.fontMediumName,
-                          fontSize: labelFontSize)
+                          fontName: theme.fontMediumName,
+                          fontSize: labelFontSize,
+                          theme: theme)
         //label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         height += labelHeight
@@ -580,6 +609,7 @@ class UXFParser{
     
     private func createSmileButtons(layoutView: UIStackView,
                                     groupId: String,
+                                    theme: UXFTheme,
                               submitHandler: ((Dictionary<String,Any>)->())?){
         
         let smilesCount = 5
@@ -591,8 +621,8 @@ class UXFParser{
                 button.adjustsImageSizeForAccessibilityContentSizeCategory = true
             }
         
-            let imageName =  self.theme.smileImageName(by: smileIndex)
-            let previewButtonImage =  self.theme.getSmile(imageName: imageName, completion: { (image) in
+            let imageName =  theme.smileImageName(by: smileIndex)
+            let previewButtonImage =  theme.getSmile(imageName: imageName, completion: { (image) in
                 button.setImage(image, for: UIControl.State.normal)
             })
             button.setImage(previewButtonImage, for: UIControl.State.normal)

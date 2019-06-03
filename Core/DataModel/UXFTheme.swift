@@ -7,64 +7,92 @@
 //
 
 import Foundation
-import HEXColor
 
-open class UXFTheme{
+enum UXFThemeType: Int {
+    case custom = 0
+    case light = 1
+    case dark = 2
+}
+
+open class UXFTheme: Decodable{
     
     open var titleColor: UIColor = UIColor.init("#2F3552") //header
-    open var textColor: UIColor = UIColor.init("#2F3552") //text
-    open var accendentTextColor: UIColor = UIColor.green
-    open var accentColor: UIColor  = UIColor.green
-    open var backgroundColor: UIColor = UIColor.white //form background color
     open var errorColor: UIColor = UIColor.init("#E92436") //Alert comment color
-    open var cardColor: UIColor = UIColor.yellow
-    open var formCornerRadius: CGFloat = 8.0
-    open var progressColor: UIColor = UIColor.init("#9699A7") // navigation label color
+    open var formRadius: CGFloat = 8.0
+    open var textColor: UIColor = UIColor.init("#2F3552") //text
+    open var inputBackgroundColor: UIColor = UIColor.init("#F6F6F7") //text
+    open var inputTextColor: UIColor = UIColor.init("#F6F6F7") //text
+    open var controlColor: UIColor = UIColor.init("#9699A7") // navigation label color
+    open var backgroundColor: UIColor = UIColor.white //form background color
+
     open var fontRegularName: String = "Roboto-Regular"
     open var fontMediumName: String = "Roboto-Medium"
     open var fontBoldName: String = "Roboto-Bold"
     
-    public init(){
-       
+    enum CodingKeys: String, CodingKey {
+        case titleColor
+        case errorColor
+        case formRadius
+        case textColor
+        case inputBackgroundColor
+        case inputTextColor
+        case controlColor
+        case backgroundColor
+        case fontRegularName
+        case fontMediumName
+        case fontBoldName
     }
     
-    public init(colorsDict: Dictionary<String, String>,
-         smilesDict: Dictionary<String, String>) {
- 
-        if let titleColorString = colorsDict["title"]{
-           titleColor = UIColor(titleColorString)
+    required public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let titleColorString = try? container.decode(String.self, forKey: .titleColor){
+           self.titleColor = UIColor.init(titleColorString)
         }
-        if let textColorString = colorsDict["text"] {
-           textColor = UIColor(textColorString)
+        if let errorColorString = try? container.decode(String.self, forKey: .errorColor){
+            self.errorColor = UIColor.init(errorColorString)
         }
-        if let accendentColorString = colorsDict["accentedText"] {
-          accendentTextColor = UIColor(accendentColorString)
+        if let radius: CGFloat =  try? container.decode(CGFloat.self, forKey: .formRadius) {
+            self.formRadius = radius
         }
-        if let accentColorString = colorsDict["accent"] {
-          accentColor = UIColor(accentColorString)
+        if let textColorString = try? container.decode(String.self, forKey: .textColor){
+            self.textColor = UIColor.init(textColorString)
         }
-        if let backgroundColorString = colorsDict["background"] {
-            backgroundColor = UIColor(backgroundColorString)
+        if let inputBackgroundColorString = try? container.decode(String.self, forKey: .inputBackgroundColor){
+            self.inputBackgroundColor = UIColor.init(inputBackgroundColorString)
         }
-        if let errorColorString = colorsDict["error"] {
-           errorColor = UIColor(errorColorString)
+        if let inputTextColorString = try? container.decode(String.self, forKey: .inputTextColor){
+            self.inputTextColor = UIColor.init(inputTextColorString)
         }
-        if let cardColorString = colorsDict["card"] {
-           cardColor = UIColor(cardColorString)
+        if let backgroundColorString = try? container.decode(String.self, forKey: .backgroundColor){
+            self.backgroundColor = UIColor.init(backgroundColorString)
         }
-        if let progrressColorString = colorsDict["progressColor"] {
-            progressColor = UIColor(progrressColorString)
+        if let fontName = try container.decodeIfPresent(String.self, forKey: .fontRegularName){
+           self.fontRegularName = fontName
+        }
+        if let fontName =  try container.decodeIfPresent(String.self, forKey: .fontMediumName){
+           self.fontMediumName = fontName
+        }
+        if let fontName = try container.decodeIfPresent(String.self, forKey: .fontBoldName) {
+           self.fontBoldName = fontName
         }
         
+        loadFonts()
+    }
+    
+    private func loadFonts(){
         let fontExtention = "ttf"
         let fonts = [fontRegularName, fontMediumName, fontBoldName]
         fonts.forEach { (fontName) in
             let bundle =  Bundle.init(for: UXFTheme.self)
             if let fontUrl = bundle.url(forResource: fontName, withExtension: fontExtention){
-               _ = loadFont(fontUrl: fontUrl)
+                _ = loadFont(fontUrl: fontUrl)
             }
         }
-       
+    }
+    
+    public init() {
+        
+        loadFonts()
     }
     
     open func getSmile(imageName: String, completion: (_ smileImage: UIImage)->()) ->(UIImage?){

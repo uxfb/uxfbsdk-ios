@@ -40,7 +40,7 @@ open class UXFeedback{
     private var _parser: UXFParser!
     
     init() {
-        self.setTheme(theme: UXFTheme.init(colorsDict: [:], smilesDict: [:]))
+        self.setTheme(theme: UXFTheme.init())
     }
     
     open func setTheme(theme: UXFTheme){

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import HEXColor
 
 enum UXFTextFieldState{
     case normal

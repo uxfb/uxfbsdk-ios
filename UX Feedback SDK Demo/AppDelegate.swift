@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         customTheme.backgroundColor = UIColor.groupTableViewBackground
         customTheme.titleColor = UIColor.brown
         customTheme.textColor = UIColor.blue
-        customTheme.formCornerRadius = 2.0
+        customTheme.formRadius = 2.0
        // customTheme.fontRegularName = "YourRegularFontName"
        // customTheme.fontBoldName = "YourBoldFontName"
        // customTheme.fontMediumName = "YourMediumFontName"

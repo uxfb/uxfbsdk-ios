@@ -6,8 +6,6 @@
 //  Copyright © 2019 UXF. All rights reserved.
 //
 
-import HEXColor
-
 struct UXFText: Decodable {
     let colorString: String!
     var color: UIColor{

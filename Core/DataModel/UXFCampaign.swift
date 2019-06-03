@@ -22,6 +22,7 @@ struct UXFCampaign{
     private let attemptKey = "campaignAttempt"
 
     private(set) var campaignId: String!
+    private(set) var theme: UXFTheme!
     private(set) var pages: Array<UXFPage> = []
     private(set) var type: UXFCampaignType!
     private(set) var targetings: Array<Dictionary<String,Any>>!
@@ -73,14 +74,14 @@ struct UXFCampaign{
             if let name = targetingDict["name"] as? String, eventName == name {
                 if let timeout = targetingDict["timeout"] as? Double{
                     delay = timeout
-                }
+                }/*
                 else if let timeoutDict = targetingDict["timeout"] as? Dictionary<String,Any>,
                         let enabled = timeoutDict["enabled"] as? Bool,
                         let timeout = timeoutDict["value"] as? String{
                     if enabled == true {
                        delay = TimeInterval(Double(timeout) ?? 0)
                     }
-                }
+                }*/
             }
         }
         return delay

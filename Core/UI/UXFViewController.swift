@@ -92,9 +92,9 @@ open class UXFViewController: UIViewController{
         let logoImage =  UIImage.init(named: "logo_small", in: bundle, compatibleWith: nil)
         self.logoImageView?.image = logoImage
         
-        self.progressLabel?.textColor = theme?.progressColor
+        self.progressLabel?.textColor = theme?.controlColor
         self.progressLabel?.text = self.progressString
-        contentView?.layer.cornerRadius = theme?.formCornerRadius ?? 8.0
+        contentView?.layer.cornerRadius = theme?.formRadius ?? 8.0
         contentView?.layer.masksToBounds = false
         contentView?.clipsToBounds = false
         

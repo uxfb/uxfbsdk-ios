@@ -89,7 +89,7 @@ class UXFCampaignFormPresentor: NSObject{
         let controller = UXFViewController.init(index: fromIndex, formID: page.id )
         controller.modalPresentationStyle = .overCurrentContext
         controller.progressString = (title == nil ? "" : title!)
-        controller.theme = _parser.theme
+        controller.theme = self._campaign.theme
         controller.transitioningDelegate = self
         
         controller.didCloseHandler = { [weak self]  (formIndex) in
@@ -133,7 +133,7 @@ class UXFCampaignFormPresentor: NSObject{
     
     func prepareUIForm(controller: UXFViewController, page: UXFPage) {
         
-        controller.contentView.backgroundColor = _parser.theme.backgroundColor
+        controller.contentView.backgroundColor = _campaign.theme.backgroundColor
         
         var allConstraints: [NSLayoutConstraint] = []
         var viewIndex = 0
@@ -145,6 +145,7 @@ class UXFCampaignFormPresentor: NSObject{
             for fieldInfo in  filedsInfoArr{
                 
                 if let filedView = _parser.parseUIElement(dictionary: fieldInfo,
+                                                          theme: _campaign.theme,
                                                          submitHandler: {(info) in
                                                         controller.nextHandler?(controller.formIndex, info)
                 }){
