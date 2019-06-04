@@ -143,7 +143,8 @@ open class UXFeedback{
     open func resetAllCampaignsData(completion: (()->())?){
         
         _campaigns.forEach { (campaign) in
-            campaign.removeUserData()
+            var aCampaign = campaign
+            aCampaign.removeUserData()
         }
     }
 }

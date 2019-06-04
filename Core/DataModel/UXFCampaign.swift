@@ -19,7 +19,13 @@ enum UXFCampaignPosition: String{
 
 struct UXFCampaign{
 
-    private let attemptKey = "campaignAttempt"
+    var attemptCompanyKey: String {
+        return self.campaignId + ".campaignAttempt"
+    }
+    
+    var currentFormIDKey: String {
+        return self.campaignId + ".currentFormId"
+    }
 
     private(set) var campaignId: String!
     private(set) var theme: UXFTheme!
@@ -30,18 +36,20 @@ struct UXFCampaign{
     private(set) var projectId: String!
     private(set) var autoclose: Double!
     
-    var currentFormID: String? {
-      return UserDefaults.standard.object(forKey: self.campaignId + ".currentFormId") as? String
-    }
-    
-    func setCurrentFormID(formID: String?){
-        if formID != nil {
-           UserDefaults.standard.set(formID!, forKey: self.campaignId + ".currentFormId")
+
+    internal var сurrentFormID: String?{
+        set{
+            if newValue != nil {
+                UserDefaults.standard.set(newValue, forKey: self.currentFormIDKey)
+            }
+            else{
+                UserDefaults.standard.removeObject(forKey: self.currentFormIDKey)
+            }
+            UserDefaults.standard.synchronize()
         }
-        else{
-            UserDefaults.standard.removeObject(forKey: self.campaignId + ".currentFormId")
+        get{
+            return  UserDefaults.standard.object(forKey: self.currentFormIDKey) as? String
         }
-        UserDefaults.standard.synchronize()
     }
     
     var answerId: String?{
@@ -58,14 +66,17 @@ struct UXFCampaign{
          UserDefaults.standard.synchronize()
     }
     
-    func removeUserData(){
+    mutating func removeUserData(){
         self.setAnswerID(answerID:  nil)
-        self.setCurrentFormID(formID: nil)
+        self.сurrentFormID = nil
         self.resetAttempt()
     }
     
     var showAttemptCount: Int{
-        return 3
+    #if DEBUG
+        return Int.max
+    #endif
+        return 1
     }
     
     func showDelay(eventName: String) -> TimeInterval{
@@ -86,8 +97,9 @@ struct UXFCampaign{
         }
         return delay
     }
+    
     var currentAttempt: Int{
-        return UserDefaults.standard.integer(forKey: attemptKey)
+        return UserDefaults.standard.integer(forKey: self.attemptCompanyKey)
     }
     
     var formsCount: Int{
@@ -95,28 +107,23 @@ struct UXFCampaign{
     }
     
     func show() -> (Bool){
-        
-        //Временно: выходим если уже показывали форму хотя бы один раз
-        #if DEBUG
-          return true
-        #else
-        if self.currentFormID != nil {
-            return false
-        }
-        #endif
-        
-        #warning("implement API call here")
-        
-        if self.currentAttempt < showAttemptCount{
-            UserDefaults.standard.set(self.currentAttempt + 1, forKey: self.campaignId + "." + attemptKey)
+
+        let attemptCount = self.currentAttempt
+        if attemptCount < showAttemptCount{
+            self.incAttempt()
             return true
         }
         
         return false
     }
     
-    private func resetAttempt(){
-        UserDefaults.standard.removeObject(forKey: self.campaignId + "." + attemptKey)
+    private func incAttempt(){
+        UserDefaults.standard.set(self.currentAttempt + 1, forKey: self.attemptCompanyKey)
+        UserDefaults.standard.synchronize()
+    }
+    
+    private mutating func resetAttempt(){
+        UserDefaults.standard.set(0, forKey: self.attemptCompanyKey)
         UserDefaults.standard.synchronize()
     }
     

@@ -240,7 +240,7 @@ class UXFCampaignFormPresentor: NSObject{
             //controller.state = .presented
         }
         _currentForm = controller
-        _campaign.setCurrentFormID(formID: controller.formID) //save current campaign fromID
+        _campaign.сurrentFormID = controller.formID //save current campaign formID
         
         if _campaign.autoclose > 0 && _currentForm?.formIndex == (_campaign.pages.count - 1) {
             self.perform(#selector(dismissCurrentForm), with: nil, afterDelay: _campaign.autoclose)
