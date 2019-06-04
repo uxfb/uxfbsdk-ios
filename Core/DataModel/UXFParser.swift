@@ -57,14 +57,14 @@ class UXFParser{
         let projectId = campaignInfo["projectId"] as! String
         let autocolse: Double = campaignInfo["autocolse"] as? Double ?? 0.0
         var theme: UXFTheme = self.customTheme ?? UXFTheme.init()
-        /*
+        
         if let design = campaignInfo["design"] as? Dictionary<String, Any>,
            let themeType = UXFThemeType.init(rawValue: (design["theme"] as? Int) ?? 0),
                themeType != .custom{
             if let campaignTheme = parseTheme(jsonDict: design) {
                theme = campaignTheme
             }
-        }*/
+        }
         
         var pages = Array<UXFPage>()
         if let pagesArrayOfDict = campaignInfo["pages"] as? Array<Dictionary<String, Any>> {
@@ -227,7 +227,7 @@ class UXFParser{
                           text: text,
                           fontName: theme.fontMediumName,
                           fontSize: labelFontSize,
-                          theme: theme)
+                             theme: theme)
         //label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         height += labelHeight
@@ -238,11 +238,12 @@ class UXFParser{
         let textField = UXFTextField.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 48))
         textField.font = UIFont.init(name: theme.fontRegularName, size: textField.font!.pointSize)
         textField.placeholder = "Email"
+        textField.textColor = theme.inputTextColor
+        textField.backgroundColor = theme.inputBackgroundColor
         height += textFieldHeight + textFieldYOffset
         textField.contentLeftPadding = 16.0
         //textField.borderStyle = .line
         //textField.setContentHuggingPriority(UILayoutPriority.init(rawValue: 251), for: .vertical)
-        textField.backgroundColor = UIColor.init("#F6F6F7")
         textField.didChange = { (inputTextField, text) in
             inputTextField.inputState = text?.count ?? 0 > 0 ? .input : .normal
         }
@@ -374,9 +375,10 @@ class UXFParser{
         height += textFieldHeight + textFieldYOffset
         textField.contentLeftPadding = 16.0
         textField.font = UIFont.init(name: theme.fontRegularName, size: textField.font!.pointSize)
+        textField.textColor = theme.inputTextColor
+        textField.backgroundColor = theme.inputBackgroundColor
         //textField.borderStyle = .line
         //textField.setContentHuggingPriority(UILayoutPriority.init(rawValue: 251), for: .vertical)
-        textField.backgroundColor = UIColor.init("#F6F6F7")
         textField.didChange = { (inputTextField, text) in
                 inputTextField.inputState = text?.count ?? 0 > 0 ? .input : .normal
                 if isCommentRequired == true {

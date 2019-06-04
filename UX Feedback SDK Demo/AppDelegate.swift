@@ -28,8 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         DDLogDebug("Start application")
         
-        /*
-        for family in UIFont.familyNames.sorted() {
+        
+        /*for family in UIFont.familyNames.sorted() {
             let names = UIFont.fontNames(forFamilyName: family)
             print("Family: \(family) Font names: \(names)")
         }*/
@@ -39,18 +39,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         customTheme.backgroundColor = UIColor.groupTableViewBackground
         customTheme.titleColor = UIColor.brown
         customTheme.textColor = UIColor.black
-        customTheme.errorColor = UIColor.orange
+        customTheme.errorColor = UIColor.red
         customTheme.controlColor = UIColor.blue
         customTheme.inputBackgroundColor = UIColor.lightGray
         customTheme.inputTextColor = UIColor.darkGray
         customTheme.formRadius = 20.0
         
-       // customTheme.fontRegularName = "YourRegularFontName"
+       // customTheme.fontRegularName = "Marker Felt"
        // customTheme.fontBoldName = "YourBoldFontName"
-       // customTheme.fontMediumName = "YourMediumFontName"
+        customTheme.fontMediumName = "Marker Felt"
         
         UXFeedback.sharedInstance.setup(appID: uxfAppID,
-                                        applicationWindow: self.window!, theme: customTheme)
+                                        applicationWindow: self.window!)//, theme: customTheme)
         {  success in
             let message = "UXFeedback initialization " + (success == true ? "successful" : "failed")
             DDLogDebug(message)

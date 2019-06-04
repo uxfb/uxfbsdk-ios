@@ -16,14 +16,15 @@ enum UXFThemeType: Int {
 
 open class UXFTheme: Decodable{
     
-    open var titleColor: UIColor = UIColor.gray // UIColor.init("#2F3552") //header
-    open var errorColor: UIColor = UIColor.gray //UIColor.init("#E92436") //Alert comment color
-    open var formRadius: CGFloat = 18.0
-    open var textColor: UIColor = UIColor.gray //UIColor.init("#2F3552") //text
-    open var inputBackgroundColor: UIColor =  UIColor.gray //UIColor.init("#F6F6F7") //text
-    open var inputTextColor: UIColor = UIColor.gray //UIColor.init("#F6F6F7") //text
-    open var controlColor: UIColor = UIColor.gray // UIColor.init("#9699A7") // navigation label color
-    open var backgroundColor: UIColor = UIColor.gray //UIColor.white //form background color
+    open var titleColor: UIColor =  UIColor.init("#2F3552") //header
+    open var errorColor: UIColor = UIColor.init("#E92436") //Alert comment color
+    open var progressColor: UIColor = UIColor.black
+    open var formRadius: CGFloat = 8.0
+    open var textColor: UIColor = UIColor.init("#2F3552") //text
+    open var inputBackgroundColor: UIColor = UIColor.init("#F6F6F7")
+    open var inputTextColor: UIColor = UIColor.init("#F6F6F7")
+    open var controlColor: UIColor = UIColor.init("#9699A7") // navigation label color
+    open var backgroundColor: UIColor = UIColor.white //form background color
 
     open var fontRegularName: String = "Roboto-Regular"
     open var fontMediumName: String = "Roboto-Medium"
@@ -33,6 +34,7 @@ open class UXFTheme: Decodable{
         case titleColor
         case errorColor
         case formRadius
+        case progressColor
         case textColor
         case inputBackgroundColor
         case inputTextColor
@@ -65,6 +67,9 @@ open class UXFTheme: Decodable{
         }
         if let backgroundColorString = try? container.decode(String.self, forKey: .backgroundColor){
             self.backgroundColor = UIColor.init(backgroundColorString)
+        }
+        if let progressColorString = try? container.decode(String.self, forKey: .progressColor){
+            self.progressColor = UIColor.init(progressColorString)
         }
         if let fontName = try container.decodeIfPresent(String.self, forKey: .fontRegularName){
            self.fontRegularName = fontName

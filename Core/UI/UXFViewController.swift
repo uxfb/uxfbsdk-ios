@@ -83,21 +83,21 @@ open class UXFViewController: UIViewController{
                                                   size: self.progressLabel!.font.pointSize)
         }
         
+        
         let bundle = Bundle(for: UXFeedback.self)
 
         var closeImage = UIImage.init(named: "close_image", in: bundle, compatibleWith: nil)
         var backImage = UIImage.init(named: "back_arrow", in: bundle, compatibleWith: nil)
-        var logoImage =  UIImage.init(named: "logo_small", in: bundle, compatibleWith: nil)
+        let logoImage =  UIImage.init(named: "logo_small", in: bundle, compatibleWith: nil)
         if let controlColor = theme?.controlColor {
             backImage = backImage?.tint(with: controlColor)
             closeImage = closeImage?.tint(with: controlColor)
-            logoImage = logoImage?.tint(with: controlColor)
         }
         closeButton?.setImage(closeImage, for: .normal)
         backButton?.setImage(backImage, for: .normal)
         logoImageView?.image = logoImage
         
-        self.progressLabel?.textColor = theme?.controlColor
+        self.progressLabel?.textColor = theme?.progressColor
         self.progressLabel?.text = self.progressString
         contentView?.layer.cornerRadius = theme?.formRadius ?? 8.0
         contentView?.layer.masksToBounds = false
