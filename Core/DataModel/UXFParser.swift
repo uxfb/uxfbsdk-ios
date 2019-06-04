@@ -328,27 +328,23 @@ class UXFParser{
         var alertCommentText: String?
         var isCommentRequired = false
         
-        let titleText: String = (dictionary["value"] as? String)  ?? "Вы чем-то расстроены? Пожалуйста, поделитесь этим с нами"
+        var titleText: String = (dictionary["value"] as? String)  ?? "Вы чем-то расстроены?"
         
         if let selectedSmile = self._selectedSmileIndex,
             let messages: Dictionary<String,String> = dictionary["messages"] as? Dictionary<String, String>{
             
-            isCommentRequired = (selectedSmile < 2)
+            isCommentRequired = (selectedSmile <= 2)
     
             if isCommentRequired {
-                if selectedSmile == 0 {
-                    alertCommentText  = messages["negative"]
+           
+                if let message = messages["negative"] {
+                       titleText  =  message
                 }
-                else{
-                     alertCommentText  = messages["warning"]
-                }
-             
-                if alertCommentText == nil {
-                    alertCommentText = "Комментарий обязательный"
-                }
+
+                alertCommentText  = messages["warning"] ?? "Комментарий обязательный"
             }
-            else{
-                alertCommentText  = messages["positive"]
+            else if let message = messages["positive"]{
+                titleText  = message
             }
         }
     

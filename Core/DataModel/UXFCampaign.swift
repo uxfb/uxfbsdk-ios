@@ -73,10 +73,13 @@ struct UXFCampaign{
     }
     
     var showAttemptCount: Int{
-    #if DEBUG
-        return Int.max
-    #endif
-        return 1
+        
+        if UXFeedback.isStage {
+            return Int.max
+        }
+        else{
+            return 1
+        }
     }
     
     func showDelay(eventName: String) -> TimeInterval{
