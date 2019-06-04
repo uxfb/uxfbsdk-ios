@@ -85,12 +85,17 @@ open class UXFViewController: UIViewController{
         
         let bundle = Bundle(for: UXFeedback.self)
 
-        let closeImage = UIImage.init(named: "close_image", in: bundle, compatibleWith: nil)
+        var closeImage = UIImage.init(named: "close_image", in: bundle, compatibleWith: nil)
+        var backImage = UIImage.init(named: "back_arrow", in: bundle, compatibleWith: nil)
+        var logoImage =  UIImage.init(named: "logo_small", in: bundle, compatibleWith: nil)
+        if let controlColor = theme?.controlColor {
+            backImage = backImage?.tint(with: controlColor)
+            closeImage = closeImage?.tint(with: controlColor)
+            logoImage = logoImage?.tint(with: controlColor)
+        }
         closeButton?.setImage(closeImage, for: .normal)
-        let backImage = UIImage.init(named: "back_arrow", in: bundle, compatibleWith: nil)
         backButton?.setImage(backImage, for: .normal)
-        let logoImage =  UIImage.init(named: "logo_small", in: bundle, compatibleWith: nil)
-        self.logoImageView?.image = logoImage
+        logoImageView?.image = logoImage
         
         self.progressLabel?.textColor = theme?.controlColor
         self.progressLabel?.text = self.progressString

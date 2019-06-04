@@ -38,14 +38,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let customTheme: UXFTheme = UXFTheme.init()
         customTheme.backgroundColor = UIColor.groupTableViewBackground
         customTheme.titleColor = UIColor.brown
-        customTheme.textColor = UIColor.blue
-        customTheme.formRadius = 2.0
+        customTheme.textColor = UIColor.black
+        customTheme.errorColor = UIColor.orange
+        customTheme.controlColor = UIColor.blue
+        customTheme.inputBackgroundColor = UIColor.lightGray
+        customTheme.inputTextColor = UIColor.darkGray
+        customTheme.formRadius = 20.0
+        
        // customTheme.fontRegularName = "YourRegularFontName"
        // customTheme.fontBoldName = "YourBoldFontName"
        // customTheme.fontMediumName = "YourMediumFontName"
         
         UXFeedback.sharedInstance.setup(appID: uxfAppID,
-                                        applicationWindow: self.window!)//, theme: customTheme)
+                                        applicationWindow: self.window!, theme: customTheme)
         {  success in
             let message = "UXFeedback initialization " + (success == true ? "successful" : "failed")
             DDLogDebug(message)

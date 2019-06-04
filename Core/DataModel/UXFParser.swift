@@ -57,14 +57,14 @@ class UXFParser{
         let projectId = campaignInfo["projectId"] as! String
         let autocolse: Double = campaignInfo["autocolse"] as? Double ?? 0.0
         var theme: UXFTheme = self.customTheme ?? UXFTheme.init()
-        
+        /*
         if let design = campaignInfo["design"] as? Dictionary<String, Any>,
            let themeType = UXFThemeType.init(rawValue: (design["theme"] as? Int) ?? 0),
                themeType != .custom{
             if let campaignTheme = parseTheme(jsonDict: design) {
                theme = campaignTheme
             }
-        }
+        }*/
         
         var pages = Array<UXFPage>()
         if let pagesArrayOfDict = campaignInfo["pages"] as? Array<Dictionary<String, Any>> {

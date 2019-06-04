@@ -16,14 +16,14 @@ enum UXFThemeType: Int {
 
 open class UXFTheme: Decodable{
     
-    open var titleColor: UIColor = UIColor.init("#2F3552") //header
-    open var errorColor: UIColor = UIColor.init("#E92436") //Alert comment color
-    open var formRadius: CGFloat = 8.0
-    open var textColor: UIColor = UIColor.init("#2F3552") //text
-    open var inputBackgroundColor: UIColor = UIColor.init("#F6F6F7") //text
-    open var inputTextColor: UIColor = UIColor.init("#F6F6F7") //text
-    open var controlColor: UIColor = UIColor.init("#9699A7") // navigation label color
-    open var backgroundColor: UIColor = UIColor.white //form background color
+    open var titleColor: UIColor = UIColor.gray // UIColor.init("#2F3552") //header
+    open var errorColor: UIColor = UIColor.gray //UIColor.init("#E92436") //Alert comment color
+    open var formRadius: CGFloat = 18.0
+    open var textColor: UIColor = UIColor.gray //UIColor.init("#2F3552") //text
+    open var inputBackgroundColor: UIColor =  UIColor.gray //UIColor.init("#F6F6F7") //text
+    open var inputTextColor: UIColor = UIColor.gray //UIColor.init("#F6F6F7") //text
+    open var controlColor: UIColor = UIColor.gray // UIColor.init("#9699A7") // navigation label color
+    open var backgroundColor: UIColor = UIColor.gray //UIColor.white //form background color
 
     open var fontRegularName: String = "Roboto-Regular"
     open var fontMediumName: String = "Roboto-Medium"
