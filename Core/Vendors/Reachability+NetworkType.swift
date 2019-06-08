@@ -1,5 +1,4 @@
 import CoreTelephony
-import Reachability
 
 enum NetworkType {
   case unknown

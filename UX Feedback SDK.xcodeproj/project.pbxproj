@@ -45,17 +45,16 @@
 		0A4689C422840FC80074E1A3 /* UXFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2754A8226628BC000E2E17 /* UXFViewController.xib */; };
 		0A4689C522840FD00074E1A3 /* UXFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB72250965100E1C092 /* UXFTextField.swift */; };
 		0AA705FA2289D5890091A7A0 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F52289D5890091A7A0 /* Nuke.framework */; };
-		0AA705FB2289D5890091A7A0 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F62289D5890091A7A0 /* Reachability.framework */; };
 		0AA705FD2289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */; };
 		0AA705FE2289D5890091A7A0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F92289D5890091A7A0 /* Alamofire.framework */; };
 		0AA705FF2289D5970091A7A0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F92289D5890091A7A0 /* Alamofire.framework */; };
 		0AA706022289D5970091A7A0 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F52289D5890091A7A0 /* Nuke.framework */; };
-		0AA706032289D5970091A7A0 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F62289D5890091A7A0 /* Reachability.framework */; };
 		0AA7062D229126B10091A7A0 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70621229126AF0091A7A0 /* Roboto-Bold.ttf */; };
 		0AA70631229126B10091A7A0 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70625229126B00091A7A0 /* Roboto-Regular.ttf */; };
 		0AA70635229126B10091A7A0 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70629229126B00091A7A0 /* Roboto-Medium.ttf */; };
 		0AA850DF228960AB0040007C /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; };
 		0AA850E0228960AB0040007C /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0AB2FF3A22ABBABB0024A88A /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB2FF3922ABBABB0024A88A /* Reachability.swift */; };
 		0AF49826229C3D4A000CB7D6 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49824229C3D4A000CB7D6 /* UIColorExtension.swift */; };
 		0AF49827229C3D4A000CB7D6 /* UIColorInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49825229C3D4A000CB7D6 /* UIColorInputError.swift */; };
 		0AF49829229C3D5D000CB7D6 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49828229C3D5C000CB7D6 /* StringExtension.swift */; };
@@ -132,7 +131,6 @@
 		0A6CDB8E22446EC900C17007 /* UXFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFViewController.swift; sourceTree = "<group>"; };
 		0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UXFeedbackSDK.framework; sourceTree = "<group>"; };
 		0AA705F52289D5890091A7A0 /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = Carthage/Build/iOS/Nuke.framework; sourceTree = "<group>"; };
-		0AA705F62289D5890091A7A0 /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
 		0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityLogger.framework; path = Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework; sourceTree = "<group>"; };
 		0AA705F92289D5890091A7A0 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		0AA7061F229126AF0091A7A0 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
@@ -149,6 +147,7 @@
 		0AA7062A229126B10091A7A0 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		0AA92D9C227A9410005DBCBA /* UXFSmileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFSmileButton.swift; sourceTree = "<group>"; };
 		0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+blocks.swift"; sourceTree = "<group>"; };
+		0AB2FF3922ABBABB0024A88A /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		0AF49824229C3D4A000CB7D6 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		0AF49825229C3D4A000CB7D6 /* UIColorInputError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorInputError.swift; sourceTree = "<group>"; };
 		0AF49828229C3D5C000CB7D6 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
@@ -160,7 +159,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AA705FA2289D5890091A7A0 /* Nuke.framework in Frameworks */,
-				0AA705FB2289D5890091A7A0 /* Reachability.framework in Frameworks */,
 				0AA705FD2289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework in Frameworks */,
 				0AA705FE2289D5890091A7A0 /* Alamofire.framework in Frameworks */,
 				0AA850DF228960AB0040007C /* UXFeedbackSDK.framework in Frameworks */,
@@ -173,7 +171,6 @@
 			files = (
 				0AA705FF2289D5970091A7A0 /* Alamofire.framework in Frameworks */,
 				0AA706022289D5970091A7A0 /* Nuke.framework in Frameworks */,
-				0AA706032289D5970091A7A0 /* Reachability.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +240,7 @@
 				0A019A6322367EF2002FD4F8 /* UISearchBar+color.swift */,
 				0A019A5F22367EF2002FD4F8 /* UIVIewAddition.swift */,
 				0A0CDEB92250A16B00E1C092 /* UIViewController+present.swift */,
+				0AB2FF3922ABBABB0024A88A /* Reachability.swift */,
 				0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */,
 				0A0CDEA5224F42E900E1C092 /* Queue.swift */,
 			);
@@ -343,7 +341,6 @@
 				0AA705F92289D5890091A7A0 /* Alamofire.framework */,
 				0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */,
 				0AA705F52289D5890091A7A0 /* Nuke.framework */,
-				0AA705F62289D5890091A7A0 /* Reachability.framework */,
 				0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */,
 			);
 			name = Frameworks;
@@ -492,7 +489,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Reachability.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Nuke.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework",
 			);
@@ -513,7 +509,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Reachability.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Nuke.framework",
 			);
 			outputFileListPaths = (
@@ -569,6 +564,7 @@
 				0A4689B522840BE00074E1A3 /* UIImage+Tinting.swift in Sources */,
 				0A4689AD22840BBF0074E1A3 /* UXFButton.swift in Sources */,
 				0A4689B122840BC90074E1A3 /* UXFPageResponse.swift in Sources */,
+				0AB2FF3A22ABBABB0024A88A /* Reachability.swift in Sources */,
 				0A4689AB22840BBF0074E1A3 /* UXFParser.swift in Sources */,
 				0A4689A322840BB90074E1A3 /* UXFAPIClient.swift in Sources */,
 				0A4689C522840FD00074E1A3 /* UXFTextField.swift in Sources */,
