@@ -21,7 +21,7 @@ class UXFCampaignFormPresentor: NSObject{
         if self.currentFormIndex < 0 || self.currentFormIndex >= (_campaign.pages.count  -  1) {
             return ""
         }else {
-            return "\(self.currentFormIndex + 1)/\(formsCount)"
+            return "\(self.currentFormIndex + 1)/\(formsCount - 1)"
         }
     }
     
@@ -140,7 +140,10 @@ class UXFCampaignFormPresentor: NSObject{
         var contentHeight: CGFloat = (controller.progressLabel?.frame.size.height ?? 0.0) + (controller.progressLabel?.frame.origin.y ?? 0.0)
         if let filedsInfoArr = page.uiData["fields"] as? Array<Dictionary<String, Any>> {
             
-            var allviews: Dictionary <String, UIView> = ["topView": controller.progressLabel!]
+            var allviews: Dictionary <String, UIView> = [:]
+            if controller.progressLabel?.text?.count ?? 0 > 0 {
+               allviews["topView"] = controller.progressLabel!
+            }
             var fieldViews: Dictionary <String, UIView> = [:]
             for fieldInfo in  filedsInfoArr{
                 
@@ -160,11 +163,18 @@ class UXFCampaignFormPresentor: NSObject{
                     contentHeight += filedView.frame.size.height + 8.0
                 }
             }
-            var layoutFormat = "V:|-[topView]-"
+            var layoutFormat = "V:|-"
+            if allviews["topView"] != nil {
+              layoutFormat += "[topView]-"
+            }
+            else{
+                layoutFormat += "27.0-"
+            }
+            
             for viewName in fieldViews.keys.sorted(){
                 layoutFormat += "[" + viewName + "]-"
             }
-            layoutFormat += "|"
+            layoutFormat += "(15)-|"
             allConstraints += NSLayoutConstraint.constraints(withVisualFormat: layoutFormat,
                                                              metrics: nil,
                                                              views: allviews as [String : Any])

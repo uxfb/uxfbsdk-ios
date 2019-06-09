@@ -195,16 +195,16 @@ class UXFParser{
                                 groupID: String)->(UIView?){
         let imageView = UIImageView.init(frame: CGRect.init(x: 0,
                                                             y: 0,
-                                                            width: 72,
-                                                            height: 72))
+                                                            width: 50,
+                                                            height: 50))
         imageView.contentMode = .scaleAspectFit
-        //imageView.backgroundColor = UIColor.blue
         let scale = UIScreen.main.scale
         if let setInfo = dictionary["set"] as? Dictionary<String, String>,
            let imagePath = setInfo["\(Int(scale))x"],
            let imageUrl = URL.init(string:  imagePath){
                Nuke.loadImage(with: imageUrl, into: imageView)
         }
+        //imageView.backgroundColor = UIColor.gray
         return imageView
     }
     
@@ -571,7 +571,7 @@ class UXFParser{
         let view = UIView.init()
         view.backgroundColor = UIColor.clear
         
-        let labelYOffset: CGFloat = 10.0
+        let labelYOffset: CGFloat = 4.0
         var height: CGFloat = labelYOffset
         let label = UILabel.init()
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
@@ -590,7 +590,7 @@ class UXFParser{
         allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-[label]-|",
                                                          metrics: nil,
                                                          views: views as [String : Any])
-        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(labelYOffset)-[label(>=\(labelHeight))]-|",
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(labelYOffset)-[label(>=\(labelHeight))]-\(labelYOffset)-|",
             options: [.alignAllCenterX],
             metrics: nil,
             views: views as [String : Any])
