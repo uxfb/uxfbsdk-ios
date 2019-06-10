@@ -138,6 +138,8 @@ open class UXFeedback{
                 }
             })
         }
+        
+        self.formDelegate?.formDidFailLoading(error: UXFError.init(description: "Form " + formID + " not found in any companies"))
     }
     
     open func resetAllCampaignsData(completion: (()->())?){
@@ -152,7 +154,7 @@ open class UXFeedback{
 extension UXFeedback: UXFCampaignFormPresentorProtocol {
     
     func formSubmitted(formIndex: Int, info: Dictionary<String, Any>?, campaign: UXFCampaign) {
-     
+
             _apiClient.saveFormData(isFirstAnswer: (formIndex == 0),
                                     projectId: campaign.projectId,
                                     answerId: campaign.answerId,

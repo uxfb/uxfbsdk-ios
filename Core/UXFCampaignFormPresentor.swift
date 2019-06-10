@@ -93,13 +93,19 @@ class UXFCampaignFormPresentor: NSObject{
         controller.transitioningDelegate = self
         
         controller.didCloseHandler = { [weak self]  (formIndex) in
-            self?.feedbackFormDelegate?.formDidClose(formID: controller.formID,
-                                            withFeedbackResults: [],
-                                            isRedirectToAppStoreEnabled: false)
+            
             if let formsCount = self?._campaign.formsCount {
+                let result = UXFeedbackResult(rating: self?._campaign.raiting,
+                                              abandonedPageIndex: formIndex,
+                                              sent: true)
                 if formIndex == (formsCount - 1) {
-                    self?.feedbackCampaignDelegate?.campaignDidClose(withFeedbackResult: UXFeedbackResult(rating: nil, abandonedPageIndex: formIndex, sent: true),
+                    self?.feedbackCampaignDelegate?.campaignDidClose(withFeedbackResult: result,
                                                                      isRedirectToAppStoreEnabled: false)
+                }
+                else{
+                    self?.feedbackFormDelegate?.formDidClose(formID: controller.formID,
+                                                             withFeedbackResults: [result],
+                                                             isRedirectToAppStoreEnabled: false)
                 }
             }
         }
@@ -149,6 +155,7 @@ class UXFCampaignFormPresentor: NSObject{
                 
                 if let filedView = _parser.parseUIElement(dictionary: fieldInfo,
                                                           theme: _campaign.theme,
+                                                          campaign: _campaign,
                                                          submitHandler: {(info) in
                                                         controller.nextHandler?(controller.formIndex, info)
                 }){

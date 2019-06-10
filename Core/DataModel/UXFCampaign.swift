@@ -19,12 +19,16 @@ enum UXFCampaignPosition: String{
 
 struct UXFCampaign{
 
-    var attemptCompanyKey: String {
+    private var attemptCompanyKey: String {
         return self.campaignId + ".campaignAttempt"
     }
     
-    var currentFormIDKey: String {
+    private var currentFormIDKey: String {
         return self.campaignId + ".currentFormId"
+    }
+    
+    private var raitingKey: String {
+        return self.campaignId + ".raiting"
     }
 
     private(set) var campaignId: String!
@@ -36,6 +40,16 @@ struct UXFCampaign{
     private(set) var projectId: String!
     private(set) var autoclose: Double!
     
+    var raiting: Int?{
+        get{
+           return UserDefaults.standard.object(forKey: self.raitingKey) as? Int
+        }
+    }
+    
+    func setRaiting(_ newRaiting: Int){
+        UserDefaults.standard.set(newRaiting, forKey: self.raitingKey)
+        UserDefaults.standard.synchronize()
+    }
 
     internal var сurrentFormID: String?{
         set{

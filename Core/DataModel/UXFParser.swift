@@ -22,18 +22,6 @@ class UXFParser{
         return (UIScreen.main.bounds.width - (UXFParser.formControllerViewOffset + UXFParser.contenViewOffset)*2)
     }
     
-    private var _selectedSmileIndex: Int? {
-        get {
-            if UserDefaults.standard.object(forKey: "selectedSmileIndex") != nil {
-               return UserDefaults.standard.integer(forKey: "selectedSmileIndex")
-            }
-            return nil
-        }
-        set{
-            UserDefaults.standard.set(newValue, forKey: "selectedSmileIndex")
-        }
-    }
-    
     init(theme: UXFTheme?) {
         self.customTheme = theme
     }
@@ -131,6 +119,7 @@ class UXFParser{
     
     internal  func parseUIElement(dictionary: Dictionary<String, Any>,
                                   theme: UXFTheme,
+                                  campaign: UXFCampaign,
                                   submitHandler: ((Dictionary<String,Any>?)->())?)->(UIView?){
         
         var groupView: UIView? = nil
@@ -154,7 +143,7 @@ class UXFParser{
                 }
             }
             let groupID = "\(type)\(groupIndex)"
-            
+
             switch type {
             case "button":
                 groupView =  createButton(dictionary: dictionary, groupID: groupID, theme: theme)
@@ -169,10 +158,10 @@ class UXFParser{
                 groupView = createUICheckbox(dictionary: dictionary, groupID: groupID, theme: theme)
                 break
             case "smiles":
-                groupView = createSmiles(dictionary: dictionary, groupID: groupID, theme: theme,  submitHandler: submitHandler)
+                groupView = createSmiles(dictionary: dictionary, groupID: groupID, theme: theme, campaign: campaign, submitHandler: submitHandler)
                 break
             case "comment":
-                groupView = createComment(dictionary: dictionary, groupID: groupID, theme: theme, submitHandler: submitHandler)
+                groupView = createComment(dictionary: dictionary, groupID: groupID, theme: theme, campaign: campaign, submitHandler: submitHandler)
                 break
             case "email":
                 groupView = createEmailInput(dictionary: dictionary, groupID: groupID, theme: theme, submitHandler: submitHandler)
@@ -258,13 +247,16 @@ class UXFParser{
         let sendButtonHeight: CGFloat = 44.0
         //sendButton.backgroundColor = UIColor.gray
         sendButton.addAction {
+            UIView.setAnimationsEnabled(false)
             textField.resignFirstResponder()
+            UIView.setAnimationsEnabled(true)
             if let commentText = textField.text{
                 submitHandler?([groupID : commentText])
             }
             else{
                 submitHandler?(nil)
             }
+            
         }
         height += sendButtonYOffet + sendButtonHeight
         view.addSubview(sendButton)
@@ -274,6 +266,9 @@ class UXFParser{
         skipButton.translatesAutoresizingMaskIntoConstraints = false
         skipButton.setTitleColor(skipButton.tintColor, for: .normal)
         skipButton.addAction {
+            UIView.setAnimationsEnabled(false)
+            textField.resignFirstResponder()
+            UIView.setAnimationsEnabled(true)
             submitHandler?(nil)
         }
         view.addSubview(skipButton)
@@ -308,12 +303,16 @@ class UXFParser{
                                  width: view.frame.size.width,
                                  height: height)
         
+       // UIView.setAnimationsEnabled(false)
+       // textField.becomeFirstResponder()
+       // UIView.setAnimationsEnabled(true)
         return view
     }
     
     private func createComment(dictionary: Dictionary<String, Any>,
                                groupID: String,
                                theme: UXFTheme,
+                               campaign: UXFCampaign,
                                submitHandler: ((Dictionary<String,Any>?)->())?) ->(UIView?){
         
         var height: CGFloat = 0.0
@@ -331,7 +330,7 @@ class UXFParser{
         
         var titleText: String = (dictionary["value"] as? String)  ?? "Вы чем-то расстроены?"
         
-        if let selectedSmile = self._selectedSmileIndex,
+        if let selectedSmile = campaign.raiting,
             let messages: Dictionary<String,String> = dictionary["messages"] as? Dictionary<String, String>{
             
             isCommentRequired = (selectedSmile <= 2)
@@ -418,7 +417,9 @@ class UXFParser{
         sendButton.addAction {
             
             if let commentText = textField.text, commentText.count > 0{
+                UIView.setAnimationsEnabled(false)
                 textField.resignFirstResponder()
+                UIView.setAnimationsEnabled(true)
                 submitHandler?([groupID : commentText])
             }
             else if isCommentRequired == true{
@@ -426,7 +427,9 @@ class UXFParser{
                 textField.inputState = .alert
             }
             else{
+                UIView.setAnimationsEnabled(false)
                 textField.resignFirstResponder()
+                UIView.setAnimationsEnabled(true)
                 submitHandler?(nil)
             }
         }
@@ -479,6 +482,7 @@ class UXFParser{
     private  func createSmiles(dictionary: Dictionary<String, Any>,
                                   groupID: String,
                                   theme: UXFTheme,
+                                  campaign: UXFCampaign,
                             submitHandler: ((Dictionary<String,Any>?)->())?) ->(UIView){
         
         var height: CGFloat = 0.0
@@ -512,6 +516,7 @@ class UXFParser{
         self.createSmileButtons(layoutView: stackView,
                                 groupId: groupID,
                                 theme: theme,
+                                campaign: campaign,
                                 submitHandler: submitHandler)
 
         let views = ["label": label, "stackview": stackView]
@@ -615,6 +620,7 @@ class UXFParser{
     private func createSmileButtons(layoutView: UIStackView,
                                     groupId: String,
                                     theme: UXFTheme,
+                                    campaign: UXFCampaign,
                               submitHandler: ((Dictionary<String,Any>)->())?){
         
         let smilesCount = 5
@@ -642,8 +648,8 @@ class UXFParser{
                                         width: buttonWidth,
                                         height: buttonHeight)
             layoutView.addArrangedSubview(button)
-            button.addAction(for: .touchUpInside) { [weak self] in
-                self?._selectedSmileIndex = button.index
+            button.addAction(for: .touchUpInside) {
+                campaign.setRaiting(button.index)
                 submitHandler?([groupId : button.index])
             }
         }
