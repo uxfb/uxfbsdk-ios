@@ -258,6 +258,7 @@ class UXFParser{
         let sendButtonHeight: CGFloat = 44.0
         //sendButton.backgroundColor = UIColor.gray
         sendButton.addAction {
+            textField.resignFirstResponder()
             if let commentText = textField.text{
                 submitHandler?([groupID : commentText])
             }
@@ -415,7 +416,9 @@ class UXFParser{
         let sendButtonHeight: CGFloat = 44.0
         //sendButton.backgroundColor = UIColor.gray
         sendButton.addAction {
+            
             if let commentText = textField.text, commentText.count > 0{
+                textField.resignFirstResponder()
                 submitHandler?([groupID : commentText])
             }
             else if isCommentRequired == true{
@@ -423,6 +426,7 @@ class UXFParser{
                 textField.inputState = .alert
             }
             else{
+                textField.resignFirstResponder()
                 submitHandler?(nil)
             }
         }
@@ -484,7 +488,10 @@ class UXFParser{
         height += labelYOffset
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 24))
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
-        let labelHeight =  self.setLabelText(label: label, text: dictionary["value"] as? String, fontSize: labelFontSize, theme: theme)
+        let labelHeight =  self.setLabelText(label: label,
+                                             text: dictionary["value"] as? String,
+                                             fontSize: labelFontSize,
+                                             theme: theme)
        // label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label)
