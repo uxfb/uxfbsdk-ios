@@ -68,6 +68,9 @@ open class UXFTheme: Decodable{
         if let backgroundColorString = try? container.decode(String.self, forKey: .backgroundColor){
             self.backgroundColor = UIColor.init(backgroundColorString)
         }
+        if let controlColorString = try? container.decode(String.self, forKey: .controlColor){
+            self.controlColor = UIColor.init(controlColorString)
+        }
         if let progressColorString = try? container.decode(String.self, forKey: .progressColor){
             self.progressColor = UIColor.init(progressColorString)
         }
