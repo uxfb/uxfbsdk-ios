@@ -272,7 +272,8 @@ extension UXFCampaignFormPresentor: UIViewControllerTransitioningDelegate{
     }
     
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return UXFFormDismisser()
+        let dismisser = UXFFormDismisser()
+        return dismisser
     }
 }
 
@@ -374,7 +375,7 @@ private class UXFFormDismisser: NSObject, UIViewControllerAnimatedTransitioning 
         else {
             endAlpha = 0.0
         }
-        
+
         UIView.animate(withDuration: animationDuration,
                        delay: delay,
                        usingSpringWithDamping: damping,
@@ -383,7 +384,7 @@ private class UXFFormDismisser: NSObject, UIViewControllerAnimatedTransitioning 
                        animations:  {
                fromViewController.contentView.alpha = endAlpha
                fromViewController.view.frame.origin.y += endYOfset
-        }) { (completed) in
+        }) { [weak self] (completed) in
             transitionContext.completeTransition(completed)
         }
     }

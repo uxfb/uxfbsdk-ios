@@ -101,6 +101,8 @@ open class UXFeedback{
                                                                                 animationEnabled: true)
                             self._formPresentor?.isAnimationFormEnabled = self.animationEnabled
                             self._formPresentor?.delegate = self
+                            //Только для случая когда вызываем одну форму в loadFeedbackForm()
+                            //self._formPresentor?.feedbackFormDelegate = self.formDelegate
                             self._formPresentor?.feedbackCampaignDelegate = self.delegate
                             self._formPresentor?.showCampaign()
                             self._apiClient.showForm(campaingId: campaign.campaignId)
