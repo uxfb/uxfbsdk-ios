@@ -65,7 +65,7 @@ class UXFCampaignFormPresentor: NSObject{
     private func nextForm(){
         if (self.currentFormIndex + 1) < _campaign.formsCount{
             self.currentFormIndex += 1
-            let form  = createForm(fromIndex: self.currentFormIndex, title: self.progressString)
+            let form  = createForm(formIndex: self.currentFormIndex, title: self.progressString)
             showCampaignController(controller: form, direction: (currentFormIndex == 0 ? .downToUp : .alphaIn))
         }
        /* else{
@@ -76,21 +76,24 @@ class UXFCampaignFormPresentor: NSObject{
     private func prevForm(){
         if (self.currentFormIndex > 0){
             self.currentFormIndex -= 1
-            let form =  createForm(fromIndex: self.currentFormIndex, title: self.progressString)
+            let form =  createForm(formIndex: self.currentFormIndex, title: self.progressString)
             showCampaignController(controller: form, direction: .alphaIn)
         }
     }
     
     //MARK: - Form controller
     
-    open func createForm(fromIndex: Int, title: String? = nil) -> (UXFViewController){
+    open func createForm(formIndex: Int, title: String? = nil) -> (UXFViewController){
         
-        let page = self._campaign.pages[fromIndex]
-        let controller = UXFViewController.init(index: fromIndex, formID: page.id )
+        let page = self._campaign.pages[formIndex]
+        let controller = UXFViewController.init(index: formIndex, formID: page.id )
         controller.modalPresentationStyle = .overCurrentContext
         controller.progressString = (title == nil ? "" : title!)
         controller.theme = self._campaign.theme
         controller.transitioningDelegate = self
+        if formIndex == _campaign.formsCount - 1 {
+            controller.dismissDirection = .upToDown
+        }
         
         controller.didCloseHandler = { [weak self]  (formIndex) in
             
@@ -366,14 +369,31 @@ private class UXFFormDismisser: NSObject, UIViewControllerAnimatedTransitioning 
         let animationDuration: TimeInterval = 0.3
         let damping: CGFloat = 1.0//0.8
         let delay: TimeInterval = 0.0
-        var endYOfset: CGFloat = 0.0
+        var endYOffset: CGFloat = 0.0
+        var endXOffset: CGFloat = 0.0
         
-        if fromViewController.state == .closeDismiss {
-            animationOptions = .curveEaseIn
-            endYOfset = (container.frame.height - fromViewController.contentView.frame.origin.y)
+        var direction: UXFViewPopupDirection = fromViewController.dismissDirection
+        if fromViewController.state == .backDismiss{
+            direction =  fromViewController.backDirection
         }
-        else {
-            endAlpha = 0.0
+        
+        switch direction {
+           case .alphaOut:
+              endAlpha = 0.0
+              break
+           case .upToDown:
+              animationOptions = .curveEaseIn
+              endYOffset = (container.frame.height - fromViewController.contentView.frame.origin.y)
+              break
+          case .leftToRight:
+              endXOffset = container.frame.width
+              break
+          case .rightToLeft:
+              endXOffset = -container.frame.width
+              break
+            
+           default:
+                break
         }
 
         UIView.animate(withDuration: animationDuration,
@@ -383,8 +403,9 @@ private class UXFFormDismisser: NSObject, UIViewControllerAnimatedTransitioning 
                        options: animationOptions,
                        animations:  {
                fromViewController.contentView.alpha = endAlpha
-               fromViewController.view.frame.origin.y += endYOfset
-        }) { [weak self] (completed) in
+               fromViewController.view.frame.origin.y += endYOffset
+               fromViewController.view.frame.origin.x += endXOffset
+        }) { (completed) in
             transitionContext.completeTransition(completed)
         }
     }

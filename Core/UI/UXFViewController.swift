@@ -20,7 +20,7 @@ enum UXFViewPopupDirection{
 enum UXFViewControllerState{
     case presenting
     case presented
-    case outDismiss
+    case backDismiss
     case closeDismiss
 }
 
@@ -51,8 +51,8 @@ open class UXFViewController: UIViewController{
     var backHandler: ((_ formIndex: Int)->())?
     
     var presentDirection: UXFViewPopupDirection = .leftToRight
-    var dismissDirection: UXFViewPopupDirection = .upToDown
-    var backDirection: UXFViewPopupDirection = .alphaOut
+    var dismissDirection: UXFViewPopupDirection = .alphaOut
+    var backDirection: UXFViewPopupDirection = .rightToLeft
     
     @IBOutlet  var contentView: UIView!
     
@@ -148,7 +148,7 @@ open class UXFViewController: UIViewController{
     //MARK: actions
     
     @IBAction func backButtonTap(_ sender: UIButton){
-        state = .outDismiss
+        state = .backDismiss
         backHandler?(self.formIndex)
     }
     

@@ -43,7 +43,7 @@ class UXFParser{
         let progressDict = campaignInfo["progress"] as! Dictionary<String, Any>
         let progress = progressDict["enabled"] as! Bool
         let projectId = campaignInfo["projectId"] as! String
-        let autocolse: Double = campaignInfo["autocolse"] as? Double ?? 0.0
+        let autoclose: Double = campaignInfo["autoclose"] as? Double ?? 0.0
         var theme: UXFTheme = self.customTheme ?? UXFTheme.init()
         
         if let design = campaignInfo["design"] as? Dictionary<String, Any>,
@@ -72,7 +72,7 @@ class UXFParser{
                                 targetings: targetingArr,
                                 isProgressEnabled: progress,
                                 projectId:  projectId,
-                                autoclose: autocolse)
+                                autoclose: autoclose)
     }
     
     //MARK: support
