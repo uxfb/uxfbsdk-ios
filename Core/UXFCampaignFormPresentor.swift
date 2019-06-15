@@ -55,9 +55,18 @@ class UXFCampaignFormPresentor: NSObject{
         nextForm()
     }
     
-    @objc func dismissCurrentForm(){
-        _currentForm?.dismiss(animated: true, completion: nil)
-        _currentForm?.removeFromParent()
+    @objc func dismissCurrentForm(completion: (()->())?){
+        
+        if let form = _currentForm {
+            form.dismiss(animated: true){ [weak self] in
+                self?._currentForm?.removeFromParent()
+                self?._currentForm = nil
+                completion?()
+            }
+        }
+        else{
+             completion?()
+        } 
     }
     
     //MARK: - Form navigation presentation
@@ -111,6 +120,7 @@ class UXFCampaignFormPresentor: NSObject{
                                                              isRedirectToAppStoreEnabled: false)
                 }
             }
+            
         }
         controller.willCloseHandler = { [weak self] (formIndex) in
             self?.feedbackFormDelegate?.formWillClose(form: controller,
@@ -251,19 +261,21 @@ class UXFCampaignFormPresentor: NSObject{
     
     private func showCampaignController(controller: UXFViewController, direction: UXFViewPopupDirection){
         
-        self.dismissCurrentForm()
-        
-        controller.presentDirection = direction
-        
-        let parentViewController = _appWindow.rootViewController
-        parentViewController?.present(controller, animated: isAnimationFormEnabled){
-            //controller.state = .presented
-        }
-        _currentForm = controller
-        _campaign.сurrentFormID = controller.formID //save current campaign formID
-        
-        if _campaign.autoclose > 0 && _currentForm?.formIndex == (_campaign.pages.count - 1) {
-            self.perform(#selector(dismissCurrentForm), with: nil, afterDelay: _campaign.autoclose)
+        self.dismissCurrentForm(){ [unowned self] in
+            controller.presentDirection = direction
+            
+            self._appWindow.makeKeyAndVisible()
+            self._appWindow.becomeKey()
+            let parentViewController = self._appWindow.rootViewController
+            parentViewController?.present(controller, animated: self.isAnimationFormEnabled){
+                //controller.state = .presented
+            }
+            self._currentForm = controller
+            self._campaign.сurrentFormID = controller.formID //save current campaign formID
+            
+            if self._campaign.autoclose > 0 && self._currentForm?.formIndex == (self._campaign.pages.count - 1) {
+                self.perform(#selector(self.dismissCurrentForm), with: nil, afterDelay: self._campaign.autoclose)
+            }
         }
     }
 }

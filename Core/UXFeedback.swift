@@ -32,7 +32,7 @@ open class UXFeedback{
     
     private var _theme: UXFTheme!
     private  weak var _activeEventController: UIViewController?
-    private  weak var _appWindow: UIWindow!
+    private  var _appWindow: UIWindow!
     private  var _apiClient: UXFAPIClient!
     private var _campaigns: Array<UXFCampaign> = []
     private  var _eventToSend: String?
@@ -63,7 +63,11 @@ open class UXFeedback{
         _apiClient = UXFAPIClient.init(appID: appID, parser: self._parser)
         _apiClient.getAllCampaings { [weak self] (success, message, campaigns) in
 
-            self?._appWindow = applicationWindow
+            let newWindow = UIWindow(frame: UIScreen.main.bounds)
+            newWindow.rootViewController = UIViewController()
+            newWindow.windowLevel = UIWindow.Level.alert + 1
+            
+            self?._appWindow = newWindow//applicationWindow
             self?._campaigns = campaigns
         
             if success == true, let event = self?._eventToSend {
@@ -94,18 +98,15 @@ open class UXFeedback{
                         
                         _eventToSend = nil
                         DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay(eventName: name)), execute: { [unowned self] in
-                            self._formPresentor?.dismissCurrentForm()
-                            self._formPresentor = UXFCampaignFormPresentor.init(window: self._appWindow,
-                                                                                campaign: campaign,
-                                                                                parser: self._parser,
-                                                                                animationEnabled: true)
-                            self._formPresentor?.isAnimationFormEnabled = self.animationEnabled
-                            self._formPresentor?.delegate = self
-                            //Только для случая когда вызываем одну форму в loadFeedbackForm()
-                            //self._formPresentor?.feedbackFormDelegate = self.formDelegate
-                            self._formPresentor?.feedbackCampaignDelegate = self.delegate
-                            self._formPresentor?.showCampaign()
-                            self._apiClient.showForm(campaingId: campaign.campaignId)
+                            if self._formPresentor != nil {
+                                self._formPresentor?.dismissCurrentForm(){
+                                    self.showCampaignForm(campaign: campaign)
+                                }
+                            }
+                            else{
+                                 self.showCampaignForm(campaign: campaign)
+                            }
+                            
 
                         })
                         
@@ -115,26 +116,34 @@ open class UXFeedback{
         }
     }
     
+    private func showCampaignForm(campaign: UXFCampaign){
+        self._formPresentor = UXFCampaignFormPresentor.init(window: self._appWindow,
+                                                            campaign: campaign,
+                                                            parser: self._parser,
+                                                            animationEnabled: true)
+        self._formPresentor?.isAnimationFormEnabled = self.animationEnabled
+        self._formPresentor?.delegate = self
+        //Только для случая когда вызываем одну форму в loadFeedbackForm()
+        //self._formPresentor?.feedbackFormDelegate = self.formDelegate
+        self._formPresentor?.feedbackCampaignDelegate = self.delegate
+        self._formPresentor?.showCampaign()
+        self._apiClient.showForm(campaingId: campaign.campaignId)
+    }
+    
     open func loadFeedbackForm(formID: String){
         
         _campaigns.forEach { (campaign) in
             campaign.pages.forEach({ (page) in
                 if page.id == formID {
                     
-                    self._formPresentor?.dismissCurrentForm()
-                    let formIndex = 0
-                    let presentor = UXFCampaignFormPresentor.init(window: self._appWindow,
-                                                                  campaign:  campaign,
-                                                                  parser: _parser,
-                                                                  animationEnabled: true)
-                    self._formPresentor  = presentor
-                    presentor.isAnimationFormEnabled = self.animationEnabled
-                    presentor.delegate = self
-                    presentor.feedbackCampaignDelegate = self.delegate
-                    presentor.feedbackFormDelegate = self.formDelegate
-                    let controller = presentor.createForm(formIndex: formIndex)
-                    controller.presentDirection = .downToUp
-                    self.formDelegate?.formDidLoaded(form: controller)
+                    if self._formPresentor != nil {
+                        self._formPresentor?.dismissCurrentForm(){ [weak self] in
+                            self?.loadCampaignForm(campaign: campaign)
+                        }
+                    }
+                    else{
+                        self.loadCampaignForm(campaign: campaign)
+                    }
                     
                     return
                 }
@@ -142,6 +151,22 @@ open class UXFeedback{
         }
         
         self.formDelegate?.formDidFailLoading(error: UXFError.init(description: "Form " + formID + " not found in any companies"))
+    }
+    
+    private func loadCampaignForm(campaign: UXFCampaign){
+        let formIndex = 0
+        let presentor = UXFCampaignFormPresentor.init(window: self._appWindow,
+                                                      campaign:  campaign,
+                                                      parser: _parser,
+                                                      animationEnabled: true)
+        self._formPresentor  = presentor
+        presentor.isAnimationFormEnabled = self.animationEnabled
+        presentor.delegate = self
+        presentor.feedbackCampaignDelegate = self.delegate
+        presentor.feedbackFormDelegate = self.formDelegate
+        let controller = presentor.createForm(formIndex: formIndex)
+        controller.presentDirection = .downToUp
+        self.formDelegate?.formDidLoaded(form: controller)
     }
     
     open func resetAllCampaignsData(completion: (()->())?){
