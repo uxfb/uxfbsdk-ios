@@ -13,18 +13,22 @@ class MainViewController: UIViewController {
     
     @IBOutlet var busyIndicator: UIActivityIndicatorView!
     @IBOutlet var buttonsStackView: UIView!
+    @IBOutlet var dismissButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.buttonsStackView.isUserInteractionEnabled = false
-        self.buttonsStackView.alpha = 0.5
-        
         UXFeedback.sharedInstance.delegate = self
         UXFeedback.sharedInstance.formDelegate = self
         
-        busyIndicator.startAnimating()
+        if UXFeedback.sharedInstance.isCampaignsLoaded == false {
+            self.buttonsStackView.isUserInteractionEnabled = false
+            self.buttonsStackView.alpha = 0.5
+            busyIndicator.startAnimating()
+        }
+        
+        self.dismissButton.isHidden = (self.navigationController != nil)
     }
 
     
@@ -34,6 +38,10 @@ class MainViewController: UIViewController {
         assert(eventNumber > 0, "Invalid eventNumber")
      
         UXFeedback.sharedInstance.sendEvent(event: "event\(eventNumber)", fromController: self)
+    }
+    
+    @IBAction func closeButtonTap(_ sender: UIButton){
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
