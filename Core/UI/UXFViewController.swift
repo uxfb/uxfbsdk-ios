@@ -160,12 +160,20 @@ open class UXFViewController: UIViewController{
     override open func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         self.willCloseHandler?(self.formIndex)
         
+        if UXFeedback.sharedInstance.currentForm == self ||
+            UXFeedback.sharedInstance.currentForm == nil{
+            UIApplication.shared.delegate?.window??.makeKeyAndVisible()
+        }
+        
         super.dismiss(animated: presentationAnimated) { [weak self] in
             
-            let window = UIApplication.shared.keyWindow
-            window?.isHidden = true
-            UIApplication.shared.delegate?.window??.makeKeyAndVisible()
-            
+            if UXFeedback.sharedInstance.currentForm == self ||
+                UXFeedback.sharedInstance.currentForm == nil{
+                let window = UIApplication.shared.keyWindow
+                window?.isHidden = true
+                UIApplication.shared.delegate?.window??.makeKeyAndVisible()
+            }
+
             if let index = self?.formIndex{
                 self?.didCloseHandler?(index)
             }

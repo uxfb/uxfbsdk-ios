@@ -39,6 +39,10 @@ open class UXFeedback{
     private  var _formPresentor: UXFCampaignFormPresentor?
     private var _parser: UXFParser!
     
+    open var currentForm: UXFViewController?{
+        return _formPresentor?._currentForm
+    }
+    
     init() {
         self.setTheme(theme: UXFTheme.init())
     }
@@ -98,16 +102,19 @@ open class UXFeedback{
                         
                         _eventToSend = nil
                         DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay(eventName: name)), execute: { [unowned self] in
-                            if self._formPresentor != nil {
-                                self._formPresentor?.dismissCurrentForm(){
-                                    self.showCampaignForm(campaign: campaign)
-                                }
-                            }
-                            else{
-                                 self.showCampaignForm(campaign: campaign)
-                            }
                             
-
+                            _ = self._formPresentor?.dismissCurrentForm(completion:  nil)
+                            self._formPresentor = UXFCampaignFormPresentor.init(window: self._appWindow,
+                                                                                campaign: campaign,
+                                                                                parser: self._parser,
+                                                                                animationEnabled: true)
+                            self._formPresentor?.isAnimationFormEnabled = self.animationEnabled
+                            self._formPresentor?.delegate = self
+                            //Только для случая когда вызываем одну форму в loadFeedbackForm()
+                            //self._formPresentor?.feedbackFormDelegate = self.formDelegate
+                            self._formPresentor?.feedbackCampaignDelegate = self.delegate
+                            self._formPresentor?.showCampaign()
+                            self._apiClient.showForm(campaingId: campaign.campaignId)
                         })
                         
                     }
@@ -116,34 +123,26 @@ open class UXFeedback{
         }
     }
     
-    private func showCampaignForm(campaign: UXFCampaign){
-        self._formPresentor = UXFCampaignFormPresentor.init(window: self._appWindow,
-                                                            campaign: campaign,
-                                                            parser: self._parser,
-                                                            animationEnabled: true)
-        self._formPresentor?.isAnimationFormEnabled = self.animationEnabled
-        self._formPresentor?.delegate = self
-        //Только для случая когда вызываем одну форму в loadFeedbackForm()
-        //self._formPresentor?.feedbackFormDelegate = self.formDelegate
-        self._formPresentor?.feedbackCampaignDelegate = self.delegate
-        self._formPresentor?.showCampaign()
-        self._apiClient.showForm(campaingId: campaign.campaignId)
-    }
-    
     open func loadFeedbackForm(formID: String){
         
         _campaigns.forEach { (campaign) in
             campaign.pages.forEach({ (page) in
                 if page.id == formID {
-                    
-                    if self._formPresentor != nil {
-                        self._formPresentor?.dismissCurrentForm(){ [weak self] in
-                            self?.loadCampaignForm(campaign: campaign)
-                        }
-                    }
-                    else{
-                        self.loadCampaignForm(campaign: campaign)
-                    }
+                    _ = self._formPresentor?.dismissCurrentForm(completion:  nil)
+                         
+                    let formIndex = 0
+                    let presentor = UXFCampaignFormPresentor.init(window: self._appWindow,
+                                                                  campaign:  campaign,
+                                                                  parser: _parser,
+                                                                  animationEnabled: true)
+                    self._formPresentor  = presentor
+                    presentor.isAnimationFormEnabled = self.animationEnabled
+                    presentor.delegate = self
+                    presentor.feedbackCampaignDelegate = self.delegate
+                    presentor.feedbackFormDelegate = self.formDelegate
+                    let controller = presentor.createForm(formIndex: formIndex)
+                    controller.presentDirection = .downToUp
+                    self.formDelegate?.formDidLoaded(form: controller)
                     
                     return
                 }
@@ -151,22 +150,6 @@ open class UXFeedback{
         }
         
         self.formDelegate?.formDidFailLoading(error: UXFError.init(description: "Form " + formID + " not found in any companies"))
-    }
-    
-    private func loadCampaignForm(campaign: UXFCampaign){
-        let formIndex = 0
-        let presentor = UXFCampaignFormPresentor.init(window: self._appWindow,
-                                                      campaign:  campaign,
-                                                      parser: _parser,
-                                                      animationEnabled: true)
-        self._formPresentor  = presentor
-        presentor.isAnimationFormEnabled = self.animationEnabled
-        presentor.delegate = self
-        presentor.feedbackCampaignDelegate = self.delegate
-        presentor.feedbackFormDelegate = self.formDelegate
-        let controller = presentor.createForm(formIndex: formIndex)
-        controller.presentDirection = .downToUp
-        self.formDelegate?.formDidLoaded(form: controller)
     }
     
     open func resetAllCampaignsData(completion: (()->())?){
