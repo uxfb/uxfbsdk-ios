@@ -73,6 +73,7 @@ class UXFCampaignFormPresentor: NSObject{
     @objc func dismissCurrentForm(completion: (()->())?) ->(Bool){
         
         if let form = _currentForm {
+            form.state = .dismissOnly
             form.dismiss(animated: true){ [weak self] in
                 
                 if self?._currentForm == form{
@@ -294,7 +295,7 @@ class UXFCampaignFormPresentor: NSObject{
             
             if self._campaign.autoclose > 0 && self._currentForm?.formIndex == (self._campaign.pages.count - 1) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + self._campaign.autoclose) { [ weak self] in
-                    self?._currentForm?.closeForm(animated: self?._currentForm?.presentationAnimated ?? true)
+                    self?._currentForm?.dismiss(animated: self?._currentForm?.presentationAnimated ?? true)
                 }
             }
         }

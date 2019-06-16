@@ -21,7 +21,7 @@ enum UXFViewControllerState{
     case presenting
     case presented
     case backDismiss
-    case closeDismiss
+    case dismissOnly
 }
 
 open class UXFViewController: UIViewController{
@@ -153,17 +153,7 @@ open class UXFViewController: UIViewController{
     }
     
     @IBAction  func closeButtonDidTap(_ sender: UIButton){
-        self.closeForm(animated: presentationAnimated)
-    }
-    
-    func closeForm(animated flag: Bool, completion: (() -> Void)? = nil){
-        state = .closeDismiss
-        self.dismiss(animated: presentationAnimated){
-            let window = UIApplication.shared.keyWindow
-            window?.isHidden = true
-            UIApplication.shared.delegate?.window??.makeKeyAndVisible()
-            completion?()
-        }
+         self.dismiss(animated: presentationAnimated)
     }
     
     override open func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
@@ -175,6 +165,13 @@ open class UXFViewController: UIViewController{
                 self?.didCloseHandler?(index)
             }
             self?.didCloseHandler = nil
+            
+            if self?.state != .dismissOnly && self?.state != .backDismiss {
+                let window = UIApplication.shared.keyWindow
+                window?.isHidden = true
+                UIApplication.shared.delegate?.window??.makeKeyAndVisible()
+            }
+            
             completion?()
         }
     }
