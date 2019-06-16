@@ -153,26 +153,23 @@ open class UXFViewController: UIViewController{
     }
     
     @IBAction  func closeButtonDidTap(_ sender: UIButton){
+        self.closeForm(animated: presentationAnimated)
+    }
+    
+    func closeForm(animated flag: Bool, completion: (() -> Void)? = nil){
         state = .closeDismiss
-        self.dismiss(animated: presentationAnimated, completion: nil)
+        self.dismiss(animated: presentationAnimated){
+            let window = UIApplication.shared.keyWindow
+            window?.isHidden = true
+            UIApplication.shared.delegate?.window??.makeKeyAndVisible()
+            completion?()
+        }
     }
     
     override open func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         self.willCloseHandler?(self.formIndex)
         
-        if UXFeedback.sharedInstance.currentForm == self ||
-            UXFeedback.sharedInstance.currentForm == nil{
-            UIApplication.shared.delegate?.window??.makeKeyAndVisible()
-        }
-        
         super.dismiss(animated: presentationAnimated) { [weak self] in
-            
-            if UXFeedback.sharedInstance.currentForm == self ||
-                UXFeedback.sharedInstance.currentForm == nil{
-                let window = UIApplication.shared.keyWindow
-                window?.isHidden = true
-                UIApplication.shared.delegate?.window??.makeKeyAndVisible()
-            }
 
             if let index = self?.formIndex{
                 self?.didCloseHandler?(index)

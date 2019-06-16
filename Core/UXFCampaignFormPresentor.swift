@@ -74,8 +74,11 @@ class UXFCampaignFormPresentor: NSObject{
         
         if let form = _currentForm {
             form.dismiss(animated: true){ [weak self] in
-                self?._currentForm?.removeFromParent()
-                self?._currentForm = nil
+                
+                if self?._currentForm == form{
+                   self?._currentForm?.removeFromParent()
+                   self?._currentForm = nil
+                }
                 completion?()
             }
             return true
@@ -94,9 +97,6 @@ class UXFCampaignFormPresentor: NSObject{
             let form  = createForm(formIndex: self.currentFormIndex, title: self.progressString)
             showCampaignController(controller: form, direction: (currentFormIndex == 0 ? .downToUp : .alphaIn))
         }
-       /* else{
-            showCongratulationForm(direction: currentFormIndex == 0 ? .downToUp : .alphaIn)
-        }*/
     }
     
     private func prevForm(){
@@ -278,24 +278,28 @@ class UXFCampaignFormPresentor: NSObject{
     
     private func showCampaignController(controller: UXFViewController, direction: UXFViewPopupDirection){
         
-        _ = self.dismissCurrentForm(completion:  nil)
-        
-        controller.presentDirection = direction
-        
-        self._appWindow.makeKeyAndVisible()
-        self._appWindow.becomeKey()
-        let parentViewController = self._appWindow.rootViewController
-        parentViewController?.present(controller, animated: self.isAnimationFormEnabled){
-            //controller.state = .presented
+        _ = self.dismissCurrentForm(){
+            
+            self._currentForm = controller
+            self._campaign.сurrentFormID = controller.formID //save current campaign formID
+            
+            controller.presentDirection = direction
+            
+            self._appWindow.makeKeyAndVisible()
+            self._appWindow.becomeKey()
+            let parentViewController = self._appWindow.rootViewController
+            parentViewController?.present(controller, animated: self.isAnimationFormEnabled){
+                //controller.state = .presented
+            }
+            
+            if self._campaign.autoclose > 0 && self._currentForm?.formIndex == (self._campaign.pages.count - 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + self._campaign.autoclose) { [ weak self] in
+                    self?._currentForm?.closeForm(animated: self?._currentForm?.presentationAnimated ?? true)
+                }
+            }
         }
-        self._currentForm = controller
-        self._campaign.сurrentFormID = controller.formID //save current campaign formID
         
-        if self._campaign.autoclose > 0 && self._currentForm?.formIndex == (self._campaign.pages.count - 1) {
-            self.perform(#selector(self.dismissCurrentForm(completion:)),
-                         with: nil,
-                         afterDelay: self._campaign.autoclose)
-        }
+       
     }
 }
 
