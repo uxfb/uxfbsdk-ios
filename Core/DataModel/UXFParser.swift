@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Nuke
 
 class UXFParser{
     
@@ -117,6 +116,17 @@ class UXFParser{
         return labelHeight
     }
     
+    
+    internal func preloadImages(dictionary: Dictionary<String, Any>){
+        
+        let scale = UIScreen.main.scale
+        if let setInfo = dictionary["set"] as? Dictionary<String, String>,
+            let imagePath = setInfo["\(Int(scale))x"],
+            let imageUrl = URL.init(string:  imagePath){
+              UIImageView.init().cacheImage(url: imageUrl)
+        }
+    }
+    
     internal  func parseUIElement(dictionary: Dictionary<String, Any>,
                                   theme: UXFTheme,
                                   campaign: UXFCampaign,
@@ -191,7 +201,7 @@ class UXFParser{
         if let setInfo = dictionary["set"] as? Dictionary<String, String>,
            let imagePath = setInfo["\(Int(scale))x"],
            let imageUrl = URL.init(string:  imagePath){
-               Nuke.loadImage(with: imageUrl, into: imageView)
+               imageView.cacheImage(url: imageUrl)
         }
         //imageView.backgroundColor = UIColor.gray
         return imageView
