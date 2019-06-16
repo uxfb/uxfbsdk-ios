@@ -45,10 +45,25 @@ class UXFCampaignFormPresentor: NSObject{
          parser: UXFParser,
          animationEnabled: Bool = true) {
         
+        super.init()
+        
         _campaign = campaign
         _appWindow = window
         _parser = parser
         isAnimationFormEnabled = animationEnabled
+        
+        self.preloadImages()
+    }
+    
+    private func preloadImages(){
+        _campaign.pages.forEach { (page) in
+            
+            if let filedsInfoArr = page.uiData["fields"] as? Array<Dictionary<String, Any>> {
+                  for fieldInfo in  filedsInfoArr{
+                    _parser.preloadImages(dictionary: fieldInfo)
+                }
+            }
+        }
     }
     
     func showCampaign(){
