@@ -1,4 +1,2 @@
-github "Alamofire/Alamofire" "4.8.2"
-github "ashleymills/Reachability.swift" "v4.3.1"
-github "kean/Nuke" "7.6.3"
+github "Alamofire/Alamofire" "4.9.0"
 github "konkab/AlamofireNetworkActivityLogger" "2.4.0"

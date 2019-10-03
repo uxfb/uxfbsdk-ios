@@ -14,7 +14,8 @@ enum UXFThemeType: Int {
     case dark = 2
 }
 
-open class UXFTheme: Decodable{
+@objcMembers
+open class UXFTheme:  NSObject, Decodable{
     
     open var titleColor: UIColor =  UIColor.init("#2F3552") //header
     open var errorColor: UIColor = UIColor.init("#E92436") //Alert comment color
@@ -46,6 +47,9 @@ open class UXFTheme: Decodable{
     }
     
     required public init(from decoder: Decoder) throws {
+        
+        super.init()
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         if let titleColorString = try? container.decode(String.self, forKey: .titleColor){
            self.titleColor = UIColor.init(titleColorString)
@@ -98,8 +102,8 @@ open class UXFTheme: Decodable{
         }
     }
     
-    public init() {
-        
+    public override init() {
+        super.init()
         loadFonts()
     }
     

@@ -41,7 +41,10 @@ lipo -create -output "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework/${I
 
 # Step 5. Convenience step to copy the framework to the project's directory
 FRAMEWORK_REPO_DIR="UXFeedbackSDKFramework//${IOS_TARGET_NAME}.framework"
-rm -rf "$FRAMEWORK_REPO_DIR"
+#rm -rf "$FRAMEWORK_REPO_DIR"
+rm "UXFeedbackSDKFramework"
+mkdir -p "UXFeedbackSDKFramework"
+
 cp -R "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework" "$FRAMEWORK_REPO_DIR"
 
 # Step 6. Convenience step to open the project's directory in Finder

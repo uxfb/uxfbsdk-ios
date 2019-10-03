@@ -12,6 +12,15 @@
 		0A019A4522365E03002FD4F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4322365E03002FD4F8 /* Main.storyboard */; };
 		0A019A4722365E04002FD4F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4622365E04002FD4F8 /* Assets.xcassets */; };
 		0A019A4A22365E04002FD4F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4822365E04002FD4F8 /* LaunchScreen.storyboard */; };
+		0A2A349D2346303200B23383 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A349C2346303200B23383 /* AppDelegate.m */; };
+		0A2A34A02346303200B23383 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A349F2346303200B23383 /* SceneDelegate.m */; };
+		0A2A34A32346303200B23383 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A34A22346303200B23383 /* ViewController.m */; };
+		0A2A34A62346303200B23383 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A2A34A42346303200B23383 /* Main.storyboard */; };
+		0A2A34A82346303300B23383 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A2A34A72346303300B23383 /* Assets.xcassets */; };
+		0A2A34AB2346303300B23383 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A2A34A92346303300B23383 /* LaunchScreen.storyboard */; };
+		0A2A34AE2346303300B23383 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A34AD2346303300B23383 /* main.m */; };
+		0A2A34C3234631B600B23383 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F92289D5890091A7A0 /* Alamofire.framework */; };
+		0A2A34C5234631B600B23383 /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */; };
 		0A46899622840B2C0074E1A3 /* UXFeedbackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0A46899F22840BB90074E1A3 /* UXFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A5322366A29002FD4F8 /* UXFeedback.swift */; };
 		0A4689A022840BB90074E1A3 /* UXFeedbackDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */; };
@@ -44,6 +53,8 @@
 		0A4689C322840FC80074E1A3 /* UXFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB8E22446EC900C17007 /* UXFViewController.swift */; };
 		0A4689C422840FC80074E1A3 /* UXFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2754A8226628BC000E2E17 /* UXFViewController.xib */; };
 		0A4689C522840FD00074E1A3 /* UXFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB72250965100E1C092 /* UXFTextField.swift */; };
+		0A5F732A2346336800049893 /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; };
+		0A5F732B2346336800049893 /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0AA705FD2289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */; };
 		0AA705FE2289D5890091A7A0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F92289D5890091A7A0 /* Alamofire.framework */; };
 		0AA705FF2289D5970091A7A0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F92289D5890091A7A0 /* Alamofire.framework */; };
@@ -68,6 +79,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A5F732C2346336800049893 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0A5F732B2346336800049893 /* UXFeedbackSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0AA850DE228960960040007C /* Embed Frameworks */ = {
@@ -114,6 +136,20 @@
 		0A160DD42268CDB000A586C4 /* UXFStatisticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFStatisticManager.swift; sourceTree = "<group>"; };
 		0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reachability+NetworkType.swift"; sourceTree = "<group>"; };
 		0A2754A8226628BC000E2E17 /* UXFViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFViewController.xib; sourceTree = "<group>"; };
+		0A2A34992346303200B23383 /* UX Feedback SDK Demo_objc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UX Feedback SDK Demo_objc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A2A349B2346303200B23383 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0A2A349C2346303200B23383 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0A2A349E2346303200B23383 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		0A2A349F2346303200B23383 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		0A2A34A12346303200B23383 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		0A2A34A22346303200B23383 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		0A2A34A52346303200B23383 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0A2A34A72346303300B23383 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0A2A34AA2346303300B23383 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0A2A34AC2346303300B23383 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A2A34AD2346303300B23383 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0A2A34B72346303300B23383 /* UX_Feedback_SDK_Demo_objcUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UX_Feedback_SDK_Demo_objcUITests.m; sourceTree = "<group>"; };
+		0A2A34B92346303300B23383 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UXFeedbackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UXFeedbackSDK.h; sourceTree = "<group>"; };
 		0A46899522840B2C0074E1A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -165,6 +201,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0A2A34962346303200B23383 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A2A34C3234631B600B23383 /* Alamofire.framework in Frameworks */,
+				0A2A34C5234631B600B23383 /* AlamofireNetworkActivityLogger.framework in Frameworks */,
+				0A5F732A2346336800049893 /* UXFeedbackSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0A46898F22840B2C0074E1A3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -182,6 +228,8 @@
 				0A019A52223669CC002FD4F8 /* Core */,
 				0A019A3E22365E02002FD4F8 /* UX Feedback SDK Demo */,
 				0A46899322840B2C0074E1A3 /* UXFeedbackSDK */,
+				0A2A349A2346303200B23383 /* UX Feedback SDK Demo_objc */,
+				0A2A34B62346303300B23383 /* UX Feedback SDK Demo_objcUITests */,
 				0A019A3D22365E02002FD4F8 /* Products */,
 				3EE1448B815C3AA05E865A6C /* Frameworks */,
 			);
@@ -192,6 +240,7 @@
 			children = (
 				0A019A3C22365E02002FD4F8 /* UX Feedback SDK Demo.app */,
 				0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */,
+				0A2A34992346303200B23383 /* UX Feedback SDK Demo_objc.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -246,6 +295,33 @@
 				0A0CDEA5224F42E900E1C092 /* Queue.swift */,
 			);
 			path = Vendors;
+			sourceTree = "<group>";
+		};
+		0A2A349A2346303200B23383 /* UX Feedback SDK Demo_objc */ = {
+			isa = PBXGroup;
+			children = (
+				0A2A349B2346303200B23383 /* AppDelegate.h */,
+				0A2A349C2346303200B23383 /* AppDelegate.m */,
+				0A2A349E2346303200B23383 /* SceneDelegate.h */,
+				0A2A349F2346303200B23383 /* SceneDelegate.m */,
+				0A2A34A12346303200B23383 /* ViewController.h */,
+				0A2A34A22346303200B23383 /* ViewController.m */,
+				0A2A34A42346303200B23383 /* Main.storyboard */,
+				0A2A34A72346303300B23383 /* Assets.xcassets */,
+				0A2A34A92346303300B23383 /* LaunchScreen.storyboard */,
+				0A2A34AC2346303300B23383 /* Info.plist */,
+				0A2A34AD2346303300B23383 /* main.m */,
+			);
+			path = "UX Feedback SDK Demo_objc";
+			sourceTree = "<group>";
+		};
+		0A2A34B62346303300B23383 /* UX Feedback SDK Demo_objcUITests */ = {
+			isa = PBXGroup;
+			children = (
+				0A2A34B72346303300B23383 /* UX_Feedback_SDK_Demo_objcUITests.m */,
+				0A2A34B92346303300B23383 /* Info.plist */,
+			);
+			path = "UX Feedback SDK Demo_objcUITests";
 			sourceTree = "<group>";
 		};
 		0A46899322840B2C0074E1A3 /* UXFeedbackSDK */ = {
@@ -379,6 +455,25 @@
 			productReference = 0A019A3C22365E02002FD4F8 /* UX Feedback SDK Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		0A2A34982346303200B23383 /* UX Feedback SDK Demo_objc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A2A34BA2346303300B23383 /* Build configuration list for PBXNativeTarget "UX Feedback SDK Demo_objc" */;
+			buildPhases = (
+				0A2A34C22346318100B23383 /* ShellScript */,
+				0A2A34952346303200B23383 /* Sources */,
+				0A2A34962346303200B23383 /* Frameworks */,
+				0A2A34972346303200B23383 /* Resources */,
+				0A5F732C2346336800049893 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "UX Feedback SDK Demo_objc";
+			productName = "UX Feedback SDK Demo_objc";
+			productReference = 0A2A34992346303200B23383 /* UX Feedback SDK Demo_objc.app */;
+			productType = "com.apple.product-type.application";
+		};
 		0A46899122840B2C0074E1A3 /* UXFeedbackSDK */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A46899B22840B2C0074E1A3 /* Build configuration list for PBXNativeTarget "UXFeedbackSDK" */;
@@ -413,6 +508,9 @@
 					0A019A3B22365E02002FD4F8 = {
 						CreatedOnToolsVersion = 10.1;
 					};
+					0A2A34982346303200B23383 = {
+						CreatedOnToolsVersion = 11.0;
+					};
 					0A46899122840B2C0074E1A3 = {
 						CreatedOnToolsVersion = 10.2;
 					};
@@ -432,6 +530,7 @@
 			projectRoot = "";
 			targets = (
 				0A019A3B22365E02002FD4F8 /* UX Feedback SDK Demo */,
+				0A2A34982346303200B23383 /* UX Feedback SDK Demo_objc */,
 				0A46899122840B2C0074E1A3 /* UXFeedbackSDK */,
 			);
 		};
@@ -445,6 +544,16 @@
 				0A019A4A22365E04002FD4F8 /* LaunchScreen.storyboard in Resources */,
 				0A019A4722365E04002FD4F8 /* Assets.xcassets in Resources */,
 				0A019A4522365E03002FD4F8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A2A34972346303200B23383 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A2A34AB2346303300B23383 /* LaunchScreen.storyboard in Resources */,
+				0A2A34A82346303300B23383 /* Assets.xcassets in Resources */,
+				0A2A34A62346303200B23383 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +572,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0A2A34C22346318100B23383 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
 		0A4689E922854B9F0074E1A3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -478,7 +606,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\n#cp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
+			shellScript = "BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\ncp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
 		};
 		0A4689F6228564FD0074E1A3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -527,6 +655,17 @@
 				0AB437C722B2B68C00AF8665 /* SecondViewController.swift in Sources */,
 				0A019A4222365E03002FD4F8 /* MainViewController.swift in Sources */,
 				0A019A4022365E03002FD4F8 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A2A34952346303200B23383 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A2A34A32346303200B23383 /* ViewController.m in Sources */,
+				0A2A349D2346303200B23383 /* AppDelegate.m in Sources */,
+				0A2A34AE2346303300B23383 /* main.m in Sources */,
+				0A2A34A02346303200B23383 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,6 +725,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				0A019A4922365E04002FD4F8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		0A2A34A42346303200B23383 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0A2A34A52346303200B23383 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0A2A34A92346303300B23383 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0A2A34AA2346303300B23383 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -714,8 +869,8 @@
 		0A019A4F22365E04002FD4F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K42YC37US;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -732,7 +887,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "UXFeedbackDemo Dev";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -740,8 +895,8 @@
 		0A019A5022365E04002FD4F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K42YC37US;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -758,7 +913,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "UXFeedbackDemo AdHoc";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -823,8 +978,8 @@
 		0A0955AE229573DD00606547 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K42YC37US;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -841,7 +996,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "UXFeedbackDemo AdHoc";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = AdHoc;
@@ -877,6 +1032,81 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = AdHoc;
+		};
+		0A2A34BB2346303300B23383 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5K42YC37US;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "UX Feedback SDK Demo_objc/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.2.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rockman.uxfeedback.demo-objc";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0A2A34BC2346303300B23383 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5K42YC37US;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "UX Feedback SDK Demo_objc/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.2.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rockman.uxfeedback.demo-objc";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0A2A34BD2346303300B23383 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5K42YC37US;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "UX Feedback SDK Demo_objc/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.2.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rockman.uxfeedback.demo-objc";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = AdHoc;
 		};
@@ -968,6 +1198,16 @@
 				0A019A4F22365E04002FD4F8 /* Debug */,
 				0A019A5022365E04002FD4F8 /* Release */,
 				0A0955AE229573DD00606547 /* AdHoc */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0A2A34BA2346303300B23383 /* Build configuration list for PBXNativeTarget "UX Feedback SDK Demo_objc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A2A34BB2346303300B23383 /* Debug */,
+				0A2A34BC2346303300B23383 /* Release */,
+				0A2A34BD2346303300B23383 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

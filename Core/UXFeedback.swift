@@ -14,7 +14,9 @@ public struct UXFError : Error {
     public let description: String
 }
 
-open class UXFeedback{
+
+@objcMembers
+open class UXFeedback : NSObject{
     
     public static let sharedInstance = UXFeedback.init()
     
@@ -43,7 +45,8 @@ open class UXFeedback{
         return _formPresentor?._currentForm
     }
     
-    init() {
+    override init() {
+        super.init()
         self.setTheme(theme: UXFTheme.init())
     }
     

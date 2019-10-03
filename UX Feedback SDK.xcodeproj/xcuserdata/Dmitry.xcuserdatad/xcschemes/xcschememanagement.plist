@@ -9,15 +9,25 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>UXFeedbackSDK.xcscheme_^#shared#^_</key>
+		<key>UX Feedback SDK Demo_objc.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
+		</dict>
+		<key>UXFeedbackSDK.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>0A019A3B22365E02002FD4F8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0A2A34982346303200B23383</key>
 		<dict>
 			<key>primary</key>
 			<true/>
