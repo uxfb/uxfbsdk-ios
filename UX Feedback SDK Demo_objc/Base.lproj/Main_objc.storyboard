@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4zU-Cg-92O">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Item-->
+        <scene sceneID="B93-KR-FnL">
+            <objects>
+                <viewController id="7Dc-z2-lPv" customClass="MainViewController_objc" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8sC-F1-NEp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="apX-hw-gx3">
+                                <rect key="frame" x="16" y="289" width="382" height="264"/>
+                                <subviews>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdP-wj-0Nv">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="44"/>
+                                        <state key="normal" title="Tap Event 1"/>
+                                        <connections>
+                                            <action selector="eventTap:" destination="7Dc-z2-lPv" eventType="touchUpInside" id="6Gu-uY-Qj2"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yl5-Bi-xk7">
+                                        <rect key="frame" x="0.0" y="44" width="382" height="44"/>
+                                        <state key="normal" title="Tap Event 2"/>
+                                        <connections>
+                                            <action selector="eventTap:" destination="7Dc-z2-lPv" eventType="touchUpInside" id="7lf-vj-Pdw"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHR-85-I4I">
+                                        <rect key="frame" x="0.0" y="88" width="382" height="44"/>
+                                        <state key="normal" title="Tap Event 3"/>
+                                        <connections>
+                                            <action selector="eventTap:" destination="7Dc-z2-lPv" eventType="touchUpInside" id="970-bz-C0G"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IdE-ef-YjG">
+                                        <rect key="frame" x="0.0" y="132" width="382" height="44"/>
+                                        <state key="normal" title="Tap Event 4"/>
+                                        <connections>
+                                            <action selector="eventTap:" destination="7Dc-z2-lPv" eventType="touchUpInside" id="bOc-gR-9Su"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AGq-Fa-mNW">
+                                        <rect key="frame" x="0.0" y="176" width="382" height="44"/>
+                                        <state key="normal" title="Tap Event 5"/>
+                                        <connections>
+                                            <action selector="eventTap:" destination="7Dc-z2-lPv" eventType="touchUpInside" id="9Tu-v5-JoW"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eMr-p2-lDK">
+                                        <rect key="frame" x="0.0" y="220" width="382" height="44"/>
+                                        <state key="normal" title="Tap Event 6"/>
+                                        <connections>
+                                            <action selector="eventTap:" destination="7Dc-z2-lPv" eventType="touchUpInside" id="Qog-mh-7zS"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="264" id="uCR-rF-N6m"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your first UXFeedback App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sq1-Ml-Aln">
+                                <rect key="frame" x="16" y="16" width="382" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="zrG-Wv-VHn">
+                                <rect key="frame" x="197" y="411" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWx-bU-jyi">
+                                <rect key="frame" x="344" y="11" width="54" height="30"/>
+                                <state key="normal" title="Dismiss"/>
+                                <connections>
+                                    <action selector="closeButtonTap:" destination="7Dc-z2-lPv" eventType="touchUpInside" id="XXV-PL-Lah"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="sq1-Ml-Aln" firstAttribute="centerX" secondItem="8sC-F1-NEp" secondAttribute="centerX" id="4lT-HR-5MW"/>
+                            <constraint firstItem="apX-hw-gx3" firstAttribute="centerX" secondItem="8sC-F1-NEp" secondAttribute="centerX" id="81C-ou-Tia"/>
+                            <constraint firstItem="sq1-Ml-Aln" firstAttribute="top" secondItem="VMS-ht-vaE" secondAttribute="top" constant="16" id="Hcw-Ob-HS8"/>
+                            <constraint firstItem="zrG-Wv-VHn" firstAttribute="centerY" secondItem="8sC-F1-NEp" secondAttribute="centerY" id="J5u-9y-qzF"/>
+                            <constraint firstItem="sq1-Ml-Aln" firstAttribute="leading" secondItem="VMS-ht-vaE" secondAttribute="leading" constant="16" id="KUy-Jg-sMX"/>
+                            <constraint firstItem="zrG-Wv-VHn" firstAttribute="centerX" secondItem="8sC-F1-NEp" secondAttribute="centerX" id="RRX-pT-Yoo"/>
+                            <constraint firstItem="apX-hw-gx3" firstAttribute="leading" secondItem="VMS-ht-vaE" secondAttribute="leading" constant="16" id="c3b-cz-h9P"/>
+                            <constraint firstItem="uWx-bU-jyi" firstAttribute="top" secondItem="VMS-ht-vaE" secondAttribute="top" constant="11" id="cB0-Th-EFs"/>
+                            <constraint firstItem="apX-hw-gx3" firstAttribute="centerY" secondItem="8sC-F1-NEp" secondAttribute="centerY" id="pRn-o3-kdD"/>
+                            <constraint firstItem="VMS-ht-vaE" firstAttribute="trailing" secondItem="apX-hw-gx3" secondAttribute="trailing" constant="16" id="sCT-St-Xe9"/>
+                            <constraint firstItem="VMS-ht-vaE" firstAttribute="trailing" secondItem="sq1-Ml-Aln" secondAttribute="trailing" constant="16" id="tSw-oQ-41g"/>
+                            <constraint firstItem="VMS-ht-vaE" firstAttribute="trailing" secondItem="uWx-bU-jyi" secondAttribute="trailing" constant="16" id="yeG-LG-zli"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="VMS-ht-vaE"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="eV4-Uk-ftc"/>
+                    <navigationItem key="navigationItem" id="4fm-c2-8uU"/>
+                    <connections>
+                        <outlet property="busyIndicator" destination="zrG-Wv-VHn" id="08l-tT-iFk"/>
+                        <outlet property="buttonsStackView" destination="apX-hw-gx3" id="Ykj-dw-wjE"/>
+                        <outlet property="dismissButton" destination="uWx-bU-jyi" id="mk7-SP-l5D"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EDV-NZ-Xyk" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="241" y="2429"/>
+        </scene>
+        <!--Item 2-->
+        <scene sceneID="oy3-Bp-M9O">
+            <objects>
+                <viewController id="cc6-Y1-QKv" customClass="SecondViewController_objc" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6Bn-uX-P27">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ue7-fd-svx">
+                                <rect key="frame" x="167" y="426" width="80" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="RWX-kq-c0f"/>
+                                    <constraint firstAttribute="height" constant="44" id="l6z-Rc-jdS"/>
+                                </constraints>
+                                <state key="normal" title="Tap me"/>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="0tw-1j-oIY">
+                                <rect key="frame" x="197" y="390" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ue7-fd-svx" firstAttribute="centerY" secondItem="6Bn-uX-P27" secondAttribute="centerY" id="3TK-dx-gVL"/>
+                            <constraint firstItem="ue7-fd-svx" firstAttribute="centerX" secondItem="6Bn-uX-P27" secondAttribute="centerX" id="Icf-Ua-YJs"/>
+                            <constraint firstItem="0tw-1j-oIY" firstAttribute="centerX" secondItem="6Bn-uX-P27" secondAttribute="centerX" id="fwr-2T-nNW"/>
+                            <constraint firstItem="ue7-fd-svx" firstAttribute="top" secondItem="0tw-1j-oIY" secondAttribute="bottom" constant="16" id="iDl-VH-gwu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wsL-sA-bHz"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="sVd-rV-904"/>
+                    <connections>
+                        <outlet property="busyIndicator" destination="0tw-1j-oIY" id="nEN-oC-K4C"/>
+                        <outlet property="button" destination="ue7-fd-svx" id="TMa-2J-dFb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WEX-nd-awM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="161" y="1567"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="4tx-Nf-58v">
+            <objects>
+                <viewController id="F62-cE-nMY" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BV6-45-ICh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2c-SW-dKU">
+                                <rect key="frame" x="159" y="433" width="96" height="30"/>
+                                <state key="normal" title="Next screen &gt;"/>
+                                <connections>
+                                    <segue destination="7Dc-z2-lPv" kind="show" id="MyB-XV-CaG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebM-eO-A4Q">
+                                <rect key="frame" x="159" y="471" width="96" height="30"/>
+                                <state key="normal" title="Popup Screen"/>
+                                <connections>
+                                    <segue destination="7Dc-z2-lPv" kind="presentation" id="2v1-L3-yO7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ebM-eO-A4Q" firstAttribute="top" secondItem="R2c-SW-dKU" secondAttribute="bottom" constant="8" id="8ol-87-iHp"/>
+                            <constraint firstItem="ebM-eO-A4Q" firstAttribute="centerX" secondItem="BV6-45-ICh" secondAttribute="centerX" id="JTE-hT-N2v"/>
+                            <constraint firstItem="R2c-SW-dKU" firstAttribute="centerY" secondItem="BV6-45-ICh" secondAttribute="centerY" id="hME-eC-7IW"/>
+                            <constraint firstItem="R2c-SW-dKU" firstAttribute="centerX" secondItem="BV6-45-ICh" secondAttribute="centerX" id="hRU-DJ-74X"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2vN-hb-QR4"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="kbd-7l-Eaq"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NdA-Eu-EP4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-791" y="2428"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="mUs-YZ-1hK">
+            <objects>
+                <navigationController id="v6c-nU-Uip" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="6pr-VW-v41"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cue-8A-fPS">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="F62-cE-nMY" kind="relationship" relationship="rootViewController" id="kSK-pc-etZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pHu-si-Td8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1783" y="2428"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="wCj-Ev-cbU">
+            <objects>
+                <viewController id="rci-Fi-DTU" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="smy-0P-Sis">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Ojective-C UXFeedbackSDK application example" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j30-yD-YhG">
+                                <rect key="frame" x="8" y="52" width="398" height="753"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="j30-yD-YhG" firstAttribute="top" secondItem="Ch9-Be-Gfo" secondAttribute="top" constant="8" id="2JC-Mh-z3N"/>
+                            <constraint firstItem="j30-yD-YhG" firstAttribute="leading" secondItem="Ch9-Be-Gfo" secondAttribute="leading" constant="8" id="6MY-Lm-S6P"/>
+                            <constraint firstItem="Ch9-Be-Gfo" firstAttribute="trailing" secondItem="j30-yD-YhG" secondAttribute="trailing" constant="8" id="XjV-zf-0cz"/>
+                            <constraint firstItem="Ch9-Be-Gfo" firstAttribute="bottom" secondItem="j30-yD-YhG" secondAttribute="bottom" constant="8" id="lVI-WS-CFJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ch9-Be-Gfo"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="nwN-oP-4um"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vdc-mL-Yg5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="161" y="851"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="gUJ-5P-eQa">
+            <objects>
+                <tabBarController id="4zU-Cg-92O" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="J6X-mN-t6H">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="rci-Fi-DTU" kind="relationship" relationship="viewControllers" id="Ou0-BL-bGS"/>
+                        <segue destination="cc6-Y1-QKv" kind="relationship" relationship="viewControllers" id="e8a-nV-xm4"/>
+                        <segue destination="7Dc-z2-lPv" kind="relationship" relationship="viewControllers" id="dq0-ty-dBY"/>
+                        <segue destination="v6c-nU-Uip" kind="relationship" relationship="viewControllers" id="0rd-Vx-qRi"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tCq-OR-uQb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1361" y="1239"/>
+        </scene>
+    </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="2v1-L3-yO7"/>
+    </inferredMetricsTieBreakers>
+</document>

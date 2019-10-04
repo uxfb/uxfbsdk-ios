@@ -9,7 +9,7 @@
 import UIKit
 import UXFeedbackSDK
 
-class SecondViewController: UIViewController {
+class SecondViewController_swift: UIViewController {
 
     @IBOutlet var busyIndicator: UIActivityIndicatorView!
     @IBOutlet var button: UIButton!
@@ -54,7 +54,7 @@ class SecondViewController: UIViewController {
 
 }
 
-extension SecondViewController: UXFeedbackCampaignDelegate{
+extension SecondViewController_swift: UXFeedbackCampaignDelegate{
     func campaignDidClose(withFeedbackResult result: UXFeedbackResult, isRedirectToAppStoreEnabled: Bool) {
         DDLogDebug(#function)
     }

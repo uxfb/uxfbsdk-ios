@@ -9,7 +9,7 @@
 import UIKit
 import UXFeedbackSDK
 
-class MainViewController: UIViewController {
+class MainViewController_swift: UIViewController {
     
     @IBOutlet var busyIndicator: UIActivityIndicatorView!
     @IBOutlet var buttonsStackView: UIView!
@@ -45,7 +45,7 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController: UXFeedbackCampaignDelegate{
+extension MainViewController_swift: UXFeedbackCampaignDelegate{
     func campaignDidClose(withFeedbackResult result: UXFeedbackResult, isRedirectToAppStoreEnabled: Bool) {
         DDLogDebug(#function)
     }
@@ -62,7 +62,7 @@ extension MainViewController: UXFeedbackCampaignDelegate{
     }
 }
 
-extension MainViewController: UXFeedbackFormDelegate{
+extension MainViewController_swift: UXFeedbackFormDelegate{
     
     func formDidLoaded(form: UXFViewController) {
         DDLogDebug(#function)

@@ -9,21 +9,28 @@
 import Foundation
 import UIKit
 
-public struct UXFeedbackResult {
+@objcMembers
+public class UXFeedbackResult : NSObject{
     
-    public let rating: Int?
+    public var rating: Int? = nil
+    public var abandonedPageIndex: Int? = nil
+    public var sent: Bool = false
     
-    public let abandonedPageIndex: Int?
-    
-    public var sent: Bool
+    init(rating: Int?, abandonedPageIndex: Int?, sent: Bool) {
+        self.rating = rating
+        self.abandonedPageIndex = abandonedPageIndex
+        self.sent = sent
+    }
 }
 
+@objc
 public protocol UXFeedbackCampaignDelegate: class{
     func campaignDidClose(withFeedbackResult result: UXFeedbackResult, isRedirectToAppStoreEnabled: Bool)
     func campaignLoaded(success: Bool)
     func campaignErrorReceived(errorString: String)
 }
 
+@objc
 public protocol UXFeedbackFormDelegate: AnyObject {
    func formDidLoaded(form: UXFViewController)
    func formDidFailLoading(error: UXFError)

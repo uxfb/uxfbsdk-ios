@@ -9,9 +9,20 @@
 import Foundation
 import UIKit
 
-public struct UXFError : Error {
+@objcMembers
+public class UXFError : NSError {
     
-    public let description: String
+    private var desc: String? = nil
+    
+    init(description: String?){
+        super.init(domain: "uxfeedback", code: 0, userInfo: ["description": description])
+        self.desc = description
+    }
+
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
 }
 
 

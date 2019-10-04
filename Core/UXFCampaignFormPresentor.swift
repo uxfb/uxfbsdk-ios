@@ -125,7 +125,7 @@ class UXFCampaignFormPresentor: NSObject{
         controller.didCloseHandler = { [weak self]  (formIndex) in
             
             if let formsCount = self?._campaign.formsCount {
-                let result = UXFeedbackResult(rating: self?._campaign.raiting,
+                let result = UXFeedbackResult.init(rating: self?._campaign.raiting,
                                               abandonedPageIndex: formIndex,
                                               sent: true)
                 if formIndex == (formsCount - 1) {
