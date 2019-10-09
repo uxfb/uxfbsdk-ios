@@ -49,8 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        // customTheme.fontBoldName = "YourBoldFontName"
         customTheme.fontMediumName = "Marker Felt"
         
-        UXFeedback.sharedInstance.setup(appID: uxfAppID,
-                                        applicationWindow: self.window!)//, theme: customTheme)
+        UXFeedback.sharedInstance.setup(appID: uxfAppID)//, theme: customTheme)
         {  success in
             let message = "UXFeedback initialization " + (success == true ? "successful" : "failed")
             DDLogDebug(message)

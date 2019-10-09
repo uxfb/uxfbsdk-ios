@@ -67,8 +67,30 @@ open class UXFeedback : NSObject{
     }
     
     //Initialization SDK
+    @available(iOS 13.0, *)
     open func setup(appID: String,
-                    applicationWindow: UIWindow,
+                    windowScene: UIWindowScene,
+                    theme: UXFTheme? = nil,
+                    completion: ((_ success: Bool) -> Void)? = nil){
+        
+        self.setup(appID: appID,
+                   window: UIWindow(windowScene: windowScene),
+                   theme: theme,
+                   completion: completion)
+    }
+    
+    open func setup(appID: String,
+                    theme: UXFTheme? = nil,
+                    completion: ((_ success: Bool) -> Void)? = nil){
+        
+        setup(appID: appID,
+              window: UIWindow(frame: UIScreen.main.bounds),
+              theme: theme,
+              completion: completion)
+    }
+        
+    private func setup(appID: String,
+                    window: UIWindow,
                     theme: UXFTheme? = nil,
                     completion: ((_ success: Bool) -> Void)? = nil){
         
@@ -81,11 +103,10 @@ open class UXFeedback : NSObject{
         _apiClient = UXFAPIClient.init(appID: appID, parser: self._parser)
         _apiClient.getAllCampaings { [weak self] (success, message, campaigns) in
 
-            let newWindow = UIWindow(frame: UIScreen.main.bounds)
-            newWindow.rootViewController = UIViewController()
-            newWindow.windowLevel = UIWindow.Level.alert + 1
-            
-            self?._appWindow = newWindow//applicationWindow
+            window.rootViewController = UIViewController()
+            window.windowLevel = UIWindow.Level.alert + 1
+
+            self?._appWindow = window
             self?._campaigns = campaigns
         
             if success == true, let event = self?._eventToSend {

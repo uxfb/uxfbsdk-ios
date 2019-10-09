@@ -21,15 +21,20 @@ void DDLogDebug(id object){
     
     DDLogDebug(@"Scene connected");
     
+    UIWindowScene *windowScene = (UIWindowScene*)scene;
+    if (windowScene == nil) {
+        return;
+    }
+    
     UXFTheme *theme = [[UXFTheme alloc] init];
     
     NSString *uxfAppID = @"54444d444a068c157e7f7e14";
     if (UXFeedback.isStage == YES){
         uxfAppID = @"cjld2cjxh0000qzrmn831i7rn";
     }
-
+    
     [UXFeedback.sharedInstance setupWithAppID: uxfAppID
-                            applicationWindow: self.window
+                            windowScene: windowScene
                                         theme: theme
                                    completion:^(BOOL success) {
         NSString *message = [NSString stringWithFormat: @"UXFeedback initialization %@", (success == true ? @"successful" : @"failed")];
