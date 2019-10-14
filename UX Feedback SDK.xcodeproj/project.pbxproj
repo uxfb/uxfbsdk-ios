@@ -13,7 +13,6 @@
 		0A019A4722365E04002FD4F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4622365E04002FD4F8 /* Assets.xcassets */; };
 		0A019A4A22365E04002FD4F8 /* LaunchScreen_swift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4822365E04002FD4F8 /* LaunchScreen_swift.storyboard */; };
 		0A2A349D2346303200B23383 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A349C2346303200B23383 /* AppDelegate.m */; };
-		0A2A34A02346303200B23383 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A349F2346303200B23383 /* SceneDelegate.m */; };
 		0A2A34A32346303200B23383 /* SecondViewController_objc.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A34A22346303200B23383 /* SecondViewController_objc.m */; };
 		0A2A34A62346303200B23383 /* Main_objc.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A2A34A42346303200B23383 /* Main_objc.storyboard */; };
 		0A2A34A82346303300B23383 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A2A34A72346303300B23383 /* Assets.xcassets */; };
@@ -140,8 +139,6 @@
 		0A2A34992346303200B23383 /* UX Feedback SDK Demo_objc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UX Feedback SDK Demo_objc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A2A349B2346303200B23383 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0A2A349C2346303200B23383 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		0A2A349E2346303200B23383 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		0A2A349F2346303200B23383 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		0A2A34A12346303200B23383 /* SecondViewController_objc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController_objc.h; sourceTree = "<group>"; };
 		0A2A34A22346303200B23383 /* SecondViewController_objc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController_objc.m; sourceTree = "<group>"; };
 		0A2A34A52346303200B23383 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_objc.storyboard; sourceTree = "<group>"; };
@@ -305,8 +302,6 @@
 			children = (
 				0A2A349B2346303200B23383 /* AppDelegate.h */,
 				0A2A349C2346303200B23383 /* AppDelegate.m */,
-				0A2A349E2346303200B23383 /* SceneDelegate.h */,
-				0A2A349F2346303200B23383 /* SceneDelegate.m */,
 				0A5F732E2347671F00049893 /* MainViewController_objc.h */,
 				0A5F732F2347671F00049893 /* MainViewController_objc.m */,
 				0A2A34A12346303200B23383 /* SecondViewController_objc.h */,
@@ -671,7 +666,6 @@
 				0A2A349D2346303200B23383 /* AppDelegate.m in Sources */,
 				0A2A34AE2346303300B23383 /* main.m in Sources */,
 				0A5F73302347671F00049893 /* MainViewController_objc.m in Sources */,
-				0A2A34A02346303200B23383 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1044,6 +1038,7 @@
 		0A2A34BB2346303300B23383 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K42YC37US;
@@ -1054,7 +1049,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "UX Feedback SDK Demo_objc/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1069,6 +1064,7 @@
 		0A2A34BC2346303300B23383 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K42YC37US;
@@ -1079,7 +1075,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "UX Feedback SDK Demo_objc/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1094,6 +1090,7 @@
 		0A2A34BD2346303300B23383 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K42YC37US;
@@ -1105,7 +1102,7 @@
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = "ADHOC=1";
 				INFOPLIST_FILE = "UX Feedback SDK Demo_objc/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
