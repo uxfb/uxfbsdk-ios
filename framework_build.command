@@ -32,6 +32,19 @@ mkdir -p "${UNIVERSAL_OUTPUTFOLDER}"
 
 cp -R "${BUILD_PRODUCTS}/${CONFIGURATION}-iphoneos/$IOS_TARGET_NAME.framework" "${UNIVERSAL_OUTPUTFOLDER}/"
 
+mkdir -p "${IOS_TARGET_NAME}/tmp/Headers/simulator"
+mkdir -p "${IOS_TARGET_NAME}/tmp/Headers/device"
+cp -R "${BUILD_PRODUCTS}/${CONFIGURATION}-iphonesimulator/${IOS_TARGET_NAME}.framework/Headers/${IOS_TARGET_NAME}-Swift.h" "${IOS_TARGET_NAME}/tmp/Headers/simulator/${IOS_TARGET_NAME}-Swift.h"
+cp -r "${BUILD_PRODUCTS}/${CONFIGURATION}-iphoneos/${IOS_TARGET_NAME}.framework/Headers/${IOS_TARGET_NAME}-Swift.h" "${IOS_TARGET_NAME}/tmp/Headers/device/${IOS_TARGET_NAME}-Swift.h"
+# Merge
+touch "${IOS_TARGET_NAME}/tmp/${IOS_TARGET_NAME}-Swift.h"
+echo "#if TARGET_OS_SIMULATOR" >> "${IOS_TARGET_NAME}/tmp/${IOS_TARGET_NAME}-Swift.h"
+cat "${IOS_TARGET_NAME}/tmp/Headers/simulator/${IOS_TARGET_NAME}-Swift.h" >> "${IOS_TARGET_NAME}/tmp/${IOS_TARGET_NAME}-Swift.h"
+echo "#else" >> "${IOS_TARGET_NAME}/tmp/${IOS_TARGET_NAME}-Swift.h"
+cat "${IOS_TARGET_NAME}/tmp/Headers/device/${IOS_TARGET_NAME}-Swift.h" >> "${IOS_TARGET_NAME}/tmp/${IOS_TARGET_NAME}-Swift.h"
+echo "#endif" >> "${IOS_TARGET_NAME}/tmp/${IOS_TARGET_NAME}-Swift.h"
+
+
 # Step 3. Copy Swift modules from iphonesimulator build (if it exists) to the copied framework directory
 
 cp -R "${BUILD_PRODUCTS}/${CONFIGURATION}-iphonesimulator/${IOS_TARGET_NAME}.framework/Modules/${IOS_TARGET_NAME}.swiftmodule/." "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework/Modules/${IOS_TARGET_NAME}.swiftmodule"
@@ -40,12 +53,17 @@ cp -R "${BUILD_PRODUCTS}/${CONFIGURATION}-iphonesimulator/${IOS_TARGET_NAME}.fra
 lipo -create -output "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework/${IOS_TARGET_NAME}" "${BUILD_PRODUCTS}/${CONFIGURATION}-iphonesimulator/${IOS_TARGET_NAME}.framework/${IOS_TARGET_NAME}" "${BUILD_PRODUCTS}/${CONFIGURATION}-iphoneos/${IOS_TARGET_NAME}.framework/${IOS_TARGET_NAME}"
 
 # Step 5. Convenience step to copy the framework to the project's directory
+
 FRAMEWORK_REPO_DIR="UXFeedbackSDKFramework//${IOS_TARGET_NAME}.framework"
-#rm -rf "$FRAMEWORK_REPO_DIR"
-rm "UXFeedbackSDKFramework"
+rm -rf "$FRAMEWORK_REPO_DIR"
+#rm "UXFeedbackSDKFramework"
 mkdir -p "UXFeedbackSDKFramework"
 
+cp -R "${IOS_TARGET_NAME}/tmp/${IOS_TARGET_NAME}-Swift.h" "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework/Headers/${IOS_TARGET_NAME}-Swift.h"
 cp -R "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework" "$FRAMEWORK_REPO_DIR"
+
+# Delete temporary files
+rm -rf "${IOS_TARGET_NAME}/tmp"
 
 # Step 6. Convenience step to open the project's directory in Finder
 open "$FRAMEWORK_REPO_DIR"
