@@ -93,7 +93,7 @@ open class UXFeedback : NSObject{
               completion: completion)
     }
         
-    open func setup(appID: String,
+    private func setup(appID: String,
                     window: UIWindow?,
                     theme: UXFTheme? = nil,
                     completion: ((_ success: Bool) -> Void)? = nil){
