@@ -12,6 +12,17 @@
 		0A019A4522365E03002FD4F8 /* Main_swift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4322365E03002FD4F8 /* Main_swift.storyboard */; };
 		0A019A4722365E04002FD4F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4622365E04002FD4F8 /* Assets.xcassets */; };
 		0A019A4A22365E04002FD4F8 /* LaunchScreen_swift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4822365E04002FD4F8 /* LaunchScreen_swift.storyboard */; };
+		0A1B9E5723996F0700935E2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1B9E5623996F0700935E2E /* AppDelegate.swift */; };
+		0A1B9E5923996F0700935E2E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1B9E5823996F0700935E2E /* SceneDelegate.swift */; };
+		0A1B9E6A23996F5A00935E2E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F92289D5890091A7A0 /* Alamofire.framework */; };
+		0A1B9E6B23996F5C00935E2E /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */; };
+		0A1B9E6D23996F6A00935E2E /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; };
+		0A1B9E6E23996F6A00935E2E /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A1B9E7023996F9600935E2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4622365E04002FD4F8 /* Assets.xcassets */; };
+		0A1B9E7123996F9E00935E2E /* Main_swift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4322365E03002FD4F8 /* Main_swift.storyboard */; };
+		0A1B9E7223996F9E00935E2E /* LaunchScreen_swift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4822365E04002FD4F8 /* LaunchScreen_swift.storyboard */; };
+		0A1B9E7323996FA700935E2E /* MainViewController_swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A4122365E03002FD4F8 /* MainViewController_swift.swift */; };
+		0A1B9E742399711000935E2E /* SecondViewController_swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB437C622B2B68C00AF8665 /* SecondViewController_swift.swift */; };
 		0A2A349D2346303200B23383 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A349C2346303200B23383 /* AppDelegate.m */; };
 		0A2A34A32346303200B23383 /* SecondViewController_objc.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A34A22346303200B23383 /* SecondViewController_objc.m */; };
 		0A2A34A62346303200B23383 /* Main_objc.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A2A34A42346303200B23383 /* Main_objc.storyboard */; };
@@ -72,6 +83,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		0A1B9E6F23996F6A00935E2E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0A1B9E6E23996F6A00935E2E /* UXFeedbackSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0A468A0022856BEA0074E1A3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
@@ -135,6 +157,10 @@
 		0A0CDEB92250A16B00E1C092 /* UIViewController+present.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+present.swift"; sourceTree = "<group>"; };
 		0A160DD42268CDB000A586C4 /* UXFStatisticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFStatisticManager.swift; sourceTree = "<group>"; };
 		0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reachability+NetworkType.swift"; sourceTree = "<group>"; };
+		0A1B9E5423996F0700935E2E /* UX Feedback SDK Demo_wscene.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UX Feedback SDK Demo_wscene.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A1B9E5623996F0700935E2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0A1B9E5823996F0700935E2E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		0A1B9E6423996F0800935E2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A2754A8226628BC000E2E17 /* UXFViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFViewController.xib; sourceTree = "<group>"; };
 		0A2A34992346303200B23383 /* UX Feedback SDK Demo_objc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UX Feedback SDK Demo_objc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A2A349B2346303200B23383 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -201,6 +227,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0A1B9E5123996F0700935E2E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A1B9E6A23996F5A00935E2E /* Alamofire.framework in Frameworks */,
+				0A1B9E6B23996F5C00935E2E /* AlamofireNetworkActivityLogger.framework in Frameworks */,
+				0A1B9E6D23996F6A00935E2E /* UXFeedbackSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0A2A34962346303200B23383 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -230,6 +266,7 @@
 				0A46899322840B2C0074E1A3 /* UXFeedbackSDK */,
 				0A2A349A2346303200B23383 /* UX Feedback SDK Demo_objc */,
 				0A2A34B62346303300B23383 /* UX Feedback SDK Demo_objcUITests */,
+				0A1B9E5523996F0700935E2E /* UX Feedback SDK Demo_wscene */,
 				0A019A3D22365E02002FD4F8 /* Products */,
 				3EE1448B815C3AA05E865A6C /* Frameworks */,
 			);
@@ -241,6 +278,7 @@
 				0A019A3C22365E02002FD4F8 /* UX Feedback SDK Demo.app */,
 				0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */,
 				0A2A34992346303200B23383 /* UX Feedback SDK Demo_objc.app */,
+				0A1B9E5423996F0700935E2E /* UX Feedback SDK Demo_wscene.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -295,6 +333,16 @@
 				0A0CDEA5224F42E900E1C092 /* Queue.swift */,
 			);
 			path = Vendors;
+			sourceTree = "<group>";
+		};
+		0A1B9E5523996F0700935E2E /* UX Feedback SDK Demo_wscene */ = {
+			isa = PBXGroup;
+			children = (
+				0A1B9E5623996F0700935E2E /* AppDelegate.swift */,
+				0A1B9E5823996F0700935E2E /* SceneDelegate.swift */,
+				0A1B9E6423996F0800935E2E /* Info.plist */,
+			);
+			path = "UX Feedback SDK Demo_wscene";
 			sourceTree = "<group>";
 		};
 		0A2A349A2346303200B23383 /* UX Feedback SDK Demo_objc */ = {
@@ -455,6 +503,25 @@
 			productReference = 0A019A3C22365E02002FD4F8 /* UX Feedback SDK Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		0A1B9E5323996F0700935E2E /* UX Feedback SDK Demo_wscene */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A1B9E6823996F0800935E2E /* Build configuration list for PBXNativeTarget "UX Feedback SDK Demo_wscene" */;
+			buildPhases = (
+				0A1B9E6923996F1C00935E2E /* ShellScript */,
+				0A1B9E5023996F0700935E2E /* Sources */,
+				0A1B9E5123996F0700935E2E /* Frameworks */,
+				0A1B9E5223996F0700935E2E /* Resources */,
+				0A1B9E6F23996F6A00935E2E /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "UX Feedback SDK Demo_wscene";
+			productName = "UX Feedback SDK Demo_wscene";
+			productReference = 0A1B9E5423996F0700935E2E /* UX Feedback SDK Demo_wscene.app */;
+			productType = "com.apple.product-type.application";
+		};
 		0A2A34982346303200B23383 /* UX Feedback SDK Demo_objc */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A2A34BA2346303300B23383 /* Build configuration list for PBXNativeTarget "UX Feedback SDK Demo_objc" */;
@@ -501,12 +568,15 @@
 		0A019A3422365E02002FD4F8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
+				LastSwiftUpdateCheck = 1120;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = UXF;
 				TargetAttributes = {
 					0A019A3B22365E02002FD4F8 = {
 						CreatedOnToolsVersion = 10.1;
+					};
+					0A1B9E5323996F0700935E2E = {
+						CreatedOnToolsVersion = 11.2.1;
 					};
 					0A2A34982346303200B23383 = {
 						CreatedOnToolsVersion = 11.0;
@@ -531,6 +601,7 @@
 			targets = (
 				0A019A3B22365E02002FD4F8 /* UX Feedback SDK Demo */,
 				0A2A34982346303200B23383 /* UX Feedback SDK Demo_objc */,
+				0A1B9E5323996F0700935E2E /* UX Feedback SDK Demo_wscene */,
 				0A46899122840B2C0074E1A3 /* UXFeedbackSDK */,
 			);
 		};
@@ -544,6 +615,16 @@
 				0A019A4A22365E04002FD4F8 /* LaunchScreen_swift.storyboard in Resources */,
 				0A019A4722365E04002FD4F8 /* Assets.xcassets in Resources */,
 				0A019A4522365E03002FD4F8 /* Main_swift.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A1B9E5223996F0700935E2E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A1B9E7023996F9600935E2E /* Assets.xcassets in Resources */,
+				0A1B9E7123996F9E00935E2E /* Main_swift.storyboard in Resources */,
+				0A1B9E7223996F9E00935E2E /* LaunchScreen_swift.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,6 +653,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0A1B9E6923996F1C00935E2E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
 		0A2A34C22346318100B23383 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -655,6 +755,17 @@
 				0AB437C722B2B68C00AF8665 /* SecondViewController_swift.swift in Sources */,
 				0A019A4222365E03002FD4F8 /* MainViewController_swift.swift in Sources */,
 				0A019A4022365E03002FD4F8 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A1B9E5023996F0700935E2E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A1B9E742399711000935E2E /* SecondViewController_swift.swift in Sources */,
+				0A1B9E5723996F0700935E2E /* AppDelegate.swift in Sources */,
+				0A1B9E5923996F0700935E2E /* SceneDelegate.swift in Sources */,
+				0A1B9E7323996FA700935E2E /* MainViewController_swift.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -885,7 +996,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -912,7 +1023,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -996,7 +1107,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1028,7 +1139,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1036,6 +1147,84 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = AdHoc;
+		};
+		0A1B9E6523996F0800935E2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5K42YC37US;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "UX Feedback SDK Demo_wscene/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.3.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo.wscene;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0A1B9E6623996F0800935E2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5K42YC37US;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "UX Feedback SDK Demo_wscene/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.3.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo.wscene;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0A1B9E6723996F0800935E2E /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5K42YC37US;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "UX Feedback SDK Demo_wscene/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.3.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo.wscene;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = AdHoc;
 		};
@@ -1058,7 +1247,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rockman.uxfeedback.demo-objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1084,7 +1273,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rockman.uxfeedback.demo-objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1111,7 +1300,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rockman.uxfeedback.demo-objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1142,7 +1331,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.3.2;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1178,7 +1367,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1208,6 +1397,16 @@
 				0A019A4F22365E04002FD4F8 /* Debug */,
 				0A019A5022365E04002FD4F8 /* Release */,
 				0A0955AE229573DD00606547 /* AdHoc */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0A1B9E6823996F0800935E2E /* Build configuration list for PBXNativeTarget "UX Feedback SDK Demo_wscene" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A1B9E6523996F0800935E2E /* Debug */,
+				0A1B9E6623996F0800935E2E /* Release */,
+				0A1B9E6723996F0800935E2E /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

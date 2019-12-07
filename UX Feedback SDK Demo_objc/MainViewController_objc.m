@@ -49,7 +49,6 @@
 }
 
 #pragma mark - UXFeedbackCampaignDelegate
-
 - (void) campaignLoadedWithSuccess:(BOOL)success{
     [self.busyIndicator stopAnimating];
     self.buttonsStackView.userInteractionEnabled = YES;

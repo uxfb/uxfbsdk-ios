@@ -73,8 +73,12 @@ open class UXFeedback : NSObject{
                     theme: UXFTheme? = nil,
                     completion: ((_ success: Bool) -> Void)? = nil){
         
+        //let window = windowScene.windows.first
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = UIViewController()
+        window.windowLevel = UIWindow.Level.alert + 10
         self.setup(appID: appID,
-                   window: UIWindow(windowScene: windowScene),
+                   window: window != nil ? window : UIWindow(windowScene: windowScene),
                    theme: theme,
                    completion: completion)
     }
@@ -84,13 +88,13 @@ open class UXFeedback : NSObject{
                     completion: ((_ success: Bool) -> Void)? = nil){
         
         setup(appID: appID,
-              window: UIWindow(frame: UIScreen.main.bounds),
+              window: nil,
               theme: theme,
               completion: completion)
     }
         
-    private func setup(appID: String,
-                    window: UIWindow,
+    open func setup(appID: String,
+                    window: UIWindow?,
                     theme: UXFTheme? = nil,
                     completion: ((_ success: Bool) -> Void)? = nil){
         
@@ -103,10 +107,14 @@ open class UXFeedback : NSObject{
         _apiClient = UXFAPIClient.init(appID: appID, parser: self._parser)
         _apiClient.getAllCampaings { [weak self] (success, message, campaigns) in
 
-            window.rootViewController = UIViewController()
-            window.windowLevel = UIWindow.Level.alert + 1
-
+        if window == nil {
+           self?._appWindow = UIWindow(frame: UIScreen.main.bounds)
+           self?._appWindow.rootViewController = UIViewController()
+           self?._appWindow.windowLevel = UIWindow.Level.alert + 10
+        }
+        else{
             self?._appWindow = window
+        }
             self?._campaigns = campaigns
         
             if success == true, let event = self?._eventToSend {
@@ -126,15 +134,16 @@ open class UXFeedback : NSObject{
     open func sendEvent(event: String, fromController: UIViewController? = nil){
     
         _eventToSend = event
-        
+        var eventShowed = false
         if self.canDisplayCampaings == true{
             _campaigns.forEach { (campaign) in
-                
                 campaign.targetings.forEach({ (targeting) in
                     if let type = targeting["type"] as? String, type == "event",
                        let name = targeting["name"] as? String, name == event,
-                        campaign.show() == true{
+                        campaign.show() == true,
+                        eventShowed == false{
                         
+                        eventShowed = true
                         _eventToSend = nil
                         DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay(eventName: name)), execute: { [unowned self] in
                             
