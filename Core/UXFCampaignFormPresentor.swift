@@ -203,20 +203,21 @@ class UXFCampaignFormPresentor: NSObject{
             }
             var layoutFormat = "V:|-"
             if allviews["topView"] != nil {
-              layoutFormat += "[topView]-"
+              layoutFormat += "14-[topView]-11-"
             }
             else{
-                layoutFormat += "27.0-"
+                layoutFormat += "27-"
             }
             
             for viewName in fieldViews.keys.sorted(){
                 layoutFormat += "[" + viewName + "]-"
             }
-            layoutFormat += "(15)-|"
+            layoutFormat += "(>=8)-|"
             allConstraints += NSLayoutConstraint.constraints(withVisualFormat: layoutFormat,
                                                              metrics: nil,
                                                              views: allviews as [String : Any])
         }
+        
         controller.heightConstraint?.constant = contentHeight
         controller.contentView.addConstraints(allConstraints)
         

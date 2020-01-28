@@ -24,6 +24,11 @@ class SecondViewController_swift: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        UXFeedback.sharedInstance.delegate = self
+    }
 
     /*
     // MARK: - Navigation

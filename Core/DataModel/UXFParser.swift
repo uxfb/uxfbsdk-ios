@@ -216,7 +216,7 @@ class UXFParser{
                                                   y: 0,
                                                   width: (UIScreen.main.bounds.width - (UXFParser.formControllerViewOffset + UXFParser.contenViewOffset)*2),
                                                   height: 44))
-        let labelYOffset: CGFloat = 10.0
+        let labelYOffset: CGFloat = 0.0
         height += labelYOffset
         
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 24))
@@ -302,7 +302,7 @@ class UXFParser{
             metrics: nil,
             views: views as [String : Any])
         
-        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(labelYOffset)-[label(>=\(labelHeight))]-\(textFieldYOffset)-[textField(\(textFieldHeight))]-\(sendButtonYOffet)-[sendButton(\(sendButtonHeight))]-\(UXFParser.bottomOffset)-|",
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(labelYOffset)-[label(>=\(labelHeight))]-\(textFieldYOffset)-[textField(\(textFieldHeight))]-\(sendButtonYOffet)@750-[sendButton(\(sendButtonHeight))]-\(UXFParser.bottomOffset)-|",
             metrics: nil,
             views: views as [String : Any])
         
@@ -331,7 +331,7 @@ class UXFParser{
                                                   width: (UIScreen.main.bounds.width - (UXFParser.formControllerViewOffset + UXFParser.contenViewOffset)*2),
                                                   height: 44))
         
-        let labelYOffset: CGFloat = 10.0
+        let labelYOffset: CGFloat = 0.0
         height += labelYOffset
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 24))
         
@@ -421,7 +421,7 @@ class UXFParser{
         sendButton.setTitle("Отправить".localized(), for: .normal)
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.setTitleColor(sendButton.tintColor, for: .normal)
-        let sendButtonYOffet: CGFloat = 25.0
+        let sendButtonYOffet: CGFloat = 16.0
         let sendButtonHeight: CGFloat = 44.0
         //sendButton.backgroundColor = UIColor.gray
         sendButton.addAction {
@@ -474,7 +474,7 @@ class UXFParser{
         }
 
         height += UXFParser.bottomOffset
-        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(labelYOffset)-[label(>=\(labelHeight))]-\(textFieldYOffset)-[textField(\(textFieldHeight))]-\(alertLabelConstraintsText)\(sendButtonYOffet)-[sendButton(\(sendButtonHeight))]-\(UXFParser.bottomOffset)-|",
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(labelYOffset)-[label(>=\(labelHeight))]-\(textFieldYOffset)-[textField(\(textFieldHeight))]-\(alertLabelConstraintsText)\(sendButtonYOffet)@750-[sendButton(\(sendButtonHeight))]|",
             options: [.alignAllCenterX],
             metrics: nil,
             views: views as [String : Any])
@@ -512,7 +512,7 @@ class UXFParser{
         height += labelHeight
  
         let stackViewYOffset: CGFloat = 24.0
-        let stackViewBottom: CGFloat = 43.0
+        let stackViewBottom: CGFloat = 33.0
         height += stackViewYOffset + stackViewBottom
         let stackViewHeight: CGFloat = IS_IPAD == true ? 48.0 : 40.0
         height += stackViewHeight
@@ -537,7 +537,7 @@ class UXFParser{
         allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[stackview(==label@750,<=414)]",
                                                                     metrics: nil,
                                                                     views: views as [String : Any])
-        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(labelYOffset)-[label(>=\(labelHeight))]-\(stackViewYOffset)-[stackview(\(stackViewHeight))]-\(stackViewBottom)-|",
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(labelYOffset)-[label(>=\(labelHeight))]-\(stackViewYOffset)@750-[stackview(\(stackViewHeight))]-(\(stackViewBottom)@750,>=30)-|",
              options: [.alignAllCenterX],
                                                                  metrics: nil,
                                                                  views: views as [String : Any])
@@ -593,7 +593,7 @@ class UXFParser{
         let view = UIView.init()
         view.backgroundColor = UIColor.clear
         
-        let labelYOffset: CGFloat = 4.0
+        let labelYOffset: CGFloat = 7.0
         var height: CGFloat = labelYOffset
         let label = UILabel.init()
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
