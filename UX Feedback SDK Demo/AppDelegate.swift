@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let message = "UXFeedback initialization " + (success == true ? "successful" : "failed")
             DDLogDebug(message)
         }
-
+        
         return true
     }
 

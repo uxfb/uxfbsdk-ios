@@ -49,6 +49,8 @@ open class UXFeedback : NSObject{
     private  var _apiClient: UXFAPIClient!
     private var _campaigns: Array<UXFCampaign> = []
     private  var _eventToSend: String?
+    private var _resetAllCampaingHandler: (()->())?
+    private var _resetAllCampaingNeeds: Bool = false
     private  var _formPresentor: UXFCampaignFormPresentor?
     private var _parser: UXFParser!
     
@@ -117,8 +119,14 @@ open class UXFeedback : NSObject{
         }
             self?._campaigns = campaigns
         
-            if success == true, let event = self?._eventToSend {
-                self?.sendEvent(event: event)
+            if success == true{
+             
+                if self?._resetAllCampaingNeeds == true {
+                    self?.resetAllCampaigns()
+                }
+                if let event = self?._eventToSend {
+                   self?.sendEvent(event: event)
+                 }
             }
             
             completion?(success)
@@ -198,10 +206,23 @@ open class UXFeedback : NSObject{
     
     open func resetAllCampaignsData(completion: (()->())?){
         
+        if _campaigns.count > 0 {
+            self.resetAllCampaigns()
+            completion?()
+        }
+        else{
+            _resetAllCampaingNeeds = true
+            _resetAllCampaingHandler = completion
+        }
+    }
+    
+    private func resetAllCampaigns(){
         _campaigns.forEach { (campaign) in
             var aCampaign = campaign
             aCampaign.removeUserData()
         }
+        _resetAllCampaingNeeds = false
+        _resetAllCampaingHandler?()
     }
 }
 

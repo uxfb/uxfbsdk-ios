@@ -17,6 +17,7 @@ class SecondViewController_swift: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        UXFeedback.sharedInstance.resetAllCampaignsData(completion: nil)
         if UXFeedback.sharedInstance.isCampaignsLoaded == false {
           button.isEnabled = false
           busyIndicator.startAnimating()
