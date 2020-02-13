@@ -76,11 +76,11 @@ open class UXFeedback : NSObject{
                     completion: ((_ success: Bool) -> Void)? = nil){
         
         //let window = windowScene.windows.first
-        let window = UIWindow(windowScene: windowScene)
+        let window = PassthroughWindow(windowScene: windowScene)
         window.rootViewController = UIViewController()
         window.windowLevel = UIWindow.Level.alert + 10
         self.setup(appID: appID,
-                   window: window != nil ? window : UIWindow(windowScene: windowScene),
+                   window: window != nil ? window : PassthroughWindow(windowScene: windowScene),
                    theme: theme,
                    completion: completion)
     }
@@ -95,7 +95,7 @@ open class UXFeedback : NSObject{
               completion: completion)
     }
         
-    private func setup(appID: String,
+    open func setup(appID: String,
                     window: UIWindow?,
                     theme: UXFTheme? = nil,
                     completion: ((_ success: Bool) -> Void)? = nil){
@@ -110,7 +110,7 @@ open class UXFeedback : NSObject{
         _apiClient.getAllCampaings { [weak self] (success, message, campaigns) in
 
         if window == nil {
-           self?._appWindow = UIWindow(frame: UIScreen.main.bounds)
+           self?._appWindow = PassthroughWindow(frame: UIScreen.main.bounds)
            self?._appWindow.rootViewController = UIViewController()
            self?._appWindow.windowLevel = UIWindow.Level.alert + 10
         }
