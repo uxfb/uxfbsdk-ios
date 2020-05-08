@@ -78,9 +78,9 @@ open class UXFViewController: UIViewController{
             self.logoImageView?.isHidden  = true
         }
         
-        if self.progressLabel != nil, self.theme != nil {
-           self.progressLabel?.font = UIFont.init(name: self.theme!.fontRegularName,
-                                                  size: self.progressLabel!.font.pointSize)
+        if let label = self.progressLabel, let currentTheme = self.theme {
+            
+            self.progressLabel?.font = currentTheme.regularFont(size: label.font.pointSize)
         }
         
         

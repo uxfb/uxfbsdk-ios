@@ -28,7 +28,7 @@ class UXFParser{
     func parseTheme(jsonDict: Dictionary<String,Any>) -> UXFTheme? {
         if let jsonData = try? JSONSerialization.data(withJSONObject: jsonDict, options: .prettyPrinted) {
            let theme = try! JSONDecoder().decode(UXFTheme.self, from: jsonData)
-            return theme
+           return theme
         }
         return nil
        // if let controlColorString = jsonDict["controlColor"]
@@ -79,8 +79,7 @@ class UXFParser{
     private func setLabelText(label: UILabel,
                               text: String?,
                               textAlignment: NSTextAlignment = NSTextAlignment.center,
-                              fontName: String? = nil,
-                              fontSize: CGFloat = 17.0,
+                              font: UIFont,
                               textColor: UIColor? = nil,
                               width: CGFloat? = nil,
                               theme: UXFTheme) -> CGFloat{
@@ -90,10 +89,8 @@ class UXFParser{
         if text != nil {
             let attributedString = NSMutableAttributedString(string: text!)
             let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineSpacing = fontSize * 0.5
+            paragraphStyle.lineSpacing = font.pointSize * 0.5
             paragraphStyle.alignment = textAlignment
-            
-            let font = UIFont.init(name: fontName ?? theme.fontMediumName, size: fontSize)
             
             attributedString.addAttributes([NSAttributedString.Key.font : font as Any,
                                             NSAttributedString.Key.foregroundColor: textColor ?? theme.textColor],
@@ -109,7 +106,7 @@ class UXFParser{
             label.text = ""
         }
         
-        var labelHeight = fontSize
+        var labelHeight = font.pointSize
         if let text = label.attributedText {
             labelHeight = text.height(withConstrainedWidth: width ?? self.containerWidth)
         }
@@ -222,11 +219,11 @@ class UXFParser{
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 24))
         let text =  (dictionary["value"] as? String)  ?? "Введите Email и мы ответим Вам в ближайшее время"
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
+        
         let labelHeight = self.setLabelText(label: label,
                           text: text,
-                          fontName: theme.fontMediumName,
-                          fontSize: labelFontSize,
-                             theme: theme)
+                          font: theme.mediumFont(size: labelFontSize),
+                         theme: theme)
         //label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         height += labelHeight
@@ -235,7 +232,7 @@ class UXFParser{
         let textFieldHeight: CGFloat = 48.0
         let textFieldYOffset: CGFloat = 15.0
         let textField = UXFTextField.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 48))
-        textField.font = UIFont.init(name: theme.fontRegularName, size: textField.font!.pointSize)
+        textField.font = theme.regularFont(size: textField.font!.pointSize)
         textField.placeholder = "Email"
         textField.textColor = theme.inputTextColor
         textField.backgroundColor = theme.inputBackgroundColor
@@ -361,8 +358,7 @@ class UXFParser{
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
         let labelHeight = self.setLabelText(label: label,
                           text: titleText,
-                          fontName: theme.fontMediumName,
-                          fontSize: labelFontSize,
+                          font: theme.mediumFont(size: labelFontSize),
                           theme: theme)
         //label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -380,7 +376,7 @@ class UXFParser{
         let textField = UXFTextField.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 48))
         height += textFieldHeight + textFieldYOffset
         textField.contentLeftPadding = 16.0
-        textField.font = UIFont.init(name: theme.fontRegularName, size: textField.font!.pointSize)
+        textField.font = theme.regularFont(size: textField.font!.pointSize)
         textField.textColor = theme.inputTextColor
         textField.backgroundColor = theme.inputBackgroundColor
         //textField.borderStyle = .line
@@ -401,8 +397,7 @@ class UXFParser{
             alertLabelHeight = self.setLabelText(label: alertLabel!,
                               text: alertText,
                               textAlignment: .left,
-                              fontName: theme.fontRegularName,
-                              fontSize: alertLabelFontSize,
+                              font: theme.regularFont(size: alertLabelFontSize),
                               theme: theme)
             alertLabel!.translatesAutoresizingMaskIntoConstraints = false
             height += alertLabelYOffset + alertLabelHeight
@@ -504,7 +499,7 @@ class UXFParser{
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
         let labelHeight =  self.setLabelText(label: label,
                                              text: dictionary["value"] as? String,
-                                             fontSize: labelFontSize,
+                                             font: theme.mediumFont(size: labelFontSize),
                                              theme: theme)
        // label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -556,7 +551,7 @@ class UXFParser{
         
         if button.titleLabel != nil {
            button.titleLabel?.text = dictionary["value"] as? String
-           button.titleLabel?.font = UIFont.init(name: theme.fontMediumName, size: button.titleLabel!.font.pointSize)
+           button.titleLabel?.font = theme.mediumFont(size: button.titleLabel!.font.pointSize)
         }
         return button
     }
@@ -577,8 +572,7 @@ class UXFParser{
         
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
         let labelHeight = self.setLabelText(label: label, text: dictionary["value"] as? String,
-                          fontName: theme.fontBoldName,
-                          fontSize: labelFontSize,
+                          font: theme.boldFont(size: labelFontSize),
                           textColor: theme.titleColor,
                           theme: theme)
         //label.backgroundColor = UIColor.darkGray
@@ -599,8 +593,7 @@ class UXFParser{
         let labelFontSize: CGFloat = (IS_IPAD == true ? 20.0 : 16.0)
         let labelHeight = self.setLabelText(label: label,
                           text: dictionary["value"] as? String,
-                          fontName: theme.fontMediumName,
-                          fontSize: labelFontSize,
+                          font: theme.mediumFont(size: labelFontSize),
                           theme: theme)
         //label.backgroundColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false

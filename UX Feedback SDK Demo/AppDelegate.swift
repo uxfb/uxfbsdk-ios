@@ -9,8 +9,7 @@
 import UIKit
 import UXFeedbackSDK
 
-let uxfAppID = UXFeedback.isStage == true ? "cjld2cjxh0000qzrmn831i7rn" : "54444d444a068c157e7f7e14"
-//let uxfAppID = "ck5peux4c00003h5mcloo8opu"
+let uxfAppID =  UXFeedback.isStage == true ? "cjld2cjxh0000qzrmn831i7rn" : "54444d444a068c157e7f7e14"
 
 internal func DDLogDebug(_ value: Any){
     #if DEBUG
@@ -45,17 +44,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         customTheme.inputBackgroundColor = UIColor.lightGray
         customTheme.inputTextColor = UIColor.darkGray
         customTheme.formRadius = 20.0
-        
-       // customTheme.fontRegularName = "Marker Felt"
-       // customTheme.fontBoldName = "YourBoldFontName"
-        customTheme.fontMediumName = "Marker Felt"
-        
-        UXFeedback.sharedInstance.setup(appID: uxfAppID)//, window: self.window!)
+
+        UXFeedback.sharedInstance.setup(appID: uxfAppID)//, theme: customTheme)
         {  success in
             let message = "UXFeedback initialization " + (success == true ? "successful" : "failed")
             DDLogDebug(message)
         }
-        
+
         return true
     }
 

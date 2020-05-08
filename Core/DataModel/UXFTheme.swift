@@ -27,9 +27,73 @@ open class UXFTheme:  NSObject, Decodable{
     open var controlColor: UIColor = UIColor.init("#9699A7") // navigation label color
     open var backgroundColor: UIColor = UIColor.white //form background color
 
-    open var fontRegularName: String = "Roboto-Regular"
-    open var fontMediumName: String = "Roboto-Medium"
-    open var fontBoldName: String = "Roboto-Bold"
+    private var fontRegularName: String?
+    private var fontMediumName: String?
+    private var fontBoldName: String?
+    
+    private var _regularFont: UIFont?
+    open var regularFont: UIFont{
+        get{
+            return _regularFont ?? self.regularFont(size: UIFont.systemFontSize)
+        }
+        set{
+            _regularFont = newValue
+        }
+    }
+    
+    open func regularFont(size: CGFloat) -> UIFont{
+        if (_regularFont != nil){
+            return _regularFont!.withSize(size)
+        }
+        let systemFont = UIFont.systemFont(ofSize: size, weight: .regular)
+        guard let fontName = self.fontRegularName else {
+            return systemFont
+        }
+        return UIFont.init(name: fontName, size: size) ?? systemFont
+    }
+
+    
+    private var _mediumFont: UIFont?
+    open var mediumFont: UIFont{
+        get{
+            return _mediumFont ?? self.mediumFont(size: UIFont.systemFontSize)
+        }
+        set{
+            _mediumFont = newValue
+        }
+    }
+    
+    open func mediumFont(size: CGFloat) -> UIFont{
+        if(_mediumFont != nil){
+            return _mediumFont!.withSize(size)
+        }
+        let systemFont = UIFont.systemFont(ofSize: size, weight: .medium)
+        guard let fontName = self.fontMediumName else {
+            return systemFont
+        }
+        return UIFont.init(name: fontName, size: size) ?? systemFont
+    }
+    
+    private var _boldFont: UIFont?
+    open var boldFont: UIFont{
+        get{
+            return  _boldFont ?? self.boldFont(size: UIFont.systemFontSize)
+        }
+        set{
+            _boldFont = newValue
+        }
+    }
+    
+    open func boldFont(size: CGFloat) -> UIFont{
+        if(_boldFont != nil){
+            return  _boldFont!.withSize(size)
+        }
+        let systemFont = UIFont.systemFont(ofSize: size, weight: .bold)
+        guard let fontName = self.fontBoldName else{
+            return systemFont
+        }
+        return UIFont.init(name: fontName, size: size) ?? systemFont
+    }
     
     enum CodingKeys: String, CodingKey {
         case titleColor
@@ -92,13 +156,27 @@ open class UXFTheme:  NSObject, Decodable{
     }
     
     private func loadFonts(){
-        let fontExtention = "ttf"
-        let fonts = [fontRegularName, fontMediumName, fontBoldName]
-        fonts.forEach { (fontName) in
-            let bundle =  Bundle.init(for: UXFTheme.self)
-            if let fontUrl = bundle.url(forResource: fontName, withExtension: fontExtention){
-                _ = loadFont(fontUrl: fontUrl)
-            }
+        let floatVersion = (UIDevice.current.systemVersion as NSString).floatValue
+        if (floatVersion >= 11){
+        
+           if(self.fontRegularName == nil){
+               self.fontRegularName = "Roboto-Regular"
+           }
+           if(self.fontBoldName == nil){
+               self.fontBoldName = "Roboto-Bold"
+           }
+           if(self.fontMediumName == nil){
+               self.fontMediumName = "Roboto-Medium"
+           }
+           
+               let fontExtention = "ttf"
+               let fonts = [fontRegularName, fontMediumName, fontBoldName]
+               fonts.forEach { (fontName) in
+                   let bundle =  Bundle.init(for: UXFTheme.self)
+                   if let fontUrl = bundle.url(forResource: fontName, withExtension: fontExtention){
+                       _ = loadFont(fontUrl: fontUrl)
+                   }
+               }
         }
     }
     
