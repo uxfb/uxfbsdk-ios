@@ -76,13 +76,16 @@ open class UXFeedback : NSObject{
                     completion: ((_ success: Bool) -> Void)? = nil){
         
         //let window = windowScene.windows.first
-        let window = PassthroughWindow(windowScene: windowScene)
-        window.rootViewController = UIViewController()
-        window.windowLevel = UIWindow.Level.alert + 10
-        self.setup(appID: appID,
-                   window: window != nil ? window : PassthroughWindow(windowScene: windowScene),
-                   theme: theme,
+        DispatchQueue.main.async { [weak self] in
+            let window = PassthroughWindow(windowScene: windowScene)
+            window.rootViewController = UIViewController()
+            window.windowLevel = UIWindow.Level.alert + 10
+            self?.setup(appID: appID,
+                       window: window,
+                        theme: theme,
                    completion: completion)
+        }
+        
     }
     
     open func setup(appID: String,
@@ -109,14 +112,17 @@ open class UXFeedback : NSObject{
         _apiClient = UXFAPIClient.init(appID: appID, parser: self._parser)
         _apiClient.getAllCampaings { [weak self] (success, message, campaigns) in
 
-        if window == nil {
-           self?._appWindow = PassthroughWindow(frame: UIScreen.main.bounds)
-           self?._appWindow.rootViewController = UIViewController()
-           self?._appWindow.windowLevel = UIWindow.Level.alert + 10
-        }
-        else{
-            self?._appWindow = window
-        }
+            if window == nil {
+                DispatchQueue.main.async {
+                    self?._appWindow = PassthroughWindow(frame: UIScreen.main.bounds)
+                    self?._appWindow.rootViewController = UIViewController()
+                    self?._appWindow.windowLevel = UIWindow.Level.alert + 10
+                }
+            }
+            else{
+                self?._appWindow = window
+            }
+            
             self?._campaigns = campaigns
         
             if success == true{

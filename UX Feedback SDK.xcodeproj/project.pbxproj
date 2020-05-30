@@ -14,8 +14,6 @@
 		0A019A4A22365E04002FD4F8 /* LaunchScreen_swift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4822365E04002FD4F8 /* LaunchScreen_swift.storyboard */; };
 		0A1B9E5723996F0700935E2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1B9E5623996F0700935E2E /* AppDelegate.swift */; };
 		0A1B9E5923996F0700935E2E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1B9E5823996F0700935E2E /* SceneDelegate.swift */; };
-		0A1B9E6A23996F5A00935E2E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F92289D5890091A7A0 /* Alamofire.framework */; };
-		0A1B9E6B23996F5C00935E2E /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */; };
 		0A1B9E6D23996F6A00935E2E /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; };
 		0A1B9E6E23996F6A00935E2E /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A1B9E7023996F9600935E2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4622365E04002FD4F8 /* Assets.xcassets */; };
@@ -29,8 +27,6 @@
 		0A2A34A82346303300B23383 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A2A34A72346303300B23383 /* Assets.xcassets */; };
 		0A2A34AB2346303300B23383 /* LaunchScreen_objc.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A2A34A92346303300B23383 /* LaunchScreen_objc.storyboard */; };
 		0A2A34AE2346303300B23383 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A34AD2346303300B23383 /* main.m */; };
-		0A2A34C3234631B600B23383 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F92289D5890091A7A0 /* Alamofire.framework */; };
-		0A2A34C5234631B600B23383 /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */; };
 		0A46899622840B2C0074E1A3 /* UXFeedbackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0A46899F22840BB90074E1A3 /* UXFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A5322366A29002FD4F8 /* UXFeedback.swift */; };
 		0A4689A022840BB90074E1A3 /* UXFeedbackDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */; };
@@ -66,9 +62,6 @@
 		0A5F732A2346336800049893 /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; };
 		0A5F732B2346336800049893 /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A5F73302347671F00049893 /* MainViewController_objc.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F732F2347671F00049893 /* MainViewController_objc.m */; };
-		0AA705FD2289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */; };
-		0AA705FE2289D5890091A7A0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F92289D5890091A7A0 /* Alamofire.framework */; };
-		0AA705FF2289D5970091A7A0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA705F92289D5890091A7A0 /* Alamofire.framework */; };
 		0AA7062D229126B10091A7A0 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70621229126AF0091A7A0 /* Roboto-Bold.ttf */; };
 		0AA70631229126B10091A7A0 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70625229126B00091A7A0 /* Roboto-Regular.ttf */; };
 		0AA70635229126B10091A7A0 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70629229126B00091A7A0 /* Roboto-Medium.ttf */; };
@@ -193,8 +186,6 @@
 		0A6CDB8B2243C95B00C17007 /* UXFRateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFRateViewController.xib; sourceTree = "<group>"; };
 		0A6CDB8E22446EC900C17007 /* UXFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFViewController.swift; sourceTree = "<group>"; };
 		0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UXFeedbackSDK.framework; sourceTree = "<group>"; };
-		0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityLogger.framework; path = Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework; sourceTree = "<group>"; };
-		0AA705F92289D5890091A7A0 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		0AA7061F229126AF0091A7A0 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		0AA70620229126AF0091A7A0 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
 		0AA70621229126AF0091A7A0 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -223,8 +214,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AA705FD2289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework in Frameworks */,
-				0AA705FE2289D5890091A7A0 /* Alamofire.framework in Frameworks */,
 				0AA850DF228960AB0040007C /* UXFeedbackSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,8 +222,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A1B9E6A23996F5A00935E2E /* Alamofire.framework in Frameworks */,
-				0A1B9E6B23996F5C00935E2E /* AlamofireNetworkActivityLogger.framework in Frameworks */,
 				0A1B9E6D23996F6A00935E2E /* UXFeedbackSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,8 +230,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A2A34C3234631B600B23383 /* Alamofire.framework in Frameworks */,
-				0A2A34C5234631B600B23383 /* AlamofireNetworkActivityLogger.framework in Frameworks */,
 				0A5F732A2346336800049893 /* UXFeedbackSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -253,7 +238,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AA705FF2289D5970091A7A0 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,8 +450,6 @@
 		3EE1448B815C3AA05E865A6C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0AA705F92289D5890091A7A0 /* Alamofire.framework */,
-				0AA705F82289D5890091A7A0 /* AlamofireNetworkActivityLogger.framework */,
 				0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */,
 			);
 			name = Frameworks;
@@ -491,7 +473,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A019A4E22365E04002FD4F8 /* Build configuration list for PBXNativeTarget "UX Feedback SDK Demo" */;
 			buildPhases = (
-				0A4689F6228564FD0074E1A3 /* ShellScript */,
 				0A019A3822365E02002FD4F8 /* Sources */,
 				0A019A3922365E02002FD4F8 /* Frameworks */,
 				0A019A3A22365E02002FD4F8 /* Resources */,
@@ -510,7 +491,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A1B9E6823996F0800935E2E /* Build configuration list for PBXNativeTarget "UX Feedback SDK Demo_wscene" */;
 			buildPhases = (
-				0A1B9E6923996F1C00935E2E /* ShellScript */,
 				0A1B9E5023996F0700935E2E /* Sources */,
 				0A1B9E5123996F0700935E2E /* Frameworks */,
 				0A1B9E5223996F0700935E2E /* Resources */,
@@ -529,7 +509,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A2A34BA2346303300B23383 /* Build configuration list for PBXNativeTarget "UX Feedback SDK Demo_objc" */;
 			buildPhases = (
-				0A2A34C22346318100B23383 /* ShellScript */,
 				0A2A34952346303200B23383 /* Sources */,
 				0A2A34962346303200B23383 /* Frameworks */,
 				0A2A34972346303200B23383 /* Resources */,
@@ -548,7 +527,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A46899B22840B2C0074E1A3 /* Build configuration list for PBXNativeTarget "UXFeedbackSDK" */;
 			buildPhases = (
-				0A4689FF22856A3B0074E1A3 /* ShellScript */,
 				0A46898E22840B2C0074E1A3 /* Sources */,
 				0A46898F22840B2C0074E1A3 /* Frameworks */,
 				0A46898D22840B2C0074E1A3 /* Headers */,
@@ -656,44 +634,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0A1B9E6923996F1C00935E2E /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		0A2A34C22346318100B23383 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
 		0A4689E922854B9F0074E1A3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -709,44 +649,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\n#cp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
-		};
-		0A4689F6228564FD0074E1A3 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		0A4689FF22856A3B0074E1A3 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\ncp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1236,7 +1139,6 @@
 		0A2A34BB2346303300B23383 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K42YC37US;
@@ -1262,7 +1164,6 @@
 		0A2A34BC2346303300B23383 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K42YC37US;
@@ -1288,7 +1189,6 @@
 		0A2A34BD2346303300B23383 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K42YC37US;

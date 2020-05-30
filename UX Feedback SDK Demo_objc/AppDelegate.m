@@ -23,7 +23,7 @@ void DDLogDebug(id object){
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
-    NSLog(@"Start application");
+    NSLog(@"Start ObjC application");
     
     UXFTheme *theme = [[UXFTheme alloc] init];
     
@@ -35,7 +35,7 @@ void DDLogDebug(id object){
     [UXFeedback.sharedInstance setupWithAppID: uxfAppID
                                         theme: theme
                                    completion:^(BOOL success) {
-        NSString *message = [NSString stringWithFormat: @"UXFeedback initialization %@", (success == true ? @"successful" : @"failed")];
+        NSString *message = [NSString stringWithFormat: @"UXFeedback objc initialization %@", (success == true ? @"successful" : @"failed")];
         DDLogDebug(message);
     }];
     

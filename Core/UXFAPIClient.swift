@@ -7,10 +7,6 @@
 //
 
 import Foundation
-import Alamofire
-#if DEBUG
-import AlamofireNetworkActivityLogger
-#endif
 
 enum UXFAPIClientResponseResult{
     case success
@@ -33,11 +29,6 @@ class UXFAPIClient{
     private var _parser: UXFParser!
     
     init(appID: String, parser: UXFParser){
-        #if DEBUG
-        NetworkActivityLogger.shared.level = .debug
-        NetworkActivityLogger.shared.startLogging()
-        #endif
-        
         _parser = parser
         self.appID = appID
   
@@ -88,15 +79,6 @@ class UXFAPIClient{
            completion?(false, message, [])
         }
       }
-        
-        /*
-        performObjectRequest(route: UXFAPIWebRouter.getCampaing(appID: _appID, campaingID: "5c908a553300006b006496d3"),
-                             keyPath: "theme") { (theme: UXFTheme?) in
-                                DDLogDebug(theme.debugDescription)
-                                if let color = theme?.accentColor{
-                                    DDLogDebug(color.hexString())
-                                }
-        }*/
     }
     
     
@@ -141,15 +123,60 @@ class UXFAPIClient{
     
     //MARK: internal request
     
-    internal func performRequest(route:UXFAPIWebRouter, completion:@escaping (UXFAPIClientResponseResult, String?, Any?)->()) -> DataRequest?{
+    internal func performRequest(route:UXFAPIWebRouter, completion:@escaping (UXFAPIClientResponseResult, String?, Any?)->()) -> URLSessionDataTask?{
         
-        /*let urlRequest = try? route.asURLRequest()
-        if urlRequest != nil {
-            if let httpBodyData = urlRequest!.httpBody {
-                DDLogDebug(String.init(data: httpBodyData, encoding: String.Encoding.utf8) as Any)
+        guard let urlRequest = try? route.asURLRequest() else{
+             completion(.fail, "Error url request", nil)
+             return nil
+        }
+        
+        #if DEBUG
+        if let httpBodyData = urlRequest.httpBody {
+            DDLogDebug(String.init(data: httpBodyData, encoding: String.Encoding.utf8) as Any)
+        }
+        #endif
+       
+        let task = URLSession.shared.dataTask(with: urlRequest) { (data: Data?, response: URLResponse?, error: Error?) in
+    
+            do {
+                guard let data = data,
+                    let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode,
+                    error == nil else {
+                    // Data was nil, validation failed or an error occurred.
+                        throw error ?? UXFError.init(description: "Request error")
+                }
+                
+                if error != nil{
+                    if error!.code == uxfErrorRequestCancelled{
+                        completion(.cancelled, nil, nil)
+                    }
+                    else {
+                       completion(.fail, "Error in request \(String(describing: error!))".localized(), nil)
+                    }
+                }
+                else{
+                    if let values =  try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as? Dictionary<String,Any>{
+                        if  let result = values["data"] {
+                            completion(.success, nil, result)
+                        }else{
+                            completion(.fail, "Response data is empty", nil)
+                        }
+                    }else{
+                        completion(.fail, "Response data error", nil)
+                    }
+                    
+                }
+   
+            } catch {
+                DDLogDebug("Request failed with error: \(error.localizedDescription)")
+                completion(.fail,error.localizedDescription, nil)
             }
-        }*/
+        }
         
+        task.resume()
+        return task
+        
+        /*-----------------
         return Alamofire.request(route).responseJSON { response in
             
             //DDLogDebug("\(route.path) + \( response.value ?? "")")
@@ -209,54 +236,10 @@ class UXFAPIClient{
             }else{
                 completion(.fail, "Response data is empty", nil)
             }
-        }
+        }--------------*/
     }
     
-    internal func performObjectRequest<T:Decodable>(route: UXFAPIWebRouter,
-                                                           keyPath: String? = nil,
-                                                           decoder: JSONDecoder = JSONDecoder(),
-                                                           completion:@escaping (T?)->Void) -> DataRequest?{
-        /*let url = try? route.asURL()
-         Alamofire.request(url!).responseDecodableObject(keyPath: keyPath, decoder: decoder) { (response: DataResponse<T>) in
-         completion(response.result.value)
-         }*/
-        
-        
-        return performRequest(route: route){ (status: UXFAPIClientResponseResult, message: String?, result: Any?) in
-            
-            if status == .success && result != nil {
-                var dict: Dictionary = result! as! Dictionary<String, Any>
-                
-                if keyPath != nil {
-                    for subPath in keyPath!.components(separatedBy: ".") {
-                        dict = dict[subPath] as! [String : Any]
-                    }
-                }
-                
-                do{
-                    let jsonData = try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
-                    let object = try? JSONDecoder().decode(T.self, from: jsonData)
-                    completion(object)
-                }catch{
-                    completion(nil)
-                }
-            }
-            else{
-                completion(nil)
-            }
-        }
-    }
     /*
-    internal func performObjectArrayRequest<T:Decodable>(route: UXFAPIWebRouter,
-                                                       keyPath: String? = nil,
-                                                       decoder: JSONDecoder = JSONDecoder(),
-                                                    completion: @escaping (Result<[T]>)->Void) -> DataRequest{
-        let url = try? route.asURL()
-        return Alamofire.request(url!).responseDecodableObject(keyPath: keyPath, decoder: decoder) { (response: DataResponse<[T]>) in
-            completion(response.result)
-        }
-    }*/
-    
     internal func downloadAttachment(url: URL, fileName: String, completion: ((_ destinationUrlPath: URL)->())?){
         
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
@@ -270,5 +253,5 @@ class UXFAPIClient{
                 completion?(destinationUrl)
             }
         }
-    }
+    }*/
 }

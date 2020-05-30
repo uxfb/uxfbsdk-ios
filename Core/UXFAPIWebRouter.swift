@@ -6,7 +6,7 @@
 //  Copyright © 2019 UXF. All rights reserved.
 //
 
-import Alamofire
+import Foundation.NSURLRequest
 
 enum HTTPHeaderField: String {
     case authentication = "Authorization"
@@ -63,16 +63,16 @@ enum UXFAPIWebRouter {
     case saveOtherFormData(projectId: String?, answerId: String?, fields: Dictionary <String, Any>?)
     case showForm(uid: String, campaingId: String)
     
-    var method: HTTPMethod {
+    var method: String {
         switch self {
 
         case .saveFirstFormData, .showForm:
-            return .post
+            return "POST"
         case .saveOtherFormData:
-            return .put
+            return "PUT"
             
         default:
-            return .get
+            return "GET"
         }
     }
     
@@ -89,7 +89,7 @@ enum UXFAPIWebRouter {
         }
     }
     
-    var parameters: Parameters? {
+    var parameters: [String:Any]? {
         switch self {
             
           case .saveFirstFormData(_ , let uid, let campaignId, let fields, let info):
@@ -120,7 +120,7 @@ enum UXFAPIWebRouter {
          }
     }
     
-    var pathParameters: Parameters?{
+    var pathParameters: [String:Any]?{
         
         var parameters: [String: Any] = [:]
         switch self {
@@ -140,9 +140,6 @@ enum UXFAPIWebRouter {
   
         return parameters
     }
-}
-
-extension UXFAPIWebRouter: URLRequestConvertible{
     
     func asURLRequest() throws -> URLRequest {
         
@@ -152,7 +149,7 @@ extension UXFAPIWebRouter: URLRequestConvertible{
         var urlRequest = URLRequest(url: url)
 
         // HTTP Method
-        urlRequest.httpMethod = method.rawValue
+        urlRequest.httpMethod = method
         
         // Common Headers
         urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.acceptType.rawValue)
@@ -167,9 +164,10 @@ extension UXFAPIWebRouter: URLRequestConvertible{
                 let data = try JSONSerialization.data(withJSONObject: bodyParameters, options: [])
                 urlRequest.httpBody = data
             } catch {
-                throw AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error))
+                throw UXFError(description: error.localizedDescription)
             }
         }
+        
         
         return urlRequest
     }

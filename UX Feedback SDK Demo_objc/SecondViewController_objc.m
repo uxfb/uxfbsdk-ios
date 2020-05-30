@@ -11,9 +11,6 @@
 
 @interface SecondViewController_objc () <UXFeedbackCampaignDelegate>
 
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *busyIndicator;
-@property (nonatomic, strong) IBOutlet UIButton *button;
-
 
 @end
 

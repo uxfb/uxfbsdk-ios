@@ -10,6 +10,8 @@
 
 @interface SecondViewController_objc : UIViewController
 
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *busyIndicator;
+@property (nonatomic, weak) IBOutlet UIButton *button;
 
 @end
 
