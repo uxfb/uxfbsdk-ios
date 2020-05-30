@@ -68,5 +68,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "28C563C7-F6F3-4E9D-BB61-69D0F6C6AA9D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Core/UXFeedback.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
+            landmarkName = "loadFeedbackForm(formID:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "28C563C7-F6F3-4E9D-BB61-69D0F6C6AA9D - b27371a3e816c9a9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "UXFeedbackSDK.UXFeedback.loadFeedbackForm(formID: Swift.String) -&gt; ()"
+                  moduleName = "UXFeedbackSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dmitry/Documents/work/UXFeedbackSDK/Core/UXFeedback.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "192"
+                  endingLineNumber = "192"
+                  offsetFromSymbolStart = "200">
+               </Location>
+               <Location
+                  uuid = "28C563C7-F6F3-4E9D-BB61-69D0F6C6AA9D - 82f7b7d73e3552cb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (UXFeedbackSDK.UXFCampaign) -&gt; () in UXFeedbackSDK.UXFeedback.loadFeedbackForm(formID: Swift.String) -&gt; ()"
+                  moduleName = "UXFeedbackSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dmitry/Documents/work/UXFeedbackSDK/Core/UXFeedback.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "193"
+                  endingLineNumber = "193"
+                  offsetFromSymbolStart = "216">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E9B7A089-D61A-4C84-9981-4346710B7D7C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Core/UXFeedback.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
+            landmarkName = "loadFeedbackForm(formID:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

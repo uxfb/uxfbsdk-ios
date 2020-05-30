@@ -19,7 +19,8 @@ class MainViewController_swift: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-
+        UXFeedback.sharedInstance.delegate = self
+        UXFeedback.sharedInstance.formDelegate = self
         
         if UXFeedback.sharedInstance.isCampaignsLoaded == false {
             self.buttonsStackView.isUserInteractionEnabled = false
@@ -28,13 +29,6 @@ class MainViewController_swift: UIViewController {
         }
         
         self.dismissButton.isHidden = (self.navigationController != nil)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
-        UXFeedback.sharedInstance.delegate = self
-        UXFeedback.sharedInstance.formDelegate = self
     }
 
     
