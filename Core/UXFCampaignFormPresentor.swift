@@ -129,22 +129,29 @@ class UXFCampaignFormPresentor: NSObject{
                                               abandonedPageIndex: formIndex,
                                               sent: true)
                 if formIndex == (formsCount - 1) {
-                    self?.feedbackCampaignDelegate?.campaignDidClose(withFeedbackResult: result,
-                                                                     isRedirectToAppStoreEnabled: false)
+                    DispatchQueue.main.async {
+                        self?.feedbackCampaignDelegate?.campaignDidClose(withFeedbackResult: result,
+                        isRedirectToAppStoreEnabled: false)
+                    }
+                    
                 }
                 else{
-                    self?.feedbackFormDelegate?.formDidClose(formID: controller.formID,
+                    DispatchQueue.main.async {
+                       self?.feedbackFormDelegate?.formDidClose(formID: controller.formID,
                                                              withFeedbackResults: [result],
                                                              isRedirectToAppStoreEnabled: false)
+                    }
                 }
             }
             
         }
         controller.willCloseHandler = { [weak self] (formIndex) in
-            self?.feedbackFormDelegate?.formWillClose(form: controller,
+            DispatchQueue.main.async{
+                self?.feedbackFormDelegate?.formWillClose(form: controller,
                                               formID: controller.formID,
                                               withFeedbackResults: [],
                                               isRedirectToAppStoreEnabled: false)
+            }
         }
         
         controller.backHandler = { [weak self]  (formIndex) in

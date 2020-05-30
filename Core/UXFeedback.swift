@@ -111,17 +111,6 @@ open class UXFeedback : NSObject{
 
         _apiClient = UXFAPIClient.init(appID: appID, parser: self._parser)
         _apiClient.getAllCampaings { [weak self] (success, message, campaigns) in
-
-            if window == nil {
-                DispatchQueue.main.async {
-                    self?._appWindow = PassthroughWindow(frame: UIScreen.main.bounds)
-                    self?._appWindow.rootViewController = UIViewController()
-                    self?._appWindow.windowLevel = UIWindow.Level.alert + 10
-                }
-            }
-            else{
-                self?._appWindow = window
-            }
             
             self?._campaigns = campaigns
         
@@ -135,8 +124,25 @@ open class UXFeedback : NSObject{
                  }
             }
             
-            completion?(success)
-            self?.delegate?.campaignLoaded(success: success)
+            
+            
+            if window == nil {
+                DispatchQueue.main.async {
+                    self?._appWindow = PassthroughWindow(frame: UIScreen.main.bounds)
+                    self?._appWindow.rootViewController = UIViewController()
+                    self?._appWindow.windowLevel = UIWindow.Level.alert + 10
+                    completion?(success)
+                    self?.delegate?.campaignLoaded(success: success)
+                }
+            }
+            else{
+                self?._appWindow = window
+                completion?(success)
+                DispatchQueue.main.async {
+                   self?.delegate?.campaignLoaded(success: success)
+                }
+            }
+       
         }
     }
     
@@ -200,14 +206,17 @@ open class UXFeedback : NSObject{
                     presentor.feedbackFormDelegate = self.formDelegate
                     let controller = presentor.createForm(formIndex: formIndex)
                     controller.presentDirection = .downToUp
-                    self.formDelegate?.formDidLoaded(form: controller)
-                    
+                    DispatchQueue.main.async {
+                         self.formDelegate?.formDidLoaded(form: controller)
+                    }
+    
                     return
                 }
             })
         }
-        
-        self.formDelegate?.formDidFailLoading(error: UXFError.init(description: "Form " + formID + " not found in any companies"))
+        DispatchQueue.main.async {
+            self.formDelegate?.formDidFailLoading(error: UXFError.init(description: "Form " + formID + " not found in any companies"))
+        }
     }
     
     open func resetAllCampaignsData(completion: (()->())?){
@@ -245,7 +254,10 @@ extension UXFeedback: UXFCampaignFormPresentorProtocol {
                                                     campaign.setAnswerID(answerID: answerId)
                                                 }
                                                 if success == false {
-                                                    self.delegate?.campaignErrorReceived(errorString: "Неизвестная ошибка при отправке данных формы")
+                                                    DispatchQueue.main.async {
+                                                        self.delegate?.campaignErrorReceived(errorString: "Неизвестная ошибка при отправке данных формы")
+                                                    }
+                                                    
                                                 }
             }
     }
