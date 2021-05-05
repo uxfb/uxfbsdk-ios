@@ -1,70 +1,36 @@
 #!/bin/sh
-#  Created by Dmitry on 25.03.2019.
-#  Copyright (c) 2013 Dmitry Kudryavcev. All rights reserved.
+#  Created by Alexander on 25.03.2021.
+#  Copyright (c) 2021 Alexander Potemka. All rights reserved.
 
-IOS_TARGET_NAME="UXFeedbackSDK"
+SDK_TARGET_NAME="UXFeedbackSDK"
 
 MAIN_DIR="$(dirname "$0")"
 cd "$MAIN_DIR"
 
-CONFIGURATION="Release"
+# set framework folder name
+FRAMEWORK_FOLDER_NAME="${SDK_TARGET_NAME}_XCFramework"
+# set framework name or read it from project by this variable
+FRAMEWORK_NAME="${SDK_TARGET_NAME}"
+#xcframework path
+FRAMEWORK_PATH="${MAIN_DIR}/${FRAMEWORK_FOLDER_NAME}/${FRAMEWORK_NAME}.xcframework"
+# set path for iOS simulator archive
+SIMULATOR_ARCHIVE_PATH="./build/ios_simulator.xcarchive"
+# set path for iOS device archive
+IOS_DEVICE_ARCHIVE_PATH="./build/ios.xcarchive"
 
-IOS_PLATFORMS=(
-"iphoneos"
-"iphonesimulator"
-)
+rm -rf "${MAIN_DIR}/${FRAMEWORK_FOLDER_NAME}"
+mkdir -p "$SIMULATOR_ARCHIVE_PATH"
+mkdir -p "$IOS_DEVICE_ARCHIVE_PATH"
+mkdir -p "$FRAMEWORK_PATH"
 
-xcodebuild clean
+echo "Archiving ${FRAMEWORK_NAME}"
+xcodebuild archive -scheme ${FRAMEWORK_NAME} -destination="iOS Simulator" -archivePath "${SIMULATOR_ARCHIVE_PATH}" -sdk iphonesimulator SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES
+xcodebuild archive -scheme ${FRAMEWORK_NAME} -destination="iOS" -archivePath "${IOS_DEVICE_ARCHIVE_PATH}" -sdk iphoneos SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES
+#Creating XCFramework
+echo "Creating XCFramework"
+xcodebuild -create-xcframework -framework ${SIMULATOR_ARCHIVE_PATH}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework -framework ${IOS_DEVICE_ARCHIVE_PATH}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework -output "${FRAMEWORK_PATH}"
 
-for PLATFORM in "${IOS_PLATFORMS[@]}"; do
- echo "Build for $CONFIGURATION $PLATFORM"
-xcodebuild -target "$IOS_TARGET_NAME" ONLY_ACTIVE_ARCH=NO -configuration "$CONFIGURATION" -sdk "$PLATFORM" build
-done
-
-BUILD_PRODUCTS="$MAIN_DIR/build"
-
-UNIVERSAL_OUTPUTFOLDER=${BUILD_PRODUCTS}/${CONFIGURATION}-universal
-# Make sure the output directory exists
-mkdir -p "${UNIVERSAL_OUTPUTFOLDER}"
-# Next, work out if we're in SIM or DEVICE
-
-# Step 2. Copy the framework structure (from iphoneos build) to the universal folder
-
-cp -R "${BUILD_PRODUCTS}/${CONFIGURATION}-iphoneos/$IOS_TARGET_NAME.framework" "${UNIVERSAL_OUTPUTFOLDER}/"
-
-mkdir -p "${IOS_TARGET_NAME}/tmp/Headers/simulator"
-mkdir -p "${IOS_TARGET_NAME}/tmp/Headers/device"
-cp -R "${BUILD_PRODUCTS}/${CONFIGURATION}-iphonesimulator/${IOS_TARGET_NAME}.framework/Headers/${IOS_TARGET_NAME}-Swift.h" "${IOS_TARGET_NAME}/tmp/Headers/simulator/${IOS_TARGET_NAME}-Swift.h"
-cp -r "${BUILD_PRODUCTS}/${CONFIGURATION}-iphoneos/${IOS_TARGET_NAME}.framework/Headers/${IOS_TARGET_NAME}-Swift.h" "${IOS_TARGET_NAME}/tmp/Headers/device/${IOS_TARGET_NAME}-Swift.h"
-# Merge
-touch "${IOS_TARGET_NAME}/tmp/${IOS_TARGET_NAME}-Swift.h"
-echo "#if TARGET_OS_SIMULATOR" >> "${IOS_TARGET_NAME}/tmp/${IOS_TARGET_NAME}-Swift.h"
-cat "${IOS_TARGET_NAME}/tmp/Headers/simulator/${IOS_TARGET_NAME}-Swift.h" >> "${IOS_TARGET_NAME}/tmp/${IOS_TARGET_NAME}-Swift.h"
-echo "#else" >> "${IOS_TARGET_NAME}/tmp/${IOS_TARGET_NAME}-Swift.h"
-cat "${IOS_TARGET_NAME}/tmp/Headers/device/${IOS_TARGET_NAME}-Swift.h" >> "${IOS_TARGET_NAME}/tmp/${IOS_TARGET_NAME}-Swift.h"
-echo "#endif" >> "${IOS_TARGET_NAME}/tmp/${IOS_TARGET_NAME}-Swift.h"
-
-
-# Step 3. Copy Swift modules from iphonesimulator build (if it exists) to the copied framework directory
-
-cp -R "${BUILD_PRODUCTS}/${CONFIGURATION}-iphonesimulator/${IOS_TARGET_NAME}.framework/Modules/${IOS_TARGET_NAME}.swiftmodule/." "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework/Modules/${IOS_TARGET_NAME}.swiftmodule"
-
-# Step 4. Create universal binary file using lipo and place the combined executable in the copied framework directory
-lipo -create -output "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework/${IOS_TARGET_NAME}" "${BUILD_PRODUCTS}/${CONFIGURATION}-iphonesimulator/${IOS_TARGET_NAME}.framework/${IOS_TARGET_NAME}" "${BUILD_PRODUCTS}/${CONFIGURATION}-iphoneos/${IOS_TARGET_NAME}.framework/${IOS_TARGET_NAME}"
-
-# Step 5. Convenience step to copy the framework to the project's directory
-
-FRAMEWORK_REPO_DIR="UXFeedbackSDKFramework//${IOS_TARGET_NAME}.framework"
-rm -rf "$FRAMEWORK_REPO_DIR"
-#rm "UXFeedbackSDKFramework"
-mkdir -p "UXFeedbackSDKFramework"
-
-cp -R "${IOS_TARGET_NAME}/tmp/${IOS_TARGET_NAME}-Swift.h" "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework/Headers/${IOS_TARGET_NAME}-Swift.h"
-cp -R "${UNIVERSAL_OUTPUTFOLDER}/${IOS_TARGET_NAME}.framework" "$FRAMEWORK_REPO_DIR"
-
-# Delete temporary files
-rm -rf "${IOS_TARGET_NAME}/tmp"
-
-# Step 6. Convenience step to open the project's directory in Finder
-open "$FRAMEWORK_REPO_DIR"
-#fi
+echo "Clean archives"
+#rm -rf "${SIMULATOR_ARCHIVE_PATH}"
+#rm -rf "${IOS_DEVICE_ARCHIVE_PATH}"
+#open "${MAIN_DIR}/${FRAMEWORK_FOLDER_NAME}"

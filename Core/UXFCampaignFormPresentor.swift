@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-let IS_IPAD = (UIDevice.current.userInterfaceIdiom == .pad)
-
 protocol UXFCampaignFormPresentorProtocol: class {
     func formSubmitted(formIndex: Int, info: Dictionary<String, Any>?, campaign: UXFCampaign)
 }
@@ -58,7 +56,7 @@ class UXFCampaignFormPresentor: NSObject{
     private func preloadImages(){
         _campaign.pages.forEach { (page) in
             
-            if let filedsInfoArr = page.uiData["fields"] as? Array<Dictionary<String, Any>> {
+            if let filedsInfoArr = page.fields as? Array<Dictionary<String, Any>> {
                   for fieldInfo in  filedsInfoArr{
                     _parser.preloadImages(dictionary: fieldInfo)
                 }
@@ -111,7 +109,6 @@ class UXFCampaignFormPresentor: NSObject{
     //MARK: - Form controller
     
     open func createForm(formIndex: Int, title: String? = nil) -> (UXFViewController){
-        
         let page = self._campaign.pages[formIndex]
         let controller = UXFViewController.init(index: formIndex, formID: page.id )
         controller.modalPresentationStyle = .overCurrentContext
@@ -133,7 +130,6 @@ class UXFCampaignFormPresentor: NSObject{
                         self?.feedbackCampaignDelegate?.campaignDidClose(withFeedbackResult: result,
                         isRedirectToAppStoreEnabled: false)
                     }
-                    
                 }
                 else{
                     DispatchQueue.main.async {
@@ -143,7 +139,6 @@ class UXFCampaignFormPresentor: NSObject{
                     }
                 }
             }
-            
         }
         controller.willCloseHandler = { [weak self] (formIndex) in
             DispatchQueue.main.async{
@@ -177,12 +172,12 @@ class UXFCampaignFormPresentor: NSObject{
     
     func prepareUIForm(controller: UXFViewController, page: UXFPage) {
         
-        controller.contentView.backgroundColor = _campaign.theme.backgroundColor
+//        controller.contentView.backgroundColor = _campaign.theme.backgroundColor
         
         var allConstraints: [NSLayoutConstraint] = []
         var viewIndex = 0
         var contentHeight: CGFloat = (controller.progressLabel?.frame.size.height ?? 0.0) + (controller.progressLabel?.frame.origin.y ?? 0.0)
-        if let filedsInfoArr = page.uiData["fields"] as? Array<Dictionary<String, Any>> {
+        if let filedsInfoArr = page.fields as? Array<Dictionary<String, Any>> {
             
             var allviews: Dictionary <String, UIView> = [:]
             if controller.progressLabel?.text?.count ?? 0 > 0 {
@@ -227,66 +222,9 @@ class UXFCampaignFormPresentor: NSObject{
         
         controller.heightConstraint?.constant = contentHeight
         controller.contentView.addConstraints(allConstraints)
-        
-        /*
-         controller.contentView.addSubview(page.button)
-         page.button.translatesAutoresizingMaskIntoConstraints = false
-         let views = ["topView" : topView, "button": page.button, "superview": controller.contentView]
-         
-         let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[superview]-15-[button(44)]-15-[superview]",
-         options: NSLayoutConstraint.FormatOptions.alignAllCenterY,
-         metrics: nil,
-         views: views as [String : Any])
-         let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[topView]-15-[button(120)]-15-[superview]",
-         options: NSLayoutConstraint.FormatOptions.alignAllCenterX,
-         metrics: nil,
-         views: views as [String : Any])
-         controller.contentView.addConstraints(horizontalConstraints)
-         controller.contentView.addConstraints(verticalConstraints)
-         */
     }
-    
-    /*
-    private func showRateForm(direction: UXFViewPopupDirection){
-        let controller = UXFRateViewController.init()
-        controller.didCloseHandler = {
-            
-        }
-        controller.nextHandler = { [weak self] in
-            self?.nextForm()
-        }
-        showController(controller: controller, direction:  direction)
-    }
-    
-    private func showCommentForm(direction: UXFViewPopupDirection){
-        let controller = UXFCommentViewController.init()
-        controller.didCloseHandler = {
-            
-        }
-        controller.backHandler = { [weak self] in
-            self?.prevForm()
-        }
-        controller.nextHandler = { [weak self] in
-            self?.nextForm()
-        }
-        controller.isMandatoryField = false
-        showController(controller: controller, direction: direction)
-    }
-    
-    private func showCongratulationForm(direction: UXFViewPopupDirection){
-        let controller = UXFCongratulationViewController()
-        controller.didCloseHandler = {  (formIndex) in
-            
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            controller.close(animated:  true)
-        }
-        
-        showController(controller: controller, direction:  direction)
-    }*/
     
     private func showCampaignController(controller: UXFViewController, direction: UXFViewPopupDirection){
-        
         _ = self.dismissCurrentForm(){
             
             self._currentForm = controller
@@ -311,7 +249,6 @@ class UXFCampaignFormPresentor: NSObject{
        
     }
 }
-
 
 extension UXFCampaignFormPresentor: UIViewControllerTransitioningDelegate{
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {

@@ -8,17 +8,92 @@
 
 import UIKit
 
-class UXFCheckboxCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+class UXFCheckboxCell: UXFBaseCell, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet var tableView: UITableView! {
+        didSet {
+            let bundle = Bundle(for: UXFeedback.self)
+            tableView.register(UINib(nibName: "UXFCheckCell", bundle: bundle), forCellReuseIdentifier: "UXFCheckCell")
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.backgroundColor = .clear
+        }
     }
     
+    private var options: Array<UXFOption> = []
+    private var isError: Bool = false
+    
+    override func updateUI() {
+        guard let data = try? JSONSerialization.data(withJSONObject: field?.uiData["options"] as Any, options: .prettyPrinted) else {
+            return
+        }
+
+        guard let opt = try? JSONDecoder().decode([UXFOption].self,
+                                                      from: data) else {
+            return
+        }
+        options = opt
+        tableView.backgroundColor = theme?.bgColor
+        
+        if field!.isError && field?.answers.count == 0 {
+            isError = true
+        }
+        
+        tableView.reloadData()
+        
+        for answer in field?.answers ?? [] {
+            if let index = options.lastIndex(where: { (option) -> Bool in
+                option.id == answer
+            }) {
+                tableView.selectRow(at: IndexPath(item: index, section: 0), animated: false, scrollPosition: .none)
+            }
+        }
+    }
+    
+    //MARK: - Table view
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return options.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UXFCheckCell", for: indexPath) as! UXFCheckCell
+        let the = self.theme
+        cell.configure(option: options[indexPath.row], theme: the!, isError: isError)
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        isError = false
+        checkAnswer(indexPath: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        checkAnswer(indexPath: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let width = self.bounds.width - 48
+        let value = options[indexPath.row].value
+        let font = theme!.regularFont(size: .mediumFontSize)
+        let lines = CGFloat(value.linesCount(width: width, font: font))
+//        let lines = CGFloat(value.linesCount(width: width, font: .mediumFont))
+        return max(ceil(lines * font.lineHeight) + 24, 48)
+    }
+    
+    //MARK:- CALL DELEGATE
+    
+    private func checkAnswer(indexPath: IndexPath) {
+        if self.delegate != nil {
+            let indexes = tableView.indexPathsForSelectedRows?.map({ (indexPath) -> Int in
+                indexPath.row
+            }) ?? []
+            
+            var answers: [String] = []
+            for index in indexes {
+                answers.append(options[index].id)
+            }
+            self.delegate?.fieldChanged(self.field!, answer: answers, refresh: true)
+        }
+    }
 }

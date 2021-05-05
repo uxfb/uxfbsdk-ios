@@ -25,14 +25,14 @@ enum NetworkType {
 extension Reachability {
   
   static func getNetworkType() -> NetworkType {
-    guard let reachability: Reachability = Reachability() else { return .unknown }
     do {
+      let reachability: Reachability = try Reachability()
       try reachability.startNotifier()
         switch reachability.connection {
-          case .none:     return .noConnection
           case .wifi: return .wifi
           case .cellular: return Reachability.getWWANNetworkType()
-      }
+          case .unavailable: return .unknown
+        }
     } catch {
       return .unknown
     }

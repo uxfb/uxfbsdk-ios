@@ -8,17 +8,36 @@
 
 import UIKit
 
-class UXFButtonCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+class UXFButtonCell: UXFBaseCell {
+    @IBOutlet var button: UIButton!
+    @IBOutlet var buttonWidth: NSLayoutConstraint!
+    
+    override func updateUI() {
+        guard field != nil, theme != nil else {
+            return
+        }
+        button.setTitle(field!.value, for: .normal)
+        button.titleLabel?.font = theme?.regularFont(size: .mediumFontSize)
+        button.layer.cornerRadius = theme!.btnBorderRadius
+        button.layer.masksToBounds = true
+        button.setBackgroundImage(UIImage(color: theme!.btnBgColor), for: .normal)
+        button.setBackgroundImage(UIImage(color: theme!.btnBgColorActive), for: .highlighted)
+        
+        button.isEnabled = !(field?.isError ?? false)
+        
+        button.setTitleColor(theme!.btnTextColor, for: .normal)
+        if UIApplication.shared.statusBarOrientation.isLandscape {
+            buttonWidth.constant = self.contentView.frame.width
+        } else {
+            buttonWidth.constant = 160
+        }
+        
+        self.layoutIfNeeded()
     }
     
+    @IBAction  func buttonTapped(_ sender: UIButton){
+        if delegate != nil {
+            delegate?.buttonTapped(field!, answer: [], refresh: true)
+        }
+    }
 }

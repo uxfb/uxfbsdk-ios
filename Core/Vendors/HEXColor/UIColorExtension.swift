@@ -78,7 +78,7 @@ import UIKit
             print(error.localizedDescription)
             throw error
         }
-        
+//        let hexString: String = String(rgba[String.Index(utf16Offset: 1, in: rgba)])
         let hexString: String = String(rgba[String.Index.init(encodedOffset: 1)...])
         var hexValue:  UInt32 = 0
         

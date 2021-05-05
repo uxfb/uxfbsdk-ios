@@ -9,7 +9,7 @@
 import UIKit
 import UXFeedbackSDK
 
-let uxfAppID =  UXFeedback.isStage == true ? "cjld2cjxh0000qzrmn831i7rn" : "54444d444a068c157e7f7e14"
+let uxfAppID =  UXFeedback.isStage == true ? "ckh8zduea00003c58k6cyatp0" : "ckh8zduea00003c58k6cyatp0"
 
 internal func DDLogDebug(_ value: Any){
     #if DEBUG
@@ -28,7 +28,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        UXFeedback.sharedInstance.setup(appID: uxfAppID, windowScene: scene as! UIWindowScene)
+        UXFeedback.sharedInstance.setup(appID: uxfAppID,
+                                        window: window,
+                                        theme: UXFBTheme()) { (success) in
+            
+        }
+        
+        
+        UXFeedback.sharedSDK.setup(appID: uxfAppID, windowScene: scene as! UIWindowScene)
         {  success in
             let message = "UXFeedback initialization " + (success == true ? "successful" : "failed")
             DDLogDebug(message)

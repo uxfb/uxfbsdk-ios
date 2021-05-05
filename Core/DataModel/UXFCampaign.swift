@@ -8,17 +8,17 @@
 
 import UIKit
 
-enum UXFCampaignType: String{
-    case popup = "popup"
-    case slidein = "slidein"
+enum UXFCampaignType: String {
+    case popup = "101"
+    case slidein = "102"
 }
 
-enum UXFCampaignPosition: String{
+enum UXFCampaignPosition: String {
     case upperRight = "upperRight"
 }
 
 struct UXFCampaign{
-
+    
     private var attemptCompanyKey: String {
         return self.campaignId + ".campaignAttempt"
     }
@@ -32,10 +32,11 @@ struct UXFCampaign{
     }
 
     private(set) var campaignId: String!
-    private(set) var theme: UXFTheme!
+    private(set) var theme: UXFBTheme!
     private(set) var pages: Array<UXFPage> = []
     private(set) var type: UXFCampaignType!
     private(set) var targetings: Array<Dictionary<String,Any>>!
+    private(set) var transforms: Array<UXFTransform>!
     private(set) var isProgressEnabled: Bool!
     private(set) var projectId: String!
     private(set) var autoclose: Double!
@@ -87,7 +88,6 @@ struct UXFCampaign{
     }
     
     var showAttemptCount: Int{
-        
         if UXFeedback.isStage {
             return Int.max
         }
@@ -97,19 +97,12 @@ struct UXFCampaign{
     }
     
     func showDelay(eventName: String) -> TimeInterval{
-        var delay: TimeInterval = 0.0
+        var delay: TimeInterval = 0.1
         self.targetings.forEach { (targetingDict) in
-            if let name = targetingDict["name"] as? String, eventName == name {
-                if let timeout = targetingDict["timeout"] as? Double{
+            if let name = targetingDict["value"] as? String, eventName == name {
+                if let timeout = targetingDict["seconds"] as? Double{
                     delay = timeout
-                }/*
-                else if let timeoutDict = targetingDict["timeout"] as? Dictionary<String,Any>,
-                        let enabled = timeoutDict["enabled"] as? Bool,
-                        let timeout = timeoutDict["value"] as? String{
-                    if enabled == true {
-                       delay = TimeInterval(Double(timeout) ?? 0)
-                    }
-                }*/
+                }
             }
         }
         return delay
@@ -123,8 +116,7 @@ struct UXFCampaign{
         return pages.count
     }
     
-    func show() -> (Bool){
-
+    func show() -> (Bool) {
         let attemptCount = self.currentAttempt
         if attemptCount < showAttemptCount{
             self.incAttempt()
@@ -132,6 +124,10 @@ struct UXFCampaign{
         }
         
         return false
+    }
+    
+    mutating func updateTheme(theme: UXFBTheme) {
+        self.theme = theme
     }
     
     private func incAttempt(){

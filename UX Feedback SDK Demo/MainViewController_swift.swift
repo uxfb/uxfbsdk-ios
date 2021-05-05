@@ -13,31 +13,42 @@ class MainViewController_swift: UIViewController {
     
     @IBOutlet var busyIndicator: UIActivityIndicatorView!
     @IBOutlet var buttonsStackView: UIView!
-    @IBOutlet var dismissButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
+        self.view.backgroundColor = .white
+        UXFeedback.sharedSDK.delegate = self
+//        UXFeedback.sharedInstance.formDelegate = self
         
-        UXFeedback.sharedInstance.delegate = self
-        UXFeedback.sharedInstance.formDelegate = self
-        
-        if UXFeedback.sharedInstance.isCampaignsLoaded == false {
+        if UXFeedback.sharedSDK.isCampaignsLoaded == false {
             self.buttonsStackView.isUserInteractionEnabled = false
             self.buttonsStackView.alpha = 0.5
             busyIndicator.startAnimating()
         }
-        
-        self.dismissButton.isHidden = (self.navigationController != nil)
     }
 
+    @IBAction func stopCampaign(_ sender: UIButton){
+        UXFeedback.sharedSDK.stopCampaign()
+    }
     
     @IBAction func eventTap(_ sender: UIButton){
         
         let eventNumber = sender.tag
         assert(eventNumber > 0, "Invalid eventNumber")
-     
-        UXFeedback.sharedInstance.sendEvent(event: "event\(eventNumber)", fromController: self)
+        switch eventNumber {
+        case 1:
+            UXFeedback.sharedSDK.sendEvent(event: "UXFeedbackIOSTestCampaign", fromController: self)
+            break
+        case 2:
+            UXFeedback.sharedSDK.sendEvent(event: "eee", fromController: self)
+            break
+        default:
+            break
+        }
     }
     
     @IBAction func closeButtonTap(_ sender: UIButton){
@@ -46,6 +57,10 @@ class MainViewController_swift: UIViewController {
 }
 
 extension MainViewController_swift: UXFeedbackCampaignDelegate{
+    func campaignDidShow() {
+        print("CAMPAIGN SHOWED")
+    }
+    
     func campaignDidClose(withFeedbackResult result: UXFeedbackResult, isRedirectToAppStoreEnabled: Bool) {
         DDLogDebug(#function)
     }
@@ -64,7 +79,7 @@ extension MainViewController_swift: UXFeedbackCampaignDelegate{
 
 extension MainViewController_swift: UXFeedbackFormDelegate{
     
-    func formDidLoaded(form: UXFViewController) {
+    func formDidLoaded(form: UXFCampaignViewController) {
         DDLogDebug(#function)
         self.present(form, animated: true, completion: nil)
     }
@@ -77,7 +92,7 @@ extension MainViewController_swift: UXFeedbackFormDelegate{
         DDLogDebug(#function)
     }
     
-    func formWillClose(form: UXFViewController, formID: String?, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
+    func formWillClose(form: UXFCampaignViewController, formID: String?, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
         DDLogDebug(#function)
     }
 }

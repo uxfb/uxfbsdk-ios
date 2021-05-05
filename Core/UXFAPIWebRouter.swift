@@ -18,6 +18,7 @@ enum HTTPHeaderField: String {
     case uid = "uid"
     case campaignId = "campaignId"
     case fields = "fields"
+    case pages = "pages"
     case answerId = "answerId"
     case projectId = "projectId"
     case info = "info"
@@ -36,17 +37,19 @@ enum ContentType: String {
 enum UXFAPIWebRouter {
     
     static var baseURL: String {
-        
-        if UXFAPIWebRouter.isStageAPI == true{
-            return "https://public-api.uxfeedback.ru/v1"//"https://api-release.uxfeedback.ru/v1"
+        if UXFAPIWebRouter.isStageAPI == true {
+            return
+                "https://public-api.uxfeedback.ru/v2"
+//                "https://api-stage.uxfeedback.ru/v2"
         }
         else{
-            return "https://public-api.uxfeedback.ru/v1"
+            return
+                "https://public-api.uxfeedback.ru/v2"
+//                "https://api-stage.uxfeedback.ru/v2"
         }
     }
     
-    static internal var isStageAPI: Bool{
-        
+    static internal var isStageAPI: Bool {
         #if DEBUG
           return true
         #else
@@ -62,11 +65,12 @@ enum UXFAPIWebRouter {
     case saveFirstFormData(projectId: String?, uid: String, campaignId: String, fields: Dictionary <String, Any>?, info: Dictionary<String, Any>)
     case saveOtherFormData(projectId: String?, answerId: String?, fields: Dictionary <String, Any>?)
     case showForm(uid: String, campaingId: String)
+    case saveFormData(projectId: String?, uid: String, campaignId: String, pages: Array<Dictionary<String, Any>>, info: Dictionary<String, Any>)
     
     var method: String {
         switch self {
 
-        case .saveFirstFormData, .showForm:
+        case .saveFirstFormData, .showForm, .saveFormData:
             return "POST"
         case .saveOtherFormData:
             return "PUT"
@@ -78,14 +82,16 @@ enum UXFAPIWebRouter {
     
     var path: String {
        switch self {
-         case .getCampaing(let appId):
-              return "/mobile/campaigns/\(appId)"
-         case .saveFirstFormData(_, _, _, _, _):
-              return "/mobile/answers"
-         case .saveOtherFormData(_, _, _):
-              return "/mobile/answers"
-         case .showForm(_, _):
-              return "/mobile/visits"
+       case .getCampaing(let appId):
+            return "/mobile/campaigns/\(appId)"
+       case .saveFirstFormData(let projectId, _, _, _, _):
+            return "/mobile/answers/\(projectId!)"
+       case .saveOtherFormData(_, _, _):
+            return "/mobile/answers"
+       case .saveFormData(_, _, _, _, _):
+            return "/mobile/answers"
+       case .showForm(_, _):
+            return "/mobile/visits"
         }
     }
     
@@ -111,6 +117,16 @@ enum UXFAPIWebRouter {
                 params[HTTPHeaderField.fields.rawValue] = fields!
             }
             return params
+          
+        case .saveFormData(_, let uid, let campaignId, let pages, let info):
+            var params = [HTTPHeaderField.uid.rawValue : uid,
+                   HTTPHeaderField.campaignId.rawValue : campaignId,
+                   HTTPHeaderField.info.rawValue : info] as [String : Any]
+            
+            params[HTTPHeaderField.pages.rawValue] = pages
+            
+            
+            return params
             
           case .showForm(let uid, let campaingId):
              return  [HTTPHeaderField.uid.rawValue : uid,
@@ -120,16 +136,21 @@ enum UXFAPIWebRouter {
          }
     }
     
-    var pathParameters: [String:Any]?{
+    var pathParameters: [String:Any]? {
         
         var parameters: [String: Any] = [:]
         switch self {
         case .saveFirstFormData(let projectId, _, _, _, _):
             if projectId != nil {
-               parameters =  [HTTPHeaderField.projectId.rawValue : projectId!]
+//               parameters =  [HTTPHeaderField.projectId.rawValue : projectId!]
             }
             break
         case .saveOtherFormData(let projectId, _, _):
+            if projectId != nil {
+//                parameters =  [HTTPHeaderField.projectId.rawValue : projectId!]
+            }
+            break
+        case .saveFormData(let projectId, _, _, _, _):
             if projectId != nil {
                 parameters =  [HTTPHeaderField.projectId.rawValue : projectId!]
             }

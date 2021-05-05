@@ -105,24 +105,24 @@ open class UXFBTheme:  NSObject, Decodable{
     }
     
     enum CodingKeys: String, CodingKey {
-        case text03Color
-        case inputBorderColor
+        case bgColor
         case iconColor
-        case btnBgColorActive
+        case mainColor
+        case btnBgColor
+        case text01Color
+        case text02Color
+        case text03Color
+        case btnTextColor
+        case inputBgColor
+        case controlBgColor
         case btnBorderRadius
+        case btnBgColorActive
+        case controlIconColor
+        case formBorderRadius
+        case inputBorderColor
         case errorColorSecondary
         case errorColorPrimary
-        case mainColor
-        case controlBgColorActiv
-        case formBorderRadius
-        case inputBgColor
-        case text01Color
-        case controlBgColor
-        case controlIconColor
-        case btnBgColor
-        case text02Color
-        case btnTextColor
-        case bgColor
+        case controlBgColorActive
         
         case fontRegularName
         case fontMediumName
@@ -157,7 +157,7 @@ open class UXFBTheme:  NSObject, Decodable{
         if let mainColorString = try? container.decode(String.self, forKey: .mainColor){
             self.mainColor = UIColor.init(mainColorString)
         }
-        if let controlBgColorActiveString = try? container.decode(String.self, forKey: .controlBgColorActiv){
+        if let controlBgColorActiveString = try? container.decode(String.self, forKey: .controlBgColorActive){
             self.controlBgColorActive = UIColor.init(controlBgColorActiveString)
         }
         if let inputBgColorString = try? container.decode(String.self, forKey: .inputBgColor){

@@ -8,6 +8,11 @@
 
 import UIKit
 
-class UXFField: NSObject {
-
+struct UXFField {
+    private(set) var id: String?
+    private(set) var type: UXFFieldType?
+    private(set) var value: String?
+    private(set) var uiData: Dictionary<String, Any>
+    var answers: [String] = []
+    var isError: Bool = false
 }

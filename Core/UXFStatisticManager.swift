@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+let IS_IPAD = (UIDevice.current.userInterfaceIdiom == .pad)
+
 class UXFStatisticManager{
     
     class func getDeviceInfo() -> (Dictionary<String, Any>){

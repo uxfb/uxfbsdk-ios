@@ -20,7 +20,6 @@
 		0A1B9E7123996F9E00935E2E /* Main_swift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4322365E03002FD4F8 /* Main_swift.storyboard */; };
 		0A1B9E7223996F9E00935E2E /* LaunchScreen_swift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A019A4822365E04002FD4F8 /* LaunchScreen_swift.storyboard */; };
 		0A1B9E7323996FA700935E2E /* MainViewController_swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A4122365E03002FD4F8 /* MainViewController_swift.swift */; };
-		0A1B9E742399711000935E2E /* SecondViewController_swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB437C622B2B68C00AF8665 /* SecondViewController_swift.swift */; };
 		0A2A349D2346303200B23383 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A349C2346303200B23383 /* AppDelegate.m */; };
 		0A2A34A32346303200B23383 /* SecondViewController_objc.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A34A22346303200B23383 /* SecondViewController_objc.m */; };
 		0A2A34A62346303200B23383 /* Main_objc.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A2A34A42346303200B23383 /* Main_objc.storyboard */; };
@@ -30,23 +29,15 @@
 		0A46899622840B2C0074E1A3 /* UXFeedbackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0A46899F22840BB90074E1A3 /* UXFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A5322366A29002FD4F8 /* UXFeedback.swift */; };
 		0A4689A022840BB90074E1A3 /* UXFeedbackDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */; };
-		0A4689A122840BB90074E1A3 /* UXFCampaignFormPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEAD2250664C00E1C092 /* UXFCampaignFormPresentor.swift */; };
 		0A4689A322840BB90074E1A3 /* UXFAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A5922367CD6002FD4F8 /* UXFAPIClient.swift */; };
 		0A4689A422840BB90074E1A3 /* UXFURLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6E2237C503002FD4F8 /* UXFURLComponents.swift */; };
 		0A4689A522840BB90074E1A3 /* UXFAPIWebRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6C2237B773002FD4F8 /* UXFAPIWebRouter.swift */; };
 		0A4689A622840BB90074E1A3 /* UXFStatisticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A160DD42268CDB000A586C4 /* UXFStatisticManager.swift */; };
 		0A4689A722840BB90074E1A3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A0CDEAB2250598800E1C092 /* Images.xcassets */; };
-		0A4689A822840BBF0074E1A3 /* UXFTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A57223673FE002FD4F8 /* UXFTheme.swift */; };
+		0A4689A822840BBF0074E1A3 /* UXFBTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A57223673FE002FD4F8 /* UXFBTheme.swift */; };
 		0A4689A922840BBF0074E1A3 /* UXFCampaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB832243B4FB00C17007 /* UXFCampaign.swift */; };
 		0A4689AA22840BBF0074E1A3 /* UXFPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB852243BD5500C17007 /* UXFPage.swift */; };
-		0A4689AB22840BBF0074E1A3 /* UXFParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB7D224113F900C17007 /* UXFParser.swift */; };
 		0A4689AC22840BBF0074E1A3 /* UXFText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB77223BD47800C17007 /* UXFText.swift */; };
-		0A4689AD22840BBF0074E1A3 /* UXFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB75223B960500C17007 /* UXFButton.swift */; };
-		0A4689AE22840BBF0074E1A3 /* UXFSmileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA92D9C227A9410005DBCBA /* UXFSmileButton.swift */; };
-		0A4689AF22840BBF0074E1A3 /* UXFCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB7B224111EC00C17007 /* UXFCheckbox.swift */; };
-		0A4689B022840BBF0074E1A3 /* UXFLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB79224110FE00C17007 /* UXFLabel.swift */; };
-		0A4689B122840BC90074E1A3 /* UXFPageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB7F224241DE00C17007 /* UXFPageResponse.swift */; };
-		0A4689B222840BC90074E1A3 /* UXFPageElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB812242424300C17007 /* UXFPageElement.swift */; };
 		0A4689B322840BE00074E1A3 /* NSLayoutConstraint+additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6122367EF2002FD4F8 /* NSLayoutConstraint+additions.swift */; };
 		0A4689B422840BE00074E1A3 /* String+additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6222367EF2002FD4F8 /* String+additions.swift */; };
 		0A4689B522840BE00074E1A3 /* UIImage+Tinting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6022367EF2002FD4F8 /* UIImage+Tinting.swift */; };
@@ -56,25 +47,68 @@
 		0A4689B922840BE00074E1A3 /* UIViewController+present.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB92250A16B00E1C092 /* UIViewController+present.swift */; };
 		0A4689BA22840BE00074E1A3 /* Reachability+NetworkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */; };
 		0A4689BB22840BE00074E1A3 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEA5224F42E900E1C092 /* Queue.swift */; };
-		0A4689C322840FC80074E1A3 /* UXFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB8E22446EC900C17007 /* UXFViewController.swift */; };
-		0A4689C422840FC80074E1A3 /* UXFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2754A8226628BC000E2E17 /* UXFViewController.xib */; };
-		0A4689C522840FD00074E1A3 /* UXFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB72250965100E1C092 /* UXFTextField.swift */; };
 		0A5F732A2346336800049893 /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; };
 		0A5F732B2346336800049893 /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A5F73302347671F00049893 /* MainViewController_objc.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F732F2347671F00049893 /* MainViewController_objc.m */; };
 		0AA7062D229126B10091A7A0 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70621229126AF0091A7A0 /* Roboto-Bold.ttf */; };
 		0AA70631229126B10091A7A0 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70625229126B00091A7A0 /* Roboto-Regular.ttf */; };
 		0AA70635229126B10091A7A0 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70629229126B00091A7A0 /* Roboto-Medium.ttf */; };
-		0AA850DF228960AB0040007C /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; };
-		0AA850E0228960AB0040007C /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0AB2FF3A22ABBABB0024A88A /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB2FF3922ABBABB0024A88A /* Reachability.swift */; };
-		0AB437C722B2B68C00AF8665 /* SecondViewController_swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB437C622B2B68C00AF8665 /* SecondViewController_swift.swift */; };
 		0AB437C922B4FE2C00AF8665 /* UIImageView+cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB437C822B4FE2C00AF8665 /* UIImageView+cache.swift */; };
 		0AB8C29123F444DE00FB0EEB /* PassthroughWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8C29023F444DD00FB0EEB /* PassthroughWindow.swift */; };
 		0AF49826229C3D4A000CB7D6 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49824229C3D4A000CB7D6 /* UIColorExtension.swift */; };
 		0AF49827229C3D4A000CB7D6 /* UIColorInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49825229C3D4A000CB7D6 /* UIColorInputError.swift */; };
 		0AF49829229C3D5D000CB7D6 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49828229C3D5C000CB7D6 /* StringExtension.swift */; };
+		BF01BDF525613086008C641B /* UXFOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDF425613086008C641B /* UXFOption.swift */; };
+		BF01BDF725613254008C641B /* Decodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDF625613254008C641B /* Decodable+.swift */; };
+		BF01BDF925617FD9008C641B /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDF825617FD9008C641B /* UIFont+.swift */; };
+		BF01BDFB25618234008C641B /* CGFloat+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDFA25618234008C641B /* CGFloat+.swift */; };
+		BF01BDFD2561EF59008C641B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF01BDFC2561EF59008C641B /* Images.xcassets */; };
+		BF02FD32255C0AE300C794E6 /* UXFField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF02FD31255C0AE300C794E6 /* UXFField.swift */; };
+		BF02FD3F255C65B000C794E6 /* UXFTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF02FD3E255C65B000C794E6 /* UXFTransform.swift */; };
+		BF2806AF2562B18F006F2D61 /* UXFStarsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806882562B18F006F2D61 /* UXFStarsCell.swift */; };
+		BF2806B32562B18F006F2D61 /* UXFRadioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28068E2562B18F006F2D61 /* UXFRadioCell.swift */; };
+		BF2806B42562B18F006F2D61 /* UXFRadiobuttonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28068F2562B18F006F2D61 /* UXFRadiobuttonCell.swift */; };
+		BF2806B62562B18F006F2D61 /* UXFInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806922562B18F006F2D61 /* UXFInputCell.swift */; };
+		BF2806B82562B18F006F2D61 /* UXFCheckboxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806952562B18F006F2D61 /* UXFCheckboxCell.swift */; };
+		BF2806B92562B18F006F2D61 /* UXFCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806972562B18F006F2D61 /* UXFCheckCell.swift */; };
+		BF2806BC2562B18F006F2D61 /* UXFImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28069B2562B18F006F2D61 /* UXFImageCell.swift */; };
+		BF2806BE2562B18F006F2D61 /* UXFButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28069E2562B18F006F2D61 /* UXFButtonCell.swift */; };
+		BF2806C02562B18F006F2D61 /* UXFTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A12562B18F006F2D61 /* UXFTextCell.swift */; };
+		BF2806C22562B18F006F2D61 /* UXFCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A32562B18F006F2D61 /* UXFCampaignViewController.swift */; };
+		BF2806C32562B18F006F2D61 /* UXFBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A52562B18F006F2D61 /* UXFBaseCell.swift */; };
+		BF2806C52562B18F006F2D61 /* UXFHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A82562B18F006F2D61 /* UXFHeaderCell.swift */; };
+		BF2806C62562B18F006F2D61 /* UXFEmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806AA2562B18F006F2D61 /* UXFEmailCell.swift */; };
+		BF2806C92562B18F006F2D61 /* UXFSmilesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806AE2562B18F006F2D61 /* UXFSmilesCell.swift */; };
+		BF2806D72562B6A5006F2D61 /* UXFStarsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806892562B18F006F2D61 /* UXFStarsCell.xib */; };
+		BF2806D82562B6A5006F2D61 /* UXFRadiobuttonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28068B2562B18F006F2D61 /* UXFRadiobuttonCell.xib */; };
+		BF2806D92562B6A5006F2D61 /* UXFRadioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28068D2562B18F006F2D61 /* UXFRadioCell.xib */; };
+		BF2806DA2562B6A5006F2D61 /* UXFInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806912562B18F006F2D61 /* UXFInputCell.xib */; };
+		BF2806DB2562B6A5006F2D61 /* UXFCheckboxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806942562B18F006F2D61 /* UXFCheckboxCell.xib */; };
+		BF2806DC2562B6A5006F2D61 /* UXFCheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806982562B18F006F2D61 /* UXFCheckCell.xib */; };
+		BF2806DD2562B6A6006F2D61 /* UXFImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069A2562B18F006F2D61 /* UXFImageCell.xib */; };
+		BF2806DE2562B6A6006F2D61 /* UXFCampaignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069C2562B18F006F2D61 /* UXFCampaignViewController.xib */; };
+		BF2806DF2562B6A6006F2D61 /* UXFButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069F2562B18F006F2D61 /* UXFButtonCell.xib */; };
+		BF2806E02562B6A6006F2D61 /* UXFTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806A22562B18F006F2D61 /* UXFTextCell.xib */; };
+		BF2806E12562B6A6006F2D61 /* UXFHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806A72562B18F006F2D61 /* UXFHeaderCell.xib */; };
+		BF2806E22562B6A6006F2D61 /* UXFEmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AB2562B18F006F2D61 /* UXFEmailCell.xib */; };
+		BF2806E32562B6A6006F2D61 /* UXFSmilesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AD2562B18F006F2D61 /* UXFSmilesCell.xib */; };
+		BF5ED7DD25593DDE00A1698E /* UXFCampaignPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5ED7DC25593DDE00A1698E /* UXFCampaignPresentor.swift */; };
+		BF5ED7E52559DB1900A1698E /* UXFParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5ED7E42559DB1900A1698E /* UXFParser.swift */; };
+		BF6248B82559E06F0039F855 /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; };
+		BF6248B92559E06F0039F855 /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BF6248C1255B24910039F855 /* UXFDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6248C0255B24910039F855 /* UXFDataManager.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BF6248BA2559E06F0039F855 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A019A3422365E02002FD4F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0A46899122840B2C0074E1A3;
+			remoteInfo = UXFeedbackSDK;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		0A1B9E6F23996F6A00935E2E /* Embed Frameworks */ = {
@@ -108,13 +142,13 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0AA850DE228960960040007C /* Embed Frameworks */ = {
+		BF6248BC2559E0700039F855 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0AA850E0228960AB0040007C /* UXFeedbackSDK.framework in Embed Frameworks */,
+				BF6248B92559E06F0039F855 /* UXFeedbackSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -131,7 +165,7 @@
 		0A019A4B22365E04002FD4F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A019A5322366A29002FD4F8 /* UXFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFeedback.swift; sourceTree = "<group>"; };
 		0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFeedbackDelegate.swift; sourceTree = "<group>"; };
-		0A019A57223673FE002FD4F8 /* UXFTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFTheme.swift; sourceTree = "<group>"; };
+		0A019A57223673FE002FD4F8 /* UXFBTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFBTheme.swift; sourceTree = "<group>"; };
 		0A019A5922367CD6002FD4F8 /* UXFAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFAPIClient.swift; sourceTree = "<group>"; };
 		0A019A5F22367EF2002FD4F8 /* UIVIewAddition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIVIewAddition.swift; sourceTree = "<group>"; };
 		0A019A6022367EF2002FD4F8 /* UIImage+Tinting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Tinting.swift"; sourceTree = "<group>"; };
@@ -142,12 +176,6 @@
 		0A019A6E2237C503002FD4F8 /* UXFURLComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFURLComponents.swift; sourceTree = "<group>"; };
 		0A0CDEA5224F42E900E1C092 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		0A0CDEAB2250598800E1C092 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0A0CDEAD2250664C00E1C092 /* UXFCampaignFormPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCampaignFormPresentor.swift; sourceTree = "<group>"; };
-		0A0CDEAF22506E0C00E1C092 /* UXFCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCommentViewController.swift; sourceTree = "<group>"; };
-		0A0CDEB022506E0C00E1C092 /* UXFCommentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFCommentViewController.xib; sourceTree = "<group>"; };
-		0A0CDEB322506F7800E1C092 /* UXFCongratulationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCongratulationViewController.swift; sourceTree = "<group>"; };
-		0A0CDEB422506F7800E1C092 /* UXFCongratulationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFCongratulationViewController.xib; sourceTree = "<group>"; };
-		0A0CDEB72250965100E1C092 /* UXFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFTextField.swift; sourceTree = "<group>"; };
 		0A0CDEB92250A16B00E1C092 /* UIViewController+present.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+present.swift"; sourceTree = "<group>"; };
 		0A160DD42268CDB000A586C4 /* UXFStatisticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFStatisticManager.swift; sourceTree = "<group>"; };
 		0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reachability+NetworkType.swift"; sourceTree = "<group>"; };
@@ -155,7 +183,6 @@
 		0A1B9E5623996F0700935E2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A1B9E5823996F0700935E2E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0A1B9E6423996F0800935E2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0A2754A8226628BC000E2E17 /* UXFViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFViewController.xib; sourceTree = "<group>"; };
 		0A2A34992346303200B23383 /* UX Feedback SDK Demo_objc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UX Feedback SDK Demo_objc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A2A349B2346303200B23383 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0A2A349C2346303200B23383 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -173,18 +200,9 @@
 		0A46899522840B2C0074E1A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A5F732E2347671F00049893 /* MainViewController_objc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController_objc.h; sourceTree = "<group>"; };
 		0A5F732F2347671F00049893 /* MainViewController_objc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController_objc.m; sourceTree = "<group>"; };
-		0A6CDB75223B960500C17007 /* UXFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFButton.swift; sourceTree = "<group>"; };
 		0A6CDB77223BD47800C17007 /* UXFText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFText.swift; sourceTree = "<group>"; };
-		0A6CDB79224110FE00C17007 /* UXFLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFLabel.swift; sourceTree = "<group>"; };
-		0A6CDB7B224111EC00C17007 /* UXFCheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCheckbox.swift; sourceTree = "<group>"; };
-		0A6CDB7D224113F900C17007 /* UXFParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFParser.swift; sourceTree = "<group>"; };
-		0A6CDB7F224241DE00C17007 /* UXFPageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFPageResponse.swift; sourceTree = "<group>"; };
-		0A6CDB812242424300C17007 /* UXFPageElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFPageElement.swift; sourceTree = "<group>"; };
 		0A6CDB832243B4FB00C17007 /* UXFCampaign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCampaign.swift; sourceTree = "<group>"; };
 		0A6CDB852243BD5500C17007 /* UXFPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFPage.swift; sourceTree = "<group>"; };
-		0A6CDB8A2243C95B00C17007 /* UXFRateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFRateViewController.swift; sourceTree = "<group>"; };
-		0A6CDB8B2243C95B00C17007 /* UXFRateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFRateViewController.xib; sourceTree = "<group>"; };
-		0A6CDB8E22446EC900C17007 /* UXFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFViewController.swift; sourceTree = "<group>"; };
 		0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UXFeedbackSDK.framework; sourceTree = "<group>"; };
 		0AA7061F229126AF0091A7A0 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		0AA70620229126AF0091A7A0 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -198,15 +216,50 @@
 		0AA70628229126B00091A7A0 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
 		0AA70629229126B00091A7A0 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		0AA7062A229126B10091A7A0 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
-		0AA92D9C227A9410005DBCBA /* UXFSmileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFSmileButton.swift; sourceTree = "<group>"; };
 		0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+blocks.swift"; sourceTree = "<group>"; };
 		0AB2FF3922ABBABB0024A88A /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		0AB437C622B2B68C00AF8665 /* SecondViewController_swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController_swift.swift; sourceTree = "<group>"; };
 		0AB437C822B4FE2C00AF8665 /* UIImageView+cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+cache.swift"; sourceTree = "<group>"; };
 		0AB8C29023F444DD00FB0EEB /* PassthroughWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughWindow.swift; sourceTree = "<group>"; };
 		0AF49824229C3D4A000CB7D6 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		0AF49825229C3D4A000CB7D6 /* UIColorInputError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorInputError.swift; sourceTree = "<group>"; };
 		0AF49828229C3D5C000CB7D6 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		BF01BDF425613086008C641B /* UXFOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFOption.swift; sourceTree = "<group>"; };
+		BF01BDF625613254008C641B /* Decodable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+.swift"; sourceTree = "<group>"; };
+		BF01BDF825617FD9008C641B /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
+		BF01BDFA25618234008C641B /* CGFloat+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+.swift"; sourceTree = "<group>"; };
+		BF01BDFC2561EF59008C641B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		BF02FD31255C0AE300C794E6 /* UXFField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFField.swift; sourceTree = "<group>"; };
+		BF02FD3E255C65B000C794E6 /* UXFTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFTransform.swift; sourceTree = "<group>"; };
+		BF2806882562B18F006F2D61 /* UXFStarsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFStarsCell.swift; sourceTree = "<group>"; };
+		BF2806892562B18F006F2D61 /* UXFStarsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFStarsCell.xib; sourceTree = "<group>"; };
+		BF28068B2562B18F006F2D61 /* UXFRadiobuttonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFRadiobuttonCell.xib; sourceTree = "<group>"; };
+		BF28068D2562B18F006F2D61 /* UXFRadioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFRadioCell.xib; sourceTree = "<group>"; };
+		BF28068E2562B18F006F2D61 /* UXFRadioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFRadioCell.swift; sourceTree = "<group>"; };
+		BF28068F2562B18F006F2D61 /* UXFRadiobuttonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFRadiobuttonCell.swift; sourceTree = "<group>"; };
+		BF2806912562B18F006F2D61 /* UXFInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFInputCell.xib; sourceTree = "<group>"; };
+		BF2806922562B18F006F2D61 /* UXFInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFInputCell.swift; sourceTree = "<group>"; };
+		BF2806942562B18F006F2D61 /* UXFCheckboxCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFCheckboxCell.xib; sourceTree = "<group>"; };
+		BF2806952562B18F006F2D61 /* UXFCheckboxCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFCheckboxCell.swift; sourceTree = "<group>"; };
+		BF2806972562B18F006F2D61 /* UXFCheckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFCheckCell.swift; sourceTree = "<group>"; };
+		BF2806982562B18F006F2D61 /* UXFCheckCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFCheckCell.xib; sourceTree = "<group>"; };
+		BF28069A2562B18F006F2D61 /* UXFImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFImageCell.xib; sourceTree = "<group>"; };
+		BF28069B2562B18F006F2D61 /* UXFImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFImageCell.swift; sourceTree = "<group>"; };
+		BF28069C2562B18F006F2D61 /* UXFCampaignViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFCampaignViewController.xib; sourceTree = "<group>"; };
+		BF28069E2562B18F006F2D61 /* UXFButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFButtonCell.swift; sourceTree = "<group>"; };
+		BF28069F2562B18F006F2D61 /* UXFButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFButtonCell.xib; sourceTree = "<group>"; };
+		BF2806A12562B18F006F2D61 /* UXFTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFTextCell.swift; sourceTree = "<group>"; };
+		BF2806A22562B18F006F2D61 /* UXFTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFTextCell.xib; sourceTree = "<group>"; };
+		BF2806A32562B18F006F2D61 /* UXFCampaignViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFCampaignViewController.swift; sourceTree = "<group>"; };
+		BF2806A52562B18F006F2D61 /* UXFBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFBaseCell.swift; sourceTree = "<group>"; };
+		BF2806A72562B18F006F2D61 /* UXFHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFHeaderCell.xib; sourceTree = "<group>"; };
+		BF2806A82562B18F006F2D61 /* UXFHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFHeaderCell.swift; sourceTree = "<group>"; };
+		BF2806AA2562B18F006F2D61 /* UXFEmailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFEmailCell.swift; sourceTree = "<group>"; };
+		BF2806AB2562B18F006F2D61 /* UXFEmailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFEmailCell.xib; sourceTree = "<group>"; };
+		BF2806AD2562B18F006F2D61 /* UXFSmilesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFSmilesCell.xib; sourceTree = "<group>"; };
+		BF2806AE2562B18F006F2D61 /* UXFSmilesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFSmilesCell.swift; sourceTree = "<group>"; };
+		BF5ED7DC25593DDE00A1698E /* UXFCampaignPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCampaignPresentor.swift; sourceTree = "<group>"; };
+		BF5ED7E42559DB1900A1698E /* UXFParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFParser.swift; sourceTree = "<group>"; };
+		BF6248C0255B24910039F855 /* UXFDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,7 +267,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AA850DF228960AB0040007C /* UXFeedbackSDK.framework in Frameworks */,
+				BF6248B82559E06F0039F855 /* UXFeedbackSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,11 +327,11 @@
 			children = (
 				0A019A3F22365E03002FD4F8 /* AppDelegate.swift */,
 				0A019A4122365E03002FD4F8 /* MainViewController_swift.swift */,
-				0AB437C622B2B68C00AF8665 /* SecondViewController_swift.swift */,
 				0A019A4322365E03002FD4F8 /* Main_swift.storyboard */,
 				0A019A4822365E04002FD4F8 /* LaunchScreen_swift.storyboard */,
 				0A019A4622365E04002FD4F8 /* Assets.xcassets */,
 				0A019A4B22365E04002FD4F8 /* Info.plist */,
+				BF01BDFC2561EF59008C641B /* Images.xcassets */,
 			);
 			path = "UX Feedback SDK Demo";
 			sourceTree = "<group>";
@@ -291,7 +344,7 @@
 				0A6CDB872243C8F900C17007 /* UI */,
 				0A019A5322366A29002FD4F8 /* UXFeedback.swift */,
 				0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */,
-				0A0CDEAD2250664C00E1C092 /* UXFCampaignFormPresentor.swift */,
+				BF5ED7DC25593DDE00A1698E /* UXFCampaignPresentor.swift */,
 				0A019A5922367CD6002FD4F8 /* UXFAPIClient.swift */,
 				0A019A6E2237C503002FD4F8 /* UXFURLComponents.swift */,
 				0A019A6C2237B773002FD4F8 /* UXFAPIWebRouter.swift */,
@@ -318,6 +371,9 @@
 				0AB8C29023F444DD00FB0EEB /* PassthroughWindow.swift */,
 				0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */,
 				0A0CDEA5224F42E900E1C092 /* Queue.swift */,
+				BF01BDF625613254008C641B /* Decodable+.swift */,
+				BF01BDF825617FD9008C641B /* UIFont+.swift */,
+				BF01BDFA25618234008C641B /* CGFloat+.swift */,
 			);
 			path = Vendors;
 			sourceTree = "<group>";
@@ -369,32 +425,18 @@
 			path = UXFeedbackSDK;
 			sourceTree = "<group>";
 		};
-		0A468A28228580E70074E1A3 /* Unused */ = {
-			isa = PBXGroup;
-			children = (
-				0A6CDB8A2243C95B00C17007 /* UXFRateViewController.swift */,
-				0A6CDB8B2243C95B00C17007 /* UXFRateViewController.xib */,
-				0A0CDEAF22506E0C00E1C092 /* UXFCommentViewController.swift */,
-				0A0CDEB022506E0C00E1C092 /* UXFCommentViewController.xib */,
-				0A0CDEB322506F7800E1C092 /* UXFCongratulationViewController.swift */,
-				0A0CDEB422506F7800E1C092 /* UXFCongratulationViewController.xib */,
-			);
-			path = Unused;
-			sourceTree = "<group>";
-		};
 		0A6CDB70223B903500C17007 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				0AA92D992279DA3D005DBCBA /* Unused */,
-				0A019A57223673FE002FD4F8 /* UXFTheme.swift */,
+				0A019A57223673FE002FD4F8 /* UXFBTheme.swift */,
 				0A6CDB832243B4FB00C17007 /* UXFCampaign.swift */,
 				0A6CDB852243BD5500C17007 /* UXFPage.swift */,
-				0A6CDB7D224113F900C17007 /* UXFParser.swift */,
 				0A6CDB77223BD47800C17007 /* UXFText.swift */,
-				0A6CDB75223B960500C17007 /* UXFButton.swift */,
-				0AA92D9C227A9410005DBCBA /* UXFSmileButton.swift */,
-				0A6CDB7B224111EC00C17007 /* UXFCheckbox.swift */,
-				0A6CDB79224110FE00C17007 /* UXFLabel.swift */,
+				BF5ED7E42559DB1900A1698E /* UXFParser.swift */,
+				BF6248C0255B24910039F855 /* UXFDataManager.swift */,
+				BF02FD31255C0AE300C794E6 /* UXFField.swift */,
+				BF02FD3E255C65B000C794E6 /* UXFTransform.swift */,
+				BF01BDF425613086008C641B /* UXFOption.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -402,10 +444,7 @@
 		0A6CDB872243C8F900C17007 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				0A468A28228580E70074E1A3 /* Unused */,
-				0A6CDB8E22446EC900C17007 /* UXFViewController.swift */,
-				0A2754A8226628BC000E2E17 /* UXFViewController.xib */,
-				0A0CDEB72250965100E1C092 /* UXFTextField.swift */,
+				BF2806862562B18F006F2D61 /* v2 */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -429,15 +468,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		0AA92D992279DA3D005DBCBA /* Unused */ = {
-			isa = PBXGroup;
-			children = (
-				0A6CDB7F224241DE00C17007 /* UXFPageResponse.swift */,
-				0A6CDB812242424300C17007 /* UXFPageElement.swift */,
-			);
-			path = Unused;
-			sourceTree = "<group>";
-		};
 		0AF49823229C3D4A000CB7D6 /* HEXColor */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,6 +483,144 @@
 				0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF2806862562B18F006F2D61 /* v2 */ = {
+			isa = PBXGroup;
+			children = (
+				BF2806A42562B18F006F2D61 /* _BASE */,
+				BF2806872562B18F006F2D61 /* _Stars */,
+				BF28069D2562B18F006F2D61 /* Button */,
+				BF2806932562B18F006F2D61 /* Checkbox */,
+				BF2806A92562B18F006F2D61 /* Email */,
+				BF2806A62562B18F006F2D61 /* Header */,
+				BF2806992562B18F006F2D61 /* Image */,
+				BF2806902562B18F006F2D61 /* Input */,
+				BF28068A2562B18F006F2D61 /* RadioButton */,
+				BF2806AC2562B18F006F2D61 /* Smiles */,
+				BF2806A02562B18F006F2D61 /* Text */,
+				BF2806A32562B18F006F2D61 /* UXFCampaignViewController.swift */,
+				BF28069C2562B18F006F2D61 /* UXFCampaignViewController.xib */,
+			);
+			path = v2;
+			sourceTree = "<group>";
+		};
+		BF2806872562B18F006F2D61 /* _Stars */ = {
+			isa = PBXGroup;
+			children = (
+				BF2806882562B18F006F2D61 /* UXFStarsCell.swift */,
+				BF2806892562B18F006F2D61 /* UXFStarsCell.xib */,
+			);
+			path = _Stars;
+			sourceTree = "<group>";
+		};
+		BF28068A2562B18F006F2D61 /* RadioButton */ = {
+			isa = PBXGroup;
+			children = (
+				BF28068B2562B18F006F2D61 /* UXFRadiobuttonCell.xib */,
+				BF28068F2562B18F006F2D61 /* UXFRadiobuttonCell.swift */,
+				BF28068C2562B18F006F2D61 /* Cell */,
+			);
+			path = RadioButton;
+			sourceTree = "<group>";
+		};
+		BF28068C2562B18F006F2D61 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BF28068D2562B18F006F2D61 /* UXFRadioCell.xib */,
+				BF28068E2562B18F006F2D61 /* UXFRadioCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		BF2806902562B18F006F2D61 /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				BF2806912562B18F006F2D61 /* UXFInputCell.xib */,
+				BF2806922562B18F006F2D61 /* UXFInputCell.swift */,
+			);
+			path = Input;
+			sourceTree = "<group>";
+		};
+		BF2806932562B18F006F2D61 /* Checkbox */ = {
+			isa = PBXGroup;
+			children = (
+				BF2806942562B18F006F2D61 /* UXFCheckboxCell.xib */,
+				BF2806952562B18F006F2D61 /* UXFCheckboxCell.swift */,
+				BF2806962562B18F006F2D61 /* Cell */,
+			);
+			path = Checkbox;
+			sourceTree = "<group>";
+		};
+		BF2806962562B18F006F2D61 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BF2806972562B18F006F2D61 /* UXFCheckCell.swift */,
+				BF2806982562B18F006F2D61 /* UXFCheckCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		BF2806992562B18F006F2D61 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				BF28069A2562B18F006F2D61 /* UXFImageCell.xib */,
+				BF28069B2562B18F006F2D61 /* UXFImageCell.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		BF28069D2562B18F006F2D61 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				BF28069E2562B18F006F2D61 /* UXFButtonCell.swift */,
+				BF28069F2562B18F006F2D61 /* UXFButtonCell.xib */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		BF2806A02562B18F006F2D61 /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				BF2806A12562B18F006F2D61 /* UXFTextCell.swift */,
+				BF2806A22562B18F006F2D61 /* UXFTextCell.xib */,
+			);
+			path = Text;
+			sourceTree = "<group>";
+		};
+		BF2806A42562B18F006F2D61 /* _BASE */ = {
+			isa = PBXGroup;
+			children = (
+				BF2806A52562B18F006F2D61 /* UXFBaseCell.swift */,
+			);
+			path = _BASE;
+			sourceTree = "<group>";
+		};
+		BF2806A62562B18F006F2D61 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				BF2806A72562B18F006F2D61 /* UXFHeaderCell.xib */,
+				BF2806A82562B18F006F2D61 /* UXFHeaderCell.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		BF2806A92562B18F006F2D61 /* Email */ = {
+			isa = PBXGroup;
+			children = (
+				BF2806AA2562B18F006F2D61 /* UXFEmailCell.swift */,
+				BF2806AB2562B18F006F2D61 /* UXFEmailCell.xib */,
+			);
+			path = Email;
+			sourceTree = "<group>";
+		};
+		BF2806AC2562B18F006F2D61 /* Smiles */ = {
+			isa = PBXGroup;
+			children = (
+				BF2806AD2562B18F006F2D61 /* UXFSmilesCell.xib */,
+				BF2806AE2562B18F006F2D61 /* UXFSmilesCell.swift */,
+			);
+			path = Smiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -476,11 +644,12 @@
 				0A019A3822365E02002FD4F8 /* Sources */,
 				0A019A3922365E02002FD4F8 /* Frameworks */,
 				0A019A3A22365E02002FD4F8 /* Resources */,
-				0AA850DE228960960040007C /* Embed Frameworks */,
+				BF6248BC2559E0700039F855 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				BF6248BB2559E06F0039F855 /* PBXTargetDependency */,
 			);
 			name = "UX Feedback SDK Demo";
 			productName = "UX Feedback Demo";
@@ -531,7 +700,6 @@
 				0A46898F22840B2C0074E1A3 /* Frameworks */,
 				0A46898D22840B2C0074E1A3 /* Headers */,
 				0A46899022840B2C0074E1A3 /* Resources */,
-				0A4689E922854B9F0074E1A3 /* ShellScript */,
 				0A468A0022856BEA0074E1A3 /* CopyFiles */,
 			);
 			buildRules = (
@@ -550,7 +718,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1120;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = UXF;
 				TargetAttributes = {
 					0A019A3B22365E02002FD4F8 = {
@@ -594,6 +762,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A019A4A22365E04002FD4F8 /* LaunchScreen_swift.storyboard in Resources */,
+				BF01BDFD2561EF59008C641B /* Images.xcassets in Resources */,
 				0A019A4722365E04002FD4F8 /* Assets.xcassets in Resources */,
 				0A019A4522365E03002FD4F8 /* Main_swift.storyboard in Resources */,
 			);
@@ -623,8 +792,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF2806D72562B6A5006F2D61 /* UXFStarsCell.xib in Resources */,
+				BF2806D82562B6A5006F2D61 /* UXFRadiobuttonCell.xib in Resources */,
+				BF2806D92562B6A5006F2D61 /* UXFRadioCell.xib in Resources */,
+				BF2806DA2562B6A5006F2D61 /* UXFInputCell.xib in Resources */,
+				BF2806DB2562B6A5006F2D61 /* UXFCheckboxCell.xib in Resources */,
+				BF2806DC2562B6A5006F2D61 /* UXFCheckCell.xib in Resources */,
+				BF2806DD2562B6A6006F2D61 /* UXFImageCell.xib in Resources */,
+				BF2806DE2562B6A6006F2D61 /* UXFCampaignViewController.xib in Resources */,
+				BF2806DF2562B6A6006F2D61 /* UXFButtonCell.xib in Resources */,
+				BF2806E02562B6A6006F2D61 /* UXFTextCell.xib in Resources */,
+				BF2806E12562B6A6006F2D61 /* UXFHeaderCell.xib in Resources */,
+				BF2806E22562B6A6006F2D61 /* UXFEmailCell.xib in Resources */,
+				BF2806E32562B6A6006F2D61 /* UXFSmilesCell.xib in Resources */,
 				0AA70635229126B10091A7A0 /* Roboto-Medium.ttf in Resources */,
-				0A4689C422840FC80074E1A3 /* UXFViewController.xib in Resources */,
 				0AA7062D229126B10091A7A0 /* Roboto-Bold.ttf in Resources */,
 				0AA70631229126B10091A7A0 /* Roboto-Regular.ttf in Resources */,
 				0A4689A722840BB90074E1A3 /* Images.xcassets in Resources */,
@@ -633,32 +814,11 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		0A4689E922854B9F0074E1A3 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "BUILD_PRODUCTS=\"$BUILT_PRODUCTS_DIR\"\ncp -R \"${BUILD_PRODUCTS}/${PRODUCT_NAME}.framework\" \"${PROJECT_DIR}\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		0A019A3822365E02002FD4F8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AB437C722B2B68C00AF8665 /* SecondViewController_swift.swift in Sources */,
 				0A019A4222365E03002FD4F8 /* MainViewController_swift.swift in Sources */,
 				0A019A4022365E03002FD4F8 /* AppDelegate.swift in Sources */,
 			);
@@ -668,7 +828,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A1B9E742399711000935E2E /* SecondViewController_swift.swift in Sources */,
 				0A1B9E5723996F0700935E2E /* AppDelegate.swift in Sources */,
 				0A1B9E5923996F0700935E2E /* SceneDelegate.swift in Sources */,
 				0A1B9E7323996FA700935E2E /* MainViewController_swift.swift in Sources */,
@@ -690,45 +849,66 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A4689C322840FC80074E1A3 /* UXFViewController.swift in Sources */,
 				0AB8C29123F444DE00FB0EEB /* PassthroughWindow.swift in Sources */,
 				0A4689BA22840BE00074E1A3 /* Reachability+NetworkType.swift in Sources */,
+				BF2806B82562B18F006F2D61 /* UXFCheckboxCell.swift in Sources */,
 				0A4689A022840BB90074E1A3 /* UXFeedbackDelegate.swift in Sources */,
-				0A4689B022840BBF0074E1A3 /* UXFLabel.swift in Sources */,
+				BF01BDFB25618234008C641B /* CGFloat+.swift in Sources */,
+				BF01BDF725613254008C641B /* Decodable+.swift in Sources */,
 				0AF49829229C3D5D000CB7D6 /* StringExtension.swift in Sources */,
+				BF02FD32255C0AE300C794E6 /* UXFField.swift in Sources */,
 				0A4689B922840BE00074E1A3 /* UIViewController+present.swift in Sources */,
 				0A4689B422840BE00074E1A3 /* String+additions.swift in Sources */,
 				0A4689AC22840BBF0074E1A3 /* UXFText.swift in Sources */,
-				0A4689A122840BB90074E1A3 /* UXFCampaignFormPresentor.swift in Sources */,
 				0A4689B622840BE00074E1A3 /* UIControl+blocks.swift in Sources */,
 				0A4689B822840BE00074E1A3 /* UIVIewAddition.swift in Sources */,
+				BF2806BE2562B18F006F2D61 /* UXFButtonCell.swift in Sources */,
+				BF2806C92562B18F006F2D61 /* UXFSmilesCell.swift in Sources */,
 				0A4689A622840BB90074E1A3 /* UXFStatisticManager.swift in Sources */,
+				BF2806AF2562B18F006F2D61 /* UXFStarsCell.swift in Sources */,
+				BF2806C32562B18F006F2D61 /* UXFBaseCell.swift in Sources */,
 				0A4689AA22840BBF0074E1A3 /* UXFPage.swift in Sources */,
-				0A4689AF22840BBF0074E1A3 /* UXFCheckbox.swift in Sources */,
+				BF01BDF925617FD9008C641B /* UIFont+.swift in Sources */,
+				BF01BDF525613086008C641B /* UXFOption.swift in Sources */,
 				0A4689A422840BB90074E1A3 /* UXFURLComponents.swift in Sources */,
+				BF2806C02562B18F006F2D61 /* UXFTextCell.swift in Sources */,
 				0A4689A922840BBF0074E1A3 /* UXFCampaign.swift in Sources */,
+				BF6248C1255B24910039F855 /* UXFDataManager.swift in Sources */,
+				BF5ED7E52559DB1900A1698E /* UXFParser.swift in Sources */,
+				BF2806C22562B18F006F2D61 /* UXFCampaignViewController.swift in Sources */,
+				BF02FD3F255C65B000C794E6 /* UXFTransform.swift in Sources */,
 				0A4689BB22840BE00074E1A3 /* Queue.swift in Sources */,
-				0A4689A822840BBF0074E1A3 /* UXFTheme.swift in Sources */,
+				0A4689A822840BBF0074E1A3 /* UXFBTheme.swift in Sources */,
 				0AF49826229C3D4A000CB7D6 /* UIColorExtension.swift in Sources */,
+				BF2806BC2562B18F006F2D61 /* UXFImageCell.swift in Sources */,
 				0A4689B722840BE00074E1A3 /* UISearchBar+color.swift in Sources */,
+				BF5ED7DD25593DDE00A1698E /* UXFCampaignPresentor.swift in Sources */,
+				BF2806B32562B18F006F2D61 /* UXFRadioCell.swift in Sources */,
 				0A4689B322840BE00074E1A3 /* NSLayoutConstraint+additions.swift in Sources */,
 				0A4689A522840BB90074E1A3 /* UXFAPIWebRouter.swift in Sources */,
-				0A4689B222840BC90074E1A3 /* UXFPageElement.swift in Sources */,
 				0A46899F22840BB90074E1A3 /* UXFeedback.swift in Sources */,
-				0A4689AE22840BBF0074E1A3 /* UXFSmileButton.swift in Sources */,
 				0AF49827229C3D4A000CB7D6 /* UIColorInputError.swift in Sources */,
 				0A4689B522840BE00074E1A3 /* UIImage+Tinting.swift in Sources */,
-				0A4689AD22840BBF0074E1A3 /* UXFButton.swift in Sources */,
-				0A4689B122840BC90074E1A3 /* UXFPageResponse.swift in Sources */,
 				0AB2FF3A22ABBABB0024A88A /* Reachability.swift in Sources */,
-				0A4689AB22840BBF0074E1A3 /* UXFParser.swift in Sources */,
+				BF2806C52562B18F006F2D61 /* UXFHeaderCell.swift in Sources */,
 				0AB437C922B4FE2C00AF8665 /* UIImageView+cache.swift in Sources */,
+				BF2806B42562B18F006F2D61 /* UXFRadiobuttonCell.swift in Sources */,
+				BF2806B62562B18F006F2D61 /* UXFInputCell.swift in Sources */,
+				BF2806C62562B18F006F2D61 /* UXFEmailCell.swift in Sources */,
+				BF2806B92562B18F006F2D61 /* UXFCheckCell.swift in Sources */,
 				0A4689A322840BB90074E1A3 /* UXFAPIClient.swift in Sources */,
-				0A4689C522840FD00074E1A3 /* UXFTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BF6248BB2559E06F0039F855 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0A46899122840B2C0074E1A3 /* UXFeedbackSDK */;
+			targetProxy = BF6248BA2559E06F0039F855 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0A019A4322365E03002FD4F8 /* Main_swift.storyboard */ = {
@@ -792,6 +972,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -817,7 +998,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -854,6 +1035,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -873,10 +1055,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -887,23 +1070,25 @@
 		0A019A4F22365E04002FD4F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5K42YC37US;
+				DEVELOPMENT_TEAM = ST7ATYX27F;
+				EXCLUDED_ARCHS = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/UXFeedbackSDK.framework/Frameworks",
 				);
 				INFOPLIST_FILE = "UX Feedback SDK Demo/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.8;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo;
+				MARKETING_VERSION = 0.4;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -913,23 +1098,25 @@
 		0A019A5022365E04002FD4F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5K42YC37US;
+				DEVELOPMENT_TEAM = ST7ATYX27F;
+				EXCLUDED_ARCHS = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/UXFeedbackSDK.framework/Frameworks",
 				);
 				INFOPLIST_FILE = "UX Feedback SDK Demo/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.8;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo;
+				MARKETING_VERSION = 0.4;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -962,6 +1149,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -981,7 +1169,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -996,23 +1184,25 @@
 		0A0955AE229573DD00606547 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5K42YC37US;
+				DEVELOPMENT_TEAM = ST7ATYX27F;
+				EXCLUDED_ARCHS = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/UXFeedbackSDK.framework/Frameworks",
 				);
 				INFOPLIST_FILE = "UX Feedback SDK Demo/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.8;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo;
+				MARKETING_VERSION = 0.4;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1027,12 +1217,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 5K42YC37US;
+				DEVELOPMENT_TEAM = ST7ATYX27F;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1045,11 +1235,13 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.9;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.sdk;
+				MARKETING_VERSION = 1.0.6;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1061,7 +1253,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5K42YC37US;
+				DEVELOPMENT_TEAM = ST7ATYX27F;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1087,7 +1279,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5K42YC37US;
+				DEVELOPMENT_TEAM = ST7ATYX27F;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1113,7 +1305,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5K42YC37US;
+				DEVELOPMENT_TEAM = ST7ATYX27F;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1139,7 +1331,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5K42YC37US;
+				DEVELOPMENT_TEAM = ST7ATYX27F;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1147,13 +1339,13 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "UX Feedback SDK Demo_objc/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.3.8;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rockman.uxfeedback.demo-objc";
+				PRODUCT_BUNDLE_IDENTIFIER = "biz.andalex.uxfeedback.demo-objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1164,7 +1356,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5K42YC37US;
+				DEVELOPMENT_TEAM = ST7ATYX27F;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1172,13 +1364,13 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "UX Feedback SDK Demo_objc/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.3.8;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rockman.uxfeedback.demo-objc";
+				PRODUCT_BUNDLE_IDENTIFIER = "biz.andalex.uxfeedback.demo-objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1189,7 +1381,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5K42YC37US;
+				DEVELOPMENT_TEAM = ST7ATYX27F;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1198,13 +1390,13 @@
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = "ADHOC=1";
 				INFOPLIST_FILE = "UX Feedback SDK Demo_objc/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.3.8;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rockman.uxfeedback.demo-objc";
+				PRODUCT_BUNDLE_IDENTIFIER = "biz.andalex.uxfeedback.demo-objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1218,10 +1410,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 5K42YC37US;
+				DEVELOPMENT_TEAM = ST7ATYX27F;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1235,12 +1428,13 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.9;
-				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.sdk;
+				MARKETING_VERSION = 1.0.6;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1255,12 +1449,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 5K42YC37US;
+				DEVELOPMENT_TEAM = ST7ATYX27F;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1273,11 +1467,13 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.9;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.sdk;
+				MARKETING_VERSION = 1.0.6;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

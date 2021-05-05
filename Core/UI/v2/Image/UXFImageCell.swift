@@ -8,17 +8,35 @@
 
 import UIKit
 
-class UXFImageCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+class UXFImageCell: UXFBaseCell {
+    @IBOutlet var cellImageView: UIImageView!
     
+    override func updateUI() {
+        guard field != nil, theme != nil else {
+            return
+        }
+        
+        guard let sets = field?.uiData["set"] as? Dictionary<String, Any> else {
+            return
+        }
+        var urlString = sets["1x"] as? String
+        let scale = UIScreen.main.scale
+        switch scale {
+        case 2:
+            urlString = sets["2x"] as? String
+            break
+        case 3:
+            urlString = sets["3x"] as? String
+            break
+        default:
+            urlString = sets["1x"] as? String
+            break
+        }
+        guard urlString != nil else {
+            return
+        }
+        cellImageView.cacheImage(url: URL(string: urlString!)!)
+    }
 }
+
+

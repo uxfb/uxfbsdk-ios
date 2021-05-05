@@ -19,7 +19,7 @@ extension UIImage {
         context.scaleBy(x: 1.0, y: -1.0)
         
         // multiply blend mode
-        context.setBlendMode(.normal)
+        context.setBlendMode(.saturation)
         
         let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
         context.clip(to: rect, mask: self.cgImage!)
@@ -41,4 +41,18 @@ extension UIImageView {
         self.tintColor = color
     }
 }
+
+extension UIImage {
+    convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
+        let rect = CGRect(origin: .zero, size: size)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        color.setFill()
+        UIRectFill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        guard let cgImage = image?.cgImage else { return nil }
+        self.init(cgImage: cgImage)
+      }
+    }
 

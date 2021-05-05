@@ -20,6 +20,15 @@ extension NSAttributedString{
 }
 
 extension String {
+    
+    func linesCount(width: CGFloat, font: UIFont) -> Int {
+        let maxSize = CGSize(width: width, height: CGFloat(Float.infinity))
+        let charSize = font.lineHeight
+        let textSize = self.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        let linesRoundedUp = Int(ceil(textSize.height/charSize))
+        return max(linesRoundedUp, 1)
+    }
+    
     func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
         let boundingBox = self.boundingRect(with: constraintRect,

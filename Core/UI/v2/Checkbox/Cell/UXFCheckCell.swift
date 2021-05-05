@@ -10,15 +10,54 @@ import UIKit
 
 class UXFCheckCell: UITableViewCell {
 
+    @IBOutlet var checkImage: UIImageView!
+    @IBOutlet var checkLabel: UILabel!
+    @IBOutlet var checkView: UIView!
+    
+    private var theme: UXFBTheme?
+    private var option: UXFOption?
+    private var isError: Bool = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        contentView.backgroundColor = .clear
+        self.backgroundColor = .clear
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        self.updateUI()
+    }
+    
+    func configure(option: UXFOption, theme: UXFBTheme, isError: Bool) {
+        self.option = option
+        self.theme = theme
+        self.isError = isError
+        self.checkLabel.font = theme.regularFont(size: .mediumFontSize)
+        updateUI()
+    }
+    
+    private func updateUI() {
+        let bundle = Bundle(for: UXFeedback.self)
+        checkView.layer.cornerRadius = theme?.btnBorderRadius ?? 4
+        checkView.layer.masksToBounds = true
+        
+        checkView.borderWidth = 2
+        checkView.borderColor = isError ? theme?.errorColorSecondary : UIColor.clear
+        
+        UIView.animate(withDuration: 0.2) {
+            self.checkLabel.text = self.option?.value
+            if self.isSelected {
+                self.checkLabel.textColor = self.theme?.text01Color
+                self.checkImage.image = UIImage(named: "check_on", in: bundle, compatibleWith: nil)?.tint(with: self.theme?.mainColor ?? .blue)
+                self.checkView.backgroundColor = self.theme?.controlBgColorActive
+            }
+            else {
+                self.checkLabel.textColor = self.theme?.text02Color
+                self.checkImage.image = UIImage(named: "check_off", in: bundle, compatibleWith: nil)?.tint(with: self.theme?.iconColor ?? .gray)
+                self.checkView.backgroundColor = self.theme?.controlBgColor
+            }
+        }
     }
     
 }

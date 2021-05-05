@@ -51,19 +51,14 @@ class UXFAPIClient{
       {[weak self] (status, message, result) in
         
         if status == .success {
-            
-            
-            if let campaignsResults = result as? Array<Dictionary<String, Any>>{
- 
+            if let campaignsResults = result as? Array<Dictionary<String, Any>> {
+    
+                
                 var campaigns: Array<UXFCampaign> = []
                 for compaignInfo in campaignsResults{
-                    if let campaign =  self?._parser.parseCampaing(campaignInfo: compaignInfo){
+                    if let campaign =  self?._parser.parseCampaign(campaignInfo: compaignInfo){
                        campaigns.append(campaign)
                     }
-                    
-                   /* let themeInfo = dict["theme"] as! Dictionary<String, Any>
-                    theme = UXFTheme.init(colorsDict: themeInfo["colors"] as! Dictionary<String, String>,
-                                          smilesDict: themeInfo["smiles"] as! Dictionary<String, String>)*/
                 }
                 
                 DDLogDebug("Get all campaings successful")
@@ -81,6 +76,22 @@ class UXFAPIClient{
       }
     }
     
+    func saveFormData(projectId: String?,
+                      campaignId: String,
+                      pages: Array<Dictionary<String,Any>>?,
+                      completion: ((_ success: Bool, _ message: String?)->())?){
+        
+        let responseHandler = {(status: UXFAPIClientResponseResult, message: String?, result: Any?) in
+            DDLogDebug(String(describing: result))
+        }
+        
+        let systemInfo = UXFStatisticManager.getDeviceInfo()
+        
+        _ = self.performRequest(route: UXFAPIWebRouter.saveFormData(projectId: projectId,
+                                                                    uid: UIDevice.current.identifierForVendor?.uuidString ?? "",
+                                                                    campaignId: campaignId,
+                                                                    pages: pages ?? [], info: systemInfo), completion: responseHandler)
+    }
     
     func saveFormData(isFirstAnswer: Bool,
                       projectId: String?,

@@ -98,4 +98,5 @@ class UXFURLComponents: NSObject{
         _path = path
         self.queryItems = queryParameters
     }
+    
 }

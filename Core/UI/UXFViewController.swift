@@ -8,23 +8,9 @@
 
 import UIKit
 
-enum UXFViewPopupDirection{
-    case rightToLeft
-    case leftToRight
-    case upToDown
-    case downToUp
-    case alphaIn
-    case alphaOut
-}
 
-enum UXFViewControllerState{
-    case presenting
-    case presented
-    case backDismiss
-    case dismissOnly
-}
 
-open class UXFViewController: UIViewController{
+open class UXFViewController: UIViewController {
     
     @IBOutlet var backButton: UIButton?
     @IBOutlet var progressLabel: UILabel?
@@ -38,6 +24,7 @@ open class UXFViewController: UIViewController{
     
     private (set) var formIndex: Int = 0
     private (set) var formID: String?
+    
     var state:UXFViewControllerState = .presenting
     
     internal weak var theme: UXFTheme?
@@ -51,7 +38,7 @@ open class UXFViewController: UIViewController{
     var backHandler: ((_ formIndex: Int)->())?
     
     var presentDirection: UXFViewPopupDirection = .leftToRight
-    var dismissDirection: UXFViewPopupDirection = .alphaOut
+    var dismissDirection: UXFViewPopupDirection = .upToDown
     var backDirection: UXFViewPopupDirection = .rightToLeft
     
     @IBOutlet  var contentView: UIView!
@@ -89,17 +76,17 @@ open class UXFViewController: UIViewController{
         var closeImage = UIImage.init(named: "close_image", in: bundle, compatibleWith: nil)
         var backImage = UIImage.init(named: "back_arrow", in: bundle, compatibleWith: nil)
         let logoImage =  UIImage.init(named: "logo_small", in: bundle, compatibleWith: nil)
-        if let controlColor = theme?.controlColor {
-            backImage = backImage?.tint(with: controlColor)
-            closeImage = closeImage?.tint(with: controlColor)
-        }
+//        if let controlColor = theme?.controlColor {
+//            backImage = backImage?.tint(with: controlColor)
+//            closeImage = closeImage?.tint(with: controlColor)
+//        }
         closeButton?.setImage(closeImage, for: .normal)
         backButton?.setImage(backImage, for: .normal)
         logoImageView?.image = logoImage
         
-        self.progressLabel?.textColor = theme?.progressColor
+//        self.progressLabel?.textColor = theme?.progressColor
         self.progressLabel?.text = self.progressString
-        contentView?.layer.cornerRadius = theme?.formRadius ?? 8.0
+//        contentView?.layer.cornerRadius = theme?.formRadius ?? 8.0
         contentView?.layer.masksToBounds = false
         contentView?.clipsToBounds = false
         
@@ -123,8 +110,6 @@ open class UXFViewController: UIViewController{
     
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-      
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {

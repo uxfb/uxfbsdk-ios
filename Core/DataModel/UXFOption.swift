@@ -6,4 +6,9 @@
 //  Copyright © 2020 UXF. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+struct UXFOption: Codable {
+    let id: String
+    let value: String
+}

@@ -9,7 +9,8 @@
 import UIKit
 import UXFeedbackSDK
 
-let uxfAppID =  UXFeedback.isStage == true ? "cjld2cjxh0000qzrmn831i7rn" : "54444d444a068c157e7f7e14"
+//let uxfAppID =  UXFeedback.isStage ? "ckh8zduea00003c58k6cyatp0" : "ckh8zduea00003c58k6cyatp0"
+let uxfAppID = "ckn735kvc00003b5z0ndi3451"
 
 internal func DDLogDebug(_ value: Any){
     #if DEBUG
@@ -27,7 +28,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         DDLogDebug("Start application")
+        let customTheme = UXFBTheme()
+        customTheme.text03Color =  UIColor.init("#8B90A0")
+        customTheme.inputBorderColor =  UIColor.init("#D3D4D8")
+        customTheme.iconColor =  UIColor.init("#B5B8C2")
+        customTheme.btnBgColorActive =  UIColor.init("#1983C8")
+        customTheme.btnBorderRadius = 4
+        customTheme.errorColorSecondary =  UIColor.init("#F4A0A3")
+        customTheme.errorColorPrimary =  UIColor.init("#E84047")
+        customTheme.mainColor =  UIColor.init("#0076C2")
+        customTheme.controlBgColorActive =  UIColor.init("#DBF1FF")
+        customTheme.formBorderRadius = 8
+        customTheme.inputBgColor =  UIColor.init("#F3F3F3")
+        customTheme.text01Color =  UIColor.init("#232735")
+        customTheme.controlBgColor =  UIColor.init("#F3F3F3")
+        customTheme.controlIconColor =  UIColor.init("#FFFFFF")
+        customTheme.btnBgColor =  UIColor.init("#0076C2")
+        customTheme.text02Color =  UIColor.init("#505565")
+        customTheme.btnTextColor =  UIColor.init("#FFFFFF")
+        customTheme.bgColor =  UIColor.init("#FFFFFF")
         
+        customTheme.fontBoldName = "SnellRoundhand-Black"
+        customTheme.fontMediumName = "SnellRoundhand-Bold"
+        customTheme.fontRegularName = "SnellRoundhand"
+        
+        UXFeedback.sharedSDK.resetAllCampaignsData {
+            
+        }
+        
+        UXFeedback.sharedSDK.setup(appID: uxfAppID)
+        
+//        UXFeedback.sharedSDK.setup(appID: uxfAppID, theme: customTheme) { (success) in
+//
+//        }
         
         /*for family in UIFont.familyNames.sorted() {
             let names = UIFont.fontNames(forFamilyName: family)
@@ -35,21 +68,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }*/
         
         //print(String(describing: UIDevice.current.identifierForVendor?.uuidString))
-        let customTheme: UXFTheme = UXFTheme.init()
-        customTheme.backgroundColor = UIColor.groupTableViewBackground
-        customTheme.titleColor = UIColor.brown
-        customTheme.textColor = UIColor.black
-        customTheme.errorColor = UIColor.red
-        customTheme.controlColor = UIColor.blue
-        customTheme.inputBackgroundColor = UIColor.lightGray
-        customTheme.inputTextColor = UIColor.darkGray
-        customTheme.formRadius = 20.0
-
-        UXFeedback.sharedInstance.setup(appID: uxfAppID)//, theme: customTheme)
-        {  success in
-            let message = "UXFeedback initialization " + (success == true ? "successful" : "failed")
-            DDLogDebug(message)
-        }
+//        let theme: UXFBTheme = UXFBTheme.init()
+//        customTheme.backgroundColor = UIColor.groupTableViewBackground
+//        customTheme.titleColor = UIColor.brown
+//        customTheme.textColor = UIColor.black
+//        customTheme.errorColor = UIColor.red
+//        customTheme.controlColor = UIColor.blue
+//        customTheme.inputBackgroundColor = UIColor.lightGray
+//        customTheme.inputTextColor = UIColor.darkGray
+//        customTheme.formRadius = 20.0
+//        theme.fontBoldName = "SnellRoundhand-Black"
+//        theme.fontMediumName = "SnellRoundhand-Bold"
+//        theme.fontRegularName = "SnellRoundhand"
+        
+//        for family in UIFont.familyNames {
+//                print("family:", family)
+//                for font in UIFont.fontNames(forFamilyName: family) {
+//                    print("font:", font)
+//                }
+//            }
+//
+//        UXFeedback.sharedSDK.setup(appID: uxfAppID, theme: theme) { (success) in
+//            let message = "UXFeedback initialization " + (success == true ? "successful" : "failed")
+//            DDLogDebug(message)
+//        }
+//
+//        UXFeedback.sharedInstance.setup(appID: uxfAppID)//, theme: customTheme)
+//        {  success in
+//            let message = "UXFeedback initialization " + (success == true ? "successful" : "failed")
+//            DDLogDebug(message)
+//        }
 
         return true
     }

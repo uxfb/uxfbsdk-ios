@@ -8,8 +8,9 @@
 
 import UIKit
 
-struct UXFPage{
+struct UXFPage {
     private(set) var id: String?
-    //private(set) var button: UXFButton!
-    private(set) var uiData: Dictionary<String,Any>
+    private(set) var type: Int?
+    private(set) var fields: Array<UXFField>
+    private(set) var buttons: Array<UXFField>
 }
