@@ -162,7 +162,7 @@ open class UXFeedback : NSObject{
                        let name = targeting["value"] as? String, name == event {
                         let isMultiVisited = targeting["isMultiVisited"] as? Bool ?? false
                         if !campaign.show() && !isMultiVisited {
-                            self.delegate?.campaignErrorReceived(errorString: "Campaign cannot be show")
+//                            self.delegate?.campaignErrorReceived(errorString: "Campaign cannot be show")
                             return
                         }
                         

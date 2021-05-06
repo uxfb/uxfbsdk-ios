@@ -22,6 +22,7 @@
                 <outlet property="tableView" destination="8B9-r0-b3F" id="4pS-Nw-bCZ"/>
                 <outlet property="tableViewBottomConstraint" destination="6hV-uy-mhg" id="qif-6m-Snx"/>
                 <outlet property="titleViewHeightConstaint" destination="jgZ-cN-Ozd" id="45U-OL-FEX"/>
+                <outlet property="topView" destination="wft-Ki-8NK" id="qWg-aR-EXT"/>
                 <outlet property="verticallyConstraint" destination="bYB-Kt-vAI" id="JUR-fn-by4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

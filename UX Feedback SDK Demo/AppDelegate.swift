@@ -46,21 +46,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         customTheme.btnBgColor =  UIColor.init("#0076C2")
         customTheme.text02Color =  UIColor.init("#505565")
         customTheme.btnTextColor =  UIColor.init("#FFFFFF")
-        customTheme.bgColor =  UIColor.init("#FFFFFF")
+        customTheme.bgColor =  UIColor.init("#000000")
         
-        customTheme.fontBoldName = "SnellRoundhand-Black"
-        customTheme.fontMediumName = "SnellRoundhand-Bold"
-        customTheme.fontRegularName = "SnellRoundhand"
+//        customTheme.fontBoldName = "SnellRoundhand-Black"
+//        customTheme.fontMediumName = "SnellRoundhand-Bold"
+//        customTheme.fontRegularName = "SnellRoundhand"
         
         UXFeedback.sharedSDK.resetAllCampaignsData {
             
         }
         
-        UXFeedback.sharedSDK.setup(appID: uxfAppID)
+//        UXFeedback.sharedSDK.setup(appID: uxfAppID)
         
-//        UXFeedback.sharedSDK.setup(appID: uxfAppID, theme: customTheme) { (success) in
+        UXFeedback.sharedSDK.setup(appID: uxfAppID, theme: customTheme) { (success) in
 //
-//        }
+        }
         
         /*for family in UIFont.familyNames.sorted() {
             let names = UIFont.fontNames(forFamilyName: family)

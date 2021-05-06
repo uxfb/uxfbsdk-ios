@@ -27,7 +27,7 @@ open class UXFCampaignViewController: UIViewController {
     @IBOutlet var contentView: UIView!
     @IBOutlet var shadowView: AnimatingShadowView! {
         didSet {
-            shadowView.backgroundColor = .white
+            shadowView.backgroundColor = campaign?.theme.bgColor ?? .white
         }
     }
     @IBOutlet var progressLabel: UILabel! {
@@ -47,6 +47,12 @@ open class UXFCampaignViewController: UIViewController {
     @IBOutlet var tableView: UITableView! {
         didSet {
             configureTableView()
+        }
+    }
+    
+    @IBOutlet var topView: UIView! {
+        didSet {
+            topView.backgroundColor = .clear
         }
     }
     
@@ -170,7 +176,7 @@ open class UXFCampaignViewController: UIViewController {
                                               size: CGSize(width: 30,
                                                            height: 22)))
         image.image = UIImage(named: "uxf", in: bundle, compatibleWith: nil)
-        tableFooterView.backgroundColor = .white
+        tableFooterView.backgroundColor = campaign?.theme.bgColor ?? .white
         tableFooterView.addSubview(image)
         tableView.tableFooterView = tableFooterView
         tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero,
@@ -181,7 +187,7 @@ open class UXFCampaignViewController: UIViewController {
         tableView.dataSource = self
         tableView.allowsSelection = false
         tableView.delaysContentTouches = false
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = campaign?.theme.bgColor ?? .white
         
         tableView.register(UINib(nibName: "UXFButtonCell", bundle: bundle), forCellReuseIdentifier: "UXFButtonCell")
         tableView.register(UINib(nibName: "UXFSmilesCell", bundle: bundle), forCellReuseIdentifier: "UXFSmilesCell")
@@ -311,7 +317,7 @@ open class UXFCampaignViewController: UIViewController {
 //                self.bottomConstraint.constant = endPoint.y
             }
             else {
-                print(endPoint.y)
+//                print(endPoint.y)
 //                self.bottomConstraint.constant = min(sheetY + endPoint.y, 0)
             }
             
@@ -427,7 +433,7 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
         case .none, .bottom:
             let cell = UITableViewCell()
             cell.contentView.backgroundColor = campaign?.theme.bgColor ?? .white
-            cell.backgroundColor = .white
+            cell.backgroundColor = campaign?.theme.bgColor ?? .white
             return UITableViewCell()
         }
     }

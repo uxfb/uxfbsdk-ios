@@ -8,17 +8,29 @@
 
 import UIKit
 
-class UXFBaseCell: UITableViewCell {
-
-    override func awakeFromNib() {
+open class UXFBaseCell: UITableViewCell {
+    internal var delegate: UXFFieldDelegate?
+    internal var field: UXFField?
+    internal var theme: UXFBTheme?
+    
+    open override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    open override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-
+    
+    internal func configureWith(_ value: UXFField, theme: UXFBTheme, delegate: UXFFieldDelegate, valueIndex: Int = 0) {
+        self.field = value
+        self.theme = theme
+        self.delegate = delegate
+        updateUI()
+    }
+    
+    internal func updateUI() {
+        
+    }
+    
+    
 }

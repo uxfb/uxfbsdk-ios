@@ -8,17 +8,15 @@
 
 import UIKit
 
-class UXFTextCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+class UXFTextCell: UXFBaseCell {
+    @IBOutlet var label: UILabel!
     
+    override func updateUI() {
+        guard field != nil, theme != nil else {
+            return
+        }
+        label.font = theme?.regularFont(size: .mediumFontSize)
+        label.text = field?.value
+        label.textColor = theme?.text01Color
+    }
 }
