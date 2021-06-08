@@ -36,15 +36,17 @@ class MainViewController_swift: UIViewController {
     }
     
     @IBAction func eventTap(_ sender: UIButton){
+        UXFeedback.sharedSDK.closeOnSwipe = true
+        UXFeedback.sharedSDK.uiBlocked = true
         
         let eventNumber = sender.tag
         assert(eventNumber > 0, "Invalid eventNumber")
         switch eventNumber {
         case 1:
-            UXFeedback.sharedSDK.sendEvent(event: "UXFeedbackIOSTestCampaign", fromController: self)
+            UXFeedback.sharedSDK.sendEvent(event: "slidein", fromController: self)
             break
         case 2:
-            UXFeedback.sharedSDK.sendEvent(event: "eee", fromController: self)
+            UXFeedback.sharedSDK.sendEvent(event: "2222", fromController: self)
             break
         default:
             break
@@ -57,7 +59,7 @@ class MainViewController_swift: UIViewController {
 }
 
 extension MainViewController_swift: UXFeedbackCampaignDelegate{
-    func campaignDidShow() {
+    func campaignDidShow(eventName: String) {
         print("CAMPAIGN SHOWED")
     }
     
@@ -65,34 +67,18 @@ extension MainViewController_swift: UXFeedbackCampaignDelegate{
         DDLogDebug(#function)
     }
     
-    func campaignLoaded(success: Bool){
+    func campaignDidLoad(success: Bool){
         self.buttonsStackView.isUserInteractionEnabled = true
         self.buttonsStackView.alpha = 1.0
         self.busyIndicator.stopAnimating()
         DDLogDebug(#function)
     }
     
-    func campaignErrorReceived(errorString: String){
+    func campaignDidReceiveError(errorString: String){
         DDLogDebug(errorString)
     }
-}
-
-extension MainViewController_swift: UXFeedbackFormDelegate{
     
-    func formDidLoaded(form: UXFCampaignViewController) {
-        DDLogDebug(#function)
-        self.present(form, animated: true, completion: nil)
-    }
-    
-    func formDidFailLoading(error: UXFError) {
-        DDLogDebug(error.localizedDescription)
-    }
-    
-    func formDidClose(formID: String?, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
-        DDLogDebug(#function)
-    }
-    
-    func formWillClose(form: UXFCampaignViewController, formID: String?, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool) {
-        DDLogDebug(#function)
+    func campaignDidClose(eventName: String) {
+        
     }
 }

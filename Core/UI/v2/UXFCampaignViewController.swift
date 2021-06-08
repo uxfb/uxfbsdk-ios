@@ -68,7 +68,7 @@ open class UXFCampaignViewController: UIViewController {
     var presentationAnimated = true
     private (set) var formIndex: Int = 0
     
-    var state:UXFViewControllerState = .presenting
+    var state: UXFViewControllerState = .presenting
     
     var didLoadHandler: ((_ formIndex: Int)->())?
     var didCloseHandler: ((_ formIndex: Int)->(Void))?
@@ -81,6 +81,8 @@ open class UXFCampaignViewController: UIViewController {
     
     var presentDirection: UXFViewPopupDirection = .downToUp
     var dismissDirection: UXFViewPopupDirection = .upToDown
+    
+    var closeOnSwipe: Bool = false
     
     internal var campaign: UXFCampaign?
     
@@ -199,6 +201,7 @@ open class UXFCampaignViewController: UIViewController {
         tableView.register(UINib(nibName: "UXFInputCell", bundle: bundle), forCellReuseIdentifier: "UXFInputCell")
         tableView.register(UINib(nibName: "UXFRadiobuttonCell", bundle: bundle), forCellReuseIdentifier: "UXFRadiobuttonCell")
         tableView.register(UINib(nibName: "UXFTextCell", bundle: bundle), forCellReuseIdentifier: "UXFTextCell")
+        tableView.register(UINib(nibName: "UXFNpsCell", bundle: bundle), forCellReuseIdentifier: "UXFNpsCell")
     }
     
     private func prepareUI() {
@@ -296,7 +299,7 @@ open class UXFCampaignViewController: UIViewController {
     
     @objc func onPan(pan: UIPanGestureRecognizer) -> Void {
         view.endEditing(true)
-        let endPoint = pan.translation(in: pan.view?.superview)
+//        let endPoint = pan.translation(in: pan.view?.superview)
         
         var safeArea: CGFloat = 0
         if #available(iOS 11.0, *) {
@@ -313,26 +316,21 @@ open class UXFCampaignViewController: UIViewController {
             break
         case .changed:
             let velocity = pan.velocity(in: pan.view?.superview)
-            if endPoint.y > 0 {
-//                self.bottomConstraint.constant = endPoint.y
-            }
-            else {
-//                print(endPoint.y)
-//                self.bottomConstraint.constant = min(sheetY + endPoint.y, 0)
-            }
             
             direction = velocity.y
             break
         case .ended:
             if direction > 120 {
-                if self.bottomConstraint.constant == sheetY {
+                if closeOnSwipe {
                     self.dismiss(animated: presentationAnimated)
+                } else {
+                    if self.bottomConstraint.constant == sheetY {
+                        self.dismiss(animated: presentationAnimated)
+                    }
+                    else {
+                        self.bottomConstraint.constant = sheetY
+                    }
                 }
-                else {
-                    self.bottomConstraint.constant = sheetY
-                }
-                
-                
             }
             else if direction < -120 {
                 self.bottomConstraint.constant = 0
@@ -428,6 +426,10 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
             
         case .stars:
             let cell = createCell(UXFStarsCell.self, indexPath: indexPath, field: field, theme: (campaign?.theme)!, delegate: dataManager!)
+            return cell
+            
+        case .nps:
+            let cell = createCell(UXFNpsCell.self, indexPath: indexPath, field: field, theme: (campaign?.theme)!, delegate: dataManager!)
             return cell
             
         case .none, .bottom:

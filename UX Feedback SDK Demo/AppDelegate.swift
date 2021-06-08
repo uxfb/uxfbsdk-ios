@@ -9,8 +9,7 @@
 import UIKit
 import UXFeedbackSDK
 
-//let uxfAppID =  UXFeedback.isStage ? "ckh8zduea00003c58k6cyatp0" : "ckh8zduea00003c58k6cyatp0"
-let uxfAppID = "ckn735kvc00003b5z0ndi3451"
+let uxfAppID = "ckh8zduea00003c58k6cyatp0"
 
 internal func DDLogDebug(_ value: Any){
     #if DEBUG
@@ -56,11 +55,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
-//        UXFeedback.sharedSDK.setup(appID: uxfAppID)
+        UXFeedback.sharedSDK.setup(appID: uxfAppID)
         
-        UXFeedback.sharedSDK.setup(appID: uxfAppID, theme: customTheme) { (success) in
+//        UXFeedback.sharedSDK.setup(appID: uxfAppID, theme: customTheme) { (success) in
 //
-        }
+//        }
         
         /*for family in UIFont.familyNames.sorted() {
             let names = UIFont.fontNames(forFamilyName: family)

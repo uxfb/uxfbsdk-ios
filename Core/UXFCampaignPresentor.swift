@@ -15,7 +15,6 @@ protocol UXFCampaignFormPresentorProtocol: AnyObject {
 
 class UXFCampaignPresentor: NSObject {
 
-    weak var feedbackFormDelegate: UXFeedbackFormDelegate?
     weak var feedbackCampaignDelegate: UXFeedbackCampaignDelegate?
     weak var delegate: UXFCampaignFormPresentorProtocol?
     var isAnimationFormEnabled: Bool = true
@@ -36,11 +35,11 @@ class UXFCampaignPresentor: NSObject {
         isAnimationFormEnabled = animationEnabled
     }
     
-    func showCampaign(){
+    func showCampaign(uiBlocked: Bool, closeOnSwipe: Bool){
         let form = createCampaignForm(_campaign)
         switch _campaign.type {
         case .slidein:
-            showCampaignController(controller: form, direction: .downToUp)
+            showCampaignController(controller: form, direction: .downToUp, uiBlocked: uiBlocked, closeOnSwipe: closeOnSwipe)
             break
         case .popup:
             showCampaignController(controller: form, direction: .alphaIn)
@@ -53,30 +52,23 @@ class UXFCampaignPresentor: NSObject {
     open func createCampaignForm(_ campaign: UXFCampaign) -> UXFCampaignViewController {
         let controller = UXFCampaignViewController()
         controller.campaign = campaign
-        
+        var eventName: String = ""
+        if let targeting = campaign.targetings.first {
+            eventName = targeting["value"] as? String ?? ""
+        }
         controller.transitioningDelegate = self
         controller.modalPresentationStyle = .overFullScreen
-//        controller.didCloseHandler = { [weak self]  (formIndex) in
-            
-//            if let formsCount = self?._campaign.formsCount {
-//                let result = UXFeedbackResult.init(rating: self?._campaign.raiting,
-//                                              abandonedPageIndex: formIndex,
-//                                              sent: true)
-//                if formIndex == (formsCount - 1) {
-//                    DispatchQueue.main.async {
-//                        self?.feedbackCampaignDelegate?.campaignDidClose(withFeedbackResult: result,
-//                        isRedirectToAppStoreEnabled: false)
-//                    }
-//                }
-//                else{
-//
-//                }
-//            }
-//        }
+        controller.didCloseHandler = { [weak self]  (formIndex) in
+            DispatchQueue.main.async {
+                
+                
+                self?.feedbackCampaignDelegate?.campaignDidClose(eventName: eventName)
+            }
+        }
         
         controller.presentHandler = { [weak self] in
             if let _ = self?._campaign {
-                self?.feedbackCampaignDelegate?.campaignDidShow()
+                self?.feedbackCampaignDelegate?.campaignDidShow(eventName: eventName)
             }
         }
         
@@ -84,20 +76,23 @@ class UXFCampaignPresentor: NSObject {
             if let campaign = self?._campaign {
                self?.delegate?.formSubmitted(formIndex: formIndex, info: info, campaign: campaign)
             }
-           
-            if self?.feedbackFormDelegate != nil {
-               controller.dismiss(animated: true, completion: nil)
-            }
         }
         
         return controller
     }
     
-    private func showCampaignController(controller: UXFCampaignViewController, direction: UXFViewPopupDirection){
+    private func showCampaignController(controller: UXFCampaignViewController, direction: UXFViewPopupDirection, uiBlocked: Bool = false, closeOnSwipe: Bool = false) {
         _ = self.dismissCurrentForm(){
             
             self._currentForm = controller
+            
             controller.presentDirection = direction
+            controller.closeOnSwipe = closeOnSwipe
+            
+            if let view = controller.view as? PassthroughToWindowView {
+                view.touchCancel = uiBlocked
+            }
+            
             
             self._appWindow.makeKeyAndVisible()
             self._appWindow.becomeKey()

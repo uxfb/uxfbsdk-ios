@@ -22,6 +22,7 @@ enum UXFFieldType: String {
     case smiles = "smiles"
     case stars = "stars"
     case bottom = "bottom"
+    case nps = "nps"
 }
 
 protocol UXFFieldDelegate {
@@ -454,6 +455,8 @@ class UXFDataManager: UXFFieldDelegate {
             return 40
         case .bottom:
             return 40
+        case .nps:
+            return 110
         case .none:
             return 40
         }
@@ -534,7 +537,7 @@ class UXFDataManager: UXFFieldDelegate {
             case .radiobutton, .email, .input:
                 item["value"] = (answer["value"] as? [String])?.first
                 break
-            case .smiles:
+            case .smiles, .nps:
                 item["value"] = Int(((answer["value"] as? [String])?.first)!)
                 break
             default:

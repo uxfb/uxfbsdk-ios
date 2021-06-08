@@ -93,6 +93,10 @@
 		BF2806E12562B6A6006F2D61 /* UXFHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806A72562B18F006F2D61 /* UXFHeaderCell.xib */; };
 		BF2806E22562B6A6006F2D61 /* UXFEmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AB2562B18F006F2D61 /* UXFEmailCell.xib */; };
 		BF2806E32562B6A6006F2D61 /* UXFSmilesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AD2562B18F006F2D61 /* UXFSmilesCell.xib */; };
+		BF405650265CD89E00709351 /* UXFNpsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40564C265CD86700709351 /* UXFNpsCell.swift */; };
+		BF405651265CD8A200709351 /* UXFNpsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF40564D265CD86700709351 /* UXFNpsCell.xib */; };
+		BF40565B265CED2500709351 /* UILabel+Align.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF405659265CECF700709351 /* UILabel+Align.swift */; };
+		BF40565E265D0B2300709351 /* UIView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40565C265D0B0600709351 /* UIView+Image.swift */; };
 		BF5ED7DD25593DDE00A1698E /* UXFCampaignPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5ED7DC25593DDE00A1698E /* UXFCampaignPresentor.swift */; };
 		BF5ED7E52559DB1900A1698E /* UXFParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5ED7E42559DB1900A1698E /* UXFParser.swift */; };
 		BF6248B82559E06F0039F855 /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; };
@@ -257,6 +261,10 @@
 		BF2806AB2562B18F006F2D61 /* UXFEmailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFEmailCell.xib; sourceTree = "<group>"; };
 		BF2806AD2562B18F006F2D61 /* UXFSmilesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFSmilesCell.xib; sourceTree = "<group>"; };
 		BF2806AE2562B18F006F2D61 /* UXFSmilesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFSmilesCell.swift; sourceTree = "<group>"; };
+		BF40564C265CD86700709351 /* UXFNpsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFNpsCell.swift; sourceTree = "<group>"; };
+		BF40564D265CD86700709351 /* UXFNpsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFNpsCell.xib; sourceTree = "<group>"; };
+		BF405659265CECF700709351 /* UILabel+Align.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Align.swift"; sourceTree = "<group>"; };
+		BF40565C265D0B0600709351 /* UIView+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Image.swift"; sourceTree = "<group>"; };
 		BF5ED7DC25593DDE00A1698E /* UXFCampaignPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCampaignPresentor.swift; sourceTree = "<group>"; };
 		BF5ED7E42559DB1900A1698E /* UXFParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFParser.swift; sourceTree = "<group>"; };
 		BF6248C0255B24910039F855 /* UXFDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFDataManager.swift; sourceTree = "<group>"; };
@@ -374,6 +382,8 @@
 				BF01BDF625613254008C641B /* Decodable+.swift */,
 				BF01BDF825617FD9008C641B /* UIFont+.swift */,
 				BF01BDFA25618234008C641B /* CGFloat+.swift */,
+				BF405659265CECF700709351 /* UILabel+Align.swift */,
+				BF40565C265D0B0600709351 /* UIView+Image.swift */,
 			);
 			path = Vendors;
 			sourceTree = "<group>";
@@ -488,6 +498,7 @@
 		BF2806862562B18F006F2D61 /* v2 */ = {
 			isa = PBXGroup;
 			children = (
+				BF40564B265CD84600709351 /* NPS */,
 				BF2806A42562B18F006F2D61 /* _BASE */,
 				BF2806872562B18F006F2D61 /* _Stars */,
 				BF28069D2562B18F006F2D61 /* Button */,
@@ -621,6 +632,15 @@
 				BF2806AE2562B18F006F2D61 /* UXFSmilesCell.swift */,
 			);
 			path = Smiles;
+			sourceTree = "<group>";
+		};
+		BF40564B265CD84600709351 /* NPS */ = {
+			isa = PBXGroup;
+			children = (
+				BF40564C265CD86700709351 /* UXFNpsCell.swift */,
+				BF40564D265CD86700709351 /* UXFNpsCell.xib */,
+			);
+			path = NPS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -803,6 +823,7 @@
 				BF2806DF2562B6A6006F2D61 /* UXFButtonCell.xib in Resources */,
 				BF2806E02562B6A6006F2D61 /* UXFTextCell.xib in Resources */,
 				BF2806E12562B6A6006F2D61 /* UXFHeaderCell.xib in Resources */,
+				BF405651265CD8A200709351 /* UXFNpsCell.xib in Resources */,
 				BF2806E22562B6A6006F2D61 /* UXFEmailCell.xib in Resources */,
 				BF2806E32562B6A6006F2D61 /* UXFSmilesCell.xib in Resources */,
 				0AA70635229126B10091A7A0 /* Roboto-Medium.ttf in Resources */,
@@ -853,6 +874,7 @@
 				0A4689BA22840BE00074E1A3 /* Reachability+NetworkType.swift in Sources */,
 				BF2806B82562B18F006F2D61 /* UXFCheckboxCell.swift in Sources */,
 				0A4689A022840BB90074E1A3 /* UXFeedbackDelegate.swift in Sources */,
+				BF40565E265D0B2300709351 /* UIView+Image.swift in Sources */,
 				BF01BDFB25618234008C641B /* CGFloat+.swift in Sources */,
 				BF01BDF725613254008C641B /* Decodable+.swift in Sources */,
 				0AF49829229C3D5D000CB7D6 /* StringExtension.swift in Sources */,
@@ -868,6 +890,7 @@
 				BF2806AF2562B18F006F2D61 /* UXFStarsCell.swift in Sources */,
 				BF2806C32562B18F006F2D61 /* UXFBaseCell.swift in Sources */,
 				0A4689AA22840BBF0074E1A3 /* UXFPage.swift in Sources */,
+				BF405650265CD89E00709351 /* UXFNpsCell.swift in Sources */,
 				BF01BDF925617FD9008C641B /* UIFont+.swift in Sources */,
 				BF01BDF525613086008C641B /* UXFOption.swift in Sources */,
 				0A4689A422840BB90074E1A3 /* UXFURLComponents.swift in Sources */,
@@ -884,6 +907,7 @@
 				0A4689B722840BE00074E1A3 /* UISearchBar+color.swift in Sources */,
 				BF5ED7DD25593DDE00A1698E /* UXFCampaignPresentor.swift in Sources */,
 				BF2806B32562B18F006F2D61 /* UXFRadioCell.swift in Sources */,
+				BF40565B265CED2500709351 /* UILabel+Align.swift in Sources */,
 				0A4689B322840BE00074E1A3 /* NSLayoutConstraint+additions.swift in Sources */,
 				0A4689A522840BB90074E1A3 /* UXFAPIWebRouter.swift in Sources */,
 				0A46899F22840BB90074E1A3 /* UXFeedback.swift in Sources */,
@@ -1223,6 +1247,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = YES;
+				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1416,6 +1441,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = YES;
+				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1455,6 +1481,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = YES;
+				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

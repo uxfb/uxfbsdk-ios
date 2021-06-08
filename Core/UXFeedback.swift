@@ -32,7 +32,6 @@ open class UXFeedback : NSObject{
     public static let sharedSDK = UXFeedback.init()
     
     open  var delegate: UXFeedbackCampaignDelegate?
-    private  var formDelegate: UXFeedbackFormDelegate?
     open  var debugEnabled: Bool = false
     open  var animationEnabled: Bool = true
     open var canDisplayCampaings: Bool = true
@@ -42,6 +41,9 @@ open class UXFeedback : NSObject{
     public static var isStage: Bool {
         return UXFAPIWebRouter.isStageAPI
     }
+    
+    open var uiBlocked: Bool = false
+    open var closeOnSwipe: Bool = false
     
     private var _theme: UXFBTheme!
     private  weak var _activeEventController: UIViewController?
@@ -137,14 +139,14 @@ open class UXFeedback : NSObject{
                     self?._appWindow.rootViewController = UIViewController()
                     self?._appWindow?.windowLevel = UXFeedback._windowLevel
                     completion?(success)
-                    self?.delegate?.campaignLoaded(success: success)
+                    self?.delegate?.campaignDidLoad(success: success)
                 }
             }
             else{
                 self?._appWindow = window
                 completion?(success)
                 DispatchQueue.main.async {
-                   self?.delegate?.campaignLoaded(success: success)
+                   self?.delegate?.campaignDidLoad(success: success)
                 }
             }
         }
@@ -162,7 +164,6 @@ open class UXFeedback : NSObject{
                        let name = targeting["value"] as? String, name == event {
                         let isMultiVisited = targeting["isMultiVisited"] as? Bool ?? false
                         if !campaign.show() && !isMultiVisited {
-//                            self.delegate?.campaignErrorReceived(errorString: "Campaign cannot be show")
                             return
                         }
                         
@@ -180,7 +181,7 @@ open class UXFeedback : NSObject{
                             self._formPresentor?.isAnimationFormEnabled = self.animationEnabled
                             self._formPresentor?.delegate = self
                             self._formPresentor?.feedbackCampaignDelegate = self.delegate
-                            self._formPresentor?.showCampaign()
+                            self._formPresentor?.showCampaign(uiBlocked: uiBlocked, closeOnSwipe: closeOnSwipe)
                             self._apiClient.showForm(campaingId: campaign.campaignId)
                         })
                     }
@@ -224,7 +225,7 @@ extension UXFeedback: UXFCampaignFormPresentorProtocol {
                                 pages: info) { (success, message) in
             if success == false {
                 DispatchQueue.main.async {
-                    self.delegate?.campaignErrorReceived(errorString: "Неизвестная ошибка при отправке данных формы")
+                    self.delegate?.campaignDidReceiveError(errorString: "Неизвестная ошибка при отправке данных формы")
                 }
                 
             }

@@ -25,16 +25,8 @@ public class UXFeedbackResult : NSObject{
 
 @objc
 public protocol UXFeedbackCampaignDelegate: AnyObject {
-    func campaignDidClose(withFeedbackResult result: UXFeedbackResult, isRedirectToAppStoreEnabled: Bool)
-    func campaignLoaded(success: Bool)
-    func campaignErrorReceived(errorString: String)
-    func campaignDidShow()
-}
-
-@objc
-public protocol UXFeedbackFormDelegate: AnyObject {
-   func formDidLoaded(form: UXFCampaignViewController)
-   func formDidFailLoading(error: UXFError)
-   func formDidClose(formID: String?, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool)
-   func formWillClose(form: UXFCampaignViewController, formID: String?, withFeedbackResults results: [UXFeedbackResult], isRedirectToAppStoreEnabled: Bool)
+    func campaignDidLoad(success: Bool)
+    func campaignDidReceiveError(errorString: String)
+    func campaignDidShow(eventName: String)
+    func campaignDidClose(eventName: String)
 }

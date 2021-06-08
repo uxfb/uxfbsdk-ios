@@ -16,6 +16,7 @@ class PassthroughWindow: UIWindow {
 }
 
 class PassthroughToWindowView: UIView {
+    var touchCancel: Bool = false
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         var view = super.hitTest(point, with: event)
         if view != self {
@@ -25,7 +26,8 @@ class PassthroughToWindowView: UIView {
         while !(view is PassthroughWindow) {
             view = view?.superview
         }
-        return view
+        
+        return touchCancel ? nil : view
     }
 }
 
