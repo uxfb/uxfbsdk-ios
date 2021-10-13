@@ -30,20 +30,24 @@ public class UXFError : NSError {
 open class UXFeedback : NSObject{
     
     public static let sharedSDK = UXFeedback.init()
+    private static var isInitialized = false
     
-    open  var delegate: UXFeedbackCampaignDelegate?
-    open  var debugEnabled: Bool = false
-    open  var animationEnabled: Bool = true
+    open var delegate: UXFeedbackCampaignDelegate?
+    open var debugEnabled: Bool = false
+    open var animationEnabled: Bool = true
     open var canDisplayCampaings: Bool = true
     open var isCampaignsLoaded: Bool {
         return _campaigns.count > 0
     }
-    public static var isStage: Bool {
-        return UXFAPIWebRouter.isStageAPI
-    }
     
     open var uiBlocked: Bool = false
     open var closeOnSwipe: Bool = false
+    
+    open var globalDelayTimer : Int?
+    
+    private var endpoint : UXFEndpoint = .stage
+    
+    private var appId: String?
     
     private var _theme: UXFBTheme!
     private  weak var _activeEventController: UIViewController?
@@ -56,24 +60,87 @@ open class UXFeedback : NSObject{
     private var _formPresentor: UXFCampaignPresentor?
     private var _parser: UXFParser!
     
-    private var _campaignCancelled: Bool = false
-    
     static private let _windowLevel = UIWindow.Level.alert + 10
     
     private var isInitTheme: Bool = false
+    
+    private var slideinBlackout: UXFBBlackout?
+    private var fullscreenBlackout: UXFBBlackout?
+    
+    private var task: DispatchWorkItem?
+    private var eventCounter: [String: Int] = [:]
+    
+    private var _properties: [String: Any] = [:]
     
     open var currentForm: UXFCampaignViewController?{
         return _formPresentor?._currentForm
     }
     
-    override init() {
+    private override init() {
         super.init()
         self.setTheme(theme: UXFBTheme.init())
     }
     
-    open func setTheme(theme: UXFBTheme){
+    private func saveShowingTime() {
+        if let appId = self.appId {
+            UserDefaults.standard.set(Date(), forKey: appId)
+        }
+    }
+    
+    private func checkGlobalDelay() -> Bool {
+        if let appId = self.appId {
+            if let date = UserDefaults.standard.object(forKey: appId) as? Date {
+                let interval = Int(Date().timeIntervalSince(date))
+                if interval >= self.globalDelayTimer ?? 1800 {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+    
+    open func setProperties(_ properties: [String: Any]) {
+        _properties = properties
+    }
+    
+    open func setTheme(theme: UXFBTheme) {
         _theme = theme
         _parser = UXFParser.init(theme: theme, isInitTheme: isInitTheme)
+    }
+    
+    open func setEndpoint(endpoint: UXFEndpoint) {
+        self.endpoint = endpoint
+        self._apiClient._endpoint = endpoint
+    }
+    
+    open func setSlideinBlackout(color: String, opactity: Int, blur: Int) {
+        if uiBlocked {
+            setBlackout(type: .slidein, color: color, opactity: opactity, blur: blur)
+        }
+    }
+    
+    open func setFullscreenBlackout(color: String, opactity: Int, blur: Int) {
+        setBlackout(type: .popup,color: color, opactity: opactity, blur: blur)
+    }
+    
+    private func setBlackout(type: UXFCampaignType, color: String, opactity: Int, blur: Int) {
+        var blackoutColor: UIColor = .clear
+        if color.count == 6 {
+            blackoutColor = UIColor.init("#\(color)")
+        } else if color.count == 7 {
+            blackoutColor = UIColor.init(color)
+        }
+        switch type {
+        case .slidein:
+            self.slideinBlackout = UXFBBlackout(color: blackoutColor, opacity: opactity, blur: blur)
+            break
+        case .popup:
+            self.fullscreenBlackout = UXFBBlackout(color: blackoutColor, opacity: opactity, blur: blur)
+            break
+        }
+        
     }
     
     //Initialization SDK
@@ -111,23 +178,25 @@ open class UXFeedback : NSObject{
                     theme: UXFBTheme? = nil,
                     completion: ((_ success: Bool) -> Void)? = nil){
         
-//        DDLogDebug(UXFAPIWebRouter.baseURL)
+        if UXFeedback.isInitialized {
+            self.delegate?.campaignDidReceiveError(errorString: "SDK is already initialized")
+        } else {
+            UXFeedback.isInitialized = true
+        }
+        self.appId = appID
         
         if theme != nil {
             self.isInitTheme = true
             self.setTheme(theme: theme!)
         }
 
-        _apiClient = UXFAPIClient.init(appID: appID, parser: self._parser)
-        _apiClient.getAllCampaings { [weak self] (success, message, campaigns) in
+        _apiClient = UXFAPIClient.init(endpoint: self.endpoint, appID: appID, parser: self._parser)
+        _apiClient.getAllCampaings { [weak self] (success, message, delay, campaigns)  in
             
             self?._campaigns = campaigns
-            
+            self?.globalDelayTimer = delay
             if success == true{
                 self?.resetAllCampaigns()
-//                if self?._resetAllCampaingNeeds == true {
-//                    self?.resetAllCampaigns()
-//                }
                 if let event = self?._eventToSend {
                    self?.sendEvent(event: event)
                  }
@@ -155,24 +224,42 @@ open class UXFeedback : NSObject{
     //Request event to show campaing form with specific name
     
     open func sendEvent(event: String, fromController: UIViewController? = nil) {
+ 
         _eventToSend = event
-        _campaignCancelled = false
+
         if self.canDisplayCampaings == true {
             _campaigns.forEach { (campaign) in
                 campaign.targetings.forEach({ (targeting) in
                     if let type = targeting["type"] as? String, type == "trigger",
                        let name = targeting["value"] as? String, name == event {
+                        
                         let isMultiVisited = targeting["isMultiVisited"] as? Bool ?? false
-                        if !campaign.show() && !isMultiVisited {
+                        let counts = (targeting["counts"] as? Int) ?? 1
+                        self.eventCounter[event] = (self.eventCounter[event] ?? 0) + 1
+                        
+                        if (self.eventCounter[event] ?? 1) != counts {
                             return
+                        }
+                        
+                        if isMultiVisited {
+                            self.eventCounter[event] = 0
                         }
                         
                         _eventToSend = nil
                         
-                        DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay(eventName: event)), execute: { [unowned self] in
-                            if self._campaignCancelled {
+                        self.task = DispatchWorkItem {
+                            if !isMultiVisited {
+                                guard self.checkGlobalDelay() else {
+                                    self.delegate?.campaignDidReceiveError(errorString: "Global timer")
+                                    return
+                                }
+                            }
+                            
+                            guard !(self._formPresentor?.isFormOnScreen ?? false) else {
+                                self.delegate?.campaignDidReceiveError(errorString: "Form is on screen")
                                 return
                             }
+                            
                             _ = self._formPresentor?.dismissCurrentForm(completion:  nil)
                             self._formPresentor = UXFCampaignPresentor(window: self._appWindow,
                                                                        campaign: campaign,
@@ -181,9 +268,31 @@ open class UXFeedback : NSObject{
                             self._formPresentor?.isAnimationFormEnabled = self.animationEnabled
                             self._formPresentor?.delegate = self
                             self._formPresentor?.feedbackCampaignDelegate = self.delegate
-                            self._formPresentor?.showCampaign(uiBlocked: uiBlocked, closeOnSwipe: closeOnSwipe)
+                            var blackout: UXFBBlackout?
+                            switch campaign.type {
+                            case .slidein:
+                                blackout = self.slideinBlackout
+                                break
+                            case .popup:
+                                blackout = self.fullscreenBlackout
+                                break
+                            case .none:
+                                break
+                            }
+                            self._formPresentor?.showCampaign(uiBlocked: self.uiBlocked, closeOnSwipe: self.closeOnSwipe, blackout: blackout)
+                            
+                            if !isMultiVisited {
+                                self.saveShowingTime()
+                            }
+                            
                             self._apiClient.showForm(campaingId: campaign.campaignId)
-                        })
+                        }
+                        
+                        guard self.task != nil else {
+                            return
+                        }
+                        
+                        DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay(eventName: event)), execute: self.task! )
                     }
                 })
             }
@@ -191,7 +300,6 @@ open class UXFeedback : NSObject{
     }
     
     open func resetAllCampaignsData(completion: (()->())?){
-        
         if _campaigns.count > 0 {
             self.resetAllCampaigns()
             completion?()
@@ -212,17 +320,26 @@ open class UXFeedback : NSObject{
     }
     
     open func stopCampaign() {
-        self._campaignCancelled = true
         self._formPresentor?.stopCampaign()
+        if self.task != nil {
+            self.task?.cancel()
+            self.task = nil
+        }
     }
 }
 
 extension UXFeedback: UXFCampaignFormPresentorProtocol {
-    func formSubmitted(formIndex: Int, info: Array<Dictionary<String, Any>>?, campaign: UXFCampaign) {
+    func formSubmitted(formIndex: Int, info: Array<Dictionary<String, Any>>?, screenshots: [UXFScreenshot], campaign: UXFCampaign) {
+        
+        let screenshotIds: [String] = screenshots.map { screenshot in
+            return screenshot.id
+        }
         
         _apiClient.saveFormData(projectId: campaign.projectId,
                                 campaignId: campaign.campaignId,
-                                pages: info) { (success, message) in
+                                pages: info,
+                                properties: _properties,
+                                screenshots: screenshotIds) { (success, message) in
             if success == false {
                 DispatchQueue.main.async {
                     self.delegate?.campaignDidReceiveError(errorString: "Неизвестная ошибка при отправке данных формы")
@@ -230,5 +347,7 @@ extension UXFeedback: UXFCampaignFormPresentorProtocol {
                 
             }
         }
+        
+        _apiClient.saveScreenshotsData(screenshots)
     }
 }

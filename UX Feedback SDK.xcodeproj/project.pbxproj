@@ -50,9 +50,6 @@
 		0A5F732A2346336800049893 /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; };
 		0A5F732B2346336800049893 /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A5F73302347671F00049893 /* MainViewController_objc.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F732F2347671F00049893 /* MainViewController_objc.m */; };
-		0AA7062D229126B10091A7A0 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70621229126AF0091A7A0 /* Roboto-Bold.ttf */; };
-		0AA70631229126B10091A7A0 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70625229126B00091A7A0 /* Roboto-Regular.ttf */; };
-		0AA70635229126B10091A7A0 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA70629229126B00091A7A0 /* Roboto-Medium.ttf */; };
 		0AB2FF3A22ABBABB0024A88A /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB2FF3922ABBABB0024A88A /* Reachability.swift */; };
 		0AB437C922B4FE2C00AF8665 /* UIImageView+cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB437C822B4FE2C00AF8665 /* UIImageView+cache.swift */; };
 		0AB8C29123F444DE00FB0EEB /* PassthroughWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8C29023F444DD00FB0EEB /* PassthroughWindow.swift */; };
@@ -93,15 +90,45 @@
 		BF2806E12562B6A6006F2D61 /* UXFHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806A72562B18F006F2D61 /* UXFHeaderCell.xib */; };
 		BF2806E22562B6A6006F2D61 /* UXFEmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AB2562B18F006F2D61 /* UXFEmailCell.xib */; };
 		BF2806E32562B6A6006F2D61 /* UXFSmilesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AD2562B18F006F2D61 /* UXFSmilesCell.xib */; };
+		BF316C102684AABC007CEFC0 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF316C0F2684AABC007CEFC0 /* VisualEffectView.swift */; };
+		BF316C122684AAFA007CEFC0 /* VisualEffectView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF316C112684AAFA007CEFC0 /* VisualEffectView+.swift */; };
 		BF405650265CD89E00709351 /* UXFNpsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40564C265CD86700709351 /* UXFNpsCell.swift */; };
 		BF405651265CD8A200709351 /* UXFNpsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF40564D265CD86700709351 /* UXFNpsCell.xib */; };
 		BF40565B265CED2500709351 /* UILabel+Align.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF405659265CECF700709351 /* UILabel+Align.swift */; };
 		BF40565E265D0B2300709351 /* UIView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40565C265D0B0600709351 /* UIView+Image.swift */; };
+		BF573EC426B69E25002A9E8C /* UXFImageSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC326B69E25002A9E8C /* UXFImageSelector.xib */; };
+		BF573EC526B69E28002A9E8C /* UXFImageSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573EC126B69E19002A9E8C /* UXFImageSelector.swift */; };
+		BF573EC926B69F0C002A9E8C /* UXFGalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573EC726B69F0C002A9E8C /* UXFGalleryCell.swift */; };
+		BF573ECA26B69F0C002A9E8C /* UXFGalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC826B69F0C002A9E8C /* UXFGalleryCell.xib */; };
+		BF573ECD26B6A14E002A9E8C /* UXFScreenshotCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573ECC26B6A14E002A9E8C /* UXFScreenshotCreator.swift */; };
+		BF573ECF26B6A157002A9E8C /* UXFScreenshotCreator.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573ECE26B6A157002A9E8C /* UXFScreenshotCreator.xib */; };
+		BF573ED026B6CBBA002A9E8C /* UXFScreenshotImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170426B670CF006F408A /* UXFScreenshotImageCell.swift */; };
+		BF573ED126B6CBBF002A9E8C /* UXFScreenshotImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF63170526B670CF006F408A /* UXFScreenshotImageCell.xib */; };
 		BF5ED7DD25593DDE00A1698E /* UXFCampaignPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5ED7DC25593DDE00A1698E /* UXFCampaignPresentor.swift */; };
 		BF5ED7E52559DB1900A1698E /* UXFParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5ED7E42559DB1900A1698E /* UXFParser.swift */; };
 		BF6248B82559E06F0039F855 /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; };
 		BF6248B92559E06F0039F855 /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BF6248C1255B24910039F855 /* UXFDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6248C0255B24910039F855 /* UXFDataManager.swift */; };
+		BF6316FC26B27A0B006F408A /* UXFScreenshotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6316F826B279ED006F408A /* UXFScreenshotCell.swift */; };
+		BF63170226B2B25D006F408A /* UXFScreenshotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF6316F926B279ED006F408A /* UXFScreenshotCell.xib */; };
+		BF63171126B67501006F408A /* UXFImageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170B26B67465006F408A /* UXFImageCollection.swift */; };
+		BF63171226B67504006F408A /* UXFImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170C26B67465006F408A /* UXFImageManager.swift */; };
+		BF63171326B67509006F408A /* UXFImageCollection.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF63170D26B67465006F408A /* UXFImageCollection.xib */; };
+		BF885EE42715ED7900F110A0 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF885EE32715ED7900F110A0 /* UIButton+.swift */; };
+		BF885EE62715FB1B00F110A0 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF885EE52715FB1B00F110A0 /* UIAlertController+.swift */; };
+		BFB6DEFC27043D7200732D29 /* UXFScreenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFB27043D7200732D29 /* UXFScreenshot.swift */; };
+		BFB6DEFE27044E4300732D29 /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFD27044E4300732D29 /* Data+.swift */; };
+		BFB6DF2827047D4800732D29 /* YYImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB6DF1E27047D4800732D29 /* YYImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFB6DF2927047D4800732D29 /* YYImageCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB6DF1F27047D4800732D29 /* YYImageCoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFB6DF2A27047D4800732D29 /* YYFrameImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB6DF2027047D4800732D29 /* YYFrameImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFB6DF2B27047D4800732D29 /* YYSpriteSheetImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DF2127047D4800732D29 /* YYSpriteSheetImage.m */; };
+		BFB6DF2C27047D4800732D29 /* YYAnimatedImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB6DF2227047D4800732D29 /* YYAnimatedImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFB6DF2D27047D4800732D29 /* YYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DF2327047D4800732D29 /* YYImage.m */; };
+		BFB6DF2E27047D4800732D29 /* YYImageCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DF2427047D4800732D29 /* YYImageCoder.m */; };
+		BFB6DF2F27047D4800732D29 /* YYFrameImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DF2527047D4800732D29 /* YYFrameImage.m */; };
+		BFB6DF3027047D4800732D29 /* YYAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DF2627047D4800732D29 /* YYAnimatedImageView.m */; };
+		BFB6DF3127047D4800732D29 /* YYSpriteSheetImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB6DF2727047D4800732D29 /* YYSpriteSheetImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFB6DF3327047D6A00732D29 /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB6DF3227047D6A00732D29 /* WebP.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,18 +235,6 @@
 		0A6CDB832243B4FB00C17007 /* UXFCampaign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCampaign.swift; sourceTree = "<group>"; };
 		0A6CDB852243BD5500C17007 /* UXFPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFPage.swift; sourceTree = "<group>"; };
 		0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UXFeedbackSDK.framework; sourceTree = "<group>"; };
-		0AA7061F229126AF0091A7A0 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
-		0AA70620229126AF0091A7A0 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
-		0AA70621229126AF0091A7A0 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
-		0AA70622229126B00091A7A0 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
-		0AA70623229126B00091A7A0 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
-		0AA70624229126B00091A7A0 /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
-		0AA70625229126B00091A7A0 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
-		0AA70626229126B00091A7A0 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
-		0AA70627229126B00091A7A0 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
-		0AA70628229126B00091A7A0 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
-		0AA70629229126B00091A7A0 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
-		0AA7062A229126B10091A7A0 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+blocks.swift"; sourceTree = "<group>"; };
 		0AB2FF3922ABBABB0024A88A /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		0AB437C822B4FE2C00AF8665 /* UIImageView+cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+cache.swift"; sourceTree = "<group>"; };
@@ -261,13 +276,43 @@
 		BF2806AB2562B18F006F2D61 /* UXFEmailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFEmailCell.xib; sourceTree = "<group>"; };
 		BF2806AD2562B18F006F2D61 /* UXFSmilesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFSmilesCell.xib; sourceTree = "<group>"; };
 		BF2806AE2562B18F006F2D61 /* UXFSmilesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFSmilesCell.swift; sourceTree = "<group>"; };
+		BF316C0F2684AABC007CEFC0 /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
+		BF316C112684AAFA007CEFC0 /* VisualEffectView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VisualEffectView+.swift"; sourceTree = "<group>"; };
 		BF40564C265CD86700709351 /* UXFNpsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFNpsCell.swift; sourceTree = "<group>"; };
 		BF40564D265CD86700709351 /* UXFNpsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFNpsCell.xib; sourceTree = "<group>"; };
 		BF405659265CECF700709351 /* UILabel+Align.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Align.swift"; sourceTree = "<group>"; };
 		BF40565C265D0B0600709351 /* UIView+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Image.swift"; sourceTree = "<group>"; };
+		BF573EC126B69E19002A9E8C /* UXFImageSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFImageSelector.swift; sourceTree = "<group>"; };
+		BF573EC326B69E25002A9E8C /* UXFImageSelector.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFImageSelector.xib; sourceTree = "<group>"; };
+		BF573EC726B69F0C002A9E8C /* UXFGalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFGalleryCell.swift; sourceTree = "<group>"; };
+		BF573EC826B69F0C002A9E8C /* UXFGalleryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFGalleryCell.xib; sourceTree = "<group>"; };
+		BF573ECC26B6A14E002A9E8C /* UXFScreenshotCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFScreenshotCreator.swift; sourceTree = "<group>"; };
+		BF573ECE26B6A157002A9E8C /* UXFScreenshotCreator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFScreenshotCreator.xib; sourceTree = "<group>"; };
 		BF5ED7DC25593DDE00A1698E /* UXFCampaignPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCampaignPresentor.swift; sourceTree = "<group>"; };
 		BF5ED7E42559DB1900A1698E /* UXFParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFParser.swift; sourceTree = "<group>"; };
 		BF6248C0255B24910039F855 /* UXFDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFDataManager.swift; sourceTree = "<group>"; };
+		BF6316F826B279ED006F408A /* UXFScreenshotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFScreenshotCell.swift; sourceTree = "<group>"; };
+		BF6316F926B279ED006F408A /* UXFScreenshotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFScreenshotCell.xib; sourceTree = "<group>"; };
+		BF63170426B670CF006F408A /* UXFScreenshotImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFScreenshotImageCell.swift; sourceTree = "<group>"; };
+		BF63170526B670CF006F408A /* UXFScreenshotImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFScreenshotImageCell.xib; sourceTree = "<group>"; };
+		BF63170B26B67465006F408A /* UXFImageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFImageCollection.swift; sourceTree = "<group>"; };
+		BF63170C26B67465006F408A /* UXFImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFImageManager.swift; sourceTree = "<group>"; };
+		BF63170D26B67465006F408A /* UXFImageCollection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFImageCollection.xib; sourceTree = "<group>"; };
+		BF885EE32715ED7900F110A0 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		BF885EE52715FB1B00F110A0 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
+		BFB6DEFB27043D7200732D29 /* UXFScreenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFScreenshot.swift; sourceTree = "<group>"; };
+		BFB6DEFD27044E4300732D29 /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
+		BFB6DF1E27047D4800732D29 /* YYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImage.h; sourceTree = "<group>"; };
+		BFB6DF1F27047D4800732D29 /* YYImageCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImageCoder.h; sourceTree = "<group>"; };
+		BFB6DF2027047D4800732D29 /* YYFrameImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYFrameImage.h; sourceTree = "<group>"; };
+		BFB6DF2127047D4800732D29 /* YYSpriteSheetImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSpriteSheetImage.m; sourceTree = "<group>"; };
+		BFB6DF2227047D4800732D29 /* YYAnimatedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYAnimatedImageView.h; sourceTree = "<group>"; };
+		BFB6DF2327047D4800732D29 /* YYImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYImage.m; sourceTree = "<group>"; };
+		BFB6DF2427047D4800732D29 /* YYImageCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYImageCoder.m; sourceTree = "<group>"; };
+		BFB6DF2527047D4800732D29 /* YYFrameImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYFrameImage.m; sourceTree = "<group>"; };
+		BFB6DF2627047D4800732D29 /* YYAnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYAnimatedImageView.m; sourceTree = "<group>"; };
+		BFB6DF2727047D4800732D29 /* YYSpriteSheetImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSpriteSheetImage.h; sourceTree = "<group>"; };
+		BFB6DF3227047D6A00732D29 /* WebP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebP.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,6 +344,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFB6DF3327047D6A00732D29 /* WebP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,25 +411,31 @@
 		0A019A5B22367E7E002FD4F8 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
-				0AF49823229C3D4A000CB7D6 /* HEXColor */,
+				BF01BDFA25618234008C641B /* CGFloat+.swift */,
+				BFB6DEFD27044E4300732D29 /* Data+.swift */,
+				BF01BDF625613254008C641B /* Decodable+.swift */,
 				0A019A6122367EF2002FD4F8 /* NSLayoutConstraint+additions.swift */,
-				0AF49828229C3D5C000CB7D6 /* StringExtension.swift */,
+				0AB8C29023F444DD00FB0EEB /* PassthroughWindow.swift */,
+				0A0CDEA5224F42E900E1C092 /* Queue.swift */,
+				0AB2FF3922ABBABB0024A88A /* Reachability.swift */,
+				0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */,
 				0A019A6222367EF2002FD4F8 /* String+additions.swift */,
+				0AF49828229C3D5C000CB7D6 /* StringExtension.swift */,
+				BF885EE52715FB1B00F110A0 /* UIAlertController+.swift */,
+				BF885EE32715ED7900F110A0 /* UIButton+.swift */,
+				0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */,
+				BF01BDF825617FD9008C641B /* UIFont+.swift */,
 				0A019A6022367EF2002FD4F8 /* UIImage+Tinting.swift */,
 				0AB437C822B4FE2C00AF8665 /* UIImageView+cache.swift */,
-				0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */,
+				BF405659265CECF700709351 /* UILabel+Align.swift */,
 				0A019A6322367EF2002FD4F8 /* UISearchBar+color.swift */,
+				BF40565C265D0B0600709351 /* UIView+Image.swift */,
 				0A019A5F22367EF2002FD4F8 /* UIVIewAddition.swift */,
 				0A0CDEB92250A16B00E1C092 /* UIViewController+present.swift */,
-				0AB2FF3922ABBABB0024A88A /* Reachability.swift */,
-				0AB8C29023F444DD00FB0EEB /* PassthroughWindow.swift */,
-				0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */,
-				0A0CDEA5224F42E900E1C092 /* Queue.swift */,
-				BF01BDF625613254008C641B /* Decodable+.swift */,
-				BF01BDF825617FD9008C641B /* UIFont+.swift */,
-				BF01BDFA25618234008C641B /* CGFloat+.swift */,
-				BF405659265CECF700709351 /* UILabel+Align.swift */,
-				BF40565C265D0B0600709351 /* UIView+Image.swift */,
+				BF316C0F2684AABC007CEFC0 /* VisualEffectView.swift */,
+				BF316C112684AAFA007CEFC0 /* VisualEffectView+.swift */,
+				0AF49823229C3D4A000CB7D6 /* HEXColor */,
+				BFB6DF1C27047D3800732D29 /* WebP */,
 			);
 			path = Vendors;
 			sourceTree = "<group>";
@@ -429,7 +481,6 @@
 			isa = PBXGroup;
 			children = (
 				0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */,
-				0AA7061E229126970091A7A0 /* Fonts */,
 				0A46899522840B2C0074E1A3 /* Info.plist */,
 			);
 			path = UXFeedbackSDK;
@@ -447,6 +498,7 @@
 				BF02FD31255C0AE300C794E6 /* UXFField.swift */,
 				BF02FD3E255C65B000C794E6 /* UXFTransform.swift */,
 				BF01BDF425613086008C641B /* UXFOption.swift */,
+				BFB6DEFB27043D7200732D29 /* UXFScreenshot.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -457,25 +509,6 @@
 				BF2806862562B18F006F2D61 /* v2 */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		0AA7061E229126970091A7A0 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				0AA7062A229126B10091A7A0 /* Roboto-Black.ttf */,
-				0AA70626229126B00091A7A0 /* Roboto-BlackItalic.ttf */,
-				0AA70621229126AF0091A7A0 /* Roboto-Bold.ttf */,
-				0AA70624229126B00091A7A0 /* Roboto-BoldItalic.ttf */,
-				0AA70623229126B00091A7A0 /* Roboto-Italic.ttf */,
-				0AA70622229126B00091A7A0 /* Roboto-Light.ttf */,
-				0AA7061F229126AF0091A7A0 /* Roboto-LightItalic.ttf */,
-				0AA70629229126B00091A7A0 /* Roboto-Medium.ttf */,
-				0AA70620229126AF0091A7A0 /* Roboto-MediumItalic.ttf */,
-				0AA70625229126B00091A7A0 /* Roboto-Regular.ttf */,
-				0AA70627229126B00091A7A0 /* Roboto-Thin.ttf */,
-				0AA70628229126B00091A7A0 /* Roboto-ThinItalic.ttf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		0AF49823229C3D4A000CB7D6 /* HEXColor */ = {
@@ -498,7 +531,8 @@
 		BF2806862562B18F006F2D61 /* v2 */ = {
 			isa = PBXGroup;
 			children = (
-				BF40564B265CD84600709351 /* NPS */,
+				BF2806A32562B18F006F2D61 /* UXFCampaignViewController.swift */,
+				BF28069C2562B18F006F2D61 /* UXFCampaignViewController.xib */,
 				BF2806A42562B18F006F2D61 /* _BASE */,
 				BF2806872562B18F006F2D61 /* _Stars */,
 				BF28069D2562B18F006F2D61 /* Button */,
@@ -507,11 +541,11 @@
 				BF2806A62562B18F006F2D61 /* Header */,
 				BF2806992562B18F006F2D61 /* Image */,
 				BF2806902562B18F006F2D61 /* Input */,
+				BF40564B265CD84600709351 /* NPS */,
 				BF28068A2562B18F006F2D61 /* RadioButton */,
+				BF6316F726B279CB006F408A /* Screenshot */,
 				BF2806AC2562B18F006F2D61 /* Smiles */,
 				BF2806A02562B18F006F2D61 /* Text */,
-				BF2806A32562B18F006F2D61 /* UXFCampaignViewController.swift */,
-				BF28069C2562B18F006F2D61 /* UXFCampaignViewController.xib */,
 			);
 			path = v2;
 			sourceTree = "<group>";
@@ -643,6 +677,92 @@
 			path = NPS;
 			sourceTree = "<group>";
 		};
+		BF573EC026B69E07002A9E8C /* ImageSelector */ = {
+			isa = PBXGroup;
+			children = (
+				BF573EC626B69EF5002A9E8C /* UXFGalleryCell */,
+				BF573EC126B69E19002A9E8C /* UXFImageSelector.swift */,
+				BF573EC326B69E25002A9E8C /* UXFImageSelector.xib */,
+			);
+			path = ImageSelector;
+			sourceTree = "<group>";
+		};
+		BF573EC626B69EF5002A9E8C /* UXFGalleryCell */ = {
+			isa = PBXGroup;
+			children = (
+				BF573EC726B69F0C002A9E8C /* UXFGalleryCell.swift */,
+				BF573EC826B69F0C002A9E8C /* UXFGalleryCell.xib */,
+			);
+			path = UXFGalleryCell;
+			sourceTree = "<group>";
+		};
+		BF573ECB26B6A134002A9E8C /* ImageCreator */ = {
+			isa = PBXGroup;
+			children = (
+				BF573ECC26B6A14E002A9E8C /* UXFScreenshotCreator.swift */,
+				BF573ECE26B6A157002A9E8C /* UXFScreenshotCreator.xib */,
+			);
+			path = ImageCreator;
+			sourceTree = "<group>";
+		};
+		BF6316F726B279CB006F408A /* Screenshot */ = {
+			isa = PBXGroup;
+			children = (
+				BF63170C26B67465006F408A /* UXFImageManager.swift */,
+				BF573ECB26B6A134002A9E8C /* ImageCreator */,
+				BF573EC026B69E07002A9E8C /* ImageSelector */,
+				BF63170A26B67465006F408A /* ImageViewer */,
+				BF63170326B670B9006F408A /* ImageCell */,
+				BF6316F826B279ED006F408A /* UXFScreenshotCell.swift */,
+				BF6316F926B279ED006F408A /* UXFScreenshotCell.xib */,
+			);
+			path = Screenshot;
+			sourceTree = "<group>";
+		};
+		BF63170326B670B9006F408A /* ImageCell */ = {
+			isa = PBXGroup;
+			children = (
+				BF63170426B670CF006F408A /* UXFScreenshotImageCell.swift */,
+				BF63170526B670CF006F408A /* UXFScreenshotImageCell.xib */,
+			);
+			path = ImageCell;
+			sourceTree = "<group>";
+		};
+		BF63170A26B67465006F408A /* ImageViewer */ = {
+			isa = PBXGroup;
+			children = (
+				BF63170B26B67465006F408A /* UXFImageCollection.swift */,
+				BF63170D26B67465006F408A /* UXFImageCollection.xib */,
+			);
+			path = ImageViewer;
+			sourceTree = "<group>";
+		};
+		BFB6DF1C27047D3800732D29 /* WebP */ = {
+			isa = PBXGroup;
+			children = (
+				BFB6DF3227047D6A00732D29 /* WebP.framework */,
+				BFB6DF1D27047D4800732D29 /* YYImage */,
+			);
+			path = WebP;
+			sourceTree = "<group>";
+		};
+		BFB6DF1D27047D4800732D29 /* YYImage */ = {
+			isa = PBXGroup;
+			children = (
+				BFB6DF1E27047D4800732D29 /* YYImage.h */,
+				BFB6DF1F27047D4800732D29 /* YYImageCoder.h */,
+				BFB6DF2027047D4800732D29 /* YYFrameImage.h */,
+				BFB6DF2127047D4800732D29 /* YYSpriteSheetImage.m */,
+				BFB6DF2227047D4800732D29 /* YYAnimatedImageView.h */,
+				BFB6DF2327047D4800732D29 /* YYImage.m */,
+				BFB6DF2427047D4800732D29 /* YYImageCoder.m */,
+				BFB6DF2527047D4800732D29 /* YYFrameImage.m */,
+				BFB6DF2627047D4800732D29 /* YYAnimatedImageView.m */,
+				BFB6DF2727047D4800732D29 /* YYSpriteSheetImage.h */,
+			);
+			path = YYImage;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -651,6 +771,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A46899622840B2C0074E1A3 /* UXFeedbackSDK.h in Headers */,
+				BFB6DF2A27047D4800732D29 /* YYFrameImage.h in Headers */,
+				BFB6DF2827047D4800732D29 /* YYImage.h in Headers */,
+				BFB6DF2927047D4800732D29 /* YYImageCoder.h in Headers */,
+				BFB6DF2C27047D4800732D29 /* YYAnimatedImageView.h in Headers */,
+				BFB6DF3127047D4800732D29 /* YYSpriteSheetImage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,7 +863,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1120;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1300;
 				ORGANIZATIONNAME = UXF;
 				TargetAttributes = {
 					0A019A3B22365E02002FD4F8 = {
@@ -752,6 +877,7 @@
 					};
 					0A46899122840B2C0074E1A3 = {
 						CreatedOnToolsVersion = 10.2;
+						LastSwiftMigration = 1300;
 					};
 				};
 			};
@@ -815,20 +941,23 @@
 				BF2806D72562B6A5006F2D61 /* UXFStarsCell.xib in Resources */,
 				BF2806D82562B6A5006F2D61 /* UXFRadiobuttonCell.xib in Resources */,
 				BF2806D92562B6A5006F2D61 /* UXFRadioCell.xib in Resources */,
+				BF573ECF26B6A157002A9E8C /* UXFScreenshotCreator.xib in Resources */,
 				BF2806DA2562B6A5006F2D61 /* UXFInputCell.xib in Resources */,
 				BF2806DB2562B6A5006F2D61 /* UXFCheckboxCell.xib in Resources */,
 				BF2806DC2562B6A5006F2D61 /* UXFCheckCell.xib in Resources */,
 				BF2806DD2562B6A6006F2D61 /* UXFImageCell.xib in Resources */,
 				BF2806DE2562B6A6006F2D61 /* UXFCampaignViewController.xib in Resources */,
 				BF2806DF2562B6A6006F2D61 /* UXFButtonCell.xib in Resources */,
+				BF63171326B67509006F408A /* UXFImageCollection.xib in Resources */,
 				BF2806E02562B6A6006F2D61 /* UXFTextCell.xib in Resources */,
 				BF2806E12562B6A6006F2D61 /* UXFHeaderCell.xib in Resources */,
+				BF63170226B2B25D006F408A /* UXFScreenshotCell.xib in Resources */,
+				BF573EC426B69E25002A9E8C /* UXFImageSelector.xib in Resources */,
+				BF573ED126B6CBBF002A9E8C /* UXFScreenshotImageCell.xib in Resources */,
 				BF405651265CD8A200709351 /* UXFNpsCell.xib in Resources */,
 				BF2806E22562B6A6006F2D61 /* UXFEmailCell.xib in Resources */,
 				BF2806E32562B6A6006F2D61 /* UXFSmilesCell.xib in Resources */,
-				0AA70635229126B10091A7A0 /* Roboto-Medium.ttf in Resources */,
-				0AA7062D229126B10091A7A0 /* Roboto-Bold.ttf in Resources */,
-				0AA70631229126B10091A7A0 /* Roboto-Regular.ttf in Resources */,
+				BF573ECA26B69F0C002A9E8C /* UXFGalleryCell.xib in Resources */,
 				0A4689A722840BB90074E1A3 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -874,16 +1003,21 @@
 				0A4689BA22840BE00074E1A3 /* Reachability+NetworkType.swift in Sources */,
 				BF2806B82562B18F006F2D61 /* UXFCheckboxCell.swift in Sources */,
 				0A4689A022840BB90074E1A3 /* UXFeedbackDelegate.swift in Sources */,
+				BF316C122684AAFA007CEFC0 /* VisualEffectView+.swift in Sources */,
 				BF40565E265D0B2300709351 /* UIView+Image.swift in Sources */,
 				BF01BDFB25618234008C641B /* CGFloat+.swift in Sources */,
+				BF63171226B67504006F408A /* UXFImageManager.swift in Sources */,
+				BF6316FC26B27A0B006F408A /* UXFScreenshotCell.swift in Sources */,
 				BF01BDF725613254008C641B /* Decodable+.swift in Sources */,
 				0AF49829229C3D5D000CB7D6 /* StringExtension.swift in Sources */,
 				BF02FD32255C0AE300C794E6 /* UXFField.swift in Sources */,
 				0A4689B922840BE00074E1A3 /* UIViewController+present.swift in Sources */,
 				0A4689B422840BE00074E1A3 /* String+additions.swift in Sources */,
+				BF573EC926B69F0C002A9E8C /* UXFGalleryCell.swift in Sources */,
 				0A4689AC22840BBF0074E1A3 /* UXFText.swift in Sources */,
 				0A4689B622840BE00074E1A3 /* UIControl+blocks.swift in Sources */,
 				0A4689B822840BE00074E1A3 /* UIVIewAddition.swift in Sources */,
+				BF573EC526B69E28002A9E8C /* UXFImageSelector.swift in Sources */,
 				BF2806BE2562B18F006F2D61 /* UXFButtonCell.swift in Sources */,
 				BF2806C92562B18F006F2D61 /* UXFSmilesCell.swift in Sources */,
 				0A4689A622840BB90074E1A3 /* UXFStatisticManager.swift in Sources */,
@@ -894,31 +1028,44 @@
 				BF01BDF925617FD9008C641B /* UIFont+.swift in Sources */,
 				BF01BDF525613086008C641B /* UXFOption.swift in Sources */,
 				0A4689A422840BB90074E1A3 /* UXFURLComponents.swift in Sources */,
+				BFB6DF3027047D4800732D29 /* YYAnimatedImageView.m in Sources */,
 				BF2806C02562B18F006F2D61 /* UXFTextCell.swift in Sources */,
 				0A4689A922840BBF0074E1A3 /* UXFCampaign.swift in Sources */,
 				BF6248C1255B24910039F855 /* UXFDataManager.swift in Sources */,
 				BF5ED7E52559DB1900A1698E /* UXFParser.swift in Sources */,
+				BFB6DEFE27044E4300732D29 /* Data+.swift in Sources */,
 				BF2806C22562B18F006F2D61 /* UXFCampaignViewController.swift in Sources */,
 				BF02FD3F255C65B000C794E6 /* UXFTransform.swift in Sources */,
+				BF573ED026B6CBBA002A9E8C /* UXFScreenshotImageCell.swift in Sources */,
+				BFB6DEFC27043D7200732D29 /* UXFScreenshot.swift in Sources */,
 				0A4689BB22840BE00074E1A3 /* Queue.swift in Sources */,
 				0A4689A822840BBF0074E1A3 /* UXFBTheme.swift in Sources */,
 				0AF49826229C3D4A000CB7D6 /* UIColorExtension.swift in Sources */,
 				BF2806BC2562B18F006F2D61 /* UXFImageCell.swift in Sources */,
 				0A4689B722840BE00074E1A3 /* UISearchBar+color.swift in Sources */,
 				BF5ED7DD25593DDE00A1698E /* UXFCampaignPresentor.swift in Sources */,
+				BFB6DF2E27047D4800732D29 /* YYImageCoder.m in Sources */,
 				BF2806B32562B18F006F2D61 /* UXFRadioCell.swift in Sources */,
+				BF316C102684AABC007CEFC0 /* VisualEffectView.swift in Sources */,
+				BF63171126B67501006F408A /* UXFImageCollection.swift in Sources */,
 				BF40565B265CED2500709351 /* UILabel+Align.swift in Sources */,
+				BF885EE62715FB1B00F110A0 /* UIAlertController+.swift in Sources */,
 				0A4689B322840BE00074E1A3 /* NSLayoutConstraint+additions.swift in Sources */,
 				0A4689A522840BB90074E1A3 /* UXFAPIWebRouter.swift in Sources */,
 				0A46899F22840BB90074E1A3 /* UXFeedback.swift in Sources */,
 				0AF49827229C3D4A000CB7D6 /* UIColorInputError.swift in Sources */,
 				0A4689B522840BE00074E1A3 /* UIImage+Tinting.swift in Sources */,
+				BF885EE42715ED7900F110A0 /* UIButton+.swift in Sources */,
 				0AB2FF3A22ABBABB0024A88A /* Reachability.swift in Sources */,
 				BF2806C52562B18F006F2D61 /* UXFHeaderCell.swift in Sources */,
 				0AB437C922B4FE2C00AF8665 /* UIImageView+cache.swift in Sources */,
+				BF573ECD26B6A14E002A9E8C /* UXFScreenshotCreator.swift in Sources */,
+				BFB6DF2D27047D4800732D29 /* YYImage.m in Sources */,
+				BFB6DF2B27047D4800732D29 /* YYSpriteSheetImage.m in Sources */,
 				BF2806B42562B18F006F2D61 /* UXFRadiobuttonCell.swift in Sources */,
 				BF2806B62562B18F006F2D61 /* UXFInputCell.swift in Sources */,
 				BF2806C62562B18F006F2D61 /* UXFEmailCell.swift in Sources */,
+				BFB6DF2F27047D4800732D29 /* YYFrameImage.m in Sources */,
 				BF2806B92562B18F006F2D61 /* UXFCheckCell.swift in Sources */,
 				0A4689A322840BB90074E1A3 /* UXFAPIClient.swift in Sources */,
 			);
@@ -1095,6 +1242,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ST7ATYX27F;
@@ -1237,6 +1385,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1251,6 +1401,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Core/Vendors/WebP",
 				);
 				INFOPLIST_FILE = UXFeedbackSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1267,6 +1418,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1291,8 +1444,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.8;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo.wscene;
+				MARKETING_VERSION = 0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1317,8 +1470,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.8;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo.wscene;
+				MARKETING_VERSION = 0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1343,8 +1496,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.8;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rockman.uxfeedback.demo.wscene;
+				MARKETING_VERSION = 0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1431,6 +1584,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1445,6 +1600,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Core/Vendors/WebP",
 				);
 				INFOPLIST_FILE = UXFeedbackSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1461,6 +1617,9 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1471,6 +1630,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1485,6 +1646,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Core/Vendors/WebP",
 				);
 				INFOPLIST_FILE = UXFeedbackSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1501,6 +1663,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

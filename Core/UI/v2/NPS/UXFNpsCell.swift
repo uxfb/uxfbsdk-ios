@@ -206,6 +206,7 @@ class UXFNpsCell: UXFBaseCell {
     
     
     //MARK :- Actions
+    
     @IBAction func valueChanged(_ sender: Any) {
         updateLabels()
     }

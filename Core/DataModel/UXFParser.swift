@@ -32,7 +32,6 @@ class UXFParser {
            return theme
         }
         return nil
-       // if let controlColorString = jsonDict["controlColor"]
     }
     
      func parseCampaign(campaignInfo: Dictionary<String,Any>) -> UXFCampaign?{
@@ -78,6 +77,7 @@ class UXFParser {
                                          uiData: fieldDict)
                     fields.append(field)
                 }
+                
                 let buttonsDict = pageDict["buttons"] as? Array<Dictionary<String, Any>> ?? []
                 var buttons = Array<UXFField>()
                 for buttonDict in buttonsDict {

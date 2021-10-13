@@ -23,12 +23,14 @@ enum UXFFieldType: String {
     case stars = "stars"
     case bottom = "bottom"
     case nps = "nps"
+    case screenshot = "screenshot"
 }
 
 protocol UXFFieldDelegate {
     func fieldChanged(_ field: UXFField, answer: [String], refresh: Bool)
     func buttonTapped(_ field: UXFField, answer: [String], refresh: Bool)
     func textChanged(_ field: UXFField, answer: [String], refresh: Bool)
+    func screenshotChanged(screenshots: [UXFScreenshot])
 }
 
 class UXFDataManager: UXFFieldDelegate {
@@ -78,6 +80,12 @@ class UXFDataManager: UXFFieldDelegate {
     }
     
     private var answers = Array<Dictionary<String, Any>>()
+    private var _screenshots: [UXFScreenshot] = []
+    public var screenshots: [UXFScreenshot] {
+        get {
+            return _screenshots
+        }
+    }
     
     var isError: Bool = false
     
@@ -134,12 +142,12 @@ class UXFDataManager: UXFFieldDelegate {
     internal func heightForFieldHeader(index: Int) -> CGFloat {
         let field = ((campaign?.pages[currentPage].fields ?? []) + (campaign?.pages[currentPage].buttons ?? []))[index]
         
-        return checkFieldTransfromed(field) ? getFieldHeaderHeight(field) : CGFloat.leastNormalMagnitude
+        return checkFieldTransfromed(field) ? getFieldHeaderHeight(field) : CGFloat.leastNonzeroMagnitude
     }
     
     internal func heightForFieldFooter(index: Int) -> CGFloat {
         let field = ((campaign?.pages[currentPage].fields ?? []) + (campaign?.pages[currentPage].buttons ?? []))[index]
-        return checkFieldTransfromed(field) ? getFieldFooterHeight(field) : CGFloat.leastNormalMagnitude
+        return checkFieldTransfromed(field) ? getFieldFooterHeight(field) : CGFloat.leastNonzeroMagnitude
     }
     
     internal func numberForFieldCell(index: Int) -> Int {
@@ -262,7 +270,7 @@ class UXFDataManager: UXFFieldDelegate {
     }
     
     private func getFieldHeaderHeight(_ field: UXFField) -> CGFloat {
-        if field.value == nil {
+        guard let value = field.value, value != "" else {
             return CGFloat.leastNonzeroMagnitude //12
         }
         
@@ -277,7 +285,7 @@ class UXFDataManager: UXFFieldDelegate {
 
         
         let font = (campaign?.theme.mediumFont(size: .mediumFontSize))!
-        let lines = field.value!.linesCount(width: UIScreen.main.bounds.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
+        let lines = value.linesCount(width: UIScreen.main.bounds.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
                                             font: font)//.mediumSemiboldFont)
         let valueHeight = CGFloat(lines) * font.lineHeight + getTitleSpacing(field)
         return valueHeight
@@ -457,6 +465,18 @@ class UXFDataManager: UXFFieldDelegate {
             return 40
         case .nps:
             return 110
+        case .screenshot:
+            var buttonsHeight: CGFloat = 0
+            
+            switch campaign?.type {
+            case .popup:
+                buttonsHeight = 82
+            case .slidein:
+                buttonsHeight = 48
+            case .none:
+                return 0
+            }
+            return screenshots.count > 0 ? 140+buttonsHeight : buttonsHeight
         case .none:
             return 40
         }
@@ -517,6 +537,12 @@ class UXFDataManager: UXFFieldDelegate {
         viewController?.updateField(idx: fieldIndex)
     }
     
+    func screenshotChanged(screenshots: [UXFScreenshot]) {
+        isError = false
+        _screenshots = screenshots
+        viewController?.updateUI()
+    }
+    
     //MARK: - Routing
     
     private func nextPage() {
@@ -568,7 +594,7 @@ class UXFDataManager: UXFFieldDelegate {
             results.append(result)
         }
         
-        viewController!.completeHandler!(0, results)
+        viewController!.completeHandler!(0, results, screenshots)
         viewController?.dismiss(animated: viewController?.presentationAnimated ?? true)
     }
     
@@ -600,53 +626,65 @@ class UXFDataManager: UXFFieldDelegate {
     }
     
     private func getNextIndex() -> Int {
-        guard let transform = campaign?.transforms.first(where: { (tramsform) -> Bool in
-            tramsform.fromPage == campaign?.pages[currentPage].id && tramsform.action == "transition"
+        
+        guard let transforms = campaign?.transforms.filter({ transform in
+            transform.fromPage == campaign?.pages[currentPage].id && transform.action == "transition"
         }) else {
             return currentPage + 1
         }
         
-        let toPageIndex = campaign?.pages.lastIndex(where: { (page) -> Bool in
-            page.id == transform.toPage
-        }) ?? (currentPage + 1)
-        
-        let answer = answers.first(where: { (dict) -> Bool in
-            ((dict["fieldId"] as? String) ?? "") == transform.fromField
-        })
-        
-        let answers = (answer?["value"] as? [String]) ?? []
-        
-        let type = UXFFieldType(rawValue: (answer?["type"] as? String) ?? "")
-        
-        switch transform.rule {
-        case "equal":
-            let same = transform.value?.filter() { answers.contains($0) }
-            if same?.count ?? 0 > 0 {
-                return toPageIndex
-            }
-            break
-        case "filled":
-            if type == .checkbox {
-                if answers.count > 0 {
+        for transform in transforms {
+            let toPageIndex = campaign?.pages.lastIndex(where: { (page) -> Bool in
+                page.id == transform.toPage
+            }) ?? (currentPage + 1)
+            
+            let answer = answers.first(where: { (dict) -> Bool in
+                ((dict["fieldId"] as? String) ?? "") == transform.fromField
+            })
+            
+            let answers = (answer?["value"] as? [String]) ?? []
+            
+            let type = UXFFieldType(rawValue: (answer?["type"] as? String) ?? "")
+            
+            switch transform.rule {
+            case "equal":
+                let same = transform.value?.filter() { answers.contains($0) }
+                if same?.count ?? 0 > 0 {
                     return toPageIndex
                 }
-            }
-            else {
-                if (answers.first ?? "").count > 0 {
+                break
+            case "filled":
+                if type == .checkbox {
+                    if answers.count > 0 {
+                        return toPageIndex
+                    }
+                }
+                else {
+                    if (answers.first ?? "").count > 0 {
+                        return toPageIndex
+                    }
+                }
+                break
+            case "unfilled":
+                if answer == nil {
                     return toPageIndex
                 }
+                break
+            default:
+                break
             }
-            break
-        case "unfilled":
-            if answer == nil {
-                return toPageIndex
-            }
-            break
-        default:
-            break
         }
         
-        return currentPage + 1
+        
+        guard let elseTransform = campaign?.transforms.first(where: { transform in
+            transform.fromPage == campaign?.pages[currentPage].id && transform.action == "transition" && transform.fromField == nil
+        }) else {
+            return currentPage + 1
+        }
+        
+        return campaign?.pages.lastIndex(where: { (page) -> Bool in
+            page.id == elseTransform.toPage
+        }) ?? (currentPage + 1)
     }
     
     private func checkFieldTransfromed(_ field: UXFField) -> Bool {

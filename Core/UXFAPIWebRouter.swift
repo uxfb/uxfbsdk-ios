@@ -7,13 +7,13 @@
 //
 
 import Foundation.NSURLRequest
+import UniformTypeIdentifiers
 
 enum HTTPHeaderField: String {
     case authentication = "Authorization"
     case contentType = "Content-Type"
     case acceptType = "Accept"
     case acceptEncoding = "Accept-Encoding"
-    case token = "token"
     case appID = "appId"
     case uid = "uid"
     case campaignId = "campaignId"
@@ -22,6 +22,8 @@ enum HTTPHeaderField: String {
     case answerId = "answerId"
     case projectId = "projectId"
     case info = "info"
+    case properties = "properties"
+    case screenshots = "screenshots"
 }
 
 extension Error {
@@ -31,49 +33,29 @@ extension Error {
 
 enum ContentType: String {
     case json = "application/json"
+    case screenshot = "multipart/form-data; boundary=-----------------------------0123456789"
 }
 
+public enum UXFEndpoint: String {
+    case prod = "https://public-api.uxfeedback.ru/v3"
+    case stage = "https://api-stage.uxfeedback.ru/v3"
+    case release = "https://api-release.uxfeedback.ru/v3"
+}
 
 enum UXFAPIWebRouter {
     
-    static var baseURL: String {
-        if UXFAPIWebRouter.isStageAPI == true {
-            return
-//                "https://public-api.uxfeedback.ru/v2"
-                "https://api-release.uxfeedback.ru/v2"
-        }
-        else{
-            return
-//                "https://public-api.uxfeedback.ru/v2"
-                "https://api-release.uxfeedback.ru/v2"
-        }
-    }
-    
-    static internal var isStageAPI: Bool {
-        #if DEBUG
-          return true
-        #else
-        #if ADHOC
-          return true
-        #else
-          return false
-        #endif
-        #endif
-    }
+    static var endpoint: UXFEndpoint = .release
     
     case getCampaing(appID: String)
-    case saveFirstFormData(projectId: String?, uid: String, campaignId: String, fields: Dictionary <String, Any>?, info: Dictionary<String, Any>)
-    case saveOtherFormData(projectId: String?, answerId: String?, fields: Dictionary <String, Any>?)
     case showForm(uid: String, campaingId: String)
-    case saveFormData(projectId: String?, uid: String, campaignId: String, pages: Array<Dictionary<String, Any>>, info: Dictionary<String, Any>)
+    case saveFormData(projectId: String?, uid: String, campaignId: String, pages: Array<Dictionary<String, Any>>, info: Dictionary<String, Any>, properties: Dictionary<String, Any>, screenshots: [String] )
+    case saveScreenshot(screenshot: UXFScreenshot)
     
     var method: String {
         switch self {
 
-        case .saveFirstFormData, .showForm, .saveFormData:
+        case .showForm, .saveFormData, .saveScreenshot:
             return "POST"
-        case .saveOtherFormData:
-            return "PUT"
             
         default:
             return "GET"
@@ -84,73 +66,84 @@ enum UXFAPIWebRouter {
        switch self {
        case .getCampaing(let appId):
             return "/mobile/campaigns/\(appId)"
-       case .saveFirstFormData(let projectId, _, _, _, _):
-            return "/mobile/answers/\(projectId!)"
-       case .saveOtherFormData(_, _, _):
-            return "/mobile/answers"
-       case .saveFormData(_, _, _, _, _):
+       case .saveFormData(_, _, _, _, _, _, _):
             return "/mobile/answers"
        case .showForm(_, _):
             return "/mobile/visits"
+       case .saveScreenshot(_ ):
+           return "/mobile/screenshots"
         }
     }
     
     var parameters: [String:Any]? {
         switch self {
-            
-          case .saveFirstFormData(_ , let uid, let campaignId, let fields, let info):
-             var params = [HTTPHeaderField.uid.rawValue : uid,
-                    HTTPHeaderField.campaignId.rawValue : campaignId,
-                    HTTPHeaderField.info.rawValue : info] as [String : Any]
-             if fields != nil {
-                params[HTTPHeaderField.fields.rawValue] = fields!
-             }
-            return params
-            
-          case .saveOtherFormData(_ , let answerId, let fields):
-            var params: [String : Any] =  [:]
-            if answerId != nil {
-               params[HTTPHeaderField.answerId.rawValue] = answerId!
-            }
-          
-            if fields != nil {
-                params[HTTPHeaderField.fields.rawValue] = fields!
-            }
-            return params
-          
-        case .saveFormData(_, let uid, let campaignId, let pages, let info):
-            var params = [HTTPHeaderField.uid.rawValue : uid,
-                   HTTPHeaderField.campaignId.rawValue : campaignId,
-                   HTTPHeaderField.info.rawValue : info] as [String : Any]
-            
-            params[HTTPHeaderField.pages.rawValue] = pages
-            
-            
-            return params
-            
-          case .showForm(let uid, let campaingId):
-             return  [HTTPHeaderField.uid.rawValue : uid,
+            case .saveFormData(_, let uid, let campaignId, let pages, let info, let properties, let screenshots):
+                var params = [HTTPHeaderField.uid.rawValue : uid,
+                       HTTPHeaderField.campaignId.rawValue : campaignId,
+                       HTTPHeaderField.info.rawValue : info] as [String : Any]
+
+                params[HTTPHeaderField.pages.rawValue] = pages
+                params[HTTPHeaderField.properties.rawValue] = properties
+                params[HTTPHeaderField.screenshots.rawValue] = screenshots
+
+                return params
+
+            case .showForm(let uid, let campaingId):
+                return  [HTTPHeaderField.uid.rawValue : uid,
                     HTTPHeaderField.campaignId.rawValue : campaingId]
-          default:
-            return [:]
-         }
+            
+            default:
+                return [:]
+        }
+    }
+    
+    var body: Data? {
+        switch self {
+        case .getCampaing, .showForm, .saveFormData:
+            if let bodyParameters = parameters, bodyParameters.count > 0 {
+                do {
+                    let data = try JSONSerialization.data(withJSONObject: bodyParameters, options: [])
+                    return data
+                } catch {
+                    return nil
+                }
+            }
+            return nil
+            
+        case .saveScreenshot(let screenshot):
+//            let boundary = "Boundary-\(NSUUID().uuidString)"
+            let boundary = "-----------------------------0123456789"
+            let lineBreak = "\r\n"
+            let mimetype = "image/webp"
+
+            let image = screenshot.image
+            var httpBody = Data()
+//            var httpBody = ""
+            httpBody.append("--\(boundary)" + lineBreak)
+            httpBody.append("Content-Disposition:form-data; name=\"screenshot\";filename=\"\(screenshot.id)\"" + lineBreak) //
+            httpBody.append("Content-Type: \(mimetype)" + lineBreak + lineBreak)
+
+            let encoder = YYImageEncoder(type: .webP)
+            encoder?.quality = 1
+            encoder?.add(image, duration: 0)
+            if let data = encoder?.encode() {
+//                let fileStr = String(decoding: data, as: UTF8.self)
+                httpBody.append(data)
+                print(data.count)
+            }
+
+            httpBody.append(lineBreak)
+            httpBody.append("--\(boundary)--" + lineBreak)
+            
+//            let postData = httpBody.data(using: .utf8)
+            return httpBody
+        }
     }
     
     var pathParameters: [String:Any]? {
-        
         var parameters: [String: Any] = [:]
         switch self {
-        case .saveFirstFormData(let projectId, _, _, _, _):
-            if projectId != nil {
-//               parameters =  [HTTPHeaderField.projectId.rawValue : projectId!]
-            }
-            break
-        case .saveOtherFormData(let projectId, _, _):
-            if projectId != nil {
-//                parameters =  [HTTPHeaderField.projectId.rawValue : projectId!]
-            }
-            break
-        case .saveFormData(let projectId, _, _, _, _):
+        case .saveFormData(let projectId, _, _, _, _, _, _):
             if projectId != nil {
                 parameters =  [HTTPHeaderField.projectId.rawValue : projectId!]
             }
@@ -162,8 +155,19 @@ enum UXFAPIWebRouter {
         return parameters
     }
     
+    var headers: [String: String]? {
+        switch self {
+        case .getCampaing, .showForm, .saveFormData:
+            return [HTTPHeaderField.acceptType.rawValue: ContentType.json.rawValue,
+                    HTTPHeaderField.contentType.rawValue: ContentType.json.rawValue]
+            
+            
+        case .saveScreenshot:
+            return [HTTPHeaderField.contentType.rawValue: ContentType.screenshot.rawValue]
+        }
+    }
+    
     func asURLRequest() throws -> URLRequest {
-        
         let url = try self.asURL()
         DDLogDebug(url.absoluteString)
        
@@ -173,28 +177,17 @@ enum UXFAPIWebRouter {
         urlRequest.httpMethod = method
         
         // Common Headers
-        urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.acceptType.rawValue)
-        urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
-        /*if self.token != nil {
-            urlRequest.setValue( self.appID!, forHTTPHeaderField: HTTPHeaderField.appID.rawValue)
-        }*/
+        urlRequest.allHTTPHeaderFields = headers
         
-        // Parameters
-        if let bodyParameters = parameters, bodyParameters.count > 0 {
-            do {
-                let data = try JSONSerialization.data(withJSONObject: bodyParameters, options: [])
-                urlRequest.httpBody = data
-            } catch {
-                throw UXFError(description: error.localizedDescription)
-            }
+        if let httpBody = body {
+            urlRequest.httpBody = httpBody
         }
-        
         
         return urlRequest
     }
     
     func asURL() throws -> URL{
-        let urlComponents = UXFURLComponents(baseUrl: UXFAPIWebRouter.baseURL,
+        let urlComponents = UXFURLComponents(baseUrl: UXFAPIWebRouter.endpoint.rawValue,
                                              path: path,
                                              queryParameters: pathParameters)
         return urlComponents.url!

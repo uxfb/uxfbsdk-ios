@@ -14,6 +14,19 @@ enum UXFBThemeType: Int {
     case dark = 2
 }
 
+class UXFBBlackout: NSObject {
+    var color: UIColor = .clear
+    var opacity: Int = 0
+    var blur: Int = 0
+    
+    convenience init(color: UIColor, opacity: Int, blur: Int) {
+        self.init()
+        self.color = color
+        self.opacity = opacity
+        self.blur = blur
+    }
+}
+
 @objcMembers
 open class UXFBTheme:  NSObject, Decodable{
     
@@ -40,8 +53,10 @@ open class UXFBTheme:  NSObject, Decodable{
     open var fontMediumName: String?
     open var fontBoldName: String?
     
+    
+    
     private var _regularFont: UIFont?
-    open var regularFont: UIFont{
+    open var regularFont: UIFont {
         get{
             return _regularFont ?? self.regularFont(size: UIFont.systemFontSize)
         }

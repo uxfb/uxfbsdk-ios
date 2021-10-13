@@ -7,12 +7,15 @@
 //
 
 import Foundation
+import AVFoundation
 
 enum UXFAPIClientResponseResult{
     case success
     case fail
     case cancelled
 }
+
+
 
 internal func DDLogDebug(_ value: Any){
     #if DEBUG
@@ -27,11 +30,13 @@ class UXFAPIClient{
     
     private(set) var appID: String!
     private var _parser: UXFParser!
+    public var _endpoint: UXFEndpoint!
     
-    init(appID: String, parser: UXFParser){
+    init(endpoint: UXFEndpoint, appID: String, parser: UXFParser){
         _parser = parser
         self.appID = appID
-  
+        self._endpoint = endpoint
+        
         NotificationCenter.default.addObserver(self,selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
@@ -43,7 +48,7 @@ class UXFAPIClient{
         //self.getAllCampaings(completion: nil)
     }
     
-    func getAllCampaings(completion: ((_ success: Bool, _ message: String?, _ campaigns: Array<UXFCampaign>)->())?){
+    func getAllCampaings(completion: ((_ success: Bool, _ message: String?, _ intervalIos: Int?, _ campaigns: Array<UXFCampaign>)->())?){
     
      DDLogDebug("Get all campaings:")
      
@@ -52,8 +57,6 @@ class UXFAPIClient{
         
         if status == .success {
             if let campaignsResults = result as? Array<Dictionary<String, Any>> {
-    
-                
                 var campaigns: Array<UXFCampaign> = []
                 for compaignInfo in campaignsResults{
                     if let campaign =  self?._parser.parseCampaign(campaignInfo: compaignInfo){
@@ -62,16 +65,33 @@ class UXFAPIClient{
                 }
                 
                 DDLogDebug("Get all campaings successful")
-                completion?(true, nil, campaigns)
+                completion?(true, nil, nil, campaigns)
             }
-            else{
+            else if let results = result as? Dictionary<String, Any> {
+                if let campaignsResults = results["campaigns"] as? Array<Dictionary<String, Any>> {
+                    var campaigns: Array<UXFCampaign> = []
+                    for compaignInfo in campaignsResults{
+                        if let campaign =  self?._parser.parseCampaign(campaignInfo: compaignInfo){
+                           campaigns.append(campaign)
+                        }
+                    }
+                    
+                    let delay = results["showCampaignsIntervalIos"] as? Int
+                    DDLogDebug("Get all campaings successful")
+                    completion?(true, nil, delay, campaigns)
+                } else {
+                    DDLogDebug("No campaings detected")
+                    completion?(false, "No campaings detected", nil, [])
+                }
+            }
+            else {
                 DDLogDebug("No campaings detected")
-                completion?(false, "No campaings detected", [])
+                completion?(false, "No campaings detected", nil, [])
             }
         }
         else{
            DDLogDebug("Get all campaings failed")
-           completion?(false, message, [])
+           completion?(false, message, nil, [])
         }
       }
     }
@@ -79,6 +99,8 @@ class UXFAPIClient{
     func saveFormData(projectId: String?,
                       campaignId: String,
                       pages: Array<Dictionary<String,Any>>?,
+                      properties: Dictionary<String,Any>?,
+                      screenshots: [String],
                       completion: ((_ success: Bool, _ message: String?)->())?){
         
         let responseHandler = {(status: UXFAPIClientResponseResult, message: String?, result: Any?) in
@@ -90,38 +112,7 @@ class UXFAPIClient{
         _ = self.performRequest(route: UXFAPIWebRouter.saveFormData(projectId: projectId,
                                                                     uid: UIDevice.current.identifierForVendor?.uuidString ?? "",
                                                                     campaignId: campaignId,
-                                                                    pages: pages ?? [], info: systemInfo), completion: responseHandler)
-    }
-    
-    func saveFormData(isFirstAnswer: Bool,
-                      projectId: String?,
-                      answerId: String?,
-                      campaignId: String,
-                      fields: Dictionary<String,Any>?,
-                      completion: ((_ success: Bool, _ message: String?, _ answerId : String?)->())?){
-        
-        let responseHandler = {(status: UXFAPIClientResponseResult, message: String?, result: Any?) in
-            DDLogDebug(String(describing: result))
-            var answerId: String?
-            if let data = result as? Dictionary<String, Any>{
-                answerId = data["answerId"] as? String
-            }
-            completion?(status == .success, message, answerId)
-        }
-
-        if isFirstAnswer == true {
-            let systemInfo = UXFStatisticManager.getDeviceInfo()
-            _ = self.performRequest(route: UXFAPIWebRouter.saveFirstFormData(projectId: projectId,
-                                                                             uid: UIDevice.current.identifierForVendor?.uuidString ?? "",
-                                                                             campaignId: campaignId,
-                                                                             fields: fields,
-                                                                             info : systemInfo),
-                                                                             completion: responseHandler)
-        }
-        else{
-                _ = self.performRequest(route: UXFAPIWebRouter.saveOtherFormData(projectId: projectId, answerId: answerId, fields: fields),
-                                        completion: responseHandler)
-            }
+                                                                    pages: pages ?? [], info: systemInfo, properties: properties ?? [:], screenshots: screenshots), completion: responseHandler)
     }
     
     func  showForm(campaingId: String){
@@ -132,9 +123,19 @@ class UXFAPIClient{
         }
     }
     
+    func saveScreenshotsData(_ screenshots: [UXFScreenshot]) {
+        for screenshot in screenshots {
+            _ = performRequest(route: UXFAPIWebRouter.saveScreenshot(screenshot: screenshot), completion: { status, message, result in
+                DDLogDebug(String(describing: result))
+            })
+        }
+    }
+    
     //MARK: internal request
     
-    internal func performRequest(route:UXFAPIWebRouter, completion:@escaping (UXFAPIClientResponseResult, String?, Any?)->()) -> URLSessionDataTask?{
+    internal func performRequest(route: UXFAPIWebRouter, completion:@escaping (UXFAPIClientResponseResult, String?, Any?)->()) -> URLSessionDataTask?{
+        
+        UXFAPIWebRouter.endpoint = self._endpoint
         
         guard let urlRequest = try? route.asURLRequest() else{
              completion(.fail, "Error url request", nil)
@@ -153,9 +154,11 @@ class UXFAPIClient{
                 guard let data = data,
                     let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode,
                     error == nil else {
-                    // Data was nil, validation failed or an error occurred.
+                        DDLogDebug("httpCode= \((response as? HTTPURLResponse)?.statusCode ?? 0), response=\(String(decoding: data ?? Data(), as: UTF8.self))")
                         throw error ?? UXFError.init(description: "Request error")
                 }
+                
+                DDLogDebug("httpCode= \(response.statusCode)")
                 
                 if error != nil{
                     if error!.code == uxfErrorRequestCancelled{
@@ -175,9 +178,7 @@ class UXFAPIClient{
                     }else{
                         completion(.fail, "Response data error", nil)
                     }
-                    
                 }
-   
             } catch {
                 DDLogDebug("Request failed with error: \(error.localizedDescription)")
                 completion(.fail,error.localizedDescription, nil)
@@ -186,83 +187,5 @@ class UXFAPIClient{
         
         task.resume()
         return task
-        
-        /*-----------------
-        return Alamofire.request(route).responseJSON { response in
-            
-            //DDLogDebug("\(route.path) + \( response.value ?? "")")
-            
-            guard response.result.isSuccess else {
-                if let error = response.result.error, error.code == uxfErrorRequestCancelled {
-                    completion(.cancelled, nil, nil)
-                }
-                else {
-                    completion(.fail, "Error in request \(String(describing: response.result.error))".localized(), nil)
-                }
-                return
-            }
-            
-            guard let values = response.result.value as? [String: AnyObject] else {
-                completion(.fail, "Error request result".localized(), nil)
-                return
-            }
-            
-            if let error = values["error"] as? String{
-                completion(.fail, "\(error): \(values["message"] as? String ?? "Error request result")", nil)
-                return
-            }
-            
-            /*
-            guard values["statusCode"] as? String == "ok" else{
-                
-                
-                if let code  = values["code"] as? String, let errorCode =  APIClientError(rawValue: code){
-                    let message = (values["message"] as? String)!
-                    if errorCode == APIClientError.refresh_token_expired || errorCode == APIClientError.unauthorized{
-                        refreshToken(){ (success: Bool, message: String?) in
-                            if success == true {
-                                performRequest(route: route, completion: completion)
-                            }
-                            else{
-                                completion(.success, message, nil)
-                            }
-                        }
-                    }
-                    else{
-                        completion(.fail, message, nil)
-                    }
-                }
-                else if let message = values["message"] as? String{
-                    completion(.fail, message, nil)
-                }
-                else{
-                    let message = values["error"] as? String
-                    completion(.fail, message, nil)
-                }
-                return
-            }*/
-    
-            if  let data = values["data"] {
-                completion(.success, nil, data)
-            }else{
-                completion(.fail, "Response data is empty", nil)
-            }
-        }--------------*/
     }
-    
-    /*
-    internal func downloadAttachment(url: URL, fileName: String, completion: ((_ destinationUrlPath: URL)->())?){
-        
-        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
-            var documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            documentsURL.appendPathComponent(fileName)
-            return (documentsURL, [.removePreviousFile])
-        }
-        
-        Alamofire.download(url, to: destination).responseData { response in
-            if let destinationUrl = response.destinationURL {
-                completion?(destinationUrl)
-            }
-        }
-    }*/
 }

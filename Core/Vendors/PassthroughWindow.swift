@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class PassthroughWindow: UIWindow {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
@@ -25,8 +26,12 @@ class PassthroughToWindowView: UIView {
 
         while !(view is PassthroughWindow) {
             view = view?.superview
+            
+            if view?.superview == nil {
+                break
+            }
         }
-        
+
         return touchCancel ? nil : view
     }
 }

@@ -1,0 +1,193 @@
+//
+//  ImageViewer.swift
+//  StayClean
+//
+//  Created by Alexander Potemka on 19/10/2018.
+//  Copyright © 2018 LLC Andalex. All rights reserved.
+//
+
+import UIKit
+import Photos
+
+typealias imagePickerAction = ([UIImage]) -> Void
+typealias closeAction = () -> Void
+
+class UXFImageManager: NSObject {
+    
+    static var currentOverlay: UIView?
+    static var hideAction: closeAction?
+    
+    
+//    static var pickerAction: imagePickerAction?
+    
+    override init() { }
+    
+    //MARK: - Create Overlay
+    
+    private static func createOverlay(overlayTarget: UIView) -> UIView {
+        let overlay = UIView(frame: overlayTarget.frame)
+        overlay.center = overlayTarget.center
+        overlay.alpha = 1
+        overlay.backgroundColor = UIColor.clear
+        return overlay
+    }
+    
+    //MARK: - TopView behavior
+
+    @objc private static func navViewAction() {
+        if let navView = currentOverlay?.viewWithTag(1234) {
+            UIView.animate(withDuration: 0.15) {
+                navView.frame.origin.y = navView.frame.origin.y == 0 ? -navView.frame.size.height : 0
+            }
+        }
+    }
+    
+    //MARK: - Show
+    
+    public static func showImageFullScreen(images: [UIImage], tappedIndex: Int, startPoint: CGPoint, startSize: CGSize, action: @escaping closeAction, closeAction: @escaping closeAction) {
+        guard let currentMainWindow = UIApplication.shared.keyWindow else {
+            return
+        }
+        var addTop: CGFloat = 0
+        if #available(iOS 11.0, *) {
+            let window = UIApplication.shared.keyWindow
+            addTop = window?.safeAreaInsets.top ?? 0
+        }
+        
+        let overlay = UXFImageManager.createOverlay(overlayTarget: currentMainWindow)
+        currentMainWindow.addSubview(overlay)
+        currentMainWindow.bringSubviewToFront(overlay)
+        let titleLabel = UILabel(frame: CGRect(x: overlay.frame.size.width/2 - 60,
+                                               y: overlay.frame.origin.y + addTop,
+                                               width: 120,
+                                               height: 48))
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+        titleLabel.font = .systemFont(ofSize: 14)
+        titleLabel.text = "\(tappedIndex + 1) из \(images.count)"
+        
+        let imageCollection = Bundle(for: UXFeedback.self).loadNibNamed("UXFImageCollection", owner: self, options: nil)?.first as! UXFImageCollection
+        imageCollection.configure(frame: CGRect(origin: startPoint, size: startSize), images: images, currentIndex: tappedIndex) { title in
+            titleLabel.text = title
+        }
+        
+        
+        overlay.addSubview(imageCollection)
+        
+        let navView = UIView(frame: CGRect(x: overlay.frame.origin.x,
+                                           y: overlay.frame.origin.y,
+                                           width: overlay.frame.size.width,
+                                           height: addTop + 48))
+        navView.backgroundColor = UIColor.black.withAlphaComponent(0.75)
+        navView.tag = 1234
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(UXFImageManager.navViewAction))
+        tapGesture.cancelsTouchesInView = false
+        tapGesture.numberOfTapsRequired = 1
+        imageCollection.addGestureRecognizer(tapGesture)
+        
+        let cancelButton = UIButton(frame: CGRect(x: overlay.frame.size.width - 60,
+                                                  y: overlay.frame.origin.y + addTop,
+                                                  width: 44,
+                                                  height: 44))
+        cancelButton.setTitle("", for: .normal)
+        let bundle = Bundle(for: UXFeedback.self)
+        cancelButton.setImage(UIImage(named: "close", in: bundle, compatibleWith: nil), for: .normal)
+        cancelButton.addTargetClosure(closure: { (cancelUIButton) in
+            hide(animated: true)
+        })
+        cancelButton.contentHorizontalAlignment = .right
+        
+        navView.addSubview(titleLabel)
+        navView.addSubview(cancelButton)
+        overlay.addSubview(navView)
+        
+        
+        hideAction = closeAction
+        currentOverlay = overlay
+        UIView.animate(withDuration: 0.3, animations: {
+            let imageSize = CGRect(x: overlay.frame.origin.x,
+                                   y: overlay.frame.origin.y,
+                                   width: overlay.frame.size.width,
+                                   height: overlay.frame.size.height)
+            imageCollection.updateFrame(frame: imageSize)
+            overlay.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        }) { (finished) in
+            imageCollection.hideFront()
+        }
+    }
+    
+    public static func showGallery(maxCount: Int,  action: @escaping imagePickerAction) {
+        
+        guard let currentMainWindow = UIApplication.shared.keyWindow else {
+            return
+        }
+        
+        let overlay = UXFImageManager.createOverlay(overlayTarget: currentMainWindow)
+        currentMainWindow.addSubview(overlay)
+        currentMainWindow.bringSubviewToFront(overlay)
+        
+        let imageSelector = Bundle(for: UXFeedback.self).loadNibNamed("UXFImageSelector", owner: self, options: nil)?.first as! UXFImageSelector
+        imageSelector.configure(frame: overlay.bounds, maxCount: maxCount, completion: action)
+        imageSelector.center.y = imageSelector.center.y + imageSelector.frame.size.height
+        overlay.addSubview(imageSelector)
+        
+        hideAction = nil
+        currentOverlay = overlay
+        UIView.animate(withDuration: 0.3, animations: {
+            imageSelector.center.y = imageSelector.center.y - imageSelector.frame.size.height
+        }) { (finished) in
+            
+        }
+    }
+    
+    public static func showScreenshotTake(action: @escaping imagePickerAction, closeAction: @escaping closeAction) {
+        guard let currentMainWindow = UIApplication.shared.keyWindow else {
+            return
+        }
+        
+        let overlay = UXFImageManager.createOverlay(overlayTarget: currentMainWindow)
+        currentMainWindow.addSubview(overlay)
+        currentMainWindow.bringSubviewToFront(overlay)
+        
+        let imageCreator = Bundle(for: UXFeedback.self).loadNibNamed("UXFScreenshotCreator", owner: self, options: nil)?.first as! UXFScreenshotCreator
+        imageCreator.alpha = 0
+        imageCreator.configure(frame: overlay.bounds, completion: action)
+        overlay.addSubview(imageCreator)
+        
+        hideAction = closeAction
+        currentOverlay = overlay
+        UIView.animate(withDuration: 0.3, animations: {
+            imageCreator.alpha = 1
+        }) { (finished) in
+            
+        }
+    }
+    
+    //MARK: - Hide
+    
+    @objc private static func tapHide(_ gesture: UITapGestureRecognizer) {
+        hide(animated: true)
+    }
+    
+    public static func hide(animated: Bool, duration: TimeInterval = 0.2) {
+        if currentOverlay != nil {
+            if animated {
+                UIView.animate(withDuration: duration, animations: {
+                    currentOverlay?.alpha = (currentOverlay?.alpha)! > CGFloat(0) ? 0 : 1
+                }) { (result) in
+                    currentOverlay?.removeFromSuperview()
+                    currentOverlay = nil
+                }
+            }
+            else {
+                currentOverlay?.removeFromSuperview()
+                currentOverlay = nil
+            }
+            
+            if hideAction != nil {
+                hideAction!()
+            }
+        }
+    }
+}

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import PhotosUI
+
+let visualEffectViewTag = 777
 
 enum UXFViewPopupDirection{
     case upToDown
@@ -68,14 +71,16 @@ open class UXFCampaignViewController: UIViewController {
     var presentationAnimated = true
     private (set) var formIndex: Int = 0
     
+    
     var state: UXFViewControllerState = .presenting
+    var blackout: UXFBBlackout?
     
     var didLoadHandler: ((_ formIndex: Int)->())?
     var didCloseHandler: ((_ formIndex: Int)->(Void))?
     var willCloseHandler: ((_ formIndex: Int)->(Void))?
     var backHandler: ((_ formIndex: Int)->())?
     
-    var completeHandler: ((_ formIndex: Int, _ info: Array<Dictionary<String, Any>>?)->())?
+    var completeHandler: ((_ formIndex: Int, _ info: Array<Dictionary<String, Any>>?, _ screenshots: [UXFScreenshot])->())?
     
     var presentHandler: (()->())?
     
@@ -92,6 +97,8 @@ open class UXFCampaignViewController: UIViewController {
     private var dataManager: UXFDataManager?
     
     var keyboardHeight: CGFloat = 0
+    
+    private var showGalleryTask: DispatchWorkItem?
     
     convenience init() {
         let bundle = Bundle(for: UXFeedback.self)
@@ -155,7 +162,6 @@ open class UXFCampaignViewController: UIViewController {
         UIView.animate(withDuration: 0.1) {
             self.view.layoutIfNeeded()
         }
-        
     }
     
     open override func viewDidLayoutSubviews() {
@@ -191,17 +197,42 @@ open class UXFCampaignViewController: UIViewController {
         tableView.delaysContentTouches = false
         tableView.backgroundColor = campaign?.theme.bgColor ?? .white
         
-        tableView.register(UINib(nibName: "UXFButtonCell", bundle: bundle), forCellReuseIdentifier: "UXFButtonCell")
-        tableView.register(UINib(nibName: "UXFSmilesCell", bundle: bundle), forCellReuseIdentifier: "UXFSmilesCell")
-        tableView.register(UINib(nibName: "UXFStarsCell", bundle: bundle), forCellReuseIdentifier: "UXFStarsCell")
-        tableView.register(UINib(nibName: "UXFCheckboxCell", bundle: bundle), forCellReuseIdentifier: "UXFCheckboxCell")
-        tableView.register(UINib(nibName: "UXFEmailCell", bundle: bundle), forCellReuseIdentifier: "UXFEmailCell")
-        tableView.register(UINib(nibName: "UXFHeaderCell", bundle: bundle), forCellReuseIdentifier: "UXFHeaderCell")
-        tableView.register(UINib(nibName: "UXFImageCell", bundle: bundle), forCellReuseIdentifier: "UXFImageCell")
-        tableView.register(UINib(nibName: "UXFInputCell", bundle: bundle), forCellReuseIdentifier: "UXFInputCell")
-        tableView.register(UINib(nibName: "UXFRadiobuttonCell", bundle: bundle), forCellReuseIdentifier: "UXFRadiobuttonCell")
-        tableView.register(UINib(nibName: "UXFTextCell", bundle: bundle), forCellReuseIdentifier: "UXFTextCell")
-        tableView.register(UINib(nibName: "UXFNpsCell", bundle: bundle), forCellReuseIdentifier: "UXFNpsCell")
+        tableView.register(UINib(nibName: "UXFButtonCell",
+                                 bundle: bundle),
+                           forCellReuseIdentifier: "UXFButtonCell")
+        tableView.register(UINib(nibName: "UXFSmilesCell",
+                                 bundle: bundle),
+                           forCellReuseIdentifier: "UXFSmilesCell")
+        tableView.register(UINib(nibName: "UXFStarsCell",
+                                 bundle: bundle),
+                           forCellReuseIdentifier: "UXFStarsCell")
+        tableView.register(UINib(nibName: "UXFCheckboxCell",
+                                 bundle: bundle),
+                           forCellReuseIdentifier: "UXFCheckboxCell")
+        tableView.register(UINib(nibName: "UXFEmailCell",
+                                 bundle: bundle),
+                           forCellReuseIdentifier: "UXFEmailCell")
+        tableView.register(UINib(nibName: "UXFHeaderCell",
+                                 bundle: bundle),
+                           forCellReuseIdentifier: "UXFHeaderCell")
+        tableView.register(UINib(nibName: "UXFImageCell",
+                                 bundle: bundle),
+                           forCellReuseIdentifier: "UXFImageCell")
+        tableView.register(UINib(nibName: "UXFInputCell",
+                                 bundle: bundle),
+                           forCellReuseIdentifier: "UXFInputCell")
+        tableView.register(UINib(nibName: "UXFRadiobuttonCell",
+                                 bundle: bundle),
+                           forCellReuseIdentifier: "UXFRadiobuttonCell")
+        tableView.register(UINib(nibName: "UXFTextCell",
+                                 bundle: bundle),
+                           forCellReuseIdentifier: "UXFTextCell")
+        tableView.register(UINib(nibName: "UXFNpsCell",
+                                 bundle: bundle),
+                           forCellReuseIdentifier: "UXFNpsCell")
+        tableView.register(UINib(nibName: "UXFScreenshotCell",
+                                 bundle: bundle),
+                           forCellReuseIdentifier: "UXFScreenshotCell")
     }
     
     private func prepareUI() {
@@ -267,20 +298,18 @@ open class UXFCampaignViewController: UIViewController {
         self.willCloseHandler?(self.formIndex)
         
         super.dismiss(animated: presentationAnimated) { [weak self] in
-
             if let index = self?.formIndex{
                 self?.didCloseHandler?(index)
             }
             self?.didCloseHandler = nil
             
             if self?.state != .dismissOnly && self?.state != .backDismiss {
-                for window in UIApplication.shared.windows{
+                for window in UIApplication.shared.windows {
                     if window is PassthroughWindow {
                         window.isHidden = true
                         window.resignKey()
                     }
                 }
-
                 UIApplication.shared.delegate?.window??.makeKeyAndVisible()
             }
             
@@ -432,11 +461,185 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
             let cell = createCell(UXFNpsCell.self, indexPath: indexPath, field: field, theme: (campaign?.theme)!, delegate: dataManager!)
             return cell
             
+        case .screenshot:
+            let cell = createCell(UXFScreenshotCell.self, indexPath: indexPath, field: field, theme: (campaign?.theme)!, delegate: dataManager!)
+            cell.setScreenshots(dataManager?.screenshots ?? [])
+            
+            let takeTask = DispatchWorkItem {
+                UIView.animate(withDuration: 0.15) {
+                    self.view.alpha = 0
+                } completion: { finish in
+                    UXFImageManager.showScreenshotTake { images in
+                        self.addScreenshots(images, type: .screenhot)
+                    } closeAction: {
+                        UIView.animate(withDuration: 0.15) {
+                            self.view.alpha = 1
+                        }
+                    }
+                }
+            }
+            
+            showGalleryTask = DispatchWorkItem {
+                let count = 3 - (self.dataManager?.screenshots.count ?? 0)
+                guard  count > 0 else {
+                    return
+                }
+                
+                PHPhotoLibrary.shared().unregisterChangeObserver(self)
+                UXFImageManager.showGallery(maxCount: count) { images in
+                    self.addScreenshots(images, type: .gallery)
+                }
+            }
+            let selectTask = DispatchWorkItem {
+                self.checkGalleryPermissions { result in
+                    if result {
+                        DispatchQueue.main.async(execute: self.showGalleryTask!)
+                    }
+                }
+            }
+            
+            cell.setActions(take: {
+                DispatchQueue.main.async(execute: takeTask)
+            }, select: {
+                DispatchQueue.main.async(execute: selectTask)
+            }, campaignType: campaign?.type ?? .slidein)
+
+
+            return cell
+            
         case .none, .bottom:
             let cell = UITableViewCell()
             cell.contentView.backgroundColor = campaign?.theme.bgColor ?? .white
             cell.backgroundColor = campaign?.theme.bgColor ?? .white
             return UITableViewCell()
+        }
+    }
+    
+    private func addScreenshots(_ images: [UIImage], type: UXFScreenshotType) {
+        var screenshots = dataManager?.screenshots
+        for image in images {
+            screenshots?.append(UXFScreenshot(id: .randomImageName, image: image, type: type))
+        }
+        dataManager?.screenshotChanged(screenshots: screenshots ?? [])
+    }
+    
+    private func checkGalleryPermissions(completionHandler: @escaping (Bool) -> ()) {
+        var status: PHAuthorizationStatus?
+        if #available(iOS 14, *) {
+            status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        } else {
+            status = PHPhotoLibrary.authorizationStatus()
+        }
+        
+        guard let status = status else {
+            completionHandler(false)
+            return
+        }
+            
+        if status == .notDetermined {
+            if #available(iOS 14, *) {
+                PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+                    self.checkGalleryPermissionsStatus(status) { result in
+                        completionHandler(result)
+                    }
+                }
+            } else {
+                PHPhotoLibrary.requestAuthorization { status in
+                    self.checkGalleryPermissionsStatus(status) { result in
+                        completionHandler(result)
+                    }
+                }
+            }
+        } else {
+            checkGalleryPermissionsStatus(status) { result in
+                completionHandler(result)
+            }
+        }
+    }
+    
+    private func checkGalleryPermissionsStatus(_ status: PHAuthorizationStatus, completionHandler: @escaping (Bool) -> ()) {
+        switch status {
+        case .notDetermined:
+            completionHandler(false)
+
+        case .restricted:
+            self.showAlert(title: "Информация", message: "Нет доступа к фотографиям устройства", buttonTitle: "Закрыть")
+            completionHandler(false)
+
+        case .denied:
+            self.showAlertSettings()
+            completionHandler(false)
+
+        case .authorized:
+            completionHandler(true)
+
+        case .limited:
+            let photosCount = PHAsset.fetchAssets(with: .image, options: nil).count
+            if photosCount > 0 {
+                completionHandler(true)
+            } else {
+                self.showAlertPhotoAccess()
+                completionHandler(false)
+            }
+
+        @unknown default:
+            return
+        }
+    }
+    
+    //MARK: - Show Alert
+    
+    private func showAlertPhotoAccess() {
+        DispatchQueue.main.async {
+            let appName = Bundle.main.infoDictionary?["CFBundleName"] ?? "AppName"
+            let alert = UIAlertController(title: "\"\(appName)\" хочет получить доступ к вашим фотографиям", message: "Доступ не предоставлен ни к одной фотографии", preferredStyle: .alert)
+            let openPhotoAccessAction = UIAlertAction(title: "Изменить выбор", style: .default) { alertAction in
+                alert.dismiss(animated: true, completion: nil)
+                
+                if #available(iOS 14, *) {
+                    PHPhotoLibrary.shared().register(self)
+                    PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
+                }
+            }
+            let closeAction = UIAlertAction(title: "Закрыть", style: .default) { alertAction in
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(openPhotoAccessAction)
+            alert.addAction(closeAction)
+            alert.presentGlobally(animated: true, completion: nil)
+        }
+    }
+    
+    private func showAlertSettings() {
+        DispatchQueue.main.async {
+            let appName = Bundle.main.infoDictionary?["CFBundleName"] ?? "AppName"
+            let alert = UIAlertController(title: "\"\(appName)\" хочет получить доступ к вашим фотографиям", message: "Перейдите в настройки, чтобы разрешить доступ", preferredStyle: .alert)
+            let openSettingsAction = UIAlertAction(title: "Открыть настройки", style: .default) { alertAction in
+                alert.dismiss(animated: true, completion: nil)
+                guard let url = URL(string: UIApplication.openSettingsURLString),
+                        UIApplication.shared.canOpenURL(url) else {
+                            return
+                }
+
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+            let closeAction = UIAlertAction(title: "Закрыть", style: .default) { alertAction in
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(openSettingsAction)
+            alert.addAction(closeAction)
+            alert.presentGlobally(animated: true, completion: nil)
+        }
+    }
+    
+    private func showAlert(title: String, message: String, buttonTitle: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: buttonTitle, style: .default) { alertAction in
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(okAction)
+            alert.presentGlobally(animated: true, completion: nil)
         }
     }
     
@@ -477,11 +680,17 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
         let currentHeight = self.contentView.frame.size.height
         
         if newHeight != currentHeight {
-//            UIView.animate(withDuration: 0.1) {
-                self.contentHeight.constant = newHeight
-                self.view.layoutIfNeeded()
-//            }
+            self.contentHeight.constant = newHeight
+            self.view.layoutIfNeeded()
         }
     }
-    
+}
+
+extension UXFCampaignViewController: PHPhotoLibraryChangeObserver {
+    public func photoLibraryDidChange(_ changeInstance: PHChange) {
+        let photosCount = PHAsset.fetchAssets(with: .image, options: nil).count
+        if photosCount > 0 {
+            DispatchQueue.main.async(execute: self.showGalleryTask!)
+        }
+    }
 }

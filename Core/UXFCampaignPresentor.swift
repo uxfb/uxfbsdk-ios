@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 protocol UXFCampaignFormPresentorProtocol: AnyObject {
-    func formSubmitted(formIndex: Int, info: Array<Dictionary<String, Any>>?, campaign: UXFCampaign)
+    func formSubmitted(formIndex: Int, info: Array<Dictionary<String, Any>>?, screenshots: [UXFScreenshot], campaign: UXFCampaign)
 }
 
 class UXFCampaignPresentor: NSObject {
@@ -23,7 +23,9 @@ class UXFCampaignPresentor: NSObject {
     private var _campaign: UXFCampaign!
     private weak var _appWindow: UIWindow!
     internal weak var _currentForm: UXFCampaignViewController?
-
+    
+    internal var isFormOnScreen = false
+    
     init(window: UIWindow,
          campaign: UXFCampaign,
          animationEnabled: Bool = true) {
@@ -35,14 +37,14 @@ class UXFCampaignPresentor: NSObject {
         isAnimationFormEnabled = animationEnabled
     }
     
-    func showCampaign(uiBlocked: Bool, closeOnSwipe: Bool){
+    func showCampaign(uiBlocked: Bool, closeOnSwipe: Bool, blackout: UXFBBlackout?){
         let form = createCampaignForm(_campaign)
         switch _campaign.type {
         case .slidein:
-            showCampaignController(controller: form, direction: .downToUp, uiBlocked: uiBlocked, closeOnSwipe: closeOnSwipe)
+            showCampaignController(controller: form, direction: .downToUp, uiBlocked: uiBlocked, closeOnSwipe: closeOnSwipe, blackout: blackout)
             break
         case .popup:
-            showCampaignController(controller: form, direction: .alphaIn)
+            showCampaignController(controller: form, direction: .alphaIn, uiBlocked: true, blackout: blackout)
             break
         case .none:
             break
@@ -60,34 +62,36 @@ class UXFCampaignPresentor: NSObject {
         controller.modalPresentationStyle = .overFullScreen
         controller.didCloseHandler = { [weak self]  (formIndex) in
             DispatchQueue.main.async {
-                
-                
+                self?.isFormOnScreen = false
                 self?.feedbackCampaignDelegate?.campaignDidClose(eventName: eventName)
             }
         }
         
         controller.presentHandler = { [weak self] in
             if let _ = self?._campaign {
+                self?.isFormOnScreen = true
                 self?.feedbackCampaignDelegate?.campaignDidShow(eventName: eventName)
             }
         }
         
-        controller.completeHandler = { [weak self] (formIndex, info) in
+        controller.completeHandler = { [weak self] (formIndex, info, screenshots) in
             if let campaign = self?._campaign {
-               self?.delegate?.formSubmitted(formIndex: formIndex, info: info, campaign: campaign)
+                self?.delegate?.formSubmitted(formIndex: formIndex, info: info, screenshots: screenshots, campaign: campaign)
             }
         }
         
         return controller
     }
     
-    private func showCampaignController(controller: UXFCampaignViewController, direction: UXFViewPopupDirection, uiBlocked: Bool = false, closeOnSwipe: Bool = false) {
-        _ = self.dismissCurrentForm(){
+    private func showCampaignController(controller: UXFCampaignViewController, direction: UXFViewPopupDirection, uiBlocked: Bool = false, closeOnSwipe: Bool = false, blackout: UXFBBlackout? = nil) {
+        
+        _ = self.dismissCurrentForm() {
             
             self._currentForm = controller
             
             controller.presentDirection = direction
             controller.closeOnSwipe = closeOnSwipe
+            controller.blackout = blackout
             
             if let view = controller.view as? PassthroughToWindowView {
                 view.touchCancel = uiBlocked
@@ -97,25 +101,24 @@ class UXFCampaignPresentor: NSObject {
             self._appWindow.makeKeyAndVisible()
             self._appWindow.becomeKey()
             let parentViewController = self._appWindow.rootViewController
-            parentViewController?.present(controller, animated: self.isAnimationFormEnabled){
+            parentViewController?.present(controller, animated: self.isAnimationFormEnabled) {
                 controller.state = .presented
             }
             
-            if self._campaign.autoclose > 0 && self._currentForm?.formIndex == (self._campaign.pages.count - 1) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + self._campaign.autoclose) { [ weak self] in
-                    self?._currentForm?.dismiss(animated: self?._currentForm?.presentationAnimated ?? true)
-                }
-            }
+//            if self._campaign.autoclose > 0 && self._currentForm?.formIndex == (self._campaign.pages.count - 1) {
+//                DispatchQueue.main.asyncAfter(deadline: .now() + self._campaign.autoclose) { [ weak self] in
+//                    self?._currentForm?.dismiss(animated: self?._currentForm?.presentationAnimated ?? true)
+//                }
+//            }
         }
     }
     
     @objc func dismissCurrentForm(completion: (()->())?) ->(Bool){
-        
         if let form = _currentForm {
             form.state = .dismissOnly
-            form.dismiss(animated: true){ [weak self] in
+            form.dismiss(animated: true) { [weak self] in
                 
-                if self?._currentForm == form{
+                if self?._currentForm == form {
                    self?._currentForm?.removeFromParent()
                    self?._currentForm = nil
                 }
@@ -191,10 +194,6 @@ private class UXFCampaignAnimatorPresenter: NSObject, UIViewControllerAnimatedTr
             startAlpha = 1.0
             endAlpha = 0.0
             break
-//        
-//            toViewController.view.frame = CGRect.init(origin: CGPoint.init(x: finalFrameForVC.origin.x,
-//                                                                           y: finalFrameForVC.origin.y + toViewController.contentView.frame.size.height),
-//                                                      size: finalFrameForVC.size)
         }
         
         
@@ -202,15 +201,35 @@ private class UXFCampaignAnimatorPresenter: NSObject, UIViewControllerAnimatedTr
     
         toViewController.contentView.alpha = startAlpha
         
+        if toViewController.blackout != nil {
+            let effectView = VisualEffectView(frame: finalFrameForVC)
+            if toViewController.presentDirection == .downToUp || toViewController.presentDirection == .upToDown {
+                effectView.frame.origin.y = -effectView.frame.size.height
+                effectView.frame.size.height = effectView.frame.size.height*2
+            }
+            
+            effectView.tag = visualEffectViewTag
+            effectView.colorTint = toViewController.blackout?.color
+            effectView.colorTintAlpha = CGFloat(toViewController.blackout?.opacity ?? 0)/100
+            effectView.blurRadius = CGFloat(toViewController.blackout?.blur ?? 0)
+            effectView.scale = 1
+            effectView.alpha = 0
+            
+            toViewController.view.insertSubview(effectView, at: 0)
+        }
+        
         UIView.animate(withDuration: animationDuration,
                        delay: delay,
                        usingSpringWithDamping: damping,
                        initialSpringVelocity: 0,
                        options: animationOptions,
                        animations: {
+                        
+            toViewController.view.viewWithTag(visualEffectViewTag)?.alpha = 1
             toViewController.view.frame = finalFrameForVC
             toViewController.contentView.alpha = endAlpha
             toViewController.shadowView.alpha = endAlpha
+                        
         }){ (completed) in
             transitionContext.completeTransition(completed)
         }
@@ -250,6 +269,8 @@ private class UXFCampaignAnimatorDismisser: NSObject, UIViewControllerAnimatedTr
            default:
                 break
         }
+        
+        
 
         UIView.animate(withDuration: animationDuration,
                        delay: delay,
@@ -257,10 +278,14 @@ private class UXFCampaignAnimatorDismisser: NSObject, UIViewControllerAnimatedTr
                        initialSpringVelocity: 0,
                        options: animationOptions,
                        animations:  {
-                fromViewController.shadowView.alpha = endAlpha
-               fromViewController.contentView.alpha = endAlpha
-               fromViewController.view.frame.origin.y += endYOffset
-               fromViewController.view.frame.origin.x += endXOffset
+                        
+                        fromViewController.view.viewWithTag(visualEffectViewTag)?.alpha = 0
+                        fromViewController.shadowView.alpha = endAlpha
+                        fromViewController.contentView.alpha = endAlpha
+                        fromViewController.view.frame.origin.y += endYOffset
+                        fromViewController.view.frame.origin.x += endXOffset
+                        
+                
         }) { (completed) in
             transitionContext.completeTransition(completed)
         }

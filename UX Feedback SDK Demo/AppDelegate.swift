@@ -47,9 +47,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         customTheme.btnTextColor =  UIColor.init("#FFFFFF")
         customTheme.bgColor =  UIColor.init("#000000")
         
-//        customTheme.fontBoldName = "SnellRoundhand-Black"
-//        customTheme.fontMediumName = "SnellRoundhand-Bold"
-//        customTheme.fontRegularName = "SnellRoundhand"
+//        customTheme.fontBoldName = UIFont.systemFont(ofSize: 14, weight: .bold).fontName
+//        customTheme.fontMediumName = UIFont.systemFont(ofSize: 14, weight: .medium).fontName
+//        customTheme.fontRegularName = UIFont.systemFont(ofSize: 14, weight: .regular).fontName
         
         UXFeedback.sharedSDK.resetAllCampaignsData {
             
@@ -58,13 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UXFeedback.sharedSDK.setup(appID: uxfAppID)
         
 //        UXFeedback.sharedSDK.setup(appID: uxfAppID, theme: customTheme) { (success) in
-//
+
 //        }
-        
-        /*for family in UIFont.familyNames.sorted() {
-            let names = UIFont.fontNames(forFamilyName: family)
-            print("Family: \(family) Font names: \(names)")
-        }*/
         
         //print(String(describing: UIDevice.current.identifierForVendor?.uuidString))
 //        let theme: UXFBTheme = UXFBTheme.init()

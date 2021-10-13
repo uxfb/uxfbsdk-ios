@@ -17,8 +17,6 @@ class MainViewController_swift: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = .white
         UXFeedback.sharedSDK.delegate = self
@@ -35,18 +33,28 @@ class MainViewController_swift: UIViewController {
         UXFeedback.sharedSDK.stopCampaign()
     }
     
+    func configureSDK() {
+        UXFeedback.sharedSDK.uiBlocked = false
+        UXFeedback.sharedSDK.closeOnSwipe = true
+    }
+    
     @IBAction func eventTap(_ sender: UIButton){
         UXFeedback.sharedSDK.closeOnSwipe = true
-        UXFeedback.sharedSDK.uiBlocked = true
+//        UXFeedback.sharedSDK.uiBlocked = true
+        UXFeedback.sharedSDK.setSlideinBlackout(color: "0076C2", opactity: 10, blur: 4)
+        UXFeedback.sharedSDK.setFullscreenBlackout(color: "0076C2", opactity: 10, blur: 4)
         
         let eventNumber = sender.tag
         assert(eventNumber > 0, "Invalid eventNumber")
         switch eventNumber {
         case 1:
-            UXFeedback.sharedSDK.sendEvent(event: "slidein", fromController: self)
+            UXFeedback.sharedSDK.setProperties(["third": "non-value",
+                                                "fourth": 4])
+            UXFeedback.sharedSDK.globalDelayTimer = 1
+            UXFeedback.sharedSDK.sendEvent(event: "screens", fromController: self)
             break
         case 2:
-            UXFeedback.sharedSDK.sendEvent(event: "2222", fromController: self)
+            UXFeedback.sharedSDK.sendEvent(event: "screens2", fromController: self)
             break
         default:
             break
@@ -61,10 +69,6 @@ class MainViewController_swift: UIViewController {
 extension MainViewController_swift: UXFeedbackCampaignDelegate{
     func campaignDidShow(eventName: String) {
         print("CAMPAIGN SHOWED")
-    }
-    
-    func campaignDidClose(withFeedbackResult result: UXFeedbackResult, isRedirectToAppStoreEnabled: Bool) {
-        DDLogDebug(#function)
     }
     
     func campaignDidLoad(success: Bool){

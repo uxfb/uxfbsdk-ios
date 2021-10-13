@@ -64,9 +64,9 @@ extension UIView {
 
 extension UIView {
     func addShadowAndRoundCorner(cornerRadius : CGFloat) {
-        self.layer.shadowOffset = .zero
-        self.layer.shadowOpacity = 0.5
-        self.layer.shadowRadius = cornerRadius
+        self.layer.shadowOffset = CGSize(width: 1.0, height: 4.0)
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowRadius = 6.0
         self.layer.shadowColor = UIColor.black.withAlphaComponent(0.5).cgColor
         self.layer.masksToBounds = false
         self.layer.cornerRadius = cornerRadius
