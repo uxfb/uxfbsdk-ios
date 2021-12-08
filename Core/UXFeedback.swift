@@ -28,14 +28,18 @@ public class UXFError : NSError {
 
 @objcMembers
 open class UXFeedback : NSObject{
-    
-    public static let sharedSDK = UXFeedback.init()
+    internal func DDLog(_ value: Any) {
+        if _debugEnabled {
+            print(value)
+        }
+    }
+
+    public static let sharedSDK = UXFeedback.init() 
     private static var isInitialized = false
+    private let sdkVersion = "v1.2.2"
     
     open var delegate: UXFeedbackCampaignDelegate?
-    open var debugEnabled: Bool = false
     open var animationEnabled: Bool = true
-    open var canDisplayCampaings: Bool = true
     open var isCampaignsLoaded: Bool {
         return _campaigns.count > 0
     }
@@ -45,13 +49,15 @@ open class UXFeedback : NSObject{
     
     open var globalDelayTimer : Int?
     
-    private var endpoint : UXFEndpoint = .stage
+    private var endpoint : UXFEndpoint = .prod
+    
+    private var _debugEnabled: Bool = false
     
     private var appId: String?
     
     private var _theme: UXFBTheme!
     private  weak var _activeEventController: UIViewController?
-    private  var _appWindow: UIWindow!
+    private var _appWindow: UIWindow!
     private  var _apiClient: UXFAPIClient!
     private var _campaigns: Array<UXFCampaign> = []
     private var _eventToSend: String?
@@ -94,11 +100,16 @@ open class UXFeedback : NSObject{
                 if interval >= self.globalDelayTimer ?? 1800 {
                     return true
                 } else {
+                    self.DDLog("Global timer error: delay=\(self.globalDelayTimer ?? 1800), current=\(interval)")
                     return false
                 }
             }
         }
         return true
+    }
+    
+    open func setDebugEnabled(_ enabled: Bool) {
+        _debugEnabled = enabled
     }
     
     open func setProperties(_ properties: [String: Any]) {
@@ -110,7 +121,7 @@ open class UXFeedback : NSObject{
         _parser = UXFParser.init(theme: theme, isInitTheme: isInitTheme)
     }
     
-    open func setEndpoint(endpoint: UXFEndpoint) {
+    open func setEndpoint(endpoint: UXFEndpoint) { //private when release
         self.endpoint = endpoint
         self._apiClient._endpoint = endpoint
     }
@@ -181,6 +192,7 @@ open class UXFeedback : NSObject{
         if UXFeedback.isInitialized {
             self.delegate?.campaignDidReceiveError(errorString: "SDK is already initialized")
         } else {
+            DDLog("Init UXFeedbackSDK: \(sdkVersion)")
             UXFeedback.isInitialized = true
         }
         self.appId = appID
@@ -196,6 +208,7 @@ open class UXFeedback : NSObject{
             self?._campaigns = campaigns
             self?.globalDelayTimer = delay
             if success == true{
+                self?.DDLog("Campaigns loaded: \(campaigns.count)")
                 self?.resetAllCampaigns()
                 if let event = self?._eventToSend {
                    self?.sendEvent(event: event)
@@ -224,78 +237,84 @@ open class UXFeedback : NSObject{
     //Request event to show campaing form with specific name
     
     open func sendEvent(event: String, fromController: UIViewController? = nil) {
- 
+        DDLog("Attempt starting: \(event)")
         _eventToSend = event
-
-        if self.canDisplayCampaings == true {
-            _campaigns.forEach { (campaign) in
-                campaign.targetings.forEach({ (targeting) in
-                    if let type = targeting["type"] as? String, type == "trigger",
-                       let name = targeting["value"] as? String, name == event {
-                        
-                        let isMultiVisited = targeting["isMultiVisited"] as? Bool ?? false
-                        let counts = (targeting["counts"] as? Int) ?? 1
-                        self.eventCounter[event] = (self.eventCounter[event] ?? 0) + 1
-                        
-                        if (self.eventCounter[event] ?? 1) != counts {
-                            return
-                        }
-                        
-                        if isMultiVisited {
-                            self.eventCounter[event] = 0
-                        }
-                        
-                        _eventToSend = nil
-                        
-                        self.task = DispatchWorkItem {
-                            if !isMultiVisited {
-                                guard self.checkGlobalDelay() else {
-                                    self.delegate?.campaignDidReceiveError(errorString: "Global timer")
-                                    return
-                                }
-                            }
-                            
-                            guard !(self._formPresentor?.isFormOnScreen ?? false) else {
-                                self.delegate?.campaignDidReceiveError(errorString: "Form is on screen")
+        var eventFounded = false
+        _campaigns.forEach { (campaign) in
+            campaign.targetings.forEach({ (targeting) in
+                if let type = targeting["type"] as? String, type == "trigger",
+                   let name = targeting["value"] as? String, name == event {
+                    eventFounded = true
+                    let isMultiVisited = targeting["isMultiVisited"] as? Bool ?? false
+                    
+                    let counts = (targeting["counts"] as? Int) ?? 1
+                    let newCount = (self.eventCounter[event] ?? 0) + 1
+                    if newCount <= counts {
+                        self.eventCounter[event] = newCount
+                    }
+                    if (self.eventCounter[event] ?? 1) != counts {
+                        self.DDLog("Event count to show: \(counts)")
+                        return
+                    }
+                    
+                    if isMultiVisited {
+                        self.eventCounter[event] = 0
+                    }
+                    _eventToSend = nil
+                    self.task = DispatchWorkItem {
+                        if !isMultiVisited {
+                            guard self.checkGlobalDelay() else {
+                                self.delegate?.campaignDidReceiveError(errorString: "Global timer")
                                 return
                             }
-                            
-                            _ = self._formPresentor?.dismissCurrentForm(completion:  nil)
-                            self._formPresentor = UXFCampaignPresentor(window: self._appWindow,
-                                                                       campaign: campaign,
-                                                                       animationEnabled: true)
-                         
-                            self._formPresentor?.isAnimationFormEnabled = self.animationEnabled
-                            self._formPresentor?.delegate = self
-                            self._formPresentor?.feedbackCampaignDelegate = self.delegate
-                            var blackout: UXFBBlackout?
-                            switch campaign.type {
-                            case .slidein:
-                                blackout = self.slideinBlackout
-                                break
-                            case .popup:
-                                blackout = self.fullscreenBlackout
-                                break
-                            case .none:
-                                break
-                            }
-                            self._formPresentor?.showCampaign(uiBlocked: self.uiBlocked, closeOnSwipe: self.closeOnSwipe, blackout: blackout)
-                            
-                            if !isMultiVisited {
-                                self.saveShowingTime()
-                            }
-                            
-                            self._apiClient.showForm(campaingId: campaign.campaignId)
                         }
                         
-                        guard self.task != nil else {
+                        guard !(self._formPresentor?.isFormOnScreen ?? false) else {
+                            self.DDLog("Form already on screen")
+                            self.delegate?.campaignDidReceiveError(errorString: "Form is on screen")
                             return
                         }
                         
-                        DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay(eventName: event)), execute: self.task! )
+                        _ = self._formPresentor?.dismissCurrentForm(completion:  nil)
+                        self._formPresentor = UXFCampaignPresentor(window: self._appWindow,
+                                                                   campaign: campaign,
+                                                                   animationEnabled: true)
+                     
+                        self._formPresentor?.isAnimationFormEnabled = self.animationEnabled
+                        self._formPresentor?.delegate = self
+                        self._formPresentor?.feedbackCampaignDelegate = self.delegate
+                        var blackout: UXFBBlackout?
+                        switch campaign.type {
+                        case .slidein:
+                            blackout = self.slideinBlackout
+                            break
+                        case .popup:
+                            blackout = self.fullscreenBlackout
+                            break
+                        case .none:
+                            break
+                        }
+                        self.DDLog("Show form for event: \(event)")
+                        self._formPresentor?.showCampaign(uiBlocked: self.uiBlocked, closeOnSwipe: self.closeOnSwipe, blackout: blackout)
+                        
+                        if !isMultiVisited {
+                            self.saveShowingTime()
+                        }
+                        
+                        self._apiClient.showForm(campaingId: campaign.campaignId)
+                        self.eventCounter[event] = 0
                     }
-                })
-            }
+                    
+                    guard self.task != nil else {
+                        return
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay(eventName: event)), execute: self.task! )
+                }
+            })
+        }
+        if !eventFounded {
+            DDLog("Event not found: \(event)")
         }
     }
     
@@ -334,7 +353,7 @@ extension UXFeedback: UXFCampaignFormPresentorProtocol {
         let screenshotIds: [String] = screenshots.map { screenshot in
             return screenshot.id
         }
-        
+        self.DDLog("Campaign finished")
         _apiClient.saveFormData(projectId: campaign.projectId,
                                 campaignId: campaign.campaignId,
                                 pages: info,
@@ -344,7 +363,8 @@ extension UXFeedback: UXFCampaignFormPresentorProtocol {
                 DispatchQueue.main.async {
                     self.delegate?.campaignDidReceiveError(errorString: "Неизвестная ошибка при отправке данных формы")
                 }
-                
+            } else {
+                self.DDLog("Campaign sended")
             }
         }
         

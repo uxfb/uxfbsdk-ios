@@ -11,7 +11,6 @@ import UIKit
 
 @objcMembers
 public class UXFeedbackResult : NSObject{
-    
     public var rating: Int? = nil
     public var abandonedPageIndex: Int? = nil
     public var sent: Bool = false

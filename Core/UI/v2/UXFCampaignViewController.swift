@@ -462,6 +462,7 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
             return cell
             
         case .screenshot:
+            
             let cell = createCell(UXFScreenshotCell.self, indexPath: indexPath, field: field, theme: (campaign?.theme)!, delegate: dataManager!)
             cell.setScreenshots(dataManager?.screenshots ?? [])
             

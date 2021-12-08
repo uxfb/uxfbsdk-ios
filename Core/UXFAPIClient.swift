@@ -15,11 +15,9 @@ enum UXFAPIClientResponseResult{
     case cancelled
 }
 
-
-
 internal func DDLogDebug(_ value: Any){
     #if DEBUG
-    print(value)
+//    print(value)
     #endif
 }
 
@@ -27,7 +25,6 @@ let uxfErrorRequestCancelled = -999
 let uxfTokenErrorMessage: String = "Invalid token".localized()
 
 class UXFAPIClient{
-    
     private(set) var appID: String!
     private var _parser: UXFParser!
     public var _endpoint: UXFEndpoint!

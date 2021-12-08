@@ -95,11 +95,10 @@ class UXFScreenshotCreator: UIView {
             break
         case .changed:
             let velocity = pan.velocity(in: pan.view?.superview)
-            
             direction = velocity.y
             break
         case .ended:
-            if direction > 120 || direction < -120 {
+            if abs(direction) > 120 {
                 textLabel.isHidden = true
                 arrowImage.isHidden = true
                 touchImage.isHidden = true

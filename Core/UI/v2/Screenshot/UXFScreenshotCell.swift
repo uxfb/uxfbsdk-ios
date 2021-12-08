@@ -210,6 +210,7 @@ class UXFScreenshotCell: UXFBaseCell {
         
         let deleteAction = UIAlertAction(title: "Удалить", style: .default) { alertAction in
             self.screenshots.remove(at: index)
+//            self.delegate?.fieldChanged(field, answer: [], refresh: true)
             self.delegate?.screenshotChanged(screenshots: self.screenshots)
             alert.dismiss(animated: true, completion: nil)
         }

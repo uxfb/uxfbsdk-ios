@@ -15,6 +15,7 @@ class UXFImageCollection: UIView, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!{
         didSet{
             scrollView.delegate = self
+            
         }
     }
     

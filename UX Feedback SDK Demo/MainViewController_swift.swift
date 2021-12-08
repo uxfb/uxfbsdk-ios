@@ -16,12 +16,11 @@ class MainViewController_swift: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = .white
         UXFeedback.sharedSDK.delegate = self
-//        UXFeedback.sharedInstance.formDelegate = self
-        
+
         if UXFeedback.sharedSDK.isCampaignsLoaded == false {
             self.buttonsStackView.isUserInteractionEnabled = false
             self.buttonsStackView.alpha = 0.5
@@ -46,15 +45,17 @@ class MainViewController_swift: UIViewController {
         
         let eventNumber = sender.tag
         assert(eventNumber > 0, "Invalid eventNumber")
+        UXFeedback.sharedSDK.globalDelayTimer = 1
         switch eventNumber {
         case 1:
-            UXFeedback.sharedSDK.setProperties(["third": "non-value",
-                                                "fourth": 4])
-            UXFeedback.sharedSDK.globalDelayTimer = 1
+//            UXFeedback.sharedSDK.setProperties(["property_first": "non-value",
+//                                                "property_second": 2])
+            
+            
             UXFeedback.sharedSDK.sendEvent(event: "screens", fromController: self)
             break
         case 2:
-            UXFeedback.sharedSDK.sendEvent(event: "screens2", fromController: self)
+            UXFeedback.sharedSDK.sendEvent(event: "aud_recommend_v1_211", fromController: self)
             break
         default:
             break
@@ -68,21 +69,22 @@ class MainViewController_swift: UIViewController {
 
 extension MainViewController_swift: UXFeedbackCampaignDelegate{
     func campaignDidShow(eventName: String) {
-        print("CAMPAIGN SHOWED")
+//        print("CAMPAIGN SHOWED")
     }
     
     func campaignDidLoad(success: Bool){
         self.buttonsStackView.isUserInteractionEnabled = true
         self.buttonsStackView.alpha = 1.0
         self.busyIndicator.stopAnimating()
-        DDLogDebug(#function)
+//        DDLogDebug(#function)
     }
     
     func campaignDidReceiveError(errorString: String){
-        DDLogDebug(errorString)
+//        DDLogDebug(errorString)
     }
     
     func campaignDidClose(eventName: String) {
         
     }
 }
+

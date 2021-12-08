@@ -37,14 +37,14 @@ enum ContentType: String {
 }
 
 public enum UXFEndpoint: String {
-    case prod = "https://public-api.uxfeedback.ru/v3"
-    case stage = "https://api-stage.uxfeedback.ru/v3"
-    case release = "https://api-release.uxfeedback.ru/v3"
+    case prod = "https://public-api.uxfeedback.ru/v4"
+    case stage = "https://api-stage.uxfeedback.ru/v4"
+    case release = "https://api-release.uxfeedback.ru/v4"
 }
 
 enum UXFAPIWebRouter {
     
-    static var endpoint: UXFEndpoint = .release
+    static var endpoint: UXFEndpoint = .prod
     
     case getCampaing(appID: String)
     case showForm(uid: String, campaingId: String)
@@ -118,24 +118,22 @@ enum UXFAPIWebRouter {
 
             let image = screenshot.image
             var httpBody = Data()
-//            var httpBody = ""
             httpBody.append("--\(boundary)" + lineBreak)
-            httpBody.append("Content-Disposition:form-data; name=\"screenshot\";filename=\"\(screenshot.id)\"" + lineBreak) //
+            httpBody.append("Content-Disposition:form-data; name=\"screenshot\";filename=\"\(screenshot.id)\"" + lineBreak)
             httpBody.append("Content-Type: \(mimetype)" + lineBreak + lineBreak)
 
             let encoder = YYImageEncoder(type: .webP)
             encoder?.quality = 1
             encoder?.add(image, duration: 0)
             if let data = encoder?.encode() {
-//                let fileStr = String(decoding: data, as: UTF8.self)
                 httpBody.append(data)
-                print(data.count)
             }
 
             httpBody.append(lineBreak)
             httpBody.append("--\(boundary)--" + lineBreak)
             
-//            let postData = httpBody.data(using: .utf8)
+            let postData = String(decoding: httpBody, as: UTF8.self)
+            print(postData)
             return httpBody
         }
     }

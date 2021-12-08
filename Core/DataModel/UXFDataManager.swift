@@ -513,6 +513,8 @@ class UXFDataManager: UXFFieldDelegate {
                              "transforms": transforms] as [String : Any]
             answers.append(newAnswer)
         }
+        
+        print(answers)
 
         if refresh {
             viewController?.updateUI()

@@ -17,8 +17,7 @@ class UXFImageManager: NSObject {
     static var currentOverlay: UIView?
     static var hideAction: closeAction?
     
-    
-//    static var pickerAction: imagePickerAction?
+    private static var direction: CGFloat = 0
     
     override init() { }
     
@@ -32,13 +31,42 @@ class UXFImageManager: NSObject {
         return overlay
     }
     
-    //MARK: - TopView behavior
+    //MARK: - Gestures
 
     @objc private static func navViewAction() {
         if let navView = currentOverlay?.viewWithTag(1234) {
             UIView.animate(withDuration: 0.15) {
                 navView.frame.origin.y = navView.frame.origin.y == 0 ? -navView.frame.size.height : 0
             }
+        }
+    }
+    
+    @objc private static func panAction(pan: UIPanGestureRecognizer) {
+        let endPoint = pan.translation(in: pan.view?.superview)
+        let view = currentOverlay?.viewWithTag(999)
+        switch pan.state {
+        case .began:
+            break
+            
+        case .changed:
+            let velocity = pan.velocity(in: pan.view?.superview)
+            direction = velocity.y
+            let newY = (currentOverlay?.center.y ?? 0) + endPoint.y
+            view?.center.y = newY
+            
+        case .ended:
+            let velocity = pan.velocity(in: pan.view?.superview)
+            print(velocity.y)
+            if abs(velocity.y) > 100 {
+                hide(animated: true)
+            } else {
+                UIView.animate(withDuration: 0.15) {
+                    view?.center.y = currentOverlay?.center.y ?? 0
+                }
+            }
+            
+        default:
+            break
         }
     }
     
@@ -70,7 +98,7 @@ class UXFImageManager: NSObject {
         imageCollection.configure(frame: CGRect(origin: startPoint, size: startSize), images: images, currentIndex: tappedIndex) { title in
             titleLabel.text = title
         }
-        
+        imageCollection.tag = 999
         
         overlay.addSubview(imageCollection)
         
@@ -85,6 +113,10 @@ class UXFImageManager: NSObject {
         tapGesture.cancelsTouchesInView = false
         tapGesture.numberOfTapsRequired = 1
         imageCollection.addGestureRecognizer(tapGesture)
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(UXFImageManager.panAction(pan:)))
+        panGesture.cancelsTouchesInView = false
+        imageCollection.addGestureRecognizer(panGesture)
         
         let cancelButton = UIButton(frame: CGRect(x: overlay.frame.size.width - 60,
                                                   y: overlay.frame.origin.y + addTop,

@@ -10,6 +10,7 @@ import UIKit
 
 class UXFSmilesCell: UXFBaseCell {
     
+    private var animationInProgress: Bool = false
     private var currentValue: Int = -1
     
     override func updateUI() {
@@ -27,7 +28,7 @@ class UXFSmilesCell: UXFBaseCell {
             }
         }
         
-        if field?.isError ?? false && currentValue == -1 {
+        if (field?.isError ?? false) && currentValue == -1 {
             animateSmiles()
         }
     }
@@ -66,8 +67,13 @@ class UXFSmilesCell: UXFBaseCell {
     }
     
     @IBAction  func smileTapped(_ sender: UIButton){
+        guard !animationInProgress, sender.tag != currentValue+1 else {
+            return
+        }
+        
+        animationInProgress = true
         currentValue = sender.tag
-        UIView.animate(withDuration: 0.2) {
+        UIView.animate(withDuration: 0.15) {
             sender.alpha = 1
             for tag in 1...5 {
                 self.contentView.viewWithTag(tag)?.borderColor = .clear
@@ -77,6 +83,7 @@ class UXFSmilesCell: UXFBaseCell {
                 }
             }
         } completion: { (finished) in
+            self.animationInProgress = false
             if self.delegate != nil {
                 self.delegate?.fieldChanged(self.field!, answer: [String(self.currentValue - 1)], refresh: true)
             }

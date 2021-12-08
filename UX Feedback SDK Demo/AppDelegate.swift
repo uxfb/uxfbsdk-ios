@@ -9,7 +9,8 @@
 import UIKit
 import UXFeedbackSDK
 
-let uxfAppID = "ckh8zduea00003c58k6cyatp0"
+//let uxfAppID = "ckh8zduea00003c58k6cyatp0"
+let uxfAppID = "ck5peux4c00003h5mcloo8opu"
 
 internal func DDLogDebug(_ value: Any){
     #if DEBUG
@@ -26,7 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        DDLogDebug("Start application")
+        UXFeedback.sharedSDK.setDebugEnabled(true)
+        
         let customTheme = UXFBTheme()
         customTheme.text03Color =  UIColor.init("#8B90A0")
         customTheme.inputBorderColor =  UIColor.init("#D3D4D8")

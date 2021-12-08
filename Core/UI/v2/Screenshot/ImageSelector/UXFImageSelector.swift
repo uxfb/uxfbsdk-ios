@@ -221,9 +221,9 @@ extension UXFImageSelector: UICollectionViewDataSource, UICollectionViewDelegate
         }
         
         if (previousCount >= self.maxCount || selectedIndexes.count >= self.maxCount) && previousCount != selectedIndexes.count {
-            collectionView.reloadData()
+            self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
         } else {
-            collectionView.reloadItems(at: [indexPath])
+            self.collectionView.reloadItems(at: [indexPath])
         }
         
         self.updateUI()

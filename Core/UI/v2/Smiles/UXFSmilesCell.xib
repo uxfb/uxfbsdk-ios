@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,7 +25,7 @@
                         </constraints>
                         <state key="normal" image="mad"/>
                         <connections>
-                            <action selector="smileTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="HXv-F7-UQz"/>
+                            <action selector="smileTapped:" destination="KGk-i7-Jjw" eventType="touchDown" id="eZE-Bb-gra"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UaC-9g-W4T">
@@ -36,7 +36,7 @@
                         </constraints>
                         <state key="normal" image="confused"/>
                         <connections>
-                            <action selector="smileTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gOH-Xh-GPt"/>
+                            <action selector="smileTapped:" destination="KGk-i7-Jjw" eventType="touchDown" id="UxC-cv-wrn"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="veX-bN-DPY">
@@ -47,7 +47,7 @@
                         </constraints>
                         <state key="normal" image="angry"/>
                         <connections>
-                            <action selector="smileTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="TL2-Aj-cdN"/>
+                            <action selector="smileTapped:" destination="KGk-i7-Jjw" eventType="touchDown" id="IDh-Pz-gVt"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ueo-Ni-KFQ">
@@ -58,7 +58,7 @@
                         </constraints>
                         <state key="normal" image="in-love"/>
                         <connections>
-                            <action selector="smileTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="XDN-Oe-kvi"/>
+                            <action selector="smileTapped:" destination="KGk-i7-Jjw" eventType="touchDown" id="G4T-qX-MvJ"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zAw-Xd-eof">
@@ -69,7 +69,7 @@
                         </constraints>
                         <state key="normal" image="happy"/>
                         <connections>
-                            <action selector="smileTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Nd8-lg-S1Y"/>
+                            <action selector="smileTapped:" destination="KGk-i7-Jjw" eventType="touchDown" id="VXQ-lO-zEf"/>
                         </connections>
                     </button>
                 </subviews>

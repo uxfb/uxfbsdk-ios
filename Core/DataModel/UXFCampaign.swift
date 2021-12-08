@@ -91,7 +91,7 @@ struct UXFCampaign{
         return Int.max
     }
     
-    func showDelay(eventName: String) -> TimeInterval{
+    func showDelay(eventName: String) -> TimeInterval {
         var delay: TimeInterval = 0.1
         self.targetings.forEach { (targetingDict) in
             if let name = targetingDict["value"] as? String, eventName == name {

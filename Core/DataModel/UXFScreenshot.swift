@@ -18,4 +18,3 @@ struct UXFScreenshot {
     var image: UIImage
     var type: UXFScreenshotType
 }
-
