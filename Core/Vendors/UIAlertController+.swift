@@ -25,7 +25,7 @@ extension UIAlertController {
         super.dismiss(animated: flag, completion: completion)
         for window in UIApplication.shared.windows {
             if window is PassthroughWindow {
-                window.makeKeyAndVisible()
+//                window.makeKeyAndVisible()
                 UIAlertController.globalPresentationWindow?.isHidden = true
                 UIAlertController.globalPresentationWindow?.resignKey()
                 UIAlertController.globalPresentationWindow = nil

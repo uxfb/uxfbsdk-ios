@@ -1,104 +1,14 @@
 //
-//  UXFNpsCell.swift
+//  UXFRatingCell.swift
 //  UX Feedback SDK Demo
 //
-//  Created by Alexander Potemka on 25.05.2021.
+//  Created by Alexander Potemka on 12.12.2021.
 //  Copyright © 2021 UXF. All rights reserved.
 //
 
 import UIKit
 
-class UXFSliderView: UIView {
-    private var bigBorderView: UIView = UIView()
-    private var smallBorderView: UIView = UIView()
-    private var imageContentView: UIView = UIView()
-    
-    private let leftArrowView = UIImageView(frame: CGRect(origin: .zero,
-                                                  size: CGSize(width: 5,
-                                                               height: 10)))
-    private let rightArrowView = UIImageView(frame: CGRect(origin: .zero,
-                                                   size: CGSize(width: 5,
-                                                                height: 10)))
-    
-    private let sliderWidth: CGFloat = 48
-    private let sliderHeight: CGFloat = 48
-    
-    enum SliderStyle: Int {
-        case inactive = 0
-        case active = 1
-        case error = 2
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        let baseRadius = sliderWidth / 2
-        self.clipsToBounds = false
-        
-        bigBorderView.frame.size = CGSize(width: sliderWidth,
-                                            height: sliderHeight)
-        bigBorderView.center = self.center
-        bigBorderView.layer.cornerRadius = baseRadius
-        smallBorderView.frame.size = CGSize(width: sliderWidth - 8,
-                                            height: sliderHeight - 8)
-        smallBorderView.layer.cornerRadius = baseRadius - 4
-        smallBorderView.center = bigBorderView.center
-        imageContentView.frame.size = CGSize(width: sliderWidth - 14,
-                                            height: sliderHeight - 14)
-        imageContentView.center = bigBorderView.center
-        imageContentView.layer.cornerRadius = baseRadius - 7
-        imageContentView.backgroundColor = .white
-        
-        let bundle = Bundle(for: UXFeedback.self)
-        
-        leftArrowView.image = UIImage(named: "slider_left",
-                                      in: bundle,
-                                      compatibleWith: nil)
-        rightArrowView.image = UIImage(named: "slider_right",
-                                       in: bundle, compatibleWith: nil)
-            
-        
-        leftArrowView.center = CGPoint(x: (sliderWidth - 14) / 2 - 3.5,
-                                       y: (sliderHeight - 14) / 2)
-        rightArrowView.center = CGPoint(x: (sliderWidth - 14) / 2 + 3.5,
-                                       y: (sliderHeight - 14) / 2)
-        
-        self.isOpaque = false
-        self.backgroundColor = .clear
-        self.addSubview(bigBorderView)
-        self.addSubview(smallBorderView)
-        imageContentView.addSubview(leftArrowView)
-        imageContentView.addSubview(rightArrowView)
-        self.addSubview(imageContentView)
-    }
-    
-    func setStyle(_ sliderStyle: SliderStyle, theme: UXFBTheme) {
-        switch sliderStyle {
-        case .inactive:
-            bigBorderView.backgroundColor = theme.iconColor.withAlphaComponent(0.3)
-            smallBorderView.backgroundColor = theme.iconColor
-            
-        case .active:
-            bigBorderView.backgroundColor = theme.mainColor.withAlphaComponent(0.3)
-            smallBorderView.backgroundColor = theme.mainColor
-        case .error:
-            bigBorderView.backgroundColor = theme.errorColorPrimary.withAlphaComponent(0.3)
-            smallBorderView.backgroundColor = theme.errorColorPrimary
-        }
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        bigBorderView.center = center
-        smallBorderView.center = center
-        imageContentView.center = center
-    }
-}
-
-class UXFNpsCell: UXFBaseCell {
-
+class UXFRatingCell: UXFBaseCell {
     @IBOutlet var negativeLabel: UILabel!
     @IBOutlet var positiveLabel: UILabel!
     @IBOutlet var slider: UISlider!
@@ -109,24 +19,29 @@ class UXFNpsCell: UXFBaseCell {
     
     private let bundle = Bundle(for: UXFeedback.self)
     
-    private var currentValue: Int = -1
+    private var currentValue: Int = 0
+    private var defaultValue: Int = 0
+    private var maxValue: Int = 0
     
     override func updateUI() {
-        
-        currentValue = Int(field?.answers.first ?? "") ?? -1
-        
+        currentValue = Int(field?.answers.first ?? "") ?? 0
+        maxValue = (field?.uiData["ratingCount"] as? Int) ?? 3
+        let halfValue = (Double(maxValue)/2).rounded(.up)
+        defaultValue = Int(halfValue)
         guard field != nil, theme != nil else {
             return
         }
         
+        sliderView.frame.size.width = max((UIScreen.main.bounds.width-32) / CGFloat(maxValue), 48)
         initLabels()
         
-        slider.setValue(Float(currentValue == -1 ? 5 : currentValue), animated: false)
+        slider.maximumValue = Float(maxValue)
+        slider.setValue(Float(currentValue == 0 ? defaultValue : currentValue), animated: false)
         
-        if field?.isError ?? false && currentValue == -1 {
+        if field?.isError ?? false && currentValue == 0 {
             setErrorStyle()
         }
-        else if currentValue == -1 {
+        else if currentValue == 0 {
             setInactiveStyle()
         } else {
             setActiveStyle()
@@ -168,14 +83,19 @@ class UXFNpsCell: UXFBaseCell {
     }
     
     private func initLabels() {
-        let calculatedValue = currentValue == -1 ? 5 : currentValue
-        for i in 0...10 {
-            if let label = contentView.viewWithTag(i+1) as? VerticalAlignedLabel {
+        let calculatedValue = currentValue == 0 ? defaultValue : currentValue
+        for i in 1...10 {
+            if let label = contentView.viewWithTag(i) as? VerticalAlignedLabel {
+                label.backgroundColor = .white
+                label.isHidden = false
+                if i > maxValue {
+                    label.isHidden = true
+                }
                 if i == calculatedValue {
-                    label.textColor = currentValue == -1 ? theme?.text03Color : theme?.mainColor
+                    label.textColor = currentValue == 0 ? theme?.text03Color : theme?.mainColor
                     label.font = theme?.mediumFont(size: .bigFontSize)
                 } else if i == calculatedValue-1 || i == calculatedValue+1 {
-                    label.textColor = currentValue == -1 ? theme?.text03Color : theme?.text02Color
+                    label.textColor = currentValue == 0 ? theme?.text03Color : theme?.text02Color
                     label.font = theme?.regularFont(size: .mediumFontSize)
                     label.contentMode = .bottom
                 }
@@ -185,7 +105,6 @@ class UXFNpsCell: UXFBaseCell {
                     label.contentMode = .bottom
                 }
             }
-            
         }
     }
     
@@ -195,8 +114,8 @@ class UXFNpsCell: UXFBaseCell {
         let firstDiff: CGFloat = .bigFontSize - .mediumFontSize
         let secondDiff: CGFloat = .mediumFontSize - .smallFontSize
         
-        for i in 0...10 {
-            if let label = contentView.viewWithTag(i+1) as? VerticalAlignedLabel {
+        for i in 1...maxValue {
+            if let label = contentView.viewWithTag(i) as? VerticalAlignedLabel {
                 let diff = abs(Float(i) - slider.value)
                 if diff == 0 {
                     label.textColor = theme?.mainColor
@@ -216,7 +135,6 @@ class UXFNpsCell: UXFBaseCell {
                     label.contentMode = .bottom
                 }
             }
-            
         }
     }
     

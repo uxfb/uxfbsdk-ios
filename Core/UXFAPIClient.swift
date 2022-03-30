@@ -24,15 +24,19 @@ internal func DDLogDebug(_ value: Any){
 let uxfErrorRequestCancelled = -999
 let uxfTokenErrorMessage: String = "Invalid token".localized()
 
-class UXFAPIClient{
+class UXFAPIClient {
     private(set) var appID: String!
     private var _parser: UXFParser!
-    public var _endpoint: UXFEndpoint!
+    private var _endpoint: String
     
-    init(endpoint: UXFEndpoint, appID: String, parser: UXFParser){
+    init(endpoint: String?, appID: String, parser: UXFParser) {
         _parser = parser
         self.appID = appID
-        self._endpoint = endpoint
+        if let endpoint = endpoint {
+            self._endpoint = endpoint
+        } else {
+            self._endpoint = UXFAPIWebRouter.defaultEndpoint
+        }
         
         NotificationCenter.default.addObserver(self,selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
@@ -132,7 +136,7 @@ class UXFAPIClient{
     
     internal func performRequest(route: UXFAPIWebRouter, completion:@escaping (UXFAPIClientResponseResult, String?, Any?)->()) -> URLSessionDataTask?{
         
-        UXFAPIWebRouter.endpoint = self._endpoint
+        UXFAPIWebRouter.endpoint = "\(self._endpoint)/v5"
         
         guard let urlRequest = try? route.asURLRequest() else{
              completion(.fail, "Error url request", nil)

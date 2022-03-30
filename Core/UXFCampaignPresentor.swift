@@ -100,6 +100,7 @@ class UXFCampaignPresentor: NSObject {
             
             self._appWindow.makeKeyAndVisible()
             self._appWindow.becomeKey()
+            
             let parentViewController = self._appWindow.rootViewController
             parentViewController?.present(controller, animated: self.isAnimationFormEnabled) {
                 controller.state = .presented

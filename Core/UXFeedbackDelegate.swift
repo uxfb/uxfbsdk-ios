@@ -28,4 +28,6 @@ public protocol UXFeedbackCampaignDelegate: AnyObject {
     func campaignDidReceiveError(errorString: String)
     func campaignDidShow(eventName: String)
     func campaignDidClose(eventName: String)
+    
+    func logDidReceive(message: String)
 }

@@ -28,9 +28,5 @@ open class UXFBaseCell: UITableViewCell {
         updateUI()
     }
     
-    internal func updateUI() {
-        
-    }
-    
-    
+    internal func updateUI() { }
 }

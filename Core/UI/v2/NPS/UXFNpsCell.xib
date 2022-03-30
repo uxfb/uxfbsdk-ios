@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,9 +20,6 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8l-xG-QJn">
                         <rect key="frame" x="0.0" y="76" width="152" height="34"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="34" id="R6Q-ST-U7L"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -30,9 +27,6 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OkA-GK-FRr">
                         <rect key="frame" x="168" y="76" width="152" height="34"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="34" id="PZw-fF-xWN"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -118,6 +112,9 @@
                     </stackView>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="AOh-oZ-5IQ">
                         <rect key="frame" x="-2" y="28" width="324" height="49"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="48" id="jRK-oc-nUR"/>
+                        </constraints>
                         <connections>
                             <action selector="touchUpInside:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="J8X-S3-Q3W"/>
                             <action selector="touchUpOutside:" destination="KGk-i7-Jjw" eventType="touchUpOutside" id="pFK-AW-ccf"/>
@@ -126,18 +123,19 @@
                     </slider>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="h8l-xG-QJn" firstAttribute="top" secondItem="AOh-oZ-5IQ" secondAttribute="bottom" id="4to-so-9bT"/>
+                    <constraint firstItem="AOh-oZ-5IQ" firstAttribute="top" secondItem="Ci0-tV-2tU" secondAttribute="bottom" id="4Eo-1Y-P9L"/>
                     <constraint firstItem="Ci0-tV-2tU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="BF7-4p-Qaa"/>
                     <constraint firstAttribute="bottom" secondItem="h8l-xG-QJn" secondAttribute="bottom" id="F2V-hd-dw6"/>
-                    <constraint firstAttribute="trailing" secondItem="AOh-oZ-5IQ" secondAttribute="trailing" id="FvH-sw-Mtn"/>
-                    <constraint firstItem="AOh-oZ-5IQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="bIf-Zk-jd0"/>
+                    <constraint firstItem="h8l-xG-QJn" firstAttribute="top" secondItem="AOh-oZ-5IQ" secondAttribute="bottom" id="Td4-G9-3fT"/>
                     <constraint firstAttribute="bottom" secondItem="OkA-GK-FRr" secondAttribute="bottom" id="btY-Hh-DhY"/>
                     <constraint firstAttribute="trailing" secondItem="Ci0-tV-2tU" secondAttribute="trailing" constant="4" id="dIe-5Z-HtP"/>
                     <constraint firstItem="OkA-GK-FRr" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.5" constant="-8" id="dts-bk-Z9K"/>
                     <constraint firstItem="Ci0-tV-2tU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ib4-Pn-hiW"/>
-                    <constraint firstItem="AOh-oZ-5IQ" firstAttribute="top" secondItem="Ci0-tV-2tU" secondAttribute="bottom" id="oFw-0E-nin"/>
+                    <constraint firstItem="AOh-oZ-5IQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="iye-7c-oYd"/>
                     <constraint firstAttribute="trailing" secondItem="OkA-GK-FRr" secondAttribute="trailing" id="rR4-72-Vmi"/>
                     <constraint firstItem="h8l-xG-QJn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="vG9-sk-4BU"/>
+                    <constraint firstItem="OkA-GK-FRr" firstAttribute="top" secondItem="AOh-oZ-5IQ" secondAttribute="bottom" id="wom-Py-GcY"/>
+                    <constraint firstAttribute="trailing" secondItem="AOh-oZ-5IQ" secondAttribute="trailing" id="x9w-d8-KOg"/>
                     <constraint firstItem="h8l-xG-QJn" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.5" constant="-8" id="z71-Fi-SWp"/>
                 </constraints>
             </tableViewCellContentView>

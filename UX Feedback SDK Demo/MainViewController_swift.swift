@@ -16,7 +16,8 @@ class MainViewController_swift: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = .white
         UXFeedback.sharedSDK.delegate = self
@@ -38,6 +39,9 @@ class MainViewController_swift: UIViewController {
     }
     
     @IBAction func eventTap(_ sender: UIButton){
+        
+        
+        
         UXFeedback.sharedSDK.closeOnSwipe = true
 //        UXFeedback.sharedSDK.uiBlocked = true
         UXFeedback.sharedSDK.setSlideinBlackout(color: "0076C2", opactity: 10, blur: 4)
@@ -52,10 +56,11 @@ class MainViewController_swift: UIViewController {
 //                                                "property_second": 2])
             
             
-            UXFeedback.sharedSDK.sendEvent(event: "screens", fromController: self)
+            UXFeedback.sharedSDK.sendEvent(event: "rating", fromController: self)
             break
         case 2:
-            UXFeedback.sharedSDK.sendEvent(event: "aud_recommend_v1_211", fromController: self)
+//            showActivityOverlay()
+            UXFeedback.sharedSDK.sendEvent(event: "bad", fromController: self)
             break
         default:
             break
@@ -63,11 +68,38 @@ class MainViewController_swift: UIViewController {
     }
     
     @IBAction func closeButtonTap(_ sender: UIButton){
+//        showActivityOverlay()
         self.dismiss(animated: true, completion: nil)
     }
+    
+    var activityOverlay: UIAlertController?
+    
+    func showActivityOverlay() {
+        let overlay = UIAlertController(title: nil, message: "", preferredStyle: .alert)
+        let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        if #available(iOS 13.0, *) {
+            indicator.style = .large
+        }
+        indicator.startAnimating()
+        overlay.view.addSubview(indicator)
+        indicator.center = overlay.view.center
+        present(overlay, animated: true, completion: nil)
+        activityOverlay = overlay
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.hideActivityOverlay()
+        }
+    }
+        
+    func hideActivityOverlay() {
+        activityOverlay?.dismiss(animated: true, completion: nil)
+    }
+
 }
 
 extension MainViewController_swift: UXFeedbackCampaignDelegate{
+    func logDidReceive(message: String) { }
+    
     func campaignDidShow(eventName: String) {
 //        print("CAMPAIGN SHOWED")
     }

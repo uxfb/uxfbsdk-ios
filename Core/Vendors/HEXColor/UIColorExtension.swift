@@ -75,16 +75,15 @@ import UIKit
     public convenience init(rgba_throws rgba: String) throws {
         guard rgba.hasPrefix("#") else {
             let error = UIColorInputError.missingHashMarkAsPrefix(rgba)
-            print(error.localizedDescription)
             throw error
         }
 //        let hexString: String = String(rgba[String.Index(utf16Offset: 1, in: rgba)])
+        
         let hexString: String = String(rgba[String.Index.init(encodedOffset: 1)...])
         var hexValue:  UInt32 = 0
         
         guard Scanner(string: hexString).scanHexInt32(&hexValue) else {
             let error = UIColorInputError.unableToScanHexValue(rgba)
-            print(error.localizedDescription)
             throw error
         }
         
@@ -99,7 +98,7 @@ import UIKit
             self.init(hex8: hexValue)
         default:
             let error = UIColorInputError.mismatchedHexStringLength(rgba)
-            print(error.localizedDescription)
+//            print(error.localizedDescription)
             throw error
         }
     }
@@ -131,7 +130,7 @@ import UIKit
         
         guard r >= 0 && r <= 1 && g >= 0 && g <= 1 && b >= 0 && b <= 1 else {
             let error = UIColorInputError.unableToOutputHexStringForWideDisplayColor
-            print(error.localizedDescription)
+//            print(error.localizedDescription)
             throw error
         }
         

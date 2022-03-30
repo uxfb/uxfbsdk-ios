@@ -17,17 +17,19 @@ class UXFSmilesCell: UXFBaseCell {
         currentValue = Int(field?.answers.first ?? "") ?? -1
         
         let color = (field!.isError && currentValue == -1) ? theme?.errorColorSecondary : UIColor.clear
-        
+
         for tag in 1...5 {
             self.contentView.viewWithTag(tag)?.cornerRadius = 19
             self.contentView.viewWithTag(tag)?.borderColor = color
             self.contentView.viewWithTag(tag)?.borderWidth = 2
-            
+
             if currentValue == -1 {
                 self.contentView.viewWithTag(tag)?.alpha = 1
+            } else {
+                self.contentView.viewWithTag(tag)?.alpha = tag != (currentValue + 1) ? 0.2 : 1
             }
         }
-        
+
         if (field?.isError ?? false) && currentValue == -1 {
             animateSmiles()
         }

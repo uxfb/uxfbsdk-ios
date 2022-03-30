@@ -20,7 +20,7 @@ class UXFStatisticManager{
         if IS_IPAD {
             device = "tablet"
         }
-        else if UIDevice.current.userInterfaceIdiom == .phone{
+        else if UIDevice.current.userInterfaceIdiom == .phone {
             device = "mobile"
         }
             

@@ -63,6 +63,8 @@
 		BF01BDFD2561EF59008C641B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF01BDFC2561EF59008C641B /* Images.xcassets */; };
 		BF02FD32255C0AE300C794E6 /* UXFField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF02FD31255C0AE300C794E6 /* UXFField.swift */; };
 		BF02FD3F255C65B000C794E6 /* UXFTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF02FD3E255C65B000C794E6 /* UXFTransform.swift */; };
+		BF0CE19D27661C3B00916B32 /* UXFRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0CE19927661C2200916B32 /* UXFRatingCell.swift */; };
+		BF0CE19E27661DAD00916B32 /* UXFRatingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF0CE19A27661C2200916B32 /* UXFRatingCell.xib */; };
 		BF2806AF2562B18F006F2D61 /* UXFStarsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806882562B18F006F2D61 /* UXFStarsCell.swift */; };
 		BF2806B32562B18F006F2D61 /* UXFRadioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28068E2562B18F006F2D61 /* UXFRadioCell.swift */; };
 		BF2806B42562B18F006F2D61 /* UXFRadiobuttonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28068F2562B18F006F2D61 /* UXFRadiobuttonCell.swift */; };
@@ -116,6 +118,7 @@
 		BF63171326B67509006F408A /* UXFImageCollection.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF63170D26B67465006F408A /* UXFImageCollection.xib */; };
 		BF885EE42715ED7900F110A0 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF885EE32715ED7900F110A0 /* UIButton+.swift */; };
 		BF885EE62715FB1B00F110A0 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF885EE52715FB1B00F110A0 /* UIAlertController+.swift */; };
+		BFA54F8427AA86A2003D6411 /* UXFCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA54F8327AA86A2003D6411 /* UXFCrypto.swift */; };
 		BFA9AF632747E92700679A45 /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB6DF3227047D6A00732D29 /* WebP.framework */; };
 		BFB6DEFC27043D7200732D29 /* UXFScreenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFB27043D7200732D29 /* UXFScreenshot.swift */; };
 		BFB6DEFE27044E4300732D29 /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFD27044E4300732D29 /* Data+.swift */; };
@@ -250,6 +253,8 @@
 		BF01BDFC2561EF59008C641B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BF02FD31255C0AE300C794E6 /* UXFField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFField.swift; sourceTree = "<group>"; };
 		BF02FD3E255C65B000C794E6 /* UXFTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFTransform.swift; sourceTree = "<group>"; };
+		BF0CE19927661C2200916B32 /* UXFRatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFRatingCell.swift; sourceTree = "<group>"; };
+		BF0CE19A27661C2200916B32 /* UXFRatingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFRatingCell.xib; sourceTree = "<group>"; };
 		BF2806882562B18F006F2D61 /* UXFStarsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFStarsCell.swift; sourceTree = "<group>"; };
 		BF2806892562B18F006F2D61 /* UXFStarsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFStarsCell.xib; sourceTree = "<group>"; };
 		BF28068B2562B18F006F2D61 /* UXFRadiobuttonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFRadiobuttonCell.xib; sourceTree = "<group>"; };
@@ -301,6 +306,7 @@
 		BF63170D26B67465006F408A /* UXFImageCollection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFImageCollection.xib; sourceTree = "<group>"; };
 		BF885EE32715ED7900F110A0 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		BF885EE52715FB1B00F110A0 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
+		BFA54F8327AA86A2003D6411 /* UXFCrypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCrypto.swift; sourceTree = "<group>"; };
 		BFB6DEFB27043D7200732D29 /* UXFScreenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFScreenshot.swift; sourceTree = "<group>"; };
 		BFB6DEFD27044E4300732D29 /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
 		BFB6DF1E27047D4800732D29 /* YYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImage.h; sourceTree = "<group>"; };
@@ -404,6 +410,7 @@
 				0A019A6E2237C503002FD4F8 /* UXFURLComponents.swift */,
 				0A019A6C2237B773002FD4F8 /* UXFAPIWebRouter.swift */,
 				0A160DD42268CDB000A586C4 /* UXFStatisticManager.swift */,
+				BFA54F8327AA86A2003D6411 /* UXFCrypto.swift */,
 				0A0CDEAB2250598800E1C092 /* Images.xcassets */,
 			);
 			path = Core;
@@ -529,11 +536,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BF0CE19827661C1200916B32 /* Rating */ = {
+			isa = PBXGroup;
+			children = (
+				BF0CE19927661C2200916B32 /* UXFRatingCell.swift */,
+				BF0CE19A27661C2200916B32 /* UXFRatingCell.xib */,
+			);
+			path = Rating;
+			sourceTree = "<group>";
+		};
 		BF2806862562B18F006F2D61 /* v2 */ = {
 			isa = PBXGroup;
 			children = (
-				BF2806A32562B18F006F2D61 /* UXFCampaignViewController.swift */,
-				BF28069C2562B18F006F2D61 /* UXFCampaignViewController.xib */,
 				BF2806A42562B18F006F2D61 /* _BASE */,
 				BF2806872562B18F006F2D61 /* _Stars */,
 				BF28069D2562B18F006F2D61 /* Button */,
@@ -544,9 +558,12 @@
 				BF2806902562B18F006F2D61 /* Input */,
 				BF40564B265CD84600709351 /* NPS */,
 				BF28068A2562B18F006F2D61 /* RadioButton */,
+				BF0CE19827661C1200916B32 /* Rating */,
 				BF6316F726B279CB006F408A /* Screenshot */,
 				BF2806AC2562B18F006F2D61 /* Smiles */,
 				BF2806A02562B18F006F2D61 /* Text */,
+				BF2806A32562B18F006F2D61 /* UXFCampaignViewController.swift */,
+				BF28069C2562B18F006F2D61 /* UXFCampaignViewController.xib */,
 			);
 			path = v2;
 			sourceTree = "<group>";
@@ -864,7 +881,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1120;
-				LastUpgradeCheck = 1310;
+				LastUpgradeCheck = 1320;
 				ORGANIZATIONNAME = UXF;
 				TargetAttributes = {
 					0A019A3B22365E02002FD4F8 = {
@@ -947,6 +964,7 @@
 				BF2806DB2562B6A5006F2D61 /* UXFCheckboxCell.xib in Resources */,
 				BF2806DC2562B6A5006F2D61 /* UXFCheckCell.xib in Resources */,
 				BF2806DD2562B6A6006F2D61 /* UXFImageCell.xib in Resources */,
+				BF0CE19E27661DAD00916B32 /* UXFRatingCell.xib in Resources */,
 				BF2806DE2562B6A6006F2D61 /* UXFCampaignViewController.xib in Resources */,
 				BF2806DF2562B6A6006F2D61 /* UXFButtonCell.xib in Resources */,
 				BF63171326B67509006F408A /* UXFImageCollection.xib in Resources */,
@@ -1035,6 +1053,7 @@
 				BF6248C1255B24910039F855 /* UXFDataManager.swift in Sources */,
 				BF5ED7E52559DB1900A1698E /* UXFParser.swift in Sources */,
 				BFB6DEFE27044E4300732D29 /* Data+.swift in Sources */,
+				BFA54F8427AA86A2003D6411 /* UXFCrypto.swift in Sources */,
 				BF2806C22562B18F006F2D61 /* UXFCampaignViewController.swift in Sources */,
 				BF02FD3F255C65B000C794E6 /* UXFTransform.swift in Sources */,
 				BF573ED026B6CBBA002A9E8C /* UXFScreenshotImageCell.swift in Sources */,
@@ -1048,6 +1067,7 @@
 				BFB6DF2E27047D4800732D29 /* YYImageCoder.m in Sources */,
 				BF2806B32562B18F006F2D61 /* UXFRadioCell.swift in Sources */,
 				BF316C102684AABC007CEFC0 /* VisualEffectView.swift in Sources */,
+				BF0CE19D27661C3B00916B32 /* UXFRatingCell.swift in Sources */,
 				BF63171126B67501006F408A /* UXFImageCollection.swift in Sources */,
 				BF40565B265CED2500709351 /* UILabel+Align.swift in Sources */,
 				BF885EE62715FB1B00F110A0 /* UIAlertController+.swift in Sources */,
@@ -1393,11 +1413,11 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = ST7ATYX27F;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1411,13 +1431,13 @@
 				);
 				INFOPLIST_FILE = UXFeedbackSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1592,11 +1612,11 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = ST7ATYX27F;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1610,13 +1630,13 @@
 				);
 				INFOPLIST_FILE = UXFeedbackSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1638,11 +1658,11 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = ST7ATYX27F;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1656,13 +1676,13 @@
 				);
 				INFOPLIST_FILE = UXFeedbackSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";

@@ -14,8 +14,8 @@ enum HTTPHeaderField: String {
     case contentType = "Content-Type"
     case acceptType = "Accept"
     case acceptEncoding = "Accept-Encoding"
-    case appID = "appId"
     case uid = "uid"
+    case appID = "appId"
     case campaignId = "campaignId"
     case fields = "fields"
     case pages = "pages"
@@ -36,15 +36,9 @@ enum ContentType: String {
     case screenshot = "multipart/form-data; boundary=-----------------------------0123456789"
 }
 
-public enum UXFEndpoint: String {
-    case prod = "https://public-api.uxfeedback.ru/v4"
-    case stage = "https://api-stage.uxfeedback.ru/v4"
-    case release = "https://api-release.uxfeedback.ru/v4"
-}
-
 enum UXFAPIWebRouter {
-    
-    static var endpoint: UXFEndpoint = .prod
+    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
+    static var endpoint: String = "\(defaultEndpoint)/v5"
     
     case getCampaing(appID: String)
     case showForm(uid: String, campaingId: String)
@@ -132,8 +126,8 @@ enum UXFAPIWebRouter {
             httpBody.append(lineBreak)
             httpBody.append("--\(boundary)--" + lineBreak)
             
-            let postData = String(decoding: httpBody, as: UTF8.self)
-            print(postData)
+//            let postData = String(decoding: httpBody, as: UTF8.self)
+//            print(postData)
             return httpBody
         }
     }
@@ -185,7 +179,7 @@ enum UXFAPIWebRouter {
     }
     
     func asURL() throws -> URL{
-        let urlComponents = UXFURLComponents(baseUrl: UXFAPIWebRouter.endpoint.rawValue,
+        let urlComponents = UXFURLComponents(baseUrl: UXFAPIWebRouter.endpoint,
                                              path: path,
                                              queryParameters: pathParameters)
         return urlComponents.url!

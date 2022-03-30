@@ -11,7 +11,7 @@ import PhotosUI
 
 let visualEffectViewTag = 777
 
-enum UXFViewPopupDirection{
+enum UXFViewPopupDirection {
     case upToDown
     case downToUp
     case alphaIn
@@ -55,7 +55,7 @@ open class UXFCampaignViewController: UIViewController {
     
     @IBOutlet var topView: UIView! {
         didSet {
-            topView.backgroundColor = .clear
+            topView.backgroundColor = campaign?.theme.bgColor ?? .white
         }
     }
     
@@ -230,9 +230,18 @@ open class UXFCampaignViewController: UIViewController {
         tableView.register(UINib(nibName: "UXFNpsCell",
                                  bundle: bundle),
                            forCellReuseIdentifier: "UXFNpsCell")
+        tableView.register(UINib(nibName: "UXFRatingCell",
+                                 bundle: bundle),
+                           forCellReuseIdentifier: "UXFRatingCell")
         tableView.register(UINib(nibName: "UXFScreenshotCell",
                                  bundle: bundle),
                            forCellReuseIdentifier: "UXFScreenshotCell")
+        
+        
+        
+//        if #available(iOS 15.0, *) {
+//            tableView.sectionHeaderTopPadding = 0
+//        }
     }
     
     private func prepareUI() {
@@ -328,8 +337,6 @@ open class UXFCampaignViewController: UIViewController {
     
     @objc func onPan(pan: UIPanGestureRecognizer) -> Void {
         view.endEditing(true)
-//        let endPoint = pan.translation(in: pan.view?.superview)
-        
         var safeArea: CGFloat = 0
         if #available(iOS 11.0, *) {
             let window = UIApplication.shared.keyWindow
@@ -418,52 +425,55 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
         }
         switch field.type {
         case .button:
-            let cell = createCell(UXFButtonCell.self, indexPath: indexPath, field: field, theme: (campaign?.theme)!, delegate: dataManager!)
+            let cell = createCell(UXFButtonCell.self, indexPath: indexPath, field: field)
             return cell
         
         case .smiles:
-            let cell = createCell(UXFSmilesCell.self, indexPath: indexPath, field: field, theme: (campaign?.theme)!, delegate: dataManager!)
+            let cell = createCell(UXFSmilesCell.self, indexPath: indexPath, field: field)
             return cell
             
         case .checkbox:
-            let cell = createCell(UXFCheckboxCell.self, indexPath: indexPath, field: field, theme: (campaign?.theme)!, delegate: dataManager!)
+            let cell = createCell(UXFCheckboxCell.self, indexPath: indexPath, field: field)
             return cell
             
         case .email:
-            let cell = createCell(UXFEmailCell.self, indexPath: indexPath, field: field, theme: (campaign?.theme)!, delegate: dataManager!)
+            let cell = createCell(UXFEmailCell.self, indexPath: indexPath, field: field)
             return cell
             
         case .header:
-            let cell = createCell(UXFHeaderCell.self, indexPath: indexPath, field: field, theme: (campaign?.theme)!, delegate: dataManager!)
+            let cell = createCell(UXFHeaderCell.self, indexPath: indexPath, field: field)
             return cell
             
         case .image:
-            let cell = createCell(UXFImageCell.self, indexPath: indexPath, field: field, theme: (campaign?.theme)!, delegate: dataManager!)
+            let cell = createCell(UXFImageCell.self, indexPath: indexPath, field: field)
             return cell
             
         case .input:
-            let cell = createCell(UXFInputCell.self, indexPath: indexPath, field: field, theme: (campaign?.theme)!, delegate: dataManager!)
+            let cell = createCell(UXFInputCell.self, indexPath: indexPath, field: field)
             return cell
             
         case .radiobutton:
-            let cell = createCell(UXFRadiobuttonCell.self, indexPath: indexPath, field: field, theme: (campaign?.theme)!, delegate: dataManager!)
+            let cell = createCell(UXFRadiobuttonCell.self, indexPath: indexPath, field: field)
             return cell
             
         case .text:
-            let cell = createCell(UXFTextCell.self, indexPath: indexPath, field: field, theme: (campaign?.theme)!, delegate: dataManager!)
+            let cell = createCell(UXFTextCell.self, indexPath: indexPath, field: field)
             return cell
             
         case .stars:
-            let cell = createCell(UXFStarsCell.self, indexPath: indexPath, field: field, theme: (campaign?.theme)!, delegate: dataManager!)
+            let cell = createCell(UXFStarsCell.self, indexPath: indexPath, field: field)
             return cell
             
         case .nps:
-            let cell = createCell(UXFNpsCell.self, indexPath: indexPath, field: field, theme: (campaign?.theme)!, delegate: dataManager!)
+            let cell = createCell(UXFNpsCell.self, indexPath: indexPath, field: field)
+            return cell
+        case .rating:
+            let cell = createCell(UXFRatingCell.self, indexPath: indexPath, field: field)
             return cell
             
         case .screenshot:
             
-            let cell = createCell(UXFScreenshotCell.self, indexPath: indexPath, field: field, theme: (campaign?.theme)!, delegate: dataManager!)
+            let cell = createCell(UXFScreenshotCell.self, indexPath: indexPath, field: field)
             cell.setScreenshots(dataManager?.screenshots ?? [])
             
             let takeTask = DispatchWorkItem {
@@ -646,7 +656,7 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
     
     //MARK: - Table View support
     
-    private func createCell<T: UXFBaseCell>(_ type: T.Type, indexPath: IndexPath, field: UXFField, theme: UXFBTheme, delegate: UXFFieldDelegate) -> T {
+    private func createCell<T: UXFBaseCell>(_ type: T.Type, indexPath: IndexPath, field: UXFField) -> T {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: T.self), for: indexPath) as! T
         cell.configureWith(field, theme: (campaign?.theme)!, delegate: dataManager!, valueIndex: indexPath.row)
         cell.backgroundColor = campaign?.theme.bgColor ?? .white
@@ -660,10 +670,14 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func updateField(idx: Int) {
-        UIView.setAnimationsEnabled(false)
-        tableView.beginUpdates()
-        tableView.endUpdates()
-        UIView.setAnimationsEnabled(true)
+        if let label = view.viewWithTag(idx) as? UILabel {
+            label.text = ""
+        }
+        
+        var indexSet = IndexSet(integersIn: 0..<self.tableView.numberOfSections)
+        indexSet.remove(idx)
+        
+        self.tableView.reloadSections(indexSet, with: .none)
         
         self.updateHeight()
     }
@@ -675,6 +689,15 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
         
         self.updateHeight()
     }
+    
+//    func updateUI(section: Int) {
+//        self.progressLabel.text = dataManager?.progress
+//        let indexSet = IndexSet(integersIn: 0..<self.tableView.numberOfSections)
+////        self.tableView.reloadSections([section], with: .automatic)
+//        self.tableView.reloadSections(indexSet, with: .fade)
+//
+//        self.updateHeight()
+//    }
     
     func updateHeight() {
         let newHeight = self.dataManager?.heightForCurrentPage() ?? 0

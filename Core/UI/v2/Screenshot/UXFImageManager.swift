@@ -56,7 +56,6 @@ class UXFImageManager: NSObject {
             
         case .ended:
             let velocity = pan.velocity(in: pan.view?.superview)
-            print(velocity.y)
             if abs(velocity.y) > 100 {
                 hide(animated: true)
             } else {
