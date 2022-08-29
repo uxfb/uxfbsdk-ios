@@ -38,6 +38,8 @@ class UXFRadiobuttonCell: UXFBaseCell, UITableViewDelegate, UITableViewDataSourc
         
         if field!.isError && field?.answers.count == 0 {
             isError = true
+        } else {
+            isError = false
         }
         
         tableView.reloadData()

@@ -9,8 +9,16 @@
 import UIKit
 
 class UXFRatingCell: UXFBaseCell {
-    @IBOutlet var negativeLabel: UILabel!
-    @IBOutlet var positiveLabel: UILabel!
+    @IBOutlet var negativeLabel: UILabel! {
+        didSet {
+            negativeLabel.numberOfLines = 2
+        }
+    }
+    @IBOutlet var positiveLabel: UILabel!{
+        didSet {
+            positiveLabel.numberOfLines = 2
+        }
+    }
     @IBOutlet var slider: UISlider!
     
     private var sliderView = UXFSliderView(frame: CGRect(origin: .zero,
@@ -32,7 +40,7 @@ class UXFRatingCell: UXFBaseCell {
             return
         }
         
-        sliderView.frame.size.width = max((UIScreen.main.bounds.width-32) / CGFloat(maxValue), 48)
+        sliderView.frame.size.width = max(self.bounds.width / CGFloat(maxValue), 48)
         initLabels()
         
         slider.maximumValue = Float(maxValue)
@@ -86,6 +94,7 @@ class UXFRatingCell: UXFBaseCell {
         let calculatedValue = currentValue == 0 ? defaultValue : currentValue
         for i in 1...10 {
             if let label = contentView.viewWithTag(i) as? VerticalAlignedLabel {
+                label.text = "\(i)"
                 label.backgroundColor = .white
                 label.isHidden = false
                 if i > maxValue {

@@ -39,9 +39,9 @@ open class UXFeedback : NSObject{
 
     public static let sharedSDK = UXFeedback.init() 
     private static var isInitialized = false
-    public let sdkVersion = "v1.2.6"
+    public let sdkVersion = "v1.2.9"
     
-    open var delegate: UXFeedbackCampaignDelegate?
+    open weak var delegate: UXFeedbackCampaignDelegate?
     open var animationEnabled: Bool = true
     open var isCampaignsLoaded: Bool {
         return _campaigns.count > 0
@@ -122,6 +122,7 @@ open class UXFeedback : NSObject{
     open func setTheme(theme: UXFBTheme) {
         _theme = theme
         _parser = UXFParser.init(theme: theme, isInitTheme: isInitTheme)
+        _formPresentor?._currentForm?.tableView.reloadData()
     }
     
 //    private func setEndpoint(endpoint: String) {
@@ -219,32 +220,27 @@ open class UXFeedback : NSObject{
         
         _apiClient = UXFAPIClient.init(endpoint: domain, appID: appID, parser: self._parser)
         _apiClient.getAllCampaings { [weak self] (success, message, delay, campaigns)  in
-            self?._campaigns = campaigns
+            self?._campaigns = campaigns.sorted(by: { cam1, cam2 in
+                Int(cam1.campaignId) ?? 0 < Int(cam2.campaignId) ?? 0
+            })
             self?.globalDelayTimer = delay
-            if success == true{
+            if success == true {
                 self?.DDLog("Campaigns loaded: \(campaigns.count)")
                 self?.resetAllCampaigns()
                 if let event = self?._eventToSend {
                    self?.sendEvent(event: event)
                  }
+            } else {
+                self?.DDLog("Campaigns NOT loaded, server error")
             }
             
-//            if window == nil {
-                DispatchQueue.main.async {
-                    self?._appWindow = PassthroughWindow(frame: UIScreen.main.bounds)
-                    self?._appWindow.rootViewController = UIViewController()
-                    self?._appWindow?.windowLevel = UXFeedback._windowLevel
-                    completion?(success)
-                    self?.delegate?.campaignDidLoad(success: success)
-                }
-//            }
-//            else{
-//                self?._appWindow = window
-//                completion?(success)
-//                DispatchQueue.main.async {
-//                   self?.delegate?.campaignDidLoad(success: success)
-//                }
-//            }
+            DispatchQueue.main.async {
+                self?._appWindow = PassthroughWindow(frame: UIScreen.main.bounds)
+                self?._appWindow.rootViewController = UIViewController()
+                self?._appWindow?.windowLevel = UXFeedback._windowLevel
+                completion?(success)
+                self?.delegate?.campaignDidLoad(success: success)
+            }
         }
     }
     
@@ -284,7 +280,9 @@ open class UXFeedback : NSObject{
                                 }
                             }
                             
-                            guard !(self._formPresentor?.isFormOnScreen ?? false) else {
+                            let formOnScreen = self._formPresentor?.isFormOnScreen ?? false
+//                            self.delegate?.campaignDidReceiveError(errorString: "\(formOnScreen)")
+                            guard !formOnScreen else {
                                 self.DDLog("Form already on screen")
                                 self.delegate?.campaignDidReceiveError(errorString: "Form is on screen")
                                 return
@@ -370,7 +368,7 @@ open class UXFeedback : NSObject{
 }
 
 extension UXFeedback: UXFCampaignFormPresentorProtocol {
-    func formSubmitted(formIndex: Int, info: Array<Dictionary<String, Any>>?, screenshots: [UXFScreenshot], campaign: UXFCampaign) {
+    func formSubmitted(info: Array<Dictionary<String, Any>>?, screenshots: [UXFScreenshot], campaign: UXFCampaign) {
         
         let screenshotIds: [String] = screenshots.map { screenshot in
             return screenshot.id
@@ -381,13 +379,29 @@ extension UXFeedback: UXFCampaignFormPresentorProtocol {
                                 pages: info,
                                 properties: _properties,
                                 screenshots: screenshotIds) { (success, message) in
-            if success == false {
-                DispatchQueue.main.async {
-                    self.delegate?.campaignDidReceiveError(errorString: "Неизвестная ошибка при отправке данных формы")
+//            if success == false {
+//                DispatchQueue.main.async {
+//                    self.delegate?.campaignDidReceiveError(errorString: "Неизвестная ошибка при отправке данных формы")
+//                }
+//            } else {
+//                self.DDLog("Campaign sended")
+//            }
+        }
+        
+        var answers: [String: Any] = [:]
+        if let info = info {
+            for item in info {
+                if let fields = item["fields"] as? [[String: Any]] {
+                    for field in fields {
+                        if let fieldId = field["fieldId"] as? String, let value = field["value"] {
+                            answers[fieldId] = value
+                        }
+                    }
                 }
-            } else {
-                self.DDLog("Campaign sended")
             }
+            
+            self.delegate?.campaignDidSend(campaignId: campaign.campaignId,
+                                           answers: answers)
         }
         
         _apiClient.saveScreenshotsData(screenshots)

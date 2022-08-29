@@ -40,6 +40,7 @@ struct UXFCampaign{
     private(set) var isProgressEnabled: Bool!
     private(set) var projectId: String!
     private(set) var autoclose: Double!
+    private(set) var showCopyright: Bool!
     
     var raiting: Int?{
         get{

@@ -12,7 +12,7 @@ import UXFeedbackSDK
 //let uxfAppID = "ckh8zduea00003c58k6cyatp0"
 //let uxfAppID = "ckx7i7p7k00003c5l7dv6ue7t"
 
-let uxfAppID = "cl0z3qass000038651z5z7jbe"
+let uxfAppID = "ckm22v45k00013b5ztqv5j74m"
 
 internal func DDLogDebug(_ value: Any){
     #if DEBUG
@@ -53,30 +53,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UXFeedback.sharedSDK.resetAllCampaignsData { }
         
 //    endpoint: "AAAAAAAAAAAAAHYwMhEVF1hOTAolMWgBABIHDQwbey0+AwABBgMCCD52NBA=", 
-        UXFeedback.sharedSDK.setup(appID: uxfAppID, window: window, theme: nil) { success in
+        UXFeedback.sharedSDK.setup(appID: uxfAppID, window: nil, theme: nil) { success in
         }
         
         return true
     }
 
-    func applicationWillResignActive(_ application: UIApplication) {
-        
-    }
+    func applicationWillResignActive(_ application: UIApplication) { }
 
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        
-    }
+    func applicationDidEnterBackground(_ application: UIApplication) { }
 
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        
-    }
+    func applicationWillEnterForeground(_ application: UIApplication) { }
 
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        
-    }
+    func applicationDidBecomeActive(_ application: UIApplication) { }
 
-    func applicationWillTerminate(_ application: UIApplication) {
-        
-    }
+    func applicationWillTerminate(_ application: UIApplication) { }
 }
 

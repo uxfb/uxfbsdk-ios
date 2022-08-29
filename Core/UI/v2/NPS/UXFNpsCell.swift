@@ -99,8 +99,16 @@ class UXFSliderView: UIView {
 
 class UXFNpsCell: UXFBaseCell {
 
-    @IBOutlet var negativeLabel: UILabel!
-    @IBOutlet var positiveLabel: UILabel!
+    @IBOutlet var negativeLabel: UILabel! {
+        didSet {
+            negativeLabel.numberOfLines = 2
+        }
+    }
+    @IBOutlet var positiveLabel: UILabel!{
+        didSet {
+            positiveLabel.numberOfLines = 2
+        }
+    }
     @IBOutlet var slider: UISlider!
     
     private var sliderView = UXFSliderView(frame: CGRect(origin: .zero,
@@ -121,12 +129,14 @@ class UXFNpsCell: UXFBaseCell {
         
         initLabels()
         
+        sliderView.frame.size.width = max(self.bounds.width / CGFloat(11), 48)
+        
         slider.setValue(Float(currentValue == -1 ? 5 : currentValue), animated: false)
+        
         
         if field?.isError ?? false && currentValue == -1 {
             setErrorStyle()
-        }
-        else if currentValue == -1 {
+        } else if currentValue == -1 {
             setInactiveStyle()
         } else {
             setActiveStyle()

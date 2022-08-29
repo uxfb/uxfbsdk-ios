@@ -132,6 +132,7 @@
 		BFB6DF2F27047D4800732D29 /* YYFrameImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DF2527047D4800732D29 /* YYFrameImage.m */; };
 		BFB6DF3027047D4800732D29 /* YYAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DF2627047D4800732D29 /* YYAnimatedImageView.m */; };
 		BFB6DF3127047D4800732D29 /* YYSpriteSheetImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB6DF2727047D4800732D29 /* YYSpriteSheetImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFE496DE280AA3A900844083 /* UXFBPrivacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE496DD280AA3A900844083 /* UXFBPrivacy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -320,6 +321,7 @@
 		BFB6DF2627047D4800732D29 /* YYAnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYAnimatedImageView.m; sourceTree = "<group>"; };
 		BFB6DF2727047D4800732D29 /* YYSpriteSheetImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSpriteSheetImage.h; sourceTree = "<group>"; };
 		BFB6DF3227047D6A00732D29 /* WebP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebP.framework; sourceTree = "<group>"; };
+		BFE496DD280AA3A900844083 /* UXFBPrivacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFBPrivacy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -507,6 +509,7 @@
 				BF02FD3E255C65B000C794E6 /* UXFTransform.swift */,
 				BF01BDF425613086008C641B /* UXFOption.swift */,
 				BFB6DEFB27043D7200732D29 /* UXFScreenshot.swift */,
+				BFE496DD280AA3A900844083 /* UXFBPrivacy.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -881,7 +884,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1120;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1340;
 				ORGANIZATIONNAME = UXF;
 				TargetAttributes = {
 					0A019A3B22365E02002FD4F8 = {
@@ -1081,6 +1084,7 @@
 				BF2806C52562B18F006F2D61 /* UXFHeaderCell.swift in Sources */,
 				0AB437C922B4FE2C00AF8665 /* UIImageView+cache.swift in Sources */,
 				BF573ECD26B6A14E002A9E8C /* UXFScreenshotCreator.swift in Sources */,
+				BFE496DE280AA3A900844083 /* UXFBPrivacy.swift in Sources */,
 				BFB6DF2D27047D4800732D29 /* YYImage.m in Sources */,
 				BFB6DF2B27047D4800732D29 /* YYSpriteSheetImage.m in Sources */,
 				BF2806B42562B18F006F2D61 /* UXFRadiobuttonCell.swift in Sources */,
@@ -1413,7 +1417,7 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1431,13 +1435,13 @@
 				);
 				INFOPLIST_FILE = UXFeedbackSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.2.9;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1612,7 +1616,7 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1630,13 +1634,13 @@
 				);
 				INFOPLIST_FILE = UXFeedbackSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.2.9;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1658,7 +1662,7 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1676,13 +1680,13 @@
 				);
 				INFOPLIST_FILE = UXFeedbackSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.2.9;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";

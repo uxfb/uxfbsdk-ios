@@ -36,13 +36,15 @@ class UXFParser {
     
      func parseCampaign(campaignInfo: Dictionary<String,Any>) -> UXFCampaign?{
         
-        let type = "\(campaignInfo["type"] as! Int)"
-        let targetingArr = campaignInfo["targeting"] as! Array<Dictionary<String, Any>>
-        let campaingId = "\(campaignInfo["campaignId"] as! Int)"
-        let progressDict = campaignInfo["progress"] as? Dictionary<String, Any>
-        let progress = (progressDict?["enabled"] as? Bool) ?? false
-        let projectId = "\(campaignInfo["projectId"] as! Int)"
-        let autoclose: Double = campaignInfo["autoclose"] as? Double ?? 0.0
+         let type = "\(campaignInfo["type"] as! Int)"
+         let targetingArr = campaignInfo["targeting"] as! Array<Dictionary<String, Any>>
+         let campaingId = "\(campaignInfo["campaignId"] as! Int)"
+         let progressDict = campaignInfo["progress"] as? Dictionary<String, Any>
+         let progress = (progressDict?["enabled"] as? Bool) ?? false
+         let projectId = "\(campaignInfo["projectId"] as! Int)"
+         let autoclose: Double = campaignInfo["autoclose"] as? Double ?? 0.0
+         let showCopyright: Bool = campaignInfo["showCopyright"] as? Bool ?? true
+         
         
         var theme: UXFBTheme?
         if let customTheme = self.customTheme, isInitTheme == true {
@@ -86,8 +88,8 @@ class UXFParser {
                     let buttonValue: String? = buttonDict["value"] as? String
                     let button = UXFField(id: buttonId,
                                           type: UXFFieldType(rawValue: buttonType ?? ""),
-                                         value: buttonValue,
-                                         uiData: buttonDict)
+                                          value: buttonValue,
+                                          uiData: buttonDict)
                     buttons.append(button)
                 }
                 let page = UXFPage.init(id: pageId,
@@ -142,6 +144,7 @@ class UXFParser {
                            transforms: transformArr,
                            isProgressEnabled: progress,
                            projectId: projectId,
-                           autoclose: autoclose)
+                           autoclose: autoclose,
+                           showCopyright: showCopyright)
     }
 }

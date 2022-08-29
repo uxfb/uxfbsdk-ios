@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 protocol UXFCampaignFormPresentorProtocol: AnyObject {
-    func formSubmitted(formIndex: Int, info: Array<Dictionary<String, Any>>?, screenshots: [UXFScreenshot], campaign: UXFCampaign)
+    func formSubmitted(info: Array<Dictionary<String, Any>>?, screenshots: [UXFScreenshot], campaign: UXFCampaign)
 }
 
 class UXFCampaignPresentor: NSObject {
@@ -19,7 +19,6 @@ class UXFCampaignPresentor: NSObject {
     weak var delegate: UXFCampaignFormPresentorProtocol?
     var isAnimationFormEnabled: Bool = true
     
-    private(set) var currentFormIndex: Int = -1
     private var _campaign: UXFCampaign!
     private weak var _appWindow: UIWindow!
     internal weak var _currentForm: UXFCampaignViewController?
@@ -60,12 +59,6 @@ class UXFCampaignPresentor: NSObject {
         }
         controller.transitioningDelegate = self
         controller.modalPresentationStyle = .overFullScreen
-        controller.didCloseHandler = { [weak self]  (formIndex) in
-            DispatchQueue.main.async {
-                self?.isFormOnScreen = false
-                self?.feedbackCampaignDelegate?.campaignDidClose(eventName: eventName)
-            }
-        }
         
         controller.presentHandler = { [weak self] in
             if let _ = self?._campaign {
@@ -73,11 +66,21 @@ class UXFCampaignPresentor: NSObject {
                 self?.feedbackCampaignDelegate?.campaignDidShow(eventName: eventName)
             }
         }
-        
-        controller.completeHandler = { [weak self] (formIndex, info, screenshots) in
-            if let campaign = self?._campaign {
-                self?.delegate?.formSubmitted(formIndex: formIndex, info: info, screenshots: screenshots, campaign: campaign)
+        controller.didCloseHandler = { [weak self] in
+            DispatchQueue.main.async {
+                self?.isFormOnScreen = false
+                self?.feedbackCampaignDelegate?.campaignDidClose(eventName: eventName)
             }
+        }
+        controller.completeHandler = { [weak self] (info, screenshots) in
+            if let campaign = self?._campaign {
+                self?.feedbackCampaignDelegate?.campaignDidClose(eventName: eventName)
+                self?.delegate?.formSubmitted(info: info, screenshots: screenshots, campaign: campaign)
+            }
+        }
+        controller.didTerminateHandler = { [weak self] (terminatedPage, totalPages) in
+            self?.isFormOnScreen = false
+            self?.feedbackCampaignDelegate?.campaignDidTerminate(eventName: eventName, terminatedPage: terminatedPage, totalPages: totalPages)
         }
         
         return controller
@@ -105,20 +108,14 @@ class UXFCampaignPresentor: NSObject {
             parentViewController?.present(controller, animated: self.isAnimationFormEnabled) {
                 controller.state = .presented
             }
-            
-//            if self._campaign.autoclose > 0 && self._currentForm?.formIndex == (self._campaign.pages.count - 1) {
-//                DispatchQueue.main.asyncAfter(deadline: .now() + self._campaign.autoclose) { [ weak self] in
-//                    self?._currentForm?.dismiss(animated: self?._currentForm?.presentationAnimated ?? true)
-//                }
-//            }
         }
     }
     
     @objc func dismissCurrentForm(completion: (()->())?) ->(Bool){
         if let form = _currentForm {
+            isFormOnScreen = false
             form.state = .dismissOnly
             form.dismiss(animated: true) { [weak self] in
-                
                 if self?._currentForm == form {
                    self?._currentForm?.removeFromParent()
                    self?._currentForm = nil
@@ -135,6 +132,7 @@ class UXFCampaignPresentor: NSObject {
     
     func stopCampaign() {
         if let form = _currentForm {
+            isFormOnScreen = false
             form.dismiss(animated: true)
         }
     }
@@ -204,6 +202,7 @@ private class UXFCampaignAnimatorPresenter: NSObject, UIViewControllerAnimatedTr
         
         if toViewController.blackout != nil {
             let effectView = VisualEffectView(frame: finalFrameForVC)
+            
             if toViewController.presentDirection == .downToUp || toViewController.presentDirection == .upToDown {
                 effectView.frame.origin.y = -effectView.frame.size.height
                 effectView.frame.size.height = effectView.frame.size.height*2

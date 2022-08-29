@@ -37,8 +37,11 @@ enum ContentType: String {
 }
 
 enum UXFAPIWebRouter {
-    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
-    static var endpoint: String = "\(defaultEndpoint)/v5"
+//    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
+//    static let defaultEndpoint: String = "https://develop.api.uxfb.space"
+    
+    static let defaultEndpoint: String = "https://feature-dev-2113-trs-logic-stand.api.uxfb.space/"
+    static var endpoint: String = "\(defaultEndpoint)/v6"
     
     case getCampaing(appID: String)
     case showForm(uid: String, campaingId: String)
@@ -140,6 +143,11 @@ enum UXFAPIWebRouter {
                 parameters =  [HTTPHeaderField.projectId.rawValue : projectId!]
             }
             break
+            
+        case .getCampaing(_):
+            parameters = [HTTPHeaderField.uid.rawValue: uid]
+            break
+            
         default:
             break
         }

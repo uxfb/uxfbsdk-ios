@@ -43,7 +43,7 @@ class MainViewController_swift: UIViewController {
         
         
         UXFeedback.sharedSDK.closeOnSwipe = true
-//        UXFeedback.sharedSDK.uiBlocked = true
+        UXFeedback.sharedSDK.uiBlocked = true
         UXFeedback.sharedSDK.setSlideinBlackout(color: "0076C2", opactity: 10, blur: 4)
         UXFeedback.sharedSDK.setFullscreenBlackout(color: "0076C2", opactity: 10, blur: 4)
         
@@ -56,11 +56,11 @@ class MainViewController_swift: UIViewController {
 //                                                "property_second": 2])
             
             
-            UXFeedback.sharedSDK.sendEvent(event: "rating", fromController: self)
+            UXFeedback.sharedSDK.sendEvent(event: "AcceptChangesAlertViews", fromController: self)
             break
         case 2:
 //            showActivityOverlay()
-            UXFeedback.sharedSDK.sendEvent(event: "bad", fromController: self)
+            UXFeedback.sharedSDK.sendEvent(event: "nps", fromController: self)
             break
         default:
             break
@@ -98,6 +98,14 @@ class MainViewController_swift: UIViewController {
 }
 
 extension MainViewController_swift: UXFeedbackCampaignDelegate{
+    func campaignDidTerminate(eventName: String, terminatedPage: Int, totalPages: Int) {
+        
+    }
+    
+    func campaignDidSend(campaignId: String, answers: [String : Any]) {
+        
+    }
+    
     func logDidReceive(message: String) { }
     
     func campaignDidShow(eventName: String) {

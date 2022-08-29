@@ -32,10 +32,10 @@ class UXFImageCell: UXFBaseCell {
             urlString = sets["1x"] as? String
             break
         }
-        guard urlString != nil else {
+        guard let urlString = urlString, let url = URL(string: urlString) else {
             return
         }
-        cellImageView.cacheImage(url: URL(string: urlString!)!)
+        cellImageView.cacheImage(url: url)
     }
 }
 

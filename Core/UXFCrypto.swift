@@ -9,6 +9,11 @@
 import Foundation
 
 class UXFCrypto: NSObject {
+    
+    public var uid: String {
+        return UIDevice.current.identifierForVendor?.uuidString ?? ""
+    }
+    
     private let key = "UXFeedback"
     
     private func utf8(_ input: Character) -> UInt8 {

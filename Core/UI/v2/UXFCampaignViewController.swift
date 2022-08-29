@@ -26,7 +26,7 @@ enum UXFViewControllerState{
 }
 
 open class UXFCampaignViewController: UIViewController {
-
+    
     @IBOutlet var contentView: UIView!
     @IBOutlet var shadowView: AnimatingShadowView! {
         didSet {
@@ -68,20 +68,14 @@ open class UXFCampaignViewController: UIViewController {
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var titleViewHeightConstaint: NSLayoutConstraint!
     
-    var presentationAnimated = true
-    private (set) var formIndex: Int = 0
-    
+    var presentationAnimated = true  
     
     var state: UXFViewControllerState = .presenting
     var blackout: UXFBBlackout?
     
-    var didLoadHandler: ((_ formIndex: Int)->())?
-    var didCloseHandler: ((_ formIndex: Int)->(Void))?
-    var willCloseHandler: ((_ formIndex: Int)->(Void))?
-    var backHandler: ((_ formIndex: Int)->())?
-    
-    var completeHandler: ((_ formIndex: Int, _ info: Array<Dictionary<String, Any>>?, _ screenshots: [UXFScreenshot])->())?
-    
+    var didTerminateHandler: ((Int, Int)->(Void))?
+    var didCloseHandler: (()->(Void))?
+    var completeHandler: ((_ info: Array<Dictionary<String, Any>>?, _ screenshots: [UXFScreenshot])->())?
     var presentHandler: (()->())?
     
     var presentDirection: UXFViewPopupDirection = .downToUp
@@ -127,6 +121,11 @@ open class UXFCampaignViewController: UIViewController {
                                                selector: #selector(keyboardWillHide),
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(rotated),
+                                               name: UIDevice.orientationDidChangeNotification,
+                                               object: nil)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -168,6 +167,26 @@ open class UXFCampaignViewController: UIViewController {
         updateLayouts()
     }
     
+    open override func viewWillLayoutSubviews() {
+        if IS_IPAD {
+            if let effectView = view.viewWithTag(visualEffectViewTag) {
+                DispatchQueue.main.async {
+                    effectView.frame = UIScreen.main.bounds
+                }
+            }
+            tableView.reloadData()
+        }
+    }
+    
+    @objc private func rotated() {
+        if let effectView = view.viewWithTag(visualEffectViewTag) {
+            DispatchQueue.main.async {
+                effectView.frame = UIScreen.main.bounds
+            }
+        }
+        tableView.reloadData()
+    }
+    
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         tableView.reloadData()
     }
@@ -178,14 +197,16 @@ open class UXFCampaignViewController: UIViewController {
         let bundle = Bundle(for: UXFeedback.self)
         let tableFooterView = UIView(frame: CGRect(origin: .zero,
                                                    size: CGSize(width: UIScreen.main.bounds.width,
-                                                                height: 50)))
-        let image = UIImageView(frame: CGRect(origin: CGPoint(x: 0,
+                                                                height: campaign?.showCopyright ?? true ? 50 : 16)))
+        if campaign?.showCopyright ?? true {
+            let image = UIImageView(frame: CGRect(origin: CGPoint(x: 0,
                                                               y: 16),
                                               size: CGSize(width: 30,
                                                            height: 22)))
-        image.image = UIImage(named: "uxf", in: bundle, compatibleWith: nil)
-        tableFooterView.backgroundColor = campaign?.theme.bgColor ?? .white
-        tableFooterView.addSubview(image)
+            image.image = UIImage(named: "uxf", in: bundle, compatibleWith: nil)
+            tableFooterView.backgroundColor = campaign?.theme.bgColor ?? .white
+            tableFooterView.addSubview(image)
+        }
         tableView.tableFooterView = tableFooterView
         tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero,
                                                          size: CGSize(width: 1,
@@ -299,19 +320,11 @@ open class UXFCampaignViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction  func closeButtonTapped(_ sender: UIButton) {
-        dataManager?.endCampaign()
-//         self.dismiss(animated: presentationAnimated)
+        dataManager?.endCampaign(terminated: true)
     }
     
     override open func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
-        self.willCloseHandler?(self.formIndex)
-        
         super.dismiss(animated: presentationAnimated) { [weak self] in
-            if let index = self?.formIndex{
-                self?.didCloseHandler?(index)
-            }
-            self?.didCloseHandler = nil
-            
             if self?.state != .dismissOnly && self?.state != .backDismiss {
                 for window in UIApplication.shared.windows {
                     if window is PassthroughWindow {
@@ -358,10 +371,10 @@ open class UXFCampaignViewController: UIViewController {
         case .ended:
             if direction > 120 {
                 if closeOnSwipe {
-                    self.dismiss(animated: presentationAnimated)
+                    dataManager?.endCampaign(terminated: true)
                 } else {
                     if self.bottomConstraint.constant == sheetY {
-                        self.dismiss(animated: presentationAnimated)
+                        dataManager?.endCampaign(terminated: true)
                     }
                     else {
                         self.bottomConstraint.constant = sheetY

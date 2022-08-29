@@ -39,7 +39,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FYl-yn-EeP">
                     <rect key="frame" x="0.0" y="0.0" width="331" height="380"/>
                     <subviews>
-                        <tableView contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" indicatorStyle="black" bouncesZoom="NO" keyboardDismissMode="onDrag" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="8B9-r0-b3F">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" indicatorStyle="black" bouncesZoom="NO" keyboardDismissMode="onDrag" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="8B9-r0-b3F">
                             <rect key="frame" x="16" y="54" width="299" height="326"/>
                             <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="-16" maxY="0.0"/>

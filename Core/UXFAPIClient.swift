@@ -111,13 +111,16 @@ class UXFAPIClient {
         let systemInfo = UXFStatisticManager.getDeviceInfo()
         
         _ = self.performRequest(route: UXFAPIWebRouter.saveFormData(projectId: projectId,
-                                                                    uid: UIDevice.current.identifierForVendor?.uuidString ?? "",
+                                                                    uid: uid,
                                                                     campaignId: campaignId,
-                                                                    pages: pages ?? [], info: systemInfo, properties: properties ?? [:], screenshots: screenshots), completion: responseHandler)
+                                                                    pages: pages ?? [], info: systemInfo,
+                                                                    properties: properties ?? [:],
+                                                                    screenshots: screenshots),
+                                completion: responseHandler)
     }
     
     func  showForm(campaingId: String){
-        _ = performRequest(route: UXFAPIWebRouter.showForm(uid: UIDevice.current.identifierForVendor?.uuidString ?? "",
+        _ = performRequest(route: UXFAPIWebRouter.showForm(uid: uid,
                                                     campaingId: campaingId))
         {(status, message, result) in
             DDLogDebug(String(describing: result))

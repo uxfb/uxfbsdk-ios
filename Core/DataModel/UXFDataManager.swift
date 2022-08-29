@@ -38,6 +38,14 @@ class UXFDataManager: UXFFieldDelegate {
     
     private var viewController: UXFCampaignViewController?
     
+    private var width: CGFloat {
+        return viewController?.view.bounds.width ?? UIScreen.main.bounds.width
+    }
+    private var height: CGFloat {
+        return viewController?.view.bounds.height ?? UIScreen.main.bounds.height
+    }
+    
+    
     private var currentPage: Int = 0
     private var campaign: UXFCampaign?
     var extraSpace: CGFloat {
@@ -95,7 +103,10 @@ class UXFDataManager: UXFFieldDelegate {
     internal func heightForCurrentPage() -> CGFloat {
         
         let page = campaign?.pages[currentPage]
-        var height: CGFloat = 98
+        var height: CGFloat = 64
+        if campaign?.showCopyright ?? true {
+            height += 34
+        }
         for field in (page?.fields)! {
             height += checkFieldTransfromed(field) ? (getFieldHeight(field) + getFieldHeaderHeight(field) + getFieldFooterHeight(field)) : 2
         }
@@ -108,17 +119,17 @@ class UXFDataManager: UXFFieldDelegate {
         case .slidein:
             areas -= .bottomArea
             height += .bottomArea
-            height = min(UIScreen.main.bounds.height, height)
+            height = min(self.height, height)
             break
         case .popup:
             areas += extraSpace / 2
-            height = min(UIScreen.main.bounds.height - 48, height)
+            height = min(self.height - 48, height)
             break
         default:
             break
         }
         
-        let maxHeight = UIScreen.main.bounds.size.height - areas
+        let maxHeight = self.height - areas
         
         return min(height, maxHeight)
     }
@@ -290,7 +301,7 @@ class UXFDataManager: UXFFieldDelegate {
         }
         
         let font = (campaign?.theme.mediumFont(size: .mediumFontSize))!
-        let lines = value.linesCount(width: UIScreen.main.bounds.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
+        let lines = value.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
                                             font: font)//.mediumSemiboldFont)
         let valueHeight = CGFloat(lines) * font.lineHeight + getTitleSpacing(field)
         return valueHeight
@@ -304,7 +315,7 @@ class UXFDataManager: UXFFieldDelegate {
                 return checkFieldTransfromed(field) ? 12 : 0
             }
             let font = (campaign?.theme.regularFont(size: .smallFontSize))!
-            let lines = warning.linesCount(width: UIScreen.main.bounds.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
+            let lines = warning.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
                                            font: font)
             let valueHeight = CGFloat(lines) * font.lineHeight
             height += valueHeight + 8
@@ -329,7 +340,7 @@ class UXFDataManager: UXFFieldDelegate {
             return UIView()
         }
         
-        let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width - .leftArea - .rightArea - extraSpace,
+        let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.width - .leftArea - .rightArea - extraSpace,
                                                                     height: getFieldHeaderHeight(field))))
         let label = UILabel(frame: CGRect(origin: .zero,
                                           size: CGSize(width: view.frame.width,
@@ -359,10 +370,10 @@ class UXFDataManager: UXFFieldDelegate {
             guard let warning = field.uiData["warning"] as? String else {
                 return UIView()
             }
-            let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width - .leftArea - .rightArea - extraSpace,
+            let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.width - .leftArea - .rightArea - extraSpace,
                                                                         height: getFieldFooterHeight(field))))
             let font = (campaign?.theme.regularFont(size: .smallFontSize))!
-            let lines = warning.linesCount(width: UIScreen.main.bounds.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
+            let lines = warning.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
                                            font: font)
             let valueHeight = CGFloat(lines) * font.lineHeight
             let label = UILabel(frame: CGRect(origin: CGPoint(x: 0,
@@ -399,7 +410,7 @@ class UXFDataManager: UXFFieldDelegate {
             return 40
             
         case .checkbox:
-            let width = UIScreen.main.bounds.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 48
+            let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 48
             var height: CGFloat = 0
             let checkboxes = field.uiData["options"] as? Array<Dictionary<String, Any>> ?? []
             for checkbox in checkboxes {
@@ -416,7 +427,7 @@ class UXFDataManager: UXFFieldDelegate {
             
         case .header:
             let font = (campaign?.theme.boldFont(size: .bigFontSize))!// .bigSemiboldFont)
-            let lines = field.value!.linesCount(width: UIScreen.main.bounds.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
+            let lines = field.value!.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
                                                 font: font)
             let valueHeight = ceil(CGFloat(lines) * font.lineHeight)
             return valueHeight
@@ -441,14 +452,14 @@ class UXFDataManager: UXFFieldDelegate {
             let answer = (answerDict?["value"] as? [String] ?? []).first ?? ""
 //            let answer = field.answers.first ?? ""
             let font = (campaign?.theme.regularFont(size: .mediumFontSize))!
-            let lines = min(answer.linesCount(width: UIScreen.main.bounds.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
+            let lines = min(answer.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
                                               font: font), 10) //.mediumFont
             let valueHeight = ceil(CGFloat(lines) * font.lineHeight)
             
             return max(valueHeight, minHeight)
             
         case .radiobutton:
-            let width = UIScreen.main.bounds.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 48
+            let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 48
             var height: CGFloat = 0
             let buttons = field.uiData["options"] as? Array<Dictionary<String, Any>> ?? []
             for button in buttons {
@@ -463,7 +474,7 @@ class UXFDataManager: UXFFieldDelegate {
             
         case .text:
             let font = (campaign?.theme.regularFont(size: .mediumFontSize))!
-            let lines = field.value!.linesCount(width: UIScreen.main.bounds.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
+            let lines = field.value!.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
                                                 font: font)//.mediumFont)
             let valueHeight = ceil(CGFloat(lines) * font.lineHeight)
             return valueHeight
@@ -506,7 +517,7 @@ class UXFDataManager: UXFFieldDelegate {
         }
         else {
             if campaign?.pages[currentPage].type == 2 {
-                endCampaign()
+                endCampaign(terminated: false)
             }
             else {
                 nextPage()
@@ -542,9 +553,9 @@ class UXFDataManager: UXFFieldDelegate {
     
     
     func textChanged(_ field: UXFField, answer: [String], refresh: Bool = true) {
-        let fieldIndex = Int((campaign?.pages[currentPage].fields.firstIndex(where: { (fld) -> Bool in
-            fld.id == field.id
-        }))!)
+//        let fieldIndex = Int((campaign?.pages[currentPage].fields.firstIndex(where: { (fld) -> Bool in
+//            fld.id == field.id
+//        }))!)
         
         answers = answers.filter { answer in ((answer["fieldId"] as? String) ?? "") != field.id }
         if answer.count > 0 {
@@ -555,7 +566,7 @@ class UXFDataManager: UXFFieldDelegate {
             answers.append(newAnswer)
         }
         
-        viewController?.updateField(idx: fieldIndex)
+//        viewController?.updateField(idx: fieldIndex)
     }
     
     func screenshotChanged(screenshots: [UXFScreenshot]) {
@@ -576,7 +587,7 @@ class UXFDataManager: UXFFieldDelegate {
         viewController?.updateUI()
     }
     
-    public func endCampaign() {
+    public func endCampaign(terminated: Bool) {
         var formattedAnswers = Array<Dictionary<String, Any>>()
         answers.forEach { (answer) in
             var item = answer
@@ -590,6 +601,7 @@ class UXFDataManager: UXFFieldDelegate {
             default:
                 item["value"] = answer["value"]
             }
+            
             formattedAnswers.append(item)
         }
         
@@ -615,7 +627,12 @@ class UXFDataManager: UXFFieldDelegate {
             results.append(result)
         }
         
-        viewController!.completeHandler!(0, results, screenshots)
+        if terminated {
+            viewController!.didTerminateHandler?(currentPage + 1, campaign?.pages.count ?? 0)
+        } else {
+            viewController!.completeHandler!(results, screenshots)
+            viewController!.didCloseHandler?()
+        }
         viewController?.dismiss(animated: viewController?.presentationAnimated ?? true)
     }
     

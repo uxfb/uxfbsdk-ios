@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -105,7 +105,7 @@
                         </userDefinedRuntimeAttributes>
                     </stackView>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="pO0-7V-I4j">
-                        <rect key="frame" x="-2" y="28" width="324" height="49"/>
+                        <rect key="frame" x="0.0" y="28" width="320" height="49"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="48" id="cML-Vq-fSs"/>
                         </constraints>
@@ -120,7 +120,7 @@
                     <constraint firstAttribute="trailing" secondItem="isp-aD-sAC" secondAttribute="trailing" id="5qW-S1-O3S"/>
                     <constraint firstItem="pO0-7V-I4j" firstAttribute="top" secondItem="isp-aD-sAC" secondAttribute="bottom" id="75E-TS-4bl"/>
                     <constraint firstItem="Mgp-ch-huf" firstAttribute="width" secondItem="DU3-6L-Dot" secondAttribute="width" multiplier="0.5" constant="-8" id="8Z9-8e-lH2"/>
-                    <constraint firstItem="pO0-7V-I4j" firstAttribute="leading" secondItem="DU3-6L-Dot" secondAttribute="leading" id="GNG-NK-dN1"/>
+                    <constraint firstItem="pO0-7V-I4j" firstAttribute="leading" secondItem="DU3-6L-Dot" secondAttribute="leading" constant="2" id="GNG-NK-dN1"/>
                     <constraint firstItem="isp-aD-sAC" firstAttribute="top" secondItem="DU3-6L-Dot" secondAttribute="top" id="MI7-jX-pnf"/>
                     <constraint firstItem="5kY-a7-V6c" firstAttribute="width" secondItem="DU3-6L-Dot" secondAttribute="width" multiplier="0.5" constant="-8" id="QjY-hh-xIg"/>
                     <constraint firstAttribute="bottom" secondItem="Mgp-ch-huf" secondAttribute="bottom" id="a51-Np-TXg"/>
@@ -128,7 +128,7 @@
                     <constraint firstItem="isp-aD-sAC" firstAttribute="leading" secondItem="DU3-6L-Dot" secondAttribute="leading" id="kMQ-c2-ahU"/>
                     <constraint firstItem="Mgp-ch-huf" firstAttribute="leading" secondItem="DU3-6L-Dot" secondAttribute="leading" id="ks5-hp-FBT"/>
                     <constraint firstAttribute="trailing" secondItem="5kY-a7-V6c" secondAttribute="trailing" id="lwa-ZB-KbQ"/>
-                    <constraint firstAttribute="trailing" secondItem="pO0-7V-I4j" secondAttribute="trailing" id="yTI-Ti-x20"/>
+                    <constraint firstAttribute="trailing" secondItem="pO0-7V-I4j" secondAttribute="trailing" constant="2" id="yTI-Ti-x20"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="qkn-wH-PWG"/>

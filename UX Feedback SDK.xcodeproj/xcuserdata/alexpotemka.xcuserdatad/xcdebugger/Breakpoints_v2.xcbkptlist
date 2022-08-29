@@ -23,112 +23,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "72DF3A2C-5DBE-433D-B5F9-3E5F0D5076DD"
+            uuid = "6C006A04-E4D2-444D-9E3F-290514E69D02"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Core/UI/v2/Rating/UXFRatingCell.swift"
+            filePath = "Core/UXFAPIClient.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "updateUI()"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "performRequest(route:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "213D0EEE-840B-41B8-8565-D8AEFC196AC9"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Core/UI/v2/Rating/UXFRatingCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "updateUI()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C9F0295F-1CA6-45CC-99CF-F5ED07637B90"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Core/UI/v2/Rating/UXFRatingCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "updateUI()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1CC61F52-06ED-469F-B17F-2EC15C65A9B6"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Core/UI/v2/UXFCampaignViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "399"
-            endingLineNumber = "399"
-            landmarkName = "tableView(_:heightForFooterInSection:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "690725C2-4DCB-4886-9FF0-33B4D5E900CA"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Core/UI/v2/UXFCampaignViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "407"
-            endingLineNumber = "407"
-            landmarkName = "tableView(_:viewForFooterInSection:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7CEE3F10-72EF-48C1-84BB-77DB51AFB1D6"
+            uuid = "37014252-D1A3-49B9-BFEC-793592186678"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Core/DataModel/UXFDataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
-            landmarkName = "fieldForRow(indexPath:)"
+            startingLineNumber = "530"
+            endingLineNumber = "530"
+            landmarkName = "fieldChanged(_:answer:refresh:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C6856E24-0A48-4481-B5E6-3A705C33674A"
-            shouldBeEnabled = "No"
+            uuid = "2BE07A9C-A5CE-41C4-A484-218F0DEC714B"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Core/DataModel/UXFDataManager.swift"
+            filePath = "Core/DataModel/UXFParser.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "fieldsCount()"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "parseCampaign(campaignInfo:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
