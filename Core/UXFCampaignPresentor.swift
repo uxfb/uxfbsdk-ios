@@ -100,7 +100,6 @@ class UXFCampaignPresentor: NSObject {
                 view.touchCancel = uiBlocked
             }
             
-            
             self._appWindow.makeKeyAndVisible()
             self._appWindow.becomeKey()
             

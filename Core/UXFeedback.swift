@@ -39,7 +39,7 @@ open class UXFeedback : NSObject{
 
     public static let sharedSDK = UXFeedback.init() 
     private static var isInitialized = false
-    public let sdkVersion = "v1.2.9"
+    public let sdkVersion = "v1.3.1"
     
     open weak var delegate: UXFeedbackCampaignDelegate?
     open var animationEnabled: Bool = true
@@ -121,7 +121,7 @@ open class UXFeedback : NSObject{
     
     open func setTheme(theme: UXFBTheme) {
         _theme = theme
-        _parser = UXFParser.init(theme: theme, isInitTheme: isInitTheme)
+        _parser = UXFParser.init(theme: _theme, isInitTheme: isInitTheme)
         _formPresentor?._currentForm?.tableView.reloadData()
     }
     
@@ -231,6 +231,7 @@ open class UXFeedback : NSObject{
                    self?.sendEvent(event: event)
                  }
             } else {
+                self?.DDLog("\(message ?? "Unresolved message")")
                 self?.DDLog("Campaigns NOT loaded, server error")
             }
             
@@ -289,8 +290,12 @@ open class UXFeedback : NSObject{
                             }
                             
                             _ = self._formPresentor?.dismissCurrentForm(completion:  nil)
+
+                            
+                            var mCampaign = campaign
+                            mCampaign.updateTheme(theme: self._theme)
                             self._formPresentor = UXFCampaignPresentor(window: self._appWindow,
-                                                                       campaign: campaign,
+                                                                       campaign: mCampaign,
                                                                        animationEnabled: true)
                          
                             self._formPresentor?.isAnimationFormEnabled = self.animationEnabled
@@ -300,10 +305,10 @@ open class UXFeedback : NSObject{
                             switch campaign.type {
                             case .slidein:
                                 blackout = self.slideinBlackout
-                                break
+                                
                             case .popup:
                                 blackout = self.fullscreenBlackout
-                                break
+                                
                             case .none:
                                 break
                             }

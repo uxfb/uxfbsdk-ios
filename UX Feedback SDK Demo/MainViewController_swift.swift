@@ -16,8 +16,6 @@ class MainViewController_swift: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = .white
         UXFeedback.sharedSDK.delegate = self
@@ -26,6 +24,32 @@ class MainViewController_swift: UIViewController {
             self.buttonsStackView.isUserInteractionEnabled = false
             self.buttonsStackView.alpha = 0.5
             busyIndicator.startAnimating()
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            let customTheme = UXFBTheme()
+            customTheme.text03Color =  UIColor.init("#000000")
+            customTheme.inputBorderColor =  UIColor.init("#D3D4D8")
+            customTheme.iconColor =  UIColor.init("#B5B8C2")
+            customTheme.btnBgColorActive =  UIColor.init("#1983C8")
+            customTheme.btnBorderRadius = 4
+            customTheme.errorColorSecondary =  UIColor.init("#F4A0A3")
+            customTheme.errorColorPrimary =  UIColor.init("#E84047")
+            customTheme.mainColor =  UIColor.init("#AFAFAF")
+            customTheme.controlBgColorActive =  UIColor.init("#DBF1FF")
+            customTheme.formBorderRadius = 20
+            customTheme.inputBgColor =  UIColor.init("#F3F3F3")
+            customTheme.text01Color =  UIColor.init("#232735")
+            customTheme.controlBgColor =  UIColor.init("#ABABAB")
+            customTheme.controlIconColor =  UIColor.init("#FFFFFF")
+            customTheme.btnBgColor =  UIColor.init("#0076C2")
+            customTheme.text02Color =  UIColor.init("#505565")
+            customTheme.btnTextColor =  UIColor.init("#FFFFFF")
+            customTheme.bgColor =  UIColor.init("#FFFFFF")
+            
+//            UXFeedback.sharedSDK.setTheme(theme: customTheme)
         }
     }
 
@@ -39,9 +63,6 @@ class MainViewController_swift: UIViewController {
     }
     
     @IBAction func eventTap(_ sender: UIButton){
-        
-        
-        
         UXFeedback.sharedSDK.closeOnSwipe = true
         UXFeedback.sharedSDK.uiBlocked = true
         UXFeedback.sharedSDK.setSlideinBlackout(color: "0076C2", opactity: 10, blur: 4)
@@ -56,11 +77,11 @@ class MainViewController_swift: UIViewController {
 //                                                "property_second": 2])
             
             
-            UXFeedback.sharedSDK.sendEvent(event: "AcceptChangesAlertViews", fromController: self)
+            UXFeedback.sharedSDK.sendEvent(event: "logick", fromController: self)
             break
         case 2:
 //            showActivityOverlay()
-            UXFeedback.sharedSDK.sendEvent(event: "nps", fromController: self)
+            UXFeedback.sharedSDK.sendEvent(event: "logick2", fromController: self)
             break
         default:
             break

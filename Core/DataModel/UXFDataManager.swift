@@ -517,6 +517,7 @@ class UXFDataManager: UXFFieldDelegate {
         }
         else {
             if campaign?.pages[currentPage].type == 2 {
+                _ = getNextIndex()
                 endCampaign(terminated: false)
             }
             else {
@@ -636,7 +637,7 @@ class UXFDataManager: UXFFieldDelegate {
         viewController?.dismiss(animated: viewController?.presentationAnimated ?? true)
     }
     
-    //MARK:- TRANSFORMATIONS!
+    //MARK: - TRANSFORMATIONS
     
     private func fieldNeedComplete(_ field: UXFField) -> Bool {
         let required = ((field.uiData["required"] as? Bool) ?? false) //|| (field.type == .smiles)
@@ -665,48 +666,75 @@ class UXFDataManager: UXFFieldDelegate {
     
     private func getNextIndex() -> Int {
         guard let transforms = campaign?.transforms.filter({ transform in
-            transform.fromPage == campaign?.pages[currentPage].id && transform.action == "transition"
+            transform.from.page == campaign?.pages[currentPage].id
+//            && transform.to.action == "transition"
         }) else {
             return currentPage + 1
         }
         
         for transform in transforms {
             let toPageIndex = campaign?.pages.lastIndex(where: { (page) -> Bool in
-                page.id == transform.toPage
+                page.id == transform.to.value
             }) ?? (currentPage + 1)
             
+            let toValue = transform.to.value
+            let toType = transform.to.type
+            
             let answer = answers.first(where: { (dict) -> Bool in
-                ((dict["fieldId"] as? String) ?? "") == transform.fromField
+                ((dict["fieldId"] as? String) ?? "") == transform.from.field
             })
             
             let answers = (answer?["value"] as? [String]) ?? []
             
             let type = UXFFieldType(rawValue: (answer?["type"] as? String) ?? "")
             
-            switch transform.rule {
+            switch transform.condition?.rule {
             case "equal":
-                let same = transform.value?.filter() { answers.contains($0) }
+                let same = transform.condition?.value?.filter() { answers.contains($0) }
                 if same?.count ?? 0 > 0 {
-                    return toPageIndex
+                    switch toType {
+                    case "toPage":
+                        return toPageIndex
+                    case "toDeeplink", "toURL":
+                        openUrl(toValue)
+                        return currentPage
+                    default:
+                        break
+                    }
                 }
-                break
+                
             case "filled":
                 if type == .checkbox {
                     if answers.count > 0 {
-                        return toPageIndex
+                        switch toType {
+                        case "toPage":
+                            return toPageIndex
+                        case "toDeeplink", "toURL":
+                            openUrl(toValue)
+                            return currentPage
+                        default:
+                            break
+                        }
                     }
-                }
-                else {
+                } else {
                     if (answers.first ?? "").count > 0 {
-                        return toPageIndex
+                        switch toType {
+                        case "toPage":
+                            return toPageIndex
+                        case "toDeeplink", "toURL":
+                            openUrl(toValue)
+                            return currentPage
+                        default:
+                            break
+                        }
                     }
                 }
-                break
+                
             case "unfilled":
                 if answer == nil {
                     return toPageIndex
                 }
-                break
+                
             default:
                 break
             }
@@ -714,25 +742,33 @@ class UXFDataManager: UXFFieldDelegate {
         
         
         guard let elseTransform = campaign?.transforms.first(where: { transform in
-            transform.fromPage == campaign?.pages[currentPage].id && transform.action == "transition" && transform.fromField == nil
+            transform.from.page == campaign?.pages[currentPage].id && transform.to.action == "transition" && transform.from.field == nil
         }) else {
             return currentPage + 1
         }
         
-        return campaign?.pages.lastIndex(where: { (page) -> Bool in
-            page.id == elseTransform.toPage
-        }) ?? (currentPage + 1)
+        if elseTransform.to.type == "toDeeplink" || elseTransform.to.type == "toURL" {
+            openUrl(elseTransform.to.value)
+            return currentPage
+        } else {
+            return campaign?.pages.lastIndex(where: { (page) -> Bool in
+                page.id == elseTransform.to.value
+            }) ?? (currentPage + 1)
+        }
     }
     
     private func checkFieldTransfromed(_ field: UXFField) -> Bool {
-        guard let transforms = campaign?.transforms.filter({ transform in
-            transform.toField == field.id || transform.toButton == field.id
-        }), transforms.count > 0 else {
+        if field.id == "wVbs9D8E" {
+            print(field)
+        }
+        guard let transforms = campaign?.transforms.filter({ $0.to.value == field.id }),
+              transforms.count > 0 else {
             return true
         }
         
+
         guard let answer = answers.first(where: { (dict) -> Bool in
-            (transforms.map { $0.fromField }).contains(((dict["fieldId"] as? String) ?? ""))
+            (transforms.map { $0.from.field }).contains(((dict["fieldId"] as? String) ?? ""))
         }) else {
             return false
         }
@@ -741,12 +777,12 @@ class UXFDataManager: UXFFieldDelegate {
             let type = UXFFieldType(rawValue: (answer["type"] as? String) ?? "")
             let answers = (answer["value"] as? [String]) ?? []
             
-            if transform.rule == "equal" {
-                let same = transform.value?.filter() { answers.contains($0) }
+            if transform.condition?.rule == "equal" {
+                let same = transform.condition?.value?.filter() { answers.contains($0) }
                 if same?.count ?? 0 > 0 {
                     return true
                 }
-            } else if transform.rule == "filled" {
+            } else if transform.condition?.rule == "filled" {
                 if type == .checkbox {
                     if answers.count > 0 {
                         return true
@@ -760,6 +796,13 @@ class UXFDataManager: UXFFieldDelegate {
             }
         }
         return false
+    }
+    
+    private func openUrl(_ urlString: String) {
+        endCampaign(terminated: false)
+        if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
     }
 }
 

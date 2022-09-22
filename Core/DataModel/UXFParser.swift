@@ -104,38 +104,19 @@ class UXFParser {
         if let transformsArrayOfDict = campaignInfo["transforms"] as? Array<Dictionary<String, Any>> {
             for transformDict in transformsArrayOfDict{
                 DDLogDebug("transform: \(transformDict)")
-                let id: String? = transformDict["id"] as? String
-                let rule: String? = transformDict["rule"] as? String
-                let action: String? = transformDict["action"] as? String
-                let fromField: String? = transformDict["fromField"] as? String
-                let toField: String? = transformDict["toField"] as? String
-                let fromButton: String? = transformDict["fromButton"] as? String
-                let toButton: String? = transformDict["toButton"] as? String
-                let fromPage: String? = transformDict["fromPage"] as? String
-                let toPage: String? = transformDict["toPage"] as? String
-                var valueArr: [String] = []
-                if let value = transformDict["value"] as? [String] {
-                    valueArr = value
-                } else if let value = transformDict["value"] as? [Int] {
-                    valueArr = value.map({ String($0) })
+                
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: transformDict, options: [])
+                    let decoder = JSONDecoder()
+                    let transform = try decoder.decode(UXFTransform.self, from: jsonData)
+                    
+                    transformArr.append(transform)
+                } catch {
+                    print(error)
                 }
-                
-                
-                let transform = UXFTransform(id: id,
-                                             rule: rule,
-                                             action: action,
-                                             value: valueArr,
-                                             fromField: fromField,
-                                             toField: toField,
-                                             fromButton: fromButton,
-                                             toButton: toButton,
-                                             fromPage: fromPage,
-                                             toPage: toPage)
-                transformArr.append(transform)
             }
         }
 
-        
         return UXFCampaign(campaignId: campaingId,
                            theme: theme,
                            pages: pages,

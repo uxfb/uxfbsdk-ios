@@ -29,6 +29,8 @@ class UXFAPIClient {
     private var _parser: UXFParser!
     private var _endpoint: String
     
+    private var _version: String = "v6"
+    
     init(endpoint: String?, appID: String, parser: UXFParser) {
         _parser = parser
         self.appID = appID
@@ -139,7 +141,8 @@ class UXFAPIClient {
     
     internal func performRequest(route: UXFAPIWebRouter, completion:@escaping (UXFAPIClientResponseResult, String?, Any?)->()) -> URLSessionDataTask?{
         
-        UXFAPIWebRouter.endpoint = "\(self._endpoint)/v5"
+        
+        UXFAPIWebRouter.endpoint = "\(self._endpoint)/\(_version)"
         
         guard let urlRequest = try? route.asURLRequest() else{
              completion(.fail, "Error url request", nil)

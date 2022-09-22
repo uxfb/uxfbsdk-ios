@@ -8,15 +8,53 @@
 
 import UIKit
 
+//"id": "zVpKVlbW",
+//          "from": {
+//            "field": "LMhpR0k1",
+//            "page": "MED8XFrA"
+//          },
+//          "to": {
+//            "action": "transition",
+//            "value": "https://www.gismeteo.ru/",
+//            "type": "toURL"
+//          },
+//          "condition": {
+//            "rule": "filled"
+//          }
+
 struct UXFTransform: Codable {
     let id: String?
+    let from: UXFTransformFrom
+    let to: UXFTransformTo
+    let condition: UXFTransformCondition?
+}
+
+struct UXFTransformFrom: Codable {
+    let field: String?
+    let page: String?
+}
+
+struct UXFTransformTo: Codable {
+    let action: String
+    let value: String
+    let type: String
+}
+
+struct UXFTransformCondition: Codable {
     let rule: String?
-    let action: String?
-    let value: [String]?
-    let fromField: String?
-    let toField: String?
-    let fromButton: String?
-    let toButton: String?
-    let fromPage: String?
-    let toPage: String?
+    var value: [String]?
+    
+    private enum CodingKeys: String, CodingKey {
+       case rule, value
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        rule = try container.decode(String.self, forKey: .rule)
+        do {
+            value = try container.decodeIfPresent([Int].self, forKey: .value)?.map({ String($0) })
+        } catch DecodingError.typeMismatch {
+            value = try container.decodeIfPresent([String].self, forKey: .value)
+        }
+    }
 }
