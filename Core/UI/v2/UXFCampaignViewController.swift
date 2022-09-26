@@ -73,7 +73,7 @@ open class UXFCampaignViewController: UIViewController {
     var state: UXFViewControllerState = .presenting
     var blackout: UXFBBlackout?
     
-    var didTerminateHandler: ((Int, Int)->(Void))?
+    var didTerminateHandler: ((_ info: Array<Dictionary<String, Any>>?, _ screenshots: [UXFScreenshot], Int, Int)->())?
     var didCloseHandler: (()->(Void))?
     var completeHandler: ((_ info: Array<Dictionary<String, Any>>?, _ screenshots: [UXFScreenshot])->())?
     var presentHandler: (()->())?

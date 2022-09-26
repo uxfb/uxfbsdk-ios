@@ -37,8 +37,8 @@ enum ContentType: String {
 }
 
 enum UXFAPIWebRouter {
-    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
-//    static let defaultEndpoint: String = "https://develop.api.uxfb.space"
+//    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
+    static let defaultEndpoint: String = "https://develop.api.uxfb.space"
     
 //    static let defaultEndpoint: String = "https://feature-dev-2113-trs-logic-stand.api.uxfb.space"
     static var endpoint: String = "\(defaultEndpoint)/v6"

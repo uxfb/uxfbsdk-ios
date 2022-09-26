@@ -629,7 +629,7 @@ class UXFDataManager: UXFFieldDelegate {
         }
         
         if terminated {
-            viewController!.didTerminateHandler?(currentPage + 1, campaign?.pages.count ?? 0)
+            viewController!.didTerminateHandler?(results, screenshots, currentPage + 1, campaign?.pages.count ?? 0)
         } else {
             viewController!.completeHandler!(results, screenshots)
             viewController!.didCloseHandler?()

@@ -78,9 +78,12 @@ class UXFCampaignPresentor: NSObject {
                 self?.delegate?.formSubmitted(info: info, screenshots: screenshots, campaign: campaign)
             }
         }
-        controller.didTerminateHandler = { [weak self] (terminatedPage, totalPages) in
-            self?.isFormOnScreen = false
-            self?.feedbackCampaignDelegate?.campaignDidTerminate(eventName: eventName, terminatedPage: terminatedPage, totalPages: totalPages)
+        controller.didTerminateHandler = { [weak self] (info, screenshots, terminatedPage, totalPages) in
+            if let campaign = self?._campaign {
+                self?.delegate?.formSubmitted(info: info, screenshots: screenshots, campaign: campaign)
+                self?.feedbackCampaignDelegate?.campaignDidTerminate(eventName: eventName, terminatedPage: terminatedPage, totalPages: totalPages)
+                self?.isFormOnScreen = false
+            }
         }
         
         return controller

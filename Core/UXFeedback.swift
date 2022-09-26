@@ -39,7 +39,7 @@ open class UXFeedback : NSObject{
 
     public static let sharedSDK = UXFeedback.init() 
     private static var isInitialized = false
-    public let sdkVersion = "v1.3.1"
+    public let sdkVersion = "v1.3.2"
     
     open weak var delegate: UXFeedbackCampaignDelegate?
     open var animationEnabled: Bool = true
