@@ -81,7 +81,7 @@ class MainViewController_swift: UIViewController {
             break
         case 2:
 //            showActivityOverlay()
-            UXFeedback.sharedSDK.sendEvent(event: "logick2", fromController: self)
+            UXFeedback.sharedSDK.sendEvent(event: "pokaz3", fromController: self)
             break
         default:
             break

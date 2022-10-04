@@ -119,19 +119,8 @@
 		BF885EE42715ED7900F110A0 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF885EE32715ED7900F110A0 /* UIButton+.swift */; };
 		BF885EE62715FB1B00F110A0 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF885EE52715FB1B00F110A0 /* UIAlertController+.swift */; };
 		BFA54F8427AA86A2003D6411 /* UXFCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA54F8327AA86A2003D6411 /* UXFCrypto.swift */; };
-		BFA9AF632747E92700679A45 /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB6DF3227047D6A00732D29 /* WebP.framework */; };
 		BFB6DEFC27043D7200732D29 /* UXFScreenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFB27043D7200732D29 /* UXFScreenshot.swift */; };
 		BFB6DEFE27044E4300732D29 /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFD27044E4300732D29 /* Data+.swift */; };
-		BFB6DF2827047D4800732D29 /* YYImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB6DF1E27047D4800732D29 /* YYImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BFB6DF2927047D4800732D29 /* YYImageCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB6DF1F27047D4800732D29 /* YYImageCoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BFB6DF2A27047D4800732D29 /* YYFrameImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB6DF2027047D4800732D29 /* YYFrameImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BFB6DF2B27047D4800732D29 /* YYSpriteSheetImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DF2127047D4800732D29 /* YYSpriteSheetImage.m */; };
-		BFB6DF2C27047D4800732D29 /* YYAnimatedImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB6DF2227047D4800732D29 /* YYAnimatedImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BFB6DF2D27047D4800732D29 /* YYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DF2327047D4800732D29 /* YYImage.m */; };
-		BFB6DF2E27047D4800732D29 /* YYImageCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DF2427047D4800732D29 /* YYImageCoder.m */; };
-		BFB6DF2F27047D4800732D29 /* YYFrameImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DF2527047D4800732D29 /* YYFrameImage.m */; };
-		BFB6DF3027047D4800732D29 /* YYAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DF2627047D4800732D29 /* YYAnimatedImageView.m */; };
-		BFB6DF3127047D4800732D29 /* YYSpriteSheetImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB6DF2727047D4800732D29 /* YYSpriteSheetImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFE496DE280AA3A900844083 /* UXFBPrivacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE496DD280AA3A900844083 /* UXFBPrivacy.swift */; };
 /* End PBXBuildFile section */
 
@@ -353,7 +342,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFA9AF632747E92700679A45 /* WebP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -792,11 +780,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A46899622840B2C0074E1A3 /* UXFeedbackSDK.h in Headers */,
-				BFB6DF2A27047D4800732D29 /* YYFrameImage.h in Headers */,
-				BFB6DF2827047D4800732D29 /* YYImage.h in Headers */,
-				BFB6DF2927047D4800732D29 /* YYImageCoder.h in Headers */,
-				BFB6DF2C27047D4800732D29 /* YYAnimatedImageView.h in Headers */,
-				BFB6DF3127047D4800732D29 /* YYSpriteSheetImage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1050,7 +1033,6 @@
 				BF01BDF925617FD9008C641B /* UIFont+.swift in Sources */,
 				BF01BDF525613086008C641B /* UXFOption.swift in Sources */,
 				0A4689A422840BB90074E1A3 /* UXFURLComponents.swift in Sources */,
-				BFB6DF3027047D4800732D29 /* YYAnimatedImageView.m in Sources */,
 				BF2806C02562B18F006F2D61 /* UXFTextCell.swift in Sources */,
 				0A4689A922840BBF0074E1A3 /* UXFCampaign.swift in Sources */,
 				BF6248C1255B24910039F855 /* UXFDataManager.swift in Sources */,
@@ -1067,7 +1049,6 @@
 				BF2806BC2562B18F006F2D61 /* UXFImageCell.swift in Sources */,
 				0A4689B722840BE00074E1A3 /* UISearchBar+color.swift in Sources */,
 				BF5ED7DD25593DDE00A1698E /* UXFCampaignPresentor.swift in Sources */,
-				BFB6DF2E27047D4800732D29 /* YYImageCoder.m in Sources */,
 				BF2806B32562B18F006F2D61 /* UXFRadioCell.swift in Sources */,
 				BF316C102684AABC007CEFC0 /* VisualEffectView.swift in Sources */,
 				BF0CE19D27661C3B00916B32 /* UXFRatingCell.swift in Sources */,
@@ -1085,12 +1066,9 @@
 				0AB437C922B4FE2C00AF8665 /* UIImageView+cache.swift in Sources */,
 				BF573ECD26B6A14E002A9E8C /* UXFScreenshotCreator.swift in Sources */,
 				BFE496DE280AA3A900844083 /* UXFBPrivacy.swift in Sources */,
-				BFB6DF2D27047D4800732D29 /* YYImage.m in Sources */,
-				BFB6DF2B27047D4800732D29 /* YYSpriteSheetImage.m in Sources */,
 				BF2806B42562B18F006F2D61 /* UXFRadiobuttonCell.swift in Sources */,
 				BF2806B62562B18F006F2D61 /* UXFInputCell.swift in Sources */,
 				BF2806C62562B18F006F2D61 /* UXFEmailCell.swift in Sources */,
-				BFB6DF2F27047D4800732D29 /* YYFrameImage.m in Sources */,
 				BF2806B92562B18F006F2D61 /* UXFCheckCell.swift in Sources */,
 				0A4689A322840BB90074E1A3 /* UXFAPIClient.swift in Sources */,
 			);

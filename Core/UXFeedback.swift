@@ -37,7 +37,9 @@ open class UXFeedback : NSObject{
         }
     }
 
-    public static let sharedSDK = UXFeedback.init() 
+    public static let sharedSDK = UXFeedback.init()
+    
+    
     private static var isInitialized = false
     public let sdkVersion = "v1.3.2"
     

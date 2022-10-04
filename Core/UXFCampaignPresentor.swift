@@ -74,7 +74,7 @@ class UXFCampaignPresentor: NSObject {
         }
         controller.completeHandler = { [weak self] (info, screenshots) in
             if let campaign = self?._campaign {
-                self?.feedbackCampaignDelegate?.campaignDidClose(eventName: eventName)
+//                self?.feedbackCampaignDelegate?.campaignDidClose(eventName: eventName)
                 self?.delegate?.formSubmitted(info: info, screenshots: screenshots, campaign: campaign)
             }
         }

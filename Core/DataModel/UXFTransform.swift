@@ -8,20 +8,6 @@
 
 import UIKit
 
-//"id": "zVpKVlbW",
-//          "from": {
-//            "field": "LMhpR0k1",
-//            "page": "MED8XFrA"
-//          },
-//          "to": {
-//            "action": "transition",
-//            "value": "https://www.gismeteo.ru/",
-//            "type": "toURL"
-//          },
-//          "condition": {
-//            "rule": "filled"
-//          }
-
 struct UXFTransform: Codable {
     let id: String?
     let from: UXFTransformFrom
