@@ -47,6 +47,7 @@ class UXFEmailCell: UXFBaseCell, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        delegate?.didBeginEditing(field!)
         textField.layer.borderColor = theme?.inputBorderColor.cgColor
     }
     

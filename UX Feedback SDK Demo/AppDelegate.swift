@@ -9,10 +9,10 @@
 import UIKit
 import UXFeedbackSDK
 
-let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
+//let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
 //let uxfAppID = "ckf3ph0c100013b5p0mjgnxlq" //prod
 
-//let uxfAppID = "cl124jdji0000386fkehdcnj6" //v6
+let uxfAppID = "cl124jdji0000386fkehdcnj6" //v8
 
 internal func DDLogDebug(_ value: Any){
     #if DEBUG
@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         customTheme.formBorderRadius = 8
         customTheme.inputBgColor =  UIColor.init("#F3F3F3")
         customTheme.text01Color =  UIColor.init("#232735")
-        customTheme.controlBgColor =  UIColor.init("#F3F3F3")
+        customTheme.controlBgColor =  UIColor.init("#ABCABC")
         customTheme.controlIconColor =  UIColor.init("#FFFFFF")
         customTheme.btnBgColor =  UIColor.init("#0076C2")
         customTheme.text02Color =  UIColor.init("#505565")
@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UXFeedback.sharedSDK.resetAllCampaignsData { }
         
 //    endpoint: "AAAAAAAAAAAAAHYwMhEVF1hOTAolMWgBABIHDQwbey0+AwABBgMCCD52NBA=", 
-        UXFeedback.sharedSDK.setup(appID: uxfAppID, window: nil, theme: nil) { success in
+        UXFeedback.sharedSDK.setup(appID: uxfAppID, window: nil, theme: customTheme) { success in
         }
         
         return true

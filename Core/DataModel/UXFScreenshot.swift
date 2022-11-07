@@ -17,4 +17,5 @@ struct UXFScreenshot {
     let id: String
     var image: UIImage
     var type: UXFScreenshotType
+    var field: UXFField
 }

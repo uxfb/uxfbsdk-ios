@@ -95,7 +95,7 @@ class UXFRatingCell: UXFBaseCell {
         for i in 1...10 {
             if let label = contentView.viewWithTag(i) as? VerticalAlignedLabel {
                 label.text = "\(i)"
-                label.backgroundColor = .white
+                label.backgroundColor = .clear
                 label.isHidden = false
                 if i > maxValue {
                     label.isHidden = true

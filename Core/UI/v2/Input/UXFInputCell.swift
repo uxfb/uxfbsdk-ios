@@ -48,13 +48,15 @@ extension UXFInputCell: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
         if delegate != nil {
-            delegate?.textChanged(field!, answer: [newText], refresh: false)
+            delegate?.textChanged(field!, answer: [newText])
+//            delegate?.fieldChanged(field!, answer: newText != "" ? [newText] : [], refresh: true)
         }
         
         return true
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        delegate?.didBeginEditing(field!)
         textView.borderColor = theme?.inputBorderColor
         
         if comment == "" {

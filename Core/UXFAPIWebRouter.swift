@@ -37,15 +37,15 @@ enum ContentType: String {
 }
 
 enum UXFAPIWebRouter {
-    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
+//    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
 //    static let defaultEndpoint: String = "https://develop.api.uxfb.space"
     
-//    static let defaultEndpoint: String = "https://feature-dev-2113-trs-logic-stand.api.uxfb.space"
-    static var endpoint: String = "\(defaultEndpoint)/v6"
+    static let defaultEndpoint: String = "https://epic-dev-1928-screenshots.api.uxfb.space"
+    static var endpoint: String = "\(defaultEndpoint)/v8"
     
     case getCampaing(appID: String)
     case showForm(uid: String, campaingId: String)
-    case saveFormData(projectId: String?, uid: String, campaignId: String, pages: Array<Dictionary<String, Any>>, info: Dictionary<String, Any>, properties: Dictionary<String, Any>, screenshots: [String] )
+    case saveFormData(projectId: String?, uid: String, campaignId: String, pages: Array<Dictionary<String, Any>>, info: Dictionary<String, Any>, properties: Dictionary<String, Any>)
     case saveScreenshot(screenshot: UXFScreenshot)
     
     var method: String {
@@ -63,7 +63,7 @@ enum UXFAPIWebRouter {
        switch self {
        case .getCampaing(let appId):
             return "/mobile/campaigns/\(appId)"
-       case .saveFormData(_, _, _, _, _, _, _):
+       case .saveFormData(_, _, _, _, _, _):
             return "/mobile/answers"
        case .showForm(_, _):
             return "/mobile/visits"
@@ -74,14 +74,14 @@ enum UXFAPIWebRouter {
     
     var parameters: [String:Any]? {
         switch self {
-            case .saveFormData(_, let uid, let campaignId, let pages, let info, let properties, let screenshots):
+            case .saveFormData(_, let uid, let campaignId, let pages, let info, let properties):
                 var params = [HTTPHeaderField.uid.rawValue : uid,
                        HTTPHeaderField.campaignId.rawValue : campaignId,
                        HTTPHeaderField.info.rawValue : info] as [String : Any]
 
                 params[HTTPHeaderField.pages.rawValue] = pages
                 params[HTTPHeaderField.properties.rawValue] = properties
-                params[HTTPHeaderField.screenshots.rawValue] = screenshots
+//                params[HTTPHeaderField.screenshots.rawValue] = screenshots
 
                 return params
 
@@ -119,18 +119,17 @@ enum UXFAPIWebRouter {
             httpBody.append("Content-Disposition:form-data; name=\"screenshot\";filename=\"\(screenshot.id)\"" + lineBreak)
             httpBody.append("Content-Type: \(mimetype)" + lineBreak + lineBreak)
 
-//            let encoder = YYImageEncoder(type: .webP)
-//            encoder?.quality = 1
-//            encoder?.add(image, duration: 0)
-//            if let data = encoder?.encode() {
-//                httpBody.append(data)
-//            }
+            
+            let encoder = YYImageEncoder(type: .webP)
+            encoder?.quality = 1
+            encoder?.add(image, duration: 0)
+            if let data = encoder?.encode() {
+                httpBody.append(data)
+            }
 
             httpBody.append(lineBreak)
             httpBody.append("--\(boundary)--" + lineBreak)
             
-//            let postData = String(decoding: httpBody, as: UTF8.self)
-//            print(postData)
             return httpBody
         }
     }
@@ -138,7 +137,7 @@ enum UXFAPIWebRouter {
     var pathParameters: [String:Any]? {
         var parameters: [String: Any] = [:]
         switch self {
-        case .saveFormData(let projectId, _, _, _, _, _, _):
+        case .saveFormData(let projectId, _, _, _, _, _):
             if projectId != nil {
                 parameters =  [HTTPHeaderField.projectId.rawValue : projectId!]
             }

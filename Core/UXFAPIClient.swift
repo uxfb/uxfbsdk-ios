@@ -29,7 +29,7 @@ class UXFAPIClient {
     private var _parser: UXFParser!
     private var _endpoint: String
     
-    private var _version: String = "v6"
+    private var _version: String = "v8"
     
     init(endpoint: String?, appID: String, parser: UXFParser) {
         _parser = parser
@@ -103,7 +103,7 @@ class UXFAPIClient {
                       campaignId: String,
                       pages: Array<Dictionary<String,Any>>?,
                       properties: Dictionary<String,Any>?,
-                      screenshots: [String],
+//                      screenshots: [String],
                       completion: ((_ success: Bool, _ message: String?)->())?){
         
         let responseHandler = {(status: UXFAPIClientResponseResult, message: String?, result: Any?) in
@@ -116,8 +116,7 @@ class UXFAPIClient {
                                                                     uid: uid,
                                                                     campaignId: campaignId,
                                                                     pages: pages ?? [], info: systemInfo,
-                                                                    properties: properties ?? [:],
-                                                                    screenshots: screenshots),
+                                                                    properties: properties ?? [:]),
                                 completion: responseHandler)
     }
     

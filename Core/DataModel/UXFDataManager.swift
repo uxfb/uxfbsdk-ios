@@ -30,8 +30,12 @@ enum UXFFieldType: String {
 protocol UXFFieldDelegate {
     func fieldChanged(_ field: UXFField, answer: [String], refresh: Bool)
     func buttonTapped(_ field: UXFField, answer: [String], refresh: Bool)
-    func textChanged(_ field: UXFField, answer: [String], refresh: Bool)
-    func screenshotChanged(screenshots: [UXFScreenshot])
+    func textChanged(_ field: UXFField, answer: [String])
+//    func screenshotChanged(screenshots: [UXFScreenshot])
+    
+    func screenshotChanged(_ field: UXFField, screenshots: [UXFScreenshot])
+    
+    func didBeginEditing(_ field: UXFField)
 }
 
 class UXFDataManager: UXFFieldDelegate {
@@ -44,7 +48,6 @@ class UXFDataManager: UXFFieldDelegate {
     private var height: CGFloat {
         return viewController?.view.bounds.height ?? UIScreen.main.bounds.height
     }
-    
     
     private var currentPage: Int = 0
     private var campaign: UXFCampaign?
@@ -517,8 +520,10 @@ class UXFDataManager: UXFFieldDelegate {
         }
         else {
             if campaign?.pages[currentPage].type == 2 {
-                _ = getNextIndex()
-                endCampaign(terminated: false)
+                let nextIndex = getNextIndex()
+                if nextIndex != -1 {
+                    endCampaign(terminated: false)
+                }
             }
             else {
                 nextPage()
@@ -538,26 +543,18 @@ class UXFDataManager: UXFFieldDelegate {
             answers.append(newAnswer)
         }
 
-        
-//        let fieldIndex = Int((campaign?.pages[currentPage].fields.firstIndex(where: { (fld) -> Bool in
-//            fld.id == field.id
-//        }))!)
-        
         if refresh {
-//            viewController?.updateUI(section: fieldIndex)
-            viewController?.updateUI()
+//            guard let fieldIndex = campaign?.pages[currentPage].fields.firstIndex(where: { (fld) -> Bool in
+//                fld.id == field.id
+//            }) else {
+//                return
+//            }
+            viewController?.updateUI() //fieldIndex
         }
-//        else {
-//            viewController?.updateField(idx: fieldIndex)
-//        }
     }
     
     
-    func textChanged(_ field: UXFField, answer: [String], refresh: Bool = true) {
-//        let fieldIndex = Int((campaign?.pages[currentPage].fields.firstIndex(where: { (fld) -> Bool in
-//            fld.id == field.id
-//        }))!)
-        
+    func textChanged(_ field: UXFField, answer: [String]) {
         answers = answers.filter { answer in ((answer["fieldId"] as? String) ?? "") != field.id }
         if answer.count > 0 {
             let newAnswer = ["fieldId": field.id as Any,
@@ -566,14 +563,30 @@ class UXFDataManager: UXFFieldDelegate {
                              "transforms": ""] as [String : Any]
             answers.append(newAnswer)
         }
-        
-//        viewController?.updateField(idx: fieldIndex)
     }
     
-    func screenshotChanged(screenshots: [UXFScreenshot]) {
+    func screenshotChanged(_ field: UXFField, screenshots: [UXFScreenshot]) {
         isError = false
         _screenshots = screenshots
-        viewController?.updateUI()
+        
+        let screenshotIds = _screenshots.map { $0.id }
+        fieldChanged(field, answer: screenshotIds, refresh: true)
+    }
+    
+//    func screenshotChanged(screenshots: [UXFScreenshot]) {
+//        isError = false
+//        _screenshots = screenshots
+//        viewController?.updateUI()
+//    }
+    
+    func didBeginEditing(_ field: UXFField) {
+        guard let fieldIndex = campaign?.pages[currentPage].fields.firstIndex(where: { (fld) -> Bool in
+            fld.id == field.id
+        }) else {
+            return
+        }
+        
+        viewController?.didBeginEditing(fieldIndex)
     }
     
     //MARK: - Routing
@@ -588,17 +601,21 @@ class UXFDataManager: UXFFieldDelegate {
         viewController?.updateUI()
     }
     
-    public func endCampaign(terminated: Bool) {
+    private func formattedScreenshots() {
+        
+    }
+    
+    public func endCampaign(terminated: Bool, isLink: Bool = false) {
         var formattedAnswers = Array<Dictionary<String, Any>>()
         answers.forEach { (answer) in
             var item = answer
             switch (UXFFieldType(rawValue: item["type"] as! String)) {
             case .radiobutton, .email, .input:
                 item["value"] = (answer["value"] as? [String])?.first
-                break
+                
             case .smiles, .nps, .rating:
                 item["value"] = Int(((answer["value"] as? [String])?.first)!)
-                break
+                
             default:
                 item["value"] = answer["value"]
             }
@@ -624,6 +641,8 @@ class UXFDataManager: UXFFieldDelegate {
             let currentPageId = campaign?.pages[currentPage].id ?? ""
             
             result["close"] = page?.id == currentPageId ? 1 : 0
+            
+            result["externalLink"] = isLink ? 1 : 0
             
             results.append(result)
         }
@@ -690,6 +709,21 @@ class UXFDataManager: UXFFieldDelegate {
             
             switch transform.condition?.rule {
             case "equal":
+                let sameCount = transform.condition?.value?.filter() { answers.contains($0) }.count ?? 0
+                if sameCount == transform.condition?.value?.count &&
+                    sameCount == fieldAnswersCount(transform.from.field ?? "") {
+                    switch toType {
+                    case "toPage":
+                        return toPageIndex
+                    case "toDeeplink", "toURL":
+                        openUrl(toValue)
+                        return -1
+//                        return currentPage
+                    default:
+                        break
+                    }
+                }
+            case "contain":
                 let same = transform.condition?.value?.filter() { answers.contains($0) }
                 if same?.count ?? 0 > 0 {
                     switch toType {
@@ -697,7 +731,8 @@ class UXFDataManager: UXFFieldDelegate {
                         return toPageIndex
                     case "toDeeplink", "toURL":
                         openUrl(toValue)
-                        return currentPage
+                        return -1
+//                        return currentPage
                     default:
                         break
                     }
@@ -711,7 +746,8 @@ class UXFDataManager: UXFFieldDelegate {
                             return toPageIndex
                         case "toDeeplink", "toURL":
                             openUrl(toValue)
-                            return currentPage
+                            return -1
+//                            return currentPage
                         default:
                             break
                         }
@@ -723,7 +759,8 @@ class UXFDataManager: UXFFieldDelegate {
                             return toPageIndex
                         case "toDeeplink", "toURL":
                             openUrl(toValue)
-                            return currentPage
+                            return -1
+//                            return currentPage
                         default:
                             break
                         }
@@ -749,7 +786,8 @@ class UXFDataManager: UXFFieldDelegate {
         
         if elseTransform.to.type == "toDeeplink" || elseTransform.to.type == "toURL" {
             openUrl(elseTransform.to.value)
-            return currentPage
+            return -1
+//            return currentPage
         } else {
             return campaign?.pages.lastIndex(where: { (page) -> Bool in
                 page.id == elseTransform.to.value
@@ -758,18 +796,15 @@ class UXFDataManager: UXFFieldDelegate {
     }
     
     private func checkFieldTransfromed(_ field: UXFField) -> Bool {
-        if field.id == "wVbs9D8E" {
-            print(field)
-        }
         guard let transforms = campaign?.transforms.filter({ $0.to.value == field.id }),
               transforms.count > 0 else {
             return true
         }
         
-
         guard let answer = answers.first(where: { (dict) -> Bool in
             (transforms.map { $0.from.field }).contains(((dict["fieldId"] as? String) ?? ""))
         }) else {
+            clearAnswers(field.id!)
             return false
         }
         
@@ -777,12 +812,19 @@ class UXFDataManager: UXFFieldDelegate {
             let type = UXFFieldType(rawValue: (answer["type"] as? String) ?? "")
             let answers = (answer["value"] as? [String]) ?? []
             
-            if transform.condition?.rule == "equal" {
+            switch transform.condition?.rule {
+            case "equal":
+                let sameCount = transform.condition?.value?.filter() { answers.contains($0) }.count ?? 0
+                if sameCount == transform.condition?.value?.count &&
+                    sameCount == fieldAnswersCount(transform.from.field ?? "") {
+                    return true
+                }
+            case "contain":
                 let same = transform.condition?.value?.filter() { answers.contains($0) }
                 if same?.count ?? 0 > 0 {
                     return true
                 }
-            } else if transform.condition?.rule == "filled" {
+            case "filled":
                 if type == .checkbox {
                     if answers.count > 0 {
                         return true
@@ -793,16 +835,43 @@ class UXFDataManager: UXFFieldDelegate {
                         return true
                     }
                 }
+            default:
+                clearAnswers(field.id!)
+                return false
             }
         }
+        clearAnswers(field.id!)
         return false
     }
     
     private func openUrl(_ urlString: String) {
-        endCampaign(terminated: false)
+        endCampaign(terminated: false, isLink: true)
         if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url)
         }
+    }
+    
+    private func clearAnswers(_ fieldId: String) {
+        answers.removeAll { dict in
+            if let fId = dict["fieldId"] as? String {
+                return fId == fieldId
+            }
+            return false
+        }
+    }
+    
+    private func fieldAnswersCount(_ fieldId: String) -> Int {
+        var result = 0
+        let answer = answers.first { dict in
+            if let fId = dict["fieldId"] as? String {
+                return fId == fieldId
+            }
+            return false
+        }
+        if let value = answer?["value"] as? [String] {
+            result = value.count
+        }
+        return result
     }
 }
 

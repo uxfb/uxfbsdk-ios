@@ -68,6 +68,8 @@ open class UXFCampaignViewController: UIViewController {
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var titleViewHeightConstaint: NSLayoutConstraint!
     
+    @IBOutlet var tableViewTopConstraint: NSLayoutConstraint!
+    
     var presentationAnimated = true  
     
     var state: UXFViewControllerState = .presenting
@@ -129,38 +131,38 @@ open class UXFCampaignViewController: UIViewController {
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            keyboardHeight = keyboardSize.height
-            
-            switch campaign?.type {
-            case .popup:
-                self.verticallyConstraint.constant = -keyboardHeight/2
-                break
-            case .slidein:
-                self.bottomConstraint.constant = -keyboardHeight
-                break
-            default:
-                break
+        guard let userinfo = notification.userInfo else {
+                return
+            }
+
+            guard
+                let duration = (userinfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
+                let endFrame = (userinfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+                let curveOption = userinfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt else {
+                    return
             }
             
-            self.view.layoutIfNeeded()
-            
-        }
+            UIView.animate(withDuration: duration, delay: 0, options: [.beginFromCurrentState, .init(rawValue: curveOption)], animations: {
+                let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: endFrame.height, right: 0)
+                self.tableView.contentInset = edgeInsets
+            })
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        keyboardHeight = 0
-        if self.bottomConstraint.constant != 0 {
-            self.bottomConstraint.constant = 0
-        }
-        if self.verticallyConstraint.constant != 0 {
-            self.verticallyConstraint.constant = 0
-        }
-        
-        
-        UIView.animate(withDuration: 0.1) {
-            self.view.layoutIfNeeded()
-        }
+        guard let userinfo = notification.userInfo else {
+                return
+            }
+
+            guard
+                let duration = (userinfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
+                let curveOption = userinfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt else {
+                    return
+            }
+            
+            UIView.animate(withDuration: duration, delay: 0, options: [.beginFromCurrentState, .init(rawValue: curveOption)], animations: {
+                let edgeInsets = UIEdgeInsets.zero
+                self.tableView.contentInset = edgeInsets
+            })
     }
     
     open override func viewDidLayoutSubviews() {
@@ -487,14 +489,16 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
         case .screenshot:
             
             let cell = createCell(UXFScreenshotCell.self, indexPath: indexPath, field: field)
-            cell.setScreenshots(dataManager?.screenshots ?? [])
+            cell.setScreenshots(dataManager?.screenshots.filter({ screenshot in
+                screenshot.field.id == field.id
+            }) ?? [])
             
             let takeTask = DispatchWorkItem {
                 UIView.animate(withDuration: 0.15) {
                     self.view.alpha = 0
                 } completion: { finish in
                     UXFImageManager.showScreenshotTake { images in
-                        self.addScreenshots(images, type: .screenhot)
+                        self.addScreenshots(images, type: .screenhot, field: field)
                     } closeAction: {
                         UIView.animate(withDuration: 0.15) {
                             self.view.alpha = 1
@@ -511,7 +515,7 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
                 
                 PHPhotoLibrary.shared().unregisterChangeObserver(self)
                 UXFImageManager.showGallery(maxCount: count) { images in
-                    self.addScreenshots(images, type: .gallery)
+                    self.addScreenshots(images, type: .gallery, field: field)
                 }
             }
             let selectTask = DispatchWorkItem {
@@ -539,12 +543,19 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
         }
     }
     
-    private func addScreenshots(_ images: [UIImage], type: UXFScreenshotType) {
+    private func addScreenshots(_ images: [UIImage], type: UXFScreenshotType, field: UXFField) {
         var screenshots = dataManager?.screenshots
         for image in images {
-            screenshots?.append(UXFScreenshot(id: .randomImageName, image: image, type: type))
+            let encoder = YYImageEncoder(type: .webP)
+            encoder?.quality = 1
+            encoder?.add(image, duration: 0)
+            
+            screenshots?.append(UXFScreenshot(id: .randomImageName, image: image, type: type, field: field))
         }
-        dataManager?.screenshotChanged(screenshots: screenshots ?? [])
+        
+        dataManager?.screenshotChanged(field, screenshots: screenshots ?? [])
+        
+//        dataManager?.screenshotChanged(screenshots: screenshots ?? [])
     }
     
     private func checkGalleryPermissions(completionHandler: @escaping (Bool) -> ()) {
@@ -695,22 +706,27 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
         self.updateHeight()
     }
     
-    func updateUI() {
-//        self.view.endEditing(true)
+    func updateUI(_ sender: Int? = nil) {
         self.progressLabel.text = dataManager?.progress
-        self.tableView.reloadData()
+        if let sender = sender {
+            for i in 0..<(dataManager?.fieldsCount() ?? 0) {
+                if i != sender {
+                    self.tableView.reloadSections([i], with: .automatic)
+                }
+            }
+        } else {
+            self.tableView.reloadData()
+        }
         
         self.updateHeight()
+        self.tableView.setContentOffset(.zero, animated: true)
     }
     
-//    func updateUI(section: Int) {
-//        self.progressLabel.text = dataManager?.progress
-//        let indexSet = IndexSet(integersIn: 0..<self.tableView.numberOfSections)
-////        self.tableView.reloadSections([section], with: .automatic)
-//        self.tableView.reloadSections(indexSet, with: .fade)
-//
-//        self.updateHeight()
-//    }
+    func didBeginEditing(_ section: Int) {
+        let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
+        self.tableView.contentInset = edgeInsets
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: section), at: .middle, animated: true)
+    }
     
     func updateHeight() {
         let newHeight = self.dataManager?.heightForCurrentPage() ?? 0
@@ -720,6 +736,10 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
             self.contentHeight.constant = newHeight
             self.view.layoutIfNeeded()
         }
+    }
+    
+    open override var shouldAutorotate: Bool {
+        return false
     }
 }
 

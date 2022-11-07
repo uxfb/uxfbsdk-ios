@@ -41,7 +41,7 @@ open class UXFeedback : NSObject{
     
     
     private static var isInitialized = false
-    public let sdkVersion = "v1.3.2"
+    public let sdkVersion = "v1.5.0"
     
     open weak var delegate: UXFeedbackCampaignDelegate?
     open var animationEnabled: Bool = true
@@ -377,22 +377,11 @@ open class UXFeedback : NSObject{
 extension UXFeedback: UXFCampaignFormPresentorProtocol {
     func formSubmitted(info: Array<Dictionary<String, Any>>?, screenshots: [UXFScreenshot], campaign: UXFCampaign) {
         
-        let screenshotIds: [String] = screenshots.map { screenshot in
-            return screenshot.id
-        }
         self.DDLog("Campaign finished")
         _apiClient.saveFormData(projectId: campaign.projectId,
                                 campaignId: campaign.campaignId,
                                 pages: info,
-                                properties: _properties,
-                                screenshots: screenshotIds) { (success, message) in
-//            if success == false {
-//                DispatchQueue.main.async {
-//                    self.delegate?.campaignDidReceiveError(errorString: "Неизвестная ошибка при отправке данных формы")
-//                }
-//            } else {
-//                self.DDLog("Campaign sended")
-//            }
+                                properties: _properties) { (success, message) in
         }
         
         var answers: [String: Any] = [:]

@@ -122,6 +122,30 @@
 		BFB6DEFC27043D7200732D29 /* UXFScreenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFB27043D7200732D29 /* UXFScreenshot.swift */; };
 		BFB6DEFE27044E4300732D29 /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFD27044E4300732D29 /* Data+.swift */; };
 		BFE496DE280AA3A900844083 /* UXFBPrivacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE496DD280AA3A900844083 /* UXFBPrivacy.swift */; };
+		BFEAFFDF291936710042972A /* YYImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BFEAFFD5291936710042972A /* YYImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFEAFFE0291936710042972A /* YYImageCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = BFEAFFD6291936710042972A /* YYImageCoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFEAFFE1291936710042972A /* YYFrameImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BFEAFFD7291936710042972A /* YYFrameImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFEAFFE2291936710042972A /* YYSpriteSheetImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BFEAFFD8291936710042972A /* YYSpriteSheetImage.m */; };
+		BFEAFFE3291936710042972A /* YYAnimatedImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = BFEAFFD9291936710042972A /* YYAnimatedImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFEAFFE4291936710042972A /* YYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BFEAFFDA291936710042972A /* YYImage.m */; };
+		BFEAFFE5291936710042972A /* YYImageCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = BFEAFFDB291936710042972A /* YYImageCoder.m */; };
+		BFEAFFE6291936710042972A /* YYFrameImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BFEAFFDC291936710042972A /* YYFrameImage.m */; };
+		BFEAFFE7291936710042972A /* YYAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFEAFFDD291936710042972A /* YYAnimatedImageView.m */; };
+		BFEAFFE8291936710042972A /* YYSpriteSheetImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BFEAFFDE291936710042972A /* YYSpriteSheetImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFEAFFF12919865F0042972A /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAFC6842919325500F99607 /* Accelerate.framework */; };
+		BFEAFFF22919865F0042972A /* Accelerate.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BFAFC6842919325500F99607 /* Accelerate.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BFEAFFF3291986600042972A /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAFC6802919324500F99607 /* AssetsLibrary.framework */; };
+		BFEAFFF4291986600042972A /* AssetsLibrary.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BFAFC6802919324500F99607 /* AssetsLibrary.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BFEAFFF5291986630042972A /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAFC67C2919323700F99607 /* CoreFoundation.framework */; };
+		BFEAFFF6291986630042972A /* CoreFoundation.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BFAFC67C2919323700F99607 /* CoreFoundation.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BFEAFFF7291986650042972A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAFC6822919324E00F99607 /* ImageIO.framework */; };
+		BFEAFFF8291986650042972A /* ImageIO.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BFAFC6822919324E00F99607 /* ImageIO.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BFEAFFF9291986660042972A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAFC6862919325A00F99607 /* MobileCoreServices.framework */; };
+		BFEAFFFA291986660042972A /* MobileCoreServices.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BFAFC6862919325A00F99607 /* MobileCoreServices.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BFEAFFFB291986680042972A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAFC67E2919323F00F99607 /* QuartzCore.framework */; };
+		BFEAFFFC291986680042972A /* QuartzCore.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BFAFC67E2919323F00F99607 /* QuartzCore.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BFEAFFFD2919866A0042972A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAFC67A2919323200F99607 /* UIKit.framework */; };
+		BFEAFFFE2919866A0042972A /* UIKit.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BFAFC67A2919323200F99607 /* UIKit.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +176,13 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				BFEAFFF8291986650042972A /* ImageIO.framework in Copy Files */,
+				BFEAFFF22919865F0042972A /* Accelerate.framework in Copy Files */,
+				BFEAFFFC291986680042972A /* QuartzCore.framework in Copy Files */,
+				BFEAFFF4291986600042972A /* AssetsLibrary.framework in Copy Files */,
+				BFEAFFFA291986660042972A /* MobileCoreServices.framework in Copy Files */,
+				BFEAFFFE2919866A0042972A /* UIKit.framework in Copy Files */,
+				BFEAFFF6291986630042972A /* CoreFoundation.framework in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,20 +328,29 @@
 		BF885EE32715ED7900F110A0 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		BF885EE52715FB1B00F110A0 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
 		BFA54F8327AA86A2003D6411 /* UXFCrypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFCrypto.swift; sourceTree = "<group>"; };
+		BFAFC6792919321900F99607 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		BFAFC67A2919323200F99607 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BFAFC67C2919323700F99607 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		BFAFC67E2919323F00F99607 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		BFAFC6802919324500F99607 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		BFAFC6822919324E00F99607 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		BFAFC6842919325500F99607 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		BFAFC6862919325A00F99607 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		BFAFC6882919326200F99607 /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
 		BFB6DEFB27043D7200732D29 /* UXFScreenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFScreenshot.swift; sourceTree = "<group>"; };
 		BFB6DEFD27044E4300732D29 /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
-		BFB6DF1E27047D4800732D29 /* YYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImage.h; sourceTree = "<group>"; };
-		BFB6DF1F27047D4800732D29 /* YYImageCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImageCoder.h; sourceTree = "<group>"; };
-		BFB6DF2027047D4800732D29 /* YYFrameImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYFrameImage.h; sourceTree = "<group>"; };
-		BFB6DF2127047D4800732D29 /* YYSpriteSheetImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSpriteSheetImage.m; sourceTree = "<group>"; };
-		BFB6DF2227047D4800732D29 /* YYAnimatedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYAnimatedImageView.h; sourceTree = "<group>"; };
-		BFB6DF2327047D4800732D29 /* YYImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYImage.m; sourceTree = "<group>"; };
-		BFB6DF2427047D4800732D29 /* YYImageCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYImageCoder.m; sourceTree = "<group>"; };
-		BFB6DF2527047D4800732D29 /* YYFrameImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYFrameImage.m; sourceTree = "<group>"; };
-		BFB6DF2627047D4800732D29 /* YYAnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYAnimatedImageView.m; sourceTree = "<group>"; };
-		BFB6DF2727047D4800732D29 /* YYSpriteSheetImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSpriteSheetImage.h; sourceTree = "<group>"; };
-		BFB6DF3227047D6A00732D29 /* WebP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebP.framework; sourceTree = "<group>"; };
 		BFE496DD280AA3A900844083 /* UXFBPrivacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFBPrivacy.swift; sourceTree = "<group>"; };
+		BFEAFFD5291936710042972A /* YYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImage.h; sourceTree = "<group>"; };
+		BFEAFFD6291936710042972A /* YYImageCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImageCoder.h; sourceTree = "<group>"; };
+		BFEAFFD7291936710042972A /* YYFrameImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYFrameImage.h; sourceTree = "<group>"; };
+		BFEAFFD8291936710042972A /* YYSpriteSheetImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSpriteSheetImage.m; sourceTree = "<group>"; };
+		BFEAFFD9291936710042972A /* YYAnimatedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYAnimatedImageView.h; sourceTree = "<group>"; };
+		BFEAFFDA291936710042972A /* YYImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYImage.m; sourceTree = "<group>"; };
+		BFEAFFDB291936710042972A /* YYImageCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYImageCoder.m; sourceTree = "<group>"; };
+		BFEAFFDC291936710042972A /* YYFrameImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYFrameImage.m; sourceTree = "<group>"; };
+		BFEAFFDD291936710042972A /* YYAnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYAnimatedImageView.m; sourceTree = "<group>"; };
+		BFEAFFDE291936710042972A /* YYSpriteSheetImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSpriteSheetImage.h; sourceTree = "<group>"; };
+		BFEAFFF0291986460042972A /* libz.1.2.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.8.tbd; path = usr/lib/libz.1.2.8.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -342,6 +382,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFEAFFF9291986660042972A /* MobileCoreServices.framework in Frameworks */,
+				BFEAFFF12919865F0042972A /* Accelerate.framework in Frameworks */,
+				BFEAFFFB291986680042972A /* QuartzCore.framework in Frameworks */,
+				BFEAFFF7291986650042972A /* ImageIO.framework in Frameworks */,
+				BFEAFFF3291986600042972A /* AssetsLibrary.framework in Frameworks */,
+				BFEAFFFD2919866A0042972A /* UIKit.framework in Frameworks */,
+				BFEAFFF5291986630042972A /* CoreFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +456,7 @@
 		0A019A5B22367E7E002FD4F8 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				BFAFC65F2919309D00F99607 /* WebP */,
 				BF01BDFA25618234008C641B /* CGFloat+.swift */,
 				BFB6DEFD27044E4300732D29 /* Data+.swift */,
 				BF01BDF625613254008C641B /* Decodable+.swift */,
@@ -433,7 +481,6 @@
 				BF316C0F2684AABC007CEFC0 /* VisualEffectView.swift */,
 				BF316C112684AAFA007CEFC0 /* VisualEffectView+.swift */,
 				0AF49823229C3D4A000CB7D6 /* HEXColor */,
-				BFB6DF1C27047D3800732D29 /* WebP */,
 			);
 			path = Vendors;
 			sourceTree = "<group>";
@@ -522,6 +569,16 @@
 		3EE1448B815C3AA05E865A6C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BFEAFFF0291986460042972A /* libz.1.2.8.tbd */,
+				BFAFC6882919326200F99607 /* libz.1.1.3.tbd */,
+				BFAFC6862919325A00F99607 /* MobileCoreServices.framework */,
+				BFAFC6842919325500F99607 /* Accelerate.framework */,
+				BFAFC6822919324E00F99607 /* ImageIO.framework */,
+				BFAFC6802919324500F99607 /* AssetsLibrary.framework */,
+				BFAFC67E2919323F00F99607 /* QuartzCore.framework */,
+				BFAFC67C2919323700F99607 /* CoreFoundation.framework */,
+				BFAFC67A2919323200F99607 /* UIKit.framework */,
+				BFAFC6792919321900F99607 /* libz.tbd */,
 				0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */,
 			);
 			name = Frameworks;
@@ -746,28 +803,27 @@
 			path = ImageViewer;
 			sourceTree = "<group>";
 		};
-		BFB6DF1C27047D3800732D29 /* WebP */ = {
+		BFAFC65F2919309D00F99607 /* WebP */ = {
 			isa = PBXGroup;
 			children = (
-				BFB6DF3227047D6A00732D29 /* WebP.framework */,
-				BFB6DF1D27047D4800732D29 /* YYImage */,
+				BFEAFFD4291936710042972A /* YYImage */,
 			);
 			path = WebP;
 			sourceTree = "<group>";
 		};
-		BFB6DF1D27047D4800732D29 /* YYImage */ = {
+		BFEAFFD4291936710042972A /* YYImage */ = {
 			isa = PBXGroup;
 			children = (
-				BFB6DF1E27047D4800732D29 /* YYImage.h */,
-				BFB6DF1F27047D4800732D29 /* YYImageCoder.h */,
-				BFB6DF2027047D4800732D29 /* YYFrameImage.h */,
-				BFB6DF2127047D4800732D29 /* YYSpriteSheetImage.m */,
-				BFB6DF2227047D4800732D29 /* YYAnimatedImageView.h */,
-				BFB6DF2327047D4800732D29 /* YYImage.m */,
-				BFB6DF2427047D4800732D29 /* YYImageCoder.m */,
-				BFB6DF2527047D4800732D29 /* YYFrameImage.m */,
-				BFB6DF2627047D4800732D29 /* YYAnimatedImageView.m */,
-				BFB6DF2727047D4800732D29 /* YYSpriteSheetImage.h */,
+				BFEAFFD5291936710042972A /* YYImage.h */,
+				BFEAFFD6291936710042972A /* YYImageCoder.h */,
+				BFEAFFD7291936710042972A /* YYFrameImage.h */,
+				BFEAFFD8291936710042972A /* YYSpriteSheetImage.m */,
+				BFEAFFD9291936710042972A /* YYAnimatedImageView.h */,
+				BFEAFFDA291936710042972A /* YYImage.m */,
+				BFEAFFDB291936710042972A /* YYImageCoder.m */,
+				BFEAFFDC291936710042972A /* YYFrameImage.m */,
+				BFEAFFDD291936710042972A /* YYAnimatedImageView.m */,
+				BFEAFFDE291936710042972A /* YYSpriteSheetImage.h */,
 			);
 			path = YYImage;
 			sourceTree = "<group>";
@@ -779,6 +835,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFEAFFDF291936710042972A /* YYImage.h in Headers */,
+				BFEAFFE1291936710042972A /* YYFrameImage.h in Headers */,
+				BFEAFFE8291936710042972A /* YYSpriteSheetImage.h in Headers */,
+				BFEAFFE3291936710042972A /* YYAnimatedImageView.h in Headers */,
+				BFEAFFE0291936710042972A /* YYImageCoder.h in Headers */,
 				0A46899622840B2C0074E1A3 /* UXFeedbackSDK.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1007,6 +1068,7 @@
 				0AB8C29123F444DE00FB0EEB /* PassthroughWindow.swift in Sources */,
 				0A4689BA22840BE00074E1A3 /* Reachability+NetworkType.swift in Sources */,
 				BF2806B82562B18F006F2D61 /* UXFCheckboxCell.swift in Sources */,
+				BFEAFFE7291936710042972A /* YYAnimatedImageView.m in Sources */,
 				0A4689A022840BB90074E1A3 /* UXFeedbackDelegate.swift in Sources */,
 				BF316C122684AAFA007CEFC0 /* VisualEffectView+.swift in Sources */,
 				BF40565E265D0B2300709351 /* UIView+Image.swift in Sources */,
@@ -1016,12 +1078,14 @@
 				BF01BDF725613254008C641B /* Decodable+.swift in Sources */,
 				0AF49829229C3D5D000CB7D6 /* StringExtension.swift in Sources */,
 				BF02FD32255C0AE300C794E6 /* UXFField.swift in Sources */,
+				BFEAFFE2291936710042972A /* YYSpriteSheetImage.m in Sources */,
 				0A4689B922840BE00074E1A3 /* UIViewController+present.swift in Sources */,
 				0A4689B422840BE00074E1A3 /* String+additions.swift in Sources */,
 				BF573EC926B69F0C002A9E8C /* UXFGalleryCell.swift in Sources */,
 				0A4689AC22840BBF0074E1A3 /* UXFText.swift in Sources */,
 				0A4689B622840BE00074E1A3 /* UIControl+blocks.swift in Sources */,
 				0A4689B822840BE00074E1A3 /* UIVIewAddition.swift in Sources */,
+				BFEAFFE5291936710042972A /* YYImageCoder.m in Sources */,
 				BF573EC526B69E28002A9E8C /* UXFImageSelector.swift in Sources */,
 				BF2806BE2562B18F006F2D61 /* UXFButtonCell.swift in Sources */,
 				BF2806C92562B18F006F2D61 /* UXFSmilesCell.swift in Sources */,
@@ -1040,6 +1104,7 @@
 				BFB6DEFE27044E4300732D29 /* Data+.swift in Sources */,
 				BFA54F8427AA86A2003D6411 /* UXFCrypto.swift in Sources */,
 				BF2806C22562B18F006F2D61 /* UXFCampaignViewController.swift in Sources */,
+				BFEAFFE6291936710042972A /* YYFrameImage.m in Sources */,
 				BF02FD3F255C65B000C794E6 /* UXFTransform.swift in Sources */,
 				BF573ED026B6CBBA002A9E8C /* UXFScreenshotImageCell.swift in Sources */,
 				BFB6DEFC27043D7200732D29 /* UXFScreenshot.swift in Sources */,
@@ -1053,6 +1118,7 @@
 				BF316C102684AABC007CEFC0 /* VisualEffectView.swift in Sources */,
 				BF0CE19D27661C3B00916B32 /* UXFRatingCell.swift in Sources */,
 				BF63171126B67501006F408A /* UXFImageCollection.swift in Sources */,
+				BFEAFFE4291936710042972A /* YYImage.m in Sources */,
 				BF40565B265CED2500709351 /* UILabel+Align.swift in Sources */,
 				BF885EE62715FB1B00F110A0 /* UIAlertController+.swift in Sources */,
 				0A4689B322840BE00074E1A3 /* NSLayoutConstraint+additions.swift in Sources */,
