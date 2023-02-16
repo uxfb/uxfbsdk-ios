@@ -29,8 +29,11 @@ public protocol UXFeedbackCampaignDelegate: AnyObject {
     func campaignDidShow(eventName: String)
     func campaignDidClose(eventName: String)
     func campaignDidTerminate(eventName: String, terminatedPage: Int, totalPages: Int)
-    
-    func campaignDidSend(campaignId: String, answers: [String: Any])
-    
+    func campaignDidSend(campaignId: String)
+    func campaignDidAnswered(campaignId: String, answers: [String: Any])
+}
+
+@objc
+public protocol UXFeedbackLogDelegate: AnyObject {
     func logDidReceive(message: String)
 }

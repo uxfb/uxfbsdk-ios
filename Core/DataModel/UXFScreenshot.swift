@@ -9,7 +9,7 @@
 import UIKit
 
 enum UXFScreenshotType {
-    case screenhot
+    case screenshot
     case gallery
 }
 
@@ -18,4 +18,9 @@ struct UXFScreenshot {
     var image: UIImage
     var type: UXFScreenshotType
     var field: UXFField
+}
+
+struct UXFScreenshotData: Codable {
+    let id: String
+    let base64image: String
 }

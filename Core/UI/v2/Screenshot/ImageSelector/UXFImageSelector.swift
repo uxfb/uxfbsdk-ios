@@ -110,10 +110,13 @@ class UXFImageSelector: UIView, PHPhotoLibraryChangeObserver {
         let options = PHImageRequestOptions()
         var thumbnail = UIImage()
         options.isSynchronous = true
-        
-        manager.requestImage(for: asset, targetSize: CGSize(width: 1024, height: 1024), contentMode: .aspectFill, options: options, resultHandler: {(result, info)->Void in
-            
-            thumbnail = result!
+        options.isNetworkAccessAllowed = true
+        options.deliveryMode = .opportunistic
+
+        manager.requestImage(for: asset, targetSize: CGSize(width: 1024, height: 1024), contentMode: .default, options: options, resultHandler: {(result, info) -> Void in
+            if let result = result {
+                thumbnail = result
+            }
         })
         return thumbnail
     }

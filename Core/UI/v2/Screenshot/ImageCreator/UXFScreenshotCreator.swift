@@ -13,6 +13,8 @@ class UXFScreenshotCreator: UIView {
     private var direction: CGFloat = 0
     private var completeAction: imagePickerAction?
     
+    @IBOutlet weak var handBottom: NSLayoutConstraint!
+    
     @IBOutlet weak var shadowTop: NSLayoutConstraint!
     @IBOutlet weak var shadowBottom: NSLayoutConstraint!
     @IBOutlet weak var shadowLeft: NSLayoutConstraint!
@@ -27,7 +29,7 @@ class UXFScreenshotCreator: UIView {
             okButton.backgroundColor = UIColor.init("#0076C2")
             okButton.layer.masksToBounds = true
             okButton.addShadowAndRoundCorner(cornerRadius: 28)
-            okButton.isEnabled = false
+            okButton.isEnabled = true
         }
     }
     @IBOutlet weak var cancelButton: UIButton! {
@@ -47,21 +49,55 @@ class UXFScreenshotCreator: UIView {
         }
     }
     
+    private var displayLink: CADisplayLink?
+    private var startTime: TimeInterval?
+    
     public func configure(frame: CGRect, completion: @escaping imagePickerAction) {
         self.frame = frame
         self.completeAction = completion
     }
-
-    @IBAction func pressOk(_ sender: Any) {
+    
+    func showHandAnimation() {
+        displayLink = CADisplayLink(target: self,
+        selector: #selector(animateHand))
         
+        startTime = CACurrentMediaTime()
+        displayLink?.add(to: RunLoop.main, forMode: .common)
+    }
+    
+    @objc private func animateHand() {
+        guard let startTime = startTime else {
+            return
+        }
+        
+        let now = CACurrentMediaTime()
+        
+        let timeDiff = now - startTime
+        
+        let whole = timeDiff.rounded(.down)
+        let fraction = timeDiff - whole
+        
+        let diffPos = 28.0 * fraction
+        
+//        self.handBottom.constant = 48 + diffPos
+        
+        if Int(whole) % 2 == 0 {
+            self.handBottom.constant = 48 + CGFloat(diffPos)
+        } else {
+            self.handBottom.constant = 76 - CGFloat(diffPos)
+        }
+    }
+    
+    @IBAction func pressOk(_ sender: Any) {
         let flashView = UIView(frame: self.bounds)
         flashView.backgroundColor = .white
         flashView.alpha = 1.0
-        self.insertSubview(flashView, at: 0)
+        self.addSubview(flashView)
         
-        UXFImageManager.hide(animated: true, duration: 0.5)
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.3) {
             flashView.alpha = 0.0
+        } completion: { finished in
+            UXFImageManager.hide(animated: true, duration: 0.5)
         }
         
         var screenshotImage :UIImage?
@@ -86,10 +122,12 @@ class UXFScreenshotCreator: UIView {
     }
     
     @IBAction func pressCancel(_ sender: Any) {
+        self.displayLink?.invalidate()
         UXFImageManager.hide(animated: true)
     }
     
     @objc func onPan(pan: UIPanGestureRecognizer) -> Void {
+        
         switch pan.state {
         case .began:
             break
@@ -114,6 +152,8 @@ class UXFScreenshotCreator: UIView {
                 self.shadowLeft.constant = side
                 self.shadowRight.constant = side
                 
+                self.displayLink?.invalidate()
+                
                 UIView.animate(withDuration: 0.3) {
                     self.shadowView.layoutIfNeeded()
                     self.shadowView.layer.cornerRadius = 36
@@ -127,5 +167,22 @@ class UXFScreenshotCreator: UIView {
         default:
             break
         }
+    }
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        var view = super.hitTest(point, with: event)
+        if view != self {
+            return view
+        }
+        
+        while !(view is PassthroughWindow) {
+            view = view?.superview
+            
+            if view?.superview == nil {
+                break
+            }
+        }
+
+        return view
     }
 }

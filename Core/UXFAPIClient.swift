@@ -31,6 +31,8 @@ class UXFAPIClient {
     
     private var _version: String = "v8"
     
+    public var timeout: Int = 5
+    
     init(endpoint: String?, appID: String, parser: UXFParser) {
         _parser = parser
         self.appID = appID
@@ -51,12 +53,12 @@ class UXFAPIClient {
         //self.getAllCampaings(completion: nil)
     }
     
-    func getAllCampaings(completion: ((_ success: Bool, _ message: String?, _ intervalIos: Int?, _ campaigns: Array<UXFCampaign>)->())?){
+    func getAllCampaings(completion: ((_ success: Bool, _ httpCode: Int, _ message: String?, _ intervalIos: Int?, _ campaigns: Array<UXFCampaign>)->())?){
     
      DDLogDebug("Get all campaings:")
      
      _ = self.performRequest(route: UXFAPIWebRouter.getCampaing(appID: self.appID))
-      {[weak self] (status, message, result) in
+      {[weak self] (status, httpCode, message, result) in
         
         if status == .success {
             if let campaignsResults = result as? Array<Dictionary<String, Any>> {
@@ -68,7 +70,7 @@ class UXFAPIClient {
                 }
                 
                 DDLogDebug("Get all campaings successful")
-                completion?(true, nil, nil, campaigns)
+                completion?(true, httpCode, nil, nil, campaigns)
             }
             else if let results = result as? Dictionary<String, Any> {
                 if let campaignsResults = results["campaigns"] as? Array<Dictionary<String, Any>> {
@@ -81,20 +83,20 @@ class UXFAPIClient {
                     
                     let delay = results["showCampaignsIntervalIos"] as? Int
                     DDLogDebug("Get all campaings successful")
-                    completion?(true, nil, delay, campaigns)
+                    completion?(true, httpCode, nil, delay, campaigns)
                 } else {
                     DDLogDebug("No campaings detected")
-                    completion?(false, "No campaings detected", nil, [])
+                    completion?(false, httpCode, "No campaings detected", nil, [])
                 }
             }
             else {
                 DDLogDebug("No campaings detected")
-                completion?(false, "No campaings detected", nil, [])
+                completion?(false, httpCode, "No campaings detected", nil, [])
             }
         }
         else{
            DDLogDebug("Get all campaings failed")
-           completion?(false, message, nil, [])
+           completion?(false, httpCode, message, nil, [])
         }
       }
     }
@@ -103,11 +105,11 @@ class UXFAPIClient {
                       campaignId: String,
                       pages: Array<Dictionary<String,Any>>?,
                       properties: Dictionary<String,Any>?,
-//                      screenshots: [String],
-                      completion: ((_ success: Bool, _ message: String?)->())?){
+                      completion: ((_ success: Bool, _ httpCode: Int, _ message: String?)->())?){
         
-        let responseHandler = {(status: UXFAPIClientResponseResult, message: String?, result: Any?) in
+        let responseHandler = {(status: UXFAPIClientResponseResult, httpCode: Int, message: String?, result: Any?) in
             DDLogDebug(String(describing: result))
+            completion?(status == .success, httpCode, message)
         }
         
         let systemInfo = UXFStatisticManager.getDeviceInfo()
@@ -120,74 +122,85 @@ class UXFAPIClient {
                                 completion: responseHandler)
     }
     
-    func  showForm(campaingId: String){
-        _ = performRequest(route: UXFAPIWebRouter.showForm(uid: uid,
-                                                    campaingId: campaingId))
-        {(status, message, result) in
+    func showForm(campaingId: String,
+                   completion: ((_ success: Bool, _ httpCode: Int)->())?){
+        
+        let responseHandler = {(status: UXFAPIClientResponseResult, httpCode: Int, message: String?, result: Any?) in
             DDLogDebug(String(describing: result))
+            completion?(status == .success, httpCode)
         }
+        
+        _ = performRequest(route: UXFAPIWebRouter.showForm(uid: uid,
+                                                           campaingId: campaingId),
+                           completion: responseHandler)
     }
     
-    func saveScreenshotsData(_ screenshots: [UXFScreenshot]) {
-        for screenshot in screenshots {
-            _ = performRequest(route: UXFAPIWebRouter.saveScreenshot(screenshot: screenshot), completion: { status, message, result in
-                DDLogDebug(String(describing: result))
-            })
+    func saveScreenshotsData(_ screenshot: UXFScreenshotData,
+                             completion: ((_ success: Bool, _ httpCode: Int)->())?){
+        let responseHandler = {(status: UXFAPIClientResponseResult, httpCode: Int, message: String?, result: Any?) in
+            DDLogDebug(String(describing: result))
+            completion?(status == .success, httpCode)
         }
+        
+        _ = performRequest(route: UXFAPIWebRouter.saveScreenshot(screenshot: screenshot),
+                           completion: responseHandler)
     }
     
     //MARK: internal request
     
-    internal func performRequest(route: UXFAPIWebRouter, completion:@escaping (UXFAPIClientResponseResult, String?, Any?)->()) -> URLSessionDataTask?{
-        
+    internal func performRequest(route: UXFAPIWebRouter, completion: @escaping (UXFAPIClientResponseResult, Int, String?, Any?)->()) -> URLSessionDataTask?{
         
         UXFAPIWebRouter.endpoint = "\(self._endpoint)/\(_version)"
         
-        guard let urlRequest = try? route.asURLRequest() else{
-             completion(.fail, "Error url request", nil)
+        guard var urlRequest = try? route.asURLRequest() else{
+             completion(.fail, 0, "Error url request", nil)
              return nil
         }
+        
+        urlRequest.timeoutInterval = TimeInterval(timeout)
         
         #if DEBUG
         if let httpBodyData = urlRequest.httpBody {
             DDLogDebug(String.init(data: httpBodyData, encoding: String.Encoding.utf8) as Any)
         }
         #endif
-       
+        
         let task = URLSession.shared.dataTask(with: urlRequest) { (data: Data?, response: URLResponse?, error: Error?) in
     
             do {
                 guard let data = data,
-                    let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode,
+                    let response = response as? HTTPURLResponse,
                     error == nil else {
                         DDLogDebug("httpCode= \((response as? HTTPURLResponse)?.statusCode ?? 0), response=\(String(decoding: data ?? Data(), as: UTF8.self))")
                         throw error ?? UXFError.init(description: "Request error")
                 }
                 
+                let httpCode = response.statusCode
+                
                 DDLogDebug("httpCode= \(response.statusCode)")
                 
                 if error != nil{
                     if error!.code == uxfErrorRequestCancelled{
-                        completion(.cancelled, nil, nil)
+                        completion(.cancelled, httpCode, nil, nil)
                     }
                     else {
-                       completion(.fail, "Error in request \(String(describing: error!))".localized(), nil)
+                       completion(.fail, httpCode, "Error in request \(String(describing: error!))".localized(), nil)
                     }
                 }
                 else{
                     if let values =  try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as? Dictionary<String,Any>{
                         if  let result = values["data"] {
-                            completion(.success, nil, result)
-                        }else{
-                            completion(.fail, "Response data is empty", nil)
+                            completion(.success, httpCode, nil, result)
+                        } else {
+                            completion(.fail, httpCode, "Response data is empty", nil)
                         }
                     }else{
-                        completion(.fail, "Response data error", nil)
+                        completion(.fail, httpCode, "Response data error", nil)
                     }
                 }
             } catch {
                 DDLogDebug("Request failed with error: \(error.localizedDescription)")
-                completion(.fail,error.localizedDescription, nil)
+                completion(.fail, 0, error.localizedDescription, nil)
             }
         }
         

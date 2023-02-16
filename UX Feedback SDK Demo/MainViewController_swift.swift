@@ -18,13 +18,11 @@ class MainViewController_swift: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = .white
-        UXFeedback.sharedSDK.delegate = self
+        UXFeedback.sdk.campaignDelegate = self
 
-        if UXFeedback.sharedSDK.isCampaignsLoaded == false {
-            self.buttonsStackView.isUserInteractionEnabled = false
-            self.buttonsStackView.alpha = 0.5
-            busyIndicator.startAnimating()
-        }
+        self.buttonsStackView.isUserInteractionEnabled = false
+        self.buttonsStackView.alpha = 0.5
+        busyIndicator.startAnimating()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -54,34 +52,39 @@ class MainViewController_swift: UIViewController {
     }
 
     @IBAction func stopCampaign(_ sender: UIButton){
-        UXFeedback.sharedSDK.stopCampaign()
+        UXFeedback.sdk.stopCampaign()
     }
     
     func configureSDK() {
-        UXFeedback.sharedSDK.uiBlocked = false
-        UXFeedback.sharedSDK.closeOnSwipe = true
+        UXFeedback.sdk.settings.slideInUiBlocked = true
+        UXFeedback.sdk.settings.closeOnSwipe = true
     }
     
     @IBAction func eventTap(_ sender: UIButton){
-        UXFeedback.sharedSDK.closeOnSwipe = true
-        UXFeedback.sharedSDK.uiBlocked = true
-        UXFeedback.sharedSDK.setSlideinBlackout(color: "0076C2", opactity: 10, blur: 4)
-        UXFeedback.sharedSDK.setFullscreenBlackout(color: "0076C2", opactity: 10, blur: 4)
+        UXFeedback.sdk.settings.closeOnSwipe = true
+        UXFeedback.sdk.settings.slideInUiBlocked = true
+        UXFeedback.sdk.settings.slideInUiBlackoutBlur = 4
+        UXFeedback.sdk.settings.slideInUiBlackoutOpacity = 50
+        UXFeedback.sdk.settings.slideInUiBlackoutColor = "000000"
+        UXFeedback.sdk.settings.popupUiBlackoutBlur = 4
+        UXFeedback.sdk.settings.popupUiBlackoutOpacity = 50
+        UXFeedback.sdk.settings.popupUiBlackoutColor = "000000"
+        
         
         let eventNumber = sender.tag
         assert(eventNumber > 0, "Invalid eventNumber")
-        UXFeedback.sharedSDK.globalDelayTimer = 1
+        UXFeedback.sdk.settings.globalDelayTimer = 1
         switch eventNumber {
         case 1:
 //            UXFeedback.sharedSDK.setProperties(["property_first": "non-value",
 //                                                "property_second": 2])
             
             
-            UXFeedback.sharedSDK.sendEvent(event: "zzzzz2", fromController: self)
+            UXFeedback.sdk.startCampaign(eventName: "screen")
             break
         case 2:
 //            showActivityOverlay()
-            UXFeedback.sharedSDK.sendEvent(event: "check2", fromController: self)
+            UXFeedback.sdk.startCampaign(eventName: "box1")
             break
         default:
             break
@@ -119,11 +122,16 @@ class MainViewController_swift: UIViewController {
 }
 
 extension MainViewController_swift: UXFeedbackCampaignDelegate{
-    func campaignDidTerminate(eventName: String, terminatedPage: Int, totalPages: Int) {
+    
+    func campaignDidSend(campaignId: String) {
+        print("sended")
+    }
+    
+    func campaignDidAnswered(campaignId: String, answers: [String : Any]) {
         
     }
     
-    func campaignDidSend(campaignId: String, answers: [String : Any]) {
+    func campaignDidTerminate(eventName: String, terminatedPage: Int, totalPages: Int) {
         
     }
     

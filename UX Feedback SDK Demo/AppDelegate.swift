@@ -10,9 +10,9 @@ import UIKit
 import UXFeedbackSDK
 
 //let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
-//let uxfAppID = "ckf3ph0c100013b5p0mjgnxlq" //prod
+let uxfAppID = "ck78uf73w0000315rlomponmb" //prod
 
-let uxfAppID = "cl124jdji0000386fkehdcnj6" //v8
+//let uxfAppID = "cl124jdji0000386fkehdcnj6" //v8
 
 internal func DDLogDebug(_ value: Any){
     #if DEBUG
@@ -27,8 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        UXFeedback.sharedSDK.setDebugEnabled(true)
         
         let customTheme = UXFBTheme()
         customTheme.text03Color =  UIColor.init("#8B90A0")
@@ -50,11 +48,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         customTheme.btnTextColor =  UIColor.init("#FFFFFF")
         customTheme.bgColor =  UIColor.init("#000000")
         
-        UXFeedback.sharedSDK.resetAllCampaignsData { }
+        UXFeedback.sdk.resetAllCampaignsData { }
         
-//    endpoint: "AAAAAAAAAAAAAHYwMhEVF1hOTAolMWgBABIHDQwbey0+AwABBgMCCD52NBA=", 
-        UXFeedback.sharedSDK.setup(appID: uxfAppID, window: nil, theme: customTheme) { success in
-        }
+//    endpoint: "AAAAAAAAAAAAAHYwMhEVF1hOTAolMWgBABIHDQwbey0+AwABBgMCCD52NBA=",
+        UXFeedback.setup(appID: uxfAppID,
+                         settings: UXFBSettings())
+        
+        UXFeedback.sdk.theme = customTheme
+        UXFeedback.sdk.settings.debugEnabled = true
         
         return true
     }

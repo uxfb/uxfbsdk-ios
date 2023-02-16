@@ -29,7 +29,6 @@ class UXFBBlackout: NSObject {
 
 @objcMembers
 open class UXFBTheme:  NSObject, Decodable{
-    
     open var text03Color: UIColor =  UIColor.init("#8B90A0")
     open var inputBorderColor: UIColor =  UIColor.init("#D3D4D8")
     open var iconColor: UIColor =  UIColor.init("#B5B8C2")

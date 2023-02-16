@@ -94,7 +94,7 @@ open class UXFCampaignViewController: UIViewController {
     
     var keyboardHeight: CGFloat = 0
     
-    private var showGalleryTask: DispatchWorkItem?
+//    private var showGalleryTask: DispatchWorkItem?
     
     convenience init() {
         let bundle = Bundle(for: UXFeedback.self)
@@ -132,20 +132,28 @@ open class UXFCampaignViewController: UIViewController {
     
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let userinfo = notification.userInfo else {
-                return
-            }
+            return
+        }
 
-            guard
-                let duration = (userinfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
-                let endFrame = (userinfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
-                let curveOption = userinfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt else {
-                    return
-            }
+        guard
+            let duration = (userinfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
+            let endFrame = (userinfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+            let curveOption = userinfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt else {
+                return
+        }
             
+        let space = UIScreen.main.bounds.height - (self.dataManager?.heightForCurrentPage() ?? 0)
+        if space > 240 {
+            self.bottomConstraint.constant = -120
+            UIView.animate(withDuration: duration, delay: 0) {
+                self.view.layoutIfNeeded()
+            }
+        } else {
             UIView.animate(withDuration: duration, delay: 0, options: [.beginFromCurrentState, .init(rawValue: curveOption)], animations: {
                 let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: endFrame.height, right: 0)
                 self.tableView.contentInset = edgeInsets
             })
+        }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
@@ -159,9 +167,12 @@ open class UXFCampaignViewController: UIViewController {
                     return
             }
             
+            self.bottomConstraint.constant = 0
+        
             UIView.animate(withDuration: duration, delay: 0, options: [.beginFromCurrentState, .init(rawValue: curveOption)], animations: {
                 let edgeInsets = UIEdgeInsets.zero
                 self.tableView.contentInset = edgeInsets
+                self.view.layoutIfNeeded()
             })
     }
     
@@ -487,18 +498,18 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
             return cell
             
         case .screenshot:
-            
             let cell = createCell(UXFScreenshotCell.self, indexPath: indexPath, field: field)
-            cell.setScreenshots(dataManager?.screenshots.filter({ screenshot in
+            let sShots = dataManager?.screenshots.filter({ screenshot in
                 screenshot.field.id == field.id
-            }) ?? [])
+            }) ?? []
+            cell.setScreenshots(sShots)
             
             let takeTask = DispatchWorkItem {
                 UIView.animate(withDuration: 0.15) {
                     self.view.alpha = 0
                 } completion: { finish in
                     UXFImageManager.showScreenshotTake { images in
-                        self.addScreenshots(images, type: .screenhot, field: field)
+                        self.addScreenshots(images, type: .screenshot, field: field)
                     } closeAction: {
                         UIView.animate(withDuration: 0.15) {
                             self.view.alpha = 1
@@ -507,21 +518,20 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
                 }
             }
             
-            showGalleryTask = DispatchWorkItem {
-                let count = 3 - (self.dataManager?.screenshots.count ?? 0)
-                guard  count > 0 else {
-                    return
-                }
-                
-                PHPhotoLibrary.shared().unregisterChangeObserver(self)
-                UXFImageManager.showGallery(maxCount: count) { images in
-                    self.addScreenshots(images, type: .gallery, field: field)
-                }
-            }
             let selectTask = DispatchWorkItem {
                 self.checkGalleryPermissions { result in
                     if result {
-                        DispatchQueue.main.async(execute: self.showGalleryTask!)
+                        DispatchQueue.main.async {
+                            let count = 3 - (sShots.count)
+                            guard  count > 0 else {
+                                return
+                            }
+                            
+                            PHPhotoLibrary.shared().unregisterChangeObserver(self)
+                            UXFImageManager.showGallery(maxCount: count) { images in   
+                                self.addScreenshots(images, type: .gallery, field: field)
+                            }
+                        }
                     }
                 }
             }
@@ -546,16 +556,10 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
     private func addScreenshots(_ images: [UIImage], type: UXFScreenshotType, field: UXFField) {
         var screenshots = dataManager?.screenshots
         for image in images {
-            let encoder = YYImageEncoder(type: .webP)
-            encoder?.quality = 1
-            encoder?.add(image, duration: 0)
-            
             screenshots?.append(UXFScreenshot(id: .randomImageName, image: image, type: type, field: field))
         }
         
         dataManager?.screenshotChanged(field, screenshots: screenshots ?? [])
-        
-//        dataManager?.screenshotChanged(screenshots: screenshots ?? [])
     }
     
     private func checkGalleryPermissions(completionHandler: @escaping (Bool) -> ()) {
@@ -747,7 +751,7 @@ extension UXFCampaignViewController: PHPhotoLibraryChangeObserver {
     public func photoLibraryDidChange(_ changeInstance: PHChange) {
         let photosCount = PHAsset.fetchAssets(with: .image, options: nil).count
         if photosCount > 0 {
-            DispatchQueue.main.async(execute: self.showGalleryTask!)
+//            DispatchQueue.main.async(execute: self.showGalleryTask!)
         }
     }
 }

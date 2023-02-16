@@ -20,5 +20,68 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B227EFFF-E32B-4BE8-8B92-6BFD8B650560"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Core/DataModel/UXFDataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "570"
+            endingLineNumber = "570"
+            landmarkName = "screenshotChanged(_:screenshots:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B227EFFF-E32B-4BE8-8B92-6BFD8B650560 - 642ec33ca5ab1f9c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "UXFeedbackSDK.UXFDataManager.screenshotChanged(_: UXFeedbackSDK.UXFField, screenshots: Swift.Array&lt;UXFeedbackSDK.UXFScreenshot&gt;) -&gt; ()"
+                  moduleName = "UXFeedbackSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexpotemka/_projects/-ios/ios-sdk/Core/DataModel/UXFDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "571"
+                  endingLineNumber = "571"
+                  offsetFromSymbolStart = "288">
+               </Location>
+               <Location
+                  uuid = "B227EFFF-E32B-4BE8-8B92-6BFD8B650560 - 85b8eb89ff5e2c73"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (UXFeedbackSDK.UXFScreenshot) -&gt; Swift.Bool in UXFeedbackSDK.UXFDataManager.screenshotChanged(_: UXFeedbackSDK.UXFField, screenshots: Swift.Array&lt;UXFeedbackSDK.UXFScreenshot&gt;) -&gt; ()"
+                  moduleName = "UXFeedbackSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexpotemka/_projects/-ios/ios-sdk/Core/DataModel/UXFDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "571"
+                  endingLineNumber = "571"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "B227EFFF-E32B-4BE8-8B92-6BFD8B650560 - 2a5b2eeeada2d79a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (UXFeedbackSDK.UXFScreenshot) -&gt; Swift.String in UXFeedbackSDK.UXFDataManager.screenshotChanged(_: UXFeedbackSDK.UXFField, screenshots: Swift.Array&lt;UXFeedbackSDK.UXFScreenshot&gt;) -&gt; ()"
+                  moduleName = "UXFeedbackSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexpotemka/_projects/-ios/ios-sdk/Core/DataModel/UXFDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "571"
+                  endingLineNumber = "571"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

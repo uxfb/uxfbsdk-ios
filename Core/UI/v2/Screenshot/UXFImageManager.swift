@@ -149,8 +149,15 @@ class UXFImageManager: NSObject {
     }
     
     public static func showGallery(maxCount: Int,  action: @escaping imagePickerAction) {
+        var passthroughWindow: UIWindow?
+        for window in UIApplication.shared.windows {
+            if window is PassthroughWindow {
+                passthroughWindow = window
+                break
+            }
+        }
         
-        guard let currentMainWindow = UIApplication.shared.keyWindow else {
+        guard let currentMainWindow = passthroughWindow else {
             return
         }
         
@@ -191,7 +198,7 @@ class UXFImageManager: NSObject {
         UIView.animate(withDuration: 0.3, animations: {
             imageCreator.alpha = 1
         }) { (finished) in
-            
+            imageCreator.showHandAnimation()
         }
     }
     
@@ -220,5 +227,11 @@ class UXFImageManager: NSObject {
                 hideAction!()
             }
         }
+    }
+    
+    public static func dispose() {
+        currentOverlay?.removeFromSuperview()
+        currentOverlay = nil
+        hideAction = nil
     }
 }

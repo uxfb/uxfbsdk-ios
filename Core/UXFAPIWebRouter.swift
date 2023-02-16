@@ -37,16 +37,15 @@ enum ContentType: String {
 }
 
 enum UXFAPIWebRouter {
-//    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
+    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
 //    static let defaultEndpoint: String = "https://develop.api.uxfb.space"
     
-    static let defaultEndpoint: String = "https://epic-dev-1928-screenshots.api.uxfb.space"
     static var endpoint: String = "\(defaultEndpoint)/v8"
     
     case getCampaing(appID: String)
     case showForm(uid: String, campaingId: String)
     case saveFormData(projectId: String?, uid: String, campaignId: String, pages: Array<Dictionary<String, Any>>, info: Dictionary<String, Any>, properties: Dictionary<String, Any>)
-    case saveScreenshot(screenshot: UXFScreenshot)
+    case saveScreenshot(screenshot: UXFScreenshotData)
     
     var method: String {
         switch self {
@@ -113,18 +112,19 @@ enum UXFAPIWebRouter {
             let lineBreak = "\r\n"
             let mimetype = "image/webp"
 
-            let image = screenshot.image
             var httpBody = Data()
             httpBody.append("--\(boundary)" + lineBreak)
             httpBody.append("Content-Disposition:form-data; name=\"screenshot\";filename=\"\(screenshot.id)\"" + lineBreak)
             httpBody.append("Content-Type: \(mimetype)" + lineBreak + lineBreak)
-
             
-            let encoder = YYImageEncoder(type: .webP)
-            encoder?.quality = 1
-            encoder?.add(image, duration: 0)
-            if let data = encoder?.encode() {
-                httpBody.append(data)
+            if let imageData = Data(base64Encoded: screenshot.base64image, options: Data.Base64DecodingOptions(rawValue: 0)),
+               let image = UIImage(data: imageData) {
+                    let encoder = YYImageEncoder(type: .webP)
+                    encoder?.quality = 1
+                    encoder?.add(image, duration: 0)
+                    if let data = encoder?.encode() {
+                        httpBody.append(data)
+                    }
             }
 
             httpBody.append(lineBreak)

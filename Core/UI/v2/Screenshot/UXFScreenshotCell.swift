@@ -202,7 +202,7 @@ class UXFScreenshotCell: UXFBaseCell {
     
     private func showDeleteConfirmation(index: Int) {
         let screenshot = screenshots[index]
-        let message = screenshot.type == .screenhot ? "Скриншот будет удален, без возможности восстановления" : "В дальнейшем вы сможете загрузить его повторно из галереи"
+        let message = screenshot.type == .screenshot ? "Скриншот будет удален, без возможности восстановления" : "В дальнейшем вы сможете загрузить его повторно из галереи"
         let alert = UIAlertController(title: "Удалить скриншот?", message: message, preferredStyle: .alert)
         let noDeleteAction = UIAlertAction(title: "Не удалять", style: .default) { alertAction in
             alert.dismiss(animated: true, completion: nil)

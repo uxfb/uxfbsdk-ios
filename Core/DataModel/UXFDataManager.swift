@@ -31,7 +31,6 @@ protocol UXFFieldDelegate {
     func fieldChanged(_ field: UXFField, answer: [String], refresh: Bool)
     func buttonTapped(_ field: UXFField, answer: [String], refresh: Bool)
     func textChanged(_ field: UXFField, answer: [String])
-//    func screenshotChanged(screenshots: [UXFScreenshot])
     
     func screenshotChanged(_ field: UXFField, screenshots: [UXFScreenshot])
     
@@ -503,7 +502,7 @@ class UXFDataManager: UXFFieldDelegate {
             case .none:
                 return 0
             }
-            return screenshots.count > 0 ? 140+buttonsHeight : buttonsHeight
+            return screenshots.filter { $0.field.id == field.id }.count > 0 ? 140 + buttonsHeight : buttonsHeight
         case .none:
             return 40
         }
@@ -519,14 +518,12 @@ class UXFDataManager: UXFFieldDelegate {
             viewController?.updateUI()
         }
         else {
-            if campaign?.pages[currentPage].type == 2 {
-                let nextIndex = getNextIndex()
-                if nextIndex != -1 {
-                    endCampaign(terminated: false)
-                }
+            let nextIndex = getNextIndex()
+            if campaign?.pages[currentPage].type == 2 || nextIndex == -1 {
+                endCampaign(terminated: false, isLink: nextIndex == -1)
             }
             else {
-                nextPage()
+                nextPage(nextIndex)
             }
         }
     }
@@ -569,15 +566,10 @@ class UXFDataManager: UXFFieldDelegate {
         isError = false
         _screenshots = screenshots
         
-        let screenshotIds = _screenshots.map { $0.id }
+        
+        let screenshotIds = _screenshots.filter { $0.field.id == field.id }.map { $0.id }
         fieldChanged(field, answer: screenshotIds, refresh: true)
     }
-    
-//    func screenshotChanged(screenshots: [UXFScreenshot]) {
-//        isError = false
-//        _screenshots = screenshots
-//        viewController?.updateUI()
-//    }
     
     func didBeginEditing(_ field: UXFField) {
         guard let fieldIndex = campaign?.pages[currentPage].fields.firstIndex(where: { (fld) -> Bool in
@@ -591,18 +583,14 @@ class UXFDataManager: UXFFieldDelegate {
     
     //MARK: - Routing
     
-    private func nextPage() {
-        toPage(index: getNextIndex())
+    private func nextPage(_ index: Int) {
+        toPage(index: index)
     }
     
     private func toPage(index: Int) {
         currentPage = index
         viewController?.scrollToTop(animated: false)
         viewController?.updateUI()
-    }
-    
-    private func formattedScreenshots() {
-        
     }
     
     public func endCampaign(terminated: Bool, isLink: Bool = false) {
@@ -718,7 +706,7 @@ class UXFDataManager: UXFFieldDelegate {
                     case "toDeeplink", "toURL":
                         openUrl(toValue)
                         return -1
-//                        return currentPage
+
                     default:
                         break
                     }
@@ -732,7 +720,7 @@ class UXFDataManager: UXFFieldDelegate {
                     case "toDeeplink", "toURL":
                         openUrl(toValue)
                         return -1
-//                        return currentPage
+
                     default:
                         break
                     }
@@ -747,7 +735,7 @@ class UXFDataManager: UXFFieldDelegate {
                         case "toDeeplink", "toURL":
                             openUrl(toValue)
                             return -1
-//                            return currentPage
+
                         default:
                             break
                         }
@@ -760,7 +748,7 @@ class UXFDataManager: UXFFieldDelegate {
                         case "toDeeplink", "toURL":
                             openUrl(toValue)
                             return -1
-//                            return currentPage
+
                         default:
                             break
                         }
@@ -787,7 +775,7 @@ class UXFDataManager: UXFFieldDelegate {
         if elseTransform.to.type == "toDeeplink" || elseTransform.to.type == "toURL" {
             openUrl(elseTransform.to.value)
             return -1
-//            return currentPage
+
         } else {
             return campaign?.pages.lastIndex(where: { (page) -> Bool in
                 page.id == elseTransform.to.value
@@ -845,8 +833,8 @@ class UXFDataManager: UXFFieldDelegate {
     }
     
     private func openUrl(_ urlString: String) {
-        endCampaign(terminated: false, isLink: true)
-        if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
+        if let url = URL(string: urlString),
+            UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url)
         }
     }

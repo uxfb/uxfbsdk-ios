@@ -67,17 +67,20 @@ class UXFCampaignPresentor: NSObject {
             }
         }
         controller.didCloseHandler = { [weak self] in
+            UXFImageManager.dispose()
             DispatchQueue.main.async {
                 self?.isFormOnScreen = false
                 self?.feedbackCampaignDelegate?.campaignDidClose(eventName: eventName)
             }
         }
         controller.completeHandler = { [weak self] (info, screenshots) in
+            UXFImageManager.dispose()
             if let campaign = self?._campaign {
                 self?.delegate?.formSubmitted(info: info, screenshots: screenshots, campaign: campaign)
             }
         }
         controller.didTerminateHandler = { [weak self] (info, screenshots, terminatedPage, totalPages) in
+            UXFImageManager.dispose()
             if let campaign = self?._campaign {
                 self?.delegate?.formSubmitted(info: info, screenshots: screenshots, campaign: campaign)
                 self?.feedbackCampaignDelegate?.campaignDidTerminate(eventName: eventName, terminatedPage: terminatedPage, totalPages: totalPages)
@@ -133,6 +136,7 @@ class UXFCampaignPresentor: NSObject {
     
     func stopCampaign() {
         if let form = _currentForm {
+            UXFImageManager.dispose()
             isFormOnScreen = false
             form.dismiss(animated: true)
         }
@@ -196,7 +200,6 @@ private class UXFCampaignAnimatorPresenter: NSObject, UIViewControllerAnimatedTr
             break
         }
         
-        
         containerView.addSubview(toViewController.view)
     
         toViewController.contentView.alpha = startAlpha
@@ -210,11 +213,14 @@ private class UXFCampaignAnimatorPresenter: NSObject, UIViewControllerAnimatedTr
             }
             
             effectView.tag = visualEffectViewTag
-            effectView.colorTint = toViewController.blackout?.color
-            effectView.colorTintAlpha = CGFloat(toViewController.blackout?.opacity ?? 0)/100
-            effectView.blurRadius = CGFloat(toViewController.blackout?.blur ?? 0)
-            effectView.scale = 1
-            effectView.alpha = 0
+            
+            if #available(iOS 14, *) {
+                effectView.ios14_blurRadius = CGFloat(toViewController.blackout?.blur ?? 0)
+            } else {
+                effectView.blurRadius = CGFloat(toViewController.blackout?.blur ?? 0)
+            }
+            
+            effectView.backgroundColor = toViewController.blackout?.color.withAlphaComponent(CGFloat(toViewController.blackout?.opacity ?? 0)/100)
             
             toViewController.view.insertSubview(effectView, at: 0)
         }

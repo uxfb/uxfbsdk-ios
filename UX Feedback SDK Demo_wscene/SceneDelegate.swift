@@ -28,14 +28,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        UXFeedback.sharedSDK.setup(appID: uxfAppID,
+        UXFeedback.sdk.setup(appID: uxfAppID,
                                         window: window,
                                         theme: UXFBTheme()) { (success) in
             
         }
         
         
-        UXFeedback.sharedSDK.setup(appID: uxfAppID, windowScene: scene as! UIWindowScene)
+        UXFeedback.sdk.setup(appID: uxfAppID, windowScene: scene as! UIWindowScene)
         {  success in
             let message = "UXFeedback initialization " + (success == true ? "successful" : "failed")
             DDLogDebug(message)

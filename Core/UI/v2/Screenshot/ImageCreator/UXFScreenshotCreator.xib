@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -56,6 +56,13 @@
                         <constraint firstItem="hZ7-xc-qjB" firstAttribute="top" secondItem="nVu-cP-J32" secondAttribute="bottom" constant="32" id="tMA-Dh-UeE"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4iA-UN-JYP">
+                    <rect key="frame" x="0.0" y="632" width="414" height="104"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="104" id="o5S-mK-0MS"/>
+                    </constraints>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ry1-uK-yKh">
                     <rect key="frame" x="147" y="632" width="56" height="56"/>
                     <constraints>
@@ -87,16 +94,20 @@
             <constraints>
                 <constraint firstItem="W9P-cZ-AOa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="05m-Mu-3uF"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="W9P-cZ-AOa" secondAttribute="trailing" id="1eS-b6-ClK"/>
+                <constraint firstItem="4iA-UN-JYP" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="1fc-I5-d6c"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Ry1-uK-yKh" secondAttribute="bottom" constant="48" id="BM1-3D-XBb"/>
                 <constraint firstItem="W9P-cZ-AOa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="EcX-w5-rCi"/>
                 <constraint firstItem="Ry1-uK-yKh" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-32" id="SS7-Xe-AYC"/>
+                <constraint firstItem="4iA-UN-JYP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Wra-Px-FMs"/>
                 <constraint firstAttribute="bottom" secondItem="W9P-cZ-AOa" secondAttribute="bottom" id="aKf-R2-yTK"/>
                 <constraint firstItem="liX-2t-vfA" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="32" id="iNT-eE-Px6"/>
+                <constraint firstItem="4iA-UN-JYP" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="rCR-3v-CiI"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="liX-2t-vfA" secondAttribute="bottom" constant="48" id="siu-yY-phw"/>
             </constraints>
             <connections>
                 <outlet property="arrowImage" destination="hZ7-xc-qjB" id="686-Br-NE9"/>
                 <outlet property="cancelButton" destination="Ry1-uK-yKh" id="gvg-5I-jGb"/>
+                <outlet property="handBottom" destination="I1U-3C-5jd" id="k9p-CG-i4e"/>
                 <outlet property="okButton" destination="liX-2t-vfA" id="kfS-DM-p2n"/>
                 <outlet property="shadowBottom" destination="aKf-R2-yTK" id="9FL-L6-NGo"/>
                 <outlet property="shadowLeft" destination="EcX-w5-rCi" id="yQR-dH-9Fq"/>
@@ -106,7 +117,7 @@
                 <outlet property="textLabel" destination="nVu-cP-J32" id="fkL-Uv-xeS"/>
                 <outlet property="touchImage" destination="kru-Cm-WGD" id="kho-lg-Qrb"/>
             </connections>
-            <point key="canvasLocation" x="-13.043478260869566" y="58.928571428571423"/>
+            <point key="canvasLocation" x="-13.043478260869566" y="58.695652173913047"/>
         </view>
     </objects>
     <resources>
