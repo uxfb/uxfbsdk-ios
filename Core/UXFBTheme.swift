@@ -27,95 +27,104 @@ class UXFBBlackout: NSObject {
     }
 }
 
+/// Класс темы SDK. Для создания экземпляра настроек по умолчанию необходимо вызвать метод ``init()``.  **ВАЖНО**: все цвета задаются в формате HEX с решеткой в начале, например #ABC123
 @objcMembers
-open class UXFBTheme:  NSObject, Decodable{
+open class UXFBTheme: NSObject, Decodable {
+    /// Цвет текста счетчика страниц, плейсхолдеров, чекбоксов и радиокнопок в нормальном состоянии
     open var text03Color: UIColor =  UIColor.init("#8B90A0")
+    /// Цвет бордера инпутов в нормальном состоянии
     open var inputBorderColor: UIColor =  UIColor.init("#D3D4D8")
+    /// Цвет иконки кнопки закрытия, полоски NPS/рейтинга, обводки чекбокса и радиокнопки в нормальном состоянии
     open var iconColor: UIColor =  UIColor.init("#B5B8C2")
+    /// Цвет кнопки в состоянии highlighted
     open var btnBgColorActive: UIColor =  UIColor.init("#1983C8")
+    /// Радиус скругления кнопки
     open var btnBorderRadius: CGFloat = 4
+    /// Цвет бордера инпута в состонии ошибки
     open var errorColorSecondary: UIColor =  UIColor.init("#F4A0A3")
+    /// Цвет подписи текста ошибки к блоку, цвет NPS/рейтинга в состонии ошибки
     open var errorColorPrimary: UIColor =  UIColor.init("#E84047")
+    /// Основной цвет - курсор в инпуте и внутренней обводки инпута в фокусе, иконок активного чекбокса и радиокнопок
     open var mainColor: UIColor =  UIColor.init("#0076C2")
+    /// Цвет фона чекбокса, радиокнопки и кнопки скриншота в выбранном состоянии
     open var controlBgColorActive: UIColor =  UIColor.init("#DBF1FF")
+    /// Радиус скругления формы
     open var formBorderRadius: CGFloat = 8
+    /// Цвет фона инпута
     open var inputBgColor: UIColor =  UIColor.init("#F3F3F3")
+    /// Цвет текста заголовка и контента всех блоков
     open var text01Color: UIColor =  UIColor.init("#232735")
+    /// Цвет фона чекбокса, радиокнопки и кнопки скриншота в нормальном состоянии
     open var controlBgColor: UIColor =  UIColor.init("#F3F3F3")
+    /// Цвет иконки чекбокса, радиокнопки и ползунка NPS/рейтинга
     open var controlIconColor: UIColor =  UIColor.init("#FFFFFF")
+    /// Цвет фона кнопок
     open var btnBgColor: UIColor =  UIColor.init("#0076C2")
+    /// Цвет блока отображения текстовой информации
     open var text02Color: UIColor =  UIColor.init("#505565")
+    /// Цвет текста кнопок
     open var btnTextColor: UIColor =  UIColor.init("#FFFFFF")
+    /// Цвет фона формы
     open var bgColor: UIColor =  UIColor.init("#FFFFFF")
     
-    open var fontRegularName: String?
-    open var fontMediumName: String?
-    open var fontBoldName: String?
-    
-    
-    
-    private var _regularFont: UIFont?
-    open var regularFont: UIFont {
+    private var _fontH1: UIFont = .systemFont(ofSize: 22,
+                                              weight: .semibold)
+    /// Шрифт заголовка формы. По умолчанию System:Semibold:22
+    open var fontH1: UIFont {
         get{
-            return _regularFont ?? self.regularFont(size: UIFont.systemFontSize)
+            return _fontH1
         }
         set{
-            _regularFont = newValue
+            _fontH1 = newValue
         }
     }
     
-    open func regularFont(size: CGFloat) -> UIFont{
-        if (_regularFont != nil){
-            return _regularFont!.withSize(size)
-        }
-        let systemFont = UIFont.systemFont(ofSize: size, weight: .regular)
-        guard let fontName = self.fontRegularName else {
-            return systemFont
-        }
-        return UIFont.init(name: fontName, size: size) ?? systemFont
-    }
-
-    
-    private var _mediumFont: UIFont?
-    open var mediumFont: UIFont{
+    private var _fontH2: UIFont = .systemFont(ofSize: 17,
+                                              weight: .semibold)
+    /// Шрифт заголовка блока. По умолчанию System:Semibold:17
+    open var fontH2: UIFont {
         get{
-            return _mediumFont ?? self.mediumFont(size: UIFont.systemFontSize)
+            return _fontH2
         }
         set{
-            _mediumFont = newValue
+            _fontH2 = newValue
         }
     }
     
-    open func mediumFont(size: CGFloat) -> UIFont{
-        if(_mediumFont != nil){
-            return _mediumFont!.withSize(size)
-        }
-        let systemFont = UIFont.systemFont(ofSize: size, weight: .medium)
-        guard let fontName = self.fontMediumName else {
-            return systemFont
-        }
-        return UIFont.init(name: fontName, size: size) ?? systemFont
-    }
-    
-    private var _boldFont: UIFont?
-    open var boldFont: UIFont{
+    private var _fontP1: UIFont = .systemFont(ofSize: 17,
+                                              weight: .regular)
+    /// Шрифт всех элементов формы. По умолчанию System:Regular:17
+    open var fontP1: UIFont {
         get{
-            return  _boldFont ?? self.boldFont(size: UIFont.systemFontSize)
+            return _fontP1
         }
         set{
-            _boldFont = newValue
+            _fontP1 = newValue
         }
     }
     
-    open func boldFont(size: CGFloat) -> UIFont{
-        if(_boldFont != nil){
-            return  _boldFont!.withSize(size)
+    private var _fontP2: UIFont = .systemFont(ofSize: 14,
+                                              weight: .regular)
+    /// Шрифт подписей к блокам. По умолчанию System:Regular:14
+    open var fontP2: UIFont {
+        get{
+            return _fontP2
         }
-        let systemFont = UIFont.systemFont(ofSize: size, weight: .bold)
-        guard let fontName = self.fontBoldName else{
-            return systemFont
+        set{
+            _fontP2 = newValue
         }
-        return UIFont.init(name: fontName, size: size) ?? systemFont
+    }
+    
+    private var _fontBtn: UIFont = .systemFont(ofSize: 16,
+                                             weight: .semibold)
+    /// Шрифт кнопок. По умолчанию System:Semibold:16
+    open var fontBtn: UIFont {
+        get{
+            return _fontBtn
+        }
+        set{
+            _fontBtn = newValue
+        }
     }
     
     enum CodingKeys: String, CodingKey {
@@ -137,15 +146,9 @@ open class UXFBTheme:  NSObject, Decodable{
         case errorColorSecondary
         case errorColorPrimary
         case controlBgColorActive
-        
-        case fontRegularName
-        case fontMediumName
-        case fontBoldName
     }
     
     required public init(from decoder: Decoder) throws {
-        super.init()
-        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         if let radius: CGFloat =  try? container.decode(CGFloat.self, forKey: .btnBorderRadius) {
             self.btnBorderRadius = radius
@@ -195,78 +198,9 @@ open class UXFBTheme:  NSObject, Decodable{
         if let bgColorString = try? container.decode(String.self, forKey: .bgColor){
             self.bgColor = UIColor.init(bgColorString)
         }
-        
-        if let fontRegularName = try container.decodeIfPresent(String.self, forKey: .fontRegularName){
-           self.fontRegularName = fontRegularName
-        }
-        if let fontMediumName =  try container.decodeIfPresent(String.self, forKey: .fontMediumName){
-           self.fontMediumName = fontMediumName
-        }
-        if let fontBoldName = try container.decodeIfPresent(String.self, forKey: .fontBoldName) {
-           self.fontBoldName = fontBoldName
-        }
-        
-        loadFonts()
-    }
-    
-    private func loadFonts(){
-//        let floatVersion = (UIDevice.current.systemVersion as NSString).floatValue
-//        if (floatVersion >= 11){
-//
-//           if(self.fontRegularName == nil){
-//               self.fontRegularName = "Helvetica-Regular"
-//           }
-//           if(self.fontBoldName == nil){
-//               self.fontBoldName = "Helvetica-Bold"
-//           }
-//           if(self.fontMediumName == nil){
-//               self.fontMediumName = "Helvetica-Medium"
-//           }
-//
-//               let fontExtention = "ttf"
-//               let fonts = [fontRegularName, fontMediumName, fontBoldName]
-//               fonts.forEach { (fontName) in
-//                   let bundle =  Bundle.init(for: UXFBTheme.self)
-//                   if let fontUrl = bundle.url(forResource: fontName, withExtension: fontExtention){
-//                       _ = loadFont(fontUrl: fontUrl)
-//                   }
-//               }
-//        }
     }
     
     public override init() {
         super.init()
-        loadFonts()
-    }
-    
-    open func getSmile(imageName: String, completion: (_ smileImage: UIImage)->()) ->(UIImage?){
-        let bundle = Bundle(for: UXFeedback.self)
-        let image = UIImage.init(named: imageName, in: bundle, compatibleWith: nil)
-        return image
-    }
-    
-    open func smileImageName(by index: Int) -> (String){
-        let names = ["angry", "mad", "confused", "happy", "in-love"]
-        if index < names.count {
-            return names[index]
-        }
-        else{
-            return ""
-        }
-    }
-    
-    open func loadFont(fontUrl: URL) -> Bool {
-        if let inData = try? Data(contentsOf: fontUrl) {
-            var error: Unmanaged<CFError>?
-            if let cfdata = CFDataCreate(nil, [UInt8](inData), inData.count),
-                let provider = CGDataProvider(data: cfdata),
-                let font = CGFont(provider) {
-                    if (!CTFontManagerRegisterGraphicsFont(font, &error)) {
-                        DDLogDebug("Failed to load font: \(String(describing: error))")
-                    }
-                    return true
-                }
-            }
-        return false
     }
 }

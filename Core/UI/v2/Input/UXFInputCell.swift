@@ -28,7 +28,7 @@ class UXFInputCell: UXFBaseCell {
         textView.layer.masksToBounds = true
         textView.backgroundColor = theme?.inputBgColor ?? .white
         
-        textView.font = theme?.regularFont(size: .mediumFontSize)
+        textView.font = theme?.fontP1
         
         textView.text = comment.isEmpty ? field?.uiData["placeholder"] as? String : comment
         
@@ -57,7 +57,7 @@ extension UXFInputCell: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         delegate?.didBeginEditing(field!)
-        textView.borderColor = theme?.inputBorderColor
+        textView.borderColor = theme?.mainColor
         
         if comment == "" {
             textView.text = nil
@@ -66,6 +66,7 @@ extension UXFInputCell: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        textView.borderColor = theme?.inputBorderColor
         if textView.text.isEmpty {
             comment = ""
             textView.text = field?.uiData["placeholder"] as? String

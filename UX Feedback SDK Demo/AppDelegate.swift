@@ -9,8 +9,8 @@
 import UIKit
 import UXFeedbackSDK
 
-//let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
-let uxfAppID = "ck78uf73w0000315rlomponmb" //prod
+let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
+//let uxfAppID = "ck78uf73w0000315rlomponmb" //prod
 
 //let uxfAppID = "cl124jdji0000386fkehdcnj6" //v8
 
@@ -47,8 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         customTheme.text02Color =  UIColor.init("#505565")
         customTheme.btnTextColor =  UIColor.init("#FFFFFF")
         customTheme.bgColor =  UIColor.init("#000000")
-        
-        UXFeedback.sdk.resetAllCampaignsData { }
         
 //    endpoint: "AAAAAAAAAAAAAHYwMhEVF1hOTAolMWgBABIHDQwbey0+AwABBgMCCD52NBA=",
         UXFeedback.setup(appID: uxfAppID,

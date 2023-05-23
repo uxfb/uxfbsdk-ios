@@ -24,6 +24,7 @@ enum HTTPHeaderField: String {
     case info = "info"
     case properties = "properties"
     case screenshots = "screenshots"
+    case sdkVersion = "X-SDK-Version"
 }
 
 extension Error {
@@ -37,8 +38,8 @@ enum ContentType: String {
 }
 
 enum UXFAPIWebRouter {
-    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
-//    static let defaultEndpoint: String = "https://develop.api.uxfb.space"
+//    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
+    static let defaultEndpoint: String = "https://develop.api.uxfb.space"
     
     static var endpoint: String = "\(defaultEndpoint)/v8"
     
@@ -158,11 +159,13 @@ enum UXFAPIWebRouter {
         switch self {
         case .getCampaing, .showForm, .saveFormData:
             return [HTTPHeaderField.acceptType.rawValue: ContentType.json.rawValue,
-                    HTTPHeaderField.contentType.rawValue: ContentType.json.rawValue]
+                    HTTPHeaderField.contentType.rawValue: ContentType.json.rawValue,
+                    HTTPHeaderField.sdkVersion.rawValue: UXFeedback.sdk.version]
             
             
         case .saveScreenshot:
-            return [HTTPHeaderField.contentType.rawValue: ContentType.screenshot.rawValue]
+            return [HTTPHeaderField.contentType.rawValue: ContentType.screenshot.rawValue,
+                    HTTPHeaderField.sdkVersion.rawValue: UXFeedback.sdk.version]
         }
     }
     

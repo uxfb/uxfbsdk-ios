@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 @objcMembers
-public class UXFError : NSError {
+internal class UXFError : NSError {
     
     private var desc: String? = nil
     
@@ -24,9 +24,9 @@ public class UXFError : NSError {
     }
 }
 
-
+/// Основной интерфейс SDK. Для инициализации синглтона необходимо вызвать метод ``setup(appID:settings:campainDelegate:logDelegate:)``
 @objcMembers
-open class UXFeedback : NSObject{
+open class UXFeedback: NSObject {
     internal func DDLog(_ value: Any) {
         if settings.debugEnabled {
             print(value)
@@ -35,18 +35,28 @@ open class UXFeedback : NSObject{
             }
         }
     }
-
+    
+    /// Синглтон для работы с SDK
     public static let sdk: UXFeedback = UXFeedback.init()
     
     private static var isInitialized = false
+    
+    /// Текущая версия SDK
     public let version = "v2.0.0"
     
+    /// Делегат, реализующий интерфейс обработки событий
     open weak var campaignDelegate: UXFeedbackCampaignDelegate?
+    
+    /// Делегат, реализующий интерфейс обработки лога
     open weak var logDelegate: UXFeedbackLogDelegate?
     
+    /// Объект настроек SDK
     open var settings: UXFBSettings = UXFBSettings()
+    
+    /// Объект темы SDK
     open var theme: UXFBTheme = UXFBTheme()
     
+    /// Дополнительные параметры, которые будут переданы при завершении прохождения опроса
     open var properties: [String: Any] = [:]
     
     private var appId: String?
@@ -70,7 +80,7 @@ open class UXFeedback : NSObject{
     private var task: DispatchWorkItem?
     private var eventCounter: [String: Int] = [:]
     
-    open var currentForm: UXFCampaignViewController?{
+    private var currentForm: UXFCampaignViewController?{
         return _formPresentor?._currentForm
     }
     
@@ -89,10 +99,10 @@ open class UXFeedback : NSObject{
         if let appId = self.appId {
             if let date = UserDefaults.standard.object(forKey: appId) as? Date {
                 let interval = Int(Date().timeIntervalSince(date))
-                if interval >= self.settings.globalDelayTimer ?? 1800 {
+                if interval >= self.settings.globalDelayTimer {
                     return true
                 } else {
-                    self.DDLog("Global timer error: delay=\(self.settings.globalDelayTimer ?? 1800), current=\(interval)")
+                    self.DDLog("Global timer error: delay=\(self.settings.globalDelayTimer ), current=\(interval)")
                     return false
                 }
             }
@@ -110,15 +120,21 @@ open class UXFeedback : NSObject{
     }
 
     
-    //Initialization SDK
+    
+    /// Метод инициализации и первичной настройки SDK
+    /// - Parameters:
+    ///   - appID: Идентификатор приложения
+    ///   - settings: Объект настроек
+    ///   - campaignDelegate: Делегат обработки событий SDK
+    ///   - logDelegate: Делегат обработки логов SDK
     public static func setup(appID: String,
                              settings: UXFBSettings,
-                             campainDelegate: UXFeedbackCampaignDelegate? = nil,
+                             campaignDelegate: UXFeedbackCampaignDelegate? = nil,
                              logDelegate: UXFeedbackLogDelegate? = nil) {
         
         sdk.appId = appID
         sdk.settings = settings
-        sdk.campaignDelegate = campainDelegate
+        sdk.campaignDelegate = campaignDelegate
         sdk.logDelegate = logDelegate
         
         if UXFeedback.isInitialized {
@@ -148,9 +164,8 @@ open class UXFeedback : NSObject{
         
     }
         
-    
-    //Request event to show campaing form with specific name
-    
+    /// Метод показа кампании по указанному событию
+    /// - Parameter eventName: Название события
     open func startCampaign(eventName: String) {
         DDLog("Attempt starting: \(eventName)")
         _eventToSend = eventName
@@ -205,7 +220,7 @@ open class UXFeedback : NSObject{
                         self._formPresentor?.isAnimationFormEnabled = true
                         self._formPresentor?.delegate = self
                         self._formPresentor?.feedbackCampaignDelegate = self.campaignDelegate
-                        var blackout = UXFBBlackout()
+                        let blackout = UXFBBlackout()
 //
                         switch campaign.type {
                         case .slidein:
@@ -256,26 +271,7 @@ open class UXFeedback : NSObject{
         }
     }
     
-    open func resetAllCampaignsData(completion: (()->())?){
-        if _campaigns.count > 0 {
-            self.resetAllCampaigns()
-            completion?()
-        }
-        else{
-            _resetAllCampaingNeeds = true
-            _resetAllCampaingHandler = completion
-        }
-    }
-    
-    private func resetAllCampaigns(){
-        _campaigns.forEach { (campaign) in
-            var aCampaign = campaign
-            aCampaign.removeUserData()
-        }
-        _resetAllCampaingNeeds = false
-        _resetAllCampaingHandler?()
-    }
-    
+    /// Метод отмены показа кампании. Если кампания уже показана - она будет закрыта
     open func stopCampaign() {
         self._formPresentor?.stopCampaign()
         if self.task != nil {
@@ -288,10 +284,9 @@ open class UXFeedback : NSObject{
 extension UXFeedback: UXFRequestManagerDelegate {
     func campaingsLoaded(success: Bool, message: String?, delay: Int?, campaigns: Array<UXFCampaign>) {
         self._campaigns = campaigns
-        self.settings.globalDelayTimer = delay
+        self.settings.globalDelayTimer = delay ?? self.settings.globalDelayTimer
         if success == true {
             self.DDLog("Campaigns loaded: \(campaigns.count)")
-            self.resetAllCampaigns()
             if let event = self._eventToSend {
                 self.startCampaign(eventName: event)
             }

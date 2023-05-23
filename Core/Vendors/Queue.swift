@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class LinkedList<T> {
+internal class LinkedList<T> {
     var data: T
     var next: LinkedList?
     public init(data: T){
@@ -16,7 +16,7 @@ public class LinkedList<T> {
     }
 }
 
-public class Queue<T> {
+internal class Queue<T> {
     typealias LLNode = LinkedList<T>
     var head: LLNode!
     public var isEmpty: Bool { return head == nil }

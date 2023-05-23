@@ -77,7 +77,7 @@ class UXFRadiobuttonCell: UXFBaseCell, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let width = self.bounds.width - 48
         let value = options[indexPath.row].value
-        let font = theme!.regularFont(size: .mediumFontSize)
+        let font = theme!.fontP1
         let lines = CGFloat(value.linesCount(width: width, font: font))
 //        let lines = CGFloat(value.linesCount(width: width, font: .mediumFont))
         return max(ceil(lines * font.lineHeight) + 24, 48)

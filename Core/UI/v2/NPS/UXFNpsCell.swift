@@ -183,19 +183,18 @@ class UXFNpsCell: UXFBaseCell {
             if let label = contentView.viewWithTag(i+1) as? VerticalAlignedLabel {
                 if i == calculatedValue {
                     label.textColor = currentValue == -1 ? theme?.text03Color : theme?.mainColor
-                    label.font = theme?.mediumFont(size: .bigFontSize)
+                    label.font = theme?.fontH2
                 } else if i == calculatedValue-1 || i == calculatedValue+1 {
                     label.textColor = currentValue == -1 ? theme?.text03Color : theme?.text02Color
-                    label.font = theme?.regularFont(size: .mediumFontSize)
+                    label.font = theme?.fontP1
                     label.contentMode = .bottom
                 }
                 else {
                     label.textColor = theme?.text03Color
-                    label.font = theme?.regularFont(size: .smallFontSize)
+                    label.font = theme?.fontP2
                     label.contentMode = .bottom
                 }
             }
-            
         }
     }
     
@@ -210,19 +209,21 @@ class UXFNpsCell: UXFBaseCell {
                 let diff = abs(Float(i) - slider.value)
                 if diff == 0 {
                     label.textColor = theme?.mainColor
-                    label.font = theme?.mediumFont(size: .bigFontSize)
+                    label.font = theme?.fontH1
                     label.contentMode = .center
                 } else if diff <= 1 {
                     label.textColor = i == nearestValue ? theme?.mainColor : theme?.text02Color
-                    label.font = theme?.regularFont(size: .mediumFontSize + firstDiff * CGFloat(1-diff))
+                    let font = theme?.fontP1.withSize(.mediumFontSize + firstDiff * CGFloat(1-diff))
+                    label.font = font
                     label.contentMode = .bottom
                 } else if diff <= 2 {
                     label.textColor = (abs(nearestValue-i) == 1) ? theme?.text02Color : theme?.text03Color
-                    label.font = theme?.regularFont(size: .smallFontSize + secondDiff * CGFloat(2-diff))
+                    let font = theme?.fontP2.withSize(.smallFontSize + secondDiff * CGFloat(2-diff))
+                    label.font = font
                     label.contentMode = .bottom
                 } else {
                     label.textColor = theme?.text03Color
-                    label.font = theme?.regularFont(size: .smallFontSize)
+                    label.font = theme?.fontP2
                     label.contentMode = .bottom
                 }
             }

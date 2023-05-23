@@ -16,7 +16,7 @@
 #elif __has_include(<YYWebImage/YYImage.h>)
 #import <YYWebImage/YYAnimatedImageView.h>
 #else
-#import "YYAnimatedImageView.h"
+#import <UXFeedbackSDK/YYAnimatedImageView.h>
 #endif
 
 NS_ASSUME_NONNULL_BEGIN

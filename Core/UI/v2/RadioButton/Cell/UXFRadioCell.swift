@@ -10,13 +10,23 @@ import UIKit
 
 class UXFRadioCell: UITableViewCell {
 
-    @IBOutlet var radioImage: UIImageView!
-    @IBOutlet var radioLabel: UILabel! {
+    @IBOutlet var symbolExtView: UIView! {
         didSet {
-//            radioLabel.font = .mediumFont
-            
+            symbolExtView.layer.cornerRadius = 12
         }
     }
+    @IBOutlet var symbolMidView: UIView! {
+        didSet {
+            symbolMidView.layer.cornerRadius = 8
+        }
+    }
+    @IBOutlet var symbolIntView: UIView! {
+        didSet {
+            symbolIntView.layer.cornerRadius = 6
+        }
+    }
+    
+    @IBOutlet var radioLabel: UILabel!
     @IBOutlet var radioView: UIView!
     
     private var theme: UXFBTheme?
@@ -38,7 +48,7 @@ class UXFRadioCell: UITableViewCell {
         self.option = option
         self.theme = theme
         self.isError = isError
-        self.radioLabel.font = theme.regularFont(size: .mediumFontSize)
+        self.radioLabel.font = theme.fontP1
         updateUI()
     }
     
@@ -56,12 +66,18 @@ class UXFRadioCell: UITableViewCell {
             self.radioLabel.text = self.option?.value
             if self.isSelected {
                 self.radioLabel.textColor = self.theme?.text01Color
-                self.radioImage.image = UIImage(named: "radio_on", in: bundle, compatibleWith: nil)!.tint(with: self.theme?.mainColor ?? .blue)
+                
+                self.symbolExtView.backgroundColor = self.theme?.mainColor.withAlphaComponent(0.2)
+                self.symbolMidView.backgroundColor = self.theme?.mainColor
+                self.symbolIntView.backgroundColor = self.theme?.controlIconColor
+                
                 self.radioView.backgroundColor = self.theme?.controlBgColorActive
             }
             else {
                 self.radioLabel.textColor = self.theme?.text02Color
-                self.radioImage.image = UIImage(named: "radio_off", in: bundle, compatibleWith: nil)!.tint(with: self.theme?.iconColor ?? .gray)
+                self.symbolExtView.backgroundColor = .clear
+                self.symbolMidView.backgroundColor = self.theme?.iconColor
+                self.symbolIntView.backgroundColor = self.theme?.controlBgColor
                 self.radioView.backgroundColor = self.theme?.controlBgColor
             }
         }

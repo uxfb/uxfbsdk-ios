@@ -24,7 +24,7 @@ POSSIBILITY OF SUCH DAMAGE.
 import SystemConfiguration
 import Foundation
 
-public enum ReachabilityError: Error {
+internal enum ReachabilityError: Error {
     case failedToCreateWithAddress(sockaddr, Int32)
     case failedToCreateWithHostname(String, Int32)
     case unableToSetCallback(Int32)
@@ -33,13 +33,13 @@ public enum ReachabilityError: Error {
 }
 
 @available(*, unavailable, renamed: "Notification.Name.reachabilityChanged")
-public let ReachabilityChangedNotification = NSNotification.Name("ReachabilityChangedNotification")
+internal let ReachabilityChangedNotification = NSNotification.Name("ReachabilityChangedNotification")
 
-public extension Notification.Name {
+internal extension Notification.Name {
     static let reachabilityChanged = Notification.Name("reachabilityChanged")
 }
 
-public class Reachability {
+internal class Reachability {
 
     public typealias NetworkReachable = (Reachability) -> ()
     public typealias NetworkUnreachable = (Reachability) -> ()
@@ -162,7 +162,7 @@ public class Reachability {
     }
 }
 
-public extension Reachability {
+internal extension Reachability {
 
     // MARK: - *** Notifier methods ***
     func startNotifier() throws {

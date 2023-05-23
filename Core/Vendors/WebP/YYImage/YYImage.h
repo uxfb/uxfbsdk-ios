@@ -24,10 +24,10 @@ FOUNDATION_EXPORT const unsigned char YYImageVersionString[];
 #import <YYWebImage/YYImageCoder.h>
 #import <YYWebImage/YYAnimatedImageView.h>
 #else
-#import "YYFrameImage.h"
-#import "YYSpriteSheetImage.h"
-#import "YYImageCoder.h"
-#import "YYAnimatedImageView.h"
+#import <UXFeedbackSDK/YYFrameImage.h>
+#import <UXFeedbackSDK/YYSpriteSheetImage.h>
+#import <UXFeedbackSDK/YYImageCoder.h>
+#import <UXFeedbackSDK/YYAnimatedImageView.h>
 #endif
 
 NS_ASSUME_NONNULL_BEGIN

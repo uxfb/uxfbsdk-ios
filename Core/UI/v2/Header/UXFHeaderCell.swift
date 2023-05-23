@@ -20,7 +20,7 @@ class UXFHeaderCell: UXFBaseCell {
         guard field != nil, theme != nil else {
             return
         }
-        label.font = theme!.boldFont(size: .bigFontSize)
+        label.font = theme!.fontH1
         label.text = field?.value
         label.textColor = theme?.text01Color
     }

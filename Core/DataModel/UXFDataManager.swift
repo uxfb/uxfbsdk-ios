@@ -302,7 +302,7 @@ class UXFDataManager: UXFFieldDelegate {
             value = "* " + value
         }
         
-        let font = (campaign?.theme.mediumFont(size: .mediumFontSize))!
+        let font = (campaign?.theme.fontH2)!
         let lines = value.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
                                             font: font)//.mediumSemiboldFont)
         let valueHeight = CGFloat(lines) * font.lineHeight + getTitleSpacing(field)
@@ -316,7 +316,7 @@ class UXFDataManager: UXFFieldDelegate {
             guard let warning = field.uiData["warning"] as? String else {
                 return checkFieldTransfromed(field) ? 12 : 0
             }
-            let font = (campaign?.theme.regularFont(size: .smallFontSize))!
+            let font = (campaign?.theme.fontP2)!
             let lines = warning.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
                                            font: font)
             let valueHeight = CGFloat(lines) * font.lineHeight
@@ -324,14 +324,6 @@ class UXFDataManager: UXFFieldDelegate {
         }
         else {
             height = 0
-//            switch field.type {
-//            case .button:
-//                return CGFloat.leastNonzeroMagnitude
-//            case .smiles:
-//                return 24
-//            default:
-//                return 16
-//            }
         }
         
         return height + getFooterSpacing(field)
@@ -358,8 +350,8 @@ class UXFDataManager: UXFFieldDelegate {
         label.attributedText = attributedString
         
         
-        label.font = campaign?.theme.mediumFont(size: .mediumFontSize)
-//        label.font = .mediumSemiboldFont
+        label.font = campaign?.theme.fontH2
+
         label.textAlignment = .center
         label.numberOfLines = 0
         view.addSubview(label)
@@ -374,7 +366,7 @@ class UXFDataManager: UXFFieldDelegate {
             }
             let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.width - .leftArea - .rightArea - extraSpace,
                                                                         height: getFieldFooterHeight(field))))
-            let font = (campaign?.theme.regularFont(size: .smallFontSize))!
+            let font = (campaign?.theme.fontP2)!
             let lines = warning.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
                                            font: font)
             let valueHeight = CGFloat(lines) * font.lineHeight
@@ -417,7 +409,7 @@ class UXFDataManager: UXFFieldDelegate {
             let checkboxes = field.uiData["options"] as? Array<Dictionary<String, Any>> ?? []
             for checkbox in checkboxes {
                 let value = checkbox["value"] as? String ?? ""
-                let font = (campaign?.theme.regularFont(size: .mediumFontSize))!
+                let font = (campaign?.theme.fontP1)!
 //                let lines = CGFloat(value.linesCount(width: width, font: .mediumFont))
                 let lines = CGFloat(value.linesCount(width: width, font: font))
                 height += max(ceil(lines * font.lineHeight) + 24, 48)
@@ -428,7 +420,7 @@ class UXFDataManager: UXFFieldDelegate {
             return 40
             
         case .header:
-            let font = (campaign?.theme.boldFont(size: .bigFontSize))!// .bigSemiboldFont)
+            let font = (campaign?.theme.fontH1)!// .bigSemiboldFont)
             let lines = field.value!.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
                                                 font: font)
             let valueHeight = ceil(CGFloat(lines) * font.lineHeight)
@@ -453,7 +445,7 @@ class UXFDataManager: UXFFieldDelegate {
             }
             let answer = (answerDict?["value"] as? [String] ?? []).first ?? ""
 //            let answer = field.answers.first ?? ""
-            let font = (campaign?.theme.regularFont(size: .mediumFontSize))!
+            let font = (campaign?.theme.fontP1)!
             let lines = min(answer.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
                                               font: font), 10) //.mediumFont
             let valueHeight = ceil(CGFloat(lines) * font.lineHeight)
@@ -466,7 +458,7 @@ class UXFDataManager: UXFFieldDelegate {
             let buttons = field.uiData["options"] as? Array<Dictionary<String, Any>> ?? []
             for button in buttons {
                 let value = button["value"] as? String ?? ""
-                let font = (campaign?.theme.regularFont(size: .mediumFontSize))!
+                let font = (campaign?.theme.fontP1)!
                 let lines = CGFloat(value.linesCount(width: width, font: font))
 //                let lines = CGFloat(value.linesCount(width: width, font: .mediumFont))
                 
@@ -475,7 +467,7 @@ class UXFDataManager: UXFFieldDelegate {
             return height
             
         case .text:
-            let font = (campaign?.theme.regularFont(size: .mediumFontSize))!
+            let font = (campaign?.theme.fontP1)!
             let lines = field.value!.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
                                                 font: font)//.mediumFont)
             let valueHeight = ceil(CGFloat(lines) * font.lineHeight)

@@ -17,7 +17,7 @@ class UXFButtonCell: UXFBaseCell {
             return
         }
         button.setTitle(field!.value, for: .normal)
-        button.titleLabel?.font = theme?.regularFont(size: .mediumFontSize)
+        button.titleLabel?.font = theme?.fontBtn
         button.layer.cornerRadius = theme!.btnBorderRadius
         button.layer.masksToBounds = true
         button.setBackgroundImage(UIImage(color: theme!.btnBgColor), for: .normal)
@@ -26,7 +26,8 @@ class UXFButtonCell: UXFBaseCell {
         button.isEnabled = !(field?.isError ?? false)
         
         button.setTitleColor(theme!.btnTextColor, for: .normal)
-        if UIApplication.shared.statusBarOrientation.isLandscape {
+        let isLandscape = UIApplication.shared.keyWindow?.windowScene?.interfaceOrientation.isLandscape ?? true
+        if isLandscape {
             buttonWidth.constant = self.contentView.frame.width
         } else {
             buttonWidth.constant = 160

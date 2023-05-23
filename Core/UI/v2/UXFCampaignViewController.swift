@@ -25,7 +25,7 @@ enum UXFViewControllerState{
     case dismissOnly
 }
 
-open class UXFCampaignViewController: UIViewController {
+internal class UXFCampaignViewController: UIViewController {
     
     @IBOutlet var contentView: UIView!
     @IBOutlet var shadowView: AnimatingShadowView! {
@@ -36,7 +36,7 @@ open class UXFCampaignViewController: UIViewController {
     @IBOutlet var progressLabel: UILabel! {
         didSet {
             progressLabel.text = ""
-            progressLabel.textColor = campaign?.theme.iconColor ?? .lightGray
+            progressLabel.textColor = campaign?.theme.text03Color ?? .lightGray
         }
     }
     

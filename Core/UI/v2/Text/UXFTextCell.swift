@@ -15,8 +15,8 @@ class UXFTextCell: UXFBaseCell {
         guard field != nil, theme != nil else {
             return
         }
-        label.font = theme?.regularFont(size: .mediumFontSize)
+        label.font = theme?.fontP1
         label.text = field?.value
-        label.textColor = theme?.text01Color
+        label.textColor = theme?.text02Color
     }
 }

@@ -80,7 +80,7 @@ class MainViewController_swift: UIViewController {
 //                                                "property_second": 2])
             
             
-            UXFeedback.sdk.startCampaign(eventName: "screen")
+            UXFeedback.sdk.startCampaign(eventName: "comment")
             break
         case 2:
 //            showActivityOverlay()
@@ -121,10 +121,16 @@ class MainViewController_swift: UIViewController {
 
 }
 
+extension MainViewController_swift: UXFeedbackLogDelegate {
+    func logDidReceive(message: String) {
+        print(message)
+    }
+}
+
 extension MainViewController_swift: UXFeedbackCampaignDelegate{
     
     func campaignDidSend(campaignId: String) {
-        print("sended")
+        
     }
     
     func campaignDidAnswered(campaignId: String, answers: [String : Any]) {
@@ -134,8 +140,6 @@ extension MainViewController_swift: UXFeedbackCampaignDelegate{
     func campaignDidTerminate(eventName: String, terminatedPage: Int, totalPages: Int) {
         
     }
-    
-    func logDidReceive(message: String) { }
     
     func campaignDidShow(eventName: String) {
 //        print("CAMPAIGN SHOWED")

@@ -82,18 +82,18 @@ class UXFScreenshotCell: UXFBaseCell {
     }
     
     override func updateUI() {
-        countLabel.font = theme?.regularFont
+        countLabel.font = theme?.fontP2
         countLabel.textColor = theme?.text01Color
         
         takeView.backgroundColor = theme?.controlBgColor
         takeImage.tintColor = theme?.iconColor
         takeLabel.textColor = theme?.text01Color
-        takeLabel.font = theme?.regularFont
+        takeLabel.font = theme?.fontP2
         
         selectView.backgroundColor = theme?.controlBgColor
         selectImage.tintColor = theme?.iconColor
         selectLabel.textColor = theme?.text01Color
-        selectLabel.font = theme?.regularFont
+        selectLabel.font = theme?.fontP2
         
         let data = field?.uiData
         

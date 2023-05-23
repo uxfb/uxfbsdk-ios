@@ -9,7 +9,7 @@
 import UIKit
 
 
-public enum UIColorInputError: Error {
+internal enum UIColorInputError: Error {
     
     case missingHashMarkAsPrefix(String)
     case unableToScanHexValue(String)

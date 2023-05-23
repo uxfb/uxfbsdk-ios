@@ -8,16 +8,16 @@
 
 import UIKit
 
-open class UXFBaseCell: UITableViewCell {
+internal class UXFBaseCell: UITableViewCell {
     internal var delegate: UXFFieldDelegate?
     internal var field: UXFField?
     internal var theme: UXFBTheme?
     
-    open override func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
     }
 
-    open override func setSelected(_ selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     

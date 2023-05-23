@@ -22,13 +22,13 @@ protocol UXFRequestManagerDelegate {
     func formDataSaved(success: Bool, message: String?, capmaignId: String)
 }
 
-public struct UXFNetworkSettings {
+internal struct UXFNetworkSettings {
     var requestTimeout: Double
     var retryCount: Int
     var retryTimeout: Double
 }
 
-final class UXFRequestManager: NSObject {
+final internal class UXFRequestManager: NSObject {
     private let identifier: String  = "biz.andalex.uxfeedback.sdk"
     private let model: String = "RequestModel"
     

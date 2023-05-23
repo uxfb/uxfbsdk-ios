@@ -29,7 +29,7 @@ class UXFEmailCell: UXFBaseCell, UITextFieldDelegate {
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 12))
         textField.leftViewMode = .always
         textField.keyboardType = .emailAddress
-        textField.font = theme?.regularFont(size: .mediumFontSize)
+        textField.font = theme?.fontP1
         let answer = field?.answers.first ?? ""
         textField.text = answer
         
@@ -48,7 +48,8 @@ class UXFEmailCell: UXFBaseCell, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         delegate?.didBeginEditing(field!)
-        textField.layer.borderColor = theme?.inputBorderColor.cgColor
+//        textField.layer.borderColor = theme?.inputBorderColor.cgColor
+        textField.borderColor = theme?.mainColor
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -60,6 +61,7 @@ class UXFEmailCell: UXFBaseCell, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.borderColor = theme?.inputBorderColor
         if delegate != nil {
             let email = textField.text!
             delegate?.fieldChanged(field!, answer: email != "" ? [email] : [], refresh: true)

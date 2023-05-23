@@ -11,6 +11,20 @@ import UIKit
 class UXFCheckCell: UITableViewCell {
 
     @IBOutlet var checkImage: UIImageView!
+    @IBOutlet var checkSymbolImage: UIImageView!
+    
+    @IBOutlet var symbolExtView: UIView! {
+        didSet {
+            symbolExtView.layer.cornerRadius = 2
+        }
+    }
+    @IBOutlet var symbolMidView: UIView! {
+        didSet {
+            symbolMidView.layer.cornerRadius = 2
+        }
+    }
+    @IBOutlet var symbolIntView: UIImageView!
+    
     @IBOutlet var checkLabel: UILabel!
     @IBOutlet var checkView: UIView!
     
@@ -33,7 +47,7 @@ class UXFCheckCell: UITableViewCell {
         self.option = option
         self.theme = theme
         self.isError = isError
-        self.checkLabel.font = theme.regularFont(size: .mediumFontSize)
+        self.checkLabel.font = theme.fontP1
         updateUI()
     }
     
@@ -49,15 +63,29 @@ class UXFCheckCell: UITableViewCell {
             self.checkLabel.text = self.option?.value
             if self.isSelected {
                 self.checkLabel.textColor = self.theme?.text01Color
-                self.checkImage.image = UIImage(named: "check_on", in: bundle, compatibleWith: nil)?.tint(with: self.theme?.mainColor ?? .blue)
+                
+                self.symbolExtView.backgroundColor = self.theme?.mainColor.withAlphaComponent(0.2)
+                self.symbolMidView.backgroundColor = self.theme?.mainColor
+                self.symbolIntView.tintColor = self.theme?.controlIconColor
+                let bundle = Bundle(for: UXFeedback.self)
+                
+                self.symbolIntView.image = UIImage(named: "check_symbol",
+                                                   in: bundle,
+                                                   compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+                self.symbolIntView.backgroundColor = .clear
+                
                 self.checkView.backgroundColor = self.theme?.controlBgColorActive
             }
             else {
                 self.checkLabel.textColor = self.theme?.text02Color
-                self.checkImage.image = UIImage(named: "check_off", in: bundle, compatibleWith: nil)?.tint(with: self.theme?.iconColor ?? .gray)
+                self.symbolExtView.backgroundColor = .clear
+                self.symbolMidView.backgroundColor = self.theme?.iconColor
+                self.symbolIntView.image = nil
+                self.symbolIntView.backgroundColor = self.theme?.controlBgColor
                 self.checkView.backgroundColor = self.theme?.controlBgColor
             }
         }
+        
     }
     
 }

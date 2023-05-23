@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,28 +21,50 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t8g-Hi-IGE">
                         <rect key="frame" x="0.0" y="4" width="320" height="36"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check_on" translatesAutoresizingMaskIntoConstraints="NO" id="A3x-0B-vf2">
-                                <rect key="frame" x="8" y="8" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="EPI-l6-JaD"/>
-                                    <constraint firstAttribute="height" constant="24" id="au5-95-hcr"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qn7-fL-tyt">
                                 <rect key="frame" x="40" y="8" width="272" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1e-fh-frc">
+                                <rect key="frame" x="8" y="6" width="24" height="24"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hft-Bp-YEp">
+                                        <rect key="frame" x="4" y="4" width="16" height="16"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="p7Q-5a-uMd">
+                                                <rect key="frame" x="2" y="2" width="12" height="12"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="p7Q-5a-uMd" secondAttribute="trailing" constant="2" id="2C0-Xu-DcA"/>
+                                            <constraint firstItem="p7Q-5a-uMd" firstAttribute="top" secondItem="Hft-Bp-YEp" secondAttribute="top" constant="2" id="eTc-Pp-Flz"/>
+                                            <constraint firstAttribute="bottom" secondItem="p7Q-5a-uMd" secondAttribute="bottom" constant="2" id="lyo-1A-miE"/>
+                                            <constraint firstItem="p7Q-5a-uMd" firstAttribute="leading" secondItem="Hft-Bp-YEp" secondAttribute="leading" constant="2" id="uxH-dm-Ght"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Hft-Bp-YEp" secondAttribute="bottom" constant="4" id="86w-vU-kdT"/>
+                                    <constraint firstItem="Hft-Bp-YEp" firstAttribute="leading" secondItem="c1e-fh-frc" secondAttribute="leading" constant="4" id="Uup-ah-M7f"/>
+                                    <constraint firstAttribute="trailing" secondItem="Hft-Bp-YEp" secondAttribute="trailing" constant="4" id="a9x-bM-5sh"/>
+                                    <constraint firstAttribute="width" constant="24" id="gJ5-XU-Dkd"/>
+                                    <constraint firstAttribute="height" constant="24" id="gX0-YS-1Qx"/>
+                                    <constraint firstItem="Hft-Bp-YEp" firstAttribute="top" secondItem="c1e-fh-frc" secondAttribute="top" constant="4" id="wlb-nw-mGi"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qn7-fL-tyt" firstAttribute="top" secondItem="t8g-Hi-IGE" secondAttribute="top" constant="8" id="9I2-A6-hZH"/>
-                            <constraint firstItem="A3x-0B-vf2" firstAttribute="top" secondItem="t8g-Hi-IGE" secondAttribute="top" constant="8" id="OhV-z5-Fh2"/>
                             <constraint firstAttribute="bottom" secondItem="qn7-fL-tyt" secondAttribute="bottom" constant="8" id="YXi-ph-FKb"/>
+                            <constraint firstItem="c1e-fh-frc" firstAttribute="centerY" secondItem="t8g-Hi-IGE" secondAttribute="centerY" id="ZBI-1L-DCe"/>
                             <constraint firstAttribute="trailing" secondItem="qn7-fL-tyt" secondAttribute="trailing" constant="8" id="nFy-jI-jsc"/>
-                            <constraint firstItem="A3x-0B-vf2" firstAttribute="leading" secondItem="t8g-Hi-IGE" secondAttribute="leading" constant="8" id="wxi-gg-1Rj"/>
-                            <constraint firstItem="qn7-fL-tyt" firstAttribute="leading" secondItem="A3x-0B-vf2" secondAttribute="trailing" constant="8" id="yWx-j8-zT7"/>
+                            <constraint firstItem="qn7-fL-tyt" firstAttribute="leading" secondItem="c1e-fh-frc" secondAttribute="trailing" constant="8" id="uT6-bY-hT8"/>
+                            <constraint firstItem="c1e-fh-frc" firstAttribute="leading" secondItem="t8g-Hi-IGE" secondAttribute="leading" constant="8" id="ueD-b8-BFF"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -54,14 +77,18 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="checkImage" destination="A3x-0B-vf2" id="zee-bo-kvU"/>
                 <outlet property="checkLabel" destination="qn7-fL-tyt" id="1Ua-Js-Ydi"/>
                 <outlet property="checkView" destination="t8g-Hi-IGE" id="7Pu-HT-hdf"/>
+                <outlet property="symbolExtView" destination="c1e-fh-frc" id="hLJ-yV-sBN"/>
+                <outlet property="symbolIntView" destination="p7Q-5a-uMd" id="gOR-WF-hgG"/>
+                <outlet property="symbolMidView" destination="Hft-Bp-YEp" id="d5g-YL-lxL"/>
             </connections>
             <point key="canvasLocation" x="139" y="54"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="check_on" width="24" height="24"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
