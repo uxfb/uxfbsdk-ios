@@ -23,17 +23,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2C1FCD2E-5EA6-46C8-98AF-E3A25FFB8B26"
-            shouldBeEnabled = "No"
+            uuid = "A1726BA8-E422-47A3-B091-ACF280DE14F2"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Core/UXFeedback.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "331"
-            endingLineNumber = "331"
+            startingLineNumber = "319"
+            endingLineNumber = "319"
             landmarkName = "formSubmitted(info:screenshots:campaign:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A1726BA8-E422-47A3-B091-ACF280DE14F2 - ee2b1655b4b36579"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "UXFeedbackSDK.UXFeedback.formSubmitted(info: Swift.Optional&lt;Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;&gt;, screenshots: Swift.Array&lt;UXFeedbackSDK.UXFScreenshot&gt;, campaign: UXFeedbackSDK.UXFCampaign) -&gt; ()"
+                  moduleName = "UXFeedbackSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexpotemka/_projects/-ios/ios-sdk/Core/UXFeedback.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "319"
+                  endingLineNumber = "319"
+                  offsetFromSymbolStart = "340">
+               </Location>
+               <Location
+                  uuid = "A1726BA8-E422-47A3-B091-ACF280DE14F2 - ee2b1655b4b36579"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "UXFeedbackSDK.UXFeedback.formSubmitted(info: Swift.Optional&lt;Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;&gt;, screenshots: Swift.Array&lt;UXFeedbackSDK.UXFScreenshot&gt;, campaign: UXFeedbackSDK.UXFCampaign) -&gt; ()"
+                  moduleName = "UXFeedbackSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexpotemka/_projects/-ios/ios-sdk/Core/UXFeedback.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "319"
+                  endingLineNumber = "319"
+                  offsetFromSymbolStart = "376">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
