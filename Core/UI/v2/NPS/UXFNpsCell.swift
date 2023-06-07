@@ -183,7 +183,7 @@ class UXFNpsCell: UXFBaseCell {
             if let label = contentView.viewWithTag(i+1) as? VerticalAlignedLabel {
                 if i == calculatedValue {
                     label.textColor = currentValue == -1 ? theme?.text03Color : theme?.mainColor
-                    label.font = theme?.fontH2
+                    label.font = theme?.fontH1
                 } else if i == calculatedValue-1 || i == calculatedValue+1 {
                     label.textColor = currentValue == -1 ? theme?.text03Color : theme?.text02Color
                     label.font = theme?.fontP1

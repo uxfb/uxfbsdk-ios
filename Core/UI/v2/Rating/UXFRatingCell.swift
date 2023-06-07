@@ -102,7 +102,7 @@ class UXFRatingCell: UXFBaseCell {
                 }
                 if i == calculatedValue {
                     label.textColor = currentValue == 0 ? theme?.text03Color : theme?.mainColor
-                    label.font = theme?.fontH2
+                    label.font = theme?.fontH1
                 } else if i == calculatedValue-1 || i == calculatedValue+1 {
                     label.textColor = currentValue == 0 ? theme?.text03Color : theme?.text02Color
                     label.font = theme?.fontP1

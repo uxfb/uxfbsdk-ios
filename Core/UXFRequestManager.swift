@@ -9,6 +9,9 @@
 import Foundation
 import CoreData
 
+import Foundation
+import CoreData
+
 extension NSManagedObjectContext {
     @discardableResult public func saveIfNeeded() throws -> Bool {
         guard hasChanges else { return false }
@@ -22,13 +25,13 @@ protocol UXFRequestManagerDelegate {
     func formDataSaved(success: Bool, message: String?, capmaignId: String)
 }
 
-internal struct UXFNetworkSettings {
+public struct UXFNetworkSettings {
     var requestTimeout: Double
     var retryCount: Int
     var retryTimeout: Double
 }
 
-final internal class UXFRequestManager: NSObject {
+final class UXFRequestManager: NSObject {
     private let identifier: String  = "biz.andalex.uxfeedback.sdk"
     private let model: String = "RequestModel"
     
@@ -39,8 +42,6 @@ final internal class UXFRequestManager: NSObject {
     var settings: UXFNetworkSettings!
     
     private var attempts = 0
-    
-    private var isReady = true
     
     init(endpoint: String?,
          appID: String,
@@ -98,16 +99,11 @@ final internal class UXFRequestManager: NSObject {
     //MARK: - prepare sender
     
     private func prepareAndSend(_ request: UXFRequest? = nil) {
-//        DispatchQueue.global(qos: .background).async {
-            guard self.isReady else {
-                return
-            }
-            if let request = request {
-                self.sendNextRequest(request)
-            } else if let request = self.fetch() {
-                self.sendNextRequest(request)
-            }
-//        }
+        if let request = request {
+            self.sendNextRequest(request)
+        } else if let request = self.fetch() {
+            self.sendNextRequest(request)
+        }
     }
     
     //MARK: - Request private methods
@@ -116,7 +112,6 @@ final internal class UXFRequestManager: NSObject {
                                   success: Bool,
                                   httpCode: Int,
                                   completion: @escaping (() -> ()) ) {
-        isReady = true
         if success || httpCode == 200 {
             attempts = 0
             deleteRequest(request) {
@@ -126,16 +121,13 @@ final internal class UXFRequestManager: NSObject {
             attempts = 0
             deleteRequest(request)
         } else {
-//            print("RM: RETRY will after timeout")
             DispatchQueue.main.asyncAfter(deadline: .now() + settings.retryTimeout) {
-//                print("RM: RETRY!")
                 self.prepareAndSend(request)
             }
         }
     }
     
     private func sendNextRequest(_ request: UXFRequest) {
-        self.isReady = false
         let data = request.parametersData
         self.attempts += 1
         switch request.apiMethod {
@@ -203,10 +195,28 @@ final internal class UXFRequestManager: NSObject {
     
     //MARK: - Core data methods
     
+//    let objectModelURL = NSBundle.mainBundle().URLForResource("MyDataModel", withExtension: "momd")
+//    let objectModel: NSManagedObjectModel? = NSManagedObjectModel(contentsOfURL: objectModelURL)
+//    assert(objectModel)
+//
+//    let storeCoordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: objectModel)
+//    assert(storeCoordinator)
+//
+//    let store: NSPersistentStore? = storeCoordinator!.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil, error: nil)
+//    assert(store)
+//
+//    // Set up a managed object context with private queue concurrency
+//    // backgroundContext is a NSManagedObjectContext? property
+//    backgroundContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+//    assert(backgroundContext)
+//    backgroundContext!.persistentStoreCoordinator = storeCoordinator!
+    
+    
+    
     lazy var persistentContainer: NSPersistentContainer = {
         let messageKitBundle = Bundle(identifier: self.identifier)
         let modelURL = messageKitBundle!.url(forResource: self.model, withExtension: "momd")!
-        let managedObjectModel =  NSManagedObjectModel(contentsOf: modelURL)
+        let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL)
         let container = NSPersistentContainer(name: self.model, managedObjectModel: managedObjectModel!)
         container.loadPersistentStores { (storeDescription, error) in
             if let err = error{
@@ -215,14 +225,18 @@ final internal class UXFRequestManager: NSObject {
         }
         return container
     }()
+    
+    lazy var context = persistentContainer.viewContext
    
     private func fetch() -> UXFRequest? {
+        let context = persistentContainer.viewContext
+        
         let fetchRequest = NSFetchRequest<UXFRequest>(entityName: "UXFRequest")
         let sort = NSSortDescriptor(key: "created", ascending: true)
         fetchRequest.sortDescriptors = [sort]
         fetchRequest.fetchLimit = 1
-        do{
-            let request = try persistentContainer.viewContext.fetch(fetchRequest).first
+        do {
+            let request = try context.fetch(fetchRequest).first
             return request
         } catch {
             return nil
@@ -230,37 +244,35 @@ final internal class UXFRequestManager: NSObject {
     }
     
     private func createRequest(_ apiMethod: String, parameters: Data?) {
-        let context = persistentContainer.viewContext
-        
-        if apiMethod == "GET_CAMPAIGNS" {
-            let fetchRequest = NSFetchRequest<UXFRequest>(entityName: "UXFRequest")
-            fetchRequest.predicate = NSPredicate(format: "apiMethod == %@", apiMethod)
-            let numberOfRecords = (try? context.count(for: fetchRequest)) ?? 0
-            if numberOfRecords > 0 {
-                return
+        context.perform {
+            if apiMethod == "GET_CAMPAIGNS" {
+                let fetchRequest = NSFetchRequest<UXFRequest>(entityName: "UXFRequest")
+                fetchRequest.predicate = NSPredicate(format: "apiMethod == %@", apiMethod)
+                let numberOfRecords = (try? self.context.count(for: fetchRequest)) ?? 0
+                if numberOfRecords > 0 {
+                    return
+                }
             }
+            
+            let request = NSEntityDescription.insertNewObject(forEntityName: "UXFRequest", into: self.context) as! UXFRequest
+            request.apiMethod = apiMethod
+            request.created = Date()
+            request.parametersData = parameters
+            try? self.context.save()
+            self.finishContext()
         }
-        
-        let request = NSEntityDescription.insertNewObject(forEntityName: "UXFRequest", into: context) as! UXFRequest
-        request.apiMethod = apiMethod
-        request.created = Date()
-        request.parametersData = parameters
-        saveContext()
     }
     
     private func deleteRequest(_ request: UXFRequest, completion: (() -> ())? = nil ) {
-        persistentContainer.viewContext.delete(request)
-        saveContext(completion: completion)
+        context.performAndWait {
+            context.delete(request)
+            try? context.save()
+            finishContext(completion: completion)
+        }
     }
     
-    
-    private func saveContext(completion: (() -> ())? = nil ) {
-        do {
-            _ = try persistentContainer.viewContext.saveIfNeeded()
-        } catch { }
+    private func finishContext(completion: (() -> ())? = nil ) {
         completion?()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.prepareAndSend()
-        }
+        self.prepareAndSend()
     }
 }

@@ -523,7 +523,22 @@ class UXFDataManager: UXFFieldDelegate {
     func fieldChanged(_ field: UXFField, answer: [String], refresh: Bool = true) {
         answers = answers.filter { answer in ((answer["fieldId"] as? String) ?? "") != field.id }
         if answer.count > 0 {
-            let transforms: [String] = campaign?.transforms.filter({ $0.to.value == field.id }).map({ transform in
+            let transforms: [String] = campaign?.transforms.filter({
+                if $0.from.field != field.id {
+                    return false
+                }
+                let same = $0.condition?.value?.filter() { answer.contains($0) }.count ?? 0
+                switch $0.condition?.rule {
+                case "equal", "contain":
+                    return same > 0
+                    
+                case "filled":
+                    return answer.count > 0
+                    
+                default:
+                    return false
+                }
+            }).map({ transform in
                 transform.id ?? ""
             }) ?? []
             let newAnswer = ["pageId": campaign?.pages[currentPage].id ?? "",
