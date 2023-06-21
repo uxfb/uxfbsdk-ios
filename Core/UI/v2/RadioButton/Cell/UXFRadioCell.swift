@@ -29,8 +29,8 @@ class UXFRadioCell: UITableViewCell {
     @IBOutlet var radioLabel: UILabel!
     @IBOutlet var radioView: UIView!
     
-    private var theme: UXFBTheme?
-    private var option: UXFOption?
+    private var theme: Theme?
+    private var option: Option?
     private var isError: Bool = false
     
     override func awakeFromNib() {
@@ -44,7 +44,7 @@ class UXFRadioCell: UITableViewCell {
         self.updateUI()
     }
     
-    func configure(option: UXFOption, theme: UXFBTheme, isError: Bool) {
+    func configure(option: Option, theme: Theme, isError: Bool) {
         self.option = option
         self.theme = theme
         self.isError = isError

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class UXFURLComponents: NSObject{
+class URLComponents: NSObject{
     
     private var _baseUrl: String = ""
     private var _path: String = ""

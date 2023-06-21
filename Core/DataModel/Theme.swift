@@ -8,13 +8,13 @@
 
 import Foundation
 
-enum UXFBThemeType: Int {
+enum ThemeType: Int {
     case custom = 0                    
     case light = 1
     case dark = 2
 }
 
-class UXFBBlackout: NSObject {
+class Blackout: NSObject {
     var color: UIColor = .clear
     var opacity: Int = 0
     var blur: Int = 0
@@ -29,7 +29,7 @@ class UXFBBlackout: NSObject {
 
 /// Класс темы SDK. Для создания экземпляра настроек по умолчанию необходимо вызвать метод ``init()``.  **ВАЖНО**: все цвета задаются в формате HEX с решеткой в начале, например #ABC123
 @objcMembers
-open class UXFBTheme: NSObject, Decodable {
+open class Theme: NSObject, Decodable {
     /// Цвет текста счетчика страниц, плейсхолдеров, чекбоксов и радиокнопок в нормальном состоянии
     open var text03Color: UIColor =  UIColor.init("#8B90A0")
     /// Цвет бордера инпутов в нормальном состоянии

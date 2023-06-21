@@ -25,7 +25,7 @@ void DDLogDebug(id object){
 
     NSLog(@"Start ObjC application");
     
-    UXFBTheme *theme = [[UXFBTheme alloc] init];
+    Theme *theme = [[Theme alloc] init];
     
     NSString *uxfAppID = @"54444d444a068c157e7f7e14";
     if (UXFeedback.isStage == YES){

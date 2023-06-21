@@ -9,9 +9,9 @@
 import UIKit
 
 internal class UXFBaseCell: UITableViewCell {
-    internal var delegate: UXFFieldDelegate?
-    internal var field: UXFField?
-    internal var theme: UXFBTheme?
+    internal var delegate: FieldDelegate?
+    internal var field: Field?
+    internal var theme: Theme?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,7 +21,7 @@ internal class UXFBaseCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    internal func configureWith(_ value: UXFField, theme: UXFBTheme, delegate: UXFFieldDelegate, valueIndex: Int = 0) {
+    internal func configureWith(_ value: Field, theme: Theme, delegate: FieldDelegate, valueIndex: Int = 0) {
         self.field = value
         self.theme = theme
         self.delegate = delegate

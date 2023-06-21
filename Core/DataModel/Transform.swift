@@ -8,25 +8,25 @@
 
 import UIKit
 
-struct UXFTransform: Codable {
+struct Transform: Codable {
     let id: String?
-    let from: UXFTransformFrom
-    let to: UXFTransformTo
-    let condition: UXFTransformCondition?
+    let from: TransformFrom
+    let to: TransformTo
+    let condition: TransformCondition?
 }
 
-struct UXFTransformFrom: Codable {
+struct TransformFrom: Codable {
     let field: String?
     let page: String?
 }
 
-struct UXFTransformTo: Codable {
+struct TransformTo: Codable {
     let action: String
     let value: String
     let type: String
 }
 
-struct UXFTransformCondition: Codable {
+struct TransformCondition: Codable {
     let rule: String?
     var value: [String]?
     

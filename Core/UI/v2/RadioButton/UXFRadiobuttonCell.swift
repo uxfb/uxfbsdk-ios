@@ -20,7 +20,7 @@ class UXFRadiobuttonCell: UXFBaseCell, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    private var options: Array<UXFOption> = []
+    private var options: Array<Option> = []
     
     private var isError: Bool = false
     
@@ -29,7 +29,7 @@ class UXFRadiobuttonCell: UXFBaseCell, UITableViewDelegate, UITableViewDataSourc
             return
         }
 
-        guard let opt = try? JSONDecoder().decode([UXFOption].self,
+        guard let opt = try? JSONDecoder().decode([Option].self,
                                                       from: data) else {
             return
         }

@@ -1,21 +1,20 @@
 //
-//  UXFeedback.swift
-//  UX Feedback Demo
+//  YoHe.swift
 //
-//  Created by Dmitry Kudryavtsev on 11.03.2019.
-//  Copyright © 2019 UXF. All rights reserved.
+//  Created by Alexander Potemka on 21.06.2023.
+//  Copyright © 2023 UXF. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
 @objcMembers
-internal class UXFError : NSError {
+internal class YoHeError : NSError {
     
     private var desc: String? = nil
     
     init(description: String?){
-        super.init(domain: "uxfeedback", code: 0, userInfo: ["description": description ?? ""])
+        super.init(domain: "yohe", code: 0, userInfo: ["description": description ?? ""])
         self.desc = description
     }
 
@@ -26,7 +25,7 @@ internal class UXFError : NSError {
 
 /// Основной интерфейс SDK. Для инициализации синглтона необходимо вызвать метод ``setup(appID:settings:campainDelegate:logDelegate:)``
 @objcMembers
-open class UXFeedback: NSObject {
+open class YoHe: NSObject {
     internal func DDLog(_ value: Any) {
         if settings.debugEnabled {
             print(value)
@@ -37,12 +36,12 @@ open class UXFeedback: NSObject {
     }
     
     /// Синглтон для работы с SDK
-    public static let sdk: UXFeedback = UXFeedback.init()
+    public static let sdk: YoHe = YoHe.init()
     
     private static var isInitialized = false
     
     /// Текущая версия SDK
-    public let version = "v2.0.0"
+    public let version = Consts.version
     
     /// Делегат, реализующий интерфейс обработки событий
     open weak var campaignDelegate: UXFeedbackCampaignDelegate?
@@ -51,10 +50,10 @@ open class UXFeedback: NSObject {
     open weak var logDelegate: UXFeedbackLogDelegate?
     
     /// Объект настроек SDK
-    open var settings: UXFBSettings = UXFBSettings()
+    open var settings: Settings = Settings()
     
     /// Объект темы SDK
-    open var theme: UXFBTheme = UXFBTheme()
+    open var theme: Theme = Theme()
     
     /// Дополнительные параметры, которые будут переданы при завершении прохождения опроса
     open var properties: [String: Any] = [:]
@@ -64,14 +63,14 @@ open class UXFeedback: NSObject {
 //    private var _theme: UXFBTheme!
     private var _appWindow: UIWindow!
 
-    private var _requestManager: UXFRequestManager!
+    private var _requestManager: DataRequestManager!
     
-    private var _campaigns: Array<UXFCampaign> = []
+    private var _campaigns: Array<Campaign> = []
     private var _eventToSend: String?
     private var _resetAllCampaingHandler: (()->())?
     private var _resetAllCampaingNeeds: Bool = false
-    private var _formPresentor: UXFCampaignPresentor?
-    private var _parser: UXFParser!
+    private var _formPresentor: CampaignPresentor?
+    private var _parser: Parser!
     
     static private let _windowLevel = UIWindow.Level.alert + 10
     
@@ -80,7 +79,7 @@ open class UXFeedback: NSObject {
     private var task: DispatchWorkItem?
     private var eventCounter: [String: Int] = [:]
     
-    private var currentForm: UXFCampaignViewController?{
+    private var currentForm: CampaignViewController?{
         return _formPresentor?._currentForm
     }
     
@@ -111,7 +110,7 @@ open class UXFeedback: NSObject {
     }
     
     private func applyTheme() {
-        _parser = UXFParser.init(theme: theme, isInitTheme: isInitTheme)
+        _parser = Parser.init(theme: theme, isInitTheme: isInitTheme)
         _formPresentor?._currentForm?.tableView.reloadData()
     }
     
@@ -128,7 +127,7 @@ open class UXFeedback: NSObject {
     ///   - campaignDelegate: Делегат обработки событий SDK
     ///   - logDelegate: Делегат обработки логов SDK
     public static func setup(appID: String,
-                             settings: UXFBSettings,
+                             settings: Settings,
                              campaignDelegate: UXFeedbackCampaignDelegate? = nil,
                              logDelegate: UXFeedbackLogDelegate? = nil) {
         
@@ -137,26 +136,26 @@ open class UXFeedback: NSObject {
         sdk.campaignDelegate = campaignDelegate
         sdk.logDelegate = logDelegate
         
-        if UXFeedback.isInitialized {
+        if YoHe.isInitialized {
             sdk.campaignDelegate?.campaignDidReceiveError(errorString: "SDK is already initialized")
         } else {
-            sdk.DDLog("Init UXFeedbackSDK: \(sdk.version)")
-            UXFeedback.isInitialized = true
+            sdk.DDLog("Init YoHeSDK: \(sdk.version)")
+            YoHe.isInitialized = true
         }
         
         var domain: String?
         
         if let endpoint = settings.endpoint {
-            let eDomain = UXFCrypto().decrypt(endpoint)
+            let eDomain = Crypto().decrypt(endpoint)
             domain = eDomain
         }
         
-        sdk._requestManager = UXFRequestManager(endpoint: domain,
+        sdk._requestManager = DataRequestManager(endpoint: domain,
                                             appID: appID,
                                             parser: sdk._parser,
                                             delegate: sdk)
         
-        sdk._requestManager.settings = UXFNetworkSettings(requestTimeout: settings.socketTimeout,
+        sdk._requestManager.settings = NetworkSettings(requestTimeout: settings.socketTimeout,
                                                           retryCount: settings.retryCount,
                                                           retryTimeout: settings.retryTimeout)
         

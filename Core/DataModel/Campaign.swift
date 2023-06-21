@@ -8,18 +8,18 @@
 
 import UIKit
 
-enum UXFCampaignType: String {
+enum CampaignType: String {
     case popup = "101"
     case slidein = "102"
 }
 
-struct UXFCampaign{
+struct Campaign{
     private(set) var campaignId: String!
-    private(set) var theme: UXFBTheme!
-    private(set) var pages: Array<UXFPage> = []
-    private(set) var type: UXFCampaignType!
+    private(set) var theme: Theme!
+    private(set) var pages: Array<Page> = []
+    private(set) var type: CampaignType!
     private(set) var targetings: Array<Dictionary<String,Any>>!
-    private(set) var transforms: Array<UXFTransform>!
+    private(set) var transforms: Array<Transform>!
     private(set) var isProgressEnabled: Bool!
     private(set) var projectId: String!
     private(set) var autoclose: Double!
@@ -37,7 +37,7 @@ struct UXFCampaign{
         return delay
     }
     
-    mutating func updateTheme(theme: UXFBTheme) {
+    mutating func updateTheme(theme: Theme) {
         self.theme = theme
     }
 }

@@ -10,7 +10,7 @@
 
 import UIKit
 
-enum UXFFieldType: String {
+enum FieldType: String {
     case text = "text"
     case button = "button"
     case checkbox = "checkboxes"
@@ -27,19 +27,19 @@ enum UXFFieldType: String {
     case screenshot = "screenshot"
 }
 
-protocol UXFFieldDelegate {
-    func fieldChanged(_ field: UXFField, answer: [String], refresh: Bool)
-    func buttonTapped(_ field: UXFField, answer: [String], refresh: Bool)
-    func textChanged(_ field: UXFField, answer: [String])
+protocol FieldDelegate {
+    func fieldChanged(_ field: Field, answer: [String], refresh: Bool)
+    func buttonTapped(_ field: Field, answer: [String], refresh: Bool)
+    func textChanged(_ field: Field, answer: [String])
     
-    func screenshotChanged(_ field: UXFField, screenshots: [UXFScreenshot])
+    func screenshotChanged(_ field: Field, screenshots: [Screenshot])
     
-    func didBeginEditing(_ field: UXFField)
+    func didBeginEditing(_ field: Field)
 }
 
-class UXFDataManager: UXFFieldDelegate {
+class DataManager: FieldDelegate {
     
-    private var viewController: UXFCampaignViewController?
+    private var viewController: CampaignViewController?
     
     private var width: CGFloat {
         return viewController?.view.bounds.width ?? UIScreen.main.bounds.width
@@ -49,7 +49,7 @@ class UXFDataManager: UXFFieldDelegate {
     }
     
     private var currentPage: Int = 0
-    private var campaign: UXFCampaign?
+    private var campaign: Campaign?
     var extraSpace: CGFloat {
         get {
             return campaign?.type == .popup ? 80 : 32
@@ -85,14 +85,14 @@ class UXFDataManager: UXFFieldDelegate {
         }
     }
     
-    init(_ target: UXFCampaignViewController, campaign: UXFCampaign?) {
+    init(_ target: CampaignViewController, campaign: Campaign?) {
         self.campaign = campaign
         self.viewController = target
     }
     
     private var answers = Array<Dictionary<String, Any>>()
-    private var _screenshots: [UXFScreenshot] = []
-    public var screenshots: [UXFScreenshot] {
+    private var _screenshots: [Screenshot] = []
+    public var screenshots: [Screenshot] {
         get {
             return _screenshots
         }
@@ -187,7 +187,7 @@ class UXFDataManager: UXFFieldDelegate {
         return getFieldHeight(field)
     }
     
-    internal func fieldForRow(indexPath: IndexPath) -> UXFField {
+    internal func fieldForRow(indexPath: IndexPath) -> Field {
         let page = campaign?.pages[currentPage]
         let fields = (page?.fields ?? []) + (page?.buttons ?? [])
         var field = fields[indexPath.section]
@@ -206,7 +206,7 @@ class UXFDataManager: UXFFieldDelegate {
     
     //MARK: - Support Fields
     
-    private func getSpacing(fromField: UXFField, toField: UXFField?) -> CGFloat {
+    private func getSpacing(fromField: Field, toField: Field?) -> CGFloat {
         if toField?.type == .bottom {
             return 16
         }
@@ -234,7 +234,7 @@ class UXFDataManager: UXFFieldDelegate {
         return 24
     }
     
-    private func getFooterSpacing(_ field: UXFField) -> CGFloat {
+    private func getFooterSpacing(_ field: Field) -> CGFloat {
         var spacing: CGFloat = CGFloat.leastNonzeroMagnitude
         
         guard let fieldIndex = campaign?.pages[currentPage].fields.firstIndex(where: { (fld) -> Bool in
@@ -266,7 +266,7 @@ class UXFDataManager: UXFFieldDelegate {
         return spacing
     }
     
-    private func getTitleSpacing(_ field: UXFField) -> CGFloat {
+    private func getTitleSpacing(_ field: Field) -> CGFloat {
         var spacing: CGFloat = 0
         
         switch field.type {
@@ -283,7 +283,7 @@ class UXFDataManager: UXFFieldDelegate {
         return spacing
     }
     
-    private func getFieldHeaderHeight(_ field: UXFField) -> CGFloat {
+    private func getFieldHeaderHeight(_ field: Field) -> CGFloat {
         guard var value = field.value, value != "" else {
             return CGFloat.leastNonzeroMagnitude //12
         }
@@ -309,7 +309,7 @@ class UXFDataManager: UXFFieldDelegate {
         return valueHeight
     }
     
-    private func getFieldFooterHeight(_ field: UXFField) -> CGFloat {
+    private func getFieldFooterHeight(_ field: Field) -> CGFloat {
         var height: CGFloat = 0
         
         if isError && fieldNeedComplete(field) {
@@ -329,8 +329,8 @@ class UXFDataManager: UXFFieldDelegate {
         return height + getFooterSpacing(field)
     }
     
-    private func getFieldHeader(_ field: UXFField) -> UIView {
-        if [UXFFieldType.header, UXFFieldType.text, UXFFieldType.button, UXFFieldType.image].contains(field.type) || field.value == nil || !checkFieldTransfromed(field) {
+    private func getFieldHeader(_ field: Field) -> UIView {
+        if [FieldType.header, FieldType.text, FieldType.button, FieldType.image].contains(field.type) || field.value == nil || !checkFieldTransfromed(field) {
             return UIView()
         }
         
@@ -346,7 +346,7 @@ class UXFDataManager: UXFFieldDelegate {
         let text = "\(required ? "* " : "")\(field.value ?? "")"
         let range = (text as NSString).range(of: "*")
         let attributedString = NSMutableAttributedString(string:text)
-        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: campaign?.theme.errorColorPrimary ?? UXFBTheme.init().errorColorPrimary, range: range)
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: campaign?.theme.errorColorPrimary ?? Theme.init().errorColorPrimary, range: range)
         label.attributedText = attributedString
         
         
@@ -359,7 +359,7 @@ class UXFDataManager: UXFFieldDelegate {
         return view
     }
     
-    private func getFieldFooter(_ field: UXFField) -> UIView {
+    private func getFieldFooter(_ field: Field) -> UIView {
         if isError && fieldNeedComplete(field) {
             guard let warning = field.uiData["warning"] as? String else {
                 return UIView()
@@ -392,7 +392,7 @@ class UXFDataManager: UXFFieldDelegate {
         }
     }
     
-    private func getFieldHeight(_ field: UXFField) -> CGFloat {
+    private func getFieldHeight(_ field: Field) -> CGFloat {
         if !checkFieldTransfromed(field) {
             return .leastNonzeroMagnitude
         }
@@ -502,7 +502,7 @@ class UXFDataManager: UXFFieldDelegate {
     
     //MARK: - UXFFieldDelegate
     
-    func buttonTapped(_ field: UXFField, answer: [String], refresh: Bool) {
+    func buttonTapped(_ field: Field, answer: [String], refresh: Bool) {
         viewController?.view.endEditing(true)
         isError = false
         if needsComplete() {
@@ -520,7 +520,7 @@ class UXFDataManager: UXFFieldDelegate {
         }
     }
     
-    func fieldChanged(_ field: UXFField, answer: [String], refresh: Bool = true) {
+    func fieldChanged(_ field: Field, answer: [String], refresh: Bool = true) {
         answers = answers.filter { answer in ((answer["fieldId"] as? String) ?? "") != field.id }
         if answer.count > 0 {
             let transforms: [String] = campaign?.transforms.filter({
@@ -560,7 +560,7 @@ class UXFDataManager: UXFFieldDelegate {
     }
     
     
-    func textChanged(_ field: UXFField, answer: [String]) {
+    func textChanged(_ field: Field, answer: [String]) {
         answers = answers.filter { answer in ((answer["fieldId"] as? String) ?? "") != field.id }
         if answer.count > 0 {
             let newAnswer = ["fieldId": field.id as Any,
@@ -571,7 +571,7 @@ class UXFDataManager: UXFFieldDelegate {
         }
     }
     
-    func screenshotChanged(_ field: UXFField, screenshots: [UXFScreenshot]) {
+    func screenshotChanged(_ field: Field, screenshots: [Screenshot]) {
         isError = false
         _screenshots = screenshots
         
@@ -580,7 +580,7 @@ class UXFDataManager: UXFFieldDelegate {
         fieldChanged(field, answer: screenshotIds, refresh: true)
     }
     
-    func didBeginEditing(_ field: UXFField) {
+    func didBeginEditing(_ field: Field) {
         guard let fieldIndex = campaign?.pages[currentPage].fields.firstIndex(where: { (fld) -> Bool in
             fld.id == field.id
         }) else {
@@ -606,7 +606,7 @@ class UXFDataManager: UXFFieldDelegate {
         var formattedAnswers = Array<Dictionary<String, Any>>()
         answers.forEach { (answer) in
             var item = answer
-            switch (UXFFieldType(rawValue: item["type"] as! String)) {
+            switch (FieldType(rawValue: item["type"] as! String)) {
             case .radiobutton, .email, .input:
                 item["value"] = (answer["value"] as? [String])?.first
                 
@@ -655,7 +655,7 @@ class UXFDataManager: UXFFieldDelegate {
     
     //MARK: - TRANSFORMATIONS
     
-    private func fieldNeedComplete(_ field: UXFField) -> Bool {
+    private func fieldNeedComplete(_ field: Field) -> Bool {
         let required = ((field.uiData["required"] as? Bool) ?? false) //|| (field.type == .smiles)
         let transformered = checkFieldTransfromed(field)
         let answered = answers.map({ (dict) -> String in
@@ -702,7 +702,7 @@ class UXFDataManager: UXFFieldDelegate {
             
             let answers = (answer?["value"] as? [String]) ?? []
             
-            let type = UXFFieldType(rawValue: (answer?["type"] as? String) ?? "")
+            let type = FieldType(rawValue: (answer?["type"] as? String) ?? "")
             
             switch transform.condition?.rule {
             case "equal":
@@ -792,7 +792,7 @@ class UXFDataManager: UXFFieldDelegate {
         }
     }
     
-    private func checkFieldTransfromed(_ field: UXFField) -> Bool {
+    private func checkFieldTransfromed(_ field: Field) -> Bool {
         guard let transforms = campaign?.transforms.filter({ $0.to.value == field.id }),
               transforms.count > 0 else {
             return true
@@ -806,7 +806,7 @@ class UXFDataManager: UXFFieldDelegate {
         }
         
         for transform in transforms {
-            let type = UXFFieldType(rawValue: (answer["type"] as? String) ?? "")
+            let type = FieldType(rawValue: (answer["type"] as? String) ?? "")
             let answers = (answer["value"] as? [String]) ?? []
             
             switch transform.condition?.rule {

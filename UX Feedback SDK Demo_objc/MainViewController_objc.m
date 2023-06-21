@@ -60,7 +60,7 @@
      NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
-- (void) campaignDidCloseWithFeedbackResult:(UXFeedbackResult *)result
+- (void) campaignDidCloseWithFeedbackResult:(FeedbackResult *)result
                 isRedirectToAppStoreEnabled:(BOOL)isRedirectToAppStoreEnabled{
      NSLog(@"%s", __PRETTY_FUNCTION__);
 }
@@ -77,14 +77,14 @@
 }
 
 - (void) formDidCloseWithFormID:(NSString *)formID
-            withFeedbackResults:(NSArray<UXFeedbackResult *> *)results
+            withFeedbackResults:(NSArray<FeedbackResult *> *)results
     isRedirectToAppStoreEnabled:(BOOL)isRedirectToAppStoreEnabled{
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void) formWillCloseWithForm:(UXFViewController *)form
                         formID:(NSString *)formID
-           withFeedbackResults:(NSArray<UXFeedbackResult *> *)results
+           withFeedbackResults:(NSArray<FeedbackResult *> *)results
    isRedirectToAppStoreEnabled:(BOOL)isRedirectToAppStoreEnabled{
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }

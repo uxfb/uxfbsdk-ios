@@ -37,16 +37,15 @@ enum ContentType: String {
     case screenshot = "multipart/form-data; boundary=-----------------------------0123456789"
 }
 
-enum UXFAPIWebRouter {
-    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
-//    static let defaultEndpoint: String = "https://develop.api.uxfb.space"
+enum APIWebRouter {
+    static let defaultEndpoint: String = Consts.defaultEndpoint
     
     static var endpoint: String = "\(defaultEndpoint)/v8"
     
     case getCampaing(appID: String)
     case showForm(uid: String, campaingId: String)
     case saveFormData(projectId: String?, uid: String, campaignId: String, pages: Array<Dictionary<String, Any>>, info: Dictionary<String, Any>, properties: Dictionary<String, Any>)
-    case saveScreenshot(screenshot: UXFScreenshotData)
+    case saveScreenshot(screenshot: ScreenshotData)
     
     var method: String {
         switch self {
@@ -189,7 +188,7 @@ enum UXFAPIWebRouter {
     }
     
     func asURL() throws -> URL{
-        let urlComponents = UXFURLComponents(baseUrl: UXFAPIWebRouter.endpoint,
+        let urlComponents = URLComponents(baseUrl: APIWebRouter.endpoint,
                                              path: path,
                                              queryParameters: pathParameters)
         return urlComponents.url!

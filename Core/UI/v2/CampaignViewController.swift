@@ -11,21 +11,21 @@ import PhotosUI
 
 let visualEffectViewTag = 777
 
-enum UXFViewPopupDirection {
+enum ViewPopupDirection {
     case upToDown
     case downToUp
     case alphaIn
     case alphaOut
 }
 
-enum UXFViewControllerState{
+enum ViewControllerState{
     case presenting
     case presented
     case backDismiss
     case dismissOnly
 }
 
-internal class UXFCampaignViewController: UIViewController {
+internal class CampaignViewController: UIViewController {
     
     @IBOutlet var contentView: UIView!
     @IBOutlet var shadowView: AnimatingShadowView! {
@@ -72,25 +72,25 @@ internal class UXFCampaignViewController: UIViewController {
     
     var presentationAnimated = true  
     
-    var state: UXFViewControllerState = .presenting
-    var blackout: UXFBBlackout?
+    var state: ViewControllerState = .presenting
+    var blackout: Blackout?
     
-    var didTerminateHandler: ((_ info: Array<Dictionary<String, Any>>?, _ screenshots: [UXFScreenshot], Int, Int)->())?
+    var didTerminateHandler: ((_ info: Array<Dictionary<String, Any>>?, _ screenshots: [Screenshot], Int, Int)->())?
     var didCloseHandler: (()->(Void))?
-    var completeHandler: ((_ info: Array<Dictionary<String, Any>>?, _ screenshots: [UXFScreenshot])->())?
+    var completeHandler: ((_ info: Array<Dictionary<String, Any>>?, _ screenshots: [Screenshot])->())?
     var presentHandler: (()->())?
     
-    var presentDirection: UXFViewPopupDirection = .downToUp
-    var dismissDirection: UXFViewPopupDirection = .upToDown
+    var presentDirection: ViewPopupDirection = .downToUp
+    var dismissDirection: ViewPopupDirection = .upToDown
     
     var closeOnSwipe: Bool = false
     
-    internal var campaign: UXFCampaign?
+    internal var campaign: Campaign?
     
     private var direction: CGFloat = 0
     private var lastTouch: CGFloat = 0
     
-    private var dataManager: UXFDataManager?
+    private var dataManager: DataManager?
     
     var keyboardHeight: CGFloat = 0
     
@@ -103,7 +103,7 @@ internal class UXFCampaignViewController: UIViewController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        dataManager = UXFDataManager(self, campaign: campaign)
+        dataManager = DataManager(self, campaign: campaign)
         prepareUI()
         
         if presentHandler != nil {
@@ -409,13 +409,13 @@ internal class UXFCampaignViewController: UIViewController {
     }
 }
 
-extension UXFCampaignViewController: UIGestureRecognizerDelegate {
+extension CampaignViewController: UIGestureRecognizerDelegate {
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return !(touch.view is UIButton)
     }
 }
 
-extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate {
+extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return dataManager?.heightForFieldHeader(index: section) ?? 12
@@ -553,10 +553,10 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
         }
     }
     
-    private func addScreenshots(_ images: [UIImage], type: UXFScreenshotType, field: UXFField) {
+    private func addScreenshots(_ images: [UIImage], type: ScreenshotType, field: Field) {
         var screenshots = dataManager?.screenshots
         for image in images {
-            screenshots?.append(UXFScreenshot(id: .randomImageName, image: image, type: type, field: field))
+            screenshots?.append(Screenshot(id: .randomImageName, image: image, type: type, field: field))
         }
         
         dataManager?.screenshotChanged(field, screenshots: screenshots ?? [])
@@ -684,7 +684,7 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
     
     //MARK: - Table View support
     
-    private func createCell<T: UXFBaseCell>(_ type: T.Type, indexPath: IndexPath, field: UXFField) -> T {
+    private func createCell<T: UXFBaseCell>(_ type: T.Type, indexPath: IndexPath, field: Field) -> T {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: T.self), for: indexPath) as! T
         cell.configureWith(field, theme: (campaign?.theme)!, delegate: dataManager!, valueIndex: indexPath.row)
         cell.backgroundColor = campaign?.theme.bgColor ?? .white
@@ -747,7 +747,7 @@ extension UXFCampaignViewController: UITableViewDataSource, UITableViewDelegate 
     }
 }
 
-extension UXFCampaignViewController: PHPhotoLibraryChangeObserver {
+extension CampaignViewController: PHPhotoLibraryChangeObserver {
     public func photoLibraryDidChange(_ changeInstance: PHChange) {
         let photosCount = PHAsset.fetchAssets(with: .image, options: nil).count
         if photosCount > 0 {

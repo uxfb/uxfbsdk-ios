@@ -8,9 +8,9 @@
 
 import UIKit
 
-struct UXFField {
+struct Field {
     private(set) var id: String?
-    private(set) var type: UXFFieldType?
+    private(set) var type: FieldType?
     private(set) var value: String?
     private(set) var uiData: Dictionary<String, Any>
     var answers: [String] = []

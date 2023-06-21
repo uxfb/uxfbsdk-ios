@@ -8,33 +8,33 @@
 
 import UIKit
 
-class UXFParser {
+class Parser {
     static let contenViewOffset: CGFloat = 15.0
     static let contentSubviewOffset: CGFloat = 8.0
     static let formControllerViewOffset: CGFloat = 16.0
     static let bottomOffset: CGFloat = 8
     
-    private(set) var customTheme: UXFBTheme?
+    private(set) var customTheme: Theme?
     private(set) var isInitTheme: Bool = false
     private var _uiGroupDictionary: Dictionary <String, Array<String>> = [:]
     private var containerWidth: CGFloat {
-        return (UIScreen.main.bounds.width - (UXFParser.formControllerViewOffset + UXFParser.contenViewOffset)*2)
+        return (UIScreen.main.bounds.width - (Parser.formControllerViewOffset + Parser.contenViewOffset)*2)
     }
     
-    init(theme: UXFBTheme?, isInitTheme: Bool = false) {
+    init(theme: Theme?, isInitTheme: Bool = false) {
         self.customTheme = theme
         self.isInitTheme = isInitTheme
     }
     
-    func parseTheme(jsonDict: Dictionary<String,Any>) -> UXFBTheme? {
+    func parseTheme(jsonDict: Dictionary<String,Any>) -> Theme? {
         if let jsonData = try? JSONSerialization.data(withJSONObject: jsonDict, options: .prettyPrinted) {
-           let theme = try! JSONDecoder().decode(UXFBTheme.self, from: jsonData)
+           let theme = try! JSONDecoder().decode(Theme.self, from: jsonData)
            return theme
         }
         return nil
     }
     
-     func parseCampaign(campaignInfo: Dictionary<String,Any>) -> UXFCampaign?{
+     func parseCampaign(campaignInfo: Dictionary<String,Any>) -> Campaign?{
         
          let type = "\(campaignInfo["type"] as! Int)"
          let targetingArr = campaignInfo["targeting"] as! Array<Dictionary<String, Any>>
@@ -46,14 +46,14 @@ class UXFParser {
          let showCopyright: Bool = campaignInfo["showCopyright"] as? Bool ?? true
          
         
-        var theme: UXFBTheme?
+        var theme: Theme?
         if let customTheme = self.customTheme, isInitTheme == true {
             theme = customTheme
         }
         else {
-            theme = UXFBTheme.init()
+            theme = Theme.init()
             if let design = campaignInfo["design"] as? Dictionary<String, Any>,
-               let themeType = UXFBThemeType.init(rawValue: (design["theme"] as? Int) ?? 0),
+               let themeType = ThemeType.init(rawValue: (design["theme"] as? Int) ?? 0),
                    themeType == .custom {
                 if let campaignTheme = parseTheme(jsonDict: design) {
                    theme = campaignTheme
@@ -61,38 +61,38 @@ class UXFParser {
             }
         }
         
-        var pages = Array<UXFPage>()
+        var pages = Array<Page>()
         if let pagesArrayOfDict = campaignInfo["pages"] as? Array<Dictionary<String, Any>> {
             for pageDict in pagesArrayOfDict{
                 DDLogDebug("page: \(pageDict)")
                 let pageId: String? = pageDict["id"] as? String
                 let type: Int? = pageDict["type"] as? Int
                 let fieldsDict = pageDict["fields"] as? Array<Dictionary<String, Any>> ?? []
-                var fields = Array<UXFField>()
+                var fields = Array<Field>()
                 for fieldDict in fieldsDict {
                     let fieldId: String? = fieldDict["id"] as? String
                     let fieldType: String? = fieldDict["type"] as? String
                     let fieldValue: String? = fieldDict["value"] as? String
-                    let field = UXFField(id: fieldId,
-                                         type: UXFFieldType(rawValue: fieldType ?? ""),
+                    let field = Field(id: fieldId,
+                                         type: FieldType(rawValue: fieldType ?? ""),
                                          value: fieldValue,
                                          uiData: fieldDict)
                     fields.append(field)
                 }
                 
                 let buttonsDict = pageDict["buttons"] as? Array<Dictionary<String, Any>> ?? []
-                var buttons = Array<UXFField>()
+                var buttons = Array<Field>()
                 for buttonDict in buttonsDict {
                     let buttonId: String? = buttonDict["id"] as? String
                     let buttonType: String? = buttonDict["type"] as? String
                     let buttonValue: String? = buttonDict["value"] as? String
-                    let button = UXFField(id: buttonId,
-                                          type: UXFFieldType(rawValue: buttonType ?? ""),
+                    let button = Field(id: buttonId,
+                                          type: FieldType(rawValue: buttonType ?? ""),
                                           value: buttonValue,
                                           uiData: buttonDict)
                     buttons.append(button)
                 }
-                let page = UXFPage.init(id: pageId,
+                let page = Page.init(id: pageId,
                                         type: type,
                                         fields: fields,
                                         buttons: buttons)
@@ -100,7 +100,7 @@ class UXFParser {
             }
         }
         
-        var transformArr = Array<UXFTransform>()
+        var transformArr = Array<Transform>()
         if let transformsArrayOfDict = campaignInfo["transforms"] as? Array<Dictionary<String, Any>> {
             for transformDict in transformsArrayOfDict{
                 DDLogDebug("transform: \(transformDict)")
@@ -108,7 +108,7 @@ class UXFParser {
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: transformDict, options: [])
                     let decoder = JSONDecoder()
-                    let transform = try decoder.decode(UXFTransform.self, from: jsonData)
+                    let transform = try decoder.decode(Transform.self, from: jsonData)
                     
                     transformArr.append(transform)
                 } catch {
@@ -117,10 +117,10 @@ class UXFParser {
             }
         }
 
-        return UXFCampaign(campaignId: campaingId,
+        return Campaign(campaignId: campaingId,
                            theme: theme,
                            pages: pages,
-                           type: UXFCampaignType.init(rawValue: type),
+                           type: CampaignType.init(rawValue: type),
                            targetings: targetingArr,
                            transforms: transformArr,
                            isProgressEnabled: progress,

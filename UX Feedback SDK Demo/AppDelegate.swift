@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let customTheme = UXFBTheme()
+        let customTheme = Theme()
         customTheme.text03Color =  UIColor.init("#8B90A0")
         customTheme.inputBorderColor =  UIColor.init("#D3D4D8")
         customTheme.iconColor =  UIColor.init("#B5B8C2")
@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //    endpoint: "AAAAAAAAAAAAAHYwMhEVF1hOTAolMWgBABIHDQwbey0+AwABBgMCCD52NBA=",
         UXFeedback.setup(appID: uxfAppID,
-                         settings: UXFBSettings())
+                         settings: Settings())
         
         UXFeedback.sdk.theme = customTheme
         UXFeedback.sdk.settings.debugEnabled = true

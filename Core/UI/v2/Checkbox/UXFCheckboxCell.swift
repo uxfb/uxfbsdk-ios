@@ -19,7 +19,7 @@ class UXFCheckboxCell: UXFBaseCell, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    private var options: Array<UXFOption> = []
+    private var options: Array<Option> = []
     private var isError: Bool = false
     
     override func updateUI() {
@@ -27,7 +27,7 @@ class UXFCheckboxCell: UXFBaseCell, UITableViewDelegate, UITableViewDataSource {
             return
         }
 
-        guard let opt = try? JSONDecoder().decode([UXFOption].self,
+        guard let opt = try? JSONDecoder().decode([Option].self,
                                                       from: data) else {
             return
         }

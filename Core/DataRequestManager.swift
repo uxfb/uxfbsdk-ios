@@ -17,40 +17,40 @@ extension NSManagedObjectContext {
     }
 }
 
-protocol UXFRequestManagerDelegate {
-    func campaingsLoaded(success: Bool, message: String?, delay: Int?, campaigns: Array<UXFCampaign>)
+protocol RequestManagerDelegate {
+    func campaingsLoaded(success: Bool, message: String?, delay: Int?, campaigns: Array<Campaign>)
     func formDataSaved(success: Bool, message: String?, capmaignId: String)
 }
 
-public struct UXFNetworkSettings {
+public struct NetworkSettings {
     var requestTimeout: Double
     var retryCount: Int
     var retryTimeout: Double
 }
 
-final class UXFRequestManager: NSObject {
+final class DataRequestManager: NSObject {
     private let identifier: String  = "biz.andalex.uxfeedback.sdk"
     private let model: String = "RequestModel"
     
-    private var _apiClient: UXFAPIClient!
+    private var _apiClient: APIClient!
     
-    private var delegate: UXFRequestManagerDelegate?
+    private var delegate: RequestManagerDelegate?
     
-    var settings: UXFNetworkSettings!
+    var settings: NetworkSettings!
     
     private var attempts = 0
     
     init(endpoint: String?,
          appID: String,
-         parser: UXFParser,
-         delegate: UXFRequestManagerDelegate?) {
+         parser: Parser,
+         delegate: RequestManagerDelegate?) {
         super.init()
-        self._apiClient = UXFAPIClient(endpoint: endpoint,
+        self._apiClient = APIClient(endpoint: endpoint,
                                        appID: appID,
                                        parser: parser)
         self.delegate = delegate
         
-        settings = UXFNetworkSettings(requestTimeout: 5,
+        settings = NetworkSettings(requestTimeout: 5,
                                       retryCount: 3,
                                       retryTimeout: 10)
         self.prepareAndSend()
@@ -82,12 +82,12 @@ final class UXFRequestManager: NSObject {
         createRequest("SHOW_FORM", parameters: jsonData)
     }
     
-    public func sendScreenshotsData(screenshots: [UXFScreenshot]) {
+    public func sendScreenshotsData(screenshots: [Screenshot]) {
         for screenshot in screenshots {
             let image = screenshot.image
             let data = image.jpegData(compressionQuality: 1)
             let base64image = data?.base64EncodedString() ?? ""
-            let dataScreenshot = UXFScreenshotData(id: screenshot.id, base64image: base64image)
+            let dataScreenshot = ScreenshotData(id: screenshot.id, base64image: base64image)
             let jsonData = try? JSONEncoder().encode(dataScreenshot)
             createRequest("SCREENSHOT", parameters: jsonData)
         }
@@ -171,7 +171,7 @@ final class UXFRequestManager: NSObject {
             }
             
         case "SCREENSHOT":
-            guard let data = data, let dataScreenshot = try? JSONDecoder().decode(UXFScreenshotData.self, from: data) else {
+            guard let data = data, let dataScreenshot = try? JSONDecoder().decode(ScreenshotData.self, from: data) else {
                 self.deleteRequest(request, completion: { })
                 return
             }

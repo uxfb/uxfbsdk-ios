@@ -50,7 +50,7 @@ class UXFScreenshotCell: UXFBaseCell {
                                     forCellWithReuseIdentifier: "UXFScreenshotImageCell")
         }
     }
-    private var screenshots: [UXFScreenshot] = []
+    private var screenshots: [Screenshot] = []
     
     private var maxCount: Int = 3
     
@@ -68,7 +68,7 @@ class UXFScreenshotCell: UXFBaseCell {
         super.setSelected(selected, animated: animated)
     }
     
-    public func setScreenshots(_ screenshots: [UXFScreenshot]) {
+    public func setScreenshots(_ screenshots: [Screenshot]) {
         self.screenshots = screenshots
         
         
@@ -110,7 +110,7 @@ class UXFScreenshotCell: UXFBaseCell {
         }
     }
     
-    public func setActions(take: @escaping (() -> ()), select: @escaping (() -> ()), campaignType: UXFCampaignType) {
+    public func setActions(take: @escaping (() -> ()), select: @escaping (() -> ()), campaignType: CampaignType) {
         self.takeAction = take
         self.selectAction = select
         var height: CGFloat = 0

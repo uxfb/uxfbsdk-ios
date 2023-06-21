@@ -9,24 +9,24 @@
 import UIKit
 import Foundation
 
-protocol UXFCampaignFormPresentorProtocol: AnyObject {
-    func formSubmitted(info: Array<Dictionary<String, Any>>?, screenshots: [UXFScreenshot], campaign: UXFCampaign)
+protocol CampaignFormPresentorProtocol: AnyObject {
+    func formSubmitted(info: Array<Dictionary<String, Any>>?, screenshots: [Screenshot], campaign: Campaign)
 }
 
-class UXFCampaignPresentor: NSObject {
+internal class CampaignPresentor: NSObject {
 
     weak var feedbackCampaignDelegate: UXFeedbackCampaignDelegate?
-    weak var delegate: UXFCampaignFormPresentorProtocol?
+    weak var delegate: CampaignFormPresentorProtocol?
     var isAnimationFormEnabled: Bool = true
     
-    private var _campaign: UXFCampaign!
+    private var _campaign: Campaign!
     private weak var _appWindow: UIWindow!
-    internal weak var _currentForm: UXFCampaignViewController?
+    internal weak var _currentForm: CampaignViewController?
     
     internal var isFormOnScreen = false
     
     init(window: UIWindow,
-         campaign: UXFCampaign,
+         campaign: Campaign,
          animationEnabled: Bool = true) {
         
         super.init()
@@ -36,7 +36,7 @@ class UXFCampaignPresentor: NSObject {
         isAnimationFormEnabled = animationEnabled
     }
     
-    func showCampaign(uiBlocked: Bool, closeOnSwipe: Bool, blackout: UXFBBlackout?){
+    func showCampaign(uiBlocked: Bool, closeOnSwipe: Bool, blackout: Blackout?){
         let form = createCampaignForm(_campaign)
         switch _campaign.type {
         case .slidein:
@@ -50,8 +50,8 @@ class UXFCampaignPresentor: NSObject {
         }
     }
     
-    open func createCampaignForm(_ campaign: UXFCampaign) -> UXFCampaignViewController {
-        let controller = UXFCampaignViewController()
+    open func createCampaignForm(_ campaign: Campaign) -> CampaignViewController {
+        let controller = CampaignViewController()
         controller.campaign = campaign
         var eventName: String = ""
         if let targeting = campaign.targetings.first {
@@ -91,7 +91,7 @@ class UXFCampaignPresentor: NSObject {
         return controller
     }
     
-    private func showCampaignController(controller: UXFCampaignViewController, direction: UXFViewPopupDirection, uiBlocked: Bool = false, closeOnSwipe: Bool = false, blackout: UXFBBlackout? = nil) {
+    private func showCampaignController(controller: CampaignViewController, direction: ViewPopupDirection, uiBlocked: Bool = false, closeOnSwipe: Bool = false, blackout: Blackout? = nil) {
         
         _ = self.dismissCurrentForm() {
             
@@ -143,7 +143,7 @@ class UXFCampaignPresentor: NSObject {
     }
 }
 
-extension UXFCampaignPresentor: UIViewControllerTransitioningDelegate{
+extension CampaignPresentor: UIViewControllerTransitioningDelegate{
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return UXFCampaignAnimatorPresenter()
     }
@@ -163,7 +163,7 @@ private class UXFCampaignAnimatorPresenter: NSObject, UIViewControllerAnimatedTr
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
 
         //let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
-        let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as! UXFCampaignViewController
+        let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as! CampaignViewController
         let finalFrameForVC = transitionContext.finalFrame(for: toViewController)
         let containerView = transitionContext.containerView
         
@@ -252,7 +252,7 @@ private class UXFCampaignAnimatorDismisser: NSObject, UIViewControllerAnimatedTr
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let container = transitionContext.containerView
  
-        let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as! UXFCampaignViewController
+        let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as! CampaignViewController
         
         var animationOptions: UIView.AnimationOptions = .curveEaseOut
         var endAlpha: CGFloat = 1.0
@@ -262,7 +262,7 @@ private class UXFCampaignAnimatorDismisser: NSObject, UIViewControllerAnimatedTr
         var endYOffset: CGFloat = 0.0
         let endXOffset: CGFloat = 0.0
         
-        let direction: UXFViewPopupDirection = fromViewController.dismissDirection
+        let direction: ViewPopupDirection = fromViewController.dismissDirection
         
         switch direction {
            case .alphaOut:

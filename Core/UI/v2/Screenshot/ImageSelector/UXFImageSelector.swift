@@ -12,13 +12,13 @@ import Photos
 class UXFImageSelector: UIView, PHPhotoLibraryChangeObserver {
     @IBOutlet weak var permissionView: UIView! {
         didSet {
-            permissionView.backgroundColor = UXFBTheme().controlBgColor
+            permissionView.backgroundColor = Theme().controlBgColor
         }
     }
     
     @IBOutlet weak var permissionLabel: UILabel! {
         didSet {
-            permissionLabel.textColor = UXFBTheme().text02Color
+            permissionLabel.textColor = Theme().text02Color
         }
     }
     
@@ -27,7 +27,7 @@ class UXFImageSelector: UIView, PHPhotoLibraryChangeObserver {
             let color = UIColor.white
             permissionButton.setTitleColor(color, for: .normal)
             permissionButton.setTitleColor(color.withAlphaComponent(0.5), for: .highlighted)
-            permissionButton.backgroundColor = UXFBTheme().mainColor
+            permissionButton.backgroundColor = Theme().mainColor
             permissionButton.layer.cornerRadius = 4.0
             permissionButton.layer.masksToBounds = true
             

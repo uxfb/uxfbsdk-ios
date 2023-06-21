@@ -9,7 +9,7 @@
 import Foundation
 import AVFoundation
 
-enum UXFAPIClientResponseResult{
+enum APIClientResponseResult{
     case success
     case fail
     case cancelled
@@ -24,22 +24,22 @@ internal func DDLogDebug(_ value: Any){
 let uxfErrorRequestCancelled = -999
 let uxfTokenErrorMessage: String = "Invalid token".localized()
 
-class UXFAPIClient {
+class APIClient {
     private(set) var appID: String!
-    private var _parser: UXFParser!
+    private var _parser: Parser!
     private var _endpoint: String
     
     private var _version: String = "v8"
     
     public var timeout: Int = 5
     
-    init(endpoint: String?, appID: String, parser: UXFParser) {
+    init(endpoint: String?, appID: String, parser: Parser) {
         _parser = parser
         self.appID = appID
         if let endpoint = endpoint {
             self._endpoint = endpoint
         } else {
-            self._endpoint = UXFAPIWebRouter.defaultEndpoint
+            self._endpoint = APIWebRouter.defaultEndpoint
         }
         
         NotificationCenter.default.addObserver(self,selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
@@ -53,16 +53,16 @@ class UXFAPIClient {
         //self.getAllCampaings(completion: nil)
     }
     
-    func getAllCampaings(completion: ((_ success: Bool, _ httpCode: Int, _ message: String?, _ intervalIos: Int?, _ campaigns: Array<UXFCampaign>)->())?){
+    func getAllCampaings(completion: ((_ success: Bool, _ httpCode: Int, _ message: String?, _ intervalIos: Int?, _ campaigns: Array<Campaign>)->())?){
     
      DDLogDebug("Get all campaings:")
      
-     _ = self.performRequest(route: UXFAPIWebRouter.getCampaing(appID: self.appID))
+     _ = self.performRequest(route: APIWebRouter.getCampaing(appID: self.appID))
       {[weak self] (status, httpCode, message, result) in
         
         if status == .success {
             if let campaignsResults = result as? Array<Dictionary<String, Any>> {
-                var campaigns: Array<UXFCampaign> = []
+                var campaigns: Array<Campaign> = []
                 for compaignInfo in campaignsResults{
                     if let campaign =  self?._parser.parseCampaign(campaignInfo: compaignInfo){
                        campaigns.append(campaign)
@@ -74,7 +74,7 @@ class UXFAPIClient {
             }
             else if let results = result as? Dictionary<String, Any> {
                 if let campaignsResults = results["campaigns"] as? Array<Dictionary<String, Any>> {
-                    var campaigns: Array<UXFCampaign> = []
+                    var campaigns: Array<Campaign> = []
                     for compaignInfo in campaignsResults{
                         if let campaign =  self?._parser.parseCampaign(campaignInfo: compaignInfo){
                            campaigns.append(campaign)
@@ -107,14 +107,14 @@ class UXFAPIClient {
                       properties: Dictionary<String,Any>?,
                       completion: ((_ success: Bool, _ httpCode: Int, _ message: String?)->())?){
         
-        let responseHandler = {(status: UXFAPIClientResponseResult, httpCode: Int, message: String?, result: Any?) in
+        let responseHandler = {(status: APIClientResponseResult, httpCode: Int, message: String?, result: Any?) in
             DDLogDebug(String(describing: result))
             completion?(status == .success, httpCode, message)
         }
         
-        let systemInfo = UXFStatisticManager.getDeviceInfo()
+        let systemInfo = StatisticManager.getDeviceInfo()
         
-        _ = self.performRequest(route: UXFAPIWebRouter.saveFormData(projectId: projectId,
+        _ = self.performRequest(route: APIWebRouter.saveFormData(projectId: projectId,
                                                                     uid: uid,
                                                                     campaignId: campaignId,
                                                                     pages: pages ?? [], info: systemInfo,
@@ -125,32 +125,32 @@ class UXFAPIClient {
     func showForm(campaingId: String,
                    completion: ((_ success: Bool, _ httpCode: Int)->())?){
         
-        let responseHandler = {(status: UXFAPIClientResponseResult, httpCode: Int, message: String?, result: Any?) in
+        let responseHandler = {(status: APIClientResponseResult, httpCode: Int, message: String?, result: Any?) in
             DDLogDebug(String(describing: result))
             completion?(status == .success, httpCode)
         }
         
-        _ = performRequest(route: UXFAPIWebRouter.showForm(uid: uid,
+        _ = performRequest(route: APIWebRouter.showForm(uid: uid,
                                                            campaingId: campaingId),
                            completion: responseHandler)
     }
     
-    func saveScreenshotsData(_ screenshot: UXFScreenshotData,
+    func saveScreenshotsData(_ screenshot: ScreenshotData,
                              completion: ((_ success: Bool, _ httpCode: Int)->())?){
-        let responseHandler = {(status: UXFAPIClientResponseResult, httpCode: Int, message: String?, result: Any?) in
+        let responseHandler = {(status: APIClientResponseResult, httpCode: Int, message: String?, result: Any?) in
             DDLogDebug(String(describing: result))
             completion?(status == .success, httpCode)
         }
         
-        _ = performRequest(route: UXFAPIWebRouter.saveScreenshot(screenshot: screenshot),
+        _ = performRequest(route: APIWebRouter.saveScreenshot(screenshot: screenshot),
                            completion: responseHandler)
     }
     
     //MARK: internal request
     
-    internal func performRequest(route: UXFAPIWebRouter, completion: @escaping (UXFAPIClientResponseResult, Int, String?, Any?)->()) -> URLSessionDataTask?{
+    internal func performRequest(route: APIWebRouter, completion: @escaping (APIClientResponseResult, Int, String?, Any?)->()) -> URLSessionDataTask?{
         
-        UXFAPIWebRouter.endpoint = "\(self._endpoint)/\(_version)"
+        APIWebRouter.endpoint = "\(self._endpoint)/\(_version)"
         
         guard var urlRequest = try? route.asURLRequest() else{
              completion(.fail, 0, "Error url request", nil)

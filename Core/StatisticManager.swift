@@ -13,7 +13,7 @@ let IS_IPAD = (UIDevice.current.userInterfaceIdiom == .pad)
 
 let uid = UIDevice.current.identifierForVendor?.uuidString ?? ""
 
-class UXFStatisticManager{
+class StatisticManager{
     
     class func getDeviceInfo() -> (Dictionary<String, Any>){
         

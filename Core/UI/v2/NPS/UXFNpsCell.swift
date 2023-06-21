@@ -71,7 +71,7 @@ class UXFSliderView: UIView {
         self.addSubview(imageContentView)
     }
     
-    func setStyle(_ sliderStyle: SliderStyle, theme: UXFBTheme) {
+    func setStyle(_ sliderStyle: SliderStyle, theme: Theme) {
         switch sliderStyle {
         case .inactive:
             bigBorderView.backgroundColor = theme.iconColor.withAlphaComponent(0.3)

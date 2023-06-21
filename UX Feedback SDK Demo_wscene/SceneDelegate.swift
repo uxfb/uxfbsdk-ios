@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         UXFeedback.sdk.setup(appID: uxfAppID,
                                         window: window,
-                                        theme: UXFBTheme()) { (success) in
+                                        theme: Theme()) { (success) in
             
         }
         

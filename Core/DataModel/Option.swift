@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct UXFOption: Codable {
+struct Option: Codable {
     let id: String
     let value: String
 }

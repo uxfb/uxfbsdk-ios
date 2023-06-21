@@ -6,7 +6,7 @@
 //  Copyright © 2019 UXF. All rights reserved.
 //
 
-struct UXFText: Decodable {
+struct Text: Decodable {
     let colorString: String!
     var color: UIColor{
         return UIColor(self.colorString)

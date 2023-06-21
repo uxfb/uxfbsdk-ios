@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class UXFCrypto: NSObject {
+final class Crypto: NSObject {
     
     public var uid: String {
         return UIDevice.current.identifierForVendor?.uuidString ?? ""

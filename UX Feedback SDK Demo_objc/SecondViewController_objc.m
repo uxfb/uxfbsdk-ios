@@ -40,7 +40,7 @@
      NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
-- (void) campaignDidCloseWithFeedbackResult:(UXFeedbackResult *)result
+- (void) campaignDidCloseWithFeedbackResult:(FeedbackResult *)result
                 isRedirectToAppStoreEnabled:(BOOL)isRedirectToAppStoreEnabled{
      NSLog(@"%s", __PRETTY_FUNCTION__);
 }

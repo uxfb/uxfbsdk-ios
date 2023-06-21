@@ -27,7 +27,7 @@ class MainViewController_swift: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            let customTheme = UXFBTheme()
+            let customTheme = Theme()
             customTheme.text03Color =  UIColor.init("#000000")
             customTheme.inputBorderColor =  UIColor.init("#D3D4D8")
             customTheme.iconColor =  UIColor.init("#B5B8C2")

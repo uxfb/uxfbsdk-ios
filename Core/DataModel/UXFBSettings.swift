@@ -8,7 +8,7 @@
 
 /// Класс настроек SDK. Для создания экземпляра настроек по умолчанию необходимо вызвать метод ``init()``
 @objcMembers
-open class UXFBSettings: NSObject {
+open class Settings: NSObject {
     /// Глобальный таймер задержки показа кампании
     open var globalDelayTimer : Int = 1800
     
