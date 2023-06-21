@@ -44,10 +44,10 @@ open class YoHe: NSObject {
     public let version = Consts.version
     
     /// Делегат, реализующий интерфейс обработки событий
-    open weak var campaignDelegate: UXFeedbackCampaignDelegate?
+    open weak var campaignDelegate: YoHeCampaignDelegate?
     
     /// Делегат, реализующий интерфейс обработки лога
-    open weak var logDelegate: UXFeedbackLogDelegate?
+    open weak var logDelegate: YoHeLogDelegate?
     
     /// Объект настроек SDK
     open var settings: YoHeSettings = YoHeSettings()
@@ -126,9 +126,9 @@ open class YoHe: NSObject {
     ///   - campaignDelegate: Делегат обработки событий SDK
     ///   - logDelegate: Делегат обработки логов SDK
     public static func setup(appID: String,
-                             settings: Settings,
-                             campaignDelegate: UXFeedbackCampaignDelegate? = nil,
-                             logDelegate: UXFeedbackLogDelegate? = nil) {
+                             settings: YoHeSettings,
+                             campaignDelegate: YoHeCampaignDelegate? = nil,
+                             logDelegate: YoHeLogDelegate? = nil) {
         
         sdk.appId = appID
         sdk.settings = settings

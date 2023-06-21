@@ -6,9 +6,11 @@
 //  Copyright © 2019 UXF. All rights reserved.
 //
 
+import UIKit
+
 struct Text: Decodable {
     let colorString: String!
-    var color: UIColor{
+    var color: UIColor {
         return UIColor(self.colorString)
     }
     

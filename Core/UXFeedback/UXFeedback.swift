@@ -51,7 +51,7 @@ open class UXFeedback: NSObject {
     open weak var logDelegate: FeedbackLogDelegate?
     
     /// Объект настроек SDK
-    open var settings: Settings = Settings()
+    open var settings: UXFBSettings = UXFBSettings()
     
     /// Объект темы SDK
     open var theme: UXFBTheme = UXFBTheme()
@@ -119,8 +119,6 @@ open class UXFeedback: NSObject {
         
     }
 
-    
-    
     /// Метод инициализации и первичной настройки SDK
     /// - Parameters:
     ///   - appID: Идентификатор приложения
@@ -128,7 +126,7 @@ open class UXFeedback: NSObject {
     ///   - campaignDelegate: Делегат обработки событий SDK
     ///   - logDelegate: Делегат обработки логов SDK
     public static func setup(appID: String,
-                             settings: Settings,
+                             settings: UXFBSettings,
                              campaignDelegate: FeedbackCampaignDelegate? = nil,
                              logDelegate: FeedbackLogDelegate? = nil) {
         

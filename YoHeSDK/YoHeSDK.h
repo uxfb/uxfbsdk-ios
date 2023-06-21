@@ -6,7 +6,8 @@
 //  Copyright © 2023 UXF. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <YoHeSDK/YYImage.h>
 
 //! Project version number for YoHe.
 FOUNDATION_EXPORT double YoHeVersionNumber;

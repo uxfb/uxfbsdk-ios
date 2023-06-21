@@ -6,7 +6,7 @@
 //  Copyright © 2021 UXF. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 typealias UIButtonTargetClosure = (UIButton) -> ()
 

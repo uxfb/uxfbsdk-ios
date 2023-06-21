@@ -11,7 +11,7 @@ import UIKit
 
 /// Интерфейс обработчика различных событий от SDK
 @objc
-public protocol UXFeedbackCampaignDelegate: FeedbackCampaignDelegate {
+public protocol YoHeCampaignDelegate: FeedbackCampaignDelegate {
     /// Событие после загрузки кампаний с сервера
     /// - Parameter success: Признак успеха загрузки
     func campaignDidLoad(success: Bool)
@@ -43,7 +43,7 @@ public protocol UXFeedbackCampaignDelegate: FeedbackCampaignDelegate {
 
 /// Интерфейс обработчика событий лога от SDK
 @objc
-public protocol UXFeedbackLogDelegate: FeedbackLogDelegate {
+public protocol YoHeLogDelegate: FeedbackLogDelegate {
     /// Событие получения сообщения лога
     /// - Parameter message: Текст лога
     func logDidReceive(message: String)
