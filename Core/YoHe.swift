@@ -1,9 +1,8 @@
 //
-//  UXFeedback.swift
-//  UX Feedback Demo
+//  YoHe.swift
 //
-//  Created by Dmitry Kudryavtsev on 11.03.2019.
-//  Copyright © 2019 UXF. All rights reserved.
+//  Created by Alexander Potemka on 21.06.2023.
+//  Copyright © 2023 UXF. All rights reserved.
 //
 
 import Foundation
@@ -15,7 +14,7 @@ internal class UXFError : NSError {
     private var desc: String? = nil
     
     init(description: String?){
-        super.init(domain: "uxfeedback", code: 0, userInfo: ["description": description ?? ""])
+        super.init(domain: "yohe", code: 0, userInfo: ["description": description ?? ""])
         self.desc = description
     }
 
