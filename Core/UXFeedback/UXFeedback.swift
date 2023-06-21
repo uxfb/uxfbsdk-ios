@@ -45,16 +45,16 @@ open class UXFeedback: NSObject {
     public let version = Consts.version
     
     /// Делегат, реализующий интерфейс обработки событий
-    open weak var campaignDelegate: UXFeedbackCampaignDelegate?
+    open weak var campaignDelegate: FeedbackCampaignDelegate?
     
     /// Делегат, реализующий интерфейс обработки лога
-    open weak var logDelegate: UXFeedbackLogDelegate?
+    open weak var logDelegate: FeedbackLogDelegate?
     
     /// Объект настроек SDK
     open var settings: Settings = Settings()
     
     /// Объект темы SDK
-    open var theme: Theme = Theme()
+    open var theme: UXFBTheme = UXFBTheme()
     
     /// Дополнительные параметры, которые будут переданы при завершении прохождения опроса
     open var properties: [String: Any] = [:]
@@ -129,8 +129,8 @@ open class UXFeedback: NSObject {
     ///   - logDelegate: Делегат обработки логов SDK
     public static func setup(appID: String,
                              settings: Settings,
-                             campaignDelegate: UXFeedbackCampaignDelegate? = nil,
-                             logDelegate: UXFeedbackLogDelegate? = nil) {
+                             campaignDelegate: FeedbackCampaignDelegate? = nil,
+                             logDelegate: FeedbackLogDelegate? = nil) {
         
         sdk.appId = appID
         sdk.settings = settings
@@ -282,7 +282,7 @@ open class UXFeedback: NSObject {
 }
 
 extension UXFeedback: RequestManagerDelegate {
-    func campaingsLoaded(success: Bool, message: String?, delay: Int?, campaigns: Array<UXFCampaign>) {
+    func campaingsLoaded(success: Bool, message: String?, delay: Int?, campaigns: Array<Campaign>) {
         self._campaigns = campaigns
         self.settings.globalDelayTimer = delay ?? self.settings.globalDelayTimer
         if success == true {

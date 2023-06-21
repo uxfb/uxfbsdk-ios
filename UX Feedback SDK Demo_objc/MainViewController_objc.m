@@ -9,7 +9,7 @@
 #import "MainViewController_objc.h"
 #import <UXFeedbackSDK/UXFeedbackSDK-Swift.h>
 
-@interface MainViewController_objc () <UXFeedbackCampaignDelegate, UXFeedbackFormDelegate>
+@interface MainViewController_objc () <FeedbackCampaignDelegate, UXFeedbackFormDelegate>
 
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *busyIndicator;
 @property (nonatomic, weak) IBOutlet UIButton *dismissButton;

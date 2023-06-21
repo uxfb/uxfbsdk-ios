@@ -28,7 +28,6 @@
 		0A2A34AE2346303300B23383 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A34AD2346303300B23383 /* main.m */; };
 		0A46899622840B2C0074E1A3 /* UXFeedbackSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0A46899F22840BB90074E1A3 /* UXFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A5322366A29002FD4F8 /* UXFeedback.swift */; };
-		0A4689A022840BB90074E1A3 /* UXFeedbackDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */; };
 		0A4689A322840BB90074E1A3 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A5922367CD6002FD4F8 /* APIClient.swift */; };
 		0A4689A422840BB90074E1A3 /* URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6E2237C503002FD4F8 /* URLComponents.swift */; };
 		0A4689A522840BB90074E1A3 /* APIWebRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6C2237B773002FD4F8 /* APIWebRouter.swift */; };
@@ -62,35 +61,35 @@
 		BF01BDFD2561EF59008C641B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF01BDFC2561EF59008C641B /* Images.xcassets */; };
 		BF02FD32255C0AE300C794E6 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF02FD31255C0AE300C794E6 /* Field.swift */; };
 		BF02FD3F255C65B000C794E6 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF02FD3E255C65B000C794E6 /* Transform.swift */; };
-		BF0CE19D27661C3B00916B32 /* UXFRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0CE19927661C2200916B32 /* UXFRatingCell.swift */; };
-		BF0CE19E27661DAD00916B32 /* UXFRatingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF0CE19A27661C2200916B32 /* UXFRatingCell.xib */; };
-		BF2806AF2562B18F006F2D61 /* UXFStarsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806882562B18F006F2D61 /* UXFStarsCell.swift */; };
-		BF2806B32562B18F006F2D61 /* UXFRadioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28068E2562B18F006F2D61 /* UXFRadioCell.swift */; };
-		BF2806B42562B18F006F2D61 /* UXFRadiobuttonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28068F2562B18F006F2D61 /* UXFRadiobuttonCell.swift */; };
-		BF2806B62562B18F006F2D61 /* UXFInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806922562B18F006F2D61 /* UXFInputCell.swift */; };
-		BF2806B82562B18F006F2D61 /* UXFCheckboxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806952562B18F006F2D61 /* UXFCheckboxCell.swift */; };
-		BF2806B92562B18F006F2D61 /* UXFCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806972562B18F006F2D61 /* UXFCheckCell.swift */; };
-		BF2806BC2562B18F006F2D61 /* UXFImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28069B2562B18F006F2D61 /* UXFImageCell.swift */; };
-		BF2806BE2562B18F006F2D61 /* UXFButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28069E2562B18F006F2D61 /* UXFButtonCell.swift */; };
-		BF2806C02562B18F006F2D61 /* UXFTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A12562B18F006F2D61 /* UXFTextCell.swift */; };
+		BF0CE19D27661C3B00916B32 /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0CE19927661C2200916B32 /* RatingCell.swift */; };
+		BF0CE19E27661DAD00916B32 /* RatingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF0CE19A27661C2200916B32 /* RatingCell.xib */; };
+		BF2806AF2562B18F006F2D61 /* StarsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806882562B18F006F2D61 /* StarsCell.swift */; };
+		BF2806B32562B18F006F2D61 /* RadioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28068E2562B18F006F2D61 /* RadioCell.swift */; };
+		BF2806B42562B18F006F2D61 /* RadiobuttonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28068F2562B18F006F2D61 /* RadiobuttonCell.swift */; };
+		BF2806B62562B18F006F2D61 /* InputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806922562B18F006F2D61 /* InputCell.swift */; };
+		BF2806B82562B18F006F2D61 /* CheckboxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806952562B18F006F2D61 /* CheckboxCell.swift */; };
+		BF2806B92562B18F006F2D61 /* CheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806972562B18F006F2D61 /* CheckCell.swift */; };
+		BF2806BC2562B18F006F2D61 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28069B2562B18F006F2D61 /* ImageCell.swift */; };
+		BF2806BE2562B18F006F2D61 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28069E2562B18F006F2D61 /* ButtonCell.swift */; };
+		BF2806C02562B18F006F2D61 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A12562B18F006F2D61 /* TextCell.swift */; };
 		BF2806C22562B18F006F2D61 /* CampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A32562B18F006F2D61 /* CampaignViewController.swift */; };
-		BF2806C32562B18F006F2D61 /* UXFBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A52562B18F006F2D61 /* UXFBaseCell.swift */; };
-		BF2806C52562B18F006F2D61 /* UXFHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A82562B18F006F2D61 /* UXFHeaderCell.swift */; };
-		BF2806C62562B18F006F2D61 /* UXFEmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806AA2562B18F006F2D61 /* UXFEmailCell.swift */; };
-		BF2806C92562B18F006F2D61 /* UXFSmilesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806AE2562B18F006F2D61 /* UXFSmilesCell.swift */; };
-		BF2806D72562B6A5006F2D61 /* UXFStarsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806892562B18F006F2D61 /* UXFStarsCell.xib */; };
-		BF2806D82562B6A5006F2D61 /* UXFRadiobuttonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28068B2562B18F006F2D61 /* UXFRadiobuttonCell.xib */; };
-		BF2806D92562B6A5006F2D61 /* UXFRadioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28068D2562B18F006F2D61 /* UXFRadioCell.xib */; };
-		BF2806DA2562B6A5006F2D61 /* UXFInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806912562B18F006F2D61 /* UXFInputCell.xib */; };
-		BF2806DB2562B6A5006F2D61 /* UXFCheckboxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806942562B18F006F2D61 /* UXFCheckboxCell.xib */; };
-		BF2806DC2562B6A5006F2D61 /* UXFCheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806982562B18F006F2D61 /* UXFCheckCell.xib */; };
-		BF2806DD2562B6A6006F2D61 /* UXFImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069A2562B18F006F2D61 /* UXFImageCell.xib */; };
+		BF2806C32562B18F006F2D61 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A52562B18F006F2D61 /* BaseCell.swift */; };
+		BF2806C52562B18F006F2D61 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A82562B18F006F2D61 /* HeaderCell.swift */; };
+		BF2806C62562B18F006F2D61 /* EmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806AA2562B18F006F2D61 /* EmailCell.swift */; };
+		BF2806C92562B18F006F2D61 /* SmilesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806AE2562B18F006F2D61 /* SmilesCell.swift */; };
+		BF2806D72562B6A5006F2D61 /* StarsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806892562B18F006F2D61 /* StarsCell.xib */; };
+		BF2806D82562B6A5006F2D61 /* RadiobuttonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28068B2562B18F006F2D61 /* RadiobuttonCell.xib */; };
+		BF2806D92562B6A5006F2D61 /* RadioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28068D2562B18F006F2D61 /* RadioCell.xib */; };
+		BF2806DA2562B6A5006F2D61 /* InputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806912562B18F006F2D61 /* InputCell.xib */; };
+		BF2806DB2562B6A5006F2D61 /* CheckboxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806942562B18F006F2D61 /* CheckboxCell.xib */; };
+		BF2806DC2562B6A5006F2D61 /* CheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806982562B18F006F2D61 /* CheckCell.xib */; };
+		BF2806DD2562B6A6006F2D61 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069A2562B18F006F2D61 /* ImageCell.xib */; };
 		BF2806DE2562B6A6006F2D61 /* CampaignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069C2562B18F006F2D61 /* CampaignViewController.xib */; };
-		BF2806DF2562B6A6006F2D61 /* UXFButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069F2562B18F006F2D61 /* UXFButtonCell.xib */; };
-		BF2806E02562B6A6006F2D61 /* UXFTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806A22562B18F006F2D61 /* UXFTextCell.xib */; };
-		BF2806E12562B6A6006F2D61 /* UXFHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806A72562B18F006F2D61 /* UXFHeaderCell.xib */; };
-		BF2806E22562B6A6006F2D61 /* UXFEmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AB2562B18F006F2D61 /* UXFEmailCell.xib */; };
-		BF2806E32562B6A6006F2D61 /* UXFSmilesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AD2562B18F006F2D61 /* UXFSmilesCell.xib */; };
+		BF2806DF2562B6A6006F2D61 /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069F2562B18F006F2D61 /* ButtonCell.xib */; };
+		BF2806E02562B6A6006F2D61 /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806A22562B18F006F2D61 /* TextCell.xib */; };
+		BF2806E12562B6A6006F2D61 /* HeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806A72562B18F006F2D61 /* HeaderCell.xib */; };
+		BF2806E22562B6A6006F2D61 /* EmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AB2562B18F006F2D61 /* EmailCell.xib */; };
+		BF2806E32562B6A6006F2D61 /* SmilesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AD2562B18F006F2D61 /* SmilesCell.xib */; };
 		BF2D682229EEDD2400547634 /* DataRequest+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D682029EEDD0B00547634 /* DataRequest+CoreData.swift */; };
 		BF2D682629EEDE0F00547634 /* UXFeedbackSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = BF2D682429EEDE0100547634 /* UXFeedbackSDK.docc */; };
 		BF2D682829EEE27C00547634 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D682729EEE27B00547634 /* UIFont+.swift */; };
@@ -98,35 +97,35 @@
 		BF316C122684AAFA007CEFC0 /* VisualEffectView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF316C112684AAFA007CEFC0 /* VisualEffectView+.swift */; };
 		BF31860E2975570800B54EF5 /* DataRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF31860D2975570800B54EF5 /* DataRequestManager.swift */; };
 		BF3186112975672700B54EF5 /* RequestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF31860F2975672700B54EF5 /* RequestModel.xcdatamodeld */; };
-		BF405650265CD89E00709351 /* UXFNpsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40564C265CD86700709351 /* UXFNpsCell.swift */; };
-		BF405651265CD8A200709351 /* UXFNpsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF40564D265CD86700709351 /* UXFNpsCell.xib */; };
+		BF405650265CD89E00709351 /* NpsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40564C265CD86700709351 /* NpsCell.swift */; };
+		BF405651265CD8A200709351 /* NpsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF40564D265CD86700709351 /* NpsCell.xib */; };
 		BF40565B265CED2500709351 /* UILabel+Align.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF405659265CECF700709351 /* UILabel+Align.swift */; };
 		BF40565E265D0B2300709351 /* UIView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40565C265D0B0600709351 /* UIView+Image.swift */; };
-		BF573EC426B69E25002A9E8C /* UXFImageSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC326B69E25002A9E8C /* UXFImageSelector.xib */; };
-		BF573EC526B69E28002A9E8C /* UXFImageSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573EC126B69E19002A9E8C /* UXFImageSelector.swift */; };
-		BF573EC926B69F0C002A9E8C /* UXFGalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573EC726B69F0C002A9E8C /* UXFGalleryCell.swift */; };
-		BF573ECA26B69F0C002A9E8C /* UXFGalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC826B69F0C002A9E8C /* UXFGalleryCell.xib */; };
-		BF573ECD26B6A14E002A9E8C /* UXFScreenshotCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573ECC26B6A14E002A9E8C /* UXFScreenshotCreator.swift */; };
-		BF573ECF26B6A157002A9E8C /* UXFScreenshotCreator.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573ECE26B6A157002A9E8C /* UXFScreenshotCreator.xib */; };
-		BF573ED026B6CBBA002A9E8C /* UXFScreenshotImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170426B670CF006F408A /* UXFScreenshotImageCell.swift */; };
-		BF573ED126B6CBBF002A9E8C /* UXFScreenshotImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF63170526B670CF006F408A /* UXFScreenshotImageCell.xib */; };
+		BF573EC426B69E25002A9E8C /* ImageSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC326B69E25002A9E8C /* ImageSelector.xib */; };
+		BF573EC526B69E28002A9E8C /* ImageSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573EC126B69E19002A9E8C /* ImageSelector.swift */; };
+		BF573EC926B69F0C002A9E8C /* GalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573EC726B69F0C002A9E8C /* GalleryCell.swift */; };
+		BF573ECA26B69F0C002A9E8C /* GalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC826B69F0C002A9E8C /* GalleryCell.xib */; };
+		BF573ECD26B6A14E002A9E8C /* ScreenshotCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573ECC26B6A14E002A9E8C /* ScreenshotCreator.swift */; };
+		BF573ECF26B6A157002A9E8C /* ScreenshotCreator.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573ECE26B6A157002A9E8C /* ScreenshotCreator.xib */; };
+		BF573ED026B6CBBA002A9E8C /* ScreenshotImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170426B670CF006F408A /* ScreenshotImageCell.swift */; };
+		BF573ED126B6CBBF002A9E8C /* ScreenshotImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF63170526B670CF006F408A /* ScreenshotImageCell.xib */; };
 		BF5ED7DD25593DDE00A1698E /* CampaignPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5ED7DC25593DDE00A1698E /* CampaignPresentor.swift */; };
 		BF5ED7E52559DB1900A1698E /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5ED7E42559DB1900A1698E /* Parser.swift */; };
 		BF6248B82559E06F0039F855 /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; };
 		BF6248B92559E06F0039F855 /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BF6248C1255B24910039F855 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6248C0255B24910039F855 /* DataManager.swift */; };
-		BF6316FC26B27A0B006F408A /* UXFScreenshotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6316F826B279ED006F408A /* UXFScreenshotCell.swift */; };
-		BF63170226B2B25D006F408A /* UXFScreenshotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF6316F926B279ED006F408A /* UXFScreenshotCell.xib */; };
-		BF63171126B67501006F408A /* UXFImageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170B26B67465006F408A /* UXFImageCollection.swift */; };
-		BF63171226B67504006F408A /* UXFImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170C26B67465006F408A /* UXFImageManager.swift */; };
-		BF63171326B67509006F408A /* UXFImageCollection.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF63170D26B67465006F408A /* UXFImageCollection.xib */; };
+		BF6316FC26B27A0B006F408A /* ScreenshotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6316F826B279ED006F408A /* ScreenshotCell.swift */; };
+		BF63170226B2B25D006F408A /* ScreenshotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF6316F926B279ED006F408A /* ScreenshotCell.xib */; };
+		BF63171126B67501006F408A /* ImageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170B26B67465006F408A /* ImageCollection.swift */; };
+		BF63171226B67504006F408A /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170C26B67465006F408A /* ImageManager.swift */; };
+		BF63171326B67509006F408A /* ImageCollection.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF63170D26B67465006F408A /* ImageCollection.xib */; };
 		BF885EE42715ED7900F110A0 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF885EE32715ED7900F110A0 /* UIButton+.swift */; };
 		BF885EE62715FB1B00F110A0 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF885EE52715FB1B00F110A0 /* UIAlertController+.swift */; };
 		BFA54F8427AA86A2003D6411 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA54F8327AA86A2003D6411 /* Crypto.swift */; };
 		BFB6DEFC27043D7200732D29 /* Screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFB27043D7200732D29 /* Screenshot.swift */; };
 		BFB6DEFE27044E4300732D29 /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFD27044E4300732D29 /* Data+.swift */; };
-		BFB85E842A42D818000208D2 /* YoHe.docc in Sources */ = {isa = PBXBuildFile; fileRef = BFB85E832A42D818000208D2 /* YoHe.docc */; };
-		BFB85E852A42D818000208D2 /* YoHe.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB85E822A42D817000208D2 /* YoHe.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFB85E842A42D818000208D2 /* YoHeSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = BFB85E832A42D818000208D2 /* YoHeSDK.docc */; };
+		BFB85E852A42D818000208D2 /* YoHeSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB85E822A42D817000208D2 /* YoHeSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFB85E882A42D818000208D2 /* YoHeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB85E802A42D817000208D2 /* YoHeSDK.framework */; };
 		BFB85E892A42D818000208D2 /* YoHeSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFB85E802A42D817000208D2 /* YoHeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BFB85E8E2A42D844000208D2 /* YoHe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB85E792A42D7E5000208D2 /* YoHe.swift */; };
@@ -144,10 +143,9 @@
 		BFBB06282A1C99DD00F1BA6A /* YYSpriteSheetImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BFBB061A2A1C99DD00F1BA6A /* YYSpriteSheetImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFBB06292A1C99DD00F1BA6A /* WebPDemux.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061B2A1C99DD00F1BA6A /* WebPDemux.xcframework */; };
 		BFBB062A2A1C99DD00F1BA6A /* WebP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061C2A1C99DD00F1BA6A /* WebP.xcframework */; };
-		BFC7212C299CD2D400AAB9BC /* UXFBSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC7212B299CD2D400AAB9BC /* UXFBSettings.swift */; };
+		BFC7212C299CD2D400AAB9BC /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC7212B299CD2D400AAB9BC /* Settings.swift */; };
 		BFE496DE280AA3A900844083 /* Privacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE496DD280AA3A900844083 /* Privacy.swift */; };
 		BFEA0003291987110042972A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFEA00012919870F0042972A /* WebKit.framework */; };
-		BFF303B12A42E0B900E513EA /* YoHeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF303B02A42E0B900E513EA /* YoHeDelegate.swift */; };
 		BFF303B52A42E18800E513EA /* CampaignPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5ED7DC25593DDE00A1698E /* CampaignPresentor.swift */; };
 		BFF303B72A42E1D900E513EA /* YoHeConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF303B62A42E1D900E513EA /* YoHeConsts.swift */; };
 		BFF303BA2A42E1F400E513EA /* UXFeedbackConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF303B82A42E1E300E513EA /* UXFeedbackConsts.swift */; };
@@ -170,10 +168,104 @@
 		BFF303CC2A42E80F00E513EA /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5ED7E42559DB1900A1698E /* Parser.swift */; };
 		BFF303CD2A42E80F00E513EA /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDF425613086008C641B /* Option.swift */; };
 		BFF303CE2A42E80F00E513EA /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB77223BD47800C17007 /* Text.swift */; };
-		BFF303CF2A42E8C100E513EA /* UXFBSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC7212B299CD2D400AAB9BC /* UXFBSettings.swift */; };
+		BFF303CF2A42E8C100E513EA /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC7212B299CD2D400AAB9BC /* Settings.swift */; };
 		BFF303D02A42E8F500E513EA /* UXFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A5322366A29002FD4F8 /* UXFeedback.swift */; };
-		BFF303D12A42E9BA00E513EA /* CampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A32562B18F006F2D61 /* CampaignViewController.swift */; };
-		BFF303D22A42E9BA00E513EA /* CampaignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069C2562B18F006F2D61 /* CampaignViewController.xib */; };
+		BFF303FD2A42EFBB00E513EA /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A82562B18F006F2D61 /* HeaderCell.swift */; };
+		BFF303FE2A42EFBB00E513EA /* RadiobuttonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28068F2562B18F006F2D61 /* RadiobuttonCell.swift */; };
+		BFF303FF2A42EFBB00E513EA /* GalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573EC726B69F0C002A9E8C /* GalleryCell.swift */; };
+		BFF304002A42EFBB00E513EA /* ImageSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573EC126B69E19002A9E8C /* ImageSelector.swift */; };
+		BFF304012A42EFBB00E513EA /* CampaignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069C2562B18F006F2D61 /* CampaignViewController.xib */; };
+		BFF304022A42EFBB00E513EA /* ImageSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC326B69E25002A9E8C /* ImageSelector.xib */; };
+		BFF304032A42EFBB00E513EA /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A52562B18F006F2D61 /* BaseCell.swift */; };
+		BFF304042A42EFBB00E513EA /* SmilesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AD2562B18F006F2D61 /* SmilesCell.xib */; };
+		BFF304052A42EFBB00E513EA /* SmilesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806AE2562B18F006F2D61 /* SmilesCell.swift */; };
+		BFF304062A42EFBB00E513EA /* ScreenshotImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF63170526B670CF006F408A /* ScreenshotImageCell.xib */; };
+		BFF304072A42EFBB00E513EA /* RadioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28068E2562B18F006F2D61 /* RadioCell.swift */; };
+		BFF304082A42EFBB00E513EA /* CheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806972562B18F006F2D61 /* CheckCell.swift */; };
+		BFF304092A42EFBB00E513EA /* CheckboxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806952562B18F006F2D61 /* CheckboxCell.swift */; };
+		BFF3040A2A42EFBB00E513EA /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A12562B18F006F2D61 /* TextCell.swift */; };
+		BFF3040B2A42EFBB00E513EA /* ScreenshotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6316F826B279ED006F408A /* ScreenshotCell.swift */; };
+		BFF3040C2A42EFBB00E513EA /* ImageCollection.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF63170D26B67465006F408A /* ImageCollection.xib */; };
+		BFF3040D2A42EFBB00E513EA /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806A22562B18F006F2D61 /* TextCell.xib */; };
+		BFF3040E2A42EFBB00E513EA /* ImageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170B26B67465006F408A /* ImageCollection.swift */; };
+		BFF3040F2A42EFBB00E513EA /* ScreenshotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF6316F926B279ED006F408A /* ScreenshotCell.xib */; };
+		BFF304102A42EFBB00E513EA /* RatingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF0CE19A27661C2200916B32 /* RatingCell.xib */; };
+		BFF304112A42EFBB00E513EA /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28069E2562B18F006F2D61 /* ButtonCell.swift */; };
+		BFF304122A42EFBB00E513EA /* RadioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28068D2562B18F006F2D61 /* RadioCell.xib */; };
+		BFF304132A42EFBB00E513EA /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069F2562B18F006F2D61 /* ButtonCell.xib */; };
+		BFF304142A42EFBB00E513EA /* CampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A32562B18F006F2D61 /* CampaignViewController.swift */; };
+		BFF304152A42EFBB00E513EA /* ScreenshotImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170426B670CF006F408A /* ScreenshotImageCell.swift */; };
+		BFF304162A42EFBB00E513EA /* EmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806AA2562B18F006F2D61 /* EmailCell.swift */; };
+		BFF304172A42EFBB00E513EA /* InputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806922562B18F006F2D61 /* InputCell.swift */; };
+		BFF304182A42EFBB00E513EA /* InputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806912562B18F006F2D61 /* InputCell.xib */; };
+		BFF304192A42EFBB00E513EA /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0CE19927661C2200916B32 /* RatingCell.swift */; };
+		BFF3041A2A42EFBB00E513EA /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069A2562B18F006F2D61 /* ImageCell.xib */; };
+		BFF3041B2A42EFBB00E513EA /* StarsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806892562B18F006F2D61 /* StarsCell.xib */; };
+		BFF3041C2A42EFBB00E513EA /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28069B2562B18F006F2D61 /* ImageCell.swift */; };
+		BFF3041D2A42EFBB00E513EA /* HeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806A72562B18F006F2D61 /* HeaderCell.xib */; };
+		BFF3041E2A42EFBB00E513EA /* EmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AB2562B18F006F2D61 /* EmailCell.xib */; };
+		BFF3041F2A42EFBB00E513EA /* RadiobuttonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28068B2562B18F006F2D61 /* RadiobuttonCell.xib */; };
+		BFF304202A42EFBB00E513EA /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170C26B67465006F408A /* ImageManager.swift */; };
+		BFF304212A42EFBB00E513EA /* ScreenshotCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573ECC26B6A14E002A9E8C /* ScreenshotCreator.swift */; };
+		BFF304222A42EFBB00E513EA /* CheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806982562B18F006F2D61 /* CheckCell.xib */; };
+		BFF304232A42EFBB00E513EA /* NpsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF40564D265CD86700709351 /* NpsCell.xib */; };
+		BFF304242A42EFBB00E513EA /* ScreenshotCreator.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573ECE26B6A157002A9E8C /* ScreenshotCreator.xib */; };
+		BFF304252A42EFBB00E513EA /* GalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC826B69F0C002A9E8C /* GalleryCell.xib */; };
+		BFF304262A42EFBB00E513EA /* NpsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40564C265CD86700709351 /* NpsCell.swift */; };
+		BFF304272A42EFBB00E513EA /* StarsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806882562B18F006F2D61 /* StarsCell.swift */; };
+		BFF304282A42EFBB00E513EA /* CheckboxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806942562B18F006F2D61 /* CheckboxCell.xib */; };
+		BFF3042A2A42F4B900E513EA /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF304292A42F4B900E513EA /* Delegate.swift */; };
+		BFF3042B2A42F4B900E513EA /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF304292A42F4B900E513EA /* Delegate.swift */; };
+		BFF3042C2A42F4B900E513EA /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF304292A42F4B900E513EA /* Delegate.swift */; };
+		BFF3042F2A42F58000E513EA /* YoHeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF303B02A42E0B900E513EA /* YoHeDelegate.swift */; };
+		BFF304302A42F5A900E513EA /* UXFeedbackDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */; };
+		BFF304332A42F65400E513EA /* YoHeTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF304312A42F65400E513EA /* YoHeTheme.swift */; };
+		BFF304342A42F65400E513EA /* YoHeTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF304312A42F65400E513EA /* YoHeTheme.swift */; };
+		BFF304352A42F65400E513EA /* YoHeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF304322A42F65400E513EA /* YoHeSettings.swift */; };
+		BFF304362A42F65400E513EA /* YoHeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF304322A42F65400E513EA /* YoHeSettings.swift */; };
+		BFF304392A42F65E00E513EA /* UXFBTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF304372A42F65E00E513EA /* UXFBTheme.swift */; };
+		BFF3043A2A42F65E00E513EA /* UXFBTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF304372A42F65E00E513EA /* UXFBTheme.swift */; };
+		BFF3043B2A42F65E00E513EA /* UXFBSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF304382A42F65E00E513EA /* UXFBSettings.swift */; };
+		BFF3043C2A42F65E00E513EA /* UXFBSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF304382A42F65E00E513EA /* UXFBSettings.swift */; };
+		BFF3043D2A42F9CF00E513EA /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEA5224F42E900E1C092 /* Queue.swift */; };
+		BFF3043E2A42F9CF00E513EA /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF885EE52715FB1B00F110A0 /* UIAlertController+.swift */; };
+		BFF3043F2A42F9CF00E513EA /* NSLayoutConstraint+additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6122367EF2002FD4F8 /* NSLayoutConstraint+additions.swift */; };
+		BFF304402A42F9CF00E513EA /* Reachability+NetworkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */; };
+		BFF304412A42F9CF00E513EA /* UIControl+blocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */; };
+		BFF304422A42F9CF00E513EA /* UIImage+Tinting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6022367EF2002FD4F8 /* UIImage+Tinting.swift */; };
+		BFF304432A42F9CF00E513EA /* UIImageView+cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB437C822B4FE2C00AF8665 /* UIImageView+cache.swift */; };
+		BFF304442A42F9CF00E513EA /* UISearchBar+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6322367EF2002FD4F8 /* UISearchBar+color.swift */; };
+		BFF304452A42F9CF00E513EA /* UIVIewAddition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A5F22367EF2002FD4F8 /* UIVIewAddition.swift */; };
+		BFF304462A42F9CF00E513EA /* PassthroughWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8C29023F444DD00FB0EEB /* PassthroughWindow.swift */; };
+		BFF304472A42F9CF00E513EA /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFD27044E4300732D29 /* Data+.swift */; };
+		BFF304482A42F9CF00E513EA /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB2FF3922ABBABB0024A88A /* Reachability.swift */; };
+		BFF304492A42F9CF00E513EA /* String+additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6222367EF2002FD4F8 /* String+additions.swift */; };
+		BFF3044A2A42F9CF00E513EA /* UIViewController+present.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CDEB92250A16B00E1C092 /* UIViewController+present.swift */; };
+		BFF3044B2A42F9CF00E513EA /* UILabel+Align.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF405659265CECF700709351 /* UILabel+Align.swift */; };
+		BFF3044C2A42F9CF00E513EA /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D682729EEE27B00547634 /* UIFont+.swift */; };
+		BFF3044D2A42F9CF00E513EA /* Decodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDF625613254008C641B /* Decodable+.swift */; };
+		BFF3044E2A42F9CF00E513EA /* UIView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40565C265D0B0600709351 /* UIView+Image.swift */; };
+		BFF3044F2A42F9CF00E513EA /* CGFloat+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDFA25618234008C641B /* CGFloat+.swift */; };
+		BFF304502A42F9CF00E513EA /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49828229C3D5C000CB7D6 /* StringExtension.swift */; };
+		BFF304512A42F9CF00E513EA /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF885EE32715ED7900F110A0 /* UIButton+.swift */; };
+		BFF304522A42F9D900E513EA /* WebPDemux.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061B2A1C99DD00F1BA6A /* WebPDemux.xcframework */; };
+		BFF304532A42F9D900E513EA /* WebP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061C2A1C99DD00F1BA6A /* WebP.xcframework */; };
+		BFF304542A42F9D900E513EA /* WebPMux.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060E2A1C99DD00F1BA6A /* WebPMux.xcframework */; };
+		BFF304552A42F9D900E513EA /* WebPDecoder.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060F2A1C99DD00F1BA6A /* WebPDecoder.xcframework */; };
+		BFF304562A42F9DE00E513EA /* YYSpriteSheetImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB06142A1C99DD00F1BA6A /* YYSpriteSheetImage.m */; };
+		BFF304572A42F9DE00E513EA /* YYFrameImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB06182A1C99DD00F1BA6A /* YYFrameImage.m */; };
+		BFF304582A42F9DE00E513EA /* YYSpriteSheetImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BFBB061A2A1C99DD00F1BA6A /* YYSpriteSheetImage.h */; };
+		BFF304592A42F9DE00E513EA /* YYImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BFBB06112A1C99DD00F1BA6A /* YYImage.h */; };
+		BFF3045A2A42F9DE00E513EA /* YYImageCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = BFBB06122A1C99DD00F1BA6A /* YYImageCoder.h */; };
+		BFF3045B2A42F9DE00E513EA /* YYFrameImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BFBB06132A1C99DD00F1BA6A /* YYFrameImage.h */; };
+		BFF3045C2A42F9DE00E513EA /* YYImageCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB06172A1C99DD00F1BA6A /* YYImageCoder.m */; };
+		BFF3045D2A42F9DE00E513EA /* YYAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB06192A1C99DD00F1BA6A /* YYAnimatedImageView.m */; };
+		BFF3045E2A42F9DE00E513EA /* YYAnimatedImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = BFBB06152A1C99DD00F1BA6A /* YYAnimatedImageView.h */; };
+		BFF3045F2A42F9DE00E513EA /* YYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB06162A1C99DD00F1BA6A /* YYImage.m */; };
+		BFF304602A42F9E300E513EA /* UIColorInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49825229C3D4A000CB7D6 /* UIColorInputError.swift */; };
+		BFF304612A42F9E300E513EA /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49824229C3D4A000CB7D6 /* UIColorExtension.swift */; };
+		BFF304622A42F9E700E513EA /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF316C0F2684AABC007CEFC0 /* VisualEffectView.swift */; };
+		BFF304632A42F9E700E513EA /* VisualEffectView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF316C112684AAFA007CEFC0 /* VisualEffectView+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -292,35 +384,35 @@
 		BF01BDFC2561EF59008C641B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BF02FD31255C0AE300C794E6 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		BF02FD3E255C65B000C794E6 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
-		BF0CE19927661C2200916B32 /* UXFRatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFRatingCell.swift; sourceTree = "<group>"; };
-		BF0CE19A27661C2200916B32 /* UXFRatingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFRatingCell.xib; sourceTree = "<group>"; };
-		BF2806882562B18F006F2D61 /* UXFStarsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFStarsCell.swift; sourceTree = "<group>"; };
-		BF2806892562B18F006F2D61 /* UXFStarsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFStarsCell.xib; sourceTree = "<group>"; };
-		BF28068B2562B18F006F2D61 /* UXFRadiobuttonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFRadiobuttonCell.xib; sourceTree = "<group>"; };
-		BF28068D2562B18F006F2D61 /* UXFRadioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFRadioCell.xib; sourceTree = "<group>"; };
-		BF28068E2562B18F006F2D61 /* UXFRadioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFRadioCell.swift; sourceTree = "<group>"; };
-		BF28068F2562B18F006F2D61 /* UXFRadiobuttonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFRadiobuttonCell.swift; sourceTree = "<group>"; };
-		BF2806912562B18F006F2D61 /* UXFInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFInputCell.xib; sourceTree = "<group>"; };
-		BF2806922562B18F006F2D61 /* UXFInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFInputCell.swift; sourceTree = "<group>"; };
-		BF2806942562B18F006F2D61 /* UXFCheckboxCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFCheckboxCell.xib; sourceTree = "<group>"; };
-		BF2806952562B18F006F2D61 /* UXFCheckboxCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFCheckboxCell.swift; sourceTree = "<group>"; };
-		BF2806972562B18F006F2D61 /* UXFCheckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFCheckCell.swift; sourceTree = "<group>"; };
-		BF2806982562B18F006F2D61 /* UXFCheckCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFCheckCell.xib; sourceTree = "<group>"; };
-		BF28069A2562B18F006F2D61 /* UXFImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFImageCell.xib; sourceTree = "<group>"; };
-		BF28069B2562B18F006F2D61 /* UXFImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFImageCell.swift; sourceTree = "<group>"; };
+		BF0CE19927661C2200916B32 /* RatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
+		BF0CE19A27661C2200916B32 /* RatingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingCell.xib; sourceTree = "<group>"; };
+		BF2806882562B18F006F2D61 /* StarsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarsCell.swift; sourceTree = "<group>"; };
+		BF2806892562B18F006F2D61 /* StarsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StarsCell.xib; sourceTree = "<group>"; };
+		BF28068B2562B18F006F2D61 /* RadiobuttonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadiobuttonCell.xib; sourceTree = "<group>"; };
+		BF28068D2562B18F006F2D61 /* RadioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadioCell.xib; sourceTree = "<group>"; };
+		BF28068E2562B18F006F2D61 /* RadioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioCell.swift; sourceTree = "<group>"; };
+		BF28068F2562B18F006F2D61 /* RadiobuttonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadiobuttonCell.swift; sourceTree = "<group>"; };
+		BF2806912562B18F006F2D61 /* InputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputCell.xib; sourceTree = "<group>"; };
+		BF2806922562B18F006F2D61 /* InputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputCell.swift; sourceTree = "<group>"; };
+		BF2806942562B18F006F2D61 /* CheckboxCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckboxCell.xib; sourceTree = "<group>"; };
+		BF2806952562B18F006F2D61 /* CheckboxCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckboxCell.swift; sourceTree = "<group>"; };
+		BF2806972562B18F006F2D61 /* CheckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckCell.swift; sourceTree = "<group>"; };
+		BF2806982562B18F006F2D61 /* CheckCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckCell.xib; sourceTree = "<group>"; };
+		BF28069A2562B18F006F2D61 /* ImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
+		BF28069B2562B18F006F2D61 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		BF28069C2562B18F006F2D61 /* CampaignViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CampaignViewController.xib; sourceTree = "<group>"; };
-		BF28069E2562B18F006F2D61 /* UXFButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFButtonCell.swift; sourceTree = "<group>"; };
-		BF28069F2562B18F006F2D61 /* UXFButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFButtonCell.xib; sourceTree = "<group>"; };
-		BF2806A12562B18F006F2D61 /* UXFTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFTextCell.swift; sourceTree = "<group>"; };
-		BF2806A22562B18F006F2D61 /* UXFTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFTextCell.xib; sourceTree = "<group>"; };
+		BF28069E2562B18F006F2D61 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
+		BF28069F2562B18F006F2D61 /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
+		BF2806A12562B18F006F2D61 /* TextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
+		BF2806A22562B18F006F2D61 /* TextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextCell.xib; sourceTree = "<group>"; };
 		BF2806A32562B18F006F2D61 /* CampaignViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CampaignViewController.swift; sourceTree = "<group>"; };
-		BF2806A52562B18F006F2D61 /* UXFBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFBaseCell.swift; sourceTree = "<group>"; };
-		BF2806A72562B18F006F2D61 /* UXFHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFHeaderCell.xib; sourceTree = "<group>"; };
-		BF2806A82562B18F006F2D61 /* UXFHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFHeaderCell.swift; sourceTree = "<group>"; };
-		BF2806AA2562B18F006F2D61 /* UXFEmailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFEmailCell.swift; sourceTree = "<group>"; };
-		BF2806AB2562B18F006F2D61 /* UXFEmailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFEmailCell.xib; sourceTree = "<group>"; };
-		BF2806AD2562B18F006F2D61 /* UXFSmilesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFSmilesCell.xib; sourceTree = "<group>"; };
-		BF2806AE2562B18F006F2D61 /* UXFSmilesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFSmilesCell.swift; sourceTree = "<group>"; };
+		BF2806A52562B18F006F2D61 /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		BF2806A72562B18F006F2D61 /* HeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderCell.xib; sourceTree = "<group>"; };
+		BF2806A82562B18F006F2D61 /* HeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
+		BF2806AA2562B18F006F2D61 /* EmailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailCell.swift; sourceTree = "<group>"; };
+		BF2806AB2562B18F006F2D61 /* EmailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailCell.xib; sourceTree = "<group>"; };
+		BF2806AD2562B18F006F2D61 /* SmilesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmilesCell.xib; sourceTree = "<group>"; };
+		BF2806AE2562B18F006F2D61 /* SmilesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmilesCell.swift; sourceTree = "<group>"; };
 		BF2D682029EEDD0B00547634 /* DataRequest+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataRequest+CoreData.swift"; sourceTree = "<group>"; };
 		BF2D682429EEDE0100547634 /* UXFeedbackSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = UXFeedbackSDK.docc; sourceTree = "<group>"; };
 		BF2D682729EEE27B00547634 /* UIFont+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
@@ -328,26 +420,26 @@
 		BF316C112684AAFA007CEFC0 /* VisualEffectView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VisualEffectView+.swift"; sourceTree = "<group>"; };
 		BF31860D2975570800B54EF5 /* DataRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequestManager.swift; sourceTree = "<group>"; };
 		BF3186102975672700B54EF5 /* RequestModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RequestModel.xcdatamodel; sourceTree = "<group>"; };
-		BF40564C265CD86700709351 /* UXFNpsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFNpsCell.swift; sourceTree = "<group>"; };
-		BF40564D265CD86700709351 /* UXFNpsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFNpsCell.xib; sourceTree = "<group>"; };
+		BF40564C265CD86700709351 /* NpsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NpsCell.swift; sourceTree = "<group>"; };
+		BF40564D265CD86700709351 /* NpsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NpsCell.xib; sourceTree = "<group>"; };
 		BF405659265CECF700709351 /* UILabel+Align.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Align.swift"; sourceTree = "<group>"; };
 		BF40565C265D0B0600709351 /* UIView+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Image.swift"; sourceTree = "<group>"; };
-		BF573EC126B69E19002A9E8C /* UXFImageSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFImageSelector.swift; sourceTree = "<group>"; };
-		BF573EC326B69E25002A9E8C /* UXFImageSelector.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFImageSelector.xib; sourceTree = "<group>"; };
-		BF573EC726B69F0C002A9E8C /* UXFGalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFGalleryCell.swift; sourceTree = "<group>"; };
-		BF573EC826B69F0C002A9E8C /* UXFGalleryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFGalleryCell.xib; sourceTree = "<group>"; };
-		BF573ECC26B6A14E002A9E8C /* UXFScreenshotCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFScreenshotCreator.swift; sourceTree = "<group>"; };
-		BF573ECE26B6A157002A9E8C /* UXFScreenshotCreator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFScreenshotCreator.xib; sourceTree = "<group>"; };
+		BF573EC126B69E19002A9E8C /* ImageSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelector.swift; sourceTree = "<group>"; };
+		BF573EC326B69E25002A9E8C /* ImageSelector.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageSelector.xib; sourceTree = "<group>"; };
+		BF573EC726B69F0C002A9E8C /* GalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCell.swift; sourceTree = "<group>"; };
+		BF573EC826B69F0C002A9E8C /* GalleryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryCell.xib; sourceTree = "<group>"; };
+		BF573ECC26B6A14E002A9E8C /* ScreenshotCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotCreator.swift; sourceTree = "<group>"; };
+		BF573ECE26B6A157002A9E8C /* ScreenshotCreator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScreenshotCreator.xib; sourceTree = "<group>"; };
 		BF5ED7DC25593DDE00A1698E /* CampaignPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignPresentor.swift; sourceTree = "<group>"; };
 		BF5ED7E42559DB1900A1698E /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		BF6248C0255B24910039F855 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		BF6316F826B279ED006F408A /* UXFScreenshotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFScreenshotCell.swift; sourceTree = "<group>"; };
-		BF6316F926B279ED006F408A /* UXFScreenshotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFScreenshotCell.xib; sourceTree = "<group>"; };
-		BF63170426B670CF006F408A /* UXFScreenshotImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFScreenshotImageCell.swift; sourceTree = "<group>"; };
-		BF63170526B670CF006F408A /* UXFScreenshotImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UXFScreenshotImageCell.xib; sourceTree = "<group>"; };
-		BF63170B26B67465006F408A /* UXFImageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFImageCollection.swift; sourceTree = "<group>"; };
-		BF63170C26B67465006F408A /* UXFImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFImageManager.swift; sourceTree = "<group>"; };
-		BF63170D26B67465006F408A /* UXFImageCollection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFImageCollection.xib; sourceTree = "<group>"; };
+		BF6316F826B279ED006F408A /* ScreenshotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotCell.swift; sourceTree = "<group>"; };
+		BF6316F926B279ED006F408A /* ScreenshotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScreenshotCell.xib; sourceTree = "<group>"; };
+		BF63170426B670CF006F408A /* ScreenshotImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotImageCell.swift; sourceTree = "<group>"; };
+		BF63170526B670CF006F408A /* ScreenshotImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScreenshotImageCell.xib; sourceTree = "<group>"; };
+		BF63170B26B67465006F408A /* ImageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollection.swift; sourceTree = "<group>"; };
+		BF63170C26B67465006F408A /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		BF63170D26B67465006F408A /* ImageCollection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCollection.xib; sourceTree = "<group>"; };
 		BF885EE32715ED7900F110A0 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		BF885EE52715FB1B00F110A0 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
 		BFA54F8327AA86A2003D6411 /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
@@ -364,8 +456,8 @@
 		BFB6DEFD27044E4300732D29 /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
 		BFB85E792A42D7E5000208D2 /* YoHe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoHe.swift; sourceTree = "<group>"; };
 		BFB85E802A42D817000208D2 /* YoHeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YoHeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BFB85E822A42D817000208D2 /* YoHe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YoHe.h; sourceTree = "<group>"; };
-		BFB85E832A42D818000208D2 /* YoHe.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = YoHe.docc; sourceTree = "<group>"; };
+		BFB85E822A42D817000208D2 /* YoHeSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YoHeSDK.h; sourceTree = "<group>"; };
+		BFB85E832A42D818000208D2 /* YoHeSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = YoHeSDK.docc; sourceTree = "<group>"; };
 		BFBB060E2A1C99DD00F1BA6A /* WebPMux.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebPMux.xcframework; sourceTree = "<group>"; };
 		BFBB060F2A1C99DD00F1BA6A /* WebPDecoder.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebPDecoder.xcframework; sourceTree = "<group>"; };
 		BFBB06112A1C99DD00F1BA6A /* YYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImage.h; sourceTree = "<group>"; };
@@ -380,13 +472,18 @@
 		BFBB061A2A1C99DD00F1BA6A /* YYSpriteSheetImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSpriteSheetImage.h; sourceTree = "<group>"; };
 		BFBB061B2A1C99DD00F1BA6A /* WebPDemux.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebPDemux.xcframework; sourceTree = "<group>"; };
 		BFBB061C2A1C99DD00F1BA6A /* WebP.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebP.xcframework; sourceTree = "<group>"; };
-		BFC7212B299CD2D400AAB9BC /* UXFBSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFBSettings.swift; sourceTree = "<group>"; };
+		BFC7212B299CD2D400AAB9BC /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		BFE496DD280AA3A900844083 /* Privacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Privacy.swift; sourceTree = "<group>"; };
 		BFEA00012919870F0042972A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		BFEAFFF0291986460042972A /* libz.1.2.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.8.tbd; path = usr/lib/libz.1.2.8.tbd; sourceTree = SDKROOT; };
 		BFF303B02A42E0B900E513EA /* YoHeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoHeDelegate.swift; sourceTree = "<group>"; };
 		BFF303B62A42E1D900E513EA /* YoHeConsts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoHeConsts.swift; sourceTree = "<group>"; };
 		BFF303B82A42E1E300E513EA /* UXFeedbackConsts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFeedbackConsts.swift; sourceTree = "<group>"; };
+		BFF304292A42F4B900E513EA /* Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delegate.swift; sourceTree = "<group>"; };
+		BFF304312A42F65400E513EA /* YoHeTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoHeTheme.swift; sourceTree = "<group>"; };
+		BFF304322A42F65400E513EA /* YoHeSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoHeSettings.swift; sourceTree = "<group>"; };
+		BFF304372A42F65E00E513EA /* UXFBTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFBTheme.swift; sourceTree = "<group>"; };
+		BFF304382A42F65E00E513EA /* UXFBSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFBSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -431,6 +528,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFF304542A42F9D900E513EA /* WebPMux.xcframework in Frameworks */,
+				BFF304522A42F9D900E513EA /* WebPDemux.xcframework in Frameworks */,
+				BFF304552A42F9D900E513EA /* WebPDecoder.xcframework in Frameworks */,
+				BFF304532A42F9D900E513EA /* WebP.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,7 +547,7 @@
 				0A2A349A2346303200B23383 /* UX Feedback SDK Demo_objc */,
 				0A2A34B62346303300B23383 /* UX Feedback SDK Demo_objcUITests */,
 				0A1B9E5523996F0700935E2E /* UX Feedback SDK Demo_wscene */,
-				BFB85E812A42D817000208D2 /* YoHe */,
+				BFB85E812A42D817000208D2 /* YoHeSDK */,
 				0A019A3D22365E02002FD4F8 /* Products */,
 				3EE1448B815C3AA05E865A6C /* Frameworks */,
 			);
@@ -484,18 +585,6 @@
 				BFF303B42A42E16400E513EA /* Shared */,
 				BFF303B32A42E0CE00E513EA /* YoHe */,
 				BFF303B22A42E0C200E513EA /* UXFeedback */,
-				BF31861A29781F1A00B54EF5 /* CoreData */,
-				0A019A5B22367E7E002FD4F8 /* Vendors */,
-				0A6CDB70223B903500C17007 /* DataModel */,
-				0A6CDB872243C8F900C17007 /* UI */,
-				BF5ED7DC25593DDE00A1698E /* CampaignPresentor.swift */,
-				0A019A5922367CD6002FD4F8 /* APIClient.swift */,
-				0A019A6E2237C503002FD4F8 /* URLComponents.swift */,
-				0A019A6C2237B773002FD4F8 /* APIWebRouter.swift */,
-				0A160DD42268CDB000A586C4 /* StatisticManager.swift */,
-				BFA54F8327AA86A2003D6411 /* Crypto.swift */,
-				BF31860D2975570800B54EF5 /* DataRequestManager.swift */,
-				0A0CDEAB2250598800E1C092 /* Images.xcassets */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -588,7 +677,7 @@
 				BF6248C0255B24910039F855 /* DataManager.swift */,
 				BF02FD31255C0AE300C794E6 /* Field.swift */,
 				BF02FD3E255C65B000C794E6 /* Transform.swift */,
-				BFC7212B299CD2D400AAB9BC /* UXFBSettings.swift */,
+				BFC7212B299CD2D400AAB9BC /* Settings.swift */,
 				0A019A57223673FE002FD4F8 /* Theme.swift */,
 				BF01BDF425613086008C641B /* Option.swift */,
 				BFB6DEFB27043D7200732D29 /* Screenshot.swift */,
@@ -636,8 +725,8 @@
 		BF0CE19827661C1200916B32 /* Rating */ = {
 			isa = PBXGroup;
 			children = (
-				BF0CE19927661C2200916B32 /* UXFRatingCell.swift */,
-				BF0CE19A27661C2200916B32 /* UXFRatingCell.xib */,
+				BF0CE19927661C2200916B32 /* RatingCell.swift */,
+				BF0CE19A27661C2200916B32 /* RatingCell.xib */,
 			);
 			path = Rating;
 			sourceTree = "<group>";
@@ -677,8 +766,8 @@
 		BF2806872562B18F006F2D61 /* _Stars */ = {
 			isa = PBXGroup;
 			children = (
-				BF2806882562B18F006F2D61 /* UXFStarsCell.swift */,
-				BF2806892562B18F006F2D61 /* UXFStarsCell.xib */,
+				BF2806882562B18F006F2D61 /* StarsCell.swift */,
+				BF2806892562B18F006F2D61 /* StarsCell.xib */,
 			);
 			path = _Stars;
 			sourceTree = "<group>";
@@ -686,8 +775,8 @@
 		BF28068A2562B18F006F2D61 /* RadioButton */ = {
 			isa = PBXGroup;
 			children = (
-				BF28068B2562B18F006F2D61 /* UXFRadiobuttonCell.xib */,
-				BF28068F2562B18F006F2D61 /* UXFRadiobuttonCell.swift */,
+				BF28068B2562B18F006F2D61 /* RadiobuttonCell.xib */,
+				BF28068F2562B18F006F2D61 /* RadiobuttonCell.swift */,
 				BF28068C2562B18F006F2D61 /* Cell */,
 			);
 			path = RadioButton;
@@ -696,8 +785,8 @@
 		BF28068C2562B18F006F2D61 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				BF28068D2562B18F006F2D61 /* UXFRadioCell.xib */,
-				BF28068E2562B18F006F2D61 /* UXFRadioCell.swift */,
+				BF28068D2562B18F006F2D61 /* RadioCell.xib */,
+				BF28068E2562B18F006F2D61 /* RadioCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -705,8 +794,8 @@
 		BF2806902562B18F006F2D61 /* Input */ = {
 			isa = PBXGroup;
 			children = (
-				BF2806912562B18F006F2D61 /* UXFInputCell.xib */,
-				BF2806922562B18F006F2D61 /* UXFInputCell.swift */,
+				BF2806912562B18F006F2D61 /* InputCell.xib */,
+				BF2806922562B18F006F2D61 /* InputCell.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -714,8 +803,8 @@
 		BF2806932562B18F006F2D61 /* Checkbox */ = {
 			isa = PBXGroup;
 			children = (
-				BF2806942562B18F006F2D61 /* UXFCheckboxCell.xib */,
-				BF2806952562B18F006F2D61 /* UXFCheckboxCell.swift */,
+				BF2806942562B18F006F2D61 /* CheckboxCell.xib */,
+				BF2806952562B18F006F2D61 /* CheckboxCell.swift */,
 				BF2806962562B18F006F2D61 /* Cell */,
 			);
 			path = Checkbox;
@@ -724,8 +813,8 @@
 		BF2806962562B18F006F2D61 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				BF2806972562B18F006F2D61 /* UXFCheckCell.swift */,
-				BF2806982562B18F006F2D61 /* UXFCheckCell.xib */,
+				BF2806972562B18F006F2D61 /* CheckCell.swift */,
+				BF2806982562B18F006F2D61 /* CheckCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -733,8 +822,8 @@
 		BF2806992562B18F006F2D61 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				BF28069A2562B18F006F2D61 /* UXFImageCell.xib */,
-				BF28069B2562B18F006F2D61 /* UXFImageCell.swift */,
+				BF28069A2562B18F006F2D61 /* ImageCell.xib */,
+				BF28069B2562B18F006F2D61 /* ImageCell.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -742,8 +831,8 @@
 		BF28069D2562B18F006F2D61 /* Button */ = {
 			isa = PBXGroup;
 			children = (
-				BF28069E2562B18F006F2D61 /* UXFButtonCell.swift */,
-				BF28069F2562B18F006F2D61 /* UXFButtonCell.xib */,
+				BF28069E2562B18F006F2D61 /* ButtonCell.swift */,
+				BF28069F2562B18F006F2D61 /* ButtonCell.xib */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -751,8 +840,8 @@
 		BF2806A02562B18F006F2D61 /* Text */ = {
 			isa = PBXGroup;
 			children = (
-				BF2806A12562B18F006F2D61 /* UXFTextCell.swift */,
-				BF2806A22562B18F006F2D61 /* UXFTextCell.xib */,
+				BF2806A12562B18F006F2D61 /* TextCell.swift */,
+				BF2806A22562B18F006F2D61 /* TextCell.xib */,
 			);
 			path = Text;
 			sourceTree = "<group>";
@@ -760,7 +849,7 @@
 		BF2806A42562B18F006F2D61 /* _BASE */ = {
 			isa = PBXGroup;
 			children = (
-				BF2806A52562B18F006F2D61 /* UXFBaseCell.swift */,
+				BF2806A52562B18F006F2D61 /* BaseCell.swift */,
 			);
 			path = _BASE;
 			sourceTree = "<group>";
@@ -768,8 +857,8 @@
 		BF2806A62562B18F006F2D61 /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				BF2806A72562B18F006F2D61 /* UXFHeaderCell.xib */,
-				BF2806A82562B18F006F2D61 /* UXFHeaderCell.swift */,
+				BF2806A72562B18F006F2D61 /* HeaderCell.xib */,
+				BF2806A82562B18F006F2D61 /* HeaderCell.swift */,
 			);
 			path = Header;
 			sourceTree = "<group>";
@@ -777,8 +866,8 @@
 		BF2806A92562B18F006F2D61 /* Email */ = {
 			isa = PBXGroup;
 			children = (
-				BF2806AA2562B18F006F2D61 /* UXFEmailCell.swift */,
-				BF2806AB2562B18F006F2D61 /* UXFEmailCell.xib */,
+				BF2806AA2562B18F006F2D61 /* EmailCell.swift */,
+				BF2806AB2562B18F006F2D61 /* EmailCell.xib */,
 			);
 			path = Email;
 			sourceTree = "<group>";
@@ -786,8 +875,8 @@
 		BF2806AC2562B18F006F2D61 /* Smiles */ = {
 			isa = PBXGroup;
 			children = (
-				BF2806AD2562B18F006F2D61 /* UXFSmilesCell.xib */,
-				BF2806AE2562B18F006F2D61 /* UXFSmilesCell.swift */,
+				BF2806AD2562B18F006F2D61 /* SmilesCell.xib */,
+				BF2806AE2562B18F006F2D61 /* SmilesCell.swift */,
 			);
 			path = Smiles;
 			sourceTree = "<group>";
@@ -804,8 +893,8 @@
 		BF40564B265CD84600709351 /* NPS */ = {
 			isa = PBXGroup;
 			children = (
-				BF40564C265CD86700709351 /* UXFNpsCell.swift */,
-				BF40564D265CD86700709351 /* UXFNpsCell.xib */,
+				BF40564C265CD86700709351 /* NpsCell.swift */,
+				BF40564D265CD86700709351 /* NpsCell.xib */,
 			);
 			path = NPS;
 			sourceTree = "<group>";
@@ -814,8 +903,8 @@
 			isa = PBXGroup;
 			children = (
 				BF573EC626B69EF5002A9E8C /* UXFGalleryCell */,
-				BF573EC126B69E19002A9E8C /* UXFImageSelector.swift */,
-				BF573EC326B69E25002A9E8C /* UXFImageSelector.xib */,
+				BF573EC126B69E19002A9E8C /* ImageSelector.swift */,
+				BF573EC326B69E25002A9E8C /* ImageSelector.xib */,
 			);
 			path = ImageSelector;
 			sourceTree = "<group>";
@@ -823,8 +912,8 @@
 		BF573EC626B69EF5002A9E8C /* UXFGalleryCell */ = {
 			isa = PBXGroup;
 			children = (
-				BF573EC726B69F0C002A9E8C /* UXFGalleryCell.swift */,
-				BF573EC826B69F0C002A9E8C /* UXFGalleryCell.xib */,
+				BF573EC726B69F0C002A9E8C /* GalleryCell.swift */,
+				BF573EC826B69F0C002A9E8C /* GalleryCell.xib */,
 			);
 			path = UXFGalleryCell;
 			sourceTree = "<group>";
@@ -832,8 +921,8 @@
 		BF573ECB26B6A134002A9E8C /* ImageCreator */ = {
 			isa = PBXGroup;
 			children = (
-				BF573ECC26B6A14E002A9E8C /* UXFScreenshotCreator.swift */,
-				BF573ECE26B6A157002A9E8C /* UXFScreenshotCreator.xib */,
+				BF573ECC26B6A14E002A9E8C /* ScreenshotCreator.swift */,
+				BF573ECE26B6A157002A9E8C /* ScreenshotCreator.xib */,
 			);
 			path = ImageCreator;
 			sourceTree = "<group>";
@@ -841,13 +930,13 @@
 		BF6316F726B279CB006F408A /* Screenshot */ = {
 			isa = PBXGroup;
 			children = (
-				BF63170C26B67465006F408A /* UXFImageManager.swift */,
+				BF63170C26B67465006F408A /* ImageManager.swift */,
 				BF573ECB26B6A134002A9E8C /* ImageCreator */,
 				BF573EC026B69E07002A9E8C /* ImageSelector */,
 				BF63170A26B67465006F408A /* ImageViewer */,
 				BF63170326B670B9006F408A /* ImageCell */,
-				BF6316F826B279ED006F408A /* UXFScreenshotCell.swift */,
-				BF6316F926B279ED006F408A /* UXFScreenshotCell.xib */,
+				BF6316F826B279ED006F408A /* ScreenshotCell.swift */,
+				BF6316F926B279ED006F408A /* ScreenshotCell.xib */,
 			);
 			path = Screenshot;
 			sourceTree = "<group>";
@@ -855,8 +944,8 @@
 		BF63170326B670B9006F408A /* ImageCell */ = {
 			isa = PBXGroup;
 			children = (
-				BF63170426B670CF006F408A /* UXFScreenshotImageCell.swift */,
-				BF63170526B670CF006F408A /* UXFScreenshotImageCell.xib */,
+				BF63170426B670CF006F408A /* ScreenshotImageCell.swift */,
+				BF63170526B670CF006F408A /* ScreenshotImageCell.xib */,
 			);
 			path = ImageCell;
 			sourceTree = "<group>";
@@ -864,19 +953,19 @@
 		BF63170A26B67465006F408A /* ImageViewer */ = {
 			isa = PBXGroup;
 			children = (
-				BF63170B26B67465006F408A /* UXFImageCollection.swift */,
-				BF63170D26B67465006F408A /* UXFImageCollection.xib */,
+				BF63170B26B67465006F408A /* ImageCollection.swift */,
+				BF63170D26B67465006F408A /* ImageCollection.xib */,
 			);
 			path = ImageViewer;
 			sourceTree = "<group>";
 		};
-		BFB85E812A42D817000208D2 /* YoHe */ = {
+		BFB85E812A42D817000208D2 /* YoHeSDK */ = {
 			isa = PBXGroup;
 			children = (
-				BFB85E822A42D817000208D2 /* YoHe.h */,
-				BFB85E832A42D818000208D2 /* YoHe.docc */,
+				BFB85E822A42D817000208D2 /* YoHeSDK.h */,
+				BFB85E832A42D818000208D2 /* YoHeSDK.docc */,
 			);
-			path = YoHe;
+			path = YoHeSDK;
 			sourceTree = "<group>";
 		};
 		BFBB060D2A1C99DD00F1BA6A /* WebP */ = {
@@ -914,6 +1003,8 @@
 				0A019A5322366A29002FD4F8 /* UXFeedback.swift */,
 				0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */,
 				BFF303B82A42E1E300E513EA /* UXFeedbackConsts.swift */,
+				BFF304382A42F65E00E513EA /* UXFBSettings.swift */,
+				BFF304372A42F65E00E513EA /* UXFBTheme.swift */,
 			);
 			path = UXFeedback;
 			sourceTree = "<group>";
@@ -924,6 +1015,8 @@
 				BFB85E792A42D7E5000208D2 /* YoHe.swift */,
 				BFF303B02A42E0B900E513EA /* YoHeDelegate.swift */,
 				BFF303B62A42E1D900E513EA /* YoHeConsts.swift */,
+				BFF304322A42F65400E513EA /* YoHeSettings.swift */,
+				BFF304312A42F65400E513EA /* YoHeTheme.swift */,
 			);
 			path = YoHe;
 			sourceTree = "<group>";
@@ -931,6 +1024,19 @@
 		BFF303B42A42E16400E513EA /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				BF31861A29781F1A00B54EF5 /* CoreData */,
+				0A019A5B22367E7E002FD4F8 /* Vendors */,
+				0A6CDB70223B903500C17007 /* DataModel */,
+				0A6CDB872243C8F900C17007 /* UI */,
+				BF5ED7DC25593DDE00A1698E /* CampaignPresentor.swift */,
+				0A019A5922367CD6002FD4F8 /* APIClient.swift */,
+				0A019A6E2237C503002FD4F8 /* URLComponents.swift */,
+				0A019A6C2237B773002FD4F8 /* APIWebRouter.swift */,
+				0A160DD42268CDB000A586C4 /* StatisticManager.swift */,
+				BFA54F8327AA86A2003D6411 /* Crypto.swift */,
+				BF31860D2975570800B54EF5 /* DataRequestManager.swift */,
+				BFF304292A42F4B900E513EA /* Delegate.swift */,
+				0A0CDEAB2250598800E1C092 /* Images.xcassets */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -955,7 +1061,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFB85E852A42D818000208D2 /* YoHe.h in Headers */,
+				BFF3045E2A42F9DE00E513EA /* YYAnimatedImageView.h in Headers */,
+				BFB85E852A42D818000208D2 /* YoHeSDK.h in Headers */,
+				BFF3045B2A42F9DE00E513EA /* YYFrameImage.h in Headers */,
+				BFF304582A42F9DE00E513EA /* YYSpriteSheetImage.h in Headers */,
+				BFF3045A2A42F9DE00E513EA /* YYImageCoder.h in Headers */,
+				BFF304592A42F9DE00E513EA /* YYImage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1146,27 +1257,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF2806D72562B6A5006F2D61 /* UXFStarsCell.xib in Resources */,
-				BF2806D82562B6A5006F2D61 /* UXFRadiobuttonCell.xib in Resources */,
-				BF2806D92562B6A5006F2D61 /* UXFRadioCell.xib in Resources */,
-				BF573ECF26B6A157002A9E8C /* UXFScreenshotCreator.xib in Resources */,
-				BF2806DA2562B6A5006F2D61 /* UXFInputCell.xib in Resources */,
-				BF2806DB2562B6A5006F2D61 /* UXFCheckboxCell.xib in Resources */,
-				BF2806DC2562B6A5006F2D61 /* UXFCheckCell.xib in Resources */,
-				BF2806DD2562B6A6006F2D61 /* UXFImageCell.xib in Resources */,
-				BF0CE19E27661DAD00916B32 /* UXFRatingCell.xib in Resources */,
+				BF2806D72562B6A5006F2D61 /* StarsCell.xib in Resources */,
+				BF2806D82562B6A5006F2D61 /* RadiobuttonCell.xib in Resources */,
+				BF2806D92562B6A5006F2D61 /* RadioCell.xib in Resources */,
+				BF573ECF26B6A157002A9E8C /* ScreenshotCreator.xib in Resources */,
+				BF2806DA2562B6A5006F2D61 /* InputCell.xib in Resources */,
+				BF2806DB2562B6A5006F2D61 /* CheckboxCell.xib in Resources */,
+				BF2806DC2562B6A5006F2D61 /* CheckCell.xib in Resources */,
+				BF2806DD2562B6A6006F2D61 /* ImageCell.xib in Resources */,
+				BF0CE19E27661DAD00916B32 /* RatingCell.xib in Resources */,
 				BF2806DE2562B6A6006F2D61 /* CampaignViewController.xib in Resources */,
-				BF2806DF2562B6A6006F2D61 /* UXFButtonCell.xib in Resources */,
-				BF63171326B67509006F408A /* UXFImageCollection.xib in Resources */,
-				BF2806E02562B6A6006F2D61 /* UXFTextCell.xib in Resources */,
-				BF2806E12562B6A6006F2D61 /* UXFHeaderCell.xib in Resources */,
-				BF63170226B2B25D006F408A /* UXFScreenshotCell.xib in Resources */,
-				BF573EC426B69E25002A9E8C /* UXFImageSelector.xib in Resources */,
-				BF573ED126B6CBBF002A9E8C /* UXFScreenshotImageCell.xib in Resources */,
-				BF405651265CD8A200709351 /* UXFNpsCell.xib in Resources */,
-				BF2806E22562B6A6006F2D61 /* UXFEmailCell.xib in Resources */,
-				BF2806E32562B6A6006F2D61 /* UXFSmilesCell.xib in Resources */,
-				BF573ECA26B69F0C002A9E8C /* UXFGalleryCell.xib in Resources */,
+				BF2806DF2562B6A6006F2D61 /* ButtonCell.xib in Resources */,
+				BF63171326B67509006F408A /* ImageCollection.xib in Resources */,
+				BF2806E02562B6A6006F2D61 /* TextCell.xib in Resources */,
+				BF2806E12562B6A6006F2D61 /* HeaderCell.xib in Resources */,
+				BF63170226B2B25D006F408A /* ScreenshotCell.xib in Resources */,
+				BF573EC426B69E25002A9E8C /* ImageSelector.xib in Resources */,
+				BF573ED126B6CBBF002A9E8C /* ScreenshotImageCell.xib in Resources */,
+				BF405651265CD8A200709351 /* NpsCell.xib in Resources */,
+				BF2806E22562B6A6006F2D61 /* EmailCell.xib in Resources */,
+				BF2806E32562B6A6006F2D61 /* SmilesCell.xib in Resources */,
+				BF573ECA26B69F0C002A9E8C /* GalleryCell.xib in Resources */,
 				0A4689A722840BB90074E1A3 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1175,7 +1286,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFF303D22A42E9BA00E513EA /* CampaignViewController.xib in Resources */,
+				BFF304252A42EFBB00E513EA /* GalleryCell.xib in Resources */,
+				BFF304282A42EFBB00E513EA /* CheckboxCell.xib in Resources */,
+				BFF3040D2A42EFBB00E513EA /* TextCell.xib in Resources */,
+				BFF3040C2A42EFBB00E513EA /* ImageCollection.xib in Resources */,
+				BFF3041D2A42EFBB00E513EA /* HeaderCell.xib in Resources */,
+				BFF304242A42EFBB00E513EA /* ScreenshotCreator.xib in Resources */,
+				BFF304022A42EFBB00E513EA /* ImageSelector.xib in Resources */,
+				BFF304182A42EFBB00E513EA /* InputCell.xib in Resources */,
+				BFF3040F2A42EFBB00E513EA /* ScreenshotCell.xib in Resources */,
+				BFF3041E2A42EFBB00E513EA /* EmailCell.xib in Resources */,
+				BFF304102A42EFBB00E513EA /* RatingCell.xib in Resources */,
+				BFF304122A42EFBB00E513EA /* RadioCell.xib in Resources */,
+				BFF304062A42EFBB00E513EA /* ScreenshotImageCell.xib in Resources */,
+				BFF304132A42EFBB00E513EA /* ButtonCell.xib in Resources */,
+				BFF3041A2A42EFBB00E513EA /* ImageCell.xib in Resources */,
+				BFF304222A42EFBB00E513EA /* CheckCell.xib in Resources */,
+				BFF304012A42EFBB00E513EA /* CampaignViewController.xib in Resources */,
+				BFF3041B2A42EFBB00E513EA /* StarsCell.xib in Resources */,
+				BFF304232A42EFBB00E513EA /* NpsCell.xib in Resources */,
+				BFF304042A42EFBB00E513EA /* SmilesCell.xib in Resources */,
+				BFF3041F2A42EFBB00E513EA /* RadiobuttonCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1186,7 +1317,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFF3042A2A42F4B900E513EA /* Delegate.swift in Sources */,
+				BFF3043B2A42F65E00E513EA /* UXFBSettings.swift in Sources */,
+				BFF304352A42F65400E513EA /* YoHeSettings.swift in Sources */,
+				BFF304392A42F65E00E513EA /* UXFBTheme.swift in Sources */,
 				0A019A4222365E03002FD4F8 /* MainViewController_swift.swift in Sources */,
+				BFF304332A42F65400E513EA /* YoHeTheme.swift in Sources */,
 				0A019A4022365E03002FD4F8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1218,80 +1354,83 @@
 			files = (
 				0AB8C29123F444DE00FB0EEB /* PassthroughWindow.swift in Sources */,
 				0A4689BA22840BE00074E1A3 /* Reachability+NetworkType.swift in Sources */,
-				BF2806B82562B18F006F2D61 /* UXFCheckboxCell.swift in Sources */,
-				0A4689A022840BB90074E1A3 /* UXFeedbackDelegate.swift in Sources */,
+				BF2806B82562B18F006F2D61 /* CheckboxCell.swift in Sources */,
 				BF316C122684AAFA007CEFC0 /* VisualEffectView+.swift in Sources */,
 				BF40565E265D0B2300709351 /* UIView+Image.swift in Sources */,
 				BF01BDFB25618234008C641B /* CGFloat+.swift in Sources */,
-				BF63171226B67504006F408A /* UXFImageManager.swift in Sources */,
-				BF6316FC26B27A0B006F408A /* UXFScreenshotCell.swift in Sources */,
+				BF63171226B67504006F408A /* ImageManager.swift in Sources */,
+				BF6316FC26B27A0B006F408A /* ScreenshotCell.swift in Sources */,
 				BFBB06252A1C99DD00F1BA6A /* YYImageCoder.m in Sources */,
 				BF01BDF725613254008C641B /* Decodable+.swift in Sources */,
-				BFC7212C299CD2D400AAB9BC /* UXFBSettings.swift in Sources */,
+				BFC7212C299CD2D400AAB9BC /* Settings.swift in Sources */,
 				BF3186112975672700B54EF5 /* RequestModel.xcdatamodeld in Sources */,
 				0AF49829229C3D5D000CB7D6 /* StringExtension.swift in Sources */,
 				BF02FD32255C0AE300C794E6 /* Field.swift in Sources */,
 				0A4689B922840BE00074E1A3 /* UIViewController+present.swift in Sources */,
 				0A4689B422840BE00074E1A3 /* String+additions.swift in Sources */,
-				BF573EC926B69F0C002A9E8C /* UXFGalleryCell.swift in Sources */,
+				BF573EC926B69F0C002A9E8C /* GalleryCell.swift in Sources */,
 				0A4689AC22840BBF0074E1A3 /* Text.swift in Sources */,
 				0A4689B622840BE00074E1A3 /* UIControl+blocks.swift in Sources */,
 				0A4689B822840BE00074E1A3 /* UIVIewAddition.swift in Sources */,
-				BF573EC526B69E28002A9E8C /* UXFImageSelector.swift in Sources */,
-				BF2806BE2562B18F006F2D61 /* UXFButtonCell.swift in Sources */,
-				BF2806C92562B18F006F2D61 /* UXFSmilesCell.swift in Sources */,
+				BF573EC526B69E28002A9E8C /* ImageSelector.swift in Sources */,
+				BF2806BE2562B18F006F2D61 /* ButtonCell.swift in Sources */,
+				BF2806C92562B18F006F2D61 /* SmilesCell.swift in Sources */,
 				0A4689A622840BB90074E1A3 /* StatisticManager.swift in Sources */,
-				BF2806AF2562B18F006F2D61 /* UXFStarsCell.swift in Sources */,
-				BF2806C32562B18F006F2D61 /* UXFBaseCell.swift in Sources */,
+				BF2806AF2562B18F006F2D61 /* StarsCell.swift in Sources */,
+				BF2806C32562B18F006F2D61 /* BaseCell.swift in Sources */,
 				0A4689AA22840BBF0074E1A3 /* Page.swift in Sources */,
-				BF405650265CD89E00709351 /* UXFNpsCell.swift in Sources */,
+				BF405650265CD89E00709351 /* NpsCell.swift in Sources */,
 				BF01BDF525613086008C641B /* Option.swift in Sources */,
 				0A4689A422840BB90074E1A3 /* URLComponents.swift in Sources */,
-				BF2806C02562B18F006F2D61 /* UXFTextCell.swift in Sources */,
+				BF2806C02562B18F006F2D61 /* TextCell.swift in Sources */,
 				0A4689A922840BBF0074E1A3 /* Campaign.swift in Sources */,
 				BFBB06262A1C99DD00F1BA6A /* YYFrameImage.m in Sources */,
 				BF6248C1255B24910039F855 /* DataManager.swift in Sources */,
 				BF5ED7E52559DB1900A1698E /* Parser.swift in Sources */,
 				BFB6DEFE27044E4300732D29 /* Data+.swift in Sources */,
 				BFBB06272A1C99DD00F1BA6A /* YYAnimatedImageView.m in Sources */,
+				BFF304302A42F5A900E513EA /* UXFeedbackDelegate.swift in Sources */,
 				BFA54F8427AA86A2003D6411 /* Crypto.swift in Sources */,
 				BF2806C22562B18F006F2D61 /* CampaignViewController.swift in Sources */,
 				BF02FD3F255C65B000C794E6 /* Transform.swift in Sources */,
-				BF573ED026B6CBBA002A9E8C /* UXFScreenshotImageCell.swift in Sources */,
+				BF573ED026B6CBBA002A9E8C /* ScreenshotImageCell.swift in Sources */,
 				BFB6DEFC27043D7200732D29 /* Screenshot.swift in Sources */,
 				0A4689BB22840BE00074E1A3 /* Queue.swift in Sources */,
 				0A4689A822840BBF0074E1A3 /* Theme.swift in Sources */,
 				0AF49826229C3D4A000CB7D6 /* UIColorExtension.swift in Sources */,
-				BF2806BC2562B18F006F2D61 /* UXFImageCell.swift in Sources */,
+				BF2806BC2562B18F006F2D61 /* ImageCell.swift in Sources */,
 				0A4689B722840BE00074E1A3 /* UISearchBar+color.swift in Sources */,
 				BF2D682229EEDD2400547634 /* DataRequest+CoreData.swift in Sources */,
 				BF5ED7DD25593DDE00A1698E /* CampaignPresentor.swift in Sources */,
-				BF2806B32562B18F006F2D61 /* UXFRadioCell.swift in Sources */,
+				BF2806B32562B18F006F2D61 /* RadioCell.swift in Sources */,
 				BF316C102684AABC007CEFC0 /* VisualEffectView.swift in Sources */,
-				BF0CE19D27661C3B00916B32 /* UXFRatingCell.swift in Sources */,
-				BF63171126B67501006F408A /* UXFImageCollection.swift in Sources */,
+				BF0CE19D27661C3B00916B32 /* RatingCell.swift in Sources */,
+				BF63171126B67501006F408A /* ImageCollection.swift in Sources */,
 				BF40565B265CED2500709351 /* UILabel+Align.swift in Sources */,
 				BF885EE62715FB1B00F110A0 /* UIAlertController+.swift in Sources */,
 				0A4689B322840BE00074E1A3 /* NSLayoutConstraint+additions.swift in Sources */,
 				0A4689A522840BB90074E1A3 /* APIWebRouter.swift in Sources */,
 				0A46899F22840BB90074E1A3 /* UXFeedback.swift in Sources */,
 				BFF303BA2A42E1F400E513EA /* UXFeedbackConsts.swift in Sources */,
+				BFF3043C2A42F65E00E513EA /* UXFBSettings.swift in Sources */,
 				BF31860E2975570800B54EF5 /* DataRequestManager.swift in Sources */,
 				0AF49827229C3D4A000CB7D6 /* UIColorInputError.swift in Sources */,
 				0A4689B522840BE00074E1A3 /* UIImage+Tinting.swift in Sources */,
 				BF885EE42715ED7900F110A0 /* UIButton+.swift in Sources */,
 				0AB2FF3A22ABBABB0024A88A /* Reachability.swift in Sources */,
-				BF2806C52562B18F006F2D61 /* UXFHeaderCell.swift in Sources */,
+				BF2806C52562B18F006F2D61 /* HeaderCell.swift in Sources */,
+				BFF3043A2A42F65E00E513EA /* UXFBTheme.swift in Sources */,
 				0AB437C922B4FE2C00AF8665 /* UIImageView+cache.swift in Sources */,
 				BFBB06242A1C99DD00F1BA6A /* YYImage.m in Sources */,
-				BF573ECD26B6A14E002A9E8C /* UXFScreenshotCreator.swift in Sources */,
+				BF573ECD26B6A14E002A9E8C /* ScreenshotCreator.swift in Sources */,
 				BF2D682829EEE27C00547634 /* UIFont+.swift in Sources */,
 				BFE496DE280AA3A900844083 /* Privacy.swift in Sources */,
-				BF2806B42562B18F006F2D61 /* UXFRadiobuttonCell.swift in Sources */,
+				BFF3042B2A42F4B900E513EA /* Delegate.swift in Sources */,
+				BF2806B42562B18F006F2D61 /* RadiobuttonCell.swift in Sources */,
 				BF2D682629EEDE0F00547634 /* UXFeedbackSDK.docc in Sources */,
-				BF2806B62562B18F006F2D61 /* UXFInputCell.swift in Sources */,
-				BF2806C62562B18F006F2D61 /* UXFEmailCell.swift in Sources */,
-				BF2806B92562B18F006F2D61 /* UXFCheckCell.swift in Sources */,
+				BF2806B62562B18F006F2D61 /* InputCell.swift in Sources */,
+				BF2806C62562B18F006F2D61 /* EmailCell.swift in Sources */,
+				BF2806B92562B18F006F2D61 /* CheckCell.swift in Sources */,
 				0A4689A322840BB90074E1A3 /* APIClient.swift in Sources */,
 				BFBB06222A1C99DD00F1BA6A /* YYSpriteSheetImage.m in Sources */,
 			);
@@ -1304,30 +1443,85 @@
 				BFF303C02A42E34200E513EA /* URLComponents.swift in Sources */,
 				BFF303D02A42E8F500E513EA /* UXFeedback.swift in Sources */,
 				BFF303BE2A42E2FD00E513EA /* APIWebRouter.swift in Sources */,
+				BFF304362A42F65400E513EA /* YoHeSettings.swift in Sources */,
 				BFF303B52A42E18800E513EA /* CampaignPresentor.swift in Sources */,
+				BFF304072A42EFBB00E513EA /* RadioCell.swift in Sources */,
 				BFF303BD2A42E2FA00E513EA /* DataRequestManager.swift in Sources */,
 				BFF303BF2A42E33A00E513EA /* APIClient.swift in Sources */,
-				BFF303D12A42E9BA00E513EA /* CampaignViewController.swift in Sources */,
+				BFF3040E2A42EFBB00E513EA /* ImageCollection.swift in Sources */,
+				BFF304472A42F9CF00E513EA /* Data+.swift in Sources */,
 				BFF303CE2A42E80F00E513EA /* Text.swift in Sources */,
 				BFF303C92A42E80F00E513EA /* Theme.swift in Sources */,
-				BFF303B12A42E0B900E513EA /* YoHeDelegate.swift in Sources */,
+				BFF3043D2A42F9CF00E513EA /* Queue.swift in Sources */,
+				BFF304172A42EFBB00E513EA /* InputCell.swift in Sources */,
+				BFF304162A42EFBB00E513EA /* EmailCell.swift in Sources */,
 				BFF303C12A42E4DF00E513EA /* DataRequest+CoreData.swift in Sources */,
+				BFF304152A42EFBB00E513EA /* ScreenshotImageCell.swift in Sources */,
+				BFF303FF2A42EFBB00E513EA /* GalleryCell.swift in Sources */,
+				BFF3042C2A42F4B900E513EA /* Delegate.swift in Sources */,
+				BFF304432A42F9CF00E513EA /* UIImageView+cache.swift in Sources */,
+				BFF304452A42F9CF00E513EA /* UIVIewAddition.swift in Sources */,
 				BFF303C42A42E80F00E513EA /* Transform.swift in Sources */,
+				BFF304112A42EFBB00E513EA /* ButtonCell.swift in Sources */,
+				BFF303FE2A42EFBB00E513EA /* RadiobuttonCell.swift in Sources */,
 				BFF303C62A42E80F00E513EA /* Campaign.swift in Sources */,
 				BFF303CA2A42E80F00E513EA /* Page.swift in Sources */,
+				BFF303FD2A42EFBB00E513EA /* HeaderCell.swift in Sources */,
+				BFF304612A42F9E300E513EA /* UIColorExtension.swift in Sources */,
 				BFB85E8E2A42D844000208D2 /* YoHe.swift in Sources */,
 				BFF303C52A42E80F00E513EA /* Screenshot.swift in Sources */,
+				BFF3045F2A42F9DE00E513EA /* YYImage.m in Sources */,
+				BFF304462A42F9CF00E513EA /* PassthroughWindow.swift in Sources */,
+				BFF304192A42EFBB00E513EA /* RatingCell.swift in Sources */,
+				BFF304262A42EFBB00E513EA /* NpsCell.swift in Sources */,
 				BFF303C22A42E4E200E513EA /* RequestModel.xcdatamodeld in Sources */,
-				BFB85E842A42D818000208D2 /* YoHe.docc in Sources */,
+				BFB85E842A42D818000208D2 /* YoHeSDK.docc in Sources */,
+				BFF304032A42EFBB00E513EA /* BaseCell.swift in Sources */,
+				BFF3040A2A42EFBB00E513EA /* TextCell.swift in Sources */,
+				BFF304572A42F9DE00E513EA /* YYFrameImage.m in Sources */,
+				BFF3045D2A42F9DE00E513EA /* YYAnimatedImageView.m in Sources */,
+				BFF3041C2A42EFBB00E513EA /* ImageCell.swift in Sources */,
+				BFF3044B2A42F9CF00E513EA /* UILabel+Align.swift in Sources */,
+				BFF304602A42F9E300E513EA /* UIColorInputError.swift in Sources */,
 				BFF303CD2A42E80F00E513EA /* Option.swift in Sources */,
-				BFF303CF2A42E8C100E513EA /* UXFBSettings.swift in Sources */,
+				BFF304202A42EFBB00E513EA /* ImageManager.swift in Sources */,
+				BFF303CF2A42E8C100E513EA /* Settings.swift in Sources */,
+				BFF3044A2A42F9CF00E513EA /* UIViewController+present.swift in Sources */,
+				BFF304442A42F9CF00E513EA /* UISearchBar+color.swift in Sources */,
 				BFF303BB2A42E2F500E513EA /* StatisticManager.swift in Sources */,
+				BFF304052A42EFBB00E513EA /* SmilesCell.swift in Sources */,
 				BFF303C72A42E80F00E513EA /* Privacy.swift in Sources */,
+				BFF3044F2A42F9CF00E513EA /* CGFloat+.swift in Sources */,
+				BFF3042F2A42F58000E513EA /* YoHeDelegate.swift in Sources */,
+				BFF304142A42EFBB00E513EA /* CampaignViewController.swift in Sources */,
+				BFF304402A42F9CF00E513EA /* Reachability+NetworkType.swift in Sources */,
+				BFF3045C2A42F9DE00E513EA /* YYImageCoder.m in Sources */,
+				BFF3043F2A42F9CF00E513EA /* NSLayoutConstraint+additions.swift in Sources */,
+				BFF304492A42F9CF00E513EA /* String+additions.swift in Sources */,
 				BFF303BC2A42E2F800E513EA /* Crypto.swift in Sources */,
+				BFF3044C2A42F9CF00E513EA /* UIFont+.swift in Sources */,
 				BFF303CB2A42E80F00E513EA /* DataManager.swift in Sources */,
 				BFF303C32A42E80F00E513EA /* Field.swift in Sources */,
+				BFF3043E2A42F9CF00E513EA /* UIAlertController+.swift in Sources */,
+				BFF3044D2A42F9CF00E513EA /* Decodable+.swift in Sources */,
+				BFF304422A42F9CF00E513EA /* UIImage+Tinting.swift in Sources */,
 				BFF303CC2A42E80F00E513EA /* Parser.swift in Sources */,
+				BFF304212A42EFBB00E513EA /* ScreenshotCreator.swift in Sources */,
+				BFF304002A42EFBB00E513EA /* ImageSelector.swift in Sources */,
+				BFF304092A42EFBB00E513EA /* CheckboxCell.swift in Sources */,
+				BFF3040B2A42EFBB00E513EA /* ScreenshotCell.swift in Sources */,
+				BFF304082A42EFBB00E513EA /* CheckCell.swift in Sources */,
 				BFF303B72A42E1D900E513EA /* YoHeConsts.swift in Sources */,
+				BFF304272A42EFBB00E513EA /* StarsCell.swift in Sources */,
+				BFF3044E2A42F9CF00E513EA /* UIView+Image.swift in Sources */,
+				BFF304622A42F9E700E513EA /* VisualEffectView.swift in Sources */,
+				BFF304512A42F9CF00E513EA /* UIButton+.swift in Sources */,
+				BFF304502A42F9CF00E513EA /* StringExtension.swift in Sources */,
+				BFF304562A42F9DE00E513EA /* YYSpriteSheetImage.m in Sources */,
+				BFF304412A42F9CF00E513EA /* UIControl+blocks.swift in Sources */,
+				BFF304632A42F9E700E513EA /* VisualEffectView+.swift in Sources */,
+				BFF304482A42F9CF00E513EA /* Reachability.swift in Sources */,
+				BFF304342A42F65400E513EA /* YoHeTheme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

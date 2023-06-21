@@ -9,7 +9,7 @@
 #import "SecondViewController_objc.h"
 #import <UXFeedbackSDK/UXFeedbackSDK-Swift.h>
 
-@interface SecondViewController_objc () <UXFeedbackCampaignDelegate>
+@interface SecondViewController_objc () <FeedbackCampaignDelegate>
 
 
 @end

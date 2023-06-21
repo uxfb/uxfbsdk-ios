@@ -11,6 +11,8 @@ import Foundation
 internal class Consts {
     static let cryptoKey: String = "YoHe"
     static let version: String = "v1.0.0"
-    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
-//    static let defaultEndpoint: String = "https://develop.api.uxfb.space"
+    static let defaultEndpoint: String = "https://public-api.yohe.io"
+    static let apiVersion: String = "v8"
+    
+    static let bundle: Bundle = Bundle(for: YoHe.self)
 }

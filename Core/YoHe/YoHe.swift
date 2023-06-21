@@ -50,17 +50,16 @@ open class YoHe: NSObject {
     open weak var logDelegate: UXFeedbackLogDelegate?
     
     /// Объект настроек SDK
-    open var settings: Settings = Settings()
+    open var settings: YoHeSettings = YoHeSettings()
     
     /// Объект темы SDK
-    open var theme: Theme = Theme()
+    open var theme: YoHeTheme = YoHeTheme()
     
     /// Дополнительные параметры, которые будут переданы при завершении прохождения опроса
     open var properties: [String: Any] = [:]
     
     private var appId: String?
     
-//    private var _theme: UXFBTheme!
     private var _appWindow: UIWindow!
 
     private var _requestManager: DataRequestManager!
@@ -212,14 +211,14 @@ open class YoHe: NSObject {
                         
                         var mCampaign = campaign
                         mCampaign.updateTheme(theme: self.theme)
-                        self._formPresentor = UXFCampaignPresentor(window: self._appWindow,
+                        self._formPresentor = CampaignPresentor(window: self._appWindow,
                                                                    campaign: mCampaign,
                                                                    animationEnabled: true)
                      
                         self._formPresentor?.isAnimationFormEnabled = true
                         self._formPresentor?.delegate = self
                         self._formPresentor?.feedbackCampaignDelegate = self.campaignDelegate
-                        let blackout = UXFBBlackout()
+                        let blackout = Blackout()
 //
                         switch campaign.type {
                         case .slidein:
@@ -280,8 +279,8 @@ open class YoHe: NSObject {
     }
 }
 
-extension UXFeedback: UXFRequestManagerDelegate {
-    func campaingsLoaded(success: Bool, message: String?, delay: Int?, campaigns: Array<UXFCampaign>) {
+extension YoHe: RequestManagerDelegate {
+    func campaingsLoaded(success: Bool, message: String?, delay: Int?, campaigns: Array<Campaign>) {
         self._campaigns = campaigns
         self.settings.globalDelayTimer = delay ?? self.settings.globalDelayTimer
         if success == true {
@@ -297,7 +296,7 @@ extension UXFeedback: UXFRequestManagerDelegate {
         DispatchQueue.main.async {
             self._appWindow = PassthroughWindow(frame: UIScreen.main.bounds)
             self._appWindow.rootViewController = UIViewController()
-            self._appWindow?.windowLevel = UXFeedback._windowLevel
+            self._appWindow?.windowLevel = YoHe._windowLevel
 //            completion?(success) 
             self.campaignDelegate?.campaignDidLoad(success: success)
         }
@@ -310,8 +309,8 @@ extension UXFeedback: UXFRequestManagerDelegate {
     }
 }
 
-extension UXFeedback: UXFCampaignFormPresentorProtocol {
-    func formSubmitted(info: Array<Dictionary<String, Any>>?, screenshots: [UXFScreenshot], campaign: UXFCampaign) {
+extension YoHe: CampaignFormPresentorProtocol {
+    func formSubmitted(info: Array<Dictionary<String, Any>>?, screenshots: [Screenshot], campaign: Campaign) {
         self.DDLog("Campaign finished")
         
         var answers: [String: Any] = [:]

@@ -121,13 +121,13 @@ class MainViewController_swift: UIViewController {
 
 }
 
-extension MainViewController_swift: UXFeedbackLogDelegate {
+extension MainViewController_swift: FeedbackLogDelegate {
     func logDidReceive(message: String) {
         print(message)
     }
 }
 
-extension MainViewController_swift: UXFeedbackCampaignDelegate{
+extension MainViewController_swift: FeedbackCampaignDelegate{
     
     func campaignDidSend(campaignId: String) {
         

@@ -9,22 +9,9 @@
 import Foundation
 import UIKit
 
-@objcMembers
-internal class UXFeedbackResult : NSObject{
-    public var rating: Int? = nil
-    public var abandonedPageIndex: Int? = nil
-    public var sent: Bool = false
-    
-    init(rating: Int?, abandonedPageIndex: Int?, sent: Bool) {
-        self.rating = rating
-        self.abandonedPageIndex = abandonedPageIndex
-        self.sent = sent
-    }
-}
-
 /// Интерфейс обработчика различных событий от SDK
 @objc
-public protocol UXFeedbackCampaignDelegate: AnyObject {
+public protocol UXFeedbackCampaignDelegate: FeedbackCampaignDelegate {
     /// Событие после загрузки кампаний с сервера
     /// - Parameter success: Признак успеха загрузки
     func campaignDidLoad(success: Bool)
@@ -56,7 +43,7 @@ public protocol UXFeedbackCampaignDelegate: AnyObject {
 
 /// Интерфейс обработчика событий лога от SDK
 @objc
-public protocol UXFeedbackLogDelegate: AnyObject {
+public protocol UXFeedbackLogDelegate: FeedbackLogDelegate {
     /// Событие получения сообщения лога
     /// - Parameter message: Текст лога
     func logDidReceive(message: String)
