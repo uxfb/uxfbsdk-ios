@@ -129,7 +129,6 @@ final class UXFRequestManager: NSObject {
         self.attempts += 1
         switch request.apiMethod {
         case "GET_CAMPAIGNS":
-//            print("RM: GET_CAMPAIGNS \(Date().timeIntervalSince1970)")
             self._apiClient.getAllCampaings { [weak self] (success, httpCode, message, delay, campaigns)  in
                 self?.validateResponse(for: request, success: success, httpCode: httpCode) {
                     self?.delegate?.campaingsLoaded(success: success, message: message, delay: delay, campaigns: campaigns)
@@ -147,7 +146,6 @@ final class UXFRequestManager: NSObject {
                 self.deleteRequest(request, completion: { })
                 return
             }
-//            print("RM: SEND_FORM \(Date().timeIntervalSince1970)")
             
             self._apiClient.saveFormData(projectId: projectId,
                                          campaignId: campaignId,
@@ -168,7 +166,6 @@ final class UXFRequestManager: NSObject {
                 self.deleteRequest(request, completion: { })
                 return
             }
-//            print("RM: SHOW_FORM \(Date().timeIntervalSince1970)")
             self._apiClient.showForm(campaingId: campaignId) { success, httpCode in
                 self.validateResponse(for: request, success: success, httpCode: httpCode) { }
             }
@@ -178,8 +175,6 @@ final class UXFRequestManager: NSObject {
                 self.deleteRequest(request, completion: { })
                 return
             }
-            
-//            print("RM: SCREENSHOT \(Date().timeIntervalSince1970)")
             
             self._apiClient.saveScreenshotsData(dataScreenshot) { success, httpCode in
                 self.validateResponse(for: request, success: success, httpCode: httpCode) { }
@@ -191,24 +186,6 @@ final class UXFRequestManager: NSObject {
     }
     
     //MARK: - Core data methods
-    
-//    let objectModelURL = NSBundle.mainBundle().URLForResource("MyDataModel", withExtension: "momd")
-//    let objectModel: NSManagedObjectModel? = NSManagedObjectModel(contentsOfURL: objectModelURL)
-//    assert(objectModel)
-//
-//    let storeCoordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: objectModel)
-//    assert(storeCoordinator)
-//
-//    let store: NSPersistentStore? = storeCoordinator!.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil, error: nil)
-//    assert(store)
-//
-//    // Set up a managed object context with private queue concurrency
-//    // backgroundContext is a NSManagedObjectContext? property
-//    backgroundContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
-//    assert(backgroundContext)
-//    backgroundContext!.persistentStoreCoordinator = storeCoordinator!
-    
-    
     
     lazy var persistentContainer: NSPersistentContainer = {
         let messageKitBundle = Bundle(identifier: self.identifier)
