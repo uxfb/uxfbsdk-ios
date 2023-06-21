@@ -9,9 +9,6 @@
 import Foundation
 import CoreData
 
-import Foundation
-import CoreData
-
 extension NSManagedObjectContext {
     @discardableResult public func saveIfNeeded() throws -> Bool {
         guard hasChanges else { return false }
@@ -98,7 +95,7 @@ final class UXFRequestManager: NSObject {
     
     //MARK: - prepare sender
     
-    private func prepareAndSend(_ request: UXFRequest? = nil) {
+    private func prepareAndSend(_ request: DataRequest? = nil) {
         if let request = request {
             self.sendNextRequest(request)
         } else if let request = self.fetch() {
@@ -108,7 +105,7 @@ final class UXFRequestManager: NSObject {
     
     //MARK: - Request private methods
     
-    private func validateResponse(for request: UXFRequest,
+    private func validateResponse(for request: DataRequest,
                                   success: Bool,
                                   httpCode: Int,
                                   completion: @escaping (() -> ()) ) {
@@ -127,7 +124,7 @@ final class UXFRequestManager: NSObject {
         }
     }
     
-    private func sendNextRequest(_ request: UXFRequest) {
+    private func sendNextRequest(_ request: DataRequest) {
         let data = request.parametersData
         self.attempts += 1
         switch request.apiMethod {
@@ -228,10 +225,10 @@ final class UXFRequestManager: NSObject {
     
     lazy var context = persistentContainer.viewContext
    
-    private func fetch() -> UXFRequest? {
+    private func fetch() -> DataRequest? {
         let context = persistentContainer.viewContext
         
-        let fetchRequest = NSFetchRequest<UXFRequest>(entityName: "UXFRequest")
+        let fetchRequest = NSFetchRequest<DataRequest>(entityName: "DataRequest")
         let sort = NSSortDescriptor(key: "created", ascending: true)
         fetchRequest.sortDescriptors = [sort]
         fetchRequest.fetchLimit = 1
@@ -246,7 +243,7 @@ final class UXFRequestManager: NSObject {
     private func createRequest(_ apiMethod: String, parameters: Data?) {
         context.perform {
             if apiMethod == "GET_CAMPAIGNS" {
-                let fetchRequest = NSFetchRequest<UXFRequest>(entityName: "UXFRequest")
+                let fetchRequest = NSFetchRequest<DataRequest>(entityName: "DataRequest")
                 fetchRequest.predicate = NSPredicate(format: "apiMethod == %@", apiMethod)
                 let numberOfRecords = (try? self.context.count(for: fetchRequest)) ?? 0
                 if numberOfRecords > 0 {
@@ -254,7 +251,7 @@ final class UXFRequestManager: NSObject {
                 }
             }
             
-            let request = NSEntityDescription.insertNewObject(forEntityName: "UXFRequest", into: self.context) as! UXFRequest
+            let request = NSEntityDescription.insertNewObject(forEntityName: "DataRequest", into: self.context) as! DataRequest
             request.apiMethod = apiMethod
             request.created = Date()
             request.parametersData = parameters
@@ -263,7 +260,7 @@ final class UXFRequestManager: NSObject {
         }
     }
     
-    private func deleteRequest(_ request: UXFRequest, completion: (() -> ())? = nil ) {
+    private func deleteRequest(_ request: DataRequest, completion: (() -> ())? = nil ) {
         context.performAndWait {
             context.delete(request)
             try? context.save()

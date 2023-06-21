@@ -91,7 +91,7 @@
 		BF2806E12562B6A6006F2D61 /* UXFHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806A72562B18F006F2D61 /* UXFHeaderCell.xib */; };
 		BF2806E22562B6A6006F2D61 /* UXFEmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AB2562B18F006F2D61 /* UXFEmailCell.xib */; };
 		BF2806E32562B6A6006F2D61 /* UXFSmilesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AD2562B18F006F2D61 /* UXFSmilesCell.xib */; };
-		BF2D682229EEDD2400547634 /* UXFRequest+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D682029EEDD0B00547634 /* UXFRequest+CoreData.swift */; };
+		BF2D682229EEDD2400547634 /* DataRequest+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D682029EEDD0B00547634 /* DataRequest+CoreData.swift */; };
 		BF2D682629EEDE0F00547634 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = BF2D682429EEDE0100547634 /* Documentation.docc */; };
 		BF2D682829EEE27C00547634 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D682729EEE27B00547634 /* UIFont+.swift */; };
 		BF316C102684AABC007CEFC0 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF316C0F2684AABC007CEFC0 /* VisualEffectView.swift */; };
@@ -125,6 +125,11 @@
 		BFA54F8427AA86A2003D6411 /* UXFCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA54F8327AA86A2003D6411 /* UXFCrypto.swift */; };
 		BFB6DEFC27043D7200732D29 /* UXFScreenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFB27043D7200732D29 /* UXFScreenshot.swift */; };
 		BFB6DEFE27044E4300732D29 /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFD27044E4300732D29 /* Data+.swift */; };
+		BFB85E842A42D818000208D2 /* YoHe.docc in Sources */ = {isa = PBXBuildFile; fileRef = BFB85E832A42D818000208D2 /* YoHe.docc */; };
+		BFB85E852A42D818000208D2 /* YoHe.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB85E822A42D817000208D2 /* YoHe.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFB85E882A42D818000208D2 /* YoHeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB85E802A42D817000208D2 /* YoHeSDK.framework */; };
+		BFB85E892A42D818000208D2 /* YoHeSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFB85E802A42D817000208D2 /* YoHeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BFB85E8E2A42D844000208D2 /* YoHe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB85E792A42D7E5000208D2 /* YoHe.swift */; };
 		BFBB061D2A1C99DD00F1BA6A /* WebPMux.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060E2A1C99DD00F1BA6A /* WebPMux.xcframework */; };
 		BFBB061E2A1C99DD00F1BA6A /* WebPDecoder.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060F2A1C99DD00F1BA6A /* WebPDecoder.xcframework */; };
 		BFBB061F2A1C99DD00F1BA6A /* YYImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BFBB06112A1C99DD00F1BA6A /* YYImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -151,6 +156,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 0A46899122840B2C0074E1A3;
 			remoteInfo = UXFeedbackSDK;
+		};
+		BFB85E862A42D818000208D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A019A3422365E02002FD4F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFB85E7F2A42D817000208D2;
+			remoteInfo = YoHe;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -184,6 +196,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				BF6248B92559E06F0039F855 /* UXFeedbackSDK.framework in Embed Frameworks */,
+				BFB85E892A42D818000208D2 /* YoHeSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,7 +294,7 @@
 		BF2806AB2562B18F006F2D61 /* UXFEmailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFEmailCell.xib; sourceTree = "<group>"; };
 		BF2806AD2562B18F006F2D61 /* UXFSmilesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UXFSmilesCell.xib; sourceTree = "<group>"; };
 		BF2806AE2562B18F006F2D61 /* UXFSmilesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFSmilesCell.swift; sourceTree = "<group>"; };
-		BF2D682029EEDD0B00547634 /* UXFRequest+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UXFRequest+CoreData.swift"; sourceTree = "<group>"; };
+		BF2D682029EEDD0B00547634 /* DataRequest+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataRequest+CoreData.swift"; sourceTree = "<group>"; };
 		BF2D682429EEDE0100547634 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
 		BF2D682729EEE27B00547634 /* UIFont+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		BF316C0F2684AABC007CEFC0 /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
@@ -322,6 +335,10 @@
 		BFAFC6882919326200F99607 /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
 		BFB6DEFB27043D7200732D29 /* UXFScreenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFScreenshot.swift; sourceTree = "<group>"; };
 		BFB6DEFD27044E4300732D29 /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
+		BFB85E792A42D7E5000208D2 /* YoHe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoHe.swift; sourceTree = "<group>"; };
+		BFB85E802A42D817000208D2 /* YoHeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YoHeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFB85E822A42D817000208D2 /* YoHe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YoHe.h; sourceTree = "<group>"; };
+		BFB85E832A42D818000208D2 /* YoHe.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = YoHe.docc; sourceTree = "<group>"; };
 		BFBB060E2A1C99DD00F1BA6A /* WebPMux.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebPMux.xcframework; sourceTree = "<group>"; };
 		BFBB060F2A1C99DD00F1BA6A /* WebPDecoder.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebPDecoder.xcframework; sourceTree = "<group>"; };
 		BFBB06112A1C99DD00F1BA6A /* YYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImage.h; sourceTree = "<group>"; };
@@ -348,6 +365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF6248B82559E06F0039F855 /* UXFeedbackSDK.framework in Frameworks */,
+				BFB85E882A42D818000208D2 /* YoHeSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +397,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFB85E7D2A42D817000208D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -391,6 +416,7 @@
 				0A2A349A2346303200B23383 /* UX Feedback SDK Demo_objc */,
 				0A2A34B62346303300B23383 /* UX Feedback SDK Demo_objcUITests */,
 				0A1B9E5523996F0700935E2E /* UX Feedback SDK Demo_wscene */,
+				BFB85E812A42D817000208D2 /* YoHe */,
 				0A019A3D22365E02002FD4F8 /* Products */,
 				3EE1448B815C3AA05E865A6C /* Frameworks */,
 			);
@@ -403,6 +429,7 @@
 				0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */,
 				0A2A34992346303200B23383 /* UX Feedback SDK Demo_objc.app */,
 				0A1B9E5423996F0700935E2E /* UX Feedback SDK Demo_wscene.app */,
+				BFB85E802A42D817000208D2 /* YoHeSDK.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -430,6 +457,7 @@
 				0A6CDB70223B903500C17007 /* DataModel */,
 				0A6CDB872243C8F900C17007 /* UI */,
 				0A019A5322366A29002FD4F8 /* UXFeedback.swift */,
+				BFB85E792A42D7E5000208D2 /* YoHe.swift */,
 				BFC7212B299CD2D400AAB9BC /* UXFBSettings.swift */,
 				0A019A57223673FE002FD4F8 /* UXFBTheme.swift */,
 				0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */,
@@ -738,7 +766,7 @@
 			isa = PBXGroup;
 			children = (
 				BF31860F2975672700B54EF5 /* RequestModel.xcdatamodeld */,
-				BF2D682029EEDD0B00547634 /* UXFRequest+CoreData.swift */,
+				BF2D682029EEDD0B00547634 /* DataRequest+CoreData.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -812,6 +840,15 @@
 			path = ImageViewer;
 			sourceTree = "<group>";
 		};
+		BFB85E812A42D817000208D2 /* YoHe */ = {
+			isa = PBXGroup;
+			children = (
+				BFB85E822A42D817000208D2 /* YoHe.h */,
+				BFB85E832A42D818000208D2 /* YoHe.docc */,
+			);
+			path = YoHe;
+			sourceTree = "<group>";
+		};
 		BFBB060D2A1C99DD00F1BA6A /* WebP */ = {
 			isa = PBXGroup;
 			children = (
@@ -857,6 +894,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFB85E7B2A42D817000208D2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFB85E852A42D818000208D2 /* YoHe.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -873,6 +918,7 @@
 			);
 			dependencies = (
 				BF6248BB2559E06F0039F855 /* PBXTargetDependency */,
+				BFB85E872A42D818000208D2 /* PBXTargetDependency */,
 			);
 			name = "UX Feedback SDK Demo";
 			productName = "UX Feedback Demo";
@@ -936,6 +982,24 @@
 			productReference = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		BFB85E7F2A42D817000208D2 /* YoHeSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFB85E8A2A42D818000208D2 /* Build configuration list for PBXNativeTarget "YoHeSDK" */;
+			buildPhases = (
+				BFB85E7B2A42D817000208D2 /* Headers */,
+				BFB85E7C2A42D817000208D2 /* Sources */,
+				BFB85E7D2A42D817000208D2 /* Frameworks */,
+				BFB85E7E2A42D817000208D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YoHeSDK;
+			productName = YoHe;
+			productReference = BFB85E802A42D817000208D2 /* YoHeSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -960,6 +1024,9 @@
 						CreatedOnToolsVersion = 10.2;
 						LastSwiftMigration = 1300;
 					};
+					BFB85E7F2A42D817000208D2 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
 				};
 			};
 			buildConfigurationList = 0A019A3722365E02002FD4F8 /* Build configuration list for PBXProject "UX Feedback SDK" */;
@@ -981,6 +1048,7 @@
 				0A2A34982346303200B23383 /* UX Feedback SDK Demo_objc */,
 				0A1B9E5323996F0700935E2E /* UX Feedback SDK Demo_wscene */,
 				0A46899122840B2C0074E1A3 /* UXFeedbackSDK */,
+				BFB85E7F2A42D817000208D2 /* YoHeSDK */,
 			);
 		};
 /* End PBXProject section */
@@ -1043,6 +1111,13 @@
 				BF2806E32562B6A6006F2D61 /* UXFSmilesCell.xib in Resources */,
 				BF573ECA26B69F0C002A9E8C /* UXFGalleryCell.xib in Resources */,
 				0A4689A722840BB90074E1A3 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFB85E7E2A42D817000208D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1131,7 +1206,7 @@
 				0AF49826229C3D4A000CB7D6 /* UIColorExtension.swift in Sources */,
 				BF2806BC2562B18F006F2D61 /* UXFImageCell.swift in Sources */,
 				0A4689B722840BE00074E1A3 /* UISearchBar+color.swift in Sources */,
-				BF2D682229EEDD2400547634 /* UXFRequest+CoreData.swift in Sources */,
+				BF2D682229EEDD2400547634 /* DataRequest+CoreData.swift in Sources */,
 				BF5ED7DD25593DDE00A1698E /* UXFCampaignPresentor.swift in Sources */,
 				BF2806B32562B18F006F2D61 /* UXFRadioCell.swift in Sources */,
 				BF316C102684AABC007CEFC0 /* VisualEffectView.swift in Sources */,
@@ -1163,6 +1238,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFB85E7C2A42D817000208D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFB85E8E2A42D844000208D2 /* YoHe.swift in Sources */,
+				BFB85E842A42D818000208D2 /* YoHe.docc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1174,6 +1258,11 @@
 			isa = PBXTargetDependency;
 			target = 0A46899122840B2C0074E1A3 /* UXFeedbackSDK */;
 			targetProxy = BF6248BA2559E06F0039F855 /* PBXContainerItemProxy */;
+		};
+		BFB85E872A42D818000208D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFB85E7F2A42D817000208D2 /* YoHeSDK */;
+			targetProxy = BFB85E862A42D818000208D2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1337,6 +1426,7 @@
 		0A019A4F22365E04002FD4F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1368,6 +1458,7 @@
 		0A019A5022365E04002FD4F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1457,6 +1548,7 @@
 		0A0955AE229573DD00606547 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1495,7 +1587,7 @@
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = NO;
 				CLANG_WARN_SUSPICIOUS_MOVE = NO;
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -1701,7 +1793,7 @@
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = NO;
 				CLANG_WARN_SUSPICIOUS_MOVE = NO;
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -1754,7 +1846,7 @@
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = NO;
 				CLANG_WARN_SUSPICIOUS_MOVE = NO;
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -1795,6 +1887,114 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		BFB85E8B2A42D818000208D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 UXF. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.yohe.sdk;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BFB85E8C2A42D818000208D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 UXF. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.yohe.sdk;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		BFB85E8D2A42D818000208D2 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 UXF. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.yohe.sdk;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = AdHoc;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1845,6 +2045,16 @@
 				0A46899C22840B2C0074E1A3 /* Debug */,
 				0A46899D22840B2C0074E1A3 /* Release */,
 				0A0955AF229573DD00606547 /* AdHoc */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFB85E8A2A42D818000208D2 /* Build configuration list for PBXNativeTarget "YoHeSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFB85E8B2A42D818000208D2 /* Debug */,
+				BFB85E8C2A42D818000208D2 /* Release */,
+				BFB85E8D2A42D818000208D2 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

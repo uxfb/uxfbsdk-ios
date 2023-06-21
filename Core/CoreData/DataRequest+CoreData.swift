@@ -11,15 +11,15 @@ import Foundation
 import Foundation
 import CoreData
 
-@objc(UXFRequest)
-internal class UXFRequest: NSManagedObject {
+@objc(DataRequest)
+internal class DataRequest: NSManagedObject {
 
 }
 
-extension UXFRequest {
+extension DataRequest {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<UXFRequest> {
-        return NSFetchRequest<UXFRequest>(entityName: "UXFRequest")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<DataRequest> {
+        return NSFetchRequest<DataRequest>(entityName: "DataRequest")
     }
 
     @NSManaged public var apiMethod: String?
@@ -28,6 +28,6 @@ extension UXFRequest {
 
 }
 
-extension UXFRequest : Identifiable {
+extension DataRequest : Identifiable {
 
 }
