@@ -91,7 +91,7 @@ class ImageManager: NSObject {
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
         titleLabel.font = .systemFont(ofSize: 14)
-        titleLabel.text = "\(tappedIndex + 1) из \(images.count)"
+        titleLabel.text = "\(tappedIndex + 1) \(Consts.Texts.of) \(images.count)"
         
         let imageCollection = Consts.bundle.loadNibNamed("ImageCollection", owner: self, options: nil)?.first as! ImageCollection
         imageCollection.configure(frame: CGRect(origin: startPoint, size: startSize), images: images, currentIndex: tappedIndex) { title in

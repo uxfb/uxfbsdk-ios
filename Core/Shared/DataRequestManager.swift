@@ -29,7 +29,6 @@ public struct NetworkSettings {
 }
 
 final class DataRequestManager: NSObject {
-    private let identifier: String  = "biz.andalex.uxfeedback.sdk"
     private let model: String = "RequestModel"
     
     private var _apiClient: APIClient!
@@ -188,7 +187,7 @@ final class DataRequestManager: NSObject {
     //MARK: - Core data methods
     
     lazy var persistentContainer: NSPersistentContainer = {
-        let messageKitBundle = Bundle(identifier: self.identifier)
+        let messageKitBundle = Bundle(identifier: Consts.identifier)
         let modelURL = messageKitBundle!.url(forResource: self.model, withExtension: "momd")!
         let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL)
         let container = NSPersistentContainer(name: self.model, managedObjectModel: managedObjectModel!)

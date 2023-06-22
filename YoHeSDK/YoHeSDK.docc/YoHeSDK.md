@@ -13,7 +13,7 @@
  * **Swift Package Manager:** File → Add package → https://github.com/yohe-io/yohe-sdk-ios.git
 
 Для старта работы необходимо импортировать библиотеку
-import UXFeedbackSDK
+import YoHeSDK
 
 ## Topics 
 
@@ -21,12 +21,12 @@ import UXFeedbackSDK
 
 - ``YoHe``
 
-- ``UXFBSettings``
+- ``YoHeSettings``
 
-- ``UXFBTheme``
+- ``YoHeTheme``
 
 ### Описание интерфейсов делегатов
 
-- ``UXFeedbackCampaignDelegate``
+- ``YoHeCampaignDelegate``
 
-- ``UXFeedbackLogDelegate``
+- ``YoHeLogDelegate``

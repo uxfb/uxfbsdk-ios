@@ -6,6 +6,8 @@
 //  Copyright © 2023 UXF. All rights reserved.
 //
 
+import Foundation
+
 /// Класс настроек SDK. Для создания экземпляра настроек по умолчанию необходимо вызвать метод ``init()``
 @objcMembers
 open class Settings: NSObject {

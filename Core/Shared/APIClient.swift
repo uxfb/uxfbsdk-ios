@@ -25,6 +25,21 @@ internal func DDLogDebug(_ value: Any){
 let uxfErrorRequestCancelled = -999
 let uxfTokenErrorMessage: String = "Invalid token".localized()
 
+@objcMembers
+internal class ApiError : NSError {
+    
+    private var desc: String? = nil
+    
+    init(description: String?){
+        super.init(domain: "uxfeedback", code: 0, userInfo: ["description": description ?? ""])
+        self.desc = description
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+}
+
 class APIClient {
     private(set) var appID: String!
     private var _parser: Parser!
@@ -173,7 +188,7 @@ class APIClient {
                     let response = response as? HTTPURLResponse,
                     error == nil else {
                         DDLogDebug("httpCode= \((response as? HTTPURLResponse)?.statusCode ?? 0), response=\(String(decoding: data ?? Data(), as: UTF8.self))")
-                        throw error ?? UXFError.init(description: "Request error")
+                        throw error ?? ApiError.init(description: "Request error")
                 }
                 
                 let httpCode = response.statusCode

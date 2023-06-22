@@ -159,12 +159,12 @@ enum APIWebRouter {
         case .getCampaing, .showForm, .saveFormData:
             return [HTTPHeaderField.acceptType.rawValue: ContentType.json.rawValue,
                     HTTPHeaderField.contentType.rawValue: ContentType.json.rawValue,
-                    HTTPHeaderField.sdkVersion.rawValue: UXFeedback.sdk.version]
+                    HTTPHeaderField.sdkVersion.rawValue: Consts.version]
             
             
         case .saveScreenshot:
             return [HTTPHeaderField.contentType.rawValue: ContentType.screenshot.rawValue,
-                    HTTPHeaderField.sdkVersion.rawValue: UXFeedback.sdk.version]
+                    HTTPHeaderField.sdkVersion.rawValue: Consts.version]
         }
     }
     

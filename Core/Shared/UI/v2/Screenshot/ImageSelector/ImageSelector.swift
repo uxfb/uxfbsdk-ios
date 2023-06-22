@@ -37,7 +37,7 @@ class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
                         
                         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
                         
-                        let openSettingsAction = UIAlertAction(title: "Изменить настройки", style: .default) { alertAction in
+                        let openSettingsAction = UIAlertAction(title: Consts.Texts.changeSettings, style: .default) { alertAction in
                             alert.dismiss(animated: true, completion: nil)
                             guard let url = URL(string: UIApplication.openSettingsURLString),
                                     UIApplication.shared.canOpenURL(url) else {
@@ -46,7 +46,7 @@ class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
 
                             UIApplication.shared.open(url, options: [:], completionHandler: nil)
                         }
-                        let openPhotoAccessAction = UIAlertAction(title: "Выбрать больше фото", style: .default) { alertAction in
+                        let openPhotoAccessAction = UIAlertAction(title: Consts.Texts.takeMorePhoto, style: .default) { alertAction in
                             alert.dismiss(animated: true, completion: nil)
                             
                             if var topController = UIApplication.shared.keyWindow?.rootViewController {
@@ -56,7 +56,7 @@ class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
                                 PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: topController)
                             }
                         }
-                        let closeAction = UIAlertAction(title: "Отмена", style: .cancel) { alertAction in
+                        let closeAction = UIAlertAction(title: Consts.Buttons.cancel, style: .cancel) { alertAction in
                             alert.dismiss(animated: true, completion: nil)
                         }
                         alert.addAction(openSettingsAction)
@@ -122,7 +122,7 @@ class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
     }
     
     private func updateUI() {
-        titleLabel.text = "Выбрано: \(selectedIndexes.count) из \(maxCount)"
+        titleLabel.text = "\(Consts.Texts.selected) \(selectedIndexes.count) \(Consts.Texts.of) \(maxCount)"
         completeButton.isEnabled = selectedIndexes.count > 0
     }
     

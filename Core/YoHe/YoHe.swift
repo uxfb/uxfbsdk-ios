@@ -8,21 +8,6 @@
 import Foundation
 import UIKit
 
-@objcMembers
-internal class YoHeError : NSError {
-    
-    private var desc: String? = nil
-    
-    init(description: String?){
-        super.init(domain: "yohe", code: 0, userInfo: ["description": description ?? ""])
-        self.desc = description
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-}
-
 /// Основной интерфейс SDK. Для инициализации синглтона необходимо вызвать метод ``setup(appID:settings:campainDelegate:logDelegate:)``
 @objcMembers
 open class YoHe: NSObject {

@@ -28,7 +28,7 @@ class ImageCollection: UIView, UIScrollViewDelegate {
     public var selectedIndex: Int = 0 {
         didSet {
             if onPageChange != nil {
-                onPageChange!("\(selectedIndex + 1) из \(imageViews.count)")
+                onPageChange!("\(selectedIndex + 1) \(Consts.Texts.of) \(imageViews.count)")
             }
         }
     }

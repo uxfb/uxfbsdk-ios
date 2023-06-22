@@ -78,7 +78,7 @@ class ScreenshotCell: BaseCell {
         
         setEnabledBtns(screenshots.count < maxCount)
         
-        countLabel.text = screenshots.count > 0 ? "Скриншоты: \(screenshots.count) из \(maxCount)" : ""
+        countLabel.text = screenshots.count > 0 ? "\(Consts.Texts.screenshots) \(screenshots.count) \(Consts.Texts.of) \(maxCount)" : ""
     }
     
     override func updateUI() {
@@ -202,13 +202,13 @@ class ScreenshotCell: BaseCell {
     
     private func showDeleteConfirmation(index: Int) {
         let screenshot = screenshots[index]
-        let message = screenshot.type == .screenshot ? "Скриншот будет удален, без возможности восстановления" : "В дальнейшем вы сможете загрузить его повторно из галереи"
-        let alert = UIAlertController(title: "Удалить скриншот?", message: message, preferredStyle: .alert)
-        let noDeleteAction = UIAlertAction(title: "Не удалять", style: .default) { alertAction in
+        let message = screenshot.type == .screenshot ? Consts.Texts.screenshotDeleteInfo : Consts.Texts.screenshotDeleteFuture
+        let alert = UIAlertController(title: Consts.Texts.screenshotDeleteQuestion, message: message, preferredStyle: .alert)
+        let noDeleteAction = UIAlertAction(title: Consts.Texts.noDelete, style: .default) { alertAction in
             alert.dismiss(animated: true, completion: nil)
         }
         
-        let deleteAction = UIAlertAction(title: "Удалить", style: .default) { alertAction in
+        let deleteAction = UIAlertAction(title: Consts.Texts.delete, style: .default) { alertAction in
             self.screenshots.remove(at: index)
 //            self.delegate?.fieldChanged(field, answer: [], refresh: true)
 //            self.delegate?.screenshotChanged(screenshots: self.screenshots)
@@ -223,8 +223,8 @@ class ScreenshotCell: BaseCell {
     }
     
     private func showMaxCount() {
-        let alert = UIAlertController(title: "Вы загрузили максимальное количество скриншотов", message: "Для загрузки новых скриншотов, удалите ненужные", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Понятно", style: .default) { alertAction in
+        let alert = UIAlertController(title: Consts.Texts.screenshotMaxCount, message: Consts.Texts.screenshotMaxCountNext, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: Consts.Texts.okay, style: .default) { alertAction in
             alert.dismiss(animated: true, completion: nil)
         }
 

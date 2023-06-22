@@ -599,7 +599,7 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
             completionHandler(false)
 
         case .restricted:
-            self.showAlert(title: "Информация", message: "Нет доступа к фотографиям устройства", buttonTitle: "Закрыть")
+            self.showAlert(title: Consts.Texts.Information, message: Consts.Texts.noPhotoAccess, buttonTitle: Consts.Texts.close)
             completionHandler(false)
 
         case .denied:
@@ -628,8 +628,8 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     private func showAlertPhotoAccess() {
         DispatchQueue.main.async {
             let appName = Bundle.main.infoDictionary?["CFBundleName"] ?? "AppName"
-            let alert = UIAlertController(title: "\"\(appName)\" хочет получить доступ к вашим фотографиям", message: "Доступ не предоставлен ни к одной фотографии", preferredStyle: .alert)
-            let openPhotoAccessAction = UIAlertAction(title: "Изменить выбор", style: .default) { alertAction in
+            let alert = UIAlertController(title: "\"\(appName)\" \(Consts.Texts.wantToPhotoAcess)", message: Consts.Texts.noOnePhotoAccess, preferredStyle: .alert)
+            let openPhotoAccessAction = UIAlertAction(title: Consts.Texts.changeChoice, style: .default) { alertAction in
                 alert.dismiss(animated: true, completion: nil)
                 
                 if #available(iOS 14, *) {
@@ -637,7 +637,7 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
                     PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
                 }
             }
-            let closeAction = UIAlertAction(title: "Закрыть", style: .default) { alertAction in
+            let closeAction = UIAlertAction(title: Consts.Texts.close, style: .default) { alertAction in
                 alert.dismiss(animated: true, completion: nil)
             }
             alert.addAction(openPhotoAccessAction)
@@ -649,8 +649,8 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     private func showAlertSettings() {
         DispatchQueue.main.async {
             let appName = Bundle.main.infoDictionary?["CFBundleName"] ?? "AppName"
-            let alert = UIAlertController(title: "\"\(appName)\" хочет получить доступ к вашим фотографиям", message: "Перейдите в настройки, чтобы разрешить доступ", preferredStyle: .alert)
-            let openSettingsAction = UIAlertAction(title: "Открыть настройки", style: .default) { alertAction in
+            let alert = UIAlertController(title: "\"\(appName)\" \(Consts.Texts.wantToPhotoAccess)", message: Consts.Texts.goSettingsAccess, preferredStyle: .alert)
+            let openSettingsAction = UIAlertAction(title: Consts.Texts.openSettings, style: .default) { alertAction in
                 alert.dismiss(animated: true, completion: nil)
                 guard let url = URL(string: UIApplication.openSettingsURLString),
                         UIApplication.shared.canOpenURL(url) else {

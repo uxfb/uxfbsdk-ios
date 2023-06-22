@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #import <UXFeedbackSDK/YYImage.h>
 
 //! Project version number for UXFeedbackSDK.
