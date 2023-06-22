@@ -58,8 +58,8 @@ class CheckboxCell: BaseCell, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CheckCell", for: indexPath) as! CheckCell
-        let the = self.theme
-        cell.configure(option: options[indexPath.row], theme: the!, isError: isError)
+        let theme = self.theme
+        cell.configure(option: options[indexPath.row], theme: theme!, isError: isError)
         cell.selectionStyle = .none
         return cell
     }

@@ -56,7 +56,7 @@ class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
                                 PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: topController)
                             }
                         }
-                        let closeAction = UIAlertAction(title: Consts.Buttons.cancel, style: .cancel) { alertAction in
+                        let closeAction = UIAlertAction(title: Consts.Texts.cancel, style: .cancel) { alertAction in
                             alert.dismiss(animated: true, completion: nil)
                         }
                         alert.addAction(openSettingsAction)

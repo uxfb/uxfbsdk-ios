@@ -18,7 +18,7 @@ internal class Consts {
     
     static let bundle: Bundle = Bundle(for: YoHe.self)
     
-    class text {
+    class Texts {
          static let close = "Close"
          static let cancel = "Cancel"
          static let selected = "Selected:"
@@ -44,5 +44,6 @@ internal class Consts {
          static let changeChoice = "Change Choice"
          static let goSettingsAccess = "Go to settings to allow access"
          static let openSettings = "Open Settings"
+         static let startScroll = "Start scrolling the screen,\nthen press the button\n«Apply»"
      }
 }

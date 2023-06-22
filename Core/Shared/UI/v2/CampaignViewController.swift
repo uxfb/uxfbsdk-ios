@@ -599,7 +599,7 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
             completionHandler(false)
 
         case .restricted:
-            self.showAlert(title: Consts.Texts.Information, message: Consts.Texts.noPhotoAccess, buttonTitle: Consts.Texts.close)
+            self.showAlert(title: Consts.Texts.information, message: Consts.Texts.noPhotoAccess, buttonTitle: Consts.Texts.close)
             completionHandler(false)
 
         case .denied:
@@ -628,7 +628,7 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     private func showAlertPhotoAccess() {
         DispatchQueue.main.async {
             let appName = Bundle.main.infoDictionary?["CFBundleName"] ?? "AppName"
-            let alert = UIAlertController(title: "\"\(appName)\" \(Consts.Texts.wantToPhotoAcess)", message: Consts.Texts.noOnePhotoAccess, preferredStyle: .alert)
+            let alert = UIAlertController(title: "\"\(appName)\" \(Consts.Texts.wantToPhotoAccess)", message: Consts.Texts.noOnePhotoAccess, preferredStyle: .alert)
             let openPhotoAccessAction = UIAlertAction(title: Consts.Texts.changeChoice, style: .default) { alertAction in
                 alert.dismiss(animated: true, completion: nil)
                 

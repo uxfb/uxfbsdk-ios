@@ -14,14 +14,20 @@ class Parser {
     static let formControllerViewOffset: CGFloat = 16.0
     static let bottomOffset: CGFloat = 8
     
-    private(set) var customTheme: Theme?
+    private(set) var customTheme: ThemeProtocol?
+//    private(set) var customTheme: Theme?
     private(set) var isInitTheme: Bool = false
     private var _uiGroupDictionary: Dictionary <String, Array<String>> = [:]
     private var containerWidth: CGFloat {
         return (UIScreen.main.bounds.width - (Parser.formControllerViewOffset + Parser.contenViewOffset)*2)
     }
     
-    init(theme: Theme?, isInitTheme: Bool = false) {
+//    init(theme: Theme?, isInitTheme: Bool = false) {
+//        self.customTheme = theme
+//        self.isInitTheme = isInitTheme
+//    }
+    
+    init(theme: ThemeProtocol?, isInitTheme: Bool = false) {
         self.customTheme = theme
         self.isInitTheme = isInitTheme
     }
@@ -48,7 +54,7 @@ class Parser {
          let showCopyright: Bool = campaignInfo["showCopyright"] as? Bool ?? true
          
         
-        var theme: Theme?
+        var theme: ThemeProtocol?
         if let customTheme = self.customTheme, isInitTheme == true {
             theme = customTheme
         }

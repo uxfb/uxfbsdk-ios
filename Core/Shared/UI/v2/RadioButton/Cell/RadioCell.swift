@@ -29,7 +29,7 @@ class RadioCell: UITableViewCell {
     @IBOutlet var radioLabel: UILabel!
     @IBOutlet var radioView: UIView!
     
-    private var theme: Theme?
+    private var theme: ThemeProtocol?
     private var option: Option?
     private var isError: Bool = false
     
@@ -44,7 +44,7 @@ class RadioCell: UITableViewCell {
         self.updateUI()
     }
     
-    func configure(option: Option, theme: Theme, isError: Bool) {
+    func configure(option: Option, theme: ThemeProtocol, isError: Bool) {
         self.option = option
         self.theme = theme
         self.isError = isError

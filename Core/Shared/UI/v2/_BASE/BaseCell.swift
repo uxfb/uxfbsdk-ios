@@ -11,7 +11,7 @@ import UIKit
 internal class BaseCell: UITableViewCell {
     internal var delegate: FieldDelegate?
     internal var field: Field?
-    internal var theme: Theme?
+    internal var theme: ThemeProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,7 +21,7 @@ internal class BaseCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    internal func configureWith(_ value: Field, theme: Theme, delegate: FieldDelegate, valueIndex: Int = 0) {
+    internal func configureWith(_ value: Field, theme: ThemeProtocol, delegate: FieldDelegate, valueIndex: Int = 0) {
         self.field = value
         self.theme = theme
         self.delegate = delegate

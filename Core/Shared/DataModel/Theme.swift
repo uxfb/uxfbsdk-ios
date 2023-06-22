@@ -27,9 +27,36 @@ class Blackout: NSObject {
     }
 }
 
+protocol ThemeProtocol {
+    var text03Color: UIColor { get set }
+    var inputBorderColor: UIColor { get set }
+    var iconColor: UIColor { get set }
+    var btnBgColorActive: UIColor { get set }
+    var btnBorderRadius: CGFloat { get set }
+    var errorColorSecondary: UIColor { get set }
+    var errorColorPrimary: UIColor { get set }
+    var mainColor: UIColor { get set }
+    var controlBgColorActive: UIColor { get set }
+    var formBorderRadius: CGFloat { get set }
+    var inputBgColor: UIColor { get set }
+    var text01Color: UIColor { get set }
+    var controlBgColor: UIColor { get set }
+    var controlIconColor: UIColor { get set }
+    var btnBgColor: UIColor { get set }
+    var text02Color: UIColor { get set }
+    var btnTextColor: UIColor { get set }
+    var bgColor: UIColor { get set }
+    
+    var fontH1: UIFont { get set }
+    var fontH2: UIFont { get set }
+    var fontP1: UIFont { get set }
+    var fontP2: UIFont { get set }
+    var fontBtn: UIFont { get set }
+}
+
 @objcMembers
-open class Theme: NSObject, Decodable {
-    open var text03Color: UIColor =  UIColor.init("#8B90A0")
+open class Theme: NSObject, Decodable, ThemeProtocol {
+    open var text03Color: UIColor = UIColor.init("#8B90A0")
     open var inputBorderColor: UIColor = UIColor.init("#D3D4D8")
     open var iconColor: UIColor =  UIColor.init("#B5B8C2")
     open var btnBgColorActive: UIColor =  UIColor.init("#1983C8")
@@ -48,60 +75,21 @@ open class Theme: NSObject, Decodable {
     open var btnTextColor: UIColor =  UIColor.init("#FFFFFF")
     open var bgColor: UIColor =  UIColor.init("#FFFFFF")
     
-    private var _fontH1: UIFont = .systemFont(ofSize: 22,
+    var fontH1: UIFont = .systemFont(ofSize: 22,
                                               weight: .semibold)
-    open var fontH1: UIFont {
-        get{
-            return _fontH1
-        }
-        set{
-            _fontH1 = newValue
-        }
-    }
-    
-    private var _fontH2: UIFont = .systemFont(ofSize: 17,
+   
+    var fontH2: UIFont = .systemFont(ofSize: 17,
                                               weight: .semibold)
-    open var fontH2: UIFont {
-        get{
-            return _fontH2
-        }
-        set{
-            _fontH2 = newValue
-        }
-    }
     
-    private var _fontP1: UIFont = .systemFont(ofSize: 17,
+    var fontP1: UIFont = .systemFont(ofSize: 17,
                                               weight: .regular)
-    open var fontP1: UIFont {
-        get{
-            return _fontP1
-        }
-        set{
-            _fontP1 = newValue
-        }
-    }
     
-    private var _fontP2: UIFont = .systemFont(ofSize: 14,
+    var fontP2: UIFont = .systemFont(ofSize: 14,
                                               weight: .regular)
-    open var fontP2: UIFont {
-        get{
-            return _fontP2
-        }
-        set{
-            _fontP2 = newValue
-        }
-    }
     
-    private var _fontBtn: UIFont = .systemFont(ofSize: 16,
+    var fontBtn: UIFont = .systemFont(ofSize: 16,
                                              weight: .semibold)
-    open var fontBtn: UIFont {
-        get{
-            return _fontBtn
-        }
-        set{
-            _fontBtn = newValue
-        }
-    }
+    
     
     enum CodingKeys: String, CodingKey {
         case bgColor

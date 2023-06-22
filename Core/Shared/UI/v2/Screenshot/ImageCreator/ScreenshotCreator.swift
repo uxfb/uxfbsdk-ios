@@ -20,7 +20,11 @@ class ScreenshotCreator: UIView {
     @IBOutlet weak var shadowLeft: NSLayoutConstraint!
     @IBOutlet weak var shadowRight: NSLayoutConstraint!
     
-    @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var textLabel: UILabel! {
+        didSet {
+            textLabel.text = Consts.Texts.startScroll
+        }
+    }
     @IBOutlet weak var touchImage: UIImageView!
     @IBOutlet weak var arrowImage: UIImageView!
     

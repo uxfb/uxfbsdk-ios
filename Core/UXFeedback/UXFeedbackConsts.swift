@@ -44,5 +44,6 @@ internal class Consts {
         static let changeChoice = "Изменить выбор"
         static let goSettingsAccess = "Перейдите в настройки, чтобы разрешить доступ"
         static let openSettings = "Открыть настройки"
+        static let startScroll = "Начните скроллить экран,\nа потом нажмите на кнопку\n«Применить»"
     }
 }

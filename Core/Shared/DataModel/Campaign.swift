@@ -15,7 +15,7 @@ enum CampaignType: String {
 
 struct Campaign{
     private(set) var campaignId: String!
-    private(set) var theme: Theme!
+    private(set) var theme: ThemeProtocol!
     private(set) var pages: Array<Page> = []
     private(set) var type: CampaignType!
     private(set) var targetings: Array<Dictionary<String,Any>>!
@@ -37,7 +37,7 @@ struct Campaign{
         return delay
     }
     
-    mutating func updateTheme(theme: Theme) {
+    mutating func updateTheme(theme: ThemeProtocol) {
         self.theme = theme
     }
 }

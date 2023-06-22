@@ -69,7 +69,7 @@ class SliderView: UIView {
         self.addSubview(imageContentView)
     }
     
-    func setStyle(_ sliderStyle: SliderStyle, theme: Theme) {
+    func setStyle(_ sliderStyle: SliderStyle, theme: ThemeProtocol) {
         switch sliderStyle {
         case .inactive:
             bigBorderView.backgroundColor = theme.iconColor.withAlphaComponent(0.3)

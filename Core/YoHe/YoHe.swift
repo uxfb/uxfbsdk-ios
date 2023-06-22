@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-/// Основной интерфейс SDK. Для инициализации синглтона необходимо вызвать метод ``setup(appID:settings:campainDelegate:logDelegate:)``
+/// Main SDK interface. To initialize a singleton, call the ``setup(appID:settings:campainDelegate:logDelegate:)`` method
 @objcMembers
 open class YoHe: NSObject {
     internal func DDLog(_ value: Any) {
@@ -20,27 +20,27 @@ open class YoHe: NSObject {
         }
     }
     
-    /// Синглтон для работы с SDK
+    /// Singleton for working with the SDK
     public static let sdk: YoHe = YoHe.init()
-    
+
     private static var isInitialized = false
-    
-    /// Текущая версия SDK
+
+    /// Current SDK version
     public let version = Consts.version
-    
-    /// Делегат, реализующий интерфейс обработки событий
+
+    /// Delegate that implements the event handling interface
     open weak var campaignDelegate: YoHeCampaignDelegate?
-    
-    /// Делегат, реализующий интерфейс обработки лога
+
+    /// Delegate that implements the log processing interface
     open weak var logDelegate: YoHeLogDelegate?
-    
-    /// Объект настроек SDK
+
+    /// SDK settings object
     open var settings: YoHeSettings = YoHeSettings()
-    
-    /// Объект темы SDK
+
+    /// SDK theme object
     open var theme: YoHeTheme = YoHeTheme()
-    
-    /// Дополнительные параметры, которые будут переданы при завершении прохождения опроса
+
+    /// Additional parameters that will be passed when the poll is completed
     open var properties: [String: Any] = [:]
     
     private var appId: String?
@@ -104,12 +104,12 @@ open class YoHe: NSObject {
 
     
     
-    /// Метод инициализации и первичной настройки SDK
+    /// SDK initialization and initial setup method
     /// - Parameters:
-    ///   - appID: Идентификатор приложения
-    ///   - settings: Объект настроек
-    ///   - campaignDelegate: Делегат обработки событий SDK
-    ///   - logDelegate: Делегат обработки логов SDK
+    /// - appID: App ID
+    /// - settings: Settings object
+    /// - campaignDelegate: SDK event handling delegate
+    /// - logDelegate: Delegate for handling SDK logs
     public static func setup(appID: String,
                              settings: YoHeSettings,
                              campaignDelegate: YoHeCampaignDelegate? = nil,
@@ -147,8 +147,8 @@ open class YoHe: NSObject {
         
     }
         
-    /// Метод показа кампании по указанному событию
-    /// - Parameter eventName: Название события
+    /// Campaign display method for the specified event
+    /// - Parameter eventName: Event name
     open func startCampaign(eventName: String) {
         DDLog("Attempt starting: \(eventName)")
         _eventToSend = eventName
@@ -254,7 +254,7 @@ open class YoHe: NSObject {
         }
     }
     
-    /// Метод отмены показа кампании. Если кампания уже показана - она будет закрыта
+    /// Campaign cancellation method. If the campaign is already shown, it will be closed
     open func stopCampaign() {
         self._formPresentor?.stopCampaign()
         if self.task != nil {

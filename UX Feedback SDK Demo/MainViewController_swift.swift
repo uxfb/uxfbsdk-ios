@@ -45,9 +45,12 @@ class MainViewController_swift: UIViewController {
             customTheme.btnBgColor =  UIColor.init("#0076C2")
             customTheme.text02Color =  UIColor.init("#505565")
             customTheme.btnTextColor =  UIColor.init("#FFFFFF")
-            customTheme.bgColor =  UIColor.init("#FFFFFF")
+            customTheme.bgColor =  UIColor.init("#123456")
             
-//            UXFeedback.sharedSDK.setTheme(theme: customTheme)
+            
+            
+//            YoHe.sdk.theme = customTheme
+            
         }
     }
 

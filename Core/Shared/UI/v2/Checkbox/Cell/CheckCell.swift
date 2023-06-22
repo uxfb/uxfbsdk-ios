@@ -28,7 +28,7 @@ class CheckCell: UITableViewCell {
     @IBOutlet var checkLabel: UILabel!
     @IBOutlet var checkView: UIView!
     
-    private var theme: Theme?
+    private var theme: ThemeProtocol?
     private var option: Option?
     private var isError: Bool = false
     
@@ -43,7 +43,7 @@ class CheckCell: UITableViewCell {
         self.updateUI()
     }
     
-    func configure(option: Option, theme: Theme, isError: Bool) {
+    func configure(option: Option, theme: ThemeProtocol, isError: Bool) {
         self.option = option
         self.theme = theme
         self.isError = isError
