@@ -55,25 +55,25 @@ protocol ThemeProtocol {
 }
 
 @objcMembers
-open class Theme: NSObject, Decodable, ThemeProtocol {
-    open var text03Color: UIColor = UIColor.init("#8B90A0")
-    open var inputBorderColor: UIColor = UIColor.init("#D3D4D8")
-    open var iconColor: UIColor =  UIColor.init("#B5B8C2")
-    open var btnBgColorActive: UIColor =  UIColor.init("#1983C8")
-    open var btnBorderRadius: CGFloat = 4
-    open var errorColorSecondary: UIColor =  UIColor.init("#F4A0A3")
-    open var errorColorPrimary: UIColor =  UIColor.init("#E84047")
-    open var mainColor: UIColor =  UIColor.init("#0076C2")
-    open var controlBgColorActive: UIColor =  UIColor.init("#DBF1FF")
-    open var formBorderRadius: CGFloat = 8
-    open var inputBgColor: UIColor =  UIColor.init("#F3F3F3")
-    open var text01Color: UIColor =  UIColor.init("#232735")
-    open var controlBgColor: UIColor =  UIColor.init("#F3F3F3")
-    open var controlIconColor: UIColor =  UIColor.init("#FFFFFF")
-    open var btnBgColor: UIColor =  UIColor.init("#0076C2")
-    open var text02Color: UIColor =  UIColor.init("#505565")
-    open var btnTextColor: UIColor =  UIColor.init("#FFFFFF")
-    open var bgColor: UIColor =  UIColor.init("#FFFFFF")
+class Theme: NSObject, Decodable, ThemeProtocol {
+    var text03Color: UIColor = UIColor.init("#8B90A0")
+    var inputBorderColor: UIColor = UIColor.init("#D3D4D8")
+    var iconColor: UIColor =  UIColor.init("#B5B8C2")
+    var btnBgColorActive: UIColor =  UIColor.init("#1983C8")
+    var btnBorderRadius: CGFloat = 4
+    var errorColorSecondary: UIColor =  UIColor.init("#F4A0A3")
+    var errorColorPrimary: UIColor =  UIColor.init("#E84047")
+    var mainColor: UIColor =  UIColor.init("#0076C2")
+    var controlBgColorActive: UIColor =  UIColor.init("#DBF1FF")
+    var formBorderRadius: CGFloat = 8
+    var inputBgColor: UIColor =  UIColor.init("#F3F3F3")
+    var text01Color: UIColor =  UIColor.init("#232735")
+    var controlBgColor: UIColor =  UIColor.init("#F3F3F3")
+    var controlIconColor: UIColor =  UIColor.init("#FFFFFF")
+    var btnBgColor: UIColor =  UIColor.init("#0076C2")
+    var text02Color: UIColor =  UIColor.init("#505565")
+    var btnTextColor: UIColor =  UIColor.init("#FFFFFF")
+    var bgColor: UIColor =  UIColor.init("#FFFFFF")
     
     var fontH1: UIFont = .systemFont(ofSize: 22,
                                               weight: .semibold)

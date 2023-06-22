@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         YoHe.setup(appID: uxfAppID,
                          settings: YoHeSettings())
         
-        YoHe.sdk.theme = customTheme
+//        YoHe.sdk.theme = customTheme
         YoHe.sdk.settings.debugEnabled = true
         
         return true

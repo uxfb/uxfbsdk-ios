@@ -18,7 +18,7 @@
 		0A4689A422840BB90074E1A3 /* URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6E2237C503002FD4F8 /* URLComponents.swift */; };
 		0A4689A522840BB90074E1A3 /* APIWebRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A6C2237B773002FD4F8 /* APIWebRouter.swift */; };
 		0A4689A622840BB90074E1A3 /* StatisticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A160DD42268CDB000A586C4 /* StatisticManager.swift */; };
-		0A4689A722840BB90074E1A3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A0CDEAB2250598800E1C092 /* Images.xcassets */; };
+		0A4689A722840BB90074E1A3 /* UXFeedback.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A0CDEAB2250598800E1C092 /* UXFeedback.xcassets */; };
 		0A4689A822840BBF0074E1A3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A019A57223673FE002FD4F8 /* Theme.swift */; };
 		0A4689A922840BBF0074E1A3 /* Campaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB832243B4FB00C17007 /* Campaign.swift */; };
 		0A4689AA22840BBF0074E1A3 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CDB852243BD5500C17007 /* Page.swift */; };
@@ -190,7 +190,6 @@
 		BF43807D2A4428AF009975EB /* EmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AB2562B18F006F2D61 /* EmailCell.xib */; };
 		BF43807E2A4428AF009975EB /* SmilesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AD2562B18F006F2D61 /* SmilesCell.xib */; };
 		BF43807F2A4428AF009975EB /* GalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC826B69F0C002A9E8C /* GalleryCell.xib */; };
-		BF4380802A4428AF009975EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A0CDEAB2250598800E1C092 /* Images.xcassets */; };
 		BF4380882A442F51009975EB /* YoHeSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB85E822A42D817000208D2 /* YoHeSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF4380892A442F71009975EB /* YoHeSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = BFB85E832A42D818000208D2 /* YoHeSDK.docc */; };
 		BF43808A2A442FAB009975EB /* YoHe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB85E792A42D7E5000208D2 /* YoHe.swift */; };
@@ -210,6 +209,7 @@
 		BF4380982A44370F009975EB /* YYImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF02A4324A8009975EB /* YYImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF4380992A443806009975EB /* YoHeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF4380852A4428AF009975EB /* YoHeSDK.framework */; };
 		BF43809A2A443806009975EB /* YoHeSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BF4380852A4428AF009975EB /* YoHeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BF4380A02A444B57009975EB /* YoHe.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF43809E2A444B44009975EB /* YoHe.xcassets */; };
 		BF573EC426B69E25002A9E8C /* ImageSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC326B69E25002A9E8C /* ImageSelector.xib */; };
 		BF573EC526B69E28002A9E8C /* ImageSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573EC126B69E19002A9E8C /* ImageSelector.swift */; };
 		BF573EC926B69F0C002A9E8C /* GalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573EC726B69F0C002A9E8C /* GalleryCell.swift */; };
@@ -290,7 +290,7 @@
 		0A019A6C2237B773002FD4F8 /* APIWebRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWebRouter.swift; sourceTree = "<group>"; };
 		0A019A6E2237C503002FD4F8 /* URLComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLComponents.swift; sourceTree = "<group>"; };
 		0A0CDEA5224F42E900E1C092 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
-		0A0CDEAB2250598800E1C092 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0A0CDEAB2250598800E1C092 /* UXFeedback.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = UXFeedback.xcassets; sourceTree = "<group>"; };
 		0A0CDEB92250A16B00E1C092 /* UIViewController+present.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+present.swift"; sourceTree = "<group>"; };
 		0A160DD42268CDB000A586C4 /* StatisticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticManager.swift; sourceTree = "<group>"; };
 		0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reachability+NetworkType.swift"; sourceTree = "<group>"; };
@@ -375,6 +375,7 @@
 		BF437FF82A4324A8009975EB /* YYAnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYAnimatedImageView.m; sourceTree = "<group>"; };
 		BF437FF92A4324A8009975EB /* YYSpriteSheetImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSpriteSheetImage.h; sourceTree = "<group>"; };
 		BF4380852A4428AF009975EB /* YoHeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YoHeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF43809E2A444B44009975EB /* YoHe.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = YoHe.xcassets; sourceTree = "<group>"; };
 		BF573EC126B69E19002A9E8C /* ImageSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelector.swift; sourceTree = "<group>"; };
 		BF573EC326B69E25002A9E8C /* ImageSelector.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageSelector.xib; sourceTree = "<group>"; };
 		BF573EC726B69F0C002A9E8C /* GalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCell.swift; sourceTree = "<group>"; };
@@ -525,8 +526,8 @@
 				0AF49828229C3D5C000CB7D6 /* StringExtension.swift */,
 				BF885EE52715FB1B00F110A0 /* UIAlertController+.swift */,
 				BF885EE32715ED7900F110A0 /* UIButton+.swift */,
-				BF2D682729EEE27B00547634 /* UIFont+.swift */,
 				0AA92D9E227AB0A6005DBCBA /* UIControl+blocks.swift */,
+				BF2D682729EEE27B00547634 /* UIFont+.swift */,
 				0A019A6022367EF2002FD4F8 /* UIImage+Tinting.swift */,
 				0AB437C822B4FE2C00AF8665 /* UIImageView+cache.swift */,
 				BF405659265CECF700709351 /* UILabel+Align.swift */,
@@ -534,9 +535,9 @@
 				BF40565C265D0B0600709351 /* UIView+Image.swift */,
 				0A019A5F22367EF2002FD4F8 /* UIVIewAddition.swift */,
 				0A0CDEB92250A16B00E1C092 /* UIViewController+present.swift */,
-				BFBB060D2A1C99DD00F1BA6A /* WebP */,
 				0AF49823229C3D4A000CB7D6 /* HEXColor */,
 				BF188DDF2994F70100EAF7B1 /* VisualEffect */,
+				BFBB060D2A1C99DD00F1BA6A /* WebP */,
 			);
 			path = Vendors;
 			sourceTree = "<group>";
@@ -909,6 +910,7 @@
 				BFF303B82A42E1E300E513EA /* UXFeedbackConsts.swift */,
 				BFF304382A42F65E00E513EA /* UXFBSettings.swift */,
 				BFF304372A42F65E00E513EA /* UXFBTheme.swift */,
+				0A0CDEAB2250598800E1C092 /* UXFeedback.xcassets */,
 			);
 			path = UXFeedback;
 			sourceTree = "<group>";
@@ -921,6 +923,7 @@
 				BFF303B62A42E1D900E513EA /* YoHeConsts.swift */,
 				BFF304322A42F65400E513EA /* YoHeSettings.swift */,
 				BFF304312A42F65400E513EA /* YoHeTheme.swift */,
+				BF43809E2A444B44009975EB /* YoHe.xcassets */,
 			);
 			path = YoHe;
 			sourceTree = "<group>";
@@ -940,7 +943,6 @@
 				BFA54F8327AA86A2003D6411 /* Crypto.swift */,
 				BF31860D2975570800B54EF5 /* DataRequestManager.swift */,
 				BFF304292A42F4B900E513EA /* Delegate.swift */,
-				0A0CDEAB2250598800E1C092 /* Images.xcassets */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1117,7 +1119,7 @@
 				BF2806E22562B6A6006F2D61 /* EmailCell.xib in Resources */,
 				BF2806E32562B6A6006F2D61 /* SmilesCell.xib in Resources */,
 				BF573ECA26B69F0C002A9E8C /* GalleryCell.xib in Resources */,
-				0A4689A722840BB90074E1A3 /* Images.xcassets in Resources */,
+				0A4689A722840BB90074E1A3 /* UXFeedback.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1135,6 +1137,7 @@
 				BF4380722A4428AF009975EB /* ImageCell.xib in Resources */,
 				BF4380732A4428AF009975EB /* RatingCell.xib in Resources */,
 				BF4380742A4428AF009975EB /* CampaignViewController.xib in Resources */,
+				BF4380A02A444B57009975EB /* YoHe.xcassets in Resources */,
 				BF4380752A4428AF009975EB /* ButtonCell.xib in Resources */,
 				BF4380762A4428AF009975EB /* ImageCollection.xib in Resources */,
 				BF4380772A4428AF009975EB /* TextCell.xib in Resources */,
@@ -1146,7 +1149,6 @@
 				BF43807D2A4428AF009975EB /* EmailCell.xib in Resources */,
 				BF43807E2A4428AF009975EB /* SmilesCell.xib in Resources */,
 				BF43807F2A4428AF009975EB /* GalleryCell.xib in Resources */,
-				BF4380802A4428AF009975EB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
