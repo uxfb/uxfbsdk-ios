@@ -954,8 +954,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF437FE92A4324A2009975EB /* YYAnimatedImageView.h in Headers */,
 				0A46899622840B2C0074E1A3 /* UXFeedbackSDK.h in Headers */,
+				BF437FE92A4324A2009975EB /* YYAnimatedImageView.h in Headers */,
 				BF437FE72A4324A2009975EB /* YYFrameImage.h in Headers */,
 				BF437FEE2A4324A2009975EB /* YYSpriteSheetImage.h in Headers */,
 				BF437FE62A4324A2009975EB /* YYImageCoder.h in Headers */,
@@ -967,10 +967,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF4380882A442F51009975EB /* YoHeSDK.h in Headers */,
 				BF43808F2A44370E009975EB /* YYImageCoder.h in Headers */,
 				BF4380942A44370F009975EB /* YYAnimatedImageView.h in Headers */,
 				BF4380912A44370E009975EB /* YYFrameImage.h in Headers */,
-				BF4380882A442F51009975EB /* YoHeSDK.h in Headers */,
 				BF4380982A44370F009975EB /* YYImage.h in Headers */,
 				BF4380972A44370F009975EB /* YYSpriteSheetImage.h in Headers */,
 			);
