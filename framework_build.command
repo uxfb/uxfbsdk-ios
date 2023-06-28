@@ -1,4 +1,4 @@
-#!/bin/sh
+w#!/bin/sh
 #  Created by Alexander on 25.03.2021.
 #  Copyright (c) 2021 Alexander Potemka. All rights reserved.
 
