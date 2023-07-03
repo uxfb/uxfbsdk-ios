@@ -207,8 +207,6 @@
 		BF4380962A44370F009975EB /* YYImageCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = BF437FF62A4324A8009975EB /* YYImageCoder.m */; };
 		BF4380972A44370F009975EB /* YYSpriteSheetImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF92A4324A8009975EB /* YYSpriteSheetImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF4380982A44370F009975EB /* YYImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF02A4324A8009975EB /* YYImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BF4380992A443806009975EB /* YoHeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF4380852A4428AF009975EB /* YoHeSDK.framework */; };
-		BF43809A2A443806009975EB /* YoHeSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BF4380852A4428AF009975EB /* YoHeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BF4380A02A444B57009975EB /* YoHe.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF43809E2A444B44009975EB /* YoHe.xcassets */; };
 		BF573EC426B69E25002A9E8C /* ImageSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC326B69E25002A9E8C /* ImageSelector.xib */; };
 		BF573EC526B69E28002A9E8C /* ImageSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573EC126B69E19002A9E8C /* ImageSelector.swift */; };
@@ -236,6 +234,8 @@
 		BFBB06292A1C99DD00F1BA6A /* WebPDemux.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061B2A1C99DD00F1BA6A /* WebPDemux.xcframework */; };
 		BFBB062A2A1C99DD00F1BA6A /* WebP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061C2A1C99DD00F1BA6A /* WebP.xcframework */; };
 		BFC7212C299CD2D400AAB9BC /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC7212B299CD2D400AAB9BC /* Settings.swift */; };
+		BFD357522A4F0E3D00AD355C /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; };
+		BFD357532A4F0E3D00AD355C /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BFE496DE280AA3A900844083 /* Privacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE496DD280AA3A900844083 /* Privacy.swift */; };
 		BFEA0003291987110042972A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFEA00012919870F0042972A /* WebKit.framework */; };
 		BFF303BA2A42E1F400E513EA /* UXFeedbackConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF303B82A42E1E300E513EA /* UXFeedbackConsts.swift */; };
@@ -247,12 +247,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BF43809B2A443806009975EB /* PBXContainerItemProxy */ = {
+		BFD357542A4F0E3D00AD355C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0A019A3422365E02002FD4F8 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BF4380092A4428AF009975EB;
-			remoteInfo = YoHeSDK;
+			remoteGlobalIDString = 0A46899122840B2C0074E1A3;
+			remoteInfo = UXFeedbackSDK;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -263,7 +263,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BF43809A2A443806009975EB /* YoHeSDK.framework in Embed Frameworks */,
+				BFD357532A4F0E3D00AD355C /* UXFeedbackSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,6 +414,7 @@
 		BFBB061B2A1C99DD00F1BA6A /* WebPDemux.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebPDemux.xcframework; sourceTree = "<group>"; };
 		BFBB061C2A1C99DD00F1BA6A /* WebP.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebP.xcframework; sourceTree = "<group>"; };
 		BFC7212B299CD2D400AAB9BC /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		BFD357562A4F1A1800AD355C /* UX Feedback SDK Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UX Feedback SDK Demo.entitlements"; sourceTree = "<group>"; };
 		BFE496DD280AA3A900844083 /* Privacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Privacy.swift; sourceTree = "<group>"; };
 		BFEA00012919870F0042972A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		BFEAFFF0291986460042972A /* libz.1.2.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.8.tbd; path = usr/lib/libz.1.2.8.tbd; sourceTree = SDKROOT; };
@@ -434,7 +435,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF4380992A443806009975EB /* YoHeSDK.framework in Frameworks */,
+				BFD357522A4F0E3D00AD355C /* UXFeedbackSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +491,7 @@
 		0A019A3E22365E02002FD4F8 /* UX Feedback SDK Demo */ = {
 			isa = PBXGroup;
 			children = (
+				BFD357562A4F1A1800AD355C /* UX Feedback SDK Demo.entitlements */,
 				0A019A3F22365E03002FD4F8 /* AppDelegate.swift */,
 				0A019A4122365E03002FD4F8 /* MainViewController_swift.swift */,
 				0A019A4322365E03002FD4F8 /* Main_swift.storyboard */,
@@ -991,7 +993,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				BF43809C2A443806009975EB /* PBXTargetDependency */,
+				BFD357552A4F0E3D00AD355C /* PBXTargetDependency */,
 			);
 			name = "UX Feedback SDK Demo";
 			productName = "UX Feedback Demo";
@@ -1352,10 +1354,10 @@
 			isa = PBXTargetDependency;
 			productRef = BF4148EB29EE81CB00666D5A /* snippet-extract */;
 		};
-		BF43809C2A443806009975EB /* PBXTargetDependency */ = {
+		BFD357552A4F0E3D00AD355C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BF4380092A4428AF009975EB /* YoHeSDK */;
-			targetProxy = BF43809B2A443806009975EB /* PBXContainerItemProxy */;
+			target = 0A46899122840B2C0074E1A3 /* UXFeedbackSDK */;
+			targetProxy = BFD357542A4F0E3D00AD355C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1506,9 +1508,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_ENTITLEMENTS = "UX Feedback SDK Demo/UX Feedback SDK Demo.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 127;
 				DEVELOPMENT_TEAM = ST7ATYX27F;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1538,9 +1541,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_ENTITLEMENTS = "UX Feedback SDK Demo/UX Feedback SDK Demo.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 127;
 				DEVELOPMENT_TEAM = ST7ATYX27F;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1628,9 +1632,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_ENTITLEMENTS = "UX Feedback SDK Demo/UX Feedback SDK Demo.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 127;
 				DEVELOPMENT_TEAM = ST7ATYX27F;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (

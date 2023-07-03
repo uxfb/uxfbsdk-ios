@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import YoHeSDK
+//import YoHe
+import UXFeedbackSDK
 
 class MainViewController_swift: UIViewController {
     
@@ -18,7 +19,7 @@ class MainViewController_swift: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = .white
-        YoHe.sdk.campaignDelegate = self
+        UXFeedback.sdk.campaignDelegate = self
 
         self.buttonsStackView.isUserInteractionEnabled = false
         self.buttonsStackView.alpha = 0.5
@@ -27,7 +28,7 @@ class MainViewController_swift: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            let customTheme = YoHeTheme()
+            let customTheme = UXFBTheme()
             customTheme.text03Color =  UIColor.init("#000000")
             customTheme.inputBorderColor =  UIColor.init("#D3D4D8")
             customTheme.iconColor =  UIColor.init("#B5B8C2")
@@ -49,45 +50,45 @@ class MainViewController_swift: UIViewController {
             
             
             
-//            YoHe.sdk.theme = customTheme
+//            UXFeedback.sdk.theme = customTheme
             
         }
     }
 
     @IBAction func stopCampaign(_ sender: UIButton){
-        YoHe.sdk.stopCampaign()
+        UXFeedback.sdk.stopCampaign()
     }
     
     func configureSDK() {
-        YoHe.sdk.settings.slideInUiBlocked = true
-        YoHe.sdk.settings.closeOnSwipe = true
+        UXFeedback.sdk.settings.slideInUiBlocked = true
+        UXFeedback.sdk.settings.closeOnSwipe = true
     }
     
     @IBAction func eventTap(_ sender: UIButton){
-        YoHe.sdk.settings.closeOnSwipe = true
-        YoHe.sdk.settings.slideInUiBlocked = true
-        YoHe.sdk.settings.slideInUiBlackoutBlur = 4
-        YoHe.sdk.settings.slideInUiBlackoutOpacity = 50
-        YoHe.sdk.settings.slideInUiBlackoutColor = "000000"
-        YoHe.sdk.settings.popupUiBlackoutBlur = 4
-        YoHe.sdk.settings.popupUiBlackoutOpacity = 50
-        YoHe.sdk.settings.popupUiBlackoutColor = "000000"
+        UXFeedback.sdk.settings.closeOnSwipe = true
+        UXFeedback.sdk.settings.slideInUiBlocked = true
+        UXFeedback.sdk.settings.slideInUiBlackoutBlur = 4
+        UXFeedback.sdk.settings.slideInUiBlackoutOpacity = 50
+        UXFeedback.sdk.settings.slideInUiBlackoutColor = "000000"
+        UXFeedback.sdk.settings.popupUiBlackoutBlur = 4
+        UXFeedback.sdk.settings.popupUiBlackoutOpacity = 50
+        UXFeedback.sdk.settings.popupUiBlackoutColor = "000000"
         
         
         let eventNumber = sender.tag
         assert(eventNumber > 0, "Invalid eventNumber")
-        YoHe.sdk.settings.globalDelayTimer = 1
+        UXFeedback.sdk.settings.globalDelayTimer = 1
         switch eventNumber {
         case 1:
 //            UXFeedback.sharedSDK.setProperties(["property_first": "non-value",
 //                                                "property_second": 2])
             
             
-            YoHe.sdk.startCampaign(eventName: "comment")
+            UXFeedback.sdk.startCampaign(eventName: "comment")
             break
         case 2:
 //            showActivityOverlay()
-            YoHe.sdk.startCampaign(eventName: "box1")
+            UXFeedback.sdk.startCampaign(eventName: "box1")
             break
         default:
             break
@@ -124,13 +125,13 @@ class MainViewController_swift: UIViewController {
 
 }
 
-extension MainViewController_swift: YoHeLogDelegate {
+extension MainViewController_swift: UXFeedbackLogDelegate {
     func logDidReceive(message: String) {
         print(message)
     }
 }
 
-extension MainViewController_swift: YoHeCampaignDelegate{
+extension MainViewController_swift: UXFeedbackCampaignDelegate{
     
     func campaignDidSend(campaignId: String) {
         

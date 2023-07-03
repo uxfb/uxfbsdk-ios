@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import YoHeSDK
+//import YoHeSDK
+import UXFeedbackSDK
 
 let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
 //let uxfAppID = "ck78uf73w0000315rlomponmb" //prod
@@ -28,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let customTheme = YoHeTheme()
+        let customTheme = UXFBTheme()
         customTheme.text03Color =  UIColor.init("#8B90A0")
         customTheme.inputBorderColor =  UIColor.init("#D3D4D8")
         customTheme.iconColor =  UIColor.init("#B5B8C2")
@@ -49,11 +50,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         customTheme.bgColor =  UIColor.init("#000000")
         
 //    endpoint: "AAAAAAAAAAAAAHYwMhEVF1hOTAolMWgBABIHDQwbey0+AwABBgMCCD52NBA=",
-        YoHe.setup(appID: uxfAppID,
-                         settings: YoHeSettings())
+        UXFeedback.setup(appID: uxfAppID,
+                         settings: UXFBSettings())
         
 //        YoHe.sdk.theme = customTheme
-        YoHe.sdk.settings.debugEnabled = true
+        UXFeedback.sdk.settings.debugEnabled = true
         
         return true
     }

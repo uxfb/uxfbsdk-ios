@@ -207,18 +207,25 @@ open class UXFeedback: NSObject {
 //
                         switch campaign.type {
                         case .slidein:
-                            if let color = self.settings.slideInUiBlackoutColor,
-                                color.count == 6 {
-                                blackout.color = UIColor.init("#\(color)")
+                            
+                            if let color = self.settings.slideInUiBlackoutColor {
+                                if color.count == 6 {
+                                    blackout.color = UIColor.init("#\(color)")
+                                } else if color.count == 7 {
+                                    blackout.color = UIColor.init(color)
+                                }
                             }
                             
                             blackout.blur = self.settings.slideInUiBlackoutBlur ?? 0
                             blackout.opacity = self.settings.slideInUiBlackoutOpacity ?? 0
                             
                         case .popup:
-                            if let color = self.settings.popupUiBlackoutColor,
-                                color.count == 6 {
-                                blackout.color = UIColor.init("#\(color)")
+                            if let color = self.settings.popupUiBlackoutColor {
+                                if color.count == 6 {
+                                    blackout.color = UIColor.init("#\(color)")
+                                } else if color.count == 7 {
+                                    blackout.color = UIColor.init(color)
+                                }
                             }
                             blackout.blur = self.settings.popupUiBlackoutBlur ?? 0
                             blackout.opacity = self.settings.popupUiBlackoutOpacity ?? 0

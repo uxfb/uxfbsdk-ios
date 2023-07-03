@@ -28,6 +28,4 @@ extension DataRequest {
 
 }
 
-extension DataRequest : Identifiable {
-
-}
+extension DataRequest : Identifiable { }

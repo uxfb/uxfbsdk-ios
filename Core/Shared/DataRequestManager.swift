@@ -9,14 +9,6 @@
 import Foundation
 import CoreData
 
-extension NSManagedObjectContext {
-    @discardableResult public func saveIfNeeded() throws -> Bool {
-        guard hasChanges else { return false }
-        try save()
-        return true
-    }
-}
-
 protocol RequestManagerDelegate {
     func campaingsLoaded(success: Bool, message: String?, delay: Int?, campaigns: Array<Campaign>)
     func formDataSaved(success: Bool, message: String?, capmaignId: String)
@@ -29,6 +21,7 @@ public struct NetworkSettings {
 }
 
 final class DataRequestManager: NSObject {
+    
     private let model: String = "RequestModel"
     
     private var _apiClient: APIClient!
@@ -97,12 +90,18 @@ final class DataRequestManager: NSObject {
     private func prepareAndSend(_ request: DataRequest? = nil) {
         if let request = request {
             self.sendNextRequest(request)
-        } else if let request = self.fetch() {
-            self.sendNextRequest(request)
+        } else {
+            self.fetch { request in
+                if let request = request {
+                    self.sendNextRequest(request)
+                }
+            }
         }
     }
     
     //MARK: - Request private methods
+    
+    private var isActive = false
     
     private func validateResponse(for request: DataRequest,
                                   success: Bool,
@@ -124,6 +123,7 @@ final class DataRequestManager: NSObject {
     }
     
     private func sendNextRequest(_ request: DataRequest) {
+        isActive = true
         let data = request.parametersData
         self.attempts += 1
         switch request.apiMethod {
@@ -190,34 +190,42 @@ final class DataRequestManager: NSObject {
         let messageKitBundle = Bundle(identifier: Consts.identifier)
         let modelURL = messageKitBundle!.url(forResource: self.model, withExtension: "momd")!
         let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL)
-        let container = NSPersistentContainer(name: self.model, managedObjectModel: managedObjectModel!)
+        let container = NSPersistentContainer(name: self.model,
+                                              managedObjectModel: managedObjectModel!)
+        let description = NSPersistentStoreDescription()
+        description.shouldInferMappingModelAutomatically = true
+        description.shouldMigrateStoreAutomatically = true
+        description.setOption(FileProtectionType.none as NSObject?,
+                                  forKey: NSPersistentStoreFileProtectionKey)
+        container.persistentStoreDescriptions = [description]
+        
         container.loadPersistentStores { (storeDescription, error) in
             if let err = error{
-                fatalError("Loading of store failed:\(err)")
+                print("Loading of uxfb store failed: \(err)")
             }
         }
         return container
     }()
-    
-    lazy var context = persistentContainer.viewContext
+
+    lazy var context = persistentContainer.newBackgroundContext()
    
-    private func fetch() -> DataRequest? {
-        let context = persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<DataRequest>(entityName: "DataRequest")
-        let sort = NSSortDescriptor(key: "created", ascending: true)
-        fetchRequest.sortDescriptors = [sort]
-        fetchRequest.fetchLimit = 1
-        do {
-            let request = try context.fetch(fetchRequest).first
-            return request
-        } catch {
-            return nil
+    private func fetch(completion: @escaping (DataRequest?) -> Void ) {
+        context.perform {
+            do {
+                let fetchRequest = NSFetchRequest<DataRequest>(entityName: "DataRequest")
+                let sort = NSSortDescriptor(key: "created", ascending: true)
+                fetchRequest.sortDescriptors = [sort]
+                fetchRequest.fetchLimit = 1
+                let request = try self.context.fetch(fetchRequest).first
+                completion(request)
+            } catch {
+                completion(nil)
+            }
         }
     }
     
     private func createRequest(_ apiMethod: String, parameters: Data?) {
-        context.perform {
+        context.performAndWait {
             if apiMethod == "GET_CAMPAIGNS" {
                 let fetchRequest = NSFetchRequest<DataRequest>(entityName: "DataRequest")
                 fetchRequest.predicate = NSPredicate(format: "apiMethod == %@", apiMethod)
@@ -232,7 +240,10 @@ final class DataRequestManager: NSObject {
             request.created = Date()
             request.parametersData = parameters
             try? self.context.save()
-            self.finishContext()
+            
+            if !self.isActive {
+                self.finishContext()
+            }
         }
     }
     
@@ -245,6 +256,7 @@ final class DataRequestManager: NSObject {
     }
     
     private func finishContext(completion: (() -> ())? = nil ) {
+        isActive = false
         completion?()
         self.prepareAndSend()
     }
