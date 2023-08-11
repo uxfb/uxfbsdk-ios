@@ -27,6 +27,7 @@ protocol SettingsProtocol {
 }
 
 /// Класс настроек SDK. Для создания экземпляра настроек по умолчанию необходимо вызвать метод ``init()``
+@_documentation(visibility: internal)
 @objcMembers
 open class Settings: NSObject {
     open var globalDelayTimer: Int = 1800

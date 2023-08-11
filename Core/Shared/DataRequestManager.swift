@@ -14,6 +14,7 @@ protocol RequestManagerDelegate {
     func formDataSaved(success: Bool, message: String?, capmaignId: String)
 }
 
+@_documentation(visibility: internal)
 public struct NetworkSettings {
     var requestTimeout: Double
     var retryCount: Int

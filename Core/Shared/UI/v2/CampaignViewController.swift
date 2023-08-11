@@ -213,6 +213,7 @@ internal class CampaignViewController: UIViewController {
                                                               y: 16),
                                               size: CGSize(width: 30,
                                                            height: 22)))
+            image.contentMode = .scaleAspectFit
             image.image = UIImage(named: "logo", in: Consts.bundle, compatibleWith: nil)
             tableFooterView.backgroundColor = campaign?.theme.bgColor ?? .white
             tableFooterView.addSubview(image)

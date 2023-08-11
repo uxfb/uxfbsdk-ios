@@ -197,17 +197,17 @@
 		BF43808C2A442FAB009975EB /* YoHeTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF304312A42F65400E513EA /* YoHeTheme.swift */; };
 		BF43808D2A442FAB009975EB /* YoHeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF303B02A42E0B900E513EA /* YoHeDelegate.swift */; };
 		BF43808E2A442FAB009975EB /* YoHeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF304322A42F65400E513EA /* YoHeSettings.swift */; };
-		BF43808F2A44370E009975EB /* YYImageCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF12A4324A8009975EB /* YYImageCoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BF4380902A44370E009975EB /* YYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BF437FF52A4324A8009975EB /* YYImage.m */; };
-		BF4380912A44370E009975EB /* YYFrameImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF22A4324A8009975EB /* YYFrameImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BF4380922A44370E009975EB /* YYAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF437FF82A4324A8009975EB /* YYAnimatedImageView.m */; };
-		BF4380932A44370F009975EB /* YYSpriteSheetImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BF437FF32A4324A8009975EB /* YYSpriteSheetImage.m */; };
-		BF4380942A44370F009975EB /* YYAnimatedImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF42A4324A8009975EB /* YYAnimatedImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BF4380952A44370F009975EB /* YYFrameImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BF437FF72A4324A8009975EB /* YYFrameImage.m */; };
-		BF4380962A44370F009975EB /* YYImageCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = BF437FF62A4324A8009975EB /* YYImageCoder.m */; };
-		BF4380972A44370F009975EB /* YYSpriteSheetImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF92A4324A8009975EB /* YYSpriteSheetImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BF4380982A44370F009975EB /* YYImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF02A4324A8009975EB /* YYImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF4380A02A444B57009975EB /* YoHe.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF43809E2A444B44009975EB /* YoHe.xcassets */; };
+		BF4C76B22A861BF2001C4EB9 /* YYImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF02A4324A8009975EB /* YYImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF4C76B32A861BF2001C4EB9 /* YYImageCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF12A4324A8009975EB /* YYImageCoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF4C76B42A861BF2001C4EB9 /* YYImageCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = BF437FF62A4324A8009975EB /* YYImageCoder.m */; };
+		BF4C76B52A861BF2001C4EB9 /* YYFrameImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BF437FF72A4324A8009975EB /* YYFrameImage.m */; };
+		BF4C76B62A861BF2001C4EB9 /* YYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BF437FF52A4324A8009975EB /* YYImage.m */; };
+		BF4C76B72A861BF2001C4EB9 /* YYAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF437FF82A4324A8009975EB /* YYAnimatedImageView.m */; };
+		BF4C76B82A861BF2001C4EB9 /* YYSpriteSheetImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF92A4324A8009975EB /* YYSpriteSheetImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF4C76B92A861BF2001C4EB9 /* YYFrameImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF22A4324A8009975EB /* YYFrameImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF4C76BA2A861BF2001C4EB9 /* YYSpriteSheetImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BF437FF32A4324A8009975EB /* YYSpriteSheetImage.m */; };
+		BF4C76BB2A861BF2001C4EB9 /* YYAnimatedImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF42A4324A8009975EB /* YYAnimatedImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF573EC426B69E25002A9E8C /* ImageSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC326B69E25002A9E8C /* ImageSelector.xib */; };
 		BF573EC526B69E28002A9E8C /* ImageSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573EC126B69E19002A9E8C /* ImageSelector.swift */; };
 		BF573EC926B69F0C002A9E8C /* GalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573EC726B69F0C002A9E8C /* GalleryCell.swift */; };
@@ -933,18 +933,18 @@
 		BFF303B42A42E16400E513EA /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				BF31861A29781F1A00B54EF5 /* CoreData */,
-				0A019A5B22367E7E002FD4F8 /* Vendors */,
-				0A6CDB70223B903500C17007 /* DataModel */,
-				0A6CDB872243C8F900C17007 /* UI */,
-				BF5ED7DC25593DDE00A1698E /* CampaignPresentor.swift */,
 				0A019A5922367CD6002FD4F8 /* APIClient.swift */,
-				0A019A6E2237C503002FD4F8 /* URLComponents.swift */,
 				0A019A6C2237B773002FD4F8 /* APIWebRouter.swift */,
-				0A160DD42268CDB000A586C4 /* StatisticManager.swift */,
+				BF5ED7DC25593DDE00A1698E /* CampaignPresentor.swift */,
 				BFA54F8327AA86A2003D6411 /* Crypto.swift */,
 				BF31860D2975570800B54EF5 /* DataRequestManager.swift */,
 				BFF304292A42F4B900E513EA /* Delegate.swift */,
+				0A160DD42268CDB000A586C4 /* StatisticManager.swift */,
+				0A019A6E2237C503002FD4F8 /* URLComponents.swift */,
+				BF31861A29781F1A00B54EF5 /* CoreData */,
+				0A6CDB70223B903500C17007 /* DataModel */,
+				0A6CDB872243C8F900C17007 /* UI */,
+				0A019A5B22367E7E002FD4F8 /* Vendors */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -969,12 +969,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF4C76BB2A861BF2001C4EB9 /* YYAnimatedImageView.h in Headers */,
+				BF4C76B22A861BF2001C4EB9 /* YYImage.h in Headers */,
+				BF4C76B92A861BF2001C4EB9 /* YYFrameImage.h in Headers */,
 				BF4380882A442F51009975EB /* YoHeSDK.h in Headers */,
-				BF43808F2A44370E009975EB /* YYImageCoder.h in Headers */,
-				BF4380942A44370F009975EB /* YYAnimatedImageView.h in Headers */,
-				BF4380912A44370E009975EB /* YYFrameImage.h in Headers */,
-				BF4380982A44370F009975EB /* YYImage.h in Headers */,
-				BF4380972A44370F009975EB /* YYSpriteSheetImage.h in Headers */,
+				BF4C76B32A861BF2001C4EB9 /* YYImageCoder.h in Headers */,
+				BF4C76B82A861BF2001C4EB9 /* YYSpriteSheetImage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1260,9 +1260,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF4380192A4428AF009975EB /* PassthroughWindow.swift in Sources */,
-				BF4380952A44370F009975EB /* YYFrameImage.m in Sources */,
 				BF43801A2A4428AF009975EB /* Reachability+NetworkType.swift in Sources */,
 				BF43808A2A442FAB009975EB /* YoHe.swift in Sources */,
+				BF4C76B52A861BF2001C4EB9 /* YYFrameImage.m in Sources */,
 				BF43801C2A4428AF009975EB /* CheckboxCell.swift in Sources */,
 				BF43801D2A4428AF009975EB /* VisualEffectView+.swift in Sources */,
 				BF43801E2A4428AF009975EB /* UIView+Image.swift in Sources */,
@@ -1270,6 +1270,7 @@
 				BF43801F2A4428AF009975EB /* CGFloat+.swift in Sources */,
 				BF4380202A4428AF009975EB /* ImageManager.swift in Sources */,
 				BF4380212A4428AF009975EB /* ScreenshotCell.swift in Sources */,
+				BF4C76B62A861BF2001C4EB9 /* YYImage.m in Sources */,
 				BF4380232A4428AF009975EB /* Decodable+.swift in Sources */,
 				BF4380242A4428AF009975EB /* Settings.swift in Sources */,
 				BF4380252A4428AF009975EB /* RequestModel.xcdatamodeld in Sources */,
@@ -1277,7 +1278,9 @@
 				BF4380272A4428AF009975EB /* Field.swift in Sources */,
 				BF4380282A4428AF009975EB /* UIViewController+present.swift in Sources */,
 				BF4380292A4428AF009975EB /* String+additions.swift in Sources */,
+				BF4C76B72A861BF2001C4EB9 /* YYAnimatedImageView.m in Sources */,
 				BF43802A2A4428AF009975EB /* GalleryCell.swift in Sources */,
+				BF4C76BA2A861BF2001C4EB9 /* YYSpriteSheetImage.m in Sources */,
 				BF43802B2A4428AF009975EB /* Text.swift in Sources */,
 				BF43802C2A4428AF009975EB /* UIControl+blocks.swift in Sources */,
 				BF43802D2A4428AF009975EB /* UIVIewAddition.swift in Sources */,
@@ -1293,7 +1296,6 @@
 				BF4380382A4428AF009975EB /* URLComponents.swift in Sources */,
 				BF4380392A4428AF009975EB /* TextCell.swift in Sources */,
 				BF43803A2A4428AF009975EB /* Campaign.swift in Sources */,
-				BF4380932A44370F009975EB /* YYSpriteSheetImage.m in Sources */,
 				BF43803B2A4428AF009975EB /* DataManager.swift in Sources */,
 				BF43803C2A4428AF009975EB /* Parser.swift in Sources */,
 				BF43803D2A4428AF009975EB /* Data+.swift in Sources */,
@@ -1315,9 +1317,9 @@
 				BF43804D2A4428AF009975EB /* VisualEffectView.swift in Sources */,
 				BF43804E2A4428AF009975EB /* RatingCell.swift in Sources */,
 				BF43804F2A4428AF009975EB /* ImageCollection.swift in Sources */,
+				BF4C76B42A861BF2001C4EB9 /* YYImageCoder.m in Sources */,
 				BF4380502A4428AF009975EB /* UILabel+Align.swift in Sources */,
 				BF4380512A4428AF009975EB /* UIAlertController+.swift in Sources */,
-				BF4380922A44370E009975EB /* YYAnimatedImageView.m in Sources */,
 				BF4380522A4428AF009975EB /* NSLayoutConstraint+additions.swift in Sources */,
 				BF4380532A4428AF009975EB /* APIWebRouter.swift in Sources */,
 				BF4380572A4428AF009975EB /* DataRequestManager.swift in Sources */,
@@ -1329,7 +1331,6 @@
 				BF43805E2A4428AF009975EB /* UIImageView+cache.swift in Sources */,
 				BF43805F2A4428AF009975EB /* ScreenshotCreator.swift in Sources */,
 				BF4380602A4428AF009975EB /* UIFont+.swift in Sources */,
-				BF4380902A44370E009975EB /* YYImage.m in Sources */,
 				BF4380612A4428AF009975EB /* Privacy.swift in Sources */,
 				BF4380622A4428AF009975EB /* Delegate.swift in Sources */,
 				BF4380632A4428AF009975EB /* RadiobuttonCell.swift in Sources */,
@@ -1339,7 +1340,6 @@
 				BF43808D2A442FAB009975EB /* YoHeDelegate.swift in Sources */,
 				BF4380682A4428AF009975EB /* CheckCell.swift in Sources */,
 				BF4380692A4428AF009975EB /* APIClient.swift in Sources */,
-				BF4380962A44370F009975EB /* YYImageCoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
