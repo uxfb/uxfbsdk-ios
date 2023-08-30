@@ -18,7 +18,7 @@ enum ViewPopupDirection {
     case alphaOut
 }
 
-enum ViewControllerState{
+enum ViewControllerState {
     case presenting
     case presented
     case backDismiss
@@ -26,8 +26,17 @@ enum ViewControllerState{
 }
 
 internal class CampaignViewController: UIViewController {
-    
     @IBOutlet var contentView: UIView!
+    @IBOutlet var privacyView: UIView!
+    @IBOutlet var privacyImageBgView: UIView!
+    @IBOutlet var privacyImageView: UIImageView!
+    @IBOutlet var privacyLabel: HtmlLabel! {
+        didSet {
+            privacyLabel.delegate = self
+        }
+    }
+    @IBOutlet var privacyWarningLabel: UILabel!
+    
     @IBOutlet var shadowView: AnimatingShadowView! {
         didSet {
             shadowView.backgroundColor = campaign?.theme.bgColor ?? .white
@@ -67,7 +76,7 @@ internal class CampaignViewController: UIViewController {
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var titleViewHeightConstaint: NSLayoutConstraint!
     
-    @IBOutlet var tableViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet var privacyHeightConstaint: NSLayoutConstraint!
     
     var presentationAnimated = true  
     
@@ -83,6 +92,8 @@ internal class CampaignViewController: UIViewController {
     var dismissDirection: ViewPopupDirection = .upToDown
     
     var closeOnSwipe: Bool = false
+    
+    var rotateToggle: Bool = false
     
     internal var campaign: Campaign?
     
@@ -103,14 +114,18 @@ internal class CampaignViewController: UIViewController {
         super.viewDidLoad()
         dataManager = DataManager(self, campaign: campaign)
         prepareUI()
-        
+        preparePrivacy()
         if presentHandler != nil {
             presentHandler!()
         }
-        
-        if (campaign?.transforms.count ?? 0) > 0 {
+        if let progress = campaign?.progress?.enabled, progress {
+            progressLabel.isHidden = false
+        } else {
             progressLabel.isHidden = true
         }
+//        else if (campaign?.transforms.count ?? 0) > 0 {
+//            progressLabel.isHidden = true
+//        }
             
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),
@@ -214,7 +229,8 @@ internal class CampaignViewController: UIViewController {
                                               size: CGSize(width: 30,
                                                            height: 22)))
             image.contentMode = .scaleAspectFit
-            image.image = UIImage(named: "logo", in: Consts.bundle, compatibleWith: nil)
+            image.image = UIImage(named: "logo", in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            image.tintColor = campaign?.theme.inputBorderColor
             tableFooterView.backgroundColor = campaign?.theme.bgColor ?? .white
             tableFooterView.addSubview(image)
         }
@@ -269,11 +285,33 @@ internal class CampaignViewController: UIViewController {
                                  bundle: Consts.bundle),
                            forCellReuseIdentifier: "ScreenshotCell")
         
-        
-        
 //        if #available(iOS 15.0, *) {
 //            tableView.sectionHeaderTopPadding = 0
 //        }
+    }
+    
+    private func preparePrivacy() {
+        privacyImageBgView.layer.cornerRadius = 2
+        privacyImageBgView.layer.masksToBounds = true
+        privacyImageView.layer.cornerRadius = 2
+        privacyImageView.layer.borderColor = UIColor.clear.cgColor
+        privacyImageView.layer.borderWidth = 2
+        privacyImageView.layer.masksToBounds = true
+        
+        switch campaign?.privacy?.type {
+        case "checkboxEnabled":
+            dataManager?.checkPrivacy(true)
+            
+        case "checkboxDisabled":
+            dataManager?.checkPrivacy(false)
+            
+        case "text":
+            dataManager?.checkPrivacy(true)
+            
+        default:
+            dataManager?.checkPrivacy(nil)
+
+        }
     }
     
     private func prepareUI() {
@@ -281,7 +319,13 @@ internal class CampaignViewController: UIViewController {
         contentView.backgroundColor = campaign?.theme.bgColor ?? .white
         tableView.backgroundColor = campaign?.theme.bgColor ?? .white
         contentHeight.constant = dataManager?.heightForCurrentPage() ?? 0
-        
+        privacyView.backgroundColor = campaign?.theme.inputBgColor
+        privacyLabel.defaultColor = campaign?.theme.text03Color ?? .white
+        privacyLabel.linkColor = campaign?.theme.btnBgColor ?? .white
+        privacyLabel.textFont = campaign?.theme.fontP2 ?? .systemFont(ofSize: 14)
+        privacyWarningLabel.font = campaign?.theme.fontP2 ?? .systemFont(ofSize: 14)
+        privacyWarningLabel.textColor = campaign?.theme.errorColorPrimary ?? .red
+                                                                             
         tableViewBottomConstraint.constant = dataManager?.bottomSpace ?? 0
         titleViewHeightConstaint.constant = dataManager?.titleViewHeight ?? 54
         switch campaign?.type {
@@ -721,6 +765,7 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         self.updateHeight()
+        self.dataManager?.checkPrivacy(nil)
         self.tableView.setContentOffset(.zero, animated: true)
     }
     
@@ -740,8 +785,62 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    func updatePrivacy(enabled: Bool, height: CGFloat, warning: String?, text: String?, checked: Bool) {
+        privacyView.isHidden = !enabled
+        privacyHeightConstaint.constant = height
+        privacyLabel.html = text
+        privacyWarningLabel.text = warning
+        if enabled {
+            fillPrivacyUI(checked)
+        }
+        view.layoutIfNeeded()
+    }
+    
+    private func fillPrivacyUI(_ checked: Bool) {
+        switch campaign?.privacy?.type {
+        case "checkboxEnabled", "checkboxDisabled":
+            if checked {
+                privacyImageView.layer.borderColor = UIColor.clear.cgColor
+                privacyImageView.image = UIImage(named: "check_symbol",
+                                                 in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+                
+                privacyImageView.tintColor = campaign?.theme.controlIconColor
+                privacyImageView.backgroundColor = campaign?.theme.mainColor
+                privacyImageBgView.backgroundColor = campaign?.theme.mainColor.withAlphaComponent(0.2)
+            } else {
+                privacyImageView.layer.borderColor = campaign?.theme.iconColor.cgColor ?? UIColor.clear.cgColor
+                privacyImageView.image = nil
+                privacyImageBgView.backgroundColor = .clear
+                privacyImageView.backgroundColor = .clear
+            }
+            
+        case "text":
+            privacyImageView.layer.borderColor = UIColor.clear.cgColor
+            privacyImageView.image = UIImage(named: "lock",
+                                             in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            privacyImageView.tintColor = campaign?.theme.iconColor
+            privacyImageBgView.backgroundColor = .clear
+            privacyImageView.backgroundColor = .clear
+            
+        default:
+            break
+        }
+    }
+    
+    @IBAction func checkboxTapped(_ sender: Any) {
+        dataManager?.tapPrivacy()
+    }
+    
     open override var shouldAutorotate: Bool {
-        return false
+        return rotateToggle
+    }
+}
+
+extension CampaignViewController: HtmlLabelDelegate {
+    func htmlLabelLinkDidPress(url: URL?) {
+        if let url = url, UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
     }
 }
 

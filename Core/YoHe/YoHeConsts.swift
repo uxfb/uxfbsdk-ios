@@ -10,7 +10,7 @@ import Foundation
 
 internal class Consts {
     static let cryptoKey: String = "YoHe"
-    static let version: String = "v1.0.1"
+    static let version: String = "v1.1.0"
     static let defaultEndpoint: String = "https://public-api.yohe.io"
 //    static let defaultEndpoint: String = "https://develop.api.uxfb.space"
     static let apiVersion: String = "v8"

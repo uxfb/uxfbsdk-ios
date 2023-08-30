@@ -97,7 +97,7 @@ class APIClient {
                         }
                     }
                     
-                    let delay = results["showCampaignsIntervalIos"] as? Int
+                    let delay = results["showCampaignsInterval"] as? Int
                     DDLogDebug("Get all campaings successful")
                     completion?(true, httpCode, nil, delay, campaigns)
                 } else {
@@ -205,8 +205,10 @@ class APIClient {
                 }
                 else{
                     if let values =  try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as? Dictionary<String,Any>{
-                        if  let result = values["data"] {
+                        if let result = values["data"] {
                             completion(.success, httpCode, nil, result)
+                        } else if let result = values["campaigns"] {
+                                completion(.success, httpCode, nil, values)
                         } else {
                             completion(.fail, httpCode, "Response data is empty", nil)
                         }

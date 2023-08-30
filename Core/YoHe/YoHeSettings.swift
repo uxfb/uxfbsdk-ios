@@ -45,4 +45,7 @@ open class YoHeSettings: NSObject, SettingsProtocol {
     
      /// Server URL in converted format, **Not plain-text!**
      open var endpoint: String?
+    
+    /// Enabling auto-rotation when changing device orientation
+     open var rotateToggle: Bool = true
 }

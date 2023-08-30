@@ -20,10 +20,11 @@ struct Campaign{
     private(set) var type: CampaignType!
     private(set) var targetings: Array<Dictionary<String,Any>>!
     private(set) var transforms: Array<Transform>!
-    private(set) var isProgressEnabled: Bool!
     private(set) var projectId: String!
     private(set) var autoclose: Double!
     private(set) var showCopyright: Bool!
+    private(set) var privacy: Privacy?
+    private(set) var progress: Progress?
     
     func showDelay(eventName: String) -> TimeInterval {
         var delay: TimeInterval = 0.1

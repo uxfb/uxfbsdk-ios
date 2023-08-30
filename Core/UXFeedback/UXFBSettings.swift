@@ -47,4 +47,7 @@ open class UXFBSettings: NSObject, SettingsProtocol {
 
     /// URL сервера в преобразованном формате, **Не plain-text!**
     open var endpoint: String?
+    
+    /// Включение автоповорта при смене ориентации устройства
+    var rotateToggle: Bool = true
 }

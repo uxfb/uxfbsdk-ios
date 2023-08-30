@@ -30,3 +30,7 @@ import UXFeedbackSDK
 - ``UXFeedbackCampaignDelegate``
 
 - ``UXFeedbackLogDelegate``
+
+### Classes
+
+### Protocols

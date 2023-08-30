@@ -47,8 +47,6 @@ class Parser {
          let type = "\(campaignInfo["type"] as! Int)"
          let targetingArr = campaignInfo["targeting"] as! Array<Dictionary<String, Any>>
          let campaingId = "\(campaignInfo["campaignId"] as! Int)"
-         let progressDict = campaignInfo["progress"] as? Dictionary<String, Any>
-         let progress = (progressDict?["enabled"] as? Bool) ?? false
          let projectId = "\(campaignInfo["projectId"] as! Int)"
          let autoclose: Double = campaignInfo["autoclose"] as? Double ?? 0.0
          let showCopyright: Bool = campaignInfo["showCopyright"] as? Bool ?? true
@@ -111,8 +109,6 @@ class Parser {
         var transformArr = Array<Transform>()
         if let transformsArrayOfDict = campaignInfo["transforms"] as? Array<Dictionary<String, Any>> {
             for transformDict in transformsArrayOfDict{
-                DDLogDebug("transform: \(transformDict)")
-                
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: transformDict, options: [])
                     let decoder = JSONDecoder()
@@ -124,16 +120,43 @@ class Parser {
                 }
             }
         }
-
-        return Campaign(campaignId: campaingId,
-                           theme: theme,
-                           pages: pages,
-                           type: CampaignType.init(rawValue: type),
-                           targetings: targetingArr,
-                           transforms: transformArr,
-                           isProgressEnabled: progress,
-                           projectId: projectId,
-                           autoclose: autoclose,
-                           showCopyright: showCopyright)
+         
+         var privacy: Privacy?
+         if let privacyDict = campaignInfo["privacy"] as? Dictionary<String, Any> {
+             do {
+                 let jsonData = try JSONSerialization.data(withJSONObject: privacyDict, options: [])
+                 let decoder = JSONDecoder()
+                 let privacyValue = try decoder.decode(Privacy.self, from: jsonData)
+                 
+                 privacy = privacyValue
+             } catch {
+                 print(error)
+             }
+         }
+         
+         var progress: Progress?
+         if let privacyDict = campaignInfo["progress"] as? Dictionary<String, Any> {
+             do {
+                 let jsonData = try JSONSerialization.data(withJSONObject: privacyDict, options: [])
+                 let decoder = JSONDecoder()
+                 let progressValue = try decoder.decode(Progress.self, from: jsonData)
+                 
+                 progress = progressValue
+             } catch {
+                 print(error)
+             }
+         }
+         
+         return Campaign(campaignId: campaingId,
+                         theme: theme,
+                         pages: pages,
+                         type: CampaignType.init(rawValue: type),
+                         targetings: targetingArr,
+                         transforms: transformArr,
+                         projectId: projectId,
+                         autoclose: autoclose,
+                         showCopyright: showCopyright,
+                         privacy: privacy,
+                         progress: progress)
     }
 }

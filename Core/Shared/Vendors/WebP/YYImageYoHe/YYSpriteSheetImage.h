@@ -63,6 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
     imageView.layer.contentsRect = [sheet contentsRectForCALayerAtIndex:6];
  
  */
+
 @interface YYSpriteSheetImage : UIImage <YYAnimatedImage>
 
 /**

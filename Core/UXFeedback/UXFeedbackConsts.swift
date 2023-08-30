@@ -9,11 +9,12 @@
 import Foundation
 
 internal class Consts {
-    static let version: String = "v2.0.2"
+    static let version: String = "v2.2.0"
     static let cryptoKey: String = "UXFeedback"
-    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
+//    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
 //    static let defaultEndpoint: String = "https://develop.api.uxfb.space"
-    static let apiVersion: String = "v8"
+    static let defaultEndpoint: String = "https://feature-dev-2246-mobile-campaign-privacy.api.uxfb.space"
+    static let apiVersion: String = "v9"
     static let identifier: String  = "biz.andalex.uxfeedback.sdk"
     
     static let bundle: Bundle = Bundle(for: UXFeedback.self)

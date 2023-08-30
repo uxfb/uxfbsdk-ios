@@ -8,43 +8,42 @@
 
 import Foundation
 import UIKit
-
-/// Интерфейс обработчика различных событий от SDK
+/// Interface of the handler for various events from the SDK
 @objc
 public protocol YoHeCampaignDelegate: FeedbackCampaignDelegate {
-    /// Событие после загрузки кампаний с сервера
-    /// - Parameter success: Признак успеха загрузки
-    func campaignDidLoad(success: Bool)
-    /// Событие получения ошибки при работе SDK
-    /// - Parameter errorString: Текст ошибки
-    func campaignDidReceiveError(errorString: String)
-    /// Событие после показа формы кампании
-    /// - Parameter eventName: Имя переданного в startCampaign события
-    func campaignDidShow(eventName: String)
-    /// Событие закрытия формы кампании
-    /// - Parameter eventName: Имя переданного в startCampaign события
-    func campaignDidClose(eventName: String)
-    /// Событие прерывания прохождения кампании
-    /// - Parameters:
-    ///   - eventName: Имя переданного в startCampaign события
-    ///   - terminatedPage: Страница, на которой прохождение кампании было прервано
-    ///   - totalPages: Общее количество страниц кампании
-    func campaignDidTerminate(eventName: String, terminatedPage: Int, totalPages: Int)
-    /// Событие отправки результатов кампании на сервер
-    /// - Parameter campaignId: Идентификатор кампании
-    func campaignDidSend(campaignId: String)
-    /// Событие завершения прохождения кампании с получением ответов
-    /// - Parameters:
-    ///   - campaignId: Идентификатор кампании
-    ///   - answers: Массив ответов в формате Ключ: Значение, где ключ - идентификатор блока
-    func campaignDidAnswered(campaignId: String, answers: [String: Any])
+     /// Event after loading campaigns from the server
+     /// - Parameter success: Sign of successful download
+     func campaignDidLoad(success: Bool)
+     /// Event receiving an error when running the SDK
+     /// - Parameter errorString: Error text
+     func campaignDidReceiveError(errorString: String)
+     /// Event after displaying the campaign form
+     /// - Parameter eventName: Name of the event passed to startCampaign
+     func campaignDidShow(eventName: String)
+     /// Campaign form closing event
+     /// - Parameter eventName: Name of the event passed to startCampaign
+     func campaignDidClose(eventName: String)
+     /// Campaign abort event
+     /// - Parameters:
+     /// - eventName: Name of the event passed to startCampaign
+     /// - terminatedPage: The page where the campaign was terminated
+     /// - totalPages: Total number of campaign pages
+     func campaignDidTerminate(eventName: String, terminatedPage: Int, totalPages: Int)
+     /// Event of sending campaign results to the server
+     /// - Parameter campaignId: Campaign ID
+     func campaignDidSend(campaignId: String)
+     /// Campaign completion event with responses received
+     /// - Parameters:
+     /// - campaignId: Campaign ID
+     /// - answers: An array of answers in the format Key: Value, where key is the block ID
+     func campaignDidAnswered(campaignId: String, answers: [String: Any])
 }
 
 
-/// Интерфейс обработчика событий лога от SDK
+/// Log event handler interface from the SDK
 @objc
 public protocol YoHeLogDelegate: FeedbackLogDelegate {
-    /// Событие получения сообщения лога
-    /// - Parameter message: Текст лога
-    func logDidReceive(message: String)
+     /// Log message receipt event
+     /// - Parameter message: Log text
+     func logDidReceive(message: String)
 }

@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+internal struct Privacy: Codable {
+    private(set) var warningMessage: String?
+    private(set) var type: String
+    private(set) var declaration: String
+    private(set) var showType: String
+    private(set) var privacyPages: [String]
+    private(set) var enabled: Bool
+}

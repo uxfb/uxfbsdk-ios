@@ -65,6 +65,7 @@ class MainViewController_swift: UIViewController {
     }
     
     @IBAction func eventTap(_ sender: UIButton){
+        
         UXFeedback.sdk.settings.closeOnSwipe = true
         UXFeedback.sdk.settings.slideInUiBlocked = true
         UXFeedback.sdk.settings.slideInUiBlackoutBlur = 4
@@ -84,11 +85,11 @@ class MainViewController_swift: UIViewController {
 //                                                "property_second": 2])
             
             
-            UXFeedback.sdk.startCampaign(eventName: "comment")
+            UXFeedback.sdk.startCampaign(eventName: "nenum")
             break
         case 2:
 //            showActivityOverlay()
-            UXFeedback.sdk.startCampaign(eventName: "box1")
+            UXFeedback.sdk.startCampaign(eventName: "analyt")
             break
         default:
             break

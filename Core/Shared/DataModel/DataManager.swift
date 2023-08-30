@@ -42,7 +42,7 @@ class DataManager: FieldDelegate {
     private var viewController: CampaignViewController?
     
     private var width: CGFloat {
-        return viewController?.view.bounds.width ?? UIScreen.main.bounds.width
+        return UIScreen.main.bounds.width  
     }
     private var height: CGFloat {
         return viewController?.view.bounds.height ?? UIScreen.main.bounds.height
@@ -74,14 +74,25 @@ class DataManager: FieldDelegate {
         }
     }
     
+    internal var safeSpace: CGFloat {
+        get {
+            if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                return scene.windows.first?.safeAreaInsets.bottom ?? .leastNonzeroMagnitude
+            } else if let window = UIApplication.shared.windows.first {
+                return window.safeAreaInsets.bottom
+            }
+            
+            return .leastNonzeroMagnitude
+        }
+    }
+    
     internal var bottomSpace: CGFloat {
         get {
-            var safeArea: CGFloat = 0
-            if #available(iOS 11.0, *) {
-                let window = UIApplication.shared.keyWindow
-                safeArea = window?.safeAreaInsets.bottom ?? 0
+            var bottomValue: CGFloat = safeSpace
+            if privacyHeight != .leastNonzeroMagnitude {
+                bottomValue = 0
             }
-            return campaign?.type == .slidein ? safeArea : 0
+            return campaign?.type == .slidein ? bottomValue : 0
         }
     }
     
@@ -100,10 +111,12 @@ class DataManager: FieldDelegate {
     
     var isError: Bool = false
     
+    private var isPrivacyChecked: Bool = false
+    private var isPrivacyWarning: Bool = false
+    
     //MARK: - Prepared Data
     
     internal func heightForCurrentPage() -> CGFloat {
-        
         let page = campaign?.pages[currentPage]
         var height: CGFloat = 64
         if campaign?.showCopyright ?? true {
@@ -130,6 +143,8 @@ class DataManager: FieldDelegate {
         default:
             break
         }
+        
+        height += privacyHeight
         
         let maxHeight = self.height - areas
         
@@ -505,11 +520,16 @@ class DataManager: FieldDelegate {
     func buttonTapped(_ field: Field, answer: [String], refresh: Bool) {
         viewController?.view.endEditing(true)
         isError = false
+        if !isPrivacyChecked && privacyNeeded {
+            isPrivacyWarning = true
+            checkPrivacy(nil)
+            return
+        }
+        
         if needsComplete() {
             isError = true
             viewController?.updateUI()
-        }
-        else {
+        } else {
             let nextIndex = getNextIndex()
             if campaign?.pages[currentPage].type == 2 || nextIndex == -1 {
                 endCampaign(terminated: false, isLink: nextIndex == -1)
@@ -590,6 +610,68 @@ class DataManager: FieldDelegate {
         viewController?.didBeginEditing(fieldIndex)
     }
     
+    //MARK: - PRIVACY
+        
+    var privacyNeeded: Bool {
+        get {
+            if let privacy = campaign?.privacy,
+                privacy.enabled,
+                (campaign?.privacy?.privacyPages ?? []).contains(campaign?.pages[currentPage].id ?? "") {
+                return true
+            }
+            return false
+        }
+    }
+    
+    var privacyHeight: CGFloat {
+        if privacyNeeded {
+            let privacyString = self.campaign?.privacy?.declaration.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil) ?? ""
+            
+            let warningString = self.campaign?.privacy?.warningMessage ?? ""
+            
+            var height: CGFloat = 16 + safeSpace
+            
+            height += privacyString.height(withConstrainedWidth: width - 64, font: campaign?.theme.fontP2 ?? .systemFont(ofSize: 14))
+            if self.isPrivacyWarning {
+                height += warningString.height(withConstrainedWidth: width - 64, font: campaign?.theme.fontP2 ?? .systemFont(ofSize: 14))
+                height += 20
+            }
+            
+            return max(height, 64)
+        }
+        return .leastNonzeroMagnitude
+    }
+    
+    func tapPrivacy() {
+        if let privacy = campaign?.privacy, privacy.type != "text" {
+            isPrivacyWarning = false
+            checkPrivacy(!isPrivacyChecked)
+        }
+    }
+    
+    func checkPrivacy(_ isChecked: Bool?) {
+        if let isChecked = isChecked {
+            self.isPrivacyChecked = isChecked
+        }
+        
+        if privacyNeeded {
+            let warningText: String? = isPrivacyWarning ? campaign?.privacy?.warningMessage : nil
+            let privacyText: String? = campaign?.privacy?.declaration
+            
+            viewController?.updatePrivacy(enabled: height != .leastNonzeroMagnitude,
+                                          height: privacyHeight,
+                                          warning: warningText,
+                                          text: privacyText,
+                                          checked: isPrivacyChecked)
+        } else {
+            viewController?.updatePrivacy(enabled: false,
+                                          height: .leastNonzeroMagnitude,
+                                          warning: nil,
+                                          text: nil,
+                                          checked: isPrivacyChecked)
+        }
+    }
+    
     //MARK: - Routing
     
     private func nextPage(_ index: Int) {
@@ -644,12 +726,15 @@ class DataManager: FieldDelegate {
             results.append(result)
         }
         
-        if terminated {
-            viewController!.didTerminateHandler?(results, screenshots, currentPage + 1, campaign?.pages.count ?? 0)
-        } else {
-            viewController!.completeHandler!(results, screenshots)
-            viewController!.didCloseHandler?()
+        if isPrivacyChecked || !privacyNeeded {
+            if terminated {
+                viewController!.didTerminateHandler?(results, screenshots, currentPage + 1, campaign?.pages.count ?? 0)
+            } else {
+                viewController!.completeHandler!(results, screenshots)
+                viewController!.didCloseHandler?()
+            }
         }
+        
         viewController?.dismiss(animated: viewController?.presentationAnimated ?? true)
     }
     

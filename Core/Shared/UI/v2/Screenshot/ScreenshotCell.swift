@@ -131,12 +131,12 @@ class ScreenshotCell: BaseCell {
     //MARK :- Actions
     
     private func takeSetHighlight(_ isHighlighted: Bool) {
-        takeImage.tintColor = isHighlighted ? theme?.mainColor : theme?.text03Color
+        takeImage.tintColor = isHighlighted ? theme?.iconColor : theme?.text03Color
         takeView.backgroundColor = isHighlighted ? theme?.controlBgColorActive : theme?.controlBgColor
     }
     
     private func selectSetHighlight(_ isHighlighted: Bool) {
-        selectImage.tintColor = isHighlighted ? theme?.mainColor : theme?.text03Color
+        selectImage.tintColor = isHighlighted ? theme?.iconColor : theme?.text03Color
         selectView.backgroundColor = isHighlighted ? theme?.controlBgColorActive : theme?.controlBgColor
     }
     

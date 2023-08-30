@@ -36,8 +36,9 @@ internal class CampaignPresentor: NSObject {
         isAnimationFormEnabled = animationEnabled
     }
     
-    func showCampaign(uiBlocked: Bool, closeOnSwipe: Bool, blackout: Blackout?){
+    func showCampaign(uiBlocked: Bool, closeOnSwipe: Bool, blackout: Blackout?, rotateToggle: Bool){
         let form = createCampaignForm(_campaign)
+        form.rotateToggle = rotateToggle
         switch _campaign.type {
         case .slidein:
             showCampaignController(controller: form, direction: .downToUp, uiBlocked: uiBlocked, closeOnSwipe: closeOnSwipe, blackout: blackout)

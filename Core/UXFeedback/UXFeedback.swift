@@ -237,7 +237,8 @@ open class UXFeedback: NSObject {
                         self.DDLog("Show form for event: \(eventName)")
                         self._formPresentor?.showCampaign(uiBlocked: self.settings.slideInUiBlocked,
                                                           closeOnSwipe: self.settings.closeOnSwipe,
-                                                          blackout: blackout)
+                                                          blackout: blackout,
+                                                          rotateToggle: self.settings.rotateToggle)
                         
                         if !isMultiVisited {
                             self.saveShowingTime()
