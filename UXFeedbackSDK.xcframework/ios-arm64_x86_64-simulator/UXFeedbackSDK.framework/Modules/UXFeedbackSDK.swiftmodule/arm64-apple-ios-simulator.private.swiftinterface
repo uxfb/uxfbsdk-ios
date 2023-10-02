@@ -1,0 +1,129 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
+// swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name UXFeedbackSDK
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AVFoundation
+import CoreData
+import CoreTelephony
+import DeveloperToolsSupport
+import Foundation
+import Foundation.NSURLRequest
+import Photos
+import PhotosUI
+import QuartzCore
+import Swift
+import SwiftUI
+import SystemConfiguration
+import UIKit
+@_exported import UXFeedbackSDK
+import UniformTypeIdentifiers
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+extension Swift.String {
+  public var argb2rgba: Swift.String? {
+    get
+  }
+}
+@objc public protocol UXFeedbackCampaignDelegate : UXFeedbackSDK.FeedbackCampaignDelegate {
+  @objc func campaignDidLoad(success: Swift.Bool)
+  @objc func campaignDidReceiveError(errorString: Swift.String)
+  @objc func campaignDidShow(eventName: Swift.String)
+  @objc func campaignDidClose(eventName: Swift.String)
+  @objc func campaignDidTerminate(eventName: Swift.String, terminatedPage: Swift.Int, totalPages: Swift.Int)
+  @objc func campaignDidSend(campaignId: Swift.String)
+  @objc func campaignDidAnswered(campaignId: Swift.String, answers: [Swift.String : Any])
+}
+@objc public protocol UXFeedbackLogDelegate : UXFeedbackSDK.FeedbackLogDelegate {
+  @objc func logDidReceive(message: Swift.String)
+}
+@objc extension UIKit.UIColor {
+  @objc convenience dynamic public init(hex3: Swift.UInt16, alpha: CoreFoundation.CGFloat = 1)
+  @objc convenience dynamic public init(hex4: Swift.UInt16)
+  @objc convenience dynamic public init(hex6: Swift.UInt32, alpha: CoreFoundation.CGFloat = 1)
+  @objc convenience dynamic public init(hex8: Swift.UInt32)
+  @objc convenience dynamic public init(rgba_throws rgba: Swift.String) throws
+  @objc convenience dynamic public init(_ rgba: Swift.String, defaultColor: UIKit.UIColor = UIColor.clear)
+  @objc dynamic public func hexStringThrows(_ includeAlpha: Swift.Bool = true) throws -> Swift.String
+  @objc dynamic public func hexString(_ includeAlpha: Swift.Bool = true) -> Swift.String
+}
+extension UIKit.UIAlertController {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func dismiss(animated flag: Swift.Bool, completion: (() -> Swift.Void)? = nil)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers open class UXFeedback : ObjectiveC.NSObject {
+  @objc public static let sdk: UXFeedbackSDK.UXFeedback
+  @objc final public let version: Swift.String
+  @objc weak open var campaignDelegate: (any UXFeedbackSDK.FeedbackCampaignDelegate)?
+  @objc weak open var logDelegate: (any UXFeedbackSDK.FeedbackLogDelegate)?
+  @objc open var settings: UXFeedbackSDK.UXFBSettings
+  @objc open var theme: UXFeedbackSDK.UXFBTheme
+  @objc open var properties: [Swift.String : Any] {
+    @objc get
+    @objc set
+  }
+  @objc public static func setup(appID: Swift.String, settings: UXFeedbackSDK.UXFBSettings, campaignDelegate: (any UXFeedbackSDK.FeedbackCampaignDelegate)? = nil, logDelegate: (any UXFeedbackSDK.FeedbackLogDelegate)? = nil)
+  @objc open func startCampaign(eventName: Swift.String)
+  @objc open func stopCampaign()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers open class UXFBSettings : ObjectiveC.NSObject {
+  @objc open var globalDelayTimer: Swift.Int
+  @objc open var closeOnSwipe: Swift.Bool
+  @objc open var debugEnabled: Swift.Bool
+  @objc open var fieldsEventEnabled: Swift.Bool
+  @objc open var retryTimeout: Swift.Double
+  @objc open var retryCount: Swift.Int
+  @objc open var socketTimeout: Swift.Double
+  @objc open var slideInUiBlocked: Swift.Bool
+  @objc open var slideInUiBlackoutColor: Swift.String?
+  open var slideInUiBlackoutOpacity: Swift.Int?
+  open var slideInUiBlackoutBlur: Swift.Int?
+  @objc open var popupUiBlackoutColor: Swift.String?
+  open var popupUiBlackoutOpacity: Swift.Int?
+  open var popupUiBlackoutBlur: Swift.Int?
+  @objc open var endpoint: Swift.String?
+  @objc open var rotateToggle: Swift.Bool
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_documentation(visibility: internal) public struct NetworkSettings {
+}
+@objc @_inheritsConvenienceInitializers @objcMembers open class UXFBTheme : ObjectiveC.NSObject {
+  @objc open var text03Color: UIKit.UIColor
+  @objc open var inputBorderColor: UIKit.UIColor
+  @objc open var iconColor: UIKit.UIColor
+  @objc open var btnBgColorActive: UIKit.UIColor
+  @objc open var btnBorderRadius: CoreFoundation.CGFloat
+  @objc open var errorColorSecondary: UIKit.UIColor
+  @objc open var errorColorPrimary: UIKit.UIColor
+  @objc open var mainColor: UIKit.UIColor
+  @objc open var controlBgColorActive: UIKit.UIColor
+  @objc open var formBorderRadius: CoreFoundation.CGFloat
+  @objc open var inputBgColor: UIKit.UIColor
+  @objc open var text01Color: UIKit.UIColor
+  @objc open var controlBgColor: UIKit.UIColor
+  @objc open var controlIconColor: UIKit.UIColor
+  @objc open var btnBgColor: UIKit.UIColor
+  @objc open var text02Color: UIKit.UIColor
+  @objc open var btnTextColor: UIKit.UIColor
+  @objc open var bgColor: UIKit.UIColor
+  @objc open var fontH1: UIKit.UIFont
+  @objc open var fontH2: UIKit.UIFont
+  @objc open var fontP1: UIKit.UIFont
+  @objc open var fontP2: UIKit.UIFont
+  @objc open var fontBtn: UIKit.UIFont
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_documentation(visibility: internal) public protocol FeedbackCampaignDelegate {
+  @objc func campaignDidLoad(success: Swift.Bool)
+  @objc func campaignDidReceiveError(errorString: Swift.String)
+  @objc func campaignDidShow(eventName: Swift.String)
+  @objc func campaignDidClose(eventName: Swift.String)
+  @objc func campaignDidTerminate(eventName: Swift.String, terminatedPage: Swift.Int, totalPages: Swift.Int)
+  @objc func campaignDidSend(campaignId: Swift.String)
+  @objc func campaignDidAnswered(campaignId: Swift.String, answers: [Swift.String : Any])
+}
+@objc @_documentation(visibility: internal) public protocol FeedbackLogDelegate {
+  @objc func logDidReceive(message: Swift.String)
+}
