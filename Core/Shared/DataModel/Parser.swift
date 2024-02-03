@@ -42,15 +42,28 @@ class Parser {
         return nil
     }
     
-     func parseCampaign(campaignInfo: Dictionary<String,Any>) -> Campaign?{
+    func parseCampaign(campaignInfo: Dictionary<String,Any>) -> Campaign?{
         
-         let type = "\(campaignInfo["type"] as! Int)"
-         let targetingArr = campaignInfo["targeting"] as! Array<Dictionary<String, Any>>
-         let campaingId = "\(campaignInfo["campaignId"] as! Int)"
-         let projectId = "\(campaignInfo["projectId"] as! Int)"
-         let autoclose: Double = campaignInfo["autoclose"] as? Double ?? 0.0
-         let showCopyright: Bool = campaignInfo["showCopyright"] as? Bool ?? true
-         
+        let type = "\(campaignInfo["type"] as! Int)"
+        let targetingArr = campaignInfo["targeting"] as! Array<Dictionary<String, Any>>
+        let campaingId = "\(campaignInfo["campaignId"] as! Int)"
+        let projectId = "\(campaignInfo["projectId"] as! Int)"
+        let autoclose: Double = campaignInfo["autoclose"] as? Double ?? 0.0
+//        let showCopyright: Bool = campaignInfo["showCopyright"] as? Bool ?? true
+        
+        var copyright: Copyright?
+        if let copyrightDict = campaignInfo["copyright"] as? Dictionary<String, Any> {
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: copyrightDict, options: [])
+                let decoder = JSONDecoder()
+                let copyrightValue = try decoder.decode(Copyright.self, from: jsonData)
+                
+                copyright = copyrightValue
+            } catch {
+                print(error)
+            }
+        }
+        
         
         var theme: ThemeProtocol?
         if let customTheme = self.customTheme, isInitTheme == true {
@@ -155,7 +168,7 @@ class Parser {
                          transforms: transformArr,
                          projectId: projectId,
                          autoclose: autoclose,
-                         showCopyright: showCopyright,
+                         copyright: copyright,
                          privacy: privacy,
                          progress: progress)
     }

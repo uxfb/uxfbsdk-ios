@@ -36,15 +36,24 @@ internal class CampaignPresentor: NSObject {
         isAnimationFormEnabled = animationEnabled
     }
     
-    func showCampaign(uiBlocked: Bool, closeOnSwipe: Bool, blackout: Blackout?, rotateToggle: Bool){
+    func showCampaign(uiBlocked: Bool, closeOnSwipe: Bool, blackout: Blackout?, rotateToggle: Bool, properties: [String: Any]) {
         let form = createCampaignForm(_campaign)
         form.rotateToggle = rotateToggle
         switch _campaign.type {
         case .slidein:
-            showCampaignController(controller: form, direction: .downToUp, uiBlocked: uiBlocked, closeOnSwipe: closeOnSwipe, blackout: blackout)
+            showCampaignController(controller: form, 
+                                   direction: .downToUp, 
+                                   uiBlocked: uiBlocked,
+                                   closeOnSwipe: closeOnSwipe,
+                                   blackout: blackout,
+                                   properties: properties)
             break
         case .popup:
-            showCampaignController(controller: form, direction: .alphaIn, uiBlocked: true, blackout: blackout)
+            showCampaignController(controller: form, 
+                                   direction: .alphaIn,
+                                   uiBlocked: true,
+                                   blackout: blackout,
+                                   properties: properties)
             break
         case .none:
             break
@@ -92,7 +101,7 @@ internal class CampaignPresentor: NSObject {
         return controller
     }
     
-    private func showCampaignController(controller: CampaignViewController, direction: ViewPopupDirection, uiBlocked: Bool = false, closeOnSwipe: Bool = false, blackout: Blackout? = nil) {
+    private func showCampaignController(controller: CampaignViewController, direction: ViewPopupDirection, uiBlocked: Bool = false, closeOnSwipe: Bool = false, blackout: Blackout? = nil, properties: [String: Any]) {
         
         _ = self.dismissCurrentForm() {
             
@@ -101,6 +110,7 @@ internal class CampaignPresentor: NSObject {
             controller.presentDirection = direction
             controller.closeOnSwipe = closeOnSwipe
             controller.blackout = blackout
+            controller.properties = properties
             
             if let view = controller.view as? PassthroughToWindowView {
                 view.touchCancel = uiBlocked
@@ -140,6 +150,8 @@ internal class CampaignPresentor: NSObject {
             ImageManager.dispose()
             isFormOnScreen = false
             form.dismiss(animated: true)
+        } else {
+            isFormOnScreen = false
         }
     }
 }

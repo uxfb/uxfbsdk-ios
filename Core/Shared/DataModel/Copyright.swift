@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+internal struct Copyright: Codable {
+    private(set) var isShow: Bool
+    private(set) var href: String?
+    private(set) var image: [String: String]?
+}

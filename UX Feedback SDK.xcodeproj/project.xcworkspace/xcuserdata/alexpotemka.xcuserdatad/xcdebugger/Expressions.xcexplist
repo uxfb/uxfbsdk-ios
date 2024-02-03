@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "UXFDataManager.fieldChanged(_:answer:refresh:):UXFDataManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "campaign">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

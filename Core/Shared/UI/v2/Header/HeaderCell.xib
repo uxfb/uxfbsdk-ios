@@ -18,16 +18,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" dkfjg dfkjg dfjg dfkjg dkfjg dkjfg kjdfgn kdfgn kdfjng kdfgn kdfgn kdfng kdfgn kdfjgn kdfg " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L5a-Xy-xk3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
+                        <rect key="frame" x="16" y="0.0" width="288" height="53"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="L5a-Xy-xk3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Ts5-AW-Mmz"/>
+                    <constraint firstItem="L5a-Xy-xk3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Ts5-AW-Mmz"/>
                     <constraint firstItem="L5a-Xy-xk3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ZFe-Wc-4Iy"/>
-                    <constraint firstAttribute="trailing" secondItem="L5a-Xy-xk3" secondAttribute="trailing" id="kvW-Gs-s9m"/>
+                    <constraint firstAttribute="trailing" secondItem="L5a-Xy-xk3" secondAttribute="trailing" constant="16" id="kvW-Gs-s9m"/>
                     <constraint firstAttribute="bottom" secondItem="L5a-Xy-xk3" secondAttribute="bottom" id="ydF-uK-jvd"/>
                 </constraints>
             </tableViewCellContentView>

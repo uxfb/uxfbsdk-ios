@@ -11,4 +11,5 @@ import UIKit
 struct Option: Codable {
     let id: String
     let value: String
+    let exceptional: Bool?
 }

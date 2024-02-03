@@ -56,14 +56,20 @@ final class DataRequestManager: NSObject {
     }
     
     public func sendFormData(projectId: String?,
+                             createdAtClient: String,
                              campaignId: String,
                              pages: Array<Dictionary<String,Any>>?,
                              properties: Dictionary<String,Any>?) {
         
+        
+        let uuid: String = UUID().uuidString
+        
         let parameters = ["projectId": projectId as Any,
+                          "createdAtClient": createdAtClient as Any,
                           "campaignId": campaignId,
                           "pages": pages as Any,
-                          "properties": properties as Any] as [String : Any]
+                          "properties": properties as Any,
+                          "idempotency": uuid] as [String : Any]
         let jsonData = try? JSONSerialization.data(withJSONObject: parameters)
 
         createRequest("SEND_FORM", parameters: jsonData)
@@ -113,7 +119,7 @@ final class DataRequestManager: NSObject {
             deleteRequest(request) {
                 completion()
             }
-        } else if httpCode == 410 || attempts >= settings.retryCount {
+        } else if httpCode == 410 || attempts >= settings.retryCount { //423 also
             attempts = 0
             deleteRequest(request)
         } else {
@@ -139,6 +145,7 @@ final class DataRequestManager: NSObject {
             guard let data = data,
                   let dict = try? JSONSerialization.jsonObject(with: data) as? [String : Any],
                   let projectId = dict["projectId"] as? String,
+                  let createdAtClient = dict["createdAtClient"] as? String,
                   let campaignId = dict["campaignId"] as? String,
                   let pages = dict["pages"] as? Array<Dictionary<String,Any>>,
                   let properties = dict["properties"] as? Dictionary<String,Any>
@@ -146,11 +153,13 @@ final class DataRequestManager: NSObject {
                 self.deleteRequest(request, completion: { })
                 return
             }
-            
+            let idempotency = dict["idempotency"] as? String ?? ""
             self._apiClient.saveFormData(projectId: projectId,
+                                         createdAtClient: createdAtClient,
                                          campaignId: campaignId,
                                          pages: pages,
-                                         properties: properties) { (success, httpCode, message) in
+                                         properties: properties,
+                                         idempotency: idempotency) { (success, httpCode, message) in
                 self.validateResponse(for: request, success: success, httpCode: httpCode) {
                     self.delegate?.formDataSaved(success: success,
                                                  message: message,
@@ -240,6 +249,7 @@ final class DataRequestManager: NSObject {
             request.apiMethod = apiMethod
             request.created = Date()
             request.parametersData = parameters
+//            request.time = settings.requestTimeout
             try? self.context.save()
             
             if !self.isActive {

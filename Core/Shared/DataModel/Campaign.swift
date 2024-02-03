@@ -22,7 +22,7 @@ struct Campaign{
     private(set) var transforms: Array<Transform>!
     private(set) var projectId: String!
     private(set) var autoclose: Double!
-    private(set) var showCopyright: Bool!
+    private(set) var copyright: Copyright!
     private(set) var privacy: Privacy?
     private(set) var progress: Progress?
     

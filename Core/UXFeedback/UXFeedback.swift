@@ -42,7 +42,11 @@ open class UXFeedback: NSObject {
     open var theme: UXFBTheme = UXFBTheme()
     
     /// Дополнительные параметры, которые будут переданы при завершении прохождения опроса
-    open var properties: [String: Any] = [:]
+    open var properties: [String: Any] = [:] {
+        didSet {
+            
+        }
+    }
     
     private var appId: String?
     
@@ -238,10 +242,14 @@ open class UXFeedback: NSObject {
                         self._formPresentor?.showCampaign(uiBlocked: self.settings.slideInUiBlocked,
                                                           closeOnSwipe: self.settings.closeOnSwipe,
                                                           blackout: blackout,
-                                                          rotateToggle: self.settings.rotateToggle)
+                                                          rotateToggle: self.settings.rotateToggle,
+                                                          properties: self.properties)
                         
                         if !isMultiVisited {
                             self.saveShowingTime()
+                            self._campaigns.removeAll { camp in
+                                camp.campaignId == campaign.campaignId
+                            }
                         }
                         
                         self._requestManager.sendShowForm(campaignId: campaign.campaignId)
@@ -323,6 +331,7 @@ extension UXFeedback: CampaignFormPresentorProtocol {
                                            answers: answers)
         
         _requestManager.sendFormData(projectId: campaign.projectId,
+                                     createdAtClient: StatisticManager.getTimeUTC(),
                                      campaignId: campaign.campaignId,
                                      pages: info,
                                      properties: properties)

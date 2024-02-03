@@ -35,8 +35,6 @@ class ImageCell: BaseCell {
         guard let urlString = urlString, let url = URL(string: urlString) else {
             return
         }
-        cellImageView.cacheImage(url: url)
+        cellImageView.cacheImage(url: url, withTemplate: false)
     }
 }
-
-

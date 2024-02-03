@@ -31,10 +31,12 @@ protocol FieldDelegate {
     func fieldChanged(_ field: Field, answer: [String], refresh: Bool)
     func buttonTapped(_ field: Field, answer: [String], refresh: Bool)
     func textChanged(_ field: Field, answer: [String])
-    
     func screenshotChanged(_ field: Field, screenshots: [Screenshot])
-    
     func didBeginEditing(_ field: Field)
+}
+
+protocol RouterDelegate {
+    func openUrl(_ urlString: String, params: TransformQueryParameter?)
 }
 
 class DataManager: FieldDelegate {
@@ -76,10 +78,16 @@ class DataManager: FieldDelegate {
     
     internal var safeSpace: CGFloat {
         get {
-            if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                return scene.windows.first?.safeAreaInsets.bottom ?? .leastNonzeroMagnitude
-            } else if let window = UIApplication.shared.windows.first {
-                return window.safeAreaInsets.bottom
+            if #available(iOS 13.0, *) {
+                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                    return scene.windows.first?.safeAreaInsets.bottom ?? .leastNonzeroMagnitude
+                } else if let window = UIApplication.shared.windows.first {
+                    return window.safeAreaInsets.bottom
+                }
+            } else {
+                if let window = UIApplication.shared.windows.first {
+                    return window.safeAreaInsets.bottom
+                }
             }
             
             return .leastNonzeroMagnitude
@@ -88,10 +96,10 @@ class DataManager: FieldDelegate {
     
     internal var bottomSpace: CGFloat {
         get {
-            var bottomValue: CGFloat = safeSpace
-            if privacyHeight != .leastNonzeroMagnitude {
-                bottomValue = 0
-            }
+            let bottomValue: CGFloat = safeSpace
+//            if privacyHeight != .leastNonzeroMagnitude {
+//                bottomValue = 0
+//            }
             return campaign?.type == .slidein ? bottomValue : 0
         }
     }
@@ -114,12 +122,14 @@ class DataManager: FieldDelegate {
     private var isPrivacyChecked: Bool = false
     private var isPrivacyWarning: Bool = false
     
+    var properties: [String: Any] = [:]
+    
     //MARK: - Prepared Data
     
     internal func heightForCurrentPage() -> CGFloat {
         let page = campaign?.pages[currentPage]
         var height: CGFloat = 64
-        if campaign?.showCopyright ?? true {
+        if campaign?.copyright.isShow ?? true {
             height += 34
         }
         for field in (page?.fields)! {
@@ -325,11 +335,11 @@ class DataManager: FieldDelegate {
     }
     
     private func getFieldFooterHeight(_ field: Field) -> CGFloat {
-        var height: CGFloat = 0
+        var height: CGFloat = .leastNonzeroMagnitude
         
         if isError && fieldNeedComplete(field) {
             guard let warning = field.uiData["warning"] as? String else {
-                return checkFieldTransfromed(field) ? 12 : 0
+                return checkFieldTransfromed(field) ? 12 : .leastNonzeroMagnitude
             }
             let font = (campaign?.theme.fontP2)!
             let lines = warning.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
@@ -338,7 +348,7 @@ class DataManager: FieldDelegate {
             height += valueHeight + 8
         }
         else {
-            height = 0
+            height = .leastNonzeroMagnitude
         }
         
         return height + getFooterSpacing(field)
@@ -349,10 +359,13 @@ class DataManager: FieldDelegate {
             return UIView()
         }
         
-        let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.width - .leftArea - .rightArea - extraSpace,
+        let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.width - .leftArea - .rightArea,
                                                                     height: getFieldHeaderHeight(field))))
-        let label = UILabel(frame: CGRect(origin: .zero,
-                                          size: CGSize(width: view.frame.width,
+        
+        
+        
+        let label = UILabel(frame: CGRect(origin: .init(x: 16, y: 0),
+                                          size: CGSize(width: view.frame.width - extraSpace,
                                                        height: view.frame.height - getTitleSpacing(field))))// - 16)))
         
         label.textColor = campaign?.theme.text01Color
@@ -370,7 +383,7 @@ class DataManager: FieldDelegate {
         label.textAlignment = .center
         label.numberOfLines = 0
         view.addSubview(label)
-        
+        view.backgroundColor = campaign?.theme.bgColor
         return view
     }
     
@@ -400,6 +413,7 @@ class DataManager: FieldDelegate {
             label.tag = fieldIndex
             view.addSubview(label)
             view.clipsToBounds = true
+            view.backgroundColor = campaign?.theme.bgColor
             return view
         }
         else {
@@ -629,7 +643,7 @@ class DataManager: FieldDelegate {
             
             let warningString = self.campaign?.privacy?.warningMessage ?? ""
             
-            var height: CGFloat = 16 + safeSpace
+            var height: CGFloat = 36 //+ safeSpace
             
             height += privacyString.height(withConstrainedWidth: width - 64, font: campaign?.theme.fontP2 ?? .systemFont(ofSize: 14))
             if self.isPrivacyWarning {
@@ -733,6 +747,8 @@ class DataManager: FieldDelegate {
                 viewController!.completeHandler!(results, screenshots)
                 viewController!.didCloseHandler?()
             }
+        } else {
+            viewController!.didCloseHandler?()
         }
         
         viewController?.dismiss(animated: viewController?.presentationAnimated ?? true)
@@ -765,10 +781,9 @@ class DataManager: FieldDelegate {
         return false
     }
     
-    private func getNextIndex() -> Int {
+    private func prepareNextIndex(_ currentPage: Int, basePage: Int) -> Int {
         guard let transforms = campaign?.transforms.filter({ transform in
             transform.from.page == campaign?.pages[currentPage].id
-//            && transform.to.action == "transition"
         }) else {
             return currentPage + 1
         }
@@ -780,6 +795,7 @@ class DataManager: FieldDelegate {
             
             let toValue = transform.to.value
             let toType = transform.to.type
+            let toParams = transform.to.queryParams
             
             let answer = answers.first(where: { (dict) -> Bool in
                 ((dict["fieldId"] as? String) ?? "") == transform.from.field
@@ -798,7 +814,7 @@ class DataManager: FieldDelegate {
                     case "toPage":
                         return toPageIndex
                     case "toDeeplink", "toURL":
-                        openUrl(toValue)
+                        openUrl(toValue, params: toParams)
                         return -1
 
                     default:
@@ -812,7 +828,7 @@ class DataManager: FieldDelegate {
                     case "toPage":
                         return toPageIndex
                     case "toDeeplink", "toURL":
-                        openUrl(toValue)
+                        openUrl(toValue, params: toParams)
                         return -1
 
                     default:
@@ -827,7 +843,7 @@ class DataManager: FieldDelegate {
                         case "toPage":
                             return toPageIndex
                         case "toDeeplink", "toURL":
-                            openUrl(toValue)
+                            openUrl(toValue, params: toParams)
                             return -1
 
                         default:
@@ -840,7 +856,7 @@ class DataManager: FieldDelegate {
                         case "toPage":
                             return toPageIndex
                         case "toDeeplink", "toURL":
-                            openUrl(toValue)
+                            openUrl(toValue, params: toParams)
                             return -1
 
                         default:
@@ -861,13 +877,13 @@ class DataManager: FieldDelegate {
         
         
         guard let elseTransform = campaign?.transforms.first(where: { transform in
-            transform.from.page == campaign?.pages[currentPage].id && transform.to.action == "transition" && transform.from.field == nil
+            transform.from.page == campaign?.pages[basePage].id && transform.to.action == "transition" && transform.from.field == nil
         }) else {
             return currentPage + 1
         }
         
         if elseTransform.to.type == "toDeeplink" || elseTransform.to.type == "toURL" {
-            openUrl(elseTransform.to.value)
+            openUrl(elseTransform.to.value, params: elseTransform.to.queryParams)
             return -1
 
         } else {
@@ -877,60 +893,105 @@ class DataManager: FieldDelegate {
         }
     }
     
+    private func getNextIndex() -> Int {
+        guard let campaign = campaign else {
+            return currentPage + 1
+        }
+        
+        var nextIndex = currentPage
+        var needsShow = false
+        
+        while !needsShow {
+            nextIndex = prepareNextIndex(nextIndex, basePage: currentPage)
+            
+            if campaign.pages.indices.contains(nextIndex) {
+                if campaign.pages[nextIndex].type == 2 {
+                    needsShow = true
+                } else {
+                    var fieldsToShow = false
+                    for field in campaign.pages[nextIndex].fields {
+                        if checkFieldTransfromed(field) {
+                            fieldsToShow = true
+                        }
+                    }
+                    
+                    if fieldsToShow {
+                        needsShow = true
+                    }
+                }
+            } else {
+                needsShow = true
+            }
+        }
+        
+        return nextIndex
+    }
+    
     private func checkFieldTransfromed(_ field: Field) -> Bool {
         guard let transforms = campaign?.transforms.filter({ $0.to.value == field.id }),
               transforms.count > 0 else {
             return true
         }
         
-        guard let answer = answers.first(where: { (dict) -> Bool in
+        let answersTransforms = answers.filter { dict in
             (transforms.map { $0.from.field }).contains(((dict["fieldId"] as? String) ?? ""))
-        }) else {
+        } 
+        
+        if answersTransforms.count == 0 {
             clearAnswers(field.id!)
             return false
         }
         
-        for transform in transforms {
-            let type = FieldType(rawValue: (answer["type"] as? String) ?? "")
-            let answers = (answer["value"] as? [String]) ?? []
-            
-            switch transform.condition?.rule {
-            case "equal":
-                let sameCount = transform.condition?.value?.filter() { answers.contains($0) }.count ?? 0
-                if sameCount == transform.condition?.value?.count &&
-                    sameCount == fieldAnswersCount(transform.from.field ?? "") {
-                    return true
-                }
-            case "contain":
-                let same = transform.condition?.value?.filter() { answers.contains($0) }
-                if same?.count ?? 0 > 0 {
-                    return true
-                }
-            case "filled":
-                if type == .checkbox {
-                    if answers.count > 0 {
+//        guard let answer = answers.filter(where: { (dict) -> Bool in
+//            (transforms.map { $0.from.field }).contains(((dict["fieldId"] as? String) ?? ""))
+//        }) else {
+//            clearAnswers(field.id!)
+//            return false
+//        }
+        
+        for answer in answersTransforms {
+            let currentTransforms = transforms.filter { tr in
+                tr.from.field == answer["fieldId"] as? String
+            }
+            for transform in currentTransforms {
+                let type = FieldType(rawValue: (answer["type"] as? String) ?? "")
+                let answers = (answer["value"] as? [String]) ?? []
+                print("ANSWERS - \(answers)\n")
+                switch transform.condition?.rule {
+                case "equal":
+                    let sameCount = transform.condition?.value?.filter() { answers.contains($0) }.count ?? 0
+                    if sameCount == transform.condition?.value?.count &&
+                        sameCount == fieldAnswersCount(transform.from.field ?? "") {
                         return true
                     }
-                }
-                else {
-                    if (answers.first ?? "").count > 0 {
+                case "contain":
+                    let same = transform.condition?.value?.filter() { answers.contains($0) }
+                    if same?.count ?? 0 > 0 {
                         return true
                     }
+                case "filled":
+                    if type == .checkbox {
+                        if answers.count > 0 {
+                            return true
+                        }
+                    }
+                    else {
+                        if (answers.first ?? "").count > 0 {
+                            return true
+                        }
+                    }
+                default:
+                    clearAnswers(field.id!)
+                    return false
                 }
-            default:
-                clearAnswers(field.id!)
-                return false
             }
         }
         clearAnswers(field.id!)
         return false
     }
     
-    private func openUrl(_ urlString: String) {
-        if let url = URL(string: urlString),
-            UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
-        }
+    private func openUrl(_ urlString: String, params: TransformQueryParameter?) {
+        viewController?.openUrl(urlString, params: params)
     }
     
     private func clearAnswers(_ fieldId: String) {
@@ -956,4 +1017,5 @@ class DataManager: FieldDelegate {
         return result
     }
 }
+
 

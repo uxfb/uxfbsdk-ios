@@ -25,6 +25,11 @@ class RadioCell: UITableViewCell {
             symbolIntView.layer.cornerRadius = 6
         }
     }
+    @IBOutlet var dotView: UIView! {
+        didSet {
+            dotView.layer.cornerRadius = 3
+        }
+    }
     
     @IBOutlet var radioLabel: UILabel!
     @IBOutlet var radioView: UIView!
@@ -69,6 +74,7 @@ class RadioCell: UITableViewCell {
                 self.symbolIntView.backgroundColor = self.theme?.controlIconColor
                 
                 self.radioView.backgroundColor = self.theme?.controlBgColorActive
+                self.dotView.backgroundColor = self.theme?.mainColor
             }
             else {
                 self.radioLabel.textColor = self.theme?.text02Color
@@ -76,6 +82,7 @@ class RadioCell: UITableViewCell {
                 self.symbolMidView.backgroundColor = self.theme?.iconColor
                 self.symbolIntView.backgroundColor = self.theme?.controlBgColor
                 self.radioView.backgroundColor = self.theme?.controlBgColor
+                self.dotView.backgroundColor = .clear
             }
         }
     }

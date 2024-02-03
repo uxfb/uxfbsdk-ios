@@ -238,10 +238,13 @@ open class YoHe: NSObject {
                         self._formPresentor?.showCampaign(uiBlocked: self.settings.slideInUiBlocked,
                                                           closeOnSwipe: self.settings.closeOnSwipe,
                                                           blackout: blackout,
-                                                          rotateToggle: self.settings.rotateToggle)
+                                                          rotateToggle: self.settings.rotateToggle, properties: self.properties)
                         
                         if !isMultiVisited {
                             self.saveShowingTime()
+                            self._campaigns.removeAll { camp in
+                                camp.campaignId == campaign.campaignId
+                            }
                         }
                         
                         self._requestManager.sendShowForm(campaignId: campaign.campaignId)
@@ -322,7 +325,8 @@ extension YoHe: CampaignFormPresentorProtocol {
         self.campaignDelegate?.campaignDidAnswered(campaignId: campaign.campaignId,
                                            answers: answers)
         
-        _requestManager.sendFormData(projectId: campaign.projectId,
+        _requestManager.sendFormData(projectId: campaign.projectId, 
+                                     createdAtClient: StatisticManager.getTimeUTC(),
                                      campaignId: campaign.campaignId,
                                      pages: info,
                                      properties: properties)

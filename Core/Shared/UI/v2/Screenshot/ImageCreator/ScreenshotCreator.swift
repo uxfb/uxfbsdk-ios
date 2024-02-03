@@ -104,23 +104,38 @@ class ScreenshotCreator: UIView {
             ImageManager.hide(animated: true, duration: 0.5)
         }
         
-        var screenshotImage :UIImage?
-        for window in UIApplication.shared.windows {
-            if !(window is PassthroughWindow) {
-                let layer = window.layer
-                let scale = UIScreen.main.scale
-                UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
-                guard let context = UIGraphicsGetCurrentContext() else { return }
-                layer.render(in:context)
-                screenshotImage = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-                
-                if let image = screenshotImage {
-                    if self.completeAction != nil {
-                        self.completeAction!([image])
+        var captureWindow: UIWindow?
+        if #available(iOS 13.0, *) {
+            if let window = UIApplication.shared.connectedScenes.first?.inputView?.window {
+                captureWindow = window
+            } else {
+                for window in UIApplication.shared.windows {
+                    if !(window is PassthroughWindow) {
+                        captureWindow = window
+                        break
                     }
                 }
-                break
+            }
+        } else {
+            for window in UIApplication.shared.windows {
+                if !(window is PassthroughWindow) {
+                    captureWindow = window
+                    break
+                }
+            }
+        }
+        if let window = captureWindow {
+            let scale :CGFloat = UIScreen.main.scale
+            if let view = window.rootViewController?.view {
+                UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, scale)
+                
+                view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+                if let screenshotImage = UIGraphicsGetImageFromCurrentImageContext() {
+                    UIGraphicsEndImageContext()
+                    if self.completeAction != nil {
+                        self.completeAction!([screenshotImage])
+                    }
+                }
             }
         }
     }

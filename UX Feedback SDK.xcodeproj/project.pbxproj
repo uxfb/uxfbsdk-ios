@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -46,6 +46,8 @@
 		BF02FD3F255C65B000C794E6 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF02FD3E255C65B000C794E6 /* Transform.swift */; };
 		BF0CE19D27661C3B00916B32 /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0CE19927661C2200916B32 /* RatingCell.swift */; };
 		BF0CE19E27661DAD00916B32 /* RatingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF0CE19A27661C2200916B32 /* RatingCell.xib */; };
+		BF1C11BE2ABD67CC0085DB10 /* UXFeedbackSDK.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A46899522840B2C0074E1A3 /* UXFeedbackSDK.plist */; };
+		BF1C11BF2ABD68DB0085DB10 /* YoHeSDK.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFF304672A43173C00E513EA /* YoHeSDK.plist */; };
 		BF2806AF2562B18F006F2D61 /* StarsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806882562B18F006F2D61 /* StarsCell.swift */; };
 		BF2806B32562B18F006F2D61 /* RadioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28068E2562B18F006F2D61 /* RadioCell.swift */; };
 		BF2806B42562B18F006F2D61 /* RadiobuttonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28068F2562B18F006F2D61 /* RadiobuttonCell.swift */; };
@@ -83,6 +85,8 @@
 		BF405651265CD8A200709351 /* NpsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF40564D265CD86700709351 /* NpsCell.xib */; };
 		BF40565B265CED2500709351 /* UILabel+Align.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF405659265CECF700709351 /* UILabel+Align.swift */; };
 		BF40565E265D0B2300709351 /* UIView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40565C265D0B0600709351 /* UIView+Image.swift */; };
+		BF40817B2AA50B4400B1013F /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4081792AA50B0700B1013F /* PrivacyView.swift */; };
+		BF40817C2AA50B4400B1013F /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4081792AA50B0700B1013F /* PrivacyView.swift */; };
 		BF4380192A4428AF009975EB /* PassthroughWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8C29023F444DD00FB0EEB /* PassthroughWindow.swift */; };
 		BF43801A2A4428AF009975EB /* Reachability+NetworkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */; };
 		BF43801C2A4428AF009975EB /* CheckboxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806952562B18F006F2D61 /* CheckboxCell.swift */; };
@@ -180,6 +184,11 @@
 		BF43808D2A442FAB009975EB /* YoHeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF303B02A42E0B900E513EA /* YoHeDelegate.swift */; };
 		BF43808E2A442FAB009975EB /* YoHeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF304322A42F65400E513EA /* YoHeSettings.swift */; };
 		BF4380A02A444B57009975EB /* YoHe.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF43809E2A444B44009975EB /* YoHe.xcassets */; };
+		BF4F7C462B0A42BF0043244E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFEA00012919870F0042972A /* WebKit.framework */; };
+		BF4F7C492B0A42C00043244E /* WebP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061C2A1C99DD00F1BA6A /* WebP.xcframework */; };
+		BF4F7C4B2B0A42C20043244E /* WebPDecoder.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060F2A1C99DD00F1BA6A /* WebPDecoder.xcframework */; };
+		BF4F7C4D2B0A42C30043244E /* WebPDemux.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061B2A1C99DD00F1BA6A /* WebPDemux.xcframework */; };
+		BF4F7C4F2B0A42C40043244E /* WebPMux.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060E2A1C99DD00F1BA6A /* WebPMux.xcframework */; };
 		BF573EC426B69E25002A9E8C /* ImageSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC326B69E25002A9E8C /* ImageSelector.xib */; };
 		BF573EC526B69E28002A9E8C /* ImageSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573EC126B69E19002A9E8C /* ImageSelector.swift */; };
 		BF573EC926B69F0C002A9E8C /* GalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573EC726B69F0C002A9E8C /* GalleryCell.swift */; };
@@ -201,6 +210,8 @@
 		BFA54F8427AA86A2003D6411 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA54F8327AA86A2003D6411 /* Crypto.swift */; };
 		BFB6DEFC27043D7200732D29 /* Screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFB27043D7200732D29 /* Screenshot.swift */; };
 		BFB6DEFE27044E4300732D29 /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFD27044E4300732D29 /* Data+.swift */; };
+		BFBAFA952ADFE99B003CC167 /* Copyright.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBAFA942ADFE99B003CC167 /* Copyright.swift */; };
+		BFBAFA962ADFE99B003CC167 /* Copyright.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBAFA942ADFE99B003CC167 /* Copyright.swift */; };
 		BFCC90A62A974E4D00B51FC4 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC90A52A974E4D00B51FC4 /* Progress.swift */; };
 		BFCC90A72A974E4D00B51FC4 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC90A52A974E4D00B51FC4 /* Progress.swift */; };
 		BFCC90AA2A97691600B51FC4 /* HtmlLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC90A92A97691600B51FC4 /* HtmlLabel.swift */; };
@@ -208,27 +219,18 @@
 		BFCC90AD2A97694800B51FC4 /* HtmlHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC90AC2A97694800B51FC4 /* HtmlHelper.swift */; };
 		BFCC90AE2A97694800B51FC4 /* HtmlHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC90AC2A97694800B51FC4 /* HtmlHelper.swift */; };
 		BFCC90B52A97B64000B51FC4 /* WebP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061C2A1C99DD00F1BA6A /* WebP.xcframework */; };
-		BFCC90B62A97B64000B51FC4 /* WebP.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061C2A1C99DD00F1BA6A /* WebP.xcframework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BFCC90B62A97B64000B51FC4 /* WebP.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061C2A1C99DD00F1BA6A /* WebP.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BFCC90B82A97B64100B51FC4 /* WebPDecoder.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060F2A1C99DD00F1BA6A /* WebPDecoder.xcframework */; };
-		BFCC90B92A97B64100B51FC4 /* WebPDecoder.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060F2A1C99DD00F1BA6A /* WebPDecoder.xcframework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BFCC90B92A97B64100B51FC4 /* WebPDecoder.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060F2A1C99DD00F1BA6A /* WebPDecoder.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BFCC90BA2A97B64300B51FC4 /* WebPDemux.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061B2A1C99DD00F1BA6A /* WebPDemux.xcframework */; };
-		BFCC90BB2A97B64300B51FC4 /* WebPDemux.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061B2A1C99DD00F1BA6A /* WebPDemux.xcframework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BFCC90BB2A97B64300B51FC4 /* WebPDemux.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061B2A1C99DD00F1BA6A /* WebPDemux.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BFCC90BC2A97B64400B51FC4 /* WebPMux.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060E2A1C99DD00F1BA6A /* WebPMux.xcframework */; };
-		BFCC90BD2A97B64400B51FC4 /* WebPMux.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060E2A1C99DD00F1BA6A /* WebPMux.xcframework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BFCC90BD2A97B64400B51FC4 /* WebPMux.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060E2A1C99DD00F1BA6A /* WebPMux.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BFD357522A4F0E3D00AD355C /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; };
 		BFD357532A4F0E3D00AD355C /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BFDE2FD12A86233000F6C6CF /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = BFDE2FD02A86233000F6C6CF /* Documentation.docc */; };
 		BFDE2FD72A86273C00F6C6CF /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC7212B299CD2D400AAB9BC /* Settings.swift */; };
 		BFDE2FD82A86273D00F6C6CF /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC7212B299CD2D400AAB9BC /* Settings.swift */; };
-		BFDE30002A862B4C00F6C6CF /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFEA00012919870F0042972A /* WebKit.framework */; };
-		BFDE30012A862B5200F6C6CF /* WebP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061C2A1C99DD00F1BA6A /* WebP.xcframework */; };
-		BFDE30022A862B5200F6C6CF /* WebP.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061C2A1C99DD00F1BA6A /* WebP.xcframework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		BFDE30032A862B5200F6C6CF /* WebPDecoder.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060F2A1C99DD00F1BA6A /* WebPDecoder.xcframework */; };
-		BFDE30042A862B5200F6C6CF /* WebPDecoder.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060F2A1C99DD00F1BA6A /* WebPDecoder.xcframework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		BFDE30052A862B5200F6C6CF /* WebPDemux.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061B2A1C99DD00F1BA6A /* WebPDemux.xcframework */; };
-		BFDE30062A862B5200F6C6CF /* WebPDemux.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061B2A1C99DD00F1BA6A /* WebPDemux.xcframework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		BFDE30072A862B5200F6C6CF /* WebPMux.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060E2A1C99DD00F1BA6A /* WebPMux.xcframework */; };
-		BFDE30082A862B5200F6C6CF /* WebPMux.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060E2A1C99DD00F1BA6A /* WebPMux.xcframework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BFDE30122A862B5D00F6C6CF /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFEA00012919870F0042972A /* WebKit.framework */; };
 		BFDE30132A862C7E00F6C6CF /* UXFeedbackSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = BF2D682429EEDE0100547634 /* UXFeedbackSDK.docc */; };
 		BFDE30152A86332100F6C6CF /* YYFrameImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FDD2A4324A2009975EB /* YYFrameImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -296,20 +298,6 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BFDE30092A862B5200F6C6CF /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				BFDE30062A862B5200F6C6CF /* WebPDemux.xcframework in Embed Frameworks */,
-				BFDE30042A862B5200F6C6CF /* WebPDecoder.xcframework in Embed Frameworks */,
-				BFDE30082A862B5200F6C6CF /* WebPMux.xcframework in Embed Frameworks */,
-				BFDE30022A862B5200F6C6CF /* WebP.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -338,7 +326,7 @@
 		0A160DD62268D50F00A586C4 /* Reachability+NetworkType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reachability+NetworkType.swift"; sourceTree = "<group>"; };
 		0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UXFeedbackSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UXFeedbackSDK.h; sourceTree = "<group>"; };
-		0A46899522840B2C0074E1A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A46899522840B2C0074E1A3 /* UXFeedbackSDK.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UXFeedbackSDK.plist; sourceTree = "<group>"; };
 		0A6CDB77223BD47800C17007 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		0A6CDB832243B4FB00C17007 /* Campaign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campaign.swift; sourceTree = "<group>"; };
 		0A6CDB852243BD5500C17007 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
@@ -396,6 +384,7 @@
 		BF40564D265CD86700709351 /* NpsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NpsCell.xib; sourceTree = "<group>"; };
 		BF405659265CECF700709351 /* UILabel+Align.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Align.swift"; sourceTree = "<group>"; };
 		BF40565C265D0B0600709351 /* UIView+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Image.swift"; sourceTree = "<group>"; };
+		BF4081792AA50B0700B1013F /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
 		BF437FDB2A4324A2009975EB /* YYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImage.h; sourceTree = "<group>"; };
 		BF437FDC2A4324A2009975EB /* YYImageCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImageCoder.h; sourceTree = "<group>"; };
 		BF437FDD2A4324A2009975EB /* YYFrameImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYFrameImage.h; sourceTree = "<group>"; };
@@ -450,6 +439,7 @@
 		BFB6DEFD27044E4300732D29 /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
 		BFB85E792A42D7E5000208D2 /* YoHe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoHe.swift; sourceTree = "<group>"; };
 		BFB85E822A42D817000208D2 /* YoHeSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YoHeSDK.h; sourceTree = "<group>"; };
+		BFBAFA942ADFE99B003CC167 /* Copyright.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copyright.swift; sourceTree = "<group>"; };
 		BFBB060E2A1C99DD00F1BA6A /* WebPMux.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebPMux.xcframework; sourceTree = "<group>"; };
 		BFBB060F2A1C99DD00F1BA6A /* WebPDecoder.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebPDecoder.xcframework; sourceTree = "<group>"; };
 		BFBB061B2A1C99DD00F1BA6A /* WebPDemux.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebPDemux.xcframework; sourceTree = "<group>"; };
@@ -473,7 +463,7 @@
 		BFF304372A42F65E00E513EA /* UXFBTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFBTheme.swift; sourceTree = "<group>"; };
 		BFF304382A42F65E00E513EA /* UXFBSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UXFBSettings.swift; sourceTree = "<group>"; };
 		BFF304642A43163900E513EA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/iOSSupport/System/Library/PrivateFrameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
-		BFF304672A43173C00E513EA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFF304672A43173C00E513EA /* YoHeSDK.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YoHeSDK.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -489,11 +479,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFDE30002A862B4C00F6C6CF /* WebKit.framework in Frameworks */,
-				BFDE30072A862B5200F6C6CF /* WebPMux.xcframework in Frameworks */,
-				BFDE30052A862B5200F6C6CF /* WebPDemux.xcframework in Frameworks */,
-				BFDE30032A862B5200F6C6CF /* WebPDecoder.xcframework in Frameworks */,
-				BFDE30012A862B5200F6C6CF /* WebP.xcframework in Frameworks */,
+				BF4F7C462B0A42BF0043244E /* WebKit.framework in Frameworks */,
+				BF4F7C4F2B0A42C40043244E /* WebPMux.xcframework in Frameworks */,
+				BF4F7C4B2B0A42C20043244E /* WebPDecoder.xcframework in Frameworks */,
+				BF4F7C4D2B0A42C30043244E /* WebPDemux.xcframework in Frameworks */,
+				BF4F7C492B0A42C00043244E /* WebP.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,7 +587,7 @@
 			children = (
 				BF2D682429EEDE0100547634 /* UXFeedbackSDK.docc */,
 				0A46899422840B2C0074E1A3 /* UXFeedbackSDK.h */,
-				0A46899522840B2C0074E1A3 /* Info.plist */,
+				0A46899522840B2C0074E1A3 /* UXFeedbackSDK.plist */,
 			);
 			path = UXFeedbackSDK;
 			sourceTree = "<group>";
@@ -606,6 +596,7 @@
 			isa = PBXGroup;
 			children = (
 				0A6CDB832243B4FB00C17007 /* Campaign.swift */,
+				BFBAFA942ADFE99B003CC167 /* Copyright.swift */,
 				BF6248C0255B24910039F855 /* DataManager.swift */,
 				BF02FD31255C0AE300C794E6 /* Field.swift */,
 				BF01BDF425613086008C641B /* Option.swift */,
@@ -680,6 +671,7 @@
 		BF2806862562B18F006F2D61 /* v2 */ = {
 			isa = PBXGroup;
 			children = (
+				BF4081782AA50AEC00B1013F /* Privacy */,
 				BF2806A42562B18F006F2D61 /* _BASE */,
 				BF2806872562B18F006F2D61 /* _Stars */,
 				BF28069D2562B18F006F2D61 /* Button */,
@@ -836,6 +828,14 @@
 			path = NPS;
 			sourceTree = "<group>";
 		};
+		BF4081782AA50AEC00B1013F /* Privacy */ = {
+			isa = PBXGroup;
+			children = (
+				BF4081792AA50B0700B1013F /* PrivacyView.swift */,
+			);
+			path = Privacy;
+			sourceTree = "<group>";
+		};
 		BF437FDA2A4324A2009975EB /* YYImageUXFB */ = {
 			isa = PBXGroup;
 			children = (
@@ -934,7 +934,7 @@
 			isa = PBXGroup;
 			children = (
 				BFB85E822A42D817000208D2 /* YoHeSDK.h */,
-				BFF304672A43173C00E513EA /* Info.plist */,
+				BFF304672A43173C00E513EA /* YoHeSDK.plist */,
 				BFDE2FD02A86233000F6C6CF /* Documentation.docc */,
 			);
 			path = YoHeSDK;
@@ -1071,10 +1071,9 @@
 			buildConfigurationList = 0A46899B22840B2C0074E1A3 /* Build configuration list for PBXNativeTarget "UXFeedbackSDK" */;
 			buildPhases = (
 				0A46898D22840B2C0074E1A3 /* Headers */,
-				0A46898F22840B2C0074E1A3 /* Frameworks */,
 				0A46898E22840B2C0074E1A3 /* Sources */,
+				0A46898F22840B2C0074E1A3 /* Frameworks */,
 				0A46899022840B2C0074E1A3 /* Resources */,
-				BFDE30092A862B5200F6C6CF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1176,6 +1175,7 @@
 				BF2806DD2562B6A6006F2D61 /* ImageCell.xib in Resources */,
 				BF0CE19E27661DAD00916B32 /* RatingCell.xib in Resources */,
 				BF2806DE2562B6A6006F2D61 /* CampaignViewController.xib in Resources */,
+				BF1C11BE2ABD67CC0085DB10 /* UXFeedbackSDK.plist in Resources */,
 				BF2806DF2562B6A6006F2D61 /* ButtonCell.xib in Resources */,
 				BF63171326B67509006F408A /* ImageCollection.xib in Resources */,
 				BF2806E02562B6A6006F2D61 /* TextCell.xib in Resources */,
@@ -1205,6 +1205,7 @@
 				BF4380722A4428AF009975EB /* ImageCell.xib in Resources */,
 				BF4380732A4428AF009975EB /* RatingCell.xib in Resources */,
 				BF4380742A4428AF009975EB /* CampaignViewController.xib in Resources */,
+				BF1C11BF2ABD68DB0085DB10 /* YoHeSDK.plist in Resources */,
 				BF4380A02A444B57009975EB /* YoHe.xcassets in Resources */,
 				BF4380752A4428AF009975EB /* ButtonCell.xib in Resources */,
 				BF4380762A4428AF009975EB /* ImageCollection.xib in Resources */,
@@ -1261,6 +1262,7 @@
 				0A4689B822840BE00074E1A3 /* UIVIewAddition.swift in Sources */,
 				BF573EC526B69E28002A9E8C /* ImageSelector.swift in Sources */,
 				BFCC90A62A974E4D00B51FC4 /* Progress.swift in Sources */,
+				BF40817B2AA50B4400B1013F /* PrivacyView.swift in Sources */,
 				BF2806BE2562B18F006F2D61 /* ButtonCell.swift in Sources */,
 				BF2806C92562B18F006F2D61 /* SmilesCell.swift in Sources */,
 				0A4689A622840BB90074E1A3 /* StatisticManager.swift in Sources */,
@@ -1293,6 +1295,7 @@
 				BF2806B32562B18F006F2D61 /* RadioCell.swift in Sources */,
 				BF316C102684AABC007CEFC0 /* VisualEffectView.swift in Sources */,
 				BF0CE19D27661C3B00916B32 /* RatingCell.swift in Sources */,
+				BFBAFA952ADFE99B003CC167 /* Copyright.swift in Sources */,
 				BF63171126B67501006F408A /* ImageCollection.swift in Sources */,
 				BF40565B265CED2500709351 /* UILabel+Align.swift in Sources */,
 				BF885EE62715FB1B00F110A0 /* UIAlertController+.swift in Sources */,
@@ -1352,6 +1355,7 @@
 				BF43802E2A4428AF009975EB /* ImageSelector.swift in Sources */,
 				BF43802F2A4428AF009975EB /* ButtonCell.swift in Sources */,
 				BFCC90A72A974E4D00B51FC4 /* Progress.swift in Sources */,
+				BF40817C2AA50B4400B1013F /* PrivacyView.swift in Sources */,
 				BF4380302A4428AF009975EB /* SmilesCell.swift in Sources */,
 				BFDE30272A86332400F6C6CF /* YYImage.m in Sources */,
 				BF4380312A4428AF009975EB /* StatisticManager.swift in Sources */,
@@ -1384,6 +1388,7 @@
 				BF43804C2A4428AF009975EB /* RadioCell.swift in Sources */,
 				BF43804D2A4428AF009975EB /* VisualEffectView.swift in Sources */,
 				BF43804E2A4428AF009975EB /* RatingCell.swift in Sources */,
+				BFBAFA962ADFE99B003CC167 /* Copyright.swift in Sources */,
 				BF43804F2A4428AF009975EB /* ImageCollection.swift in Sources */,
 				BF4380502A4428AF009975EB /* UILabel+Align.swift in Sources */,
 				BF4380512A4428AF009975EB /* UIAlertController+.swift in Sources */,
@@ -1498,6 +1503,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 2.2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1555,6 +1561,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 2.2.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1575,7 +1582,7 @@
 				CODE_SIGN_ENTITLEMENTS = "UX Feedback SDK Demo/UX Feedback SDK Demo.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 127;
+				CURRENT_PROJECT_VERSION = 128;
 				DEVELOPMENT_TEAM = ST7ATYX27F;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1608,7 +1615,7 @@
 				CODE_SIGN_ENTITLEMENTS = "UX Feedback SDK Demo/UX Feedback SDK Demo.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 127;
+				CURRENT_PROJECT_VERSION = 128;
 				DEVELOPMENT_TEAM = ST7ATYX27F;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1679,6 +1686,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 2.2.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1699,7 +1707,7 @@
 				CODE_SIGN_ENTITLEMENTS = "UX Feedback SDK Demo/UX Feedback SDK Demo.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 127;
+				CURRENT_PROJECT_VERSION = 128;
 				DEVELOPMENT_TEAM = ST7ATYX27F;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1737,6 +1745,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
+				DONT_GENERATE_INFOPLIST_FILE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1750,15 +1759,16 @@
 					"$(PROJECT_DIR)/Core/Vendors/WebP",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = "UXFeedbackSDK=1";
-				INFOPLIST_FILE = UXFeedbackSDK/Info.plist;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = UXFeedbackSDK/UXFeedbackSDK.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = "";
+				MARKETING_VERSION = 2.2.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				ONLY_ACTIVE_ARCH = NO;
@@ -1791,6 +1801,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
+				DONT_GENERATE_INFOPLIST_FILE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1808,15 +1819,16 @@
 					"$(inherited)",
 					"UXFeedbackSDK=1",
 				);
-				INFOPLIST_FILE = UXFeedbackSDK/Info.plist;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = UXFeedbackSDK/UXFeedbackSDK.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = "";
+				MARKETING_VERSION = 2.2.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				ONLY_ACTIVE_ARCH = NO;
@@ -1850,6 +1862,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
+				DONT_GENERATE_INFOPLIST_FILE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1863,15 +1876,16 @@
 					"$(PROJECT_DIR)/Core/Vendors/WebP",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = "UXFeedbackSDK=1";
-				INFOPLIST_FILE = UXFeedbackSDK/Info.plist;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = UXFeedbackSDK/UXFeedbackSDK.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = "";
+				MARKETING_VERSION = 2.2.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				ONLY_ACTIVE_ARCH = NO;
@@ -1920,7 +1934,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = YoHeSDK/info.plist;
+				INFOPLIST_FILE = YoHeSDK/YoHeSDK.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1975,7 +1989,7 @@
 					"$(PROJECT_DIR)/Core/Vendors/WebP",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				INFOPLIST_FILE = YoHeSDK/info.plist;
+				INFOPLIST_FILE = YoHeSDK/YoHeSDK.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2029,7 +2043,7 @@
 					"$(PROJECT_DIR)/Core/Vendors/WebP",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				INFOPLIST_FILE = YoHeSDK/info.plist;
+				INFOPLIST_FILE = YoHeSDK/YoHeSDK.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

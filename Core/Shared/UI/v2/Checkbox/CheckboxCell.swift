@@ -94,6 +94,17 @@ class CheckboxCell: BaseCell, UITableViewDelegate, UITableViewDataSource {
             for index in indexes {
                 answers.append(options[index].id)
             }
+            
+            if (options[indexPath.row].exceptional ?? false) && answers.contains(options[indexPath.row].id) {
+                answers = [options[indexPath.row].id]
+            } else if !(options[indexPath.row].exceptional ?? false) {
+                answers.removeAll { answer in
+                    return options.filter { $0.exceptional ?? false }
+                        .map { $0.id }
+                        .contains(answer)
+                }
+            }
+            
             self.delegate?.fieldChanged(self.field!, answer: answers, refresh: true)
         }
     }

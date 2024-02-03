@@ -19,14 +19,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="x1l-fs-DpE">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="16" y="0.0" width="288" height="44"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </tableView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="x1l-fs-DpE" secondAttribute="trailing" id="Ehf-zH-BD4"/>
+                    <constraint firstAttribute="trailing" secondItem="x1l-fs-DpE" secondAttribute="trailing" constant="16" id="Ehf-zH-BD4"/>
                     <constraint firstAttribute="bottom" secondItem="x1l-fs-DpE" secondAttribute="bottom" id="IWz-7b-Yfp"/>
-                    <constraint firstItem="x1l-fs-DpE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="TS1-oN-Bo5"/>
+                    <constraint firstItem="x1l-fs-DpE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="TS1-oN-Bo5"/>
                     <constraint firstItem="x1l-fs-DpE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="dax-M8-PP2"/>
                 </constraints>
             </tableViewCellContentView>

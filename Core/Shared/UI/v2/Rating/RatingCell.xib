@@ -18,78 +18,78 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mgp-ch-huf">
-                        <rect key="frame" x="0.0" y="110" width="152" height="0.0"/>
+                        <rect key="frame" x="16" y="110" width="140" height="0.0"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kY-a7-V6c">
-                        <rect key="frame" x="168" y="110" width="152" height="0.0"/>
+                        <rect key="frame" x="164" y="110" width="140" height="0.0"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="isp-aD-sAC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="28"/>
+                        <rect key="frame" x="16" y="0.0" width="288" height="28"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WFf-Zl-yqt" customClass="VerticalAlignedLabel" customModule="UXFeedbackSDK" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="32" height="28"/>
+                                <rect key="frame" x="0.0" y="0.0" width="29" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knD-ef-82w" customClass="VerticalAlignedLabel" customModule="UXFeedbackSDK" customModuleProvider="target">
-                                <rect key="frame" x="32" y="0.0" width="32" height="28"/>
+                                <rect key="frame" x="29" y="0.0" width="28.5" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48A-hc-CY2" customClass="VerticalAlignedLabel" customModule="UXFeedbackSDK" customModuleProvider="target">
-                                <rect key="frame" x="64" y="0.0" width="32" height="28"/>
+                                <rect key="frame" x="57.5" y="0.0" width="29" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGA-Zz-6Yj" customClass="VerticalAlignedLabel" customModule="UXFeedbackSDK" customModuleProvider="target">
-                                <rect key="frame" x="96" y="0.0" width="32" height="28"/>
+                                <rect key="frame" x="86.5" y="0.0" width="28.5" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nb7-3W-LV2" customClass="VerticalAlignedLabel" customModule="UXFeedbackSDK" customModuleProvider="target">
-                                <rect key="frame" x="128" y="0.0" width="32" height="28"/>
+                                <rect key="frame" x="115" y="0.0" width="29" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="6" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogw-5m-ybY" customClass="VerticalAlignedLabel" customModule="UXFeedbackSDK" customModuleProvider="target">
-                                <rect key="frame" x="160" y="0.0" width="32" height="28"/>
+                                <rect key="frame" x="144" y="0.0" width="29" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="7" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSj-zE-R38" customClass="VerticalAlignedLabel" customModule="UXFeedbackSDK" customModuleProvider="target">
-                                <rect key="frame" x="192" y="0.0" width="32" height="28"/>
+                                <rect key="frame" x="173" y="0.0" width="28.5" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="8" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdr-H7-bn6" customClass="VerticalAlignedLabel" customModule="UXFeedbackSDK" customModuleProvider="target">
-                                <rect key="frame" x="224" y="0.0" width="32" height="28"/>
+                                <rect key="frame" x="201.5" y="0.0" width="29" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="9" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHf-aa-FKs" customClass="VerticalAlignedLabel" customModule="UXFeedbackSDK" customModuleProvider="target">
-                                <rect key="frame" x="256" y="0.0" width="32" height="28"/>
+                                <rect key="frame" x="230.5" y="0.0" width="28.5" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="697-qX-zhn" customClass="VerticalAlignedLabel" customModule="UXFeedbackSDK" customModuleProvider="target">
-                                <rect key="frame" x="288" y="0.0" width="32" height="28"/>
+                                <rect key="frame" x="259" y="0.0" width="29" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -106,7 +106,7 @@
                         </userDefinedRuntimeAttributes>
                     </stackView>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="pO0-7V-I4j">
-                        <rect key="frame" x="0.0" y="28" width="320" height="49"/>
+                        <rect key="frame" x="16" y="28" width="288" height="49"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="48" id="cML-Vq-fSs"/>
                         </constraints>
@@ -118,18 +118,18 @@
                     </slider>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="isp-aD-sAC" secondAttribute="trailing" id="5qW-S1-O3S"/>
+                    <constraint firstAttribute="trailing" secondItem="isp-aD-sAC" secondAttribute="trailing" constant="16" id="5qW-S1-O3S"/>
                     <constraint firstItem="pO0-7V-I4j" firstAttribute="top" secondItem="isp-aD-sAC" secondAttribute="bottom" id="75E-TS-4bl"/>
-                    <constraint firstItem="Mgp-ch-huf" firstAttribute="width" secondItem="DU3-6L-Dot" secondAttribute="width" multiplier="0.5" constant="-8" id="8Z9-8e-lH2"/>
-                    <constraint firstItem="pO0-7V-I4j" firstAttribute="leading" secondItem="DU3-6L-Dot" secondAttribute="leading" constant="2" id="GNG-NK-dN1"/>
+                    <constraint firstItem="Mgp-ch-huf" firstAttribute="width" secondItem="DU3-6L-Dot" secondAttribute="width" multiplier="0.5" constant="-20" id="8Z9-8e-lH2"/>
+                    <constraint firstItem="pO0-7V-I4j" firstAttribute="leading" secondItem="DU3-6L-Dot" secondAttribute="leading" constant="18" id="GNG-NK-dN1"/>
                     <constraint firstItem="isp-aD-sAC" firstAttribute="top" secondItem="DU3-6L-Dot" secondAttribute="top" id="MI7-jX-pnf"/>
-                    <constraint firstItem="5kY-a7-V6c" firstAttribute="width" secondItem="DU3-6L-Dot" secondAttribute="width" multiplier="0.5" constant="-8" id="QjY-hh-xIg"/>
+                    <constraint firstItem="5kY-a7-V6c" firstAttribute="width" secondItem="DU3-6L-Dot" secondAttribute="width" multiplier="0.5" constant="-20" id="QjY-hh-xIg"/>
                     <constraint firstAttribute="bottom" secondItem="Mgp-ch-huf" secondAttribute="bottom" id="a51-Np-TXg"/>
                     <constraint firstAttribute="bottom" secondItem="5kY-a7-V6c" secondAttribute="bottom" id="gBv-x2-QCk"/>
-                    <constraint firstItem="isp-aD-sAC" firstAttribute="leading" secondItem="DU3-6L-Dot" secondAttribute="leading" id="kMQ-c2-ahU"/>
-                    <constraint firstItem="Mgp-ch-huf" firstAttribute="leading" secondItem="DU3-6L-Dot" secondAttribute="leading" id="ks5-hp-FBT"/>
-                    <constraint firstAttribute="trailing" secondItem="5kY-a7-V6c" secondAttribute="trailing" id="lwa-ZB-KbQ"/>
-                    <constraint firstAttribute="trailing" secondItem="pO0-7V-I4j" secondAttribute="trailing" constant="2" id="yTI-Ti-x20"/>
+                    <constraint firstItem="isp-aD-sAC" firstAttribute="leading" secondItem="DU3-6L-Dot" secondAttribute="leading" constant="16" id="kMQ-c2-ahU"/>
+                    <constraint firstItem="Mgp-ch-huf" firstAttribute="leading" secondItem="DU3-6L-Dot" secondAttribute="leading" constant="16" id="ks5-hp-FBT"/>
+                    <constraint firstAttribute="trailing" secondItem="5kY-a7-V6c" secondAttribute="trailing" constant="16" id="lwa-ZB-KbQ"/>
+                    <constraint firstAttribute="trailing" secondItem="pO0-7V-I4j" secondAttribute="trailing" constant="18" id="yTI-Ti-x20"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="qkn-wH-PWG"/>

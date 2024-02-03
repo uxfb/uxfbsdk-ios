@@ -27,15 +27,7 @@ enum ViewControllerState {
 
 internal class CampaignViewController: UIViewController {
     @IBOutlet var contentView: UIView!
-    @IBOutlet var privacyView: UIView!
-    @IBOutlet var privacyImageBgView: UIView!
-    @IBOutlet var privacyImageView: UIImageView!
-    @IBOutlet var privacyLabel: HtmlLabel! {
-        didSet {
-            privacyLabel.delegate = self
-        }
-    }
-    @IBOutlet var privacyWarningLabel: UILabel!
+    private var privacyView: PrivacyView?
     
     @IBOutlet var shadowView: AnimatingShadowView! {
         didSet {
@@ -76,8 +68,6 @@ internal class CampaignViewController: UIViewController {
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var titleViewHeightConstaint: NSLayoutConstraint!
     
-    @IBOutlet var privacyHeightConstaint: NSLayoutConstraint!
-    
     var presentationAnimated = true  
     
     var state: ViewControllerState = .presenting
@@ -94,6 +84,8 @@ internal class CampaignViewController: UIViewController {
     var closeOnSwipe: Bool = false
     
     var rotateToggle: Bool = false
+    
+    var properties: [String: Any] = [:]
     
     internal var campaign: Campaign?
     
@@ -114,7 +106,11 @@ internal class CampaignViewController: UIViewController {
         super.viewDidLoad()
         dataManager = DataManager(self, campaign: campaign)
         prepareUI()
-        preparePrivacy()
+        if let theme = campaign?.theme {
+            privacyView = PrivacyView(frame: .zero, theme: theme, delegate: self)
+            privacyView?.preparePrivacy(campaign?.privacy?.type ?? "")
+        }
+        
         if presentHandler != nil {
             presentHandler!()
         }
@@ -208,6 +204,7 @@ internal class CampaignViewController: UIViewController {
         if let effectView = view.viewWithTag(visualEffectViewTag) {
             DispatchQueue.main.async {
                 effectView.frame = UIScreen.main.bounds
+                self.dataManager?.checkPrivacy(nil)
             }
         }
         tableView.reloadData()
@@ -219,22 +216,64 @@ internal class CampaignViewController: UIViewController {
 
     //MARK: - Support
     
-    private func configureTableView() {
+    private func createFooter(withPrivacy: Bool) {
+        var height: CGFloat = campaign?.copyright.isShow ?? true ? 50 : 16
+        
+        if withPrivacy {
+            privacyView?.frame.origin.y = height
+            height += privacyView?.frame.size.height ?? .leastNonzeroMagnitude
+        }
+        
         let tableFooterView = UIView(frame: CGRect(origin: .zero,
-                                                   size: CGSize(width: UIScreen.main.bounds.width,
-                                                                height: campaign?.showCopyright ?? true ? 50 : 16)))
-        if campaign?.showCopyright ?? true {
-            let image = UIImageView(frame: CGRect(origin: CGPoint(x: 0,
-                                                              y: 16),
+                                                   size: CGSize(width: UIScreen.main.bounds.width - 32,
+                                                                height: height)))
+        if campaign?.copyright.isShow ?? true {
+            let image = UIImageView(frame: CGRect(origin: CGPoint(x: 16,
+                                                              y: 12),
                                               size: CGSize(width: 30,
-                                                           height: 22)))
+                                                           height: 30)))
             image.contentMode = .scaleAspectFit
-            image.image = UIImage(named: "logo", in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            
+            var urlString: String?
+            let scale = UIScreen.main.scale
+            switch scale {
+            case 1:
+                urlString = campaign?.copyright.image?["1x"] as? String
+            case 2:
+                urlString = campaign?.copyright.image?["2x"] as? String
+            case 3:
+                urlString = campaign?.copyright.image?["3x"] as? String
+
+            default:
+                break
+            }
+            if let urlString = urlString, let url = URL(string: urlString) {
+                image.cacheImage(url: url, withTemplate: true)
+            } else {
+                image.image = UIImage(named: "logo", in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            }
+            
+            if (campaign?.copyright.href) != nil {
+                let tapGestureRecognizer = UITapGestureRecognizer()
+                tapGestureRecognizer.cancelsTouchesInView = false
+                tapGestureRecognizer.addTarget(self, action: #selector(onLogoTap(tap:)))
+                tapGestureRecognizer.delegate = self
+                image.addGestureRecognizer(tapGestureRecognizer)
+                image.isUserInteractionEnabled = true
+            }
+            
             image.tintColor = campaign?.theme.inputBorderColor
             tableFooterView.backgroundColor = campaign?.theme.bgColor ?? .white
             tableFooterView.addSubview(image)
         }
+        if withPrivacy && privacyView != nil {
+            tableFooterView.addSubview(privacyView!)
+        }
         tableView.tableFooterView = tableFooterView
+    }
+    
+    private func configureTableView() {
+        createFooter(withPrivacy: false)
         tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero,
                                                          size: CGSize(width: 1,
                                                                       height: 1)))
@@ -290,41 +329,12 @@ internal class CampaignViewController: UIViewController {
 //        }
     }
     
-    private func preparePrivacy() {
-        privacyImageBgView.layer.cornerRadius = 2
-        privacyImageBgView.layer.masksToBounds = true
-        privacyImageView.layer.cornerRadius = 2
-        privacyImageView.layer.borderColor = UIColor.clear.cgColor
-        privacyImageView.layer.borderWidth = 2
-        privacyImageView.layer.masksToBounds = true
-        
-        switch campaign?.privacy?.type {
-        case "checkboxEnabled":
-            dataManager?.checkPrivacy(true)
-            
-        case "checkboxDisabled":
-            dataManager?.checkPrivacy(false)
-            
-        case "text":
-            dataManager?.checkPrivacy(true)
-            
-        default:
-            dataManager?.checkPrivacy(nil)
-
-        }
-    }
-    
     private func prepareUI() {
-        self.progressLabel.text = dataManager?.progress
+        progressLabel.text = dataManager?.progress
         contentView.backgroundColor = campaign?.theme.bgColor ?? .white
         tableView.backgroundColor = campaign?.theme.bgColor ?? .white
         contentHeight.constant = dataManager?.heightForCurrentPage() ?? 0
-        privacyView.backgroundColor = campaign?.theme.inputBgColor
-        privacyLabel.defaultColor = campaign?.theme.text03Color ?? .white
-        privacyLabel.linkColor = campaign?.theme.btnBgColor ?? .white
-        privacyLabel.textFont = campaign?.theme.fontP2 ?? .systemFont(ofSize: 14)
-        privacyWarningLabel.font = campaign?.theme.fontP2 ?? .systemFont(ofSize: 14)
-        privacyWarningLabel.textColor = campaign?.theme.errorColorPrimary ?? .red
+//        contentView.backgroundColor = campaign?.theme.inputBgColor ?? .white
                                                                              
         tableViewBottomConstraint.constant = dataManager?.bottomSpace ?? 0
         titleViewHeightConstaint.constant = dataManager?.titleViewHeight ?? 54
@@ -339,6 +349,7 @@ internal class CampaignViewController: UIViewController {
                 panGestureRecognizer.addTarget(self, action: #selector(onPan(pan:)))
                 contentView.addGestureRecognizer(panGestureRecognizer)
                 break
+            
             case .popup:
                 dismissDirection = .alphaOut
                 verticallyConstraint.isActive = true
@@ -346,6 +357,7 @@ internal class CampaignViewController: UIViewController {
                 leftConstraint.constant = 24
                 rightConstraint.constant = 24
                 break
+            
             default:
                 break
         }
@@ -392,6 +404,16 @@ internal class CampaignViewController: UIViewController {
             
             completion?()
         }
+    }
+    
+    @objc func onLogoTap(tap: UITapGestureRecognizer) -> Void {
+        view.endEditing(true)
+        guard let href = campaign?.copyright.href, let url = URL(string: href),
+                UIApplication.shared.canOpenURL(url) else {
+                    return
+        }
+
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     @objc func onTap(tap: UITapGestureRecognizer) -> Void {
@@ -785,62 +807,22 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    //MARK: - Privacy
+    
     func updatePrivacy(enabled: Bool, height: CGFloat, warning: String?, text: String?, checked: Bool) {
-        privacyView.isHidden = !enabled
-        privacyHeightConstaint.constant = height
-        privacyLabel.html = text
-        privacyWarningLabel.text = warning
         if enabled {
-            fillPrivacyUI(checked)
+            privacyView?.fillPrivacy(campaign?.privacy?.type ?? "", checked: checked)
+            privacyView?.fillTexts(text ?? "", warning: warning ?? "")
+            privacyView?.frame = .init(origin: .zero, size: .init(width: campaign?.type == .popup ? UIScreen.main.bounds.width-48 : UIScreen.main.bounds.width,
+                                                                  height: height))
         }
-        view.layoutIfNeeded()
+        createFooter(withPrivacy: enabled)
     }
     
-    private func fillPrivacyUI(_ checked: Bool) {
-        switch campaign?.privacy?.type {
-        case "checkboxEnabled", "checkboxDisabled":
-            if checked {
-                privacyImageView.layer.borderColor = UIColor.clear.cgColor
-                privacyImageView.image = UIImage(named: "check_symbol",
-                                                 in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-                
-                privacyImageView.tintColor = campaign?.theme.controlIconColor
-                privacyImageView.backgroundColor = campaign?.theme.mainColor
-                privacyImageBgView.backgroundColor = campaign?.theme.mainColor.withAlphaComponent(0.2)
-            } else {
-                privacyImageView.layer.borderColor = campaign?.theme.iconColor.cgColor ?? UIColor.clear.cgColor
-                privacyImageView.image = nil
-                privacyImageBgView.backgroundColor = .clear
-                privacyImageView.backgroundColor = .clear
-            }
-            
-        case "text":
-            privacyImageView.layer.borderColor = UIColor.clear.cgColor
-            privacyImageView.image = UIImage(named: "lock",
-                                             in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-            privacyImageView.tintColor = campaign?.theme.iconColor
-            privacyImageBgView.backgroundColor = .clear
-            privacyImageView.backgroundColor = .clear
-            
-        default:
-            break
-        }
-    }
-    
-    @IBAction func checkboxTapped(_ sender: Any) {
-        dataManager?.tapPrivacy()
-    }
+    //MARK: - Autorotate
     
     open override var shouldAutorotate: Bool {
         return rotateToggle
-    }
-}
-
-extension CampaignViewController: HtmlLabelDelegate {
-    func htmlLabelLinkDidPress(url: URL?) {
-        if let url = url, UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
-        }
     }
 }
 
@@ -849,6 +831,60 @@ extension CampaignViewController: PHPhotoLibraryChangeObserver {
         let photosCount = PHAsset.fetchAssets(with: .image, options: nil).count
         if photosCount > 0 {
 //            DispatchQueue.main.async(execute: self.showGalleryTask!)
+        }
+    }
+}
+
+extension CampaignViewController: PrivacyDelegate {
+    func checked(_ value: Bool?) {
+        dataManager?.checkPrivacy(value)
+    }
+    
+    func tapPrivacy() {
+        dataManager?.tapPrivacy()
+    }
+}
+
+extension CampaignViewController: RouterDelegate {
+    private func buildQuery(_ data: Dictionary<String, Any>) -> String {
+        var output: String = ""
+        for (key,value) in data {
+            output +=  "\(key)=\(value)&"
+        }
+        output = String(output.dropLast()).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        if output.count > 0 {
+            output = "?\(output)"
+        }
+        return output
+    }
+    
+    func openUrl(_ urlString: String, params: TransformQueryParameter?) {
+        var queryDict: [String: Any] = [:]
+        let systemParams = StatisticManager.getDeviceInfo()
+        let userParams = properties
+        
+        for param in params?.system ?? [] {
+            if let sParam = systemParams[param] {
+                queryDict[param] = sParam
+            } else {
+                queryDict[param] = "nodata"
+            }
+        }
+        
+        for param in params?.user ?? [] {
+            if let uParam = userParams[param] {
+                queryDict[param] = uParam
+            } else {
+                queryDict[param] = "nodata"
+            }
+        }
+        
+        let queryParams = buildQuery(queryDict)
+        let resultUrl = urlString + queryParams
+        
+        if let url = URL(string: resultUrl),
+            UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
         }
     }
 }

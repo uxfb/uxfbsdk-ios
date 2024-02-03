@@ -75,7 +75,6 @@ class MainViewController_swift: UIViewController {
         UXFeedback.sdk.settings.popupUiBlackoutOpacity = 50
         UXFeedback.sdk.settings.popupUiBlackoutColor = "000000"
         
-        
         let eventNumber = sender.tag
         assert(eventNumber > 0, "Invalid eventNumber")
         UXFeedback.sdk.settings.globalDelayTimer = 1
@@ -84,12 +83,14 @@ class MainViewController_swift: UIViewController {
 //            UXFeedback.sharedSDK.setProperties(["property_first": "non-value",
 //                                                "property_second": 2])
             
-            
-            UXFeedback.sdk.startCampaign(eventName: "nenum")
+            UXFeedback.sdk.properties = ["ios": "ios-data"]
+            UXFeedback.sdk.startCampaign(eventName: "newlogick3")
+//            UXFeedback.sdk.settings.
             break
         case 2:
 //            showActivityOverlay()
-            UXFeedback.sdk.startCampaign(eventName: "analyt")
+            
+            UXFeedback.sdk.startCampaign(eventName: "swagger")
             break
         default:
             break

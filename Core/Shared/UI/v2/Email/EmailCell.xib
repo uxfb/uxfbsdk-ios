@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5dr-kK-TUe">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="16" y="0.0" width="288" height="44"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
@@ -26,8 +26,8 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="5dr-kK-TUe" secondAttribute="bottom" id="3Du-r7-E49"/>
                     <constraint firstItem="5dr-kK-TUe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="E38-dg-wcr"/>
-                    <constraint firstAttribute="trailing" secondItem="5dr-kK-TUe" secondAttribute="trailing" id="SFu-2L-e3g"/>
-                    <constraint firstItem="5dr-kK-TUe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="UMe-IC-vet"/>
+                    <constraint firstAttribute="trailing" secondItem="5dr-kK-TUe" secondAttribute="trailing" constant="16" id="SFu-2L-e3g"/>
+                    <constraint firstItem="5dr-kK-TUe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="UMe-IC-vet"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

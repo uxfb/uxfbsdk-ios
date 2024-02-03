@@ -19,15 +19,15 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="t32-y2-zjE">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="16" y="0.0" width="288" height="44"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </tableView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="t32-y2-zjE" secondAttribute="trailing" id="1dr-vp-gqb"/>
+                    <constraint firstAttribute="trailing" secondItem="t32-y2-zjE" secondAttribute="trailing" constant="16" id="1dr-vp-gqb"/>
                     <constraint firstAttribute="bottom" secondItem="t32-y2-zjE" secondAttribute="bottom" id="5OC-P0-oDK"/>
                     <constraint firstItem="t32-y2-zjE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9Ot-cB-S1H"/>
-                    <constraint firstItem="t32-y2-zjE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Iso-Wu-Df3"/>
+                    <constraint firstItem="t32-y2-zjE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Iso-Wu-Df3"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

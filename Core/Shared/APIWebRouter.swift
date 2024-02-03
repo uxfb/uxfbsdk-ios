@@ -15,6 +15,8 @@ enum HTTPHeaderField: String {
     case acceptType = "Accept"
     case acceptEncoding = "Accept-Encoding"
     case uid = "uid"
+    case language = "language"
+    case createdAtClient = "createdAtClient"
     case appID = "appId"
     case campaignId = "campaignId"
     case fields = "fields"
@@ -25,6 +27,7 @@ enum HTTPHeaderField: String {
     case properties = "properties"
     case screenshots = "screenshots"
     case sdkVersion = "X-SDK-Version"
+    case idempotencyKey = "Idempotency-Key"
 }
 
 extension Error {
@@ -44,7 +47,7 @@ enum APIWebRouter {
     
     case getCampaing(appID: String)
     case showForm(uid: String, campaingId: String)
-    case saveFormData(projectId: String?, uid: String, campaignId: String, pages: Array<Dictionary<String, Any>>, info: Dictionary<String, Any>, properties: Dictionary<String, Any>)
+    case saveFormData(projectId: String?, createdAtClient: String, uid: String, campaignId: String, pages: Array<Dictionary<String, Any>>, info: Dictionary<String, Any>, properties: Dictionary<String, Any>, idempotency: String)
     case saveScreenshot(screenshot: ScreenshotData)
     
     var method: String {
@@ -62,7 +65,7 @@ enum APIWebRouter {
        switch self {
        case .getCampaing(let appId):
             return "/mobile/campaigns/\(appId)"
-       case .saveFormData(_, _, _, _, _, _):
+       case .saveFormData(_, _, _, _, _, _, _, _):
             return "/mobile/answers"
        case .showForm(_, _):
             return "/mobile/visits"
@@ -73,10 +76,11 @@ enum APIWebRouter {
     
     var parameters: [String:Any]? {
         switch self {
-            case .saveFormData(_, let uid, let campaignId, let pages, let info, let properties):
+            case .saveFormData(_, let createdAtClient, let uid, let campaignId, let pages, let info, let properties, _):
                 var params = [HTTPHeaderField.uid.rawValue : uid,
-                       HTTPHeaderField.campaignId.rawValue : campaignId,
-                       HTTPHeaderField.info.rawValue : info] as [String : Any]
+                              HTTPHeaderField.createdAtClient.rawValue : createdAtClient,
+                              HTTPHeaderField.campaignId.rawValue : campaignId,
+                              HTTPHeaderField.info.rawValue : info] as [String : Any]
 
                 params[HTTPHeaderField.pages.rawValue] = pages
                 params[HTTPHeaderField.properties.rawValue] = properties
@@ -86,7 +90,7 @@ enum APIWebRouter {
 
             case .showForm(let uid, let campaingId):
                 return  [HTTPHeaderField.uid.rawValue : uid,
-                    HTTPHeaderField.campaignId.rawValue : campaingId]
+                         HTTPHeaderField.campaignId.rawValue : campaingId]
             
             default:
                 return [:]
@@ -137,7 +141,7 @@ enum APIWebRouter {
     var pathParameters: [String:Any]? {
         var parameters: [String: Any] = [:]
         switch self {
-        case .saveFormData(let projectId, _, _, _, _, _):
+        case .saveFormData(let projectId, _, _, _, _, _, _, _):
             if projectId != nil {
                 parameters =  [HTTPHeaderField.projectId.rawValue : projectId!]
             }
@@ -145,6 +149,9 @@ enum APIWebRouter {
             
         case .getCampaing(_):
             parameters = [HTTPHeaderField.uid.rawValue: uid]
+            if let language = Locale.autoupdatingCurrent.collatorIdentifier?.lowercased() {
+                parameters[HTTPHeaderField.language.rawValue] = language
+            }
             break
             
         default:
@@ -156,10 +163,16 @@ enum APIWebRouter {
     
     var headers: [String: String]? {
         switch self {
-        case .getCampaing, .showForm, .saveFormData:
+        case .getCampaing, .showForm:
             return [HTTPHeaderField.acceptType.rawValue: ContentType.json.rawValue,
                     HTTPHeaderField.contentType.rawValue: ContentType.json.rawValue,
                     HTTPHeaderField.sdkVersion.rawValue: Consts.version]
+        case .saveFormData(_, _, _, _, _, _, _, let idempotency):
+            
+            return [HTTPHeaderField.acceptType.rawValue: ContentType.json.rawValue,
+                    HTTPHeaderField.contentType.rawValue: ContentType.json.rawValue,
+                    HTTPHeaderField.sdkVersion.rawValue: Consts.version,
+                    HTTPHeaderField.idempotencyKey.rawValue: idempotency]
             
             
         case .saveScreenshot:

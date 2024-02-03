@@ -24,6 +24,12 @@ struct TransformTo: Codable {
     let action: String
     let value: String
     let type: String
+    let queryParams: TransformQueryParameter?
+}
+
+struct TransformQueryParameter: Codable {
+    let system: [String]?
+    let user: [String]?
 }
 
 struct TransformCondition: Codable {

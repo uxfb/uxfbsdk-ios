@@ -13,10 +13,8 @@ let IS_IPAD = (UIDevice.current.userInterfaceIdiom == .pad)
 
 let uid = UIDevice.current.identifierForVendor?.uuidString ?? ""
 
-class StatisticManager{
-    
+class StatisticManager {
     class func getDeviceInfo() -> (Dictionary<String, Any>){
-        
         let networkType = Reachability.getNetworkType()
         var device = "unknown"
         if IS_IPAD {
@@ -39,4 +37,12 @@ class StatisticManager{
         return info
     }
     
+    class func getTimeUTC() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        let utcTimeZoneStr = formatter.string(from: date)
+        return utcTimeZoneStr
+    }
 }

@@ -83,7 +83,7 @@ class ScreenshotCell: BaseCell {
     
     override func updateUI() {
         countLabel.font = theme?.fontP2
-        countLabel.textColor = theme?.text01Color
+        countLabel.textColor = theme?.text03Color
         
         takeView.backgroundColor = theme?.controlBgColor
         takeImage.tintColor = theme?.iconColor
@@ -131,21 +131,21 @@ class ScreenshotCell: BaseCell {
     //MARK :- Actions
     
     private func takeSetHighlight(_ isHighlighted: Bool) {
-        takeImage.tintColor = isHighlighted ? theme?.iconColor : theme?.text03Color
+        takeImage.tintColor = isHighlighted ? theme?.btnBgColor : theme?.iconColor
         takeView.backgroundColor = isHighlighted ? theme?.controlBgColorActive : theme?.controlBgColor
     }
     
     private func selectSetHighlight(_ isHighlighted: Bool) {
-        selectImage.tintColor = isHighlighted ? theme?.iconColor : theme?.text03Color
+        selectImage.tintColor = isHighlighted ? theme?.btnBgColor : theme?.iconColor
         selectView.backgroundColor = isHighlighted ? theme?.controlBgColorActive : theme?.controlBgColor
     }
     
     private func setEnabledBtns(_ isEnabled: Bool) {
         self.isEnabled = isEnabled
-        selectImage.tintColor = isEnabled ? theme?.text03Color : theme?.iconColor
-        takeImage.tintColor = isEnabled ? theme?.text03Color : theme?.iconColor
-        selectLabel.textColor = isEnabled ? theme?.text01Color : theme?.text03Color
-        takeLabel.textColor = isEnabled ? theme?.text01Color : theme?.text03Color
+        selectImage.tintColor = isEnabled ? theme?.iconColor : theme?.iconColor
+        takeImage.tintColor = isEnabled ? theme?.iconColor : theme?.iconColor
+        selectLabel.textColor = isEnabled ? theme?.text01Color : theme?.text01Color
+        takeLabel.textColor = isEnabled ? theme?.text01Color : theme?.text01Color
     }
 
     

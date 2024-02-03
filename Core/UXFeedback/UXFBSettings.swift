@@ -49,5 +49,5 @@ open class UXFBSettings: NSObject, SettingsProtocol {
     open var endpoint: String?
     
     /// Включение автоповорта при смене ориентации устройства
-    var rotateToggle: Bool = true
+    open var rotateToggle: Bool = true
 }
