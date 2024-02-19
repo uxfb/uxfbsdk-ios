@@ -901,6 +901,13 @@
       },
       {
         "kind": "Import",
+        "name": "SwiftUI",
+        "printedName": "SwiftUI",
+        "declKind": "Import",
+        "moduleName": "UXFeedbackSDK"
+      },
+      {
+        "kind": "Import",
         "name": "Foundation",
         "printedName": "Foundation",
         "declKind": "Import",
@@ -1019,13 +1026,6 @@
         "declAttributes": [
           "RawDocComment"
         ]
-      },
-      {
-        "kind": "Import",
-        "name": "UIKit",
-        "printedName": "UIKit",
-        "declKind": "Import",
-        "moduleName": "UXFeedbackSDK"
       },
       {
         "kind": "TypeDecl",
@@ -16437,336 +16437,343 @@
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "BooleanLiteral",
-      "offset": 555,
+      "offset": 570,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "BooleanLiteral",
-      "offset": 744,
+      "offset": 759,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "BooleanLiteral",
-      "offset": 845,
+      "offset": 860,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "BooleanLiteral",
-      "offset": 1825,
+      "offset": 1840,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "StringLiteral",
-      "offset": 2226,
+      "offset": 2241,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "StringLiteral",
-      "offset": 2318,
+      "offset": 2333,
       "length": 7,
       "value": "\"value\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "StringLiteral",
-      "offset": 2341,
+      "offset": 2356,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "BooleanLiteral",
-      "offset": 2604,
+      "offset": 2619,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "BooleanLiteral",
-      "offset": 2886,
+      "offset": 2901,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "BooleanLiteral",
-      "offset": 3767,
+      "offset": 3782,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "BooleanLiteral",
-      "offset": 3968,
+      "offset": 3983,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "BooleanLiteral",
-      "offset": 3996,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5011,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5090,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5344,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5420,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5574,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5615,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5667,
+      "offset": 4011,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "StringLiteral",
-      "offset": 366,
+      "offset": 4771,
+      "length": 8,
+      "value": "\"scenes\""
+    },
+    {
+      "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
+      "kind": "BooleanLiteral",
+      "offset": 5292,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
+      "kind": "BooleanLiteral",
+      "offset": 5371,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
+      "kind": "BooleanLiteral",
+      "offset": 5625,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
+      "kind": "BooleanLiteral",
+      "offset": 5701,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
+      "kind": "BooleanLiteral",
+      "offset": 5855,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
+      "kind": "BooleanLiteral",
+      "offset": 5896,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
+      "kind": "BooleanLiteral",
+      "offset": 5948,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
+      "kind": "StringLiteral",
+      "offset": 381,
       "length": 17,
       "value": "\"UXFeedbackSDK.CampaignPresentor\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 6430,
+      "offset": 6711,
       "length": 3,
       "value": "0.5"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 7122,
+      "offset": 7403,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 7158,
+      "offset": 7439,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 7208,
+      "offset": 7489,
       "length": 3,
       "value": "0.3"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 7243,
+      "offset": 7524,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 7286,
+      "offset": 7567,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 8168,
+      "offset": 8449,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 8195,
+      "offset": 8476,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 8266,
+      "offset": 8547,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 8293,
+      "offset": 8574,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "IntegerLiteral",
-      "offset": 8853,
+      "offset": 9134,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "IntegerLiteral",
-      "offset": 9072,
+      "offset": 9353,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "IntegerLiteral",
-      "offset": 9179,
+      "offset": 9460,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "IntegerLiteral",
-      "offset": 9348,
+      "offset": 9629,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "IntegerLiteral",
-      "offset": 9351,
+      "offset": 9632,
       "length": 3,
       "value": "100"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "IntegerLiteral",
-      "offset": 9433,
+      "offset": 9714,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "IntegerLiteral",
-      "offset": 9650,
+      "offset": 9931,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "IntegerLiteral",
-      "offset": 9841,
+      "offset": 10122,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 10371,
+      "offset": 10652,
       "length": 3,
       "value": "0.5"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 10791,
+      "offset": 11072,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 10841,
+      "offset": 11122,
       "length": 3,
       "value": "0.3"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 10876,
+      "offset": 11157,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 10919,
+      "offset": 11200,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 10957,
+      "offset": 11238,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 10995,
+      "offset": 11276,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "FloatLiteral",
-      "offset": 11176,
+      "offset": 11457,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "IntegerLiteral",
-      "offset": 11672,
+      "offset": 11953,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/CampaignPresentor.swift",
       "kind": "IntegerLiteral",
-      "offset": 11878,
+      "offset": 12159,
       "length": 1,
       "value": "0"
     },
@@ -17830,483 +17837,483 @@
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "BooleanLiteral",
-      "offset": 823,
+      "offset": 825,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "Dictionary",
-      "offset": 1625,
+      "offset": 1627,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "Array",
-      "offset": 1898,
+      "offset": 1900,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "BooleanLiteral",
-      "offset": 2038,
+      "offset": 2040,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "IntegerLiteral",
-      "offset": 2194,
+      "offset": 2196,
       "length": 2,
       "value": "10"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "BooleanLiteral",
-      "offset": 2238,
+      "offset": 2240,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "Dictionary",
-      "offset": 2335,
+      "offset": 2337,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "BooleanLiteral",
-      "offset": 3017,
+      "offset": 3019,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 3078,
+      "offset": 3080,
       "length": 83,
       "value": "\"Global timer error: delay=\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 3139,
+      "offset": 3141,
       "length": 1,
       "value": "\", current=\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 3160,
+      "offset": 3162,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "BooleanLiteral",
-      "offset": 3190,
+      "offset": 3192,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "BooleanLiteral",
-      "offset": 3253,
+      "offset": 3255,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 4403,
+      "offset": 4405,
       "length": 28,
       "value": "\"SDK is already initialized\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 4472,
+      "offset": 4474,
       "length": 36,
       "value": "\"Init UXFeedbackSDK: \""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 4507,
+      "offset": 4509,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "BooleanLiteral",
-      "offset": 4549,
+      "offset": 4551,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 5591,
+      "offset": 5593,
       "length": 32,
       "value": "\"Attempt starting: \""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 5622,
+      "offset": 5624,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "BooleanLiteral",
-      "offset": 5685,
+      "offset": 5687,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 5832,
+      "offset": 5834,
       "length": 6,
       "value": "\"type\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 5860,
+      "offset": 5862,
       "length": 9,
       "value": "\"trigger\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 5911,
+      "offset": 5913,
       "length": 7,
       "value": "\"value\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "BooleanLiteral",
-      "offset": 5987,
+      "offset": 5989,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 6043,
+      "offset": 6045,
       "length": 16,
       "value": "\"isMultiVisited\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "BooleanLiteral",
-      "offset": 6073,
+      "offset": 6075,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 6144,
+      "offset": 6146,
       "length": 8,
       "value": "\"counts\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "IntegerLiteral",
-      "offset": 6166,
+      "offset": 6168,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "IntegerLiteral",
-      "offset": 6236,
+      "offset": 6238,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "IntegerLiteral",
-      "offset": 6241,
+      "offset": 6243,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "IntegerLiteral",
-      "offset": 6429,
+      "offset": 6431,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 6479,
+      "offset": 6481,
       "length": 32,
       "value": "\"Event count to show: \""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 6510,
+      "offset": 6512,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "IntegerLiteral",
-      "offset": 6682,
+      "offset": 6684,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 6998,
+      "offset": 7000,
       "length": 14,
       "value": "\"Global timer\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "BooleanLiteral",
-      "offset": 7216,
+      "offset": 7218,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 7413,
+      "offset": 7415,
       "length": 24,
       "value": "\"Form already on screen\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 7527,
+      "offset": 7529,
       "length": 19,
       "value": "\"Form is on screen\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "BooleanLiteral",
-      "offset": 8122,
+      "offset": 8124,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "BooleanLiteral",
-      "offset": 8220,
+      "offset": 8222,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "IntegerLiteral",
-      "offset": 8680,
+      "offset": 8682,
       "length": 1,
       "value": "6"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 8750,
+      "offset": 8752,
       "length": 11,
       "value": "\"#\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 8760,
+      "offset": 8762,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "IntegerLiteral",
-      "offset": 8820,
+      "offset": 8822,
       "length": 1,
       "value": "7"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "IntegerLiteral",
-      "offset": 9073,
+      "offset": 9075,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "IntegerLiteral",
-      "offset": 9164,
+      "offset": 9166,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "IntegerLiteral",
-      "offset": 9362,
+      "offset": 9364,
       "length": 1,
       "value": "6"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 9432,
+      "offset": 9434,
       "length": 11,
       "value": "\"#\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 9442,
+      "offset": 9444,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "IntegerLiteral",
-      "offset": 9502,
+      "offset": 9504,
       "length": 1,
       "value": "7"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "IntegerLiteral",
-      "offset": 9724,
+      "offset": 9726,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "IntegerLiteral",
-      "offset": 9813,
+      "offset": 9815,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 10000,
+      "offset": 10002,
       "length": 35,
       "value": "\"Show form for event: \""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 10034,
+      "offset": 10036,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "IntegerLiteral",
-      "offset": 11011,
+      "offset": 11013,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 11403,
+      "offset": 11405,
       "length": 31,
       "value": "\"Event not found: \""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 11433,
+      "offset": 11435,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "BooleanLiteral",
-      "offset": 12076,
+      "offset": 12078,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 12106,
+      "offset": 12108,
       "length": 38,
       "value": "\"Campaigns loaded: \""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 12143,
+      "offset": 12145,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 12300,
+      "offset": 12302,
       "length": 36,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 12314,
+      "offset": 12316,
       "length": 20,
       "value": "\"Unresolved message\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 12335,
+      "offset": 12337,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 12361,
+      "offset": 12363,
       "length": 36,
       "value": "\"Campaigns NOT loaded, server error\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 13168,
+      "offset": 13187,
       "length": 19,
       "value": "\"Campaign finished\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "Dictionary",
-      "offset": 13235,
+      "offset": 13254,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 13336,
+      "offset": 13355,
       "length": 8,
       "value": "\"fields\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 13457,
+      "offset": 13476,
       "length": 9,
       "value": "\"fieldId\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedback.swift",
       "kind": "StringLiteral",
-      "offset": 13498,
+      "offset": 13517,
       "length": 7,
       "value": "\"value\""
     },
@@ -18315,7 +18322,7 @@
       "kind": "StringLiteral",
       "offset": 221,
       "length": 8,
-      "value": "\"v2.3.1\""
+      "value": "\"v2.3.2\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedbackConsts.swift",
