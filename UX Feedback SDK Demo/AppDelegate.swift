@@ -10,11 +10,11 @@ import UIKit
 //import YoHeSDK
 import UXFeedbackSDK
 
-let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
-//let uxfAppID = "cllnjd2ti0000356rb60yykbu"
+//let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
+//let uxfAppID = "cl124jdji0000386fkehdcnj6"
 //let uxfAppID = "ck78uf73w0000315rlomponmb" //prod
 
-//let uxfAppID = "cl124jdji0000386fkehdcnj6" //v8
+let uxfAppID = "cl124jdji0000386fkehdcnj6" //v10
 
 internal func DDLogDebug(_ value: Any){
     #if DEBUG

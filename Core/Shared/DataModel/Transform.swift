@@ -10,9 +10,22 @@ import UIKit
 
 struct Transform: Codable {
     let id: String?
-    let from: TransformFrom
+//    let from: TransformFrom
     let to: TransformTo
-    let condition: TransformCondition?
+    let scenarios: [TransformScenario]
+//    let condition: TransformCondition?
+}
+
+struct TransformScenario: Codable {
+    let id: String
+    let name: String
+    let conditions: [TransformScenarioCondition]
+}
+
+struct TransformScenarioCondition: Codable {
+    let id: String
+    let from: TransformFrom
+    let condition: TransformCondition
 }
 
 struct TransformFrom: Codable {

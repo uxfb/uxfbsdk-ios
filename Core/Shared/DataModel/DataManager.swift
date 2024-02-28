@@ -398,9 +398,9 @@ class DataManager: FieldDelegate {
             let lines = warning.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
                                            font: font)
             let valueHeight = CGFloat(lines) * font.lineHeight
-            let label = UILabel(frame: CGRect(origin: CGPoint(x: 0,
+            let label = UILabel(frame: CGRect(origin: CGPoint(x: 16,
                                                               y: 8),
-                                              size: CGSize(width: view.frame.size.width,
+                                              size: CGSize(width: view.frame.size.width - 32,
                                                            height: valueHeight)))
             
             label.text = warning
@@ -557,29 +557,62 @@ class DataManager: FieldDelegate {
     func fieldChanged(_ field: Field, answer: [String], refresh: Bool = true) {
         answers = answers.filter { answer in ((answer["fieldId"] as? String) ?? "") != field.id }
         if answer.count > 0 {
-            let transforms: [String] = campaign?.transforms.filter({
-                if $0.from.field != field.id {
-                    return false
-                }
-                let same = $0.condition?.value?.filter() { answer.contains($0) }.count ?? 0
-                switch $0.condition?.rule {
-                case "equal", "contain":
-                    return same > 0
+            var scenariosResult: [String] = []
+    
+            campaign?.transforms.forEach({ transform in
+                
+                transform.scenarios.forEach { scenario in
+                    let conditions = scenario.conditions.filter({
+                        if $0.from.field != field.id {
+                            return false
+                        }
+                        let same = $0.condition.value?.filter() { answer.contains($0) }.count ?? 0
+                        switch $0.condition.rule {
+                        case "equal", "contain":
+                            return same > 0
+                            
+                        case "filled":
+                            return answer.count > 0
+                            
+                        default:
+                            return false
+                        }
+                    })
+                    if conditions.count == scenario.conditions.count {
+                        scenariosResult.append(scenario.id)
+                    }
                     
-                case "filled":
-                    return answer.count > 0
-                    
-                default:
-                    return false
                 }
-            }).map({ transform in
-                transform.id ?? ""
-            }) ?? []
+            })
+            
+            
+//            let scenarios: [String] = campaign?.transforms.filter({
+//                
+//                if $0.from.field != field.id {
+//                    return false
+//                }
+//                let same = $0.condition?.value?.filter() { answer.contains($0) }.count ?? 0
+//                switch $0.condition?.rule {
+//                case "equal", "contain":
+//                    return same > 0
+//                    
+//                case "filled":
+//                    return answer.count > 0
+//                    
+//                default:
+//                    return false
+//                }
+//                
+//                return false
+//            }).map({ transform in
+//                transform.id ?? ""
+//            }) ?? []
+            
             let newAnswer = ["pageId": campaign?.pages[currentPage].id ?? "",
                              "fieldId": field.id as Any,
                              "type": field.type?.rawValue as Any,
                              "value": answer,
-                             "transforms": transforms] as [String : Any]
+                             "scenarios": scenariosResult] as [String : Any]
             answers.append(newAnswer)
         }
 

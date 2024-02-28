@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import UIKit
+//import UIKit
 
 /// Основной интерфейс SDK. Для инициализации синглтона необходимо вызвать метод ``setup(appID:settings:campainDelegate:logDelegate:)``
 @objcMembers
@@ -296,6 +296,7 @@ extension UXFeedback: RequestManagerDelegate {
         
         DispatchQueue.main.async {
             self._appWindow = PassthroughWindow(frame: UIScreen.main.bounds)
+                
             self._appWindow.rootViewController = UIViewController()
             self._appWindow?.windowLevel = UXFeedback._windowLevel
 //            completion?(success) 

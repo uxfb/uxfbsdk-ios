@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 import Foundation
 
 protocol CampaignFormPresentorProtocol: AnyObject {
@@ -114,6 +115,14 @@ internal class CampaignPresentor: NSObject {
             
             if let view = controller.view as? PassthroughToWindowView {
                 view.touchCancel = uiBlocked
+            }
+            
+            
+            if #available(iOS 13.0, *) {
+                if let wScene = UIApplication.shared.keyWindow?.windowScene {
+                    self._appWindow.windowScene = wScene
+                }
+                print("scenes")
             }
             
             self._appWindow.makeKeyAndVisible()

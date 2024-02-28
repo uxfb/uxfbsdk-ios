@@ -84,7 +84,7 @@ class MainViewController_swift: UIViewController {
 //                                                "property_second": 2])
             
             UXFeedback.sdk.properties = ["ios": "ios-data"]
-            UXFeedback.sdk.startCampaign(eventName: "newlogick3")
+            UXFeedback.sdk.startCampaign(eventName: "newlogick4")
 //            UXFeedback.sdk.settings.
             break
         case 2:

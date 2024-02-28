@@ -254,6 +254,12 @@
 		BFDE30272A86332400F6C6CF /* YYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BF437FF52A4324A8009975EB /* YYImage.m */; };
 		BFDE30282A86332400F6C6CF /* YYSpriteSheetImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF92A4324A8009975EB /* YYSpriteSheetImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFE496DE280AA3A900844083 /* Privacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE496DD280AA3A900844083 /* Privacy.swift */; };
+		BFEF97E62B7CD3CC00931D50 /* UX_Feedback_SDK_Demo_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEF97E52B7CD3CC00931D50 /* UX_Feedback_SDK_Demo_SwiftUIApp.swift */; };
+		BFEF97E82B7CD3CC00931D50 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEF97E72B7CD3CC00931D50 /* ContentView.swift */; };
+		BFEF97EA2B7CD3CE00931D50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFEF97E92B7CD3CE00931D50 /* Assets.xcassets */; };
+		BFEF97ED2B7CD3CE00931D50 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFEF97EC2B7CD3CE00931D50 /* Preview Assets.xcassets */; };
+		BFEF981B2B7CFD9300931D50 /* UXFeedbackSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; };
+		BFEF981C2B7CFD9300931D50 /* UXFeedbackSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BFF303BA2A42E1F400E513EA /* UXFeedbackConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF303B82A42E1E300E513EA /* UXFeedbackConsts.swift */; };
 		BFF3042A2A42F4B900E513EA /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF304292A42F4B900E513EA /* Delegate.swift */; };
 		BFF3042B2A42F4B900E513EA /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF304292A42F4B900E513EA /* Delegate.swift */; };
@@ -269,6 +275,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 0A46899122840B2C0074E1A3;
 			remoteInfo = UXFeedbackSDK;
+		};
+		BFEF98102B7CEA2D00931D50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A019A3422365E02002FD4F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0A46899122840B2C0074E1A3;
+			remoteInfo = UXFeedbackSDK;
+		};
+		BFEF98122B7CEA2D00931D50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A019A3422365E02002FD4F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF4380092A4428AF009975EB;
+			remoteInfo = YoHeSDK;
+		};
+		BFEF98142B7CEA3200931D50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A019A3422365E02002FD4F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF4380092A4428AF009975EB;
+			remoteInfo = YoHeSDK;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -294,6 +321,17 @@
 				BFCC90B92A97B64100B51FC4 /* WebPDecoder.xcframework in Embed Frameworks */,
 				BFCC90BD2A97B64400B51FC4 /* WebPMux.xcframework in Embed Frameworks */,
 				BFCC90B62A97B64000B51FC4 /* WebP.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFEF981D2B7CFD9300931D50 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BFEF981C2B7CFD9300931D50 /* UXFeedbackSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,6 +492,13 @@
 		BFE496DD280AA3A900844083 /* Privacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Privacy.swift; sourceTree = "<group>"; };
 		BFEA00012919870F0042972A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		BFEAFFF0291986460042972A /* libz.1.2.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.8.tbd; path = usr/lib/libz.1.2.8.tbd; sourceTree = SDKROOT; };
+		BFEF97A52B7CCBEA00931D50 /* UXFeedbackSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFeedbackSwiftUI.swift; sourceTree = "<group>"; };
+		BFEF97E32B7CD3CC00931D50 /* UX Feedback SDK Demo SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UX Feedback SDK Demo SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFEF97E52B7CD3CC00931D50 /* UX_Feedback_SDK_Demo_SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UX_Feedback_SDK_Demo_SwiftUIApp.swift; sourceTree = "<group>"; };
+		BFEF97E72B7CD3CC00931D50 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BFEF97E92B7CD3CE00931D50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BFEF97EC2B7CD3CE00931D50 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BFEF981A2B7CFBEE00931D50 /* UX-Feedback-SDK-Demo-SwiftUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UX-Feedback-SDK-Demo-SwiftUI-Info.plist"; sourceTree = SOURCE_ROOT; };
 		BFF303B02A42E0B900E513EA /* YoHeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoHeDelegate.swift; sourceTree = "<group>"; };
 		BFF303B62A42E1D900E513EA /* YoHeConsts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoHeConsts.swift; sourceTree = "<group>"; };
 		BFF303B82A42E1E300E513EA /* UXFeedbackConsts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFeedbackConsts.swift; sourceTree = "<group>"; };
@@ -499,6 +544,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFEF97E02B7CD3CC00931D50 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFEF981B2B7CFD9300931D50 /* UXFeedbackSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -506,6 +559,7 @@
 			isa = PBXGroup;
 			children = (
 				0A019A52223669CC002FD4F8 /* Core */,
+				BFEF97E42B7CD3CC00931D50 /* UX Feedback SDK Demo SwiftUI */,
 				0A019A3E22365E02002FD4F8 /* UX Feedback SDK Demo */,
 				0A46899322840B2C0074E1A3 /* UXFeedbackSDK */,
 				BFB85E812A42D817000208D2 /* YoHeSDK */,
@@ -521,6 +575,7 @@
 				0A019A3C22365E02002FD4F8 /* UX Feedback SDK Demo.app */,
 				0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */,
 				BF4380852A4428AF009975EB /* YoHeSDK.framework */,
+				BFEF97E32B7CD3CC00931D50 /* UX Feedback SDK Demo SwiftUI.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -970,9 +1025,30 @@
 			path = feedback;
 			sourceTree = "<group>";
 		};
+		BFEF97E42B7CD3CC00931D50 /* UX Feedback SDK Demo SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				BFEF981A2B7CFBEE00931D50 /* UX-Feedback-SDK-Demo-SwiftUI-Info.plist */,
+				BFEF97E52B7CD3CC00931D50 /* UX_Feedback_SDK_Demo_SwiftUIApp.swift */,
+				BFEF97E72B7CD3CC00931D50 /* ContentView.swift */,
+				BFEF97E92B7CD3CE00931D50 /* Assets.xcassets */,
+				BFEF97EB2B7CD3CE00931D50 /* Preview Content */,
+			);
+			path = "UX Feedback SDK Demo SwiftUI";
+			sourceTree = "<group>";
+		};
+		BFEF97EB2B7CD3CE00931D50 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				BFEF97EC2B7CD3CE00931D50 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		BFF303B22A42E0C200E513EA /* UXFeedback */ = {
 			isa = PBXGroup;
 			children = (
+				BFEF97A52B7CCBEA00931D50 /* UXFeedbackSwiftUI.swift */,
 				0A019A5322366A29002FD4F8 /* UXFeedback.swift */,
 				0A019A55223670CA002FD4F8 /* UXFeedbackDelegate.swift */,
 				BFF303B82A42E1E300E513EA /* UXFeedbackConsts.swift */,
@@ -1059,6 +1135,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BFEF98152B7CEA3200931D50 /* PBXTargetDependency */,
 				BFD357552A4F0E3D00AD355C /* PBXTargetDependency */,
 			);
 			name = "UX Feedback SDK Demo";
@@ -1107,6 +1184,26 @@
 			productReference = BF4380852A4428AF009975EB /* YoHeSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		BFEF97E22B7CD3CC00931D50 /* UX Feedback SDK Demo SwiftUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFEF98042B7CD3D000931D50 /* Build configuration list for PBXNativeTarget "UX Feedback SDK Demo SwiftUI" */;
+			buildPhases = (
+				BFEF97DF2B7CD3CC00931D50 /* Sources */,
+				BFEF97E02B7CD3CC00931D50 /* Frameworks */,
+				BFEF97E12B7CD3CC00931D50 /* Resources */,
+				BFEF981D2B7CFD9300931D50 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFEF98112B7CEA2D00931D50 /* PBXTargetDependency */,
+				BFEF98132B7CEA2D00931D50 /* PBXTargetDependency */,
+			);
+			name = "UX Feedback SDK Demo SwiftUI";
+			productName = "UX Feedback SDK Demo SwiftUI";
+			productReference = BFEF97E32B7CD3CC00931D50 /* UX Feedback SDK Demo SwiftUI.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1114,7 +1211,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1120;
+				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = UXF;
 				TargetAttributes = {
@@ -1124,6 +1221,9 @@
 					0A46899122840B2C0074E1A3 = {
 						CreatedOnToolsVersion = 10.2;
 						LastSwiftMigration = 1300;
+					};
+					BFEF97E22B7CD3CC00931D50 = {
+						CreatedOnToolsVersion = 15.2;
 					};
 				};
 			};
@@ -1145,6 +1245,7 @@
 				0A019A3B22365E02002FD4F8 /* UX Feedback SDK Demo */,
 				0A46899122840B2C0074E1A3 /* UXFeedbackSDK */,
 				BF4380092A4428AF009975EB /* YoHeSDK */,
+				BFEF97E22B7CD3CC00931D50 /* UX Feedback SDK Demo SwiftUI */,
 			);
 		};
 /* End PBXProject section */
@@ -1218,6 +1319,15 @@
 				BF43807D2A4428AF009975EB /* EmailCell.xib in Resources */,
 				BF43807E2A4428AF009975EB /* SmilesCell.xib in Resources */,
 				BF43807F2A4428AF009975EB /* GalleryCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFEF97E12B7CD3CC00931D50 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFEF97ED2B7CD3CE00931D50 /* Preview Assets.xcassets in Resources */,
+				BFEF97EA2B7CD3CE00931D50 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1420,6 +1530,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFEF97DF2B7CD3CC00931D50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFEF97E82B7CD3CC00931D50 /* ContentView.swift in Sources */,
+				BFEF97E62B7CD3CC00931D50 /* UX_Feedback_SDK_Demo_SwiftUIApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1427,6 +1546,21 @@
 			isa = PBXTargetDependency;
 			target = 0A46899122840B2C0074E1A3 /* UXFeedbackSDK */;
 			targetProxy = BFD357542A4F0E3D00AD355C /* PBXContainerItemProxy */;
+		};
+		BFEF98112B7CEA2D00931D50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0A46899122840B2C0074E1A3 /* UXFeedbackSDK */;
+			targetProxy = BFEF98102B7CEA2D00931D50 /* PBXContainerItemProxy */;
+		};
+		BFEF98132B7CEA2D00931D50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF4380092A4428AF009975EB /* YoHeSDK */;
+			targetProxy = BFEF98122B7CEA2D00931D50 /* PBXContainerItemProxy */;
+		};
+		BFEF98152B7CEA3200931D50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF4380092A4428AF009975EB /* YoHeSDK */;
+			targetProxy = BFEF98142B7CEA3200931D50 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2070,6 +2204,124 @@
 			};
 			name = AdHoc;
 		};
+		BFEF98052B7CD3D000931D50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"UX Feedback SDK Demo SwiftUI/Preview Content\"";
+				DEVELOPMENT_TEAM = ST7ATYX27F;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "UX-Feedback-SDK-Demo-SwiftUI-Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Take and save screenshots";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.swiftui;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BFEF98062B7CD3D000931D50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"UX Feedback SDK Demo SwiftUI/Preview Content\"";
+				DEVELOPMENT_TEAM = ST7ATYX27F;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "UX-Feedback-SDK-Demo-SwiftUI-Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Take and save screenshots";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.swiftui;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BFEF98072B7CD3D000931D50 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"UX Feedback SDK Demo SwiftUI/Preview Content\"";
+				DEVELOPMENT_TEAM = ST7ATYX27F;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "UX-Feedback-SDK-Demo-SwiftUI-Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Take and save screenshots";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.swiftui;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = AdHoc;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2109,6 +2361,16 @@
 				BF4380822A4428AF009975EB /* Debug */,
 				BF4380832A4428AF009975EB /* Release */,
 				BF4380842A4428AF009975EB /* AdHoc */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFEF98042B7CD3D000931D50 /* Build configuration list for PBXNativeTarget "UX Feedback SDK Demo SwiftUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFEF98052B7CD3D000931D50 /* Debug */,
+				BFEF98062B7CD3D000931D50 /* Release */,
+				BFEF98072B7CD3D000931D50 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
