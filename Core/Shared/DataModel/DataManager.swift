@@ -560,7 +560,6 @@ class DataManager: FieldDelegate {
             var scenariosResult: [String] = []
     
             campaign?.transforms.forEach({ transform in
-                
                 transform.scenarios.forEach { scenario in
                     let conditions = scenario.conditions.filter({
                         if $0.from.field != field.id {
@@ -585,29 +584,6 @@ class DataManager: FieldDelegate {
                 }
             })
             
-            
-//            let scenarios: [String] = campaign?.transforms.filter({
-//                
-//                if $0.from.field != field.id {
-//                    return false
-//                }
-//                let same = $0.condition?.value?.filter() { answer.contains($0) }.count ?? 0
-//                switch $0.condition?.rule {
-//                case "equal", "contain":
-//                    return same > 0
-//                    
-//                case "filled":
-//                    return answer.count > 0
-//                    
-//                default:
-//                    return false
-//                }
-//                
-//                return false
-//            }).map({ transform in
-//                transform.id ?? ""
-//            }) ?? []
-            
             let newAnswer = ["pageId": campaign?.pages[currentPage].id ?? "",
                              "fieldId": field.id as Any,
                              "type": field.type?.rawValue as Any,
@@ -617,11 +593,6 @@ class DataManager: FieldDelegate {
         }
 
         if refresh {
-//            guard let fieldIndex = campaign?.pages[currentPage].fields.firstIndex(where: { (fld) -> Bool in
-//                fld.id == field.id
-//            }) else {
-//                return
-//            }
             viewController?.updateUI() //fieldIndex
         }
     }
@@ -815,11 +786,53 @@ class DataManager: FieldDelegate {
     }
     
     private func prepareNextIndex(_ currentPage: Int, basePage: Int) -> Int {
-        guard let transforms = campaign?.transforms.filter({ transform in
-            transform.from.page == campaign?.pages[currentPage].id
-        }) else {
-            return currentPage + 1
-        }
+        let transforms = campaign?.transforms.filter({
+            let scenrarios = $0.scenarios.filter({
+                let conditions = $0.conditions.filter { condition in
+                    let answer = answers.first(where: { (dict) -> Bool in
+                        ((dict["fieldId"] as? String) ?? "") == condition.from.field
+                    })
+                    let answers = (answer?["value"] as? [String]) ?? []
+                    let type = FieldType(rawValue: (answer?["type"] as? String) ?? "")
+                    
+                    switch condition.condition.rule {
+                        case "equal":
+                            let sameCount = condition.condition.value?.filter() { answers.contains($0) }.count ?? 0
+                            if sameCount == condition.condition.value?.count &&
+                                sameCount == fieldAnswersCount(condition.from.field ?? "") {
+                                return true
+                            }
+                        case "contain":
+                            let same = condition.condition.value?.filter() { answers.contains($0) }
+                            if same?.count ?? 0 > 0 {
+                                return true
+                            }
+                            
+                        case "filled":
+                            if type == .checkbox {
+                                if answers.count > 0 {
+                                    return true
+                                }
+                            } else {
+                                if (answers.first ?? "").count > 0 {
+                                    return true
+                                }
+                            }
+                            
+                        case "unfilled":
+                            if answer == nil {
+                                return true
+                            }
+                            
+                        default:
+                            break
+                        }
+                    return false
+                }
+                return $0.conditions.count == conditions.count
+            })
+            return  $0.scenarios.count > 0
+        }) ?? []
         
         for transform in transforms {
             let toPageIndex = campaign?.pages.lastIndex(where: { (page) -> Bool in
@@ -830,87 +843,27 @@ class DataManager: FieldDelegate {
             let toType = transform.to.type
             let toParams = transform.to.queryParams
             
-            let answer = answers.first(where: { (dict) -> Bool in
-                ((dict["fieldId"] as? String) ?? "") == transform.from.field
-            })
             
-            let answers = (answer?["value"] as? [String]) ?? []
-            
-            let type = FieldType(rawValue: (answer?["type"] as? String) ?? "")
-            
-            switch transform.condition?.rule {
-            case "equal":
-                let sameCount = transform.condition?.value?.filter() { answers.contains($0) }.count ?? 0
-                if sameCount == transform.condition?.value?.count &&
-                    sameCount == fieldAnswersCount(transform.from.field ?? "") {
-                    switch toType {
-                    case "toPage":
-                        return toPageIndex
-                    case "toDeeplink", "toURL":
-                        openUrl(toValue, params: toParams)
-                        return -1
+            switch toType {
+            case "toPage":
+                return toPageIndex
+            case "toDeeplink", "toURL":
+                openUrl(toValue, params: toParams)
+                return -1
 
-                    default:
-                        break
-                    }
-                }
-            case "contain":
-                let same = transform.condition?.value?.filter() { answers.contains($0) }
-                if same?.count ?? 0 > 0 {
-                    switch toType {
-                    case "toPage":
-                        return toPageIndex
-                    case "toDeeplink", "toURL":
-                        openUrl(toValue, params: toParams)
-                        return -1
-
-                    default:
-                        break
-                    }
-                }
-                
-            case "filled":
-                if type == .checkbox {
-                    if answers.count > 0 {
-                        switch toType {
-                        case "toPage":
-                            return toPageIndex
-                        case "toDeeplink", "toURL":
-                            openUrl(toValue, params: toParams)
-                            return -1
-
-                        default:
-                            break
-                        }
-                    }
-                } else {
-                    if (answers.first ?? "").count > 0 {
-                        switch toType {
-                        case "toPage":
-                            return toPageIndex
-                        case "toDeeplink", "toURL":
-                            openUrl(toValue, params: toParams)
-                            return -1
-
-                        default:
-                            break
-                        }
-                    }
-                }
-                
-            case "unfilled":
-                if answer == nil {
-                    return toPageIndex
-                }
-                
             default:
                 break
             }
         }
         
-        
         guard let elseTransform = campaign?.transforms.first(where: { transform in
-            transform.from.page == campaign?.pages[basePage].id && transform.to.action == "transition" && transform.from.field == nil
+            return transform.scenarios.first { scenario in
+                scenario.conditions.first { condition in
+                    return (condition.from.page == campaign?.pages[basePage].id &&
+                            transform.to.action == "transition" &&
+                            condition.from.field == nil)
+                } != nil
+            } != nil
         }) else {
             return currentPage + 1
         }
@@ -918,7 +871,6 @@ class DataManager: FieldDelegate {
         if elseTransform.to.type == "toDeeplink" || elseTransform.to.type == "toURL" {
             openUrl(elseTransform.to.value, params: elseTransform.to.queryParams)
             return -1
-
         } else {
             return campaign?.pages.lastIndex(where: { (page) -> Bool in
                 page.id == elseTransform.to.value
@@ -974,13 +926,7 @@ class DataManager: FieldDelegate {
             clearAnswers(field.id!)
             return false
         }
-        
-//        guard let answer = answers.filter(where: { (dict) -> Bool in
-//            (transforms.map { $0.from.field }).contains(((dict["fieldId"] as? String) ?? ""))
-//        }) else {
-//            clearAnswers(field.id!)
-//            return false
-//        }
+
         
         for answer in answersTransforms {
             let currentTransforms = transforms.filter { tr in
@@ -989,7 +935,6 @@ class DataManager: FieldDelegate {
             for transform in currentTransforms {
                 let type = FieldType(rawValue: (answer["type"] as? String) ?? "")
                 let answers = (answer["value"] as? [String]) ?? []
-                print("ANSWERS - \(answers)\n")
                 switch transform.condition?.rule {
                 case "equal":
                     let sameCount = transform.condition?.value?.filter() { answers.contains($0) }.count ?? 0
@@ -1019,6 +964,7 @@ class DataManager: FieldDelegate {
                 }
             }
         }
+        
         clearAnswers(field.id!)
         return false
     }
