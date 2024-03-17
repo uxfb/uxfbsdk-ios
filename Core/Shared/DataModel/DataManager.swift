@@ -565,8 +565,8 @@ class DataManager: FieldDelegate {
                         if $0.from.field != field.id {
                             return false
                         }
-                        let same = $0.condition.value?.filter() { answer.contains($0) }.count ?? 0
-                        switch $0.condition.rule {
+                        let same = $0.condition?.value?.filter() { answer.contains($0) }.count ?? 0
+                        switch $0.condition?.rule {
                         case "equal", "contain":
                             return same > 0
                             
@@ -785,9 +785,9 @@ class DataManager: FieldDelegate {
         return false
     }
     
-    private func prepareNextIndex(_ currentPage: Int, basePage: Int) -> Int {
+    private func completedTransforms() -> [Transform] {
         let transforms = campaign?.transforms.filter({
-            let scenrarios = $0.scenarios.filter({
+            let scenarios = $0.scenarios.filter({
                 let conditions = $0.conditions.filter { condition in
                     let answer = answers.first(where: { (dict) -> Bool in
                         ((dict["fieldId"] as? String) ?? "") == condition.from.field
@@ -795,15 +795,15 @@ class DataManager: FieldDelegate {
                     let answers = (answer?["value"] as? [String]) ?? []
                     let type = FieldType(rawValue: (answer?["type"] as? String) ?? "")
                     
-                    switch condition.condition.rule {
+                    switch condition.condition?.rule {
                         case "equal":
-                            let sameCount = condition.condition.value?.filter() { answers.contains($0) }.count ?? 0
-                            if sameCount == condition.condition.value?.count &&
+                            let sameCount = condition.condition?.value?.filter() { answers.contains($0) }.count ?? 0
+                            if sameCount == condition.condition?.value?.count &&
                                 sameCount == fieldAnswersCount(condition.from.field ?? "") {
                                 return true
                             }
                         case "contain":
-                            let same = condition.condition.value?.filter() { answers.contains($0) }
+                            let same = condition.condition?.value?.filter() { answers.contains($0) }
                             if same?.count ?? 0 > 0 {
                                 return true
                             }
@@ -831,8 +831,24 @@ class DataManager: FieldDelegate {
                 }
                 return $0.conditions.count == conditions.count
             })
-            return  $0.scenarios.count > 0
+            return scenarios.count > 0
         }) ?? []
+        
+        return transforms
+    }
+    
+    private func prepareNextIndex(_ currentPage: Int, basePage: Int) -> Int {
+        let transforms = completedTransforms().filter { transform in
+            var result = transform.to.action == "transition" &&
+            transform.to.value != self.campaign?.pages[currentPage].id
+            if let toPageIndex = campaign?.pages.lastIndex(where: { (page) -> Bool in
+                page.id == transform.to.value
+            }) {
+                result = result && basePage < toPageIndex
+            }
+            
+            return result
+        }
         
         for transform in transforms {
             let toPageIndex = campaign?.pages.lastIndex(where: { (page) -> Bool in
@@ -842,7 +858,6 @@ class DataManager: FieldDelegate {
             let toValue = transform.to.value
             let toType = transform.to.type
             let toParams = transform.to.queryParams
-            
             
             switch toType {
             case "toPage":
@@ -918,51 +933,60 @@ class DataManager: FieldDelegate {
             return true
         }
         
-        let answersTransforms = answers.filter { dict in
-            (transforms.map { $0.from.field }).contains(((dict["fieldId"] as? String) ?? ""))
-        } 
+        let checkedTransforms = completedTransforms().filter({
+            transforms.map {$0.id}.contains($0.id)
+        })
         
-        if answersTransforms.count == 0 {
-            clearAnswers(field.id!)
-            return false
-        }
-
+//        let checkedTransforms = transforms.filter({
+//            let scenarios = $0.scenarios.filter({
+//                let conditions = $0.conditions.filter { condition in
+//                    let answer = answers.first(where: { (dict) -> Bool in
+//                        ((dict["fieldId"] as? String) ?? "") == condition.from.field
+//                    })
+//                    let answers = (answer?["value"] as? [String]) ?? []
+//                    let type = FieldType(rawValue: (answer?["type"] as? String) ?? "")
+//                    
+//                    switch condition.condition?.rule {
+//                        case "equal":
+//                            let sameCount = condition.condition?.value?.filter() { answers.contains($0) }.count ?? 0
+//                            if sameCount == condition.condition?.value?.count &&
+//                                sameCount == fieldAnswersCount(condition.from.field ?? "") {
+//                                return true
+//                            }
+//                        case "contain":
+//                            let same = condition.condition?.value?.filter() { answers.contains($0) }
+//                            if same?.count ?? 0 > 0 {
+//                                return true
+//                            }
+//                            
+//                        case "filled":
+//                            if type == .checkbox {
+//                                if answers.count > 0 {
+//                                    return true
+//                                }
+//                            } else {
+//                                if (answers.first ?? "").count > 0 {
+//                                    return true
+//                                }
+//                            }
+//                            
+//                        case "unfilled":
+//                            if answer == nil {
+//                                return true
+//                            }
+//                            
+//                        default:
+//                            break
+//                        }
+//                    return false
+//                }
+//                return $0.conditions.count == conditions.count
+//            })
+//            return scenarios.count > 0
+//        })
         
-        for answer in answersTransforms {
-            let currentTransforms = transforms.filter { tr in
-                tr.from.field == answer["fieldId"] as? String
-            }
-            for transform in currentTransforms {
-                let type = FieldType(rawValue: (answer["type"] as? String) ?? "")
-                let answers = (answer["value"] as? [String]) ?? []
-                switch transform.condition?.rule {
-                case "equal":
-                    let sameCount = transform.condition?.value?.filter() { answers.contains($0) }.count ?? 0
-                    if sameCount == transform.condition?.value?.count &&
-                        sameCount == fieldAnswersCount(transform.from.field ?? "") {
-                        return true
-                    }
-                case "contain":
-                    let same = transform.condition?.value?.filter() { answers.contains($0) }
-                    if same?.count ?? 0 > 0 {
-                        return true
-                    }
-                case "filled":
-                    if type == .checkbox {
-                        if answers.count > 0 {
-                            return true
-                        }
-                    }
-                    else {
-                        if (answers.first ?? "").count > 0 {
-                            return true
-                        }
-                    }
-                default:
-                    clearAnswers(field.id!)
-                    return false
-                }
-            }
+        if checkedTransforms.count > 0 {
+            return true
         }
         
         clearAnswers(field.id!)

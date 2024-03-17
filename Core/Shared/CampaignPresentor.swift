@@ -122,7 +122,6 @@ internal class CampaignPresentor: NSObject {
                 if let wScene = UIApplication.shared.keyWindow?.windowScene {
                     self._appWindow.windowScene = wScene
                 }
-                print("scenes")
             }
             
             self._appWindow.makeKeyAndVisible()

@@ -197,6 +197,8 @@
 		BF573ECF26B6A157002A9E8C /* ScreenshotCreator.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573ECE26B6A157002A9E8C /* ScreenshotCreator.xib */; };
 		BF573ED026B6CBBA002A9E8C /* ScreenshotImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170426B670CF006F408A /* ScreenshotImageCell.swift */; };
 		BF573ED126B6CBBF002A9E8C /* ScreenshotImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF63170526B670CF006F408A /* ScreenshotImageCell.xib */; };
+		BF5896D52B9F863300070769 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5896D42B9F863300070769 /* Attributes.swift */; };
+		BF5896D62B9F863300070769 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5896D42B9F863300070769 /* Attributes.swift */; };
 		BF5ED7DD25593DDE00A1698E /* CampaignPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5ED7DC25593DDE00A1698E /* CampaignPresentor.swift */; };
 		BF5ED7E52559DB1900A1698E /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5ED7E42559DB1900A1698E /* Parser.swift */; };
 		BF6248C1255B24910039F855 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6248C0255B24910039F855 /* DataManager.swift */; };
@@ -451,6 +453,7 @@
 		BF573EC826B69F0C002A9E8C /* GalleryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryCell.xib; sourceTree = "<group>"; };
 		BF573ECC26B6A14E002A9E8C /* ScreenshotCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotCreator.swift; sourceTree = "<group>"; };
 		BF573ECE26B6A157002A9E8C /* ScreenshotCreator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScreenshotCreator.xib; sourceTree = "<group>"; };
+		BF5896D42B9F863300070769 /* Attributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
 		BF5ED7DC25593DDE00A1698E /* CampaignPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignPresentor.swift; sourceTree = "<group>"; };
 		BF5ED7E42559DB1900A1698E /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		BF6248C0255B24910039F855 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -664,6 +667,7 @@
 				0A6CDB77223BD47800C17007 /* Text.swift */,
 				0A019A57223673FE002FD4F8 /* Theme.swift */,
 				BF02FD3E255C65B000C794E6 /* Transform.swift */,
+				BF5896D42B9F863300070769 /* Attributes.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -1415,6 +1419,7 @@
 				BFF303BA2A42E1F400E513EA /* UXFeedbackConsts.swift in Sources */,
 				BFF3043C2A42F65E00E513EA /* UXFBSettings.swift in Sources */,
 				BF31860E2975570800B54EF5 /* DataRequestManager.swift in Sources */,
+				BF5896D52B9F863300070769 /* Attributes.swift in Sources */,
 				BFDE301A2A86332100F6C6CF /* YYSpriteSheetImage.m in Sources */,
 				0AF49827229C3D4A000CB7D6 /* UIColorInputError.swift in Sources */,
 				0A4689B522840BE00074E1A3 /* UIImage+Tinting.swift in Sources */,
@@ -1508,6 +1513,7 @@
 				BF4380572A4428AF009975EB /* DataRequestManager.swift in Sources */,
 				BF4380582A4428AF009975EB /* UIColorInputError.swift in Sources */,
 				BF4380592A4428AF009975EB /* UIImage+Tinting.swift in Sources */,
+				BF5896D62B9F863300070769 /* Attributes.swift in Sources */,
 				BF43805A2A4428AF009975EB /* UIButton+.swift in Sources */,
 				BFDE2FD12A86233000F6C6CF /* Documentation.docc in Sources */,
 				BF43805B2A4428AF009975EB /* Reachability.swift in Sources */,

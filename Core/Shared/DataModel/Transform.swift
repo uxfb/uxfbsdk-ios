@@ -25,7 +25,7 @@ struct TransformScenario: Codable {
 struct TransformScenarioCondition: Codable {
     let id: String
     let from: TransformFrom
-    let condition: TransformCondition
+    let condition: TransformCondition?
 }
 
 struct TransformFrom: Codable {

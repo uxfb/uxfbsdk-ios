@@ -84,13 +84,13 @@ class MainViewController_swift: UIViewController {
 //                                                "property_second": 2])
             
             UXFeedback.sdk.properties = ["ios": "ios-data"]
-            UXFeedback.sdk.startCampaign(eventName: "newlogick4")
+//            UXFeedback.sdk.startCampaign(eventName: "newlogick4")
 //            UXFeedback.sdk.settings.
             break
         case 2:
 //            showActivityOverlay()
             
-            UXFeedback.sdk.startCampaign(eventName: "swagger")
+//            UXFeedback.sdk.startCampaign(eventName: "newlogick3")
             break
         default:
             break
@@ -129,7 +129,7 @@ class MainViewController_swift: UIViewController {
 
 extension MainViewController_swift: UXFeedbackLogDelegate {
     func logDidReceive(message: String) {
-        print(message)
+//        print(message)
     }
 }
 
