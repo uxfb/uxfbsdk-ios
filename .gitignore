@@ -35,14 +35,12 @@ Backup[ ]of[ ]*.numbers/
 build/
 
 # uxfeedback
-UXFeedbackSDK/
 UXFeedbackSDK_XCFramework/
 UXFeedbackSDKFramework/
 UXFeedbackSDKFramework_v2/
 UXFeedbackSDK.framework/
 
 # yohe
-YoHeSDK/
 YoHeSDK_XCFramework/
 YoHeSDKFramework/
 YoHeDocC/
