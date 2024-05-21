@@ -1,0 +1,4 @@
+Pods/
+build/
+UXFeedbackSDK.framework/
+Carthage/
