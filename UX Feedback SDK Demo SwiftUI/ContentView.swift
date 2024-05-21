@@ -40,14 +40,15 @@ struct ContentView: View {
       .padding(.vertical, 5)
       
       Button("Button to present") {
+        
         UXFeedback.sdk.settings.closeOnSwipe = true
         UXFeedback.sdk.settings.slideInUiBlocked = true
         UXFeedback.sdk.settings.slideInUiBlackoutBlur = 4
         UXFeedback.sdk.settings.slideInUiBlackoutOpacity = 50
-        UXFeedback.sdk.settings.slideInUiBlackoutColor = "000000"
+        UXFeedback.sdk.settings.slideInUiBlackoutColor = $blurSlideinColor.wrappedValue.hexaRGB 
         UXFeedback.sdk.settings.popupUiBlackoutBlur = 4
         UXFeedback.sdk.settings.popupUiBlackoutOpacity = 50
-        UXFeedback.sdk.settings.popupUiBlackoutColor = "000000"
+        UXFeedback.sdk.settings.popupUiBlackoutColor = $blurPopupColor.wrappedValue.hexaRGB
         
         UXFeedback.sdk.startCampaign(eventName: "swagger")
       }

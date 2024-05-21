@@ -218,8 +218,6 @@
 		BFBAFA962ADFE99B003CC167 /* Copyright.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBAFA942ADFE99B003CC167 /* Copyright.swift */; };
 		BFBECCDB2BFCAFE300279A5B /* Encodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBECCDA2BFCAFE300279A5B /* Encodable+.swift */; };
 		BFBECCDC2BFCAFE300279A5B /* Encodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBECCDA2BFCAFE300279A5B /* Encodable+.swift */; };
-		BFBECCDD2BFCFDA700279A5B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49824229C3D4A000CB7D6 /* UIColorExtension.swift */; };
-		BFBECCDE2BFCFDE000279A5B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49824229C3D4A000CB7D6 /* UIColorExtension.swift */; };
 		BFC19C952BBAABF8009C664F /* UXFBAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC19C942BBAABF8009C664F /* UXFBAttributes.swift */; };
 		BFCC90A62A974E4D00B51FC4 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC90A52A974E4D00B51FC4 /* Progress.swift */; };
 		BFCC90A72A974E4D00B51FC4 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC90A52A974E4D00B51FC4 /* Progress.swift */; };
@@ -1358,7 +1356,6 @@
 				BFF3042A2A42F4B900E513EA /* Delegate.swift in Sources */,
 				0A019A4222365E03002FD4F8 /* MainViewController_swift.swift in Sources */,
 				0A019A4022365E03002FD4F8 /* AppDelegate.swift in Sources */,
-				BFBECCDE2BFCFDE000279A5B /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1561,7 +1558,6 @@
 			files = (
 				BFEF97E82B7CD3CC00931D50 /* ContentView.swift in Sources */,
 				BFEF97E62B7CD3CC00931D50 /* UX_Feedback_SDK_Demo_SwiftUIApp.swift in Sources */,
-				BFBECCDD2BFCFDA700279A5B /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
