@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ScreenshotImageCell" customModule="UXFeedbackSDK" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="149" height="119"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="149" height="119"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U66-PR-l0l">
+                        <rect key="frame" x="0.0" y="0.0" width="149" height="119"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EgO-NX-xoJ">
+                                <rect key="frame" x="0.0" y="12" width="137" height="107"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aMs-OB-Kd6">
+                                <rect key="frame" x="125" y="0.0" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="74E-lr-qim"/>
+                                    <constraint firstAttribute="height" constant="24" id="Mec-Mq-sS9"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="delete_image"/>
+                                <connections>
+                                    <action selector="deletePressed:" destination="gTV-IL-0wX" eventType="touchUpInside" id="luK-qu-4ce"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="aMs-OB-Kd6" secondAttribute="trailing" id="5I0-X4-HzC"/>
+                            <constraint firstAttribute="trailing" secondItem="EgO-NX-xoJ" secondAttribute="trailing" constant="12" id="5UR-5l-Ix6"/>
+                            <constraint firstItem="aMs-OB-Kd6" firstAttribute="top" secondItem="U66-PR-l0l" secondAttribute="top" id="GLD-60-A0e"/>
+                            <constraint firstAttribute="bottom" secondItem="EgO-NX-xoJ" secondAttribute="bottom" id="J9M-KP-3Zt"/>
+                            <constraint firstItem="EgO-NX-xoJ" firstAttribute="top" secondItem="U66-PR-l0l" secondAttribute="top" constant="12" id="o5O-oA-Nfe"/>
+                            <constraint firstItem="EgO-NX-xoJ" firstAttribute="leading" secondItem="U66-PR-l0l" secondAttribute="leading" id="yxj-o0-aQj"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="U66-PR-l0l" secondAttribute="bottom" id="LNI-S3-te2"/>
+                <constraint firstAttribute="trailing" secondItem="U66-PR-l0l" secondAttribute="trailing" id="m9w-QD-K00"/>
+                <constraint firstItem="U66-PR-l0l" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="qup-pa-xT5"/>
+                <constraint firstItem="U66-PR-l0l" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="z8l-8r-zqJ"/>
+            </constraints>
+            <size key="customSize" width="149" height="119"/>
+            <connections>
+                <outlet property="closeButton" destination="aMs-OB-Kd6" id="b5B-Nj-mhV"/>
+                <outlet property="imageView" destination="EgO-NX-xoJ" id="GpT-ca-COn"/>
+            </connections>
+            <point key="canvasLocation" x="58.695652173913047" y="82.03125"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="delete_image" width="16" height="16"/>
+    </resources>
+</document>

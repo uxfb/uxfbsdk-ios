@@ -1,0 +1,11 @@
+framework module YoHeSDK {
+  umbrella header "YoHeSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module YoHeSDK.Swift {
+  header "YoHeSDK-Swift.h"
+  requires objc
+}

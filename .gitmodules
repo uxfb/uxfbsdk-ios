@@ -1,0 +1,3 @@
+[submodule "UXFeedbackSDKFramework"]
+	path = UXFeedbackSDKFramework
+	url = https://github.com/uxfb/UXFeedbackSDKiOS.git

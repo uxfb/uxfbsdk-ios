@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="plr-no-lSp">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Item-->
+        <scene sceneID="Hab-TO-QGa">
+            <objects>
+                <viewController id="plr-no-lSp" customClass="MainViewController_swift" customModule="UX_Feedback_SDK_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HCb-x2-2kM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="YRo-tG-RYj">
+                                <rect key="frame" x="16" y="201.5" width="343" height="264"/>
+                                <subviews>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="itt-v7-Dj5">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="132"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <state key="normal" title="SLIDE"/>
+                                        <connections>
+                                            <action selector="eventTap:" destination="plr-no-lSp" eventType="touchUpInside" id="EHa-sa-xpm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n4n-iC-Sac">
+                                        <rect key="frame" x="0.0" y="132" width="343" height="132"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <state key="normal" title="POPUP"/>
+                                        <connections>
+                                            <action selector="eventTap:" destination="plr-no-lSp" eventType="touchUpInside" id="vB7-GF-mzc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="264" id="rRj-fG-0CJ"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UXFeedback Demo App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dU-lV-kcu">
+                                <rect key="frame" x="16" y="16" width="343" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9Q2-LR-5yw">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5m9-YP-YrM">
+                                <rect key="frame" x="127.5" y="76.5" width="120" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="DG5-Eh-yXI"/>
+                                    <constraint firstAttribute="height" constant="50" id="VRO-0y-gf4"/>
+                                </constraints>
+                                <state key="normal" title="Stop campaign"/>
+                                <connections>
+                                    <action selector="stopCampaign:" destination="plr-no-lSp" eventType="touchUpInside" id="0wi-bD-Biz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Aqk-KQ-sb1"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="9Q2-LR-5yw" firstAttribute="centerY" secondItem="HCb-x2-2kM" secondAttribute="centerY" id="7Iv-Tr-HEs"/>
+                            <constraint firstItem="0dU-lV-kcu" firstAttribute="centerX" secondItem="HCb-x2-2kM" secondAttribute="centerX" id="99P-Cr-C5E"/>
+                            <constraint firstItem="9Q2-LR-5yw" firstAttribute="centerX" secondItem="HCb-x2-2kM" secondAttribute="centerX" id="Eer-GS-ZrU"/>
+                            <constraint firstItem="Aqk-KQ-sb1" firstAttribute="trailing" secondItem="YRo-tG-RYj" secondAttribute="trailing" constant="16" id="Fnl-Md-St6"/>
+                            <constraint firstItem="5m9-YP-YrM" firstAttribute="centerX" secondItem="HCb-x2-2kM" secondAttribute="centerX" id="G4s-ga-9Tr"/>
+                            <constraint firstItem="Aqk-KQ-sb1" firstAttribute="trailing" secondItem="0dU-lV-kcu" secondAttribute="trailing" constant="16" id="H5F-2A-KIU"/>
+                            <constraint firstItem="0dU-lV-kcu" firstAttribute="top" secondItem="Aqk-KQ-sb1" secondAttribute="top" constant="16" id="LoO-4h-Pmr"/>
+                            <constraint firstItem="YRo-tG-RYj" firstAttribute="centerX" secondItem="HCb-x2-2kM" secondAttribute="centerX" id="UK0-UH-KSV"/>
+                            <constraint firstItem="0dU-lV-kcu" firstAttribute="leading" secondItem="Aqk-KQ-sb1" secondAttribute="leading" constant="16" id="ZcB-MK-KOd"/>
+                            <constraint firstItem="YRo-tG-RYj" firstAttribute="leading" secondItem="Aqk-KQ-sb1" secondAttribute="leading" constant="16" id="gtS-7R-aao"/>
+                            <constraint firstItem="5m9-YP-YrM" firstAttribute="top" secondItem="0dU-lV-kcu" secondAttribute="bottom" constant="40" id="hJ2-U3-Hgj"/>
+                            <constraint firstItem="YRo-tG-RYj" firstAttribute="centerY" secondItem="HCb-x2-2kM" secondAttribute="centerY" id="orC-qt-LTY"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="TLW-vb-7L5"/>
+                    <navigationItem key="navigationItem" id="djO-Uv-k8z"/>
+                    <connections>
+                        <outlet property="busyIndicator" destination="9Q2-LR-5yw" id="y9N-6l-Izn"/>
+                        <outlet property="buttonsStackView" destination="YRo-tG-RYj" id="3xZ-GK-kEa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="scK-lo-IFi" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2559" y="1863"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
