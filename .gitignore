@@ -1,4 +1,52 @@
-Pods/
+# Mac OS X Finder
+.DS_Store
+
+# Xcode legacy
+*.mode1
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+*.pbxuser
+
+# Xcode
+xcuserdata/
+DerivedData/
+
+# build products
 build/
+*.[oa]
+
+# repositories
+.hg
+.svn
+CVS
+
+# automatic backup files
+*~.nib
+*.swp
+*~
+*(Autosaved).rtfd/
+Backup[ ]of[ ]*.pages/
+Backup[ ]of[ ]*.key/
+Backup[ ]of[ ]*.numbers/
+
+# temp build folder
+build/
+
+# uxfeedback
+UXFeedbackSDK/
+UXFeedbackSDK_XCFramework/
+UXFeedbackSDKFramework/
+UXFeedbackSDKFramework_v2/
 UXFeedbackSDK.framework/
-Carthage/
+
+# yohe
+YoHeSDK/
+YoHeSDK_XCFramework/
+YoHeSDKFramework/
+YoHeDocC/
+UXFeedbackSDK.framework/
+
+# Cocoapods
+Pods/
