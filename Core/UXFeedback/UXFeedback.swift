@@ -74,9 +74,26 @@ open class UXFeedback: NSObject {
     return _formPresentor?._currentForm
   }
   
+  private var isAppActive: Bool = true
+  
   private override init() {
     super.init()
     self.applyTheme()
+    NotificationCenter.default.addObserver(self,selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+    NotificationCenter.default.addObserver(self,selector: #selector(applicationDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+  }
+  
+  deinit {
+    NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+    NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
+  }
+  
+  @objc private func applicationDidBecomeActive(){
+    isAppActive = true
+  }
+  
+  @objc private func applicationDidEnterBackground(){
+    isAppActive = false
   }
   
   private func saveShowingTime() {
@@ -286,7 +303,7 @@ open class UXFeedback: NSObject {
             self.eventCounter[eventName] = newCount
           }
           if (self.eventCounter[eventName] ?? 1) != counts {
-            self.DDLog("Event count to show: \(counts)")
+            self.DDLog("Event count to show: \(counts - newCount)")
             return
           }
           
@@ -303,7 +320,6 @@ open class UXFeedback: NSObject {
             }
             
             let formOnScreen = self._formPresentor?.isFormOnScreen ?? false
-            //                            self.delegate?.campaignDidReceiveError(errorString: "\(formOnScreen)")
             guard !formOnScreen else {
               self.DDLog("Form already on screen")
               self.campaignDelegate?.campaignDidReceiveError(errorString: "Form is on screen")
@@ -311,7 +327,6 @@ open class UXFeedback: NSObject {
             }
             
             _ = self._formPresentor?.dismissCurrentForm(completion:  nil)
-            
             
             var mCampaign = campaign
             mCampaign.updateTheme(theme: self.theme)
@@ -353,6 +368,12 @@ open class UXFeedback: NSObject {
                 break
             }
             
+            guard self.isAppActive else {
+              self.stopCampaign()
+              self.DDLog("App hasn't active state")
+              return
+            }
+            
             self.DDLog("Show form for event: \(eventName)")
             self._formPresentor?.showCampaign(uiBlocked: self.settings.slideInUiBlocked,
                                               closeOnSwipe: self.settings.closeOnSwipe,
@@ -366,8 +387,9 @@ open class UXFeedback: NSObject {
                 camp.campaignId == campaign.campaignId
               }
             }
-            
-            self._requestManager.sendShowForm(campaignId: campaign.campaignId)
+            DispatchQueue.global(qos: .utility).async {
+              self._requestManager.sendShowForm(campaignId: campaign.campaignId)
+            }
             
             self.eventCounter[eventName] = 0
           }

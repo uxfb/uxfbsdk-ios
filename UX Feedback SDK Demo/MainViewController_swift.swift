@@ -100,7 +100,7 @@ class MainViewController_swift: UIViewController {
         case 2:
 //            showActivityOverlay()
             
-//            UXFeedback.sdk.startCampaign(eventName: "newlogick3")
+            UXFeedback.sdk.startCampaign(eventName: "ai_tickets_showed_ru")
             break
         default:
             break
