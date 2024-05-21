@@ -135,9 +135,10 @@ open class YoHe: NSObject {
         }
         
         sdk._requestManager = DataRequestManager(endpoint: domain,
-                                            appID: appID,
-                                            parser: sdk._parser,
-                                            delegate: sdk)
+                                                 appID: appID,
+                                                 parser: sdk._parser, 
+                                                 sdkSettings: settings,
+                                                 delegate: sdk)
         
         sdk._requestManager.settings = NetworkSettings(requestTimeout: settings.socketTimeout,
                                                           retryCount: settings.retryCount,
@@ -155,13 +156,13 @@ open class YoHe: NSObject {
         var eventFounded = false
 
         _campaigns.forEach { (campaign) in
-            campaign.targetings.forEach({ (targeting) in
-                if let type = targeting["type"] as? String, type == "trigger",
-                   let name = targeting["value"] as? String, name == eventName {
+            campaign.targeting.forEach({ (targeting) in
+                if targeting.type == "trigger",
+                   targeting.value == eventName {
                     eventFounded = true
-                    let isMultiVisited = targeting["isMultiVisited"] as? Bool ?? false
+                    let isMultiVisited = targeting.isMultiVisited ?? false
                     
-                    let counts = (targeting["counts"] as? Int) ?? 1
+                    let counts = targeting.counts ?? 1
                     let newCount = (self.eventCounter[eventName] ?? 0) + 1
                     if newCount <= counts {
                         self.eventCounter[eventName] = newCount
@@ -215,8 +216,8 @@ open class YoHe: NSObject {
                                 }
                             }
                             
-                            blackout.blur = self.settings.slideInUiBlackoutBlur ?? 0
-                            blackout.opacity = self.settings.slideInUiBlackoutOpacity ?? 0
+                            blackout.blur = self.settings.slideInUiBlackoutBlur
+                            blackout.opacity = self.settings.slideInUiBlackoutOpacity
                             
                         case .popup:
                             if let color = self.settings.popupUiBlackoutColor {
@@ -227,8 +228,8 @@ open class YoHe: NSObject {
                                 }
                                 
                             }
-                            blackout.blur = self.settings.popupUiBlackoutBlur ?? 0
-                            blackout.opacity = self.settings.popupUiBlackoutOpacity ?? 0
+                            blackout.blur = self.settings.popupUiBlackoutBlur
+                            blackout.opacity = self.settings.popupUiBlackoutOpacity 
                             
                         case .none:
                             break

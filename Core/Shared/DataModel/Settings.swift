@@ -18,13 +18,15 @@ protocol SettingsProtocol {
     var socketTimeout: Double { get set }
     var slideInUiBlocked: Bool { get set }
     var slideInUiBlackoutColor: String? { get set }
-    var slideInUiBlackoutOpacity: Int? { get set }
-    var slideInUiBlackoutBlur: Int? { get set }
+    var slideInUiBlackoutOpacity: Int { get set }
+    var slideInUiBlackoutBlur: Int { get set }
     var popupUiBlackoutColor: String? { get set }
-    var popupUiBlackoutOpacity: Int? { get set }
-    var popupUiBlackoutBlur: Int? { get set }
+    var popupUiBlackoutOpacity: Int { get set }
+    var popupUiBlackoutBlur: Int { get set }
     var endpoint: String? { get set }
     var rotateToggle: Bool { get set }
+    var sdkPlatform: String? { get set }
+    var sdkPlatformVersion: String? { get set }
 }
 
 

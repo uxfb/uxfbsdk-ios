@@ -11,15 +11,16 @@ import Foundation
 /// Класс настроек SDK. Для создания экземпляра настроек по умолчанию необходимо вызвать метод ``init()``
 @objcMembers
 open class UXFBSettings: NSObject, SettingsProtocol {
+    /// Тип сдк (native, react, flutter)
+    open var sdkPlatform: String? = "Native"
+    /// Версия сдк (native, react, flutter)
+    open var sdkPlatformVersion: String? = Consts.version
     /// Глобальный таймер задержки показа кампании
     open var globalDelayTimer : Int = 1800
-
     /// Признак закрытия в однократный свайп вниз, если false - форма не закрывается, а сворачивается
     open var closeOnSwipe: Bool = false
-
     /// Включение режима дебага для получения логов
     open var debugEnabled: Bool = false
-
     /// Вывод содержимого полей пройденной кампании в метод ``UXFeedbackCampaignDelegate``
     open var fieldsEventEnabled: Bool = false
     /// Интервал между повторными попытками запросов к серверу
@@ -28,26 +29,22 @@ open class UXFBSettings: NSObject, SettingsProtocol {
     open var retryCount: Int = 3
     /// Таймаут подключения к серверу
     open var socketTimeout: Double = 5
-
     /// Блокировка основного окна приложения
     open var slideInUiBlocked: Bool = false
     /// Цвет фона под формой slidein-кампании
     open var slideInUiBlackoutColor: String?
     /// Прозрачность фона под формой slidein-кампании
-    open var slideInUiBlackoutOpacity: Int?
+    open var slideInUiBlackoutOpacity: Int = 0
     /// Блюр фона под формой slidein-кампании
-    open var slideInUiBlackoutBlur: Int?
-
+    open var slideInUiBlackoutBlur: Int = 0
     /// Цвет фона под формой popup-кампании
     open var popupUiBlackoutColor: String?
     /// Прозрачность фона под формой popup-кампании
-    open var popupUiBlackoutOpacity: Int?
+    open var popupUiBlackoutOpacity: Int = 0
     /// Блюр фона под формой popup-кампании
-    open var popupUiBlackoutBlur: Int?
-
+    open var popupUiBlackoutBlur: Int = 0
     /// URL сервера в преобразованном формате, **Не plain-text!**
     open var endpoint: String?
-    
     /// Включение автоповорта при смене ориентации устройства
     open var rotateToggle: Bool = true
 }

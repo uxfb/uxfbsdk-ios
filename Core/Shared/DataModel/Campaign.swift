@@ -13,12 +13,12 @@ enum CampaignType: String {
     case slidein = "102"
 }
 
-struct Campaign{
+struct Campaign {
     private(set) var campaignId: String!
     private(set) var theme: ThemeProtocol!
     private(set) var pages: Array<Page> = []
     private(set) var type: CampaignType!
-    private(set) var targetings: Array<Dictionary<String,Any>>!
+    private(set) var targeting: Array<Targeting>!
     private(set) var transforms: Array<Transform>!
     private(set) var projectId: String!
     private(set) var autoclose: Double!
@@ -28,11 +28,9 @@ struct Campaign{
     
     func showDelay(eventName: String) -> TimeInterval {
         var delay: TimeInterval = 0.1
-        self.targetings.forEach { (targetingDict) in
-            if let name = targetingDict["value"] as? String, eventName == name {
-                if let timeout = targetingDict["seconds"] as? Double{
-                    delay = timeout
-                }
+        self.targeting.forEach { (targeting) in
+            if eventName == targeting.value, let seconds = targeting.seconds{
+                delay = seconds
             }
         }
         return delay

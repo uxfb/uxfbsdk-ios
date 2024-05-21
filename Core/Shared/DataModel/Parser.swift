@@ -45,7 +45,7 @@ class Parser {
     func parseCampaign(campaignInfo: Dictionary<String,Any>) -> Campaign?{
         
         let type = "\(campaignInfo["type"] as! Int)"
-        let targetingArr = campaignInfo["targeting"] as! Array<Dictionary<String, Any>>
+//        let targetingArr = campaignInfo["targeting"] as! Array<Dictionary<String, Any>>
         let campaingId = "\(campaignInfo["campaignId"] as! Int)"
         let projectId = "\(campaignInfo["projectId"] as! Int)"
         let autoclose: Double = campaignInfo["autoclose"] as? Double ?? 0.0
@@ -64,6 +64,18 @@ class Parser {
             }
         }
         
+        var targetings: [Targeting] = []
+        if let copyrightDict = campaignInfo["targeting"] as? Array<Dictionary<String, Any>> {
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: copyrightDict, options: [])
+                let decoder = JSONDecoder()
+                let targetingsValue = try decoder.decode([Targeting].self, from: jsonData)
+                
+                targetings = targetingsValue
+            } catch {
+                print(error)
+            }
+        }
         
         var theme: ThemeProtocol?
         if let customTheme = self.customTheme, isInitTheme == true {
@@ -164,7 +176,7 @@ class Parser {
                          theme: theme,
                          pages: pages,
                          type: CampaignType.init(rawValue: type),
-                         targetings: targetingArr,
+                         targeting: targetings,
                          transforms: transformArr,
                          projectId: projectId,
                          autoclose: autoclose,

@@ -3,15 +3,15 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "closure #1 in CampaignPresentor.showCampaignController(controller:direction:uiBlocked:closeOnSwipe:blackout:properties:):CampaignPresentor.swift">
-      </ContextState>
-      <ContextState
          contextName = "UXFDataManager.fieldChanged(_:answer:refresh:):UXFDataManager.swift">
          <PersistentStrings>
             <PersistentString
                value = "campaign">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in CampaignPresentor.showCampaignController(controller:direction:uiBlocked:closeOnSwipe:blackout:properties:):CampaignPresentor.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -10,11 +10,11 @@ import UIKit
 //import YoHeSDK
 import UXFeedbackSDK
 
-//let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
+let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
 //let uxfAppID = "cl124jdji0000386fkehdcnj6"
 //let uxfAppID = "ck78uf73w0000315rlomponmb" //prod
 
-let uxfAppID = "cl124jdji0000386fkehdcnj6" //v10
+//let uxfAppID = "cl124jdji0000386fkehdcnj6" //v11
 
 internal func DDLogDebug(_ value: Any){
     #if DEBUG
@@ -51,8 +51,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         customTheme.bgColor =  UIColor.init("#000000")
         
 //    endpoint: "AAAAAAAAAAAAAHYwMhEVF1hOTAolMWgBABIHDQwbey0+AwABBgMCCD52NBA=",
+      let settings = UXFBSettings()
+      settings.debugEnabled = true
         UXFeedback.setup(appID: uxfAppID,
-                         settings: UXFBSettings())
+                         settings: settings)
         
 //        UXFeedback.sdk.theme = customTheme
         UXFeedback.sdk.settings.debugEnabled = true

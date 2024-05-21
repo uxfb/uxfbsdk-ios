@@ -84,7 +84,17 @@ class MainViewController_swift: UIViewController {
 //                                                "property_second": 2])
             
             UXFeedback.sdk.properties = ["ios": "ios-data"]
-//            UXFeedback.sdk.startCampaign(eventName: "newlogick4")
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyy-MM-dd"
+//            var date = dateFormatter.date(from: "2024-03-29")
+//            
+            let attributes = UXFBAttributesBuilder()
+                .addValue("A", value: 11)
+//                .addValue("B", value: "B")
+                .build()
+            
+            
+            UXFeedback.sdk.startCampaign(eventName: "list", attributes: attributes)
 //            UXFeedback.sdk.settings.
             break
         case 2:

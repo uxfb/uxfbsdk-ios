@@ -769,8 +769,8 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
         var indexSet = IndexSet(integersIn: 0..<self.tableView.numberOfSections)
         indexSet.remove(idx)
         
-        self.tableView.reloadSections(indexSet, with: .none)
-        
+//        self.tableView.reloadSections(indexSet, with: .none)
+        self.tableView.reloadData()
         self.updateHeight()
     }
     

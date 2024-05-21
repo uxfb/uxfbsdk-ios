@@ -65,8 +65,8 @@ internal class CampaignPresentor: NSObject {
         let controller = CampaignViewController()
         controller.campaign = campaign
         var eventName: String = ""
-        if let targeting = campaign.targetings.first {
-            eventName = targeting["value"] as? String ?? ""
+        if let targeting = campaign.targeting.first {
+            eventName = targeting.value ?? ""
         }
         controller.transitioningDelegate = self
         controller.modalPresentationStyle = .overFullScreen
