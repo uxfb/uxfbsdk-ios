@@ -286,13 +286,14 @@ open class UXFeedback: NSObject {
   /// - Parameter eventName: Название события
   open func startCampaign(eventName: String, attributes: [Attribute]? = nil) {
     DDLog("Attempt starting: \(eventName)")
-    _eventToSend = eventName
-    _attributes = attributes
     
     guard task == nil else {
-      DDLog("Any campaign already started")
+      DDLog("Some campaign already started")
       return
     }
+    
+    _eventToSend = eventName
+    _attributes = attributes
     
     var targeting: Targeting? = nil
     
@@ -384,7 +385,6 @@ open class UXFeedback: NSObject {
             guard self.isAppActive else {
               self.stopCampaign()
               self.DDLog("App hasn't active state")
-              self.clearTask()
               return
             }
             
@@ -426,10 +426,7 @@ open class UXFeedback: NSObject {
   /// Метод отмены показа кампании. Если кампания уже показана - она будет закрыта
   open func stopCampaign() {
     self._formPresentor?.stopCampaign()
-    if self.task != nil {
-      self.task?.cancel()
-      self.task = nil
-    }
+    self.clearTask()
   }
 }
 
