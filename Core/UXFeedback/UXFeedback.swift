@@ -255,7 +255,8 @@ open class UXFeedback: NSObject {
             checkAttributes.append(attribute)
             
           default:
-            break
+            completion(false)
+            return
         }
       } else {
         completion(false)
@@ -276,12 +277,22 @@ open class UXFeedback: NSObject {
     }
   }
   
+  private func clearTask() {
+    self.task?.cancel()
+    self.task = nil
+  }
+  
   /// Метод показа кампании по указанному событию
   /// - Parameter eventName: Название события
   open func startCampaign(eventName: String, attributes: [Attribute]? = nil) {
     DDLog("Attempt starting: \(eventName)")
     _eventToSend = eventName
     _attributes = attributes
+    
+    guard task == nil else {
+      DDLog("Any campaign already started")
+      return
+    }
     
     var targeting: Targeting? = nil
     
@@ -315,6 +326,7 @@ open class UXFeedback: NSObject {
             if !isMultiVisited {
               guard self.checkGlobalDelay() else {
                 self.campaignDelegate?.campaignDidReceiveError(errorString: "Global timer")
+                self.clearTask()
                 return
               }
             }
@@ -323,6 +335,7 @@ open class UXFeedback: NSObject {
             guard !formOnScreen else {
               self.DDLog("Form already on screen")
               self.campaignDelegate?.campaignDidReceiveError(errorString: "Form is on screen")
+              self.clearTask()
               return
             }
             
@@ -371,6 +384,7 @@ open class UXFeedback: NSObject {
             guard self.isAppActive else {
               self.stopCampaign()
               self.DDLog("App hasn't active state")
+              self.clearTask()
               return
             }
             
@@ -392,6 +406,7 @@ open class UXFeedback: NSObject {
             }
             
             self.eventCounter[eventName] = 0
+            self.clearTask()
           }
           
           guard self.task != nil else {

@@ -110,15 +110,20 @@ public class AttributesBuilder {
     return self
   }
   
+  public func remove(attributeName: String) -> AttributesBuilder {
+    attributes.removeAll { attribute in
+      attribute.attributeName == attributeName
+    }
+    return self
+  }
+  
   public func build() -> [Attribute] {
     return attributes
   }
   
   private func append(_ newAttribute: Attribute) {
-    if var attribute = attributes.first(where: { attr in
-      attr.attributeName == newAttribute.attributeName
-    }) {
-      attribute.attributeValue = newAttribute.attributeValue
+    if let row = self.attributes.firstIndex(where: {$0.attributeName == newAttribute.attributeName}) {
+      self.attributes[row].attributeValue = newAttribute.attributeValue
     } else {
       attributes.append(newAttribute)
     }

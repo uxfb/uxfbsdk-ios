@@ -89,8 +89,8 @@ class MainViewController_swift: UIViewController {
 //            var date = dateFormatter.date(from: "2024-03-29")
 //            
             let attributes = UXFBAttributesBuilder()
-                .addValue("A", value: 11)
-//                .addValue("B", value: "B")
+                .addValue("A", value: 33)
+                .addValue("A", value: "b")
                 .build()
             
             
@@ -100,7 +100,7 @@ class MainViewController_swift: UIViewController {
         case 2:
 //            showActivityOverlay()
             
-            UXFeedback.sdk.startCampaign(eventName: "ai_tickets_showed_ru")
+            UXFeedback.sdk.startCampaign(eventName: "close")
             break
         default:
             break

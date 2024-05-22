@@ -10,9 +10,9 @@ import UIKit
 //import YoHeSDK
 import UXFeedbackSDK
 
-//let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
+let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
 //let uxfAppID = "cl124jdji0000386fkehdcnj6"
-let uxfAppID = "ckt2x0owt00013h61jfzprovc" //prod
+//let uxfAppID = "ckf3ph9d400033b5pap4ih7vv" //prod
 
 //let uxfAppID = "cl124jdji0000386fkehdcnj6" //v11
 
