@@ -415,10 +415,12 @@ open class UXFeedback: NSObject {
           
           DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay(eventName: eventName)), execute: self.task! )
         } else {
+          self.clearTask()
           self.campaignDelegate?.campaignDidReceiveError(errorString: "Attributes checking failed")
         }
       }
     } else {
+      self.clearTask()
       DDLog("Event not found: \(eventName)")
     }
   }

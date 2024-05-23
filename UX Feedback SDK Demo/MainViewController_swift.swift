@@ -90,11 +90,11 @@ class MainViewController_swift: UIViewController {
 //            
             let attributes = UXFBAttributesBuilder()
                 .addValue("A", value: 33)
-                .addValue("A", value: "b")
+                .addValue("B", value: "b")
                 .build()
             
             
-            UXFeedback.sdk.startCampaign(eventName: "list", attributes: attributes)
+            UXFeedback.sdk.startCampaign(eventName: "list2", attributes: attributes)
 //            UXFeedback.sdk.settings.
             break
         case 2:
