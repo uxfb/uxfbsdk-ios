@@ -9,10 +9,11 @@
 import UIKit
 
 struct Field {
-    private(set) var id: String?
-    private(set) var type: FieldType?
-    private(set) var value: String?
-    private(set) var uiData: Dictionary<String, Any>
-    var answers: [String] = []
-    var isError: Bool = false
+  private(set) var id: String?
+  private(set) var type: FieldType?
+  private(set) var value: String?
+  private(set) var uiData: Dictionary<String, Any>
+  var answers: [String] = []
+  var isError: Bool = false
+  var isLastPage: Bool = false
 }

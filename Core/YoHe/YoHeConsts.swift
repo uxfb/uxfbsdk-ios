@@ -9,7 +9,7 @@
 import Foundation
 
 internal class Consts {
-    static let os: String = "IOS"
+    static let os: String = "iOS"
     static let cryptoKey: String = "YoHe"
     static let version: String = "v1.1.0"
     static let defaultEndpoint: String = "https://public-api.yohe.io"

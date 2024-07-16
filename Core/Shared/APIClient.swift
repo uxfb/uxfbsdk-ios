@@ -71,6 +71,29 @@ class APIClient {
     //self.getAllCampaings(completion: nil)
   }
   
+  func checkToggle(completion: ((_ toggleStatus: Bool?)->())?) {
+    DDLogDebug("Check toggles:")
+    
+    _ = self.performRequest(route: APIWebRouter.checkToggle(appID: self.appID))
+    { (status, httpCode, message, result) in
+      if status == .success,
+         let result = result as? Dictionary<String, Any>  {
+        do {
+          let jsonData = try JSONSerialization.data(withJSONObject: result, options: [])
+          let decoder = JSONDecoder()
+          let checkValue = try decoder.decode(ToggleStatus.self, from: jsonData)
+          completion?(checkValue.toggleStatus)
+        } catch {
+          DDLogDebug("Check toggle failed")
+          completion?(false)
+        }
+      } else {
+        DDLogDebug("Check toggle failed")
+        completion?(false)
+      }
+    }
+  }
+  
   func getAllCampaings(completion: ((_ success: Bool, _ httpCode: Int, _ message: String?, _ intervalIos: Int?, _ campaigns: Array<Campaign>)->())?) {
     
     DDLogDebug("Get all campaings:")

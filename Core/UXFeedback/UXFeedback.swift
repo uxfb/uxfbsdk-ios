@@ -137,6 +137,13 @@ open class UXFeedback: NSObject {
                            campaignDelegate: FeedbackCampaignDelegate? = nil,
                            logDelegate: FeedbackLogDelegate? = nil) {
     
+    guard appID.count == 25 else {
+      let appIdError = "AppId не задан. Укажите его корректное значение в методе UxFeedback.setup. Инициализация не выполнена"
+      sdk.DDLog(appIdError)
+      campaignDelegate?.campaignDidReceiveError(errorString: appIdError)
+      return
+    }
+    
     sdk.appId = appID
     sdk.settings = settings
     sdk.campaignDelegate = campaignDelegate
@@ -166,8 +173,13 @@ open class UXFeedback: NSObject {
                                                    retryCount: settings.retryCount,
                                                    retryTimeout: settings.retryTimeout)
     
-    sdk._requestManager.getAllCampaigns()
-    
+    sdk._requestManager.checkToggles { toggleStatus in
+      if toggleStatus {
+        self.sdk.campaignDelegate?.campaignDidReceiveError(errorString: "Toggle status = true")
+      } else {
+        self.sdk._requestManager.getAllCampaigns()
+      }
+    }
   }
   
   private func checkAttibutes(campaignId: String, targeting: Targeting, attributes: [Attribute], completion: @escaping (Bool) -> Void) {

@@ -9,20 +9,21 @@
 import UIKit
 
 class HeaderCell: BaseCell {
-    
-    @IBOutlet var label: UILabel!  {
-        didSet {
-//            label.font = .bigSemiboldFont
-        }
+  
+  @IBOutlet var label: UILabel!  {
+    didSet {
+      //            label.font = .bigSemiboldFont
     }
-    
-    override func updateUI() {
-        guard field != nil, theme != nil else {
-            return
-        }
-        label.font = theme!.fontH1
-        label.text = field?.value
-        label.textColor = theme?.text01Color
+  }
+  
+  override func updateUI() {
+    guard field != nil, theme != nil else {
+      return
     }
+    label.font = theme!.fontH1
+    label.text = field?.value
+    label.textColor = theme?.text01Color
+    label.textAlignment = (field?.isLastPage ?? false) ? .center : .left
+  }
 }
 

@@ -9,14 +9,15 @@
 import UIKit
 
 class TextCell: BaseCell {
-    @IBOutlet var label: UILabel!
-    
-    override func updateUI() {
-        guard field != nil, theme != nil else {
-            return
-        }
-        label.font = theme?.fontP1
-        label.text = field?.value
-        label.textColor = theme?.text02Color
+  @IBOutlet var label: UILabel!
+  
+  override func updateUI() {
+    guard field != nil, theme != nil else {
+      return
     }
+    label.font = theme?.fontP1
+    label.text = field?.value
+    label.textColor = theme?.text02Color
+    label.textAlignment = (field?.isLastPage ?? false) ? .center : .left
+  }
 }

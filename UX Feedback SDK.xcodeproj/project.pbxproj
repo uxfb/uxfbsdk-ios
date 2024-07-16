@@ -218,6 +218,8 @@
 		BFBAFA962ADFE99B003CC167 /* Copyright.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBAFA942ADFE99B003CC167 /* Copyright.swift */; };
 		BFBECCDB2BFCAFE300279A5B /* Encodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBECCDA2BFCAFE300279A5B /* Encodable+.swift */; };
 		BFBECCDC2BFCAFE300279A5B /* Encodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBECCDA2BFCAFE300279A5B /* Encodable+.swift */; };
+		BFBF357D2C469B2200B3D263 /* ToggleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF357C2C469B2200B3D263 /* ToggleStatus.swift */; };
+		BFBF357E2C469B2200B3D263 /* ToggleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF357C2C469B2200B3D263 /* ToggleStatus.swift */; };
 		BFC19C952BBAABF8009C664F /* UXFBAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC19C942BBAABF8009C664F /* UXFBAttributes.swift */; };
 		BFCC90A62A974E4D00B51FC4 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC90A52A974E4D00B51FC4 /* Progress.swift */; };
 		BFCC90A72A974E4D00B51FC4 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC90A52A974E4D00B51FC4 /* Progress.swift */; };
@@ -492,6 +494,7 @@
 		BFBB061B2A1C99DD00F1BA6A /* WebPDemux.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebPDemux.xcframework; sourceTree = "<group>"; };
 		BFBB061C2A1C99DD00F1BA6A /* WebP.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebP.xcframework; sourceTree = "<group>"; };
 		BFBECCDA2BFCAFE300279A5B /* Encodable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+.swift"; sourceTree = "<group>"; };
+		BFBF357C2C469B2200B3D263 /* ToggleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleStatus.swift; sourceTree = "<group>"; };
 		BFC19C942BBAABF8009C664F /* UXFBAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFBAttributes.swift; sourceTree = "<group>"; };
 		BFC7212B299CD2D400AAB9BC /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		BFCC90A52A974E4D00B51FC4 /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
@@ -677,6 +680,7 @@
 				BFB17FC52BB804050024FED5 /* Targeting.swift */,
 				0A6CDB77223BD47800C17007 /* Text.swift */,
 				0A019A57223673FE002FD4F8 /* Theme.swift */,
+				BFBF357C2C469B2200B3D263 /* ToggleStatus.swift */,
 				BF02FD3E255C65B000C794E6 /* Transform.swift */,
 			);
 			path = DataModel;
@@ -1425,6 +1429,7 @@
 				BFBAFA952ADFE99B003CC167 /* Copyright.swift in Sources */,
 				BF63171126B67501006F408A /* ImageCollection.swift in Sources */,
 				BF40565B265CED2500709351 /* UILabel+Align.swift in Sources */,
+				BFBF357D2C469B2200B3D263 /* ToggleStatus.swift in Sources */,
 				BF885EE62715FB1B00F110A0 /* UIAlertController+.swift in Sources */,
 				0A4689B322840BE00074E1A3 /* NSLayoutConstraint+additions.swift in Sources */,
 				0A4689A522840BB90074E1A3 /* APIWebRouter.swift in Sources */,
@@ -1529,6 +1534,7 @@
 				BF4380582A4428AF009975EB /* UIColorInputError.swift in Sources */,
 				BF4380592A4428AF009975EB /* UIImage+Tinting.swift in Sources */,
 				BF5896D62B9F863300070769 /* Attributes.swift in Sources */,
+				BFBF357E2C469B2200B3D263 /* ToggleStatus.swift in Sources */,
 				BF43805A2A4428AF009975EB /* UIButton+.swift in Sources */,
 				BFDE2FD12A86233000F6C6CF /* Documentation.docc in Sources */,
 				BF43805B2A4428AF009975EB /* Reachability.swift in Sources */,

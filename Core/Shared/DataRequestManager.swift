@@ -95,9 +95,14 @@ final class DataRequestManager: NSObject {
   }
   
   public func sendAttributes(appId: String, campaignId: String, attributes: [Attribute], completion: @escaping (Bool) -> Void) {
-    let dict = attributes.convertToDict()
     self._apiClient.checkAttribues(appId, campaignId, attributes, true) { success in
       completion(success)
+    }
+  }
+  
+  public func checkToggles(completion: @escaping (Bool) -> Void) {
+    self._apiClient.checkToggle { toggleStatus in
+      completion(toggleStatus ?? false)
     }
   }
   

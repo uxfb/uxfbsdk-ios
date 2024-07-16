@@ -26,15 +26,15 @@ enum HTTPHeaderField: String {
   case info = "info"
   case properties = "properties"
   case screenshots = "screenshots"
-  case sdkVersion = "X-SDK-Version"
   case idempotencyKey = "Idempotency-Key"
-  
   case debug = "debug"
   case attributes = "attributes"
   
+  case sdkVersion = "X-SDK-Version"
   case sdkTargetOS = "X-SDK-TargetOS"
   case sdkPlatform = "X-SDK-Platform"
   case sdkPlatformVersion = "X-SDK-Platform-Version"
+  case sdkAppVersion = "X-APP-Version"
 }
 
 extension Error {
@@ -48,11 +48,15 @@ enum ContentType: String {
 }
 
 enum APIWebRouter {
+  
+  static let appVersion = "v\(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String)"
+  
   static let defaultEndpoint: String = Consts.defaultEndpoint
   
   static var endpoint: String = "\(defaultEndpoint)/\(Consts.apiVersion)"
   static var settings: SettingsProtocol?
   
+  case checkToggle(appID: String)
   case getCampaing(appID: String)
   case showForm(uid: String, campaingId: String)
   case saveFormData(projectId: String?, createdAtClient: String, uid: String, campaignId: String, pages: Array<Dictionary<String, Any>>, info: Dictionary<String, Any>, properties: Dictionary<String, Any>, idempotency: String)
@@ -62,7 +66,7 @@ enum APIWebRouter {
   var method: String {
     switch self {
         
-      case .showForm, .saveFormData, .saveScreenshot, .checkAttribute:
+      case .showForm, .saveFormData, .saveScreenshot, .checkAttribute, .checkToggle:
         return "POST"
         
       default:
@@ -72,6 +76,8 @@ enum APIWebRouter {
   
   var path: String {
     switch self {
+      case .checkToggle(let appId):
+        return "/mobile/toggles/\(appId)"
       case .getCampaing(let appId):
         return "/mobile/campaigns/\(appId)"
       case .saveFormData(_, _, _, _, _, _, _, _):
@@ -112,7 +118,7 @@ enum APIWebRouter {
   
   var body: Data? {
     switch self {
-      case .getCampaing, .showForm, .saveFormData, .checkAttribute:
+      case .checkToggle, .getCampaing, .showForm, .saveFormData, .checkAttribute:
         if let bodyParameters = parameters, bodyParameters.count > 0 {
           do {
             let data = try JSONSerialization.data(withJSONObject: bodyParameters, options: [])
@@ -154,9 +160,10 @@ enum APIWebRouter {
   var pathParameters: [String:Any]? {
     var parameters: [String: Any] = [:]
     switch self {
-      case .saveFormData(let projectId, _, _, _, _, _, _, _):
-        if projectId != nil {
-          parameters =  [HTTPHeaderField.projectId.rawValue : projectId!]
+      case .checkToggle(_):
+        parameters = [HTTPHeaderField.uid.rawValue: uid]
+        if let language = Locale.autoupdatingCurrent.collatorIdentifier?.lowercased() {
+          parameters[HTTPHeaderField.language.rawValue] = language
         }
         
       case .getCampaing(_):
@@ -167,6 +174,10 @@ enum APIWebRouter {
       case .checkAttribute(_ ,_ ,_ , let debug):
         parameters[HTTPHeaderField.debug.rawValue] = debug
         
+      case .saveFormData(let projectId, _, _, _, _, _, _, _):
+        if projectId != nil {
+          parameters =  [HTTPHeaderField.projectId.rawValue : projectId!]
+        }
       default:
         break
     }
@@ -176,13 +187,14 @@ enum APIWebRouter {
   
   var headers: [String: String]? {
     switch self {
-      case .getCampaing, .showForm, .checkAttribute:
+      case .checkToggle, .getCampaing, .showForm, .checkAttribute:
         return [HTTPHeaderField.acceptType.rawValue: ContentType.json.rawValue,
                 HTTPHeaderField.contentType.rawValue: ContentType.json.rawValue,
                 HTTPHeaderField.sdkVersion.rawValue: Consts.version,
                 HTTPHeaderField.sdkTargetOS.rawValue: Consts.os,
                 HTTPHeaderField.sdkPlatform.rawValue: APIWebRouter.settings?.sdkPlatform ?? "Native",
-                HTTPHeaderField.sdkPlatformVersion.rawValue: APIWebRouter.settings?.sdkPlatformVersion ?? Consts.version]
+                HTTPHeaderField.sdkPlatformVersion.rawValue: APIWebRouter.settings?.sdkPlatformVersion ?? Consts.version,
+                HTTPHeaderField.sdkAppVersion.rawValue: APIWebRouter.appVersion]
       case .saveFormData(_, _, _, _, _, _, _, let idempotency):
         
         return [HTTPHeaderField.acceptType.rawValue: ContentType.json.rawValue,
@@ -191,7 +203,8 @@ enum APIWebRouter {
                 HTTPHeaderField.idempotencyKey.rawValue: idempotency,
                 HTTPHeaderField.sdkTargetOS.rawValue: Consts.os,
                 HTTPHeaderField.sdkPlatform.rawValue: APIWebRouter.settings?.sdkPlatform ?? "Native",
-                HTTPHeaderField.sdkPlatformVersion.rawValue: APIWebRouter.settings?.sdkPlatformVersion ?? Consts.version]
+                HTTPHeaderField.sdkPlatformVersion.rawValue: APIWebRouter.settings?.sdkPlatformVersion ?? Consts.version,
+                HTTPHeaderField.sdkAppVersion.rawValue: APIWebRouter.appVersion]
         
         
       case .saveScreenshot:
@@ -199,7 +212,8 @@ enum APIWebRouter {
                 HTTPHeaderField.sdkVersion.rawValue: Consts.version,
                 HTTPHeaderField.sdkTargetOS.rawValue: Consts.os,
                 HTTPHeaderField.sdkPlatform.rawValue: APIWebRouter.settings?.sdkPlatform ?? "Native",
-                HTTPHeaderField.sdkPlatformVersion.rawValue: APIWebRouter.settings?.sdkPlatformVersion ?? Consts.version]
+                HTTPHeaderField.sdkPlatformVersion.rawValue: APIWebRouter.settings?.sdkPlatformVersion ?? Consts.version,
+                HTTPHeaderField.sdkAppVersion.rawValue: APIWebRouter.appVersion]
     }
   }
   
