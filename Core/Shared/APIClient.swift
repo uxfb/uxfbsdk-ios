@@ -82,7 +82,7 @@ class APIClient {
           let jsonData = try JSONSerialization.data(withJSONObject: result, options: [])
           let decoder = JSONDecoder()
           let checkValue = try decoder.decode(ToggleStatus.self, from: jsonData)
-          completion?(checkValue.toggleStatus)
+          completion?(checkValue.togglesStatus)
         } catch {
           DDLogDebug("Check toggle failed")
           completion?(false)
@@ -232,6 +232,8 @@ class APIClient {
       completion(.fail, 0, "Error url request", nil)
       return nil
     }
+    
+    print(urlRequest.allHTTPHeaderFields)
     
     urlRequest.timeoutInterval = TimeInterval(timeout)
     

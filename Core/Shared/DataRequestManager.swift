@@ -102,7 +102,7 @@ final class DataRequestManager: NSObject {
   
   public func checkToggles(completion: @escaping (Bool) -> Void) {
     self._apiClient.checkToggle { toggleStatus in
-      completion(toggleStatus ?? false)
+      completion(toggleStatus ?? true)
     }
   }
   

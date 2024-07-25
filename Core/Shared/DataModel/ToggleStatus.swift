@@ -9,5 +9,5 @@
 import Foundation
 
 struct ToggleStatus: Codable {
-  let toggleStatus: Bool
+  let togglesStatus: Bool
 }

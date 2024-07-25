@@ -49,7 +49,7 @@ enum ContentType: String {
 
 enum APIWebRouter {
   
-  static let appVersion = "v\(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String)"
+  static let appVersion = "\(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String)"
   
   static let defaultEndpoint: String = Consts.defaultEndpoint
   
