@@ -50,9 +50,9 @@ class SliderView: UIView {
         
         leftArrowView.image = UIImage(named: "slider_left",
                                       in: Consts.bundle,
-                                      compatibleWith: nil)
+                                      compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
         rightArrowView.image = UIImage(named: "slider_right",
-                                       in: Consts.bundle, compatibleWith: nil)
+                                       in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             
         
         leftArrowView.center = CGPoint(x: (sliderWidth - 14) / 2 - 3.5,
@@ -70,6 +70,9 @@ class SliderView: UIView {
     }
     
     func setStyle(_ sliderStyle: SliderStyle, theme: ThemeProtocol) {
+        imageContentView.backgroundColor = theme.controlIconColor
+        leftArrowView.tintColor = theme.iconColor
+        rightArrowView.tintColor = theme.iconColor
         switch sliderStyle {
         case .inactive:
             bigBorderView.backgroundColor = theme.iconColor.withAlphaComponent(0.3)
@@ -116,6 +119,8 @@ class NpsCell: BaseCell {
     private var currentValue: Int = -1
     
     override func updateUI() {
+        negativeLabel.font = theme?.fontP2
+        positiveLabel.font = theme?.fontP2
         
         currentValue = Int(field?.answers.first ?? "") ?? -1
         

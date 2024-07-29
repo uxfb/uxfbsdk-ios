@@ -100,7 +100,7 @@ class MainViewController_swift: UIViewController {
         case 2:
 //            showActivityOverlay()
             
-            UXFeedback.sdk.startCampaign(eventName: "screen")
+            UXFeedback.sdk.startCampaign(eventName: "abc")
             break
         default:
             break

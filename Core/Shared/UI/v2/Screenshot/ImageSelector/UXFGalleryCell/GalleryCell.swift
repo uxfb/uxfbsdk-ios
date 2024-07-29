@@ -35,7 +35,7 @@ class GalleryCell: UICollectionViewCell {
         options.isSynchronous = false
     }
     
-    public func configure(_ asset: PHAsset, index: Int = 0, alpha: CGFloat = 1) {        
+    public func configure(_ asset: PHAsset, index: Int = 0, alpha: CGFloat = 1, theme: ThemeProtocol?) {
         manager.requestImage(for: asset, targetSize: CGSize(width: 196, height: 196), contentMode: .aspectFill, options: options, resultHandler: {(result, info)->Void in
             
             self.imageView.image = result!
@@ -49,7 +49,7 @@ class GalleryCell: UICollectionViewCell {
             bottomConstraint.constant = 8
             
             label.layer.borderWidth = 0
-            label.backgroundColor = UIColor.init("#0076C2")
+            label.backgroundColor = theme?.btnBgColor
             label.text = "\(index)"
         } else {
             label.text = ""
@@ -59,7 +59,7 @@ class GalleryCell: UICollectionViewCell {
             bottomConstraint.constant = 0
             
             label.layer.borderWidth = 2
-            label.layer.borderColor = UIColor.init("#B5B8C2").cgColor
+            label.layer.borderColor = theme?.iconColor.cgColor
             label.backgroundColor = .clear
         }
     }

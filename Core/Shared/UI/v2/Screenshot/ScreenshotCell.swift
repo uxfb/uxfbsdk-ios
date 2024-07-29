@@ -241,7 +241,7 @@ extension ScreenshotCell: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ScreenshotImageCell", for: indexPath) as! ScreenshotImageCell
         
-        cell.configure(image: screenshots[indexPath.row].image) {
+        cell.configure(image: screenshots[indexPath.row].image, theme: theme) {
             self.showDeleteConfirmation(index: indexPath.row)
         }
         return cell

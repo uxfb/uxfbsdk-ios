@@ -10,6 +10,9 @@ import UIKit
 import Photos
 
 class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
+    
+    var theme: ThemeProtocol?
+    
     @IBOutlet weak var permissionView: UIView! {
         didSet {
             permissionView.backgroundColor = Theme().controlBgColor
@@ -78,9 +81,10 @@ class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
         }
     }
     
+    @IBOutlet weak var closeButton: UIButton!
+  
     @IBOutlet weak var completeButton: UIButton! {
         didSet {
-            completeButton.backgroundColor = UIColor.init("#0076C2")
             completeButton.layer.masksToBounds = true
             completeButton.addShadowAndRoundCorner(cornerRadius: 28)
         }
@@ -94,7 +98,7 @@ class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
                                     forCellWithReuseIdentifier: "GalleryCell")
             collectionView.delegate = self
             collectionView.dataSource = self
-            collectionView.backgroundColor = .white
+            collectionView.backgroundColor = .clear
         }
     }
     
@@ -122,8 +126,17 @@ class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
     }
     
     private func updateUI() {
-        titleLabel.text = "\(Consts.Texts.selected) \(selectedIndexes.count) \(Consts.Texts.of) \(maxCount)"
-        completeButton.isEnabled = selectedIndexes.count > 0
+      backgroundColor = theme?.bgColor
+      
+      titleLabel.text = "\(Consts.Texts.selected) \(selectedIndexes.count) \(Consts.Texts.of) \(maxCount)"
+      titleLabel.textColor = theme?.iconColor
+      closeButton.imageView?.tintColor = theme?.iconColor
+      closeButton.imageView?.image = closeButton.imageView?.image?.withRenderingMode(.alwaysTemplate)
+      completeButton.isEnabled = selectedIndexes.count > 0
+      completeButton.backgroundColor = theme?.btnBgColor
+      completeButton.setTitleColor(theme?.btnTextColor, for: .normal)
+      completeButton.imageView?.tintColor = selectedIndexes.count > 0 ? theme?.btnTextColor : theme?.iconColor
+      completeButton.imageView?.image = completeButton.imageView?.image?.withRenderingMode(.alwaysTemplate)
     }
     
     public func configure(frame: CGRect, maxCount: Int, completion: @escaping imagePickerAction) {
@@ -206,8 +219,8 @@ extension ImageSelector: UICollectionViewDataSource, UICollectionViewDelegate, U
         if !selectedIndexes.contains(indexPath.row) {
             alpha = selectedIndexes.count >= self.maxCount ? 0.5 : 1
         }
-        cell.configure(assets[indexPath.row], index: (selectedIndexes.firstIndex(of: indexPath.row) ?? -1)+1, alpha: alpha)
-        
+        cell.configure(assets[indexPath.row], index: (selectedIndexes.firstIndex(of: indexPath.row) ?? -1)+1, alpha: alpha, theme: theme)
+        cell.backgroundColor = .clear
         return cell
     }
     

@@ -10,6 +10,8 @@ import UIKit
 
 class ScreenshotCreator: UIView {
   
+  var theme: ThemeProtocol?
+  
   private var direction: CGFloat = 0
   private var completeAction: imagePickerAction?
   
@@ -30,7 +32,6 @@ class ScreenshotCreator: UIView {
   
   @IBOutlet weak var okButton: UIButton! {
     didSet {
-      okButton.backgroundColor = UIColor.init("#0076C2")
       okButton.layer.masksToBounds = true
       okButton.addShadowAndRoundCorner(cornerRadius: 28)
       okButton.isEnabled = true
@@ -38,7 +39,6 @@ class ScreenshotCreator: UIView {
   }
   @IBOutlet weak var cancelButton: UIButton! {
     didSet {
-      cancelButton.backgroundColor = UIColor.init("#F15E61")
       cancelButton.layer.masksToBounds = true
       cancelButton.addShadowAndRoundCorner(cornerRadius: 28)
     }
@@ -59,6 +59,7 @@ class ScreenshotCreator: UIView {
   public func configure(frame: CGRect, completion: @escaping imagePickerAction) {
     self.frame = frame
     self.completeAction = completion
+    updateUI()
   }
   
   func showHandAnimation() {
@@ -67,6 +68,17 @@ class ScreenshotCreator: UIView {
     
     startTime = CACurrentMediaTime()
     displayLink?.add(to: RunLoop.main, forMode: .common)
+  }
+  
+  private func updateUI() {
+    okButton.backgroundColor = theme?.btnBgColor
+    okButton.setTitleColor(theme?.btnTextColor, for: .normal)
+    okButton.imageView?.tintColor = theme?.btnTextColor
+    okButton.imageView?.image = okButton.imageView?.image?.withRenderingMode(.alwaysTemplate)
+    cancelButton.backgroundColor = theme?.errorColorPrimary
+    cancelButton.setTitleColor(theme?.btnTextColor, for: .normal)
+    cancelButton.imageView?.tintColor = theme?.btnTextColor
+    cancelButton.imageView?.image = cancelButton.imageView?.image?.withRenderingMode(.alwaysTemplate)
   }
   
   @objc private func animateHand() {

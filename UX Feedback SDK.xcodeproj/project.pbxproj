@@ -38,6 +38,7 @@
 		0AF49826229C3D4A000CB7D6 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49824229C3D4A000CB7D6 /* UIColorExtension.swift */; };
 		0AF49827229C3D4A000CB7D6 /* UIColorInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49825229C3D4A000CB7D6 /* UIColorInputError.swift */; };
 		0AF49829229C3D5D000CB7D6 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49828229C3D5C000CB7D6 /* StringExtension.swift */; };
+		BF01AFC82C523BDF008AA51B /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170C26B67465006F408A /* ImageManager.swift */; };
 		BF01BDF525613086008C641B /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDF425613086008C641B /* Option.swift */; };
 		BF01BDF725613254008C641B /* Decodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDF625613254008C641B /* Decodable+.swift */; };
 		BF01BDFB25618234008C641B /* CGFloat+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDFA25618234008C641B /* CGFloat+.swift */; };
@@ -93,7 +94,6 @@
 		BF43801D2A4428AF009975EB /* VisualEffectView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF316C112684AAFA007CEFC0 /* VisualEffectView+.swift */; };
 		BF43801E2A4428AF009975EB /* UIView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40565C265D0B0600709351 /* UIView+Image.swift */; };
 		BF43801F2A4428AF009975EB /* CGFloat+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDFA25618234008C641B /* CGFloat+.swift */; };
-		BF4380202A4428AF009975EB /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170C26B67465006F408A /* ImageManager.swift */; };
 		BF4380212A4428AF009975EB /* ScreenshotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6316F826B279ED006F408A /* ScreenshotCell.swift */; };
 		BF4380232A4428AF009975EB /* Decodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDF625613254008C641B /* Decodable+.swift */; };
 		BF4380252A4428AF009975EB /* RequestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF31860F2975672700B54EF5 /* RequestModel.xcdatamodeld */; };
@@ -1474,7 +1474,6 @@
 				BF43801E2A4428AF009975EB /* UIView+Image.swift in Sources */,
 				BF43808E2A442FAB009975EB /* YoHeSettings.swift in Sources */,
 				BF43801F2A4428AF009975EB /* CGFloat+.swift in Sources */,
-				BF4380202A4428AF009975EB /* ImageManager.swift in Sources */,
 				BF4380212A4428AF009975EB /* ScreenshotCell.swift in Sources */,
 				BF4380232A4428AF009975EB /* Decodable+.swift in Sources */,
 				BF4380252A4428AF009975EB /* RequestModel.xcdatamodeld in Sources */,
@@ -1487,6 +1486,7 @@
 				BF43802C2A4428AF009975EB /* UIControl+blocks.swift in Sources */,
 				BF43802D2A4428AF009975EB /* UIVIewAddition.swift in Sources */,
 				BF43802E2A4428AF009975EB /* ImageSelector.swift in Sources */,
+				BF01AFC82C523BDF008AA51B /* ImageManager.swift in Sources */,
 				BF43802F2A4428AF009975EB /* ButtonCell.swift in Sources */,
 				BFCC90A72A974E4D00B51FC4 /* Progress.swift in Sources */,
 				BF40817C2AA50B4400B1013F /* PrivacyView.swift in Sources */,

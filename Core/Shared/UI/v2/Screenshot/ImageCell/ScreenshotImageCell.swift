@@ -9,20 +9,24 @@
 import UIKit
 
 class ScreenshotImageCell: UICollectionViewCell {
-    
+  
+    private var theme: ThemeProtocol? {
+      didSet {
+        updateUI()
+      }
+    }
+  
     private var deleteAction: (() -> ())?
     @IBOutlet weak var closeButton: UIButton! {
         didSet {
             closeButton.layer.cornerRadius = 12
             closeButton.layer.masksToBounds = true
-            closeButton.backgroundColor = UIColor.init("#0076C2")
         }
     }
     @IBOutlet weak var imageView: UIImageView! {
         didSet {
             imageView.layer.cornerRadius = 16
             imageView.layer.borderWidth = 1
-            imageView.layer.borderColor = UIColor.init("#D3D4D8").cgColor
             imageView.layer.masksToBounds = true
         }
     }
@@ -31,8 +35,9 @@ class ScreenshotImageCell: UICollectionViewCell {
         super.awakeFromNib()
     }
 
-    public func configure(image: UIImage, deleteAction: @escaping () -> ()) {
+    public func configure(image: UIImage, theme: ThemeProtocol?, deleteAction: @escaping () -> ()) {
         self.deleteAction = deleteAction
+        self.theme = theme
         imageView.image = image
     }
     
@@ -41,4 +46,11 @@ class ScreenshotImageCell: UICollectionViewCell {
             deleteAction!()
         }
     }
+  
+  private func updateUI() {
+    imageView.layer.borderColor = theme?.inputBorderColor.cgColor
+    closeButton.backgroundColor = theme?.btnBgColor
+    closeButton.imageView?.tintColor = theme?.btnTextColor
+    closeButton.imageView?.image = closeButton.imageView?.image?.withRenderingMode(.alwaysTemplate)
+  }
 }

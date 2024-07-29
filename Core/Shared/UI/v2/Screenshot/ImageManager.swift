@@ -17,6 +17,8 @@ class ImageManager: NSObject {
     static var currentOverlay: UIView?
     static var hideAction: closeAction?
     
+    static var theme: ThemeProtocol?
+    
     private static var direction: CGFloat = 0
     
     override init() { }
@@ -165,6 +167,7 @@ class ImageManager: NSObject {
         currentMainWindow.bringSubviewToFront(overlay)
         
         let imageSelector = Consts.bundle.loadNibNamed("ImageSelector", owner: self, options: nil)?.first as! ImageSelector
+        imageSelector.theme = theme
         imageSelector.configure(frame: overlay.bounds, maxCount: maxCount, completion: action)
         imageSelector.center.y = imageSelector.center.y + imageSelector.frame.size.height
         overlay.addSubview(imageSelector)
@@ -188,6 +191,7 @@ class ImageManager: NSObject {
         currentMainWindow.bringSubviewToFront(overlay)
         
         let imageCreator = Consts.bundle.loadNibNamed("ScreenshotCreator", owner: self, options: nil)?.first as! ScreenshotCreator
+        imageCreator.theme = theme
         imageCreator.alpha = 0
         imageCreator.configure(frame: overlay.bounds, completion: action)
         overlay.addSubview(imageCreator)

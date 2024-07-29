@@ -540,6 +540,11 @@ class DataManager: FieldDelegate {
     if !isPrivacyChecked && privacyNeeded {
       isPrivacyWarning = true
       checkPrivacy(nil)
+        
+        if needsComplete() {
+          isError = true
+          viewController?.updateUI()
+        }
       return
     }
     

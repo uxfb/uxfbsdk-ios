@@ -30,6 +30,9 @@ class RatingCell: BaseCell {
     private var maxValue: Int = 0
     
     override func updateUI() {
+        negativeLabel.font = theme?.fontP2
+        positiveLabel.font = theme?.fontP2
+        
         currentValue = Int(field?.answers.first ?? "") ?? 0
         maxValue = (field?.uiData["ratingCount"] as? Int) ?? 3
         let halfValue = (Double(maxValue)/2).rounded(.up)

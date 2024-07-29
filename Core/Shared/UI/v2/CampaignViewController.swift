@@ -569,7 +569,7 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
           screenshot.field.id == field.id
         }) ?? []
         cell.setScreenshots(sShots)
-        
+        ImageManager.theme = self.campaign?.theme
         let takeTask = DispatchWorkItem {
           UIView.animate(withDuration: 0.15) {
             self.view.alpha = 0
