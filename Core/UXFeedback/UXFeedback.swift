@@ -137,6 +137,8 @@ open class UXFeedback: NSObject {
                            campaignDelegate: FeedbackCampaignDelegate? = nil,
                            logDelegate: FeedbackLogDelegate? = nil) {
     
+  	UXFeedback.sdk._campaigns = []
+      
     guard appID.count == 25 else {
       let appIdError = "AppId не задан. Укажите его корректное значение в методе UxFeedback.setup. Инициализация не выполнена"
       campaignDelegate?.campaignDidReceiveError(errorString: appIdError)
