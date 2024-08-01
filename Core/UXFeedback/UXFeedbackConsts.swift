@@ -10,10 +10,10 @@ import Foundation
 
 internal class Consts {
     static let os: String = "iOS"
-    static let version: String = "2.6.1"
+    static let version: String = "2.7.0"
     static let cryptoKey: String = "UXFeedback"
-//    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
-    static let defaultEndpoint: String = "https://develop.api.uxfb.space"
+    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
+//    static let defaultEndpoint: String = "https://develop.api.uxfb.space"
 //    static let defaultEndpoint: String = "https://epic-sprint-10.api.uxfb.space"
 
     static let apiVersion: String = "v12"
