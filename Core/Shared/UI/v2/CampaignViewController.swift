@@ -229,40 +229,38 @@ internal class CampaignViewController: UIViewController {
     let tableFooterView = UIView(frame: CGRect(origin: .zero,
                                                size: CGSize(width: UIScreen.main.bounds.width - 32,
                                                             height: height)))
-    if campaign?.copyright.isShow ?? true {
-      let image = UIImageView(frame: CGRect(origin: CGPoint(x: 16,
-                                                            y: 12),
-                                            size: CGSize(width: 30,
-                                                         height: 30)))
-      image.contentMode = .scaleAspectFit
-      
-      var urlString: String?
-      let scale = UIScreen.main.scale
-      switch scale {
-        case 1:
-          urlString = campaign?.copyright.image?["1x"] as? String
-        case 2:
-          urlString = campaign?.copyright.image?["2x"] as? String
-        case 3:
-          urlString = campaign?.copyright.image?["3x"] as? String
+      if campaign?.copyright.isShow ?? true {
+          let image = UIImageView(frame: CGRect(origin: CGPoint(x: 16,
+                                                                y: 12),
+                                                size: CGSize(width: 30,
+                                                             height: 30)))
+          image.contentMode = .scaleAspectFit
           
-        default:
-          break
-      }
-      if let urlString = urlString, let url = URL(string: urlString) {
-        image.cacheImage(url: url, withTemplate: true)
-      } else {
-        image.image = UIImage(named: "logo", in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-      }
-      
-      if (campaign?.copyright.href) != nil {
-        let tapGestureRecognizer = UITapGestureRecognizer()
-        tapGestureRecognizer.cancelsTouchesInView = false
-        tapGestureRecognizer.addTarget(self, action: #selector(onLogoTap(tap:)))
-        tapGestureRecognizer.delegate = self
-        image.addGestureRecognizer(tapGestureRecognizer)
-        image.isUserInteractionEnabled = true
-      }
+          var urlString: String?
+          let scale = UIScreen.main.scale
+          switch scale {
+              case 1:
+                  urlString = campaign?.copyright.image?["1x"] as? String
+              case 2:
+                  urlString = campaign?.copyright.image?["2x"] as? String
+              case 3:
+                  urlString = campaign?.copyright.image?["3x"] as? String
+                  
+              default:
+                  break
+          }
+          if let urlString = urlString, let url = URL(string: urlString) {
+              image.cacheImage(url: url, withTemplate: true)
+          } else {
+              image.image = UIImage(named: "logo", in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+          }
+          
+      let tapGestureRecognizer = UITapGestureRecognizer()
+      tapGestureRecognizer.cancelsTouchesInView = false
+      tapGestureRecognizer.addTarget(self, action: #selector(onLogoTap(tap:)))
+      tapGestureRecognizer.delegate = self
+      image.addGestureRecognizer(tapGestureRecognizer)
+      image.isUserInteractionEnabled = true
       
       image.tintColor = campaign?.theme.inputBorderColor
       tableFooterView.backgroundColor = campaign?.theme.bgColor ?? .white
@@ -410,8 +408,16 @@ internal class CampaignViewController: UIViewController {
   
   @objc func onLogoTap(tap: UITapGestureRecognizer) -> Void {
     view.endEditing(true)
-    guard let href = campaign?.copyright.href, let url = URL(string: href),
-          UIApplication.shared.canOpenURL(url) else {
+      var href: String = ""
+      if (campaign?.copyright.href) != nil {
+          href = (campaign?.copyright.href)!
+      } else {
+          href = Consts.defaultHref
+      }
+      
+      guard href.count > 0,
+                let url = URL(string: href),
+                UIApplication.shared.canOpenURL(url) else {
       return
     }
     

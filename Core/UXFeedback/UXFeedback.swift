@@ -79,13 +79,33 @@ open class UXFeedback: NSObject {
   private override init() {
     super.init()
     self.applyTheme()
-    NotificationCenter.default.addObserver(self,selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
-    NotificationCenter.default.addObserver(self,selector: #selector(applicationDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+    NotificationCenter.default.addObserver(self,selector: #selector(applicationDidBecomeActive), 
+                                           name: UIApplication.didBecomeActiveNotification, object: nil)
+    NotificationCenter.default.addObserver(self,selector: #selector(applicationDidEnterBackground), 
+                                           name: UIApplication.didEnterBackgroundNotification, object: nil)
+      if #available(iOS 13.0, *) {
+          NotificationCenter.default.addObserver(self,selector: #selector(applicationDidBecomeActive),
+                                                 name: UIScene.didActivateNotification, object: nil)
+          NotificationCenter.default.addObserver(self,selector: #selector(applicationDidEnterBackground),
+                                                 name: UIScene.didEnterBackgroundNotification, object: nil)
+      }
   }
   
   deinit {
-    NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
-    NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
+    NotificationCenter.default.removeObserver(self, 
+                                              name: UIApplication.didBecomeActiveNotification, 
+                                              object: nil)
+    NotificationCenter.default.removeObserver(self,
+                                              name: UIApplication.didEnterBackgroundNotification, 
+                                              object: nil)
+      if #available(iOS 13.0, *) {
+          NotificationCenter.default.removeObserver(self, 
+                                                    name: UIScene.didActivateNotification,
+                                                    object: nil)
+          NotificationCenter.default.removeObserver(self, 
+                                                    name: UIScene.didEnterBackgroundNotification,
+                                                    object: nil)
+      }
   }
   
   @objc private func applicationDidBecomeActive(){
@@ -464,7 +484,6 @@ extension UXFeedback: RequestManagerDelegate {
       
       self._appWindow.rootViewController = UIViewController()
       self._appWindow?.windowLevel = UXFeedback._windowLevel
-      //            completion?(success)
       self.campaignDelegate?.campaignDidLoad(success: success)
     }
   }

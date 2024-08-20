@@ -94,13 +94,13 @@ class MainViewController_swift: UIViewController {
                 .build()
             
             
-            UXFeedback.sdk.startCampaign(eventName: "list2", attributes: attributes)
+            UXFeedback.sdk.startCampaign(eventName: "abc123", attributes: attributes)
 //            UXFeedback.sdk.settings.
             break
         case 2:
 //            showActivityOverlay()
             
-            UXFeedback.sdk.startCampaign(eventName: "product")
+            UXFeedback.sdk.startCampaign(eventName: "qqq")
             break
         default:
             break

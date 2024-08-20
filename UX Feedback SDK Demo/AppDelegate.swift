@@ -49,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         customTheme.text02Color =  UIColor.init("#505565")
         customTheme.btnTextColor = .magenta// UIColor.init("#FFFFFF")
         customTheme.bgColor =  UIColor.init("#000000")
+//        customTheme.fontP1 = .boldSystemFont(ofSize: 14)
         
 //    endpoint: "AAAAAAAAAAAAAHYwMhEVF1hOTAolMWgBABIHDQwbey0+AwABBgMCCD52NBA=",
       let settings = UXFBSettings()

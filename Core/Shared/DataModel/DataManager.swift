@@ -442,7 +442,6 @@ class DataManager: FieldDelegate {
         for checkbox in checkboxes {
           let value = checkbox["value"] as? String ?? ""
           let font = (campaign?.theme.fontP1)!
-          //                let lines = CGFloat(value.linesCount(width: width, font: .mediumFont))
           let lines = CGFloat(value.linesCount(width: width, font: font))
           height += max(ceil(lines * font.lineHeight) + 24, 48)
         }
@@ -452,7 +451,7 @@ class DataManager: FieldDelegate {
         return 40
         
       case .header:
-        let font = (campaign?.theme.fontH1)!// .bigSemiboldFont)
+        let font = (campaign?.theme.fontH1)!
         let lines = field.value!.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
                                             font: font)
         let valueHeight = ceil(CGFloat(lines) * font.lineHeight)
@@ -471,15 +470,13 @@ class DataManager: FieldDelegate {
           minHeight = 84
         }
         
-        
         let answerDict = answers.first { (answer) -> Bool in
           (answer["fieldId"] as? String) == field.id
         }
         let answer = (answerDict?["value"] as? [String] ?? []).first ?? ""
-        //            let answer = field.answers.first ?? ""
         let font = (campaign?.theme.fontP1)!
         let lines = min(answer.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
-                                          font: font), 10) //.mediumFont
+                                          font: font), 10)
         let valueHeight = ceil(CGFloat(lines) * font.lineHeight)
         
         return max(valueHeight, minHeight)
@@ -492,8 +489,6 @@ class DataManager: FieldDelegate {
           let value = button["value"] as? String ?? ""
           let font = (campaign?.theme.fontP1)!
           let lines = CGFloat(value.linesCount(width: width, font: font))
-          //                let lines = CGFloat(value.linesCount(width: width, font: .mediumFont))
-          
           height += max(ceil(lines * font.lineHeight) + 24, 48)
         }
         return height
@@ -501,20 +496,23 @@ class DataManager: FieldDelegate {
       case .text:
         let font = (campaign?.theme.fontP1)!
         let lines = field.value!.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
-                                            font: font)//.mediumFont)
+                                            font: font)
         let valueHeight = ceil(CGFloat(lines) * font.lineHeight)
         return valueHeight
         
       case .stars:
         return 40
+            
       case .bottom:
         return 40
+            
       case .nps, .rating:
         if let messages = field.uiData["messages"] as? [String: String] {
           let count = (messages["negative"]?.count ?? 0) + (messages["positive"]?.count ?? 0)
           return count > 0 ? 110 : 76
         }
         return 110
+            
       case .screenshot:
         var buttonsHeight: CGFloat = 0
         
@@ -527,6 +525,7 @@ class DataManager: FieldDelegate {
             return 0
         }
         return screenshots.filter { $0.field.id == field.id }.count > 0 ? 140 + buttonsHeight : buttonsHeight
+            
       case .none:
         return 40
     }
