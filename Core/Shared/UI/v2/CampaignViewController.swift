@@ -140,11 +140,8 @@ internal class CampaignViewController: UIViewController {
   }
   
   @objc func keyboardWillShow(notification: NSNotification) {
-    guard let userinfo = notification.userInfo else {
-      return
-    }
-    
     guard
+      let userinfo = notification.userInfo,
       let duration = (userinfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
       let endFrame = (userinfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
       let curveOption = userinfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt else {
@@ -153,11 +150,16 @@ internal class CampaignViewController: UIViewController {
     
     let space = UIScreen.main.bounds.height - (self.dataManager?.heightForCurrentPage() ?? 0)
     if space > 240 {
-      self.bottomConstraint.constant = -endFrame.height + (self.dataManager?.safeSpace ?? 0)
+        if campaign?.type == .popup {
+            let diff = space / 2 - endFrame.height
+            self.bottomConstraint.constant = diff < 0 ? -diff : 0
+        } else {
+            self.bottomConstraint.constant = -endFrame.height + (self.dataManager?.safeSpace ?? 0)
+        }
       
       UIView.animate(withDuration: duration, delay: 0) {
-        self.view.layoutIfNeeded()
-        self.tableView.setContentOffset(.zero, animated: false)
+		self.view.layoutIfNeeded()
+		self.tableView.contentInset = .zero
       }
     } else {
       UIView.animate(withDuration: duration, delay: 0, options: [.beginFromCurrentState, .init(rawValue: curveOption)], animations: {
