@@ -210,8 +210,8 @@ internal class CampaignViewController: UIViewController {
         DispatchQueue.main.async {
             if let effectView = self.view.viewWithTag(visualEffectViewTag) {
                 effectView.frame = UIScreen.main.bounds
-                self.dataManager?.checkPrivacy(nil)
             }
+            self.dataManager?.checkPrivacy(nil)
             self.tableView.reloadData()
         }
     }
@@ -276,7 +276,10 @@ internal class CampaignViewController: UIViewController {
             privacyView?.removeFromSuperview()
             tableFooterView.addSubview(privacyView!)
         }
-        tableView.tableFooterView = tableFooterView
+        
+        DispatchQueue.main.async {
+            self.tableView.tableFooterView = tableFooterView
+        }
     }
     
     private func configureTableView() {
@@ -826,14 +829,12 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     
     func updatePrivacy(enabled: Bool, height: CGFloat, warning: String?, text: String?, checked: Bool) {
         if enabled {
-            privacyView?.fillPrivacy(campaign?.privacy?.type ?? "", checked: checked)
-            privacyView?.fillTexts(text ?? "", warning: warning ?? "")
-            privacyView?.frame = .init(origin: .zero, size: .init(width: campaign?.type == .popup ? UIScreen.main.bounds.width-48 : UIScreen.main.bounds.width,
-                                                                  height: height))
+            self.privacyView?.fillPrivacy(self.campaign?.privacy?.type ?? "", checked: checked)
+            self.privacyView?.fillTexts(text ?? "", warning: warning ?? "")
+            self.privacyView?.frame = .init(origin: .zero, size: .init(width: self.campaign?.type == .popup ? UIScreen.main.bounds.width-48 : UIScreen.main.bounds.width,
+                                                                       height: height))
         }
-        DispatchQueue.main.async {
-            self.createFooter(withPrivacy: enabled)
-        }
+        self.createFooter(withPrivacy: enabled)
     }
     
     //MARK: - Autorotate
