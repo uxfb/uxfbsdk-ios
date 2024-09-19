@@ -190,7 +190,9 @@ internal class CampaignViewController: UIViewController {
     }
     
     open override func viewDidLayoutSubviews() {
-        updateLayouts()
+        DispatchQueue.main.async {
+            self.updateLayouts()
+        }
     }
     
     open override func viewWillLayoutSubviews() {
@@ -205,13 +207,11 @@ internal class CampaignViewController: UIViewController {
     }
     
     @objc private func rotated() {
-        if let effectView = view.viewWithTag(visualEffectViewTag) {
-            DispatchQueue.main.async {
+        DispatchQueue.main.async {
+            if let effectView = self.view.viewWithTag(visualEffectViewTag) {
                 effectView.frame = UIScreen.main.bounds
                 self.dataManager?.checkPrivacy(nil)
             }
-        }
-        DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
@@ -831,7 +831,9 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
             privacyView?.frame = .init(origin: .zero, size: .init(width: campaign?.type == .popup ? UIScreen.main.bounds.width-48 : UIScreen.main.bounds.width,
                                                                   height: height))
         }
-        createFooter(withPrivacy: enabled)
+        DispatchQueue.main.async {
+            self.createFooter(withPrivacy: enabled)
+        }
     }
     
     //MARK: - Autorotate
