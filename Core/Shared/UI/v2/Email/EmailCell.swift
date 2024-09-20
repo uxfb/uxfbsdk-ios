@@ -12,6 +12,8 @@ class EmailCell: BaseCell, UITextFieldDelegate {
     @IBOutlet var textField: UITextField! {
         didSet {
             textField.delegate = self
+            textField.spellCheckingType = .no
+            textField.autocorrectionType = .no
         }
     }
     
@@ -55,7 +57,7 @@ class EmailCell: BaseCell, UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         if delegate != nil {
-            delegate?.fieldChanged(field!, answer: [newText], refresh: false)
+//            self.delegate?.fieldChanged(self.field!, answer: [newText], refresh: false)
         }
         return true
     }

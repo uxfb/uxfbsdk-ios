@@ -54,6 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    endpoint: "AAAAAAAAAAAAAHYwMhEVF1hOTAolMWgBABIHDQwbey0+AwABBgMCCD52NBA=",
       let settings = UXFBSettings()
       settings.debugEnabled = true
+    settings.slideInUiBlocked = false
+        
         UXFeedback.setup(appID: uxfAppID,
                          settings: settings)
         

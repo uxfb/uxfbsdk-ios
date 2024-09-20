@@ -110,13 +110,12 @@ internal class CampaignPresentor: NSObject {
             
             controller.presentDirection = direction
             controller.closeOnSwipe = closeOnSwipe
-            controller.blackout = blackout
+            controller.blackout = uiBlocked ? blackout : nil
             controller.properties = properties
             
             if let view = controller.view as? PassthroughToWindowView {
                 view.touchCancel = uiBlocked
             }
-            
             
             if #available(iOS 13.0, *) {
                 if let wScene = UIApplication.shared.keyWindow?.windowScene {

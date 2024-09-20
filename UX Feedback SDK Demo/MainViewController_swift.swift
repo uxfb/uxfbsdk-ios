@@ -60,7 +60,7 @@ class MainViewController_swift: UIViewController {
     }
     
     func configureSDK() {
-        UXFeedback.sdk.settings.slideInUiBlocked = true
+        UXFeedback.sdk.settings.slideInUiBlocked = false
         UXFeedback.sdk.settings.closeOnSwipe = true
     }
     
@@ -94,13 +94,13 @@ class MainViewController_swift: UIViewController {
                 .build()
             
             
-            UXFeedback.sdk.startCampaign(eventName: "abc123", attributes: attributes)
+            UXFeedback.sdk.startCampaign(eventName: "11")
 //            UXFeedback.sdk.settings.
             break
         case 2:
 //            showActivityOverlay()
             
-            UXFeedback.sdk.startCampaign(eventName: "qqq")
+            UXFeedback.sdk.startCampaign(eventName: "some")
             break
         default:
             break
