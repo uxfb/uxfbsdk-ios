@@ -244,7 +244,6 @@ class APIClient {
     }
 #endif
     
-    
     let task = URLSession.shared.dataTask(with: urlRequest) { (data: Data?, response: URLResponse?, error: Error?) in
       
       do {

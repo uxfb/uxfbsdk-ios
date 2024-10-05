@@ -1,6 +1,10 @@
 # Mac OS X Finder
 .DS_Store
 
+# cache
+*.noindex
+*.swiftmodule
+
 # Xcode legacy
 *.mode1
 *.mode1v3
