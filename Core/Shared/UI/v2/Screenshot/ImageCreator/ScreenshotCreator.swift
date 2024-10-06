@@ -118,16 +118,16 @@ class ScreenshotCreator: UIView {
     
     var captureWindow: UIWindow?
     if #available(iOS 13.0, *) {
-      if let window = UIApplication.shared.connectedScenes.first?.inputView?.window {
-        captureWindow = window
-      } else {
+//      if let window = UIApplication.shared.connectedScenes.first?.inputView?.window {
+//        captureWindow = window
+//      } else {
         for window in UIApplication.shared.windows {
           if !(window is PassthroughWindow) {
             captureWindow = window
             break
           }
         }
-      }
+//      }
     } else {
       for window in UIApplication.shared.windows {
         if !(window is PassthroughWindow) {
@@ -142,8 +142,6 @@ class ScreenshotCreator: UIView {
     if let window = captureWindow {
       let scale: CGFloat = UIScreen.main.scale
       if let view = window.rootViewController?.view {
-        
-        
         let layer = window.layer
         UIGraphicsBeginImageContextWithOptions(layer.frame.size, true, 0)
         guard let context = UIGraphicsGetCurrentContext() else { return }
@@ -153,17 +151,6 @@ class ScreenshotCreator: UIView {
         if self.completeAction != nil {
           self.completeAction!([image])
         }
-        
-        
-//        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, scale)
-//        
-//        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
-//        if let screenshotImage = UIGraphicsGetImageFromCurrentImageContext() {
-//          UIGraphicsEndImageContext()
-//          if self.completeAction != nil {
-//            self.completeAction!([screenshotImage])
-//          }
-//        }
       }
     }
   }
