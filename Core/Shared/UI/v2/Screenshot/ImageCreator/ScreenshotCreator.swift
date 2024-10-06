@@ -143,7 +143,8 @@ class ScreenshotCreator: UIView {
       let scale: CGFloat = UIScreen.main.scale
       if let view = window.rootViewController?.view {
         let layer = window.layer
-        UIGraphicsBeginImageContextWithOptions(layer.frame.size, true, 0)
+          UIGraphicsBeginImageContextWithOptions(layer.frame.size, true, scale)
+//        UIGraphicsBeginImageContextWithOptions(layer.frame.size, true, 0)
         guard let context = UIGraphicsGetCurrentContext() else { return }
         layer.render(in: context)
         guard let image = UIGraphicsGetImageFromCurrentImageContext()  else { return }
