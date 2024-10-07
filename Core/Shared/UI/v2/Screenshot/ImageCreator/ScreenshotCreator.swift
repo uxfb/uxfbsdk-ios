@@ -118,16 +118,16 @@ class ScreenshotCreator: UIView {
         
         var captureWindow: UIWindow?
         if #available(iOS 13.0, *) {
-            //      if let window = UIApplication.shared.connectedScenes.first?.inputView?.window {
-            //        captureWindow = window
-            //      } else {
-            for window in UIApplication.shared.windows {
-                if !(window is PassthroughWindow) {
-                    captureWindow = window
-                    break
+            if let window = UIApplication.shared.connectedScenes.first?.inputView?.window {
+                captureWindow = window
+            } else {
+                for window in UIApplication.shared.windows {
+                    if !(window is PassthroughWindow) {
+                        captureWindow = window
+                        break
+                    }
                 }
             }
-            //      }
         } else {
             for window in UIApplication.shared.windows {
                 if !(window is PassthroughWindow) {
