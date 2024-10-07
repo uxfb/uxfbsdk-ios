@@ -233,8 +233,6 @@ class APIClient {
       return nil
     }
     
-    print(urlRequest.allHTTPHeaderFields)
-    
     urlRequest.timeoutInterval = TimeInterval(timeout)
     
 #if DEBUG

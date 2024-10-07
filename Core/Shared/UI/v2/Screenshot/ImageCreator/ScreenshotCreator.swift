@@ -137,23 +137,18 @@ class ScreenshotCreator: UIView {
       }
     }
     
-    
-    
-    if let window = captureWindow {
-      let scale: CGFloat = UIScreen.main.scale
-      if let view = window.rootViewController?.view {
-        let layer = window.layer
-          UIGraphicsBeginImageContextWithOptions(layer.frame.size, true, scale)
-//        UIGraphicsBeginImageContextWithOptions(layer.frame.size, true, 0)
-        guard let context = UIGraphicsGetCurrentContext() else { return }
-        layer.render(in: context)
-        guard let image = UIGraphicsGetImageFromCurrentImageContext()  else { return }
-        UIGraphicsEndImageContext()
-        if self.completeAction != nil {
-          self.completeAction!([image])
-        }
+      if let window = captureWindow {
+          let scale: CGFloat = UIScreen.main.scale
+          let layer = window.layer
+          UIGraphicsBeginImageContextWithOptions(layer.frame.size, true, 0)
+          guard let context = UIGraphicsGetCurrentContext() else { return }
+          layer.render(in: context)
+          guard let image = UIGraphicsGetImageFromCurrentImageContext()  else { return }
+          UIGraphicsEndImageContext()
+          if self.completeAction != nil {
+              self.completeAction!([image])
+          }
       }
-    }
   }
   
   @IBAction func pressCancel(_ sender: Any) {

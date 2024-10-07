@@ -225,7 +225,8 @@ final class DataRequestManager: NSObject {
     
     container.loadPersistentStores { (storeDescription, error) in
       if let err = error{
-        print("Loading of uxfb store failed: \(err)")
+//        print("Loading of uxfb store failed: \(err)")
+          print("Loading of uxfb store failed")
       }
     }
     return container
