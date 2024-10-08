@@ -10,6 +10,8 @@ import UIKit
 
 class ScreenshotCell: BaseCell {
 
+    var platform: String?
+    
     @IBOutlet var stackView: UIStackView!
     @IBOutlet var stackViewHeight: NSLayoutConstraint!
     

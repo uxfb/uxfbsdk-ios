@@ -118,11 +118,18 @@ class ScreenshotCreator: UIView {
         
         var captureWindow: UIWindow?
         if #available(iOS 13.0, *) {
-            if let window = UIApplication.shared.connectedScenes.first?.inputView?.window {
-                captureWindow = window
+            let allScenes = UIApplication.shared.connectedScenes
+            let scene = allScenes.first { $0.activationState == .foregroundActive }
+            if let windowScene = scene as? UIWindowScene {
+                for window in windowScene.windows {
+                    if window.windowLevel == .normal && !window.isKind(of: PassthroughWindow.self) {
+                        captureWindow = window
+                        break
+                    }
+                }
             } else {
                 for window in UIApplication.shared.windows {
-                    if !(window is PassthroughWindow) {
+                    if window.windowLevel == .normal && !window.isKind(of: PassthroughWindow.self) {
                         captureWindow = window
                         break
                     }
@@ -130,43 +137,35 @@ class ScreenshotCreator: UIView {
             }
         } else {
             for window in UIApplication.shared.windows {
-                if !(window is PassthroughWindow) {
+                if window.windowLevel == .normal && !window.isKind(of: PassthroughWindow.self) {
                     captureWindow = window
                     break
                 }
             }
         }
         
-        
-        
-        if let window = captureWindow,
-           let view = window.rootViewController?.view {
-            UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0)
-            
-            view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
-            if let screenshotImage = UIGraphicsGetImageFromCurrentImageContext() {
+        if let window = captureWindow {
+            print(String(describing: window.rootViewController.self))
+            if let view = window.rootViewController?.view,
+               String(describing: view.self).contains("FlutterView") {
+                let renderer = UIGraphicsImageRenderer(size: view.bounds.size)
+                let image = renderer.image { ctx in
+                    view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+                }
+                if self.completeAction != nil {
+                    self.completeAction!([image])
+                }
+            } else {
+                UIGraphicsBeginImageContextWithOptions(window.layer.frame.size, true, 0)
+                guard let context = UIGraphicsGetCurrentContext() else { return }
+                window.layer.render(in: context)
+                guard let image = UIGraphicsGetImageFromCurrentImageContext()  else { return }
                 UIGraphicsEndImageContext()
                 if self.completeAction != nil {
-                    self.completeAction!([screenshotImage])
+                    self.completeAction!([image])
                 }
             }
         }
-        
-        
-        //    if let window = captureWindow {
-        //      let scale: CGFloat = UIScreen.main.scale
-        //      if let view = window.rootViewController?.view {
-        //        let layer = window.layer
-        //        UIGraphicsBeginImageContextWithOptions(layer.frame.size, true, 0)
-        //        guard let context = UIGraphicsGetCurrentContext() else { return }
-        //        layer.render(in: context)
-        //        guard let image = UIGraphicsGetImageFromCurrentImageContext()  else { return }
-        //        UIGraphicsEndImageContext()
-        //        if self.completeAction != nil {
-        //          self.completeAction!([image])
-        //        }
-        //      }
-        //    }
     }
     
     @IBAction func pressCancel(_ sender: Any) {
