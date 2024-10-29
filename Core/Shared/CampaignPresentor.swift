@@ -65,7 +65,7 @@ internal class CampaignPresentor: NSObject {
         let controller = CampaignViewController()
         controller.campaign = campaign
         var eventName: String = ""
-        if let targeting = campaign.targeting.first {
+        if let targeting = campaign.targeting {
             eventName = targeting.value ?? ""
         }
         controller.transitioningDelegate = self

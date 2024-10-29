@@ -331,10 +331,11 @@ open class UXFeedback: NSObject {
     var targeting: Targeting? = nil
     
     if let campaign = _campaigns.first(where: { campaign in
-      targeting = campaign.targeting.first(where: { targeting in
-        targeting.type == "trigger" && targeting.value == eventName
-      })
-      return targeting != nil
+        if campaign.targeting.value == eventName {
+            targeting = campaign.targeting
+        }
+        
+      	return targeting != nil
     }), let targeting = targeting {
       self.checkAttibutes(campaignId: campaign.campaignId,
                           targeting: targeting,

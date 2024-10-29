@@ -22,31 +22,31 @@ open class YoHe: NSObject {
     
     /// Singleton for working with the SDK
     public static let sdk: YoHe = YoHe.init()
-
+    
     private static var isInitialized = false
-
+    
     /// Current SDK version
     public let version = Consts.version
-
+    
     /// Delegate that implements the event handling interface
     open weak var campaignDelegate: YoHeCampaignDelegate?
-
+    
     /// Delegate that implements the log processing interface
     open weak var logDelegate: YoHeLogDelegate?
-
+    
     /// SDK settings object
     open var settings: YoHeSettings = YoHeSettings()
-
+    
     /// SDK theme object
     open var theme: YoHeTheme = YoHeTheme()
-
+    
     /// Additional parameters that will be passed when the poll is completed
     open var properties: [String: Any] = [:]
     
     private var appId: String?
     
     private var _appWindow: UIWindow!
-
+    
     private var _requestManager: DataRequestManager!
     
     private var _campaigns: Array<Campaign> = []
@@ -101,7 +101,7 @@ open class YoHe: NSObject {
     private func applySettings() {
         
     }
-
+    
     
     
     /// SDK initialization and initial setup method
@@ -136,27 +136,27 @@ open class YoHe: NSObject {
         
         sdk._requestManager = DataRequestManager(endpoint: domain,
                                                  appID: appID,
-                                                 parser: sdk._parser, 
+                                                 parser: sdk._parser,
                                                  sdkSettings: settings,
                                                  delegate: sdk)
         
         sdk._requestManager.settings = NetworkSettings(requestTimeout: settings.socketTimeout,
-                                                          retryCount: settings.retryCount,
-                                                          retryTimeout: settings.retryTimeout)
+                                                       retryCount: settings.retryCount,
+                                                       retryTimeout: settings.retryTimeout)
         
         sdk._requestManager.getAllCampaigns()
         
     }
-        
+    
     /// Campaign display method for the specified event
     /// - Parameter eventName: Event name
     open func startCampaign(eventName: String) {
         DDLog("Attempt starting: \(eventName)")
         _eventToSend = eventName
         var eventFounded = false
-
+        
         _campaigns.forEach { (campaign) in
-            campaign.targeting.forEach({ (targeting) in
+            if let targeting = campaign.targeting {
                 if targeting.type == "trigger",
                    targeting.value == eventName {
                     eventFounded = true
@@ -185,7 +185,7 @@ open class YoHe: NSObject {
                         }
                         
                         let formOnScreen = self._formPresentor?.isFormOnScreen ?? false
-//                            self.delegate?.campaignDidReceiveError(errorString: "\(formOnScreen)")
+                        //                            self.delegate?.campaignDidReceiveError(errorString: "\(formOnScreen)")
                         guard !formOnScreen else {
                             self.DDLog("Form already on screen")
                             self.campaignDelegate?.campaignDidReceiveError(errorString: "Form is on screen")
@@ -193,46 +193,46 @@ open class YoHe: NSObject {
                         }
                         
                         _ = self._formPresentor?.dismissCurrentForm(completion:  nil)
-
+                        
                         
                         var mCampaign = campaign
                         mCampaign.updateTheme(theme: self.theme)
                         self._formPresentor = CampaignPresentor(window: self._appWindow,
-                                                                   campaign: mCampaign,
-                                                                   animationEnabled: true)
-                     
+                                                                campaign: mCampaign,
+                                                                animationEnabled: true)
+                        
                         self._formPresentor?.isAnimationFormEnabled = true
                         self._formPresentor?.delegate = self
                         self._formPresentor?.feedbackCampaignDelegate = self.campaignDelegate
                         let blackout = Blackout()
-//
+                        //
                         switch campaign.type {
-                        case .slidein:
-                            if let color = self.settings.slideInUiBlackoutColor {
-                                if color.count == 6 {
-                                    blackout.color = UIColor.init("#\(color)")
-                                } else if color.count == 7 {
-                                    blackout.color = UIColor.init(color)
-                                }
-                            }
-                            
-                            blackout.blur = self.settings.slideInUiBlackoutBlur
-                            blackout.opacity = self.settings.slideInUiBlackoutOpacity
-                            
-                        case .popup:
-                            if let color = self.settings.popupUiBlackoutColor {
-                                if color.count == 6 {
-                                    blackout.color = UIColor.init("#\(color)")
-                                } else if color.count == 7 {
-                                    blackout.color = UIColor.init(color)
+                            case .slidein:
+                                if let color = self.settings.slideInUiBlackoutColor {
+                                    if color.count == 6 {
+                                        blackout.color = UIColor.init("#\(color)")
+                                    } else if color.count == 7 {
+                                        blackout.color = UIColor.init(color)
+                                    }
                                 }
                                 
-                            }
-                            blackout.blur = self.settings.popupUiBlackoutBlur
-                            blackout.opacity = self.settings.popupUiBlackoutOpacity 
-                            
-                        case .none:
-                            break
+                                blackout.blur = self.settings.slideInUiBlackoutBlur
+                                blackout.opacity = self.settings.slideInUiBlackoutOpacity
+                                
+                            case .popup:
+                                if let color = self.settings.popupUiBlackoutColor {
+                                    if color.count == 6 {
+                                        blackout.color = UIColor.init("#\(color)")
+                                    } else if color.count == 7 {
+                                        blackout.color = UIColor.init(color)
+                                    }
+                                    
+                                }
+                                blackout.blur = self.settings.popupUiBlackoutBlur
+                                blackout.opacity = self.settings.popupUiBlackoutOpacity
+                                
+                            case .none:
+                                break
                         }
                         
                         self.DDLog("Show form for event: \(eventName)")
@@ -259,7 +259,7 @@ open class YoHe: NSObject {
                     
                     DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay(eventName: eventName)), execute: self.task! )
                 }
-            })
+            }
         }
         if !eventFounded {
             DDLog("Event not found: \(eventName)")
@@ -294,7 +294,7 @@ extension YoHe: RequestManagerDelegate {
             self._appWindow = PassthroughWindow(frame: UIScreen.main.bounds)
             self._appWindow.rootViewController = UIViewController()
             self._appWindow?.windowLevel = YoHe._windowLevel
-//            completion?(success) 
+            //            completion?(success)
             self.campaignDelegate?.campaignDidLoad(success: success)
         }
     }
@@ -324,9 +324,9 @@ extension YoHe: CampaignFormPresentorProtocol {
         }
         
         self.campaignDelegate?.campaignDidAnswered(campaignId: campaign.campaignId,
-                                           answers: answers)
+                                                   answers: answers)
         
-        _requestManager.sendFormData(projectId: campaign.projectId, 
+        _requestManager.sendFormData(projectId: campaign.projectId,
                                      createdAtClient: StatisticManager.getTimeUTC(),
                                      campaignId: campaign.campaignId,
                                      pages: info,
