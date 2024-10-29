@@ -46,6 +46,7 @@ protocol ThemeProtocol {
     var text02Color: UIColor { get set }
     var btnTextColor: UIColor { get set }
     var bgColor: UIColor { get set }
+    var iconRating: UIColor { get set }
     
     var fontH1: UIFont { get set }
     var fontH2: UIFont { get set }

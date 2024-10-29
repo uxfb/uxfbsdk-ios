@@ -746,7 +746,7 @@
 			children = (
 				BF4081782AA50AEC00B1013F /* Privacy */,
 				BF2806A42562B18F006F2D61 /* _BASE */,
-				BF2806872562B18F006F2D61 /* _Stars */,
+				BF2806872562B18F006F2D61 /* Stars */,
 				BF28069D2562B18F006F2D61 /* Button */,
 				BF2806932562B18F006F2D61 /* Checkbox */,
 				BF2806A92562B18F006F2D61 /* Email */,
@@ -765,13 +765,13 @@
 			path = v2;
 			sourceTree = "<group>";
 		};
-		BF2806872562B18F006F2D61 /* _Stars */ = {
+		BF2806872562B18F006F2D61 /* Stars */ = {
 			isa = PBXGroup;
 			children = (
 				BF2806882562B18F006F2D61 /* StarsCell.swift */,
 				BF2806892562B18F006F2D61 /* StarsCell.xib */,
 			);
-			path = _Stars;
+			path = Stars;
 			sourceTree = "<group>";
 		};
 		BF28068A2562B18F006F2D61 /* RadioButton */ = {
