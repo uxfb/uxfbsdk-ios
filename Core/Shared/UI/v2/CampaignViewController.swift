@@ -575,6 +575,7 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
             case .nps:
                 let cell = createCell(NpsCell.self, indexPath: indexPath, field: field)
                 return cell
+                
             case .rating:
                 let cell = createCell(RatingCell.self, indexPath: indexPath, field: field)
                 return cell

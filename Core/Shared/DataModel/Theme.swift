@@ -59,6 +59,7 @@ class Theme: NSObject, Decodable, ThemeProtocol {
     var text03Color: UIColor = UIColor.init("#8B90A0")
     var inputBorderColor: UIColor = UIColor.init("#D3D4D8")
     var iconColor: UIColor =  UIColor.init("#B5B8C2")
+    var iconRating: UIColor =  UIColor.init("#FECA00")
     var btnBgColorActive: UIColor =  UIColor.init("#1983C8")
     var btnBorderRadius: CGFloat = 4
     var errorColorSecondary: UIColor =  UIColor.init("#F4A0A3")
@@ -110,6 +111,7 @@ class Theme: NSObject, Decodable, ThemeProtocol {
         case errorColorSecondary
         case errorColorPrimary
         case controlBgColorActive
+        case iconRating
     }
     
     required public init(from decoder: Decoder) throws {
@@ -161,6 +163,9 @@ class Theme: NSObject, Decodable, ThemeProtocol {
         }
         if let bgColorString = try? container.decode(String.self, forKey: .bgColor){
             self.bgColor = UIColor.init(bgColorString)
+        }
+        if let iconRating = try? container.decode(String.self, forKey: .iconRating){
+            self.iconRating = UIColor.init(iconRating)
         }
     }
     

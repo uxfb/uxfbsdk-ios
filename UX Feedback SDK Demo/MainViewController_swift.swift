@@ -93,8 +93,8 @@ class MainViewController_swift: UIViewController {
                 .addValue("B", value: "b")
                 .build()
             
-            
-            UXFeedback.sdk.startCampaign(eventName: "11")
+
+            UXFeedback.sdk.startCampaign(eventName: "ios_stars")
 //            UXFeedback.sdk.settings.
             break
         case 2:

@@ -171,7 +171,9 @@ class Parser {
                  print(error)
              }
          }
-         
+        if campaingId == "1854" {
+            print(campaignInfo)
+        }
          return Campaign(campaignId: campaingId,
                          theme: theme,
                          pages: pages,

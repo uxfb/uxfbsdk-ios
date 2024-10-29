@@ -1,24 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="StarsCell" customModule="UXFeedbackSDK" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="141" id="YFw-hv-FwC" customClass="StarsCell" customModule="UXFeedbackSDK" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="330" height="40"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YFw-hv-FwC" id="CiO-uF-tDK">
+                <rect key="frame" x="0.0" y="0.0" width="330" height="40"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIt-VR-fgO">
+                        <rect key="frame" x="88" y="1" width="38" height="38"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="38" id="CQM-nX-6X7"/>
+                            <constraint firstAttribute="width" constant="38" id="xyG-TF-S1j"/>
+                        </constraints>
+                        <state key="normal" image="star_unactive"/>
+                        <connections>
+                            <action selector="smileTapped:" destination="YFw-hv-FwC" eventType="touchDown" id="v9O-rb-w2y"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Okm-7M-sGY">
+                        <rect key="frame" x="146" y="1" width="38" height="38"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="38" id="6TP-q7-HwC"/>
+                            <constraint firstAttribute="height" constant="38" id="yh7-5Q-07r"/>
+                        </constraints>
+                        <state key="normal" image="star_unactive"/>
+                        <connections>
+                            <action selector="smileTapped:" destination="YFw-hv-FwC" eventType="touchDown" id="xvw-De-fMY"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nLD-NK-f7M">
+                        <rect key="frame" x="30" y="1" width="38" height="38"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="38" id="RBJ-3Q-0OH"/>
+                            <constraint firstAttribute="width" constant="38" id="kGQ-Eo-aNa"/>
+                        </constraints>
+                        <state key="normal" image="star_unactive"/>
+                        <connections>
+                            <action selector="smileTapped:" destination="YFw-hv-FwC" eventType="touchDown" id="Tps-aK-W3u"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cP9-o2-8oc">
+                        <rect key="frame" x="262" y="1" width="38" height="38"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="38" id="CyG-05-oJ9"/>
+                            <constraint firstAttribute="height" constant="38" id="Ubd-Dn-RVd"/>
+                        </constraints>
+                        <state key="normal" image="star_unactive"/>
+                        <connections>
+                            <action selector="smileTapped:" destination="YFw-hv-FwC" eventType="touchDown" id="iqJ-hc-Q1g"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xiQ-8C-XAk">
+                        <rect key="frame" x="204" y="1" width="38" height="38"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="38" id="ALS-by-lvb"/>
+                            <constraint firstAttribute="width" constant="38" id="rjo-0v-6oI"/>
+                        </constraints>
+                        <state key="normal" image="star_unactive"/>
+                        <connections>
+                            <action selector="smileTapped:" destination="YFw-hv-FwC" eventType="touchDown" id="ulX-7P-Vd9"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Okm-7M-sGY" firstAttribute="centerY" secondItem="CiO-uF-tDK" secondAttribute="centerY" id="Def-YS-nWg"/>
+                    <constraint firstItem="wIt-VR-fgO" firstAttribute="leading" secondItem="nLD-NK-f7M" secondAttribute="trailing" constant="20" id="HCf-br-PMA"/>
+                    <constraint firstItem="nLD-NK-f7M" firstAttribute="centerY" secondItem="CiO-uF-tDK" secondAttribute="centerY" id="NIE-eB-DR5"/>
+                    <constraint firstItem="xiQ-8C-XAk" firstAttribute="leading" secondItem="Okm-7M-sGY" secondAttribute="trailing" constant="20" id="R0B-j4-Zpp"/>
+                    <constraint firstItem="xiQ-8C-XAk" firstAttribute="centerY" secondItem="CiO-uF-tDK" secondAttribute="centerY" id="SVQ-zf-PWz"/>
+                    <constraint firstItem="cP9-o2-8oc" firstAttribute="leading" secondItem="xiQ-8C-XAk" secondAttribute="trailing" constant="20" id="bKU-pi-AsP"/>
+                    <constraint firstItem="Okm-7M-sGY" firstAttribute="centerX" secondItem="CiO-uF-tDK" secondAttribute="centerX" id="d3h-0m-K2r"/>
+                    <constraint firstItem="Okm-7M-sGY" firstAttribute="leading" secondItem="wIt-VR-fgO" secondAttribute="trailing" constant="20" id="dPU-1Z-nVU"/>
+                    <constraint firstItem="cP9-o2-8oc" firstAttribute="centerY" secondItem="CiO-uF-tDK" secondAttribute="centerY" id="qaM-2W-o9W"/>
+                    <constraint firstItem="wIt-VR-fgO" firstAttribute="centerY" secondItem="CiO-uF-tDK" secondAttribute="centerY" id="ySU-hm-QQw"/>
+                </constraints>
             </tableViewCellContentView>
-            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="-40" y="20"/>
+            <viewLayoutGuide key="safeArea" id="ZUv-Hl-Bkp"/>
+            <point key="canvasLocation" x="148" y="48"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="star_unactive" width="38" height="38"/>
+    </resources>
 </document>

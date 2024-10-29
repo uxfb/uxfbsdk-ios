@@ -11,6 +11,7 @@
 import UIKit
 
 enum FieldType: String {
+    
     case text = "text"
     case button = "button"
     case checkbox = "checkboxes"
