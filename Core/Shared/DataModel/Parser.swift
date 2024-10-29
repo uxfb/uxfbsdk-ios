@@ -63,6 +63,7 @@ class Parser {
         let campaingId = "\(campaignInfo["campaignId"] as! Int)"
         let projectId = "\(campaignInfo["projectId"] as! Int)"
         let autoclose: Double = campaignInfo["autoclose"] as? Double ?? 0.0
+        let progress: Bool = campaignInfo["progress"] as? Bool ?? false
         
         var targetings: Targeting?
         if let targetingDict = campaignInfo["targeting"] as? Dictionary<String, Any> {
@@ -156,19 +157,6 @@ class Parser {
                  let privacyValue = try decoder.decode(Privacy.self, from: jsonData)
                  
                  privacy = privacyValue
-             } catch {
-                 print(error)
-             }
-         }
-         
-         var progress: Progress?
-         if let privacyDict = campaignInfo["progress"] as? Dictionary<String, Any> {
-             do {
-                 let jsonData = try JSONSerialization.data(withJSONObject: privacyDict, options: [])
-                 let decoder = JSONDecoder()
-                 let progressValue = try decoder.decode(Progress.self, from: jsonData)
-                 
-                 progress = progressValue
              } catch {
                  print(error)
              }

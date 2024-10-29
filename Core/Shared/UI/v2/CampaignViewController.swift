@@ -114,7 +114,7 @@ internal class CampaignViewController: UIViewController {
         if presentHandler != nil {
             presentHandler!()
         }
-        if let progress = campaign?.progress?.enabled, progress {
+        if let progress = campaign?.progress, progress {
             progressLabel.isHidden = false
         } else {
             progressLabel.isHidden = true
