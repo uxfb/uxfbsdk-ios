@@ -23,7 +23,7 @@ class StarsCell: BaseCell {
             self.contentView.viewWithTag(tag)?.isUserInteractionEnabled = true
             self.contentView.viewWithTag(tag)?.addGestureRecognizer(tapGesture)
             
-            if currentValue == -1 || tag > self.currentValue + 1 {
+            if currentValue == -1 || tag > self.currentValue  {
                 (self.contentView.viewWithTag(tag) as? UIImageView)?.image = UIImage(named: "star_unactive",
                                                                                      in: Consts.bundle,
                                                                                      compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
@@ -123,7 +123,7 @@ class StarsCell: BaseCell {
     private func starTapped(_ sender: UITapGestureRecognizer){
         guard !animationInProgress,
               let tag = sender.view?.tag,
-              tag != currentValue + 1 else {
+              tag != currentValue  else {
             return
         }
         let oldValue = currentValue
@@ -133,7 +133,7 @@ class StarsCell: BaseCell {
         animateStars(reversed: oldValue > currentValue) {
             self.animationInProgress = false
             if self.delegate != nil {
-                self.delegate?.fieldChanged(self.field!, answer: [String(self.currentValue - 1)], refresh: true)
+                self.delegate?.fieldChanged(self.field!, answer: [String(self.currentValue)], refresh: true)
             }
         }
     }

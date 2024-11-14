@@ -16,10 +16,10 @@ class ImageCell: BaseCell {
             return
         }
         
-        guard let sets = field?.uiData["set"] as? Dictionary<String, Any> else {
+        guard let sets = field?.uiData["image"] as? Dictionary<String, Any> else {
             return
         }
-        var urlString = sets["1x"] as? String
+        var urlString = sets["2x"] as? String
         let scale = UIScreen.main.scale
         switch scale {
         case 2:
@@ -29,7 +29,7 @@ class ImageCell: BaseCell {
             urlString = sets["3x"] as? String
             break
         default:
-            urlString = sets["1x"] as? String
+            urlString = sets["2x"] as? String
             break
         }
         guard let urlString = urlString, let url = URL(string: urlString) else {
