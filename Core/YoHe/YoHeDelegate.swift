@@ -18,17 +18,22 @@ public protocol YoHeCampaignDelegate: FeedbackCampaignDelegate {
      /// - Parameter errorString: Error text
      func campaignDidReceiveError(errorString: String)
      /// Event after displaying the campaign form
-     /// - Parameter eventName: Name of the event passed to startCampaign
-     func campaignDidShow(eventName: String)
+     ///- Parameters:
+     /// - campaignId: Campaign identificator
+     /// - eventName: Name of the event passed to startCampaign
+     func campaignDidShow(campaignId: String, eventName: String)
      /// Campaign form closing event
-     /// - Parameter eventName: Name of the event passed to startCampaign
-     func campaignDidClose(eventName: String)
+     /// - Parameters:
+     /// - eventName: Name of the event passed to startCampaign
+     /// - campaignId: Campaign identificator
+     func campaignDidClose(campaignId: String, eventName: String)
      /// Campaign abort event
      /// - Parameters:
+     /// - campaignId: Campaign identificator
      /// - eventName: Name of the event passed to startCampaign
      /// - terminatedPage: The page where the campaign was terminated
      /// - totalPages: Total number of campaign pages
-     func campaignDidTerminate(eventName: String, terminatedPage: Int, totalPages: Int)
+     func campaignDidTerminate(campaignId: String, eventName: String, terminatedPage: Int, totalPages: Int)
      /// Event of sending campaign results to the server
      /// - Parameter campaignId: Campaign ID
      func campaignDidSend(campaignId: String)

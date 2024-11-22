@@ -19,17 +19,22 @@ public protocol UXFeedbackCampaignDelegate: FeedbackCampaignDelegate {
     /// - Parameter errorString: Текст ошибки
     func campaignDidReceiveError(errorString: String)
     /// Событие после показа формы кампании
-    /// - Parameter eventName: Имя переданного в startCampaign события
-    func campaignDidShow(eventName: String)
+    /// - Parameters:
+    /// - campaignId: Идентификатор кампании
+    /// - eventName: Имя переданного в startCampaign события
+    func campaignDidShow(campaignId: String, eventName: String)
     /// Событие закрытия формы кампании
-    /// - Parameter eventName: Имя переданного в startCampaign события
-    func campaignDidClose(eventName: String)
+    /// - Parameters:
+    /// - campaignId: Идентификатор кампании
+    /// - eventName: Имя переданного в startCampaign события
+    func campaignDidClose(campaignId: String, eventName: String)
     /// Событие прерывания прохождения кампании
     /// - Parameters:
+    ///   - campaignId: Идентификатор кампании
     ///   - eventName: Имя переданного в startCampaign события
     ///   - terminatedPage: Страница, на которой прохождение кампании было прервано
     ///   - totalPages: Общее количество страниц кампании
-    func campaignDidTerminate(eventName: String, terminatedPage: Int, totalPages: Int)
+    func campaignDidTerminate(campaignId: String, eventName: String, terminatedPage: Int, totalPages: Int)
     /// Событие отправки результатов кампании на сервер
     /// - Parameter campaignId: Идентификатор кампании
     func campaignDidSend(campaignId: String)
