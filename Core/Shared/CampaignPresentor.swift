@@ -74,14 +74,14 @@ internal class CampaignPresentor: NSObject {
         controller.presentHandler = { [weak self] in
             if let _ = self?._campaign {
                 self?.isFormOnScreen = true
-                self?.feedbackCampaignDelegate?.campaignDidShow(eventName: eventName)
+                self?.feedbackCampaignDelegate?.campaignDidShow(campaignId: campaign.campaignId, eventName: eventName)
             }
         }
         controller.didCloseHandler = { [weak self] in
             ImageManager.dispose()
             DispatchQueue.main.async {
                 self?.isFormOnScreen = false
-                self?.feedbackCampaignDelegate?.campaignDidClose(eventName: eventName)
+                self?.feedbackCampaignDelegate?.campaignDidClose(campaignId: campaign.campaignId, eventName: eventName)
             }
         }
         controller.completeHandler = { [weak self] (info, screenshots) in
@@ -94,7 +94,7 @@ internal class CampaignPresentor: NSObject {
             ImageManager.dispose()
             if let campaign = self?._campaign {
                 self?.delegate?.formSubmitted(info: info, screenshots: screenshots, campaign: campaign)
-                self?.feedbackCampaignDelegate?.campaignDidTerminate(eventName: eventName, terminatedPage: terminatedPage, totalPages: totalPages)
+                self?.feedbackCampaignDelegate?.campaignDidTerminate(campaignId: campaign.campaignId, eventName: eventName, terminatedPage: terminatedPage, totalPages: totalPages)
                 self?.isFormOnScreen = false
             }
         }

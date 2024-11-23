@@ -88,7 +88,7 @@ class MainViewController_swift: UIViewController {
 //            dateFormatter.dateFormat = "yyyy-MM-dd"
 //            var date = dateFormatter.date(from: "2024-03-29")
 //            
-            let attributes = UXFBAttributesBuilder()
+                _ = UXFBAttributesBuilder()
                 .addValue("A", value: 33)
                 .addValue("B", value: "b")
                 .build()
@@ -144,6 +144,18 @@ extension MainViewController_swift: UXFeedbackLogDelegate {
 }
 
 extension MainViewController_swift: UXFeedbackCampaignDelegate{
+    func campaignDidShow(campaignId: String, eventName: String) {
+        
+    }
+    
+    func campaignDidClose(campaignId: String, eventName: String) {
+        
+    }
+    
+    func campaignDidTerminate(campaignId: String, eventName: String, terminatedPage: Int, totalPages: Int) {
+        
+    }
+    
     
     func campaignDidSend(campaignId: String) {
         
@@ -151,14 +163,6 @@ extension MainViewController_swift: UXFeedbackCampaignDelegate{
     
     func campaignDidAnswered(campaignId: String, answers: [String : Any]) {
         
-    }
-    
-    func campaignDidTerminate(eventName: String, terminatedPage: Int, totalPages: Int) {
-        
-    }
-    
-    func campaignDidShow(eventName: String) {
-//        print("CAMPAIGN SHOWED")
     }
     
     func campaignDidLoad(success: Bool){
@@ -170,10 +174,6 @@ extension MainViewController_swift: UXFeedbackCampaignDelegate{
     
     func campaignDidReceiveError(errorString: String){
 //        DDLogDebug(errorString)
-    }
-    
-    func campaignDidClose(eventName: String) {
-        
     }
 }
 

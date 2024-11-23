@@ -110,7 +110,12 @@ class NpsCell: BaseCell {
             positiveLabel.numberOfLines = 2
         }
     }
-    @IBOutlet var slider: UISlider!
+    @IBOutlet var slider: UISlider! {
+        didSet {
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(sliderTapped(gestureRecognizer:)))
+            self.slider.addGestureRecognizer(tapGestureRecognizer)
+        }
+    }
     
     private var sliderView = SliderView(frame: CGRect(origin: .zero,
                                                          size: CGSize(width: 48,
@@ -234,6 +239,18 @@ class NpsCell: BaseCell {
     
     
     //MARK: - Actions
+    
+    @objc
+    private func sliderTapped(gestureRecognizer: UIGestureRecognizer) {
+        let pointTapped: CGPoint = gestureRecognizer.location(in: self.contentView)
+
+        let positionOfSlider: CGPoint = slider.frame.origin
+        let widthOfSlider: CGFloat = slider.frame.size.width
+        let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(slider.maximumValue) / widthOfSlider)
+
+        slider.setValue(Float(newValue), animated: true)
+        roundSlider()
+    }
     
     @IBAction func valueChanged(_ sender: Any) {
         updateLabels()
