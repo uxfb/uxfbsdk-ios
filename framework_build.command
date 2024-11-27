@@ -35,7 +35,7 @@ xcodebuild docbuild -scheme ${FRAMEWORK_NAME} \
 
 #Creating XCFramework
 echo "Creating XCFramework"
-xcodebuild -create-xcframework  -framework ${IOS_DEVICE_ARCHIVE_PATH}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework -framework ${SIMULATOR_ARCHIVE_PATH}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework -output "${FRAMEWORK_PATH}"
+xcodebuild -create-xcframework  -framework ${IOS_DEVICE_ARCHIVE_PATH}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework -framework ${SIMULATOR_ARCHIVE_PATH}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework -output "${FRAMEWORK_PATH}" 
 
 echo "Clean archives"
 #rm -rf "${SIMULATOR_ARCHIVE_PATH}"

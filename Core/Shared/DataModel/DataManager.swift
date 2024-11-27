@@ -719,7 +719,7 @@ class DataManager: FieldDelegate {
                 case .radiobutton, .email, .input:
                     item["value"] = (answer["value"] as? [String])?.first
                     
-                case .smiles, .nps, .rating:
+                case .smiles, .nps, .rating, .stars:
                     item["value"] = Int(((answer["value"] as? [String])?.first)!)
                     
                 default:

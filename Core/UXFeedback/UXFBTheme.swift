@@ -48,6 +48,8 @@ open class UXFBTheme: NSObject, ThemeProtocol {
     open var btnTextColor: UIColor =  UIColor.init("#FFFFFF")
     /// Цвет фона формы
     open var bgColor: UIColor =  UIColor.init("#FFFFFF")
+    /// Цвет звезд
+    open var iconRating: UIColor = UIColor.init("#FECA00")
     
     /// Шрифт заголовка формы. По умолчанию System:Semibold:22
     open var fontH1: UIFont = .systemFont(ofSize: 22,

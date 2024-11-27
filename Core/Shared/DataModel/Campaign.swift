@@ -18,21 +18,21 @@ struct Campaign {
     private(set) var theme: ThemeProtocol!
     private(set) var pages: Array<Page> = []
     private(set) var type: CampaignType!
-    private(set) var targeting: Array<Targeting>!
+    private(set) var targeting: Targeting!
     private(set) var transforms: Array<Transform>!
     private(set) var projectId: String!
     private(set) var autoclose: Double!
     private(set) var copyright: Copyright!
     private(set) var privacy: Privacy?
-    private(set) var progress: Progress?
+    private(set) var progress: Bool?
     
     func showDelay(eventName: String) -> TimeInterval {
         var delay: TimeInterval = 0.1
-        self.targeting.forEach { (targeting) in
-            if eventName == targeting.value, let seconds = targeting.seconds{
-                delay = seconds
-            }
+        
+        if eventName == targeting.value, let seconds = targeting.seconds{
+            delay = seconds
         }
+
         return delay
     }
     

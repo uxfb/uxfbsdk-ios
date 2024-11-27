@@ -42,38 +42,41 @@ class Parser {
         return nil
     }
     
-    func parseCampaign(campaignInfo: Dictionary<String,Any>) -> Campaign?{
+    func parseCopyright(copyrightInfo: Dictionary<String,Any>) -> Copyright?{
+        var copyright: Copyright?
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: copyrightInfo, options: [])
+            let decoder = JSONDecoder()
+            let copyrightValue = try decoder.decode(Copyright.self, from: jsonData)
+            
+            copyright = copyrightValue
+        } catch {
+            print(error)
+        }
+        
+        return copyright
+    }
+    
+    func parseCampaign(campaignInfo: Dictionary<String,Any>, copyright: Copyright?) -> Campaign?{
         
         let type = "\(campaignInfo["type"] as! Int)"
-//        let targetingArr = campaignInfo["targeting"] as! Array<Dictionary<String, Any>>
         let campaingId = "\(campaignInfo["campaignId"] as! Int)"
         let projectId = "\(campaignInfo["projectId"] as! Int)"
         let autoclose: Double = campaignInfo["autoclose"] as? Double ?? 0.0
-//        let showCopyright: Bool = campaignInfo["showCopyright"] as? Bool ?? true
+        let progress: Bool = campaignInfo["progress"] as? Bool ?? false
         
-        var copyright: Copyright?
-        if let copyrightDict = campaignInfo["copyright"] as? Dictionary<String, Any> {
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: copyrightDict, options: [])
-                let decoder = JSONDecoder()
-                let copyrightValue = try decoder.decode(Copyright.self, from: jsonData)
-                
-                copyright = copyrightValue
-            } catch {
-                print(error)
-            }
-        }
-        
-        var targetings: [Targeting] = []
-        if let copyrightDict = campaignInfo["targeting"] as? Array<Dictionary<String, Any>> {
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: copyrightDict, options: [])
-                let decoder = JSONDecoder()
-                let targetingsValue = try decoder.decode([Targeting].self, from: jsonData)
-                
-                targetings = targetingsValue
-            } catch {
-                print(error)
+        var targetings: Targeting?
+        if let targetingDict = campaignInfo["targeting"] as? Dictionary<String, Any> {
+            if let triggerDict = targetingDict["trigger"] {
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: triggerDict, options: [])
+                    let decoder = JSONDecoder()
+                    let targetingsValue = try decoder.decode(Targeting.self, from: jsonData)
+                    
+                    targetings = targetingsValue
+                } catch {
+                    print(error)
+                }
             }
         }
         
@@ -158,22 +161,7 @@ class Parser {
                  print(error)
              }
          }
-         
-         var progress: Progress?
-         if let privacyDict = campaignInfo["progress"] as? Dictionary<String, Any> {
-             do {
-                 let jsonData = try JSONSerialization.data(withJSONObject: privacyDict, options: [])
-                 let decoder = JSONDecoder()
-                 let progressValue = try decoder.decode(Progress.self, from: jsonData)
-                 
-                 progress = progressValue
-             } catch {
-                 print(error)
-             }
-         }
-        if campaingId == "1854" {
-            print(campaignInfo)
-        }
+        
          return Campaign(campaignId: campaingId,
                          theme: theme,
                          pages: pages,
