@@ -16,12 +16,12 @@ class SmilesCell: BaseCell {
     override func updateUI() {
         currentValue = Int(field?.answers.first ?? "") ?? -1
         
-        let color = (field!.isError && currentValue == -1) ? theme?.errorColorSecondary : UIColor.clear
+//        let color = (field!.isError && currentValue == -1) ? theme?.errorColorSecondary : UIColor.clear
 
         for tag in 1...5 {
             self.contentView.viewWithTag(tag)?.cornerRadius = 19
-            self.contentView.viewWithTag(tag)?.borderColor = color
-            self.contentView.viewWithTag(tag)?.borderWidth = 2
+//            self.contentView.viewWithTag(tag)?.borderColor = color
+//            self.contentView.viewWithTag(tag)?.borderWidth = 0
 
             if currentValue == -1 {
                 self.contentView.viewWithTag(tag)?.alpha = 1

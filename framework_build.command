@@ -32,9 +32,9 @@ mkdir -p "$FRAMEWORK_PATH"
 
 echo "Archiving ${FRAMEWORK_NAME}"
 
-xcodebuild archive -scheme ${FRAMEWORK_NAME} -destination="iOS" -archivePath "${IOS_DEVICE_ARCHIVE_PATH}" -sdk iphoneos SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES GCC_GENERATE_DEBUGGING_SYMBOLS=YES
+xcodebuild archive -scheme ${FRAMEWORK_NAME} -destination="iOS" -archivePath "${IOS_DEVICE_ARCHIVE_PATH}" -derivedDataPath "./build/derived_device" -sdk iphoneos SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES 
 
-xcodebuild archive -scheme ${FRAMEWORK_NAME} -destination="iOS Simulator" -archivePath "${SIMULATOR_ARCHIVE_PATH}" -sdk iphonesimulator SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES GCC_GENERATE_DEBUGGING_SYMBOLS=YES
+xcodebuild archive -scheme ${FRAMEWORK_NAME} -destination="iOS Simulator" -archivePath "${SIMULATOR_ARCHIVE_PATH}"  -derivedDataPath "./build/derived_simulator" -sdk iphonesimulator SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES
 
 xcodebuild docbuild -scheme ${FRAMEWORK_NAME} \
     -derivedDataPath "${DOCS_ARCHIVE_PATH}" \
@@ -44,7 +44,6 @@ xcodebuild docbuild -scheme ${FRAMEWORK_NAME} \
 echo "Creating XCFramework"
 xcodebuild -create-xcframework  \
 -framework ${IOS_DEVICE_ARCHIVE_PATH}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework \
--debug-symbols  "/Users/alexpotemka/_projects/-ios/ios-sdk/Documentation/Build/Products/Release-iphoneos/UXFeedbackSDK.framework.dSYM" \
 -framework ${SIMULATOR_ARCHIVE_PATH}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework \
 -output "${FRAMEWORK_PATH}" \
 

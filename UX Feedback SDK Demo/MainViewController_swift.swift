@@ -94,7 +94,7 @@ class MainViewController_swift: UIViewController {
                 .build()
             
 
-            UXFeedback.sdk.startCampaign(eventName: "ios_stars")
+            UXFeedback.sdk.startCampaign(eventName: "deposit_topup")
 //            UXFeedback.sdk.settings.
             break
         case 2:

@@ -16,7 +16,7 @@ class StarsCell: BaseCell {
     override func updateUI() {
         currentValue = Int(field?.answers.first ?? "") ?? -1
         
-        let color = (field!.isError && currentValue == -1) ? theme?.errorColorSecondary.withAlphaComponent(0.5) : theme?.iconColor
+        let color = (field!.isError && currentValue == -1) ? theme?.iconColor : theme?.iconColor
         
         for tag in 1...5 {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(starTapped(_ :)))

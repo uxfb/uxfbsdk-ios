@@ -44,8 +44,6 @@ class EmailCell: BaseCell, UITextFieldDelegate {
             textField.layer.borderWidth = 1
             textField.layer.borderColor = theme?.inputBorderColor.cgColor
         }
-        
-        
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
