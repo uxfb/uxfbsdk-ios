@@ -333,7 +333,7 @@ class DataManager: FieldDelegate {
         
         let font = (campaign?.theme.fontH2)!
         let lines = value.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
-                                     font: font)//.mediumSemiboldFont)
+                                     font: font)
         let valueHeight = CGFloat(lines) * font.lineHeight + getTitleSpacing(field)
         return valueHeight
     }
