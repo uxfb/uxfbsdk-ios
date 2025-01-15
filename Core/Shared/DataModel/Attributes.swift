@@ -49,8 +49,12 @@ public enum AttributeDecodable: Decodable {
         return double as NSNumber
       case .int(let num):
         return num as NSNumber
-      default:
-        return nil
+      case .string(let num):
+        if let myNum = Double(num) {
+            return myNum as NSNumber
+        } else {
+            return nil
+        }
     }
   }
 }

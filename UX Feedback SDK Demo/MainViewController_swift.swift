@@ -88,13 +88,12 @@ class MainViewController_swift: UIViewController {
 //            dateFormatter.dateFormat = "yyyy-MM-dd"
 //            var date = dateFormatter.date(from: "2024-03-29")
 //            
-                _ = UXFBAttributesBuilder()
-                .addValue("A", value: 33)
-                .addValue("B", value: "b")
+                let atts = UXFBAttributesBuilder()
+                .addValue("a_f_k1", value: 3)
                 .build()
             
 
-            UXFeedback.sdk.startCampaign(eventName: "deposit_topup")
+                UXFeedback.sdk.startCampaign(eventName: "product_card_opened", attributes: atts)
 //            UXFeedback.sdk.settings.
             break
         case 2:
