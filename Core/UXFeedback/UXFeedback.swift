@@ -317,8 +317,16 @@ open class UXFeedback: NSObject {
   
   /// Метод показа кампании по указанному событию
   /// - Parameter eventName: Название события
+  /// - Parameter attributes: Аттрибуты показа кампании
   open func startCampaign(eventName: String, attributes: [Attribute]? = nil) {
-    DDLog("Attempt starting: \(eventName)")
+      var attributesString: [String] = []
+      
+      if let attributes = attributes {
+          for attribute in attributes {
+              attributesString.append("name: \(attribute.attributeName), value: \(attribute.attributeValue ?? "")")
+          }
+      }
+      DDLog("Attempt starting: \(eventName)\nAttributes: \(attributesString)")
     
     guard task == nil else {
       DDLog("Some campaign already started")
