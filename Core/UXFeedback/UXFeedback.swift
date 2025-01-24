@@ -323,7 +323,15 @@ open class UXFeedback: NSObject {
       
       if let attributes = attributes {
           for attribute in attributes {
-              attributesString.append("name: \(attribute.attributeName), value: \(attribute.attributeValue ?? "")")
+              let name = attribute.attributeName
+              var value = attribute.attributeValue
+              if let date = value as? Date {
+                  let formatter = DateFormatter()
+                  formatter.dateFormat = "dd.MM.yyyy HH:mm:ss"
+                  value = formatter.string(from: date)
+              }
+              
+              attributesString.append("name: \(name), value: \(value ?? "")")
           }
       }
       DDLog("Attempt starting: \(eventName)\nAttributes: \(attributesString)")

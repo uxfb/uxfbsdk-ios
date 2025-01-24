@@ -90,7 +90,7 @@ class MainViewController_swift: UIViewController {
 //            
                 let atts = UXFBAttributesBuilder()
                 .addValue("a_f_k1", value: 3)
-                .addValue("blabla", value: "55")
+                .addValue("blabla", value: Date())
                 .build()
             
 
