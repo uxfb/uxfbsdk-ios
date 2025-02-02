@@ -89,12 +89,11 @@ class MainViewController_swift: UIViewController {
 //            var date = dateFormatter.date(from: "2024-03-29")
 //            
                 let atts = UXFBAttributesBuilder()
-                .addValue("a_f_k1", value: 3)
-                .addValue("blabla", value: Date())
+                    .addValue("test_att", value: 4)
                 .build()
             
 
-                UXFeedback.sdk.startCampaign(eventName: "product_card_opened", attributes: atts)
+                UXFeedback.sdk.startCampaign(eventName: "реgg", attributes: atts)
 //            UXFeedback.sdk.settings.
             break
         case 2:

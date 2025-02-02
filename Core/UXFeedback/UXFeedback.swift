@@ -216,20 +216,29 @@ open class UXFeedback: NSObject {
       }) {
         switch campaignAttribute.rule {
           case "equal":
-            if let string = campaignAttribute.value?.getString(),
-               let appAttribute = attribute.attributeValue as? String{
-              if appAttribute != string {
-                completion(false)
-                return
-              }
-            } else {
-              completion(false)
-              return
-            }
+                if let value = campaignAttribute.value {
+                    if let string = value.getString(),
+                       let appAttribute = attribute.attributeValue as? String {
+                        if appAttribute != string {
+                          completion(false)
+                          return
+                        }
+                    } else if let number = value.getNumber(),
+                              let appAttribute = attribute.attributeValue as? NSNumber {
+                        
+                        if appAttribute.compare(number) != .orderedSame {
+                            completion(false)
+                            return
+                        }
+                    } 
+                } else {
+                    completion(false)
+                    return
+                }
             
           case "contain":
             if let string = campaignAttribute.value?.getString(),
-               let appAttribute = attribute.attributeValue as? String{
+               let appAttribute = attribute.attributeValue as? String {
               if !appAttribute.contains(string) {
                 completion(false)
                 return

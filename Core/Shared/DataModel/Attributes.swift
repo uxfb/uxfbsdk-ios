@@ -27,6 +27,7 @@ public enum AttributeDecodable: Decodable {
       self = .int(int)
       return
     }
+      
     throw Error.couldNotDecode
   }
   enum Error: Swift.Error {
@@ -109,7 +110,7 @@ public class AttributesBuilder {
   }
   
   public func addValue(_ name: String, value: Bool) -> AttributesBuilder {
-    let attribute = Attribute(attributeName: name, attributeValue: value)
+    let attribute = Attribute(attributeName: name, attributeValue: value.description)
     append(attribute)
     return self
   }
