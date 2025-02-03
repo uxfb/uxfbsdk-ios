@@ -212,6 +212,8 @@
 		BFA54F8427AA86A2003D6411 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA54F8327AA86A2003D6411 /* Crypto.swift */; };
 		BFB17FC62BB804050024FED5 /* Targeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB17FC52BB804050024FED5 /* Targeting.swift */; };
 		BFB17FC72BB804050024FED5 /* Targeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB17FC52BB804050024FED5 /* Targeting.swift */; };
+		BFB5093A2D50B6C000021998 /* YoHeSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB509392D50B6BA00021998 /* YoHeSwiftUI.swift */; };
+		BFB5093C2D50B6C900021998 /* YoHeAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB5093B2D50B6C400021998 /* YoHeAttributes.swift */; };
 		BFB6DEFC27043D7200732D29 /* Screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFB27043D7200732D29 /* Screenshot.swift */; };
 		BFB6DEFE27044E4300732D29 /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFD27044E4300732D29 /* Data+.swift */; };
 		BFBAFA952ADFE99B003CC167 /* Copyright.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBAFA942ADFE99B003CC167 /* Copyright.swift */; };
@@ -484,6 +486,8 @@
 		BFAFC6862919325A00F99607 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		BFAFC6882919326200F99607 /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
 		BFB17FC52BB804050024FED5 /* Targeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Targeting.swift; sourceTree = "<group>"; };
+		BFB509392D50B6BA00021998 /* YoHeSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoHeSwiftUI.swift; sourceTree = "<group>"; };
+		BFB5093B2D50B6C400021998 /* YoHeAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoHeAttributes.swift; sourceTree = "<group>"; };
 		BFB6DEFB27043D7200732D29 /* Screenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screenshot.swift; sourceTree = "<group>"; };
 		BFB6DEFD27044E4300732D29 /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
 		BFB85E792A42D7E5000208D2 /* YoHe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoHe.swift; sourceTree = "<group>"; };
@@ -1081,6 +1085,8 @@
 		BFF303B32A42E0CE00E513EA /* YoHe */ = {
 			isa = PBXGroup;
 			children = (
+				BFB5093B2D50B6C400021998 /* YoHeAttributes.swift */,
+				BFB509392D50B6BA00021998 /* YoHeSwiftUI.swift */,
 				BFB85E792A42D7E5000208D2 /* YoHe.swift */,
 				BFF303B02A42E0B900E513EA /* YoHeDelegate.swift */,
 				BFF303B62A42E1D900E513EA /* YoHeConsts.swift */,
@@ -1476,6 +1482,7 @@
 				BF43801F2A4428AF009975EB /* CGFloat+.swift in Sources */,
 				BF4380212A4428AF009975EB /* ScreenshotCell.swift in Sources */,
 				BF4380232A4428AF009975EB /* Decodable+.swift in Sources */,
+				BFB5093A2D50B6C000021998 /* YoHeSwiftUI.swift in Sources */,
 				BF4380252A4428AF009975EB /* RequestModel.xcdatamodeld in Sources */,
 				BF4380262A4428AF009975EB /* StringExtension.swift in Sources */,
 				BF4380272A4428AF009975EB /* Field.swift in Sources */,
@@ -1535,6 +1542,7 @@
 				BF4380592A4428AF009975EB /* UIImage+Tinting.swift in Sources */,
 				BF5896D62B9F863300070769 /* Attributes.swift in Sources */,
 				BFBF357E2C469B2200B3D263 /* ToggleStatus.swift in Sources */,
+				BFB5093C2D50B6C900021998 /* YoHeAttributes.swift in Sources */,
 				BF43805A2A4428AF009975EB /* UIButton+.swift in Sources */,
 				BFDE2FD12A86233000F6C6CF /* Documentation.docc in Sources */,
 				BF43805B2A4428AF009975EB /* Reachability.swift in Sources */,

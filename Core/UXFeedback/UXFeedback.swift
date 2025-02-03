@@ -42,11 +42,7 @@ open class UXFeedback: NSObject {
   open var theme: UXFBTheme = UXFBTheme()
   
   /// Дополнительные параметры, которые будут переданы при завершении прохождения опроса
-  open var properties: [String: Any] = [:] {
-    didSet {
-      
-    }
-  }
+  open var properties: [String: Any] = [:] 
   
   private var appId: String?
   

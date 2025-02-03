@@ -11,11 +11,11 @@ import Foundation
 internal class Consts {
     static let os: String = "iOS"
     static let cryptoKey: String = "YoHe"
-    static let version: String = "v1.1.0"
+    static let version: String = "v1.2.0"
     static let defaultHref: String = ""
 //    static let defaultEndpoint: String = "https://public-api.yohe.io"
     static let defaultEndpoint: String = "https://develop.api.uxfb.space"
-    static let apiVersion: String = "v8"
+    static let apiVersion: String = "v13"
     static let identifier: String  = "biz.andalex.yohe.sdk"
     
     static let bundle: Bundle = Bundle(for: YoHe.self)
