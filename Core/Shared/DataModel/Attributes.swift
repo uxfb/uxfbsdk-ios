@@ -110,7 +110,7 @@ public class AttributesBuilder {
   }
   
   public func addValue(_ name: String, value: Bool) -> AttributesBuilder {
-    let attribute = Attribute(attributeName: name, attributeValue: value.description)
+    let attribute = Attribute(attributeName: name, attributeValue: value)
     append(attribute)
     return self
   }

@@ -11,7 +11,7 @@ import Foundation
 internal class Consts {
     static let os: String = "iOS"
     static let cryptoKey: String = "YoHe"
-    static let version: String = "v1.2.0"
+    static let version: String = "1.2.0"
     static let defaultHref: String = ""
 //    static let defaultEndpoint: String = "https://public-api.yohe.io"
     static let defaultEndpoint: String = "https://develop.api.uxfb.space"

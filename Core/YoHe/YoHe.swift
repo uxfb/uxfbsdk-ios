@@ -191,122 +191,6 @@ open class YoHe: NSObject {
         }
     }
     
-    private func checkAttibutes(campaignId: String, targeting: Targeting, attributes: [Attribute], completion: @escaping (Bool) -> Void) {
-      guard let campaignAttributes = targeting.attributes, campaignAttributes.count > 0  else {
-        completion(true)
-        return
-      }
-      
-      var checkAttributes: [Attribute] = []
-      for campaignAttribute in campaignAttributes {
-        if let attribute = attributes.first(where: { att in
-          att.attributeName == campaignAttribute.attributeName
-        }) {
-          switch campaignAttribute.rule {
-            case "equal":
-                  if let value = campaignAttribute.value {
-                      if let string = value.getString(),
-                         let appAttribute = attribute.attributeValue as? String {
-                          if appAttribute != string {
-                            completion(false)
-                            return
-                          }
-                      } else if let number = value.getNumber(),
-                                let appAttribute = attribute.attributeValue as? NSNumber {
-                          
-                          if appAttribute.compare(number) != .orderedSame {
-                              completion(false)
-                              return
-                          }
-                      }
-                  } else {
-                      completion(false)
-                      return
-                  }
-              
-            case "contain":
-              if let string = campaignAttribute.value?.getString(),
-                 let appAttribute = attribute.attributeValue as? String {
-                if !appAttribute.contains(string) {
-                  completion(false)
-                  return
-                }
-              } else {
-                completion(false)
-                return
-              }
-              
-            case "dateRange":
-              let dateFormatter = DateFormatter()
-              dateFormatter.dateFormat = "yyyy-MM-dd"
-              var minDate = dateFormatter.date(from: "1900-01-01")
-              var maxDate = dateFormatter.date(from: "2099-01-01")
-              
-              let valueDate = attribute.attributeValue as? Date
-              let minString = campaignAttribute.valueFrom?.getString()
-              let maxString = campaignAttribute.valueTo?.getString()
-              
-              if (minString != nil || maxString != nil) && valueDate != nil {
-                minDate = dateFormatter.date(from: minString ?? "1900-01-01")!
-                maxDate = dateFormatter.date(from: maxString ?? "2099-01-01")!
-                
-                if (valueDate!.compare(maxDate!) == .orderedAscending || valueDate!.compare(maxDate!) == .orderedSame),
-                   (valueDate!.compare(minDate!) == .orderedDescending ||
-                    valueDate!.compare(minDate!) == .orderedSame) {
-                  break
-                } else {
-                  completion(false)
-                  return
-                }
-              } else {
-                completion(false)
-                return
-              }
-              
-            case "numberRange":
-              if let valueNumber = attribute.attributeValue as? NSNumber {
-                let minValue = campaignAttribute.valueFrom?.getNumber() ?? NSNumber(integerLiteral: .min)
-                let maxValue = campaignAttribute.valueTo?.getNumber()  ?? NSNumber(integerLiteral: .max)
-                
-                if (valueNumber.compare(maxValue) == .orderedAscending ||
-                    valueNumber.compare(maxValue) == .orderedSame) &&
-                    (valueNumber.compare(minValue) == .orderedDescending ||
-                     valueNumber.compare(minValue) == .orderedSame) {
-                  break
-                } else {
-                  completion(false)
-                  return
-                }
-              } else {
-                completion(false)
-                return
-              }
-            case "list":
-              checkAttributes.append(attribute)
-              
-            default:
-              completion(false)
-              return
-          }
-        } else {
-          completion(false)
-          return
-        }
-      }
-      
-      if checkAttributes.count > 0 {
-        DispatchQueue.global(qos: .utility).async {
-          self._requestManager.sendAttributes(appId: self.appId!,
-                                              campaignId: campaignId,
-                                              attributes: checkAttributes) { result in
-            completion(result)
-          }
-        }
-      } else {
-        completion(true)
-      }
-    }
-    
     private func clearTask() {
       self.task?.cancel()
       self.task = nil
@@ -349,9 +233,11 @@ open class YoHe: NSObject {
           
             return targeting != nil
       }), let targeting = targeting {
-        self.checkAttibutes(campaignId: campaign.campaignId,
-                            targeting: targeting,
-                            attributes: attributes ?? []) { result in
+          AttributeManager.checkAttributes(appId: self.appId!,
+                                           requestManager: self._requestManager,
+                                           campaignId: campaign.campaignId,
+                                           targeting: targeting,
+                                           attributes: attributes ?? []) { result in
           if result {
             let isMultiVisited = targeting.isMultiVisited ?? false
             

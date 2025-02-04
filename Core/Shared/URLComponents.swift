@@ -98,5 +98,4 @@ class URLComponents: NSObject{
         _path = path
         self.queryItems = queryParameters
     }
-    
 }
