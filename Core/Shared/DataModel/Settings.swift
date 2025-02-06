@@ -28,27 +28,3 @@ protocol SettingsProtocol {
     var sdkPlatform: String? { get set }
     var sdkPlatformVersion: String? { get set }
 }
-
-
-//@objcMembers
-//open class Settings: NSObject {
-//    open var globalDelayTimer: Int = 1800
-//    open var closeOnSwipe: Bool = false
-//    open var debugEnabled: Bool = false
-//    open var fieldsEventEnabled: Bool = false
-//    open var retryTimeout: Double = 300
-//    open var retryCount: Int = 3
-//    open var socketTimeout: Double = 5
-//    open var slideInUiBlocked: Bool = false
-//    open var slideInUiBlackoutColor: String?
-//    open var slideInUiBlackoutOpacity: Int?
-//    open var slideInUiBlackoutBlur: Int?
-//    open var popupUiBlackoutColor: String?
-//    open var popupUiBlackoutOpacity: Int?
-//    open var popupUiBlackoutBlur: Int?
-//    open var endpoint: String?
-//
-//    public override init() {
-//        super.init()
-//    }
-//}

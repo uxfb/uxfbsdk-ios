@@ -21,7 +21,14 @@ class AttributeManager {
             switch campaignAttribute.rule {
               case "equal":
                     if let value = campaignAttribute.value {
-                        if let string = value.getString() {
+                        if let number = value.getNumber(),
+                           let appAttribute = attribute.attributeValue as? NSNumber {
+                            
+                            if appAttribute.compare(number) != .orderedSame {
+                                completion(false)
+                                return
+                            }
+                        } else if let string = value.getString() {
                             var appAttribute: String?
                             if let appValue = attribute.attributeValue as? String {
                                 appAttribute = appValue
@@ -32,13 +39,6 @@ class AttributeManager {
                             if appAttribute != string {
                               completion(false)
                               return
-                            }
-                        } else if let number = value.getNumber(),
-                                  let appAttribute = attribute.attributeValue as? NSNumber {
-                            
-                            if appAttribute.compare(number) != .orderedSame {
-                                completion(false)
-                                return
                             }
                         }
                     } else {

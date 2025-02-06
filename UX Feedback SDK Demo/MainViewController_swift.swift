@@ -89,7 +89,7 @@ class MainViewController_swift: UIViewController {
 //            var date = dateFormatter.date(from: "2024-03-29")
 //            
                 let atts = UXFBAttributesBuilder()
-                    .addValue("test_att", value: 4)
+                    .addValue("test_att", value: 7)
                 .build()
             
 
