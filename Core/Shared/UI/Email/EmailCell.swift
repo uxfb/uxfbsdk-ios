@@ -9,12 +9,25 @@
 import UIKit
 
 class EmailCell: BaseCell, UITextFieldDelegate {
-    @IBOutlet var textField: UITextField! {
-        didSet {
-            textField.delegate = self
-            textField.spellCheckingType = .no
-            textField.autocorrectionType = .no
-        }
+    private lazy var textField: UITextField = {
+        let view = UITextField()
+        view.delegate = self
+        view.spellCheckingType = .no
+        view.autocorrectionType = .no
+        return view
+    }()
+    
+    override func setupSubviews() {
+        contentView.addSubview(textField)
+        
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            textField.topAnchor.constraint(equalTo: contentView.topAnchor),
+            textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
     }
     
     override func updateUI() {
@@ -53,10 +66,10 @@ class EmailCell: BaseCell, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-        if delegate != nil {
+//        let newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+//        if delegate != nil {
 //            self.delegate?.fieldChanged(self.field!, answer: [newText], refresh: false)
-        }
+//        }
         return true
     }
     

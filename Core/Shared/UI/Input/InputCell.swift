@@ -11,9 +11,9 @@ import UIKit
 class InputCell: BaseCell {
     private lazy var textView: UITextView = {
         let view = UITextView()
-        textView.backgroundColor = .clear
-        textView.delegate = self
-        textView.textContainerInset = UIEdgeInsets(top: 8, left: 6, bottom: 8, right: 6)
+        view.backgroundColor = .clear
+        view.delegate = self
+        view.textContainerInset = UIEdgeInsets(top: 8, left: 6, bottom: 8, right: 6)
         return view
     }()
     

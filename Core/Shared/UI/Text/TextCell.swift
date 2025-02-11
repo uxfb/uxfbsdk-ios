@@ -9,7 +9,24 @@
 import UIKit
 
 class TextCell: BaseCell {
-    @IBOutlet var label: UILabel!
+    private lazy var label: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    override func setupSubviews() {
+        contentView.addSubview(label)
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            label.topAnchor.constraint(equalTo: contentView.topAnchor),
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
+    }
     
     override func updateUI() {
         guard field != nil, theme != nil else {

@@ -65,9 +65,6 @@
 		BF2806D92562B6A5006F2D61 /* RadioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28068D2562B18F006F2D61 /* RadioCell.xib */; };
 		BF2806DB2562B6A5006F2D61 /* CheckboxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806942562B18F006F2D61 /* CheckboxCell.xib */; };
 		BF2806DC2562B6A5006F2D61 /* CheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806982562B18F006F2D61 /* CheckCell.xib */; };
-		BF2806DD2562B6A6006F2D61 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069A2562B18F006F2D61 /* ImageCell.xib */; };
-		BF2806E02562B6A6006F2D61 /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806A22562B18F006F2D61 /* TextCell.xib */; };
-		BF2806E22562B6A6006F2D61 /* EmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AB2562B18F006F2D61 /* EmailCell.xib */; };
 		BF2D682229EEDD2400547634 /* DataRequest+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D682029EEDD0B00547634 /* DataRequest+CoreData.swift */; };
 		BF2D682829EEE27C00547634 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D682729EEE27B00547634 /* UIFont+.swift */; };
 		BF316C102684AABC007CEFC0 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF316C0F2684AABC007CEFC0 /* VisualEffectView.swift */; };
@@ -194,15 +191,12 @@
 		BFB509D72D50E6D000021998 /* ScreenshotCreator.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573ECE26B6A157002A9E8C /* ScreenshotCreator.xib */; };
 		BFB509D92D50E6D000021998 /* CheckboxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806942562B18F006F2D61 /* CheckboxCell.xib */; };
 		BFB509DA2D50E6D000021998 /* CheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806982562B18F006F2D61 /* CheckCell.xib */; };
-		BFB509DB2D50E6D000021998 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069A2562B18F006F2D61 /* ImageCell.xib */; };
 		BFB509DC2D50E6D000021998 /* RatingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF0CE19A27661C2200916B32 /* RatingCell.xib */; };
 		BFB509E02D50E6D000021998 /* ImageCollection.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF63170D26B67465006F408A /* ImageCollection.xib */; };
-		BFB509E12D50E6D000021998 /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806A22562B18F006F2D61 /* TextCell.xib */; };
 		BFB509E32D50E6D000021998 /* ScreenshotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF6316F926B279ED006F408A /* ScreenshotCell.xib */; };
 		BFB509E42D50E6D000021998 /* ImageSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC326B69E25002A9E8C /* ImageSelector.xib */; };
 		BFB509E52D50E6D000021998 /* ScreenshotImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF63170526B670CF006F408A /* ScreenshotImageCell.xib */; };
 		BFB509E62D50E6D000021998 /* NpsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF40564D265CD86700709351 /* NpsCell.xib */; };
-		BFB509E72D50E6D000021998 /* EmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806AB2562B18F006F2D61 /* EmailCell.xib */; };
 		BFB509E92D50E6D000021998 /* GalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC826B69F0C002A9E8C /* GalleryCell.xib */; };
 		BFB509F12D50ECDB00021998 /* YYAnimatedImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF42A4324A8009975EB /* YYAnimatedImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFB509F22D50ECDB00021998 /* YYFrameImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF22A4324A8009975EB /* YYFrameImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -366,16 +360,13 @@
 		BF2806952562B18F006F2D61 /* CheckboxCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckboxCell.swift; sourceTree = "<group>"; };
 		BF2806972562B18F006F2D61 /* CheckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckCell.swift; sourceTree = "<group>"; };
 		BF2806982562B18F006F2D61 /* CheckCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckCell.xib; sourceTree = "<group>"; };
-		BF28069A2562B18F006F2D61 /* ImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
 		BF28069B2562B18F006F2D61 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		BF28069E2562B18F006F2D61 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		BF2806A12562B18F006F2D61 /* TextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
-		BF2806A22562B18F006F2D61 /* TextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextCell.xib; sourceTree = "<group>"; };
 		BF2806A32562B18F006F2D61 /* CampaignViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CampaignViewController.swift; sourceTree = "<group>"; };
 		BF2806A52562B18F006F2D61 /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		BF2806A82562B18F006F2D61 /* HeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
 		BF2806AA2562B18F006F2D61 /* EmailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailCell.swift; sourceTree = "<group>"; };
-		BF2806AB2562B18F006F2D61 /* EmailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailCell.xib; sourceTree = "<group>"; };
 		BF2806AE2562B18F006F2D61 /* SmilesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmilesCell.swift; sourceTree = "<group>"; };
 		BF2D682029EEDD0B00547634 /* DataRequest+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataRequest+CoreData.swift"; sourceTree = "<group>"; };
 		BF2D682429EEDE0100547634 /* UXFeedbackSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = UXFeedbackSDK.docc; sourceTree = "<group>"; };
@@ -777,7 +768,6 @@
 		BF2806992562B18F006F2D61 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				BF28069A2562B18F006F2D61 /* ImageCell.xib */,
 				BF28069B2562B18F006F2D61 /* ImageCell.swift */,
 			);
 			path = Image;
@@ -795,7 +785,6 @@
 			isa = PBXGroup;
 			children = (
 				BF2806A12562B18F006F2D61 /* TextCell.swift */,
-				BF2806A22562B18F006F2D61 /* TextCell.xib */,
 			);
 			path = Text;
 			sourceTree = "<group>";
@@ -820,7 +809,6 @@
 			isa = PBXGroup;
 			children = (
 				BF2806AA2562B18F006F2D61 /* EmailCell.swift */,
-				BF2806AB2562B18F006F2D61 /* EmailCell.xib */,
 			);
 			path = Email;
 			sourceTree = "<group>";
@@ -1240,16 +1228,13 @@
 				BF573ECF26B6A157002A9E8C /* ScreenshotCreator.xib in Resources */,
 				BF2806DB2562B6A5006F2D61 /* CheckboxCell.xib in Resources */,
 				BF2806DC2562B6A5006F2D61 /* CheckCell.xib in Resources */,
-				BF2806DD2562B6A6006F2D61 /* ImageCell.xib in Resources */,
 				BF0CE19E27661DAD00916B32 /* RatingCell.xib in Resources */,
 				BF1C11BE2ABD67CC0085DB10 /* UXFeedbackSDK.plist in Resources */,
 				BF63171326B67509006F408A /* ImageCollection.xib in Resources */,
-				BF2806E02562B6A6006F2D61 /* TextCell.xib in Resources */,
 				BF63170226B2B25D006F408A /* ScreenshotCell.xib in Resources */,
 				BF573EC426B69E25002A9E8C /* ImageSelector.xib in Resources */,
 				BF573ED126B6CBBF002A9E8C /* ScreenshotImageCell.xib in Resources */,
 				BF405651265CD8A200709351 /* NpsCell.xib in Resources */,
-				BF2806E22562B6A6006F2D61 /* EmailCell.xib in Resources */,
 				BF573ECA26B69F0C002A9E8C /* GalleryCell.xib in Resources */,
 				0A4689A722840BB90074E1A3 /* UXFeedback.xcassets in Resources */,
 			);
@@ -1265,15 +1250,12 @@
 				BFB509D72D50E6D000021998 /* ScreenshotCreator.xib in Resources */,
 				BFB509D92D50E6D000021998 /* CheckboxCell.xib in Resources */,
 				BFB509DA2D50E6D000021998 /* CheckCell.xib in Resources */,
-				BFB509DB2D50E6D000021998 /* ImageCell.xib in Resources */,
 				BFB509DC2D50E6D000021998 /* RatingCell.xib in Resources */,
 				BFB509E02D50E6D000021998 /* ImageCollection.xib in Resources */,
-				BFB509E12D50E6D000021998 /* TextCell.xib in Resources */,
 				BFB509E32D50E6D000021998 /* ScreenshotCell.xib in Resources */,
 				BFB509E42D50E6D000021998 /* ImageSelector.xib in Resources */,
 				BFB509E52D50E6D000021998 /* ScreenshotImageCell.xib in Resources */,
 				BFB509E62D50E6D000021998 /* NpsCell.xib in Resources */,
-				BFB509E72D50E6D000021998 /* EmailCell.xib in Resources */,
 				BFB509E92D50E6D000021998 /* GalleryCell.xib in Resources */,
 				BFB50A022D50ECE500021998 /* YoHe.xcassets in Resources */,
 			);

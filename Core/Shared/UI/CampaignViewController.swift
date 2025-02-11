@@ -80,6 +80,12 @@ internal class CampaignViewController: UIViewController {
                       forCellReuseIdentifier: String(describing: InputCell.self))
         view.register(HeaderCell.self,
                       forCellReuseIdentifier: String(describing: HeaderCell.self))
+        view.register(TextCell.self,
+                      forCellReuseIdentifier: String(describing: TextCell.self))
+        view.register(EmailCell.self,
+                      forCellReuseIdentifier: String(describing: EmailCell.self))
+        view.register(ImageCell.self,
+                      forCellReuseIdentifier: String(describing: ImageCell.self))
         
         
         
@@ -87,18 +93,9 @@ internal class CampaignViewController: UIViewController {
         view.register(UINib(nibName: "CheckboxCell",
                                  bundle: Consts.bundle),
                            forCellReuseIdentifier: "CheckboxCell")
-        view.register(UINib(nibName: "EmailCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "EmailCell")
-        view.register(UINib(nibName: "ImageCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "ImageCell")
         view.register(UINib(nibName: "RadiobuttonCell",
                                  bundle: Consts.bundle),
                            forCellReuseIdentifier: "RadiobuttonCell")
-        view.register(UINib(nibName: "TextCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "TextCell")
         view.register(UINib(nibName: "NpsCell",
                                  bundle: Consts.bundle),
                            forCellReuseIdentifier: "NpsCell")

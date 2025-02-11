@@ -12,7 +12,7 @@ class HeaderCell: BaseCell {
     
     private lazy var label: UILabel = {
         let label = UILabel()
-        
+        label.numberOfLines = 0
         return label
     }()
     

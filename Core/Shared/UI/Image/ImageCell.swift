@@ -9,7 +9,25 @@
 import UIKit
 
 class ImageCell: BaseCell {
-    @IBOutlet var cellImageView: UIImageView!
+    
+    private lazy var cellImageView: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
+    
+    override func setupSubviews() {
+        contentView.addSubview(cellImageView)
+        
+        cellImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            cellImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            cellImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            cellImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            cellImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
+    }
     
     override func updateUI() {
         guard field != nil, theme != nil else {
