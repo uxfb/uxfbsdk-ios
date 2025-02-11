@@ -68,7 +68,6 @@
 		BF2806DB2562B6A5006F2D61 /* CheckboxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806942562B18F006F2D61 /* CheckboxCell.xib */; };
 		BF2806DC2562B6A5006F2D61 /* CheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806982562B18F006F2D61 /* CheckCell.xib */; };
 		BF2806DD2562B6A6006F2D61 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069A2562B18F006F2D61 /* ImageCell.xib */; };
-		BF2806DE2562B6A6006F2D61 /* CampaignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069C2562B18F006F2D61 /* CampaignViewController.xib */; };
 		BF2806DF2562B6A6006F2D61 /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069F2562B18F006F2D61 /* ButtonCell.xib */; };
 		BF2806E02562B6A6006F2D61 /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806A22562B18F006F2D61 /* TextCell.xib */; };
 		BF2806E12562B6A6006F2D61 /* HeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806A72562B18F006F2D61 /* HeaderCell.xib */; };
@@ -204,7 +203,6 @@
 		BFB509DA2D50E6D000021998 /* CheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806982562B18F006F2D61 /* CheckCell.xib */; };
 		BFB509DB2D50E6D000021998 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069A2562B18F006F2D61 /* ImageCell.xib */; };
 		BFB509DC2D50E6D000021998 /* RatingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF0CE19A27661C2200916B32 /* RatingCell.xib */; };
-		BFB509DD2D50E6D000021998 /* CampaignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069C2562B18F006F2D61 /* CampaignViewController.xib */; };
 		BFB509DF2D50E6D000021998 /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28069F2562B18F006F2D61 /* ButtonCell.xib */; };
 		BFB509E02D50E6D000021998 /* ImageCollection.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF63170D26B67465006F408A /* ImageCollection.xib */; };
 		BFB509E12D50E6D000021998 /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806A22562B18F006F2D61 /* TextCell.xib */; };
@@ -382,7 +380,6 @@
 		BF2806982562B18F006F2D61 /* CheckCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckCell.xib; sourceTree = "<group>"; };
 		BF28069A2562B18F006F2D61 /* ImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
 		BF28069B2562B18F006F2D61 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
-		BF28069C2562B18F006F2D61 /* CampaignViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CampaignViewController.xib; sourceTree = "<group>"; };
 		BF28069E2562B18F006F2D61 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		BF28069F2562B18F006F2D61 /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
 		BF2806A12562B18F006F2D61 /* TextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
@@ -742,7 +739,6 @@
 				BF2806AC2562B18F006F2D61 /* Smiles */,
 				BF2806A02562B18F006F2D61 /* Text */,
 				BF2806A32562B18F006F2D61 /* CampaignViewController.swift */,
-				BF28069C2562B18F006F2D61 /* CampaignViewController.xib */,
 			);
 			path = v2;
 			sourceTree = "<group>";
@@ -1276,7 +1272,6 @@
 				BF2806DC2562B6A5006F2D61 /* CheckCell.xib in Resources */,
 				BF2806DD2562B6A6006F2D61 /* ImageCell.xib in Resources */,
 				BF0CE19E27661DAD00916B32 /* RatingCell.xib in Resources */,
-				BF2806DE2562B6A6006F2D61 /* CampaignViewController.xib in Resources */,
 				BF1C11BE2ABD67CC0085DB10 /* UXFeedbackSDK.plist in Resources */,
 				BF2806DF2562B6A6006F2D61 /* ButtonCell.xib in Resources */,
 				BF63171326B67509006F408A /* ImageCollection.xib in Resources */,
@@ -1307,7 +1302,6 @@
 				BFB509DA2D50E6D000021998 /* CheckCell.xib in Resources */,
 				BFB509DB2D50E6D000021998 /* ImageCell.xib in Resources */,
 				BFB509DC2D50E6D000021998 /* RatingCell.xib in Resources */,
-				BFB509DD2D50E6D000021998 /* CampaignViewController.xib in Resources */,
 				BFB509DF2D50E6D000021998 /* ButtonCell.xib in Resources */,
 				BFB509E02D50E6D000021998 /* ImageCollection.xib in Resources */,
 				BFB509E12D50E6D000021998 /* TextCell.xib in Resources */,

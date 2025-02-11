@@ -90,7 +90,11 @@ class AnimatingShadowView: UIView {
                                                             shadowOffset: CGSize(width: 0, height: 1))
     }
 
-    @IBOutlet weak var contentView: UIView!  // no sense in have a shadowView without content!
+//    @IBOutlet weak var contentView: UIView!  // no sense in have a shadowView without content!
+    lazy var contentView: UIView = {
+        let view = UIView()
+        return view
+    }()
 
     var shadowParameters: DropShadowParameters = DropShadowParameters.defaultParameters
 
@@ -107,6 +111,10 @@ class AnimatingShadowView: UIView {
         super.layoutSubviews()
         let layer = self.layer
         layer.backgroundColor = nil
+
+        if self.contentView.superview == nil {
+            self.addSubview(contentView)
+        }
 
         let contentLayer = self.contentView.layer
         assert(contentLayer.superlayer == layer, "contentView must be a direct subview of AnimatingShadowView!")

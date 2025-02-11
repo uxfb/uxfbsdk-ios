@@ -28,49 +28,106 @@ enum ViewControllerState {
 internal class CampaignViewController: UIViewController {
     private var privacyView: PrivacyView?
     
-    @IBOutlet var contentView: UIView!
+    //MARK: - Outlets
+    lazy var contentView: UIView = {
+        let view = UIView()
+        
+        return view
+    }()
     
-    @IBOutlet var shadowView: AnimatingShadowView! {
-        didSet {
-            shadowView.backgroundColor = campaign?.theme.bgColor ?? .white
-        }
-    }
-    @IBOutlet var progressLabel: UILabel! {
-        didSet {
-            progressLabel.text = ""
-            progressLabel.textColor = campaign?.theme.text03Color ?? .lightGray
-        }
-    }
+    lazy var shadowView: AnimatingShadowView = {
+        let view = AnimatingShadowView()
+        view.backgroundColor = campaign?.theme.bgColor ?? .white
+        return view
+    }()
     
-    @IBOutlet var closeButton: UIButton! {
-        didSet {
-            closeButton.setImage(UIImage(named: "close_image", in: Consts.bundle, compatibleWith: nil)?.tint(with: campaign?.theme.iconColor ?? .lightGray), for: .normal)
-        }
-    }
+    private lazy var progressLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.textColor = campaign?.theme.text03Color ?? .lightGray
+        label.textAlignment = .center
+        return label
+    }()
     
-    @IBOutlet var tableView: UITableView! {
-        didSet {
-            configureTableView()
-        }
-    }
     
-    @IBOutlet var topView: UIView! {
-        didSet {
-            topView.backgroundColor = campaign?.theme.bgColor ?? .white
-        }
-    }
+    private lazy var closeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "close_image", in: Consts.bundle, compatibleWith: nil)?.tint(with: campaign?.theme.iconColor ?? .lightGray), for: .normal)
+        button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        return button
+    }()
     
-    @IBOutlet var contentHeight: NSLayoutConstraint!
+    lazy var tableView: UITableView = {
+        let view = UITableView(frame: .zero, style: .grouped)
+        createFooter(withPrivacy: false)
+        view.tableHeaderView = UIView(frame: CGRect(origin: .zero,
+                                                         size: CGSize(width: 1,
+                                                                      height: 1)))
+        view.delegate = self
+        view.dataSource = self
+        view.allowsSelection = false
+        view.delaysContentTouches = false
+        view.backgroundColor = campaign?.theme.bgColor ?? .white
+        view.separatorStyle = .none
+        view.separatorColor = .clear
+        view.backgroundColor = .white
+        view.register(UINib(nibName: "ButtonCell",
+                                 bundle: Consts.bundle),
+                           forCellReuseIdentifier: "ButtonCell")
+        view.register(UINib(nibName: "SmilesCell",
+                                 bundle: Consts.bundle),
+                           forCellReuseIdentifier: "SmilesCell")
+        view.register(UINib(nibName: "StarsCell",
+                                 bundle: Consts.bundle),
+                           forCellReuseIdentifier: "StarsCell")
+        view.register(UINib(nibName: "CheckboxCell",
+                                 bundle: Consts.bundle),
+                           forCellReuseIdentifier: "CheckboxCell")
+        view.register(UINib(nibName: "EmailCell",
+                                 bundle: Consts.bundle),
+                           forCellReuseIdentifier: "EmailCell")
+        view.register(UINib(nibName: "HeaderCell",
+                                 bundle: Consts.bundle),
+                           forCellReuseIdentifier: "HeaderCell")
+        view.register(UINib(nibName: "ImageCell",
+                                 bundle: Consts.bundle),
+                           forCellReuseIdentifier: "ImageCell")
+        view.register(UINib(nibName: "InputCell",
+                                 bundle: Consts.bundle),
+                           forCellReuseIdentifier: "InputCell")
+        view.register(UINib(nibName: "RadiobuttonCell",
+                                 bundle: Consts.bundle),
+                           forCellReuseIdentifier: "RadiobuttonCell")
+        view.register(UINib(nibName: "TextCell",
+                                 bundle: Consts.bundle),
+                           forCellReuseIdentifier: "TextCell")
+        view.register(UINib(nibName: "NpsCell",
+                                 bundle: Consts.bundle),
+                           forCellReuseIdentifier: "NpsCell")
+        view.register(UINib(nibName: "RatingCell",
+                                 bundle: Consts.bundle),
+                           forCellReuseIdentifier: "RatingCell")
+        view.register(UINib(nibName: "ScreenshotCell",
+                                 bundle: Consts.bundle),
+                           forCellReuseIdentifier: "ScreenshotCell")
+        return view
+    }()
     
-    @IBOutlet var verticallyConstraint: NSLayoutConstraint!
-    @IBOutlet var leftConstraint: NSLayoutConstraint!
-    @IBOutlet var rightConstraint: NSLayoutConstraint!
-    @IBOutlet var bottomConstraint: NSLayoutConstraint!
-    @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet var titleViewHeightConstaint: NSLayoutConstraint!
+    lazy var topView: UIView = {
+        let view = UIView()
+        view.backgroundColor = campaign?.theme.bgColor ?? .white
+        return view
+    }()
+    
+    var contentHeight: NSLayoutConstraint!
+    var verticallyConstraint: NSLayoutConstraint!
+    var leftConstraint: NSLayoutConstraint!
+    var rightConstraint: NSLayoutConstraint!
+    var bottomConstraint: NSLayoutConstraint!
+    var tableViewBottomConstraint: NSLayoutConstraint!
+    var titleViewHeightConstaint: NSLayoutConstraint!
     
     var presentationAnimated = true
-    
     var state: ViewControllerState = .presenting
     var blackout: Blackout?
     
@@ -97,14 +154,16 @@ internal class CampaignViewController: UIViewController {
     
     var keyboardHeight: CGFloat = 0
     
-    convenience init() {
-        self.init(nibName: String(describing: type(of: self)), bundle: Consts.bundle)
-    }
+//    convenience init() {
+//        self.init(nibName: String(describing: type(of: self)), bundle: Consts.bundle)
+//    }
     
     open override func viewDidLoad() {
         super.viewDidLoad()
         dataManager = DataManager(self, campaign: campaign)
-        prepareUI()
+        
+        createViews()
+        
         if let theme = campaign?.theme {
             privacyView = PrivacyView(frame: .zero, theme: theme, delegate: self)
             privacyView?.preparePrivacy(campaign?.privacy?.type ?? "")
@@ -278,61 +337,107 @@ internal class CampaignViewController: UIViewController {
         }
     }
     
-    private func configureTableView() {
-        createFooter(withPrivacy: false)
-        tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero,
-                                                         size: CGSize(width: 1,
-                                                                      height: 1)))
+    private func createViews() {
+        topView.addSubview(progressLabel)
+        topView.addSubview(closeButton)
+        contentView.addSubview(topView)
+        contentView.addSubview(tableView)
+        view.addSubview(shadowView)
+        view.addSubview(contentView)
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.allowsSelection = false
-        tableView.delaysContentTouches = false
-        tableView.backgroundColor = campaign?.theme.bgColor ?? .white
+        progressLabel.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        shadowView.translatesAutoresizingMaskIntoConstraints = false
+        topView.translatesAutoresizingMaskIntoConstraints = false
         
-        tableView.register(UINib(nibName: "ButtonCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "ButtonCell")
-        tableView.register(UINib(nibName: "SmilesCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "SmilesCell")
-        tableView.register(UINib(nibName: "StarsCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "StarsCell")
-        tableView.register(UINib(nibName: "CheckboxCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "CheckboxCell")
-        tableView.register(UINib(nibName: "EmailCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "EmailCell")
-        tableView.register(UINib(nibName: "HeaderCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "HeaderCell")
-        tableView.register(UINib(nibName: "ImageCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "ImageCell")
-        tableView.register(UINib(nibName: "InputCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "InputCell")
-        tableView.register(UINib(nibName: "RadiobuttonCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "RadiobuttonCell")
-        tableView.register(UINib(nibName: "TextCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "TextCell")
-        tableView.register(UINib(nibName: "NpsCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "NpsCell")
-        tableView.register(UINib(nibName: "RatingCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "RatingCell")
-        tableView.register(UINib(nibName: "ScreenshotCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "ScreenshotCell")
+        contentHeight = NSLayoutConstraint(item: contentView,
+                                           attribute: .height,
+                                           relatedBy: .equal,
+                                           toItem: nil,
+                                           attribute: .height,
+                                           multiplier: 1,
+                                           constant: 380)
         
-        //        if #available(iOS 15.0, *) {
-        //            tableView.sectionHeaderTopPadding = 0
-        //        }
+        verticallyConstraint = NSLayoutConstraint(item: contentView,
+                                                  attribute: .centerY,
+                                                  relatedBy: .equal,
+                                                  toItem: view,
+                                                  attribute: .centerY,
+                                                  multiplier: 1,
+                                                  constant: 0)
+        leftConstraint = NSLayoutConstraint(item: contentView,
+                                            attribute: .leading,
+                                            relatedBy: .equal,
+                                            toItem: view.safeAreaLayoutGuide,
+                                            attribute: .leading,
+                                            multiplier: 1,
+                                            constant: 0)
+        rightConstraint = NSLayoutConstraint(item: view.safeAreaLayoutGuide,
+                                             attribute: .trailing,
+                                             relatedBy: .equal,
+                                             toItem: contentView,
+                                             attribute: .trailing,
+                                             multiplier: 1,
+                                             constant: 0)
+        bottomConstraint = NSLayoutConstraint(item: contentView,
+                                              attribute: .bottom,
+                                              relatedBy: .equal,
+                                              toItem: view,
+                                              attribute: .bottom,
+                                              multiplier: 1,
+                                              constant: 0)
+        tableViewBottomConstraint = NSLayoutConstraint(item: tableView,
+                                                       attribute: .bottom,
+                                                       relatedBy: .equal,
+                                                       toItem: view,
+                                                       attribute: .bottom,
+                                                       multiplier: 1,
+                                                       constant: 0)
+        titleViewHeightConstaint = NSLayoutConstraint(item: topView,
+                                                      attribute: .height,
+                                                      relatedBy: .equal,
+                                                      toItem: nil,
+                                                      attribute: .height,
+                                                      multiplier: 1,
+                                                      constant: 54)
+        
+        
+        NSLayoutConstraint.activate([
+            leftConstraint,
+            rightConstraint,
+            bottomConstraint,
+            verticallyConstraint,
+            contentHeight,
+            
+            shadowView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            shadowView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            shadowView.heightAnchor.constraint(equalTo: contentView.heightAnchor),
+            shadowView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            
+            topView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            topView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            topView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            titleViewHeightConstaint,
+            
+            closeButton.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -12),
+            closeButton.bottomAnchor.constraint(equalTo: topView.bottomAnchor, constant: -6),
+            closeButton.heightAnchor.constraint(equalToConstant: 36),
+            closeButton.widthAnchor.constraint(equalToConstant: 36),
+
+            progressLabel.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 44),
+            progressLabel.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -44),
+            progressLabel.topAnchor.constraint(equalTo: topView.topAnchor),
+            progressLabel.bottomAnchor.constraint(equalTo: topView.bottomAnchor),
+            
+            tableView.topAnchor.constraint(equalTo: topView.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            tableViewBottomConstraint
+        ])
+        
+        prepareUI()
     }
     
     private func prepareUI() {
@@ -392,7 +497,8 @@ internal class CampaignViewController: UIViewController {
     
     //MARK: - Actions
     
-    @IBAction  func closeButtonTapped(_ sender: UIButton) {
+    @objc
+    private func closeButtonTapped() {
         dataManager?.endCampaign(terminated: true)
     }
     
