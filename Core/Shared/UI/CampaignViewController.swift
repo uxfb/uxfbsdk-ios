@@ -59,7 +59,6 @@ internal class CampaignViewController: UIViewController {
     
     lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .grouped)
-        createFooter(withPrivacy: false)
         view.tableHeaderView = UIView(frame: CGRect(origin: .zero,
                                                          size: CGSize(width: 1,
                                                                       height: 1)))
@@ -71,30 +70,29 @@ internal class CampaignViewController: UIViewController {
         view.separatorStyle = .none
         view.separatorColor = .clear
         view.backgroundColor = .white
-        view.register(UINib(nibName: "ButtonCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "ButtonCell")
-        view.register(UINib(nibName: "SmilesCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "SmilesCell")
-        view.register(UINib(nibName: "StarsCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "StarsCell")
+        view.register(ButtonCell.self,
+                      forCellReuseIdentifier: String(describing: ButtonCell.self))
+        view.register(StarsCell.self,
+                      forCellReuseIdentifier: String(describing: StarsCell.self))
+        view.register(SmilesCell.self,
+                      forCellReuseIdentifier: String(describing: SmilesCell.self))
+        view.register(InputCell.self,
+                      forCellReuseIdentifier: String(describing: InputCell.self))
+        view.register(HeaderCell.self,
+                      forCellReuseIdentifier: String(describing: HeaderCell.self))
+        
+        
+        
+        
         view.register(UINib(nibName: "CheckboxCell",
                                  bundle: Consts.bundle),
                            forCellReuseIdentifier: "CheckboxCell")
         view.register(UINib(nibName: "EmailCell",
                                  bundle: Consts.bundle),
                            forCellReuseIdentifier: "EmailCell")
-        view.register(UINib(nibName: "HeaderCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "HeaderCell")
         view.register(UINib(nibName: "ImageCell",
                                  bundle: Consts.bundle),
                            forCellReuseIdentifier: "ImageCell")
-        view.register(UINib(nibName: "InputCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "InputCell")
         view.register(UINib(nibName: "RadiobuttonCell",
                                  bundle: Consts.bundle),
                            forCellReuseIdentifier: "RadiobuttonCell")
@@ -163,20 +161,6 @@ internal class CampaignViewController: UIViewController {
         dataManager = DataManager(self, campaign: campaign)
         
         createViews()
-        
-        if let theme = campaign?.theme {
-            privacyView = PrivacyView(frame: .zero, theme: theme, delegate: self)
-            privacyView?.preparePrivacy(campaign?.privacy?.type ?? "")
-        }
-        
-        if presentHandler != nil {
-            presentHandler!()
-        }
-        if let progress = campaign?.progress, progress {
-            progressLabel.isHidden = false
-        } else {
-            progressLabel.isHidden = true
-        }
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),
@@ -344,6 +328,22 @@ internal class CampaignViewController: UIViewController {
         contentView.addSubview(tableView)
         view.addSubview(shadowView)
         view.addSubview(contentView)
+        
+        createFooter(withPrivacy: false)
+        
+        if let theme = campaign?.theme {
+            privacyView = PrivacyView(frame: .zero, theme: theme, delegate: self)
+            privacyView?.preparePrivacy(campaign?.privacy?.type ?? "")
+        }
+        
+        if presentHandler != nil {
+            presentHandler!()
+        }
+        if let progress = campaign?.progress, progress {
+            progressLabel.isHidden = false
+        } else {
+            progressLabel.isHidden = true
+        }
         
         progressLabel.translatesAutoresizingMaskIntoConstraints = false
         closeButton.translatesAutoresizingMaskIntoConstraints = false

@@ -9,15 +9,28 @@
 import UIKit
 
 class InputCell: BaseCell {
-    @IBOutlet var textView: UITextView! {
-        didSet {
-            textView.backgroundColor = .clear
-            textView.delegate = self
-            textView.textContainerInset = UIEdgeInsets(top: 8, left: 6, bottom: 8, right: 6)
-        }
-    }
+    private lazy var textView: UITextView = {
+        let view = UITextView()
+        textView.backgroundColor = .clear
+        textView.delegate = self
+        textView.textContainerInset = UIEdgeInsets(top: 8, left: 6, bottom: 8, right: 6)
+        return view
+    }()
     
     private var comment = ""
+    
+    override func setupSubviews() {
+        contentView.addSubview(textView)
+        
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            textView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
+    }
     
     override func updateUI() {
         let answer = field?.answers.first

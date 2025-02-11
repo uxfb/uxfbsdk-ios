@@ -10,8 +10,84 @@ import UIKit
 
 class StarsCell: BaseCell {
     
+    private lazy var star1: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "star_unactive")
+        view.tag = 1
+        return view
+    }()
+    
+    private lazy var star2: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "star_unactive")
+        view.tag = 2
+        return view
+    }()
+    
+    private lazy var star3: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "star_unactive")
+        view.tag = 3
+        return view
+    }()
+    
+    private lazy var star4: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "star_unactive")
+        view.tag = 4
+        return view
+    }()
+    
+    private lazy var star5: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "star_unactive")
+        view.tag = 5
+        return view
+    }()
+    
     private var animationInProgress: Bool = false
     private var currentValue: Int = -1
+    
+    override func setupSubviews() {
+        contentView.addSubview(star1)
+        contentView.addSubview(star2)
+        contentView.addSubview(star3)
+        contentView.addSubview(star4)
+        contentView.addSubview(star5)
+        
+        star1.translatesAutoresizingMaskIntoConstraints = false
+        star2.translatesAutoresizingMaskIntoConstraints = false
+        star3.translatesAutoresizingMaskIntoConstraints = false
+        star4.translatesAutoresizingMaskIntoConstraints = false
+        star5.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            star3.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            star3.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            star3.heightAnchor.constraint(equalToConstant: 38),
+            star3.widthAnchor.constraint(equalToConstant: 38),
+            
+            star2.trailingAnchor.constraint(equalTo: star3.leadingAnchor, constant: -20),
+            star2.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            star2.heightAnchor.constraint(equalToConstant: 38),
+            star2.widthAnchor.constraint(equalToConstant: 38),
+            
+            star1.trailingAnchor.constraint(equalTo: star2.leadingAnchor, constant: -20),
+            star1.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            star1.heightAnchor.constraint(equalToConstant: 38),
+            star1.widthAnchor.constraint(equalToConstant: 38),
+            
+            star4.leadingAnchor.constraint(equalTo: star3.trailingAnchor, constant: 20),
+            star4.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            star4.heightAnchor.constraint(equalToConstant: 38),
+            star4.widthAnchor.constraint(equalToConstant: 38),
+            
+            star5.leadingAnchor.constraint(equalTo: star4.trailingAnchor, constant: 20),
+            star5.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            star5.heightAnchor.constraint(equalToConstant: 38),
+            star5.widthAnchor.constraint(equalToConstant: 38),
+        ])
+    }
     
     override func updateUI() {
         currentValue = Int(field?.answers.first ?? "") ?? -1

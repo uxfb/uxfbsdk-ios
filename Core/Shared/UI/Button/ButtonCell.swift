@@ -9,8 +9,32 @@
 import UIKit
 
 class ButtonCell: BaseCell {
-    @IBOutlet var button: UIButton!
-    @IBOutlet var buttonWidth: NSLayoutConstraint!
+    private lazy var button: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    var buttonWidth: NSLayoutConstraint!
+    
+    override func setupSubviews() {
+        contentView.addSubview(button)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        buttonWidth = NSLayoutConstraint(item: button,
+                                         attribute: .width,
+                                         relatedBy: .equal, toItem: nil,
+                                         attribute: .height,
+                                         multiplier: 1, constant: 160)
+        
+        NSLayoutConstraint.activate([
+            button.heightAnchor.constraint(equalToConstant: 40),
+            button.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            button.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            buttonWidth
+        ])
+    }
     
     override func updateUI() {
         guard field != nil, theme != nil else {
@@ -56,7 +80,8 @@ class ButtonCell: BaseCell {
         }
     }
     
-    @IBAction  func buttonTapped(_ sender: UIButton){
+    @objc
+    private func buttonTapped() {
         if delegate != nil {
             delegate?.buttonTapped(field!, answer: [], refresh: true)
         }
