@@ -26,8 +26,9 @@ enum ViewControllerState {
 }
 
 internal class CampaignViewController: UIViewController {
-    @IBOutlet var contentView: UIView!
     private var privacyView: PrivacyView?
+    
+    @IBOutlet var contentView: UIView!
     
     @IBOutlet var shadowView: AnimatingShadowView! {
         didSet {
@@ -96,8 +97,6 @@ internal class CampaignViewController: UIViewController {
     
     var keyboardHeight: CGFloat = 0
     
-    //    private var showGalleryTask: DispatchWorkItem?
-    
     convenience init() {
         self.init(nibName: String(describing: type(of: self)), bundle: Consts.bundle)
     }
@@ -119,9 +118,6 @@ internal class CampaignViewController: UIViewController {
         } else {
             progressLabel.isHidden = true
         }
-        //        else if (campaign?.transforms.count ?? 0) > 0 {
-        //            progressLabel.isHidden = true
-        //        }
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),
