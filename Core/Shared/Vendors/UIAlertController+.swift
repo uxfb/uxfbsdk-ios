@@ -21,6 +21,14 @@ extension UIAlertController {
         UIAlertController.globalPresentationWindow?.rootViewController?.present(self, animated: animated, completion: completion)
     }
     
+    func dismissGlobally(animated flag: Bool, completion: (() -> Void)? = nil) {
+        self.dismiss(animated: flag) {
+            UIAlertController.globalPresentationWindow?.isHidden = true
+            UIAlertController.globalPresentationWindow?.resignKey()
+            UIAlertController.globalPresentationWindow = nil
+        }
+    }
+    
     open override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         super.dismiss(animated: flag, completion: completion)
         for window in UIApplication.shared.windows {

@@ -8,120 +8,90 @@
 
 import UIKit
 
-class SliderView: UIView {
-    private var bigBorderView: UIView = UIView()
-    private var smallBorderView: UIView = UIView()
-    private var imageContentView: UIView = UIView()
-    
-    private let leftArrowView = UIImageView(frame: CGRect(origin: .zero,
-                                                  size: CGSize(width: 5,
-                                                               height: 10)))
-    private let rightArrowView = UIImageView(frame: CGRect(origin: .zero,
-                                                   size: CGSize(width: 5,
-                                                                height: 10)))
-    
-    private let sliderWidth: CGFloat = 48
-    private let sliderHeight: CGFloat = 48
-    
-    enum SliderStyle: Int {
-        case inactive = 0
-        case active = 1
-        case error = 2
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        let baseRadius = sliderWidth / 2
-        self.clipsToBounds = false
-        
-        bigBorderView.frame.size = CGSize(width: sliderWidth,
-                                            height: sliderHeight)
-        bigBorderView.center = self.center
-        bigBorderView.layer.cornerRadius = baseRadius
-        smallBorderView.frame.size = CGSize(width: sliderWidth - 8,
-                                            height: sliderHeight - 8)
-        smallBorderView.layer.cornerRadius = baseRadius - 4
-        smallBorderView.center = bigBorderView.center
-        imageContentView.frame.size = CGSize(width: sliderWidth - 14,
-                                            height: sliderHeight - 14)
-        imageContentView.center = bigBorderView.center
-        imageContentView.layer.cornerRadius = baseRadius - 7
-        imageContentView.backgroundColor = .white
-        
-        leftArrowView.image = UIImage(named: "slider_left",
-                                      in: Consts.bundle,
-                                      compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-        rightArrowView.image = UIImage(named: "slider_right",
-                                       in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-            
-        
-        leftArrowView.center = CGPoint(x: (sliderWidth - 14) / 2 - 3.5,
-                                       y: (sliderHeight - 14) / 2)
-        rightArrowView.center = CGPoint(x: (sliderWidth - 14) / 2 + 3.5,
-                                       y: (sliderHeight - 14) / 2)
-        
-        self.isOpaque = false
-        self.backgroundColor = .clear
-        self.addSubview(bigBorderView)
-        self.addSubview(smallBorderView)
-        imageContentView.addSubview(leftArrowView)
-        imageContentView.addSubview(rightArrowView)
-        self.addSubview(imageContentView)
-    }
-    
-    func setStyle(_ sliderStyle: SliderStyle, theme: ThemeProtocol) {
-        imageContentView.backgroundColor = theme.controlIconColor
-        leftArrowView.tintColor = theme.iconColor
-        rightArrowView.tintColor = theme.iconColor
-        switch sliderStyle {
-        case .inactive:
-            bigBorderView.backgroundColor = theme.iconColor.withAlphaComponent(0.3)
-            smallBorderView.backgroundColor = theme.iconColor
-            
-        case .active:
-            bigBorderView.backgroundColor = theme.mainColor.withAlphaComponent(0.3)
-            smallBorderView.backgroundColor = theme.mainColor
-        case .error:
-            bigBorderView.backgroundColor = theme.errorColorPrimary.withAlphaComponent(0.3)
-            smallBorderView.backgroundColor = theme.errorColorPrimary
-        }
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        bigBorderView.center = center
-        smallBorderView.center = center
-        imageContentView.center = center
-    }
-}
-
 class NpsCell: BaseCell {
 
-    @IBOutlet var negativeLabel: UILabel! {
-        didSet {
-            negativeLabel.numberOfLines = 2
+    private lazy var negativeLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 2
+        label.textAlignment = .left
+        return label
+    }()
+    
+    private lazy var positiveLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 2
+        label.textAlignment = .right
+        return label
+    }()
+    
+    private lazy var slider: UISlider = {
+        let slider = UISlider()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(sliderTapped(gestureRecognizer:)))
+        slider.addGestureRecognizer(tapGestureRecognizer)
+        
+        slider.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
+        slider.addTarget(self, action: #selector(touchUpInside(_:)), for: .touchUpInside)
+        slider.addTarget(self, action: #selector(touchUpOutside(_:)), for: .touchUpOutside)
+        
+        slider.value = 5
+        slider.maximumValue = 10
+        return slider
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        
+        for i in 0...10 {
+            let label = VerticalAlignedLabel()
+            label.text = "\(i)"
+            label.tag = i + 1
+            label.textAlignment = .center
+            stackView.addArrangedSubview(label)
         }
-    }
-    @IBOutlet var positiveLabel: UILabel!{
-        didSet {
-            positiveLabel.numberOfLines = 2
-        }
-    }
-    @IBOutlet var slider: UISlider! {
-        didSet {
-            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(sliderTapped(gestureRecognizer:)))
-            self.slider.addGestureRecognizer(tapGestureRecognizer)
-        }
-    }
+        stackView.distribution = .fillEqually
+        return stackView
+    }()
     
     private var sliderView = SliderView(frame: CGRect(origin: .zero,
                                                          size: CGSize(width: 48,
                                                                       height: 48)))
     
     private var currentValue: Int = -1
+    
+    override func setupSubviews() {
+        contentView.addSubview(stackView)
+        contentView.addSubview(slider)
+        contentView.addSubview(positiveLabel)
+        contentView.addSubview(negativeLabel)
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        positiveLabel.translatesAutoresizingMaskIntoConstraints = false
+        negativeLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            stackView.heightAnchor.constraint(equalToConstant: 28),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
+            slider.heightAnchor.constraint(equalToConstant: 48),
+            slider.topAnchor.constraint(equalTo: stackView.bottomAnchor),
+            slider.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18),
+            slider.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -18),
+            
+            negativeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            negativeLabel.topAnchor.constraint(equalTo: slider.bottomAnchor),
+            negativeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            negativeLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5, constant: -20),
+            
+            positiveLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            positiveLabel.topAnchor.constraint(equalTo: slider.bottomAnchor),
+            positiveLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            positiveLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5, constant: -20),
+        ])
+    }
     
     override func updateUI() {
         negativeLabel.font = theme?.fontP2
@@ -252,15 +222,18 @@ class NpsCell: BaseCell {
         roundSlider()
     }
     
-    @IBAction func valueChanged(_ sender: Any) {
+    @objc
+    private func valueChanged(_ sender: Any) {
         updateLabels()
     }
     
-    @IBAction func touchUpInside(_ sender: Any) {
+    @objc
+    private func touchUpInside(_ sender: Any) {
         roundSlider()
     }
     
-    @IBAction func touchUpOutside(_ sender: Any) {
+    @objc
+    private func touchUpOutside(_ sender: Any) {
         roundSlider()
     }
     

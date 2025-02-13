@@ -45,7 +45,6 @@
 		BF02FD32255C0AE300C794E6 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF02FD31255C0AE300C794E6 /* Field.swift */; };
 		BF02FD3F255C65B000C794E6 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF02FD3E255C65B000C794E6 /* Transform.swift */; };
 		BF0CE19D27661C3B00916B32 /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0CE19927661C2200916B32 /* RatingCell.swift */; };
-		BF0CE19E27661DAD00916B32 /* RatingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF0CE19A27661C2200916B32 /* RatingCell.xib */; };
 		BF1C11BE2ABD67CC0085DB10 /* UXFeedbackSDK.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A46899522840B2C0074E1A3 /* UXFeedbackSDK.plist */; };
 		BF2806AF2562B18F006F2D61 /* StarsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806882562B18F006F2D61 /* StarsCell.swift */; };
 		BF2806B32562B18F006F2D61 /* RadioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28068E2562B18F006F2D61 /* RadioCell.swift */; };
@@ -61,10 +60,6 @@
 		BF2806C52562B18F006F2D61 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A82562B18F006F2D61 /* HeaderCell.swift */; };
 		BF2806C62562B18F006F2D61 /* EmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806AA2562B18F006F2D61 /* EmailCell.swift */; };
 		BF2806C92562B18F006F2D61 /* SmilesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806AE2562B18F006F2D61 /* SmilesCell.swift */; };
-		BF2806D82562B6A5006F2D61 /* RadiobuttonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28068B2562B18F006F2D61 /* RadiobuttonCell.xib */; };
-		BF2806D92562B6A5006F2D61 /* RadioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28068D2562B18F006F2D61 /* RadioCell.xib */; };
-		BF2806DB2562B6A5006F2D61 /* CheckboxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806942562B18F006F2D61 /* CheckboxCell.xib */; };
-		BF2806DC2562B6A5006F2D61 /* CheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806982562B18F006F2D61 /* CheckCell.xib */; };
 		BF2D682229EEDD2400547634 /* DataRequest+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D682029EEDD0B00547634 /* DataRequest+CoreData.swift */; };
 		BF2D682829EEE27C00547634 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D682729EEE27B00547634 /* UIFont+.swift */; };
 		BF316C102684AABC007CEFC0 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF316C0F2684AABC007CEFC0 /* VisualEffectView.swift */; };
@@ -72,7 +67,6 @@
 		BF31860E2975570800B54EF5 /* DataRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF31860D2975570800B54EF5 /* DataRequestManager.swift */; };
 		BF3186112975672700B54EF5 /* RequestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF31860F2975672700B54EF5 /* RequestModel.xcdatamodeld */; };
 		BF405650265CD89E00709351 /* NpsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40564C265CD86700709351 /* NpsCell.swift */; };
-		BF405651265CD8A200709351 /* NpsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF40564D265CD86700709351 /* NpsCell.xib */; };
 		BF40565B265CED2500709351 /* UILabel+Align.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF405659265CECF700709351 /* UILabel+Align.swift */; };
 		BF40565E265D0B2300709351 /* UIView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40565C265D0B0600709351 /* UIView+Image.swift */; };
 		BF40817B2AA50B4400B1013F /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4081792AA50B0700B1013F /* PrivacyView.swift */; };
@@ -81,23 +75,17 @@
 		BF4F7C4B2B0A42C20043244E /* WebPDecoder.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060F2A1C99DD00F1BA6A /* WebPDecoder.xcframework */; };
 		BF4F7C4D2B0A42C30043244E /* WebPDemux.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061B2A1C99DD00F1BA6A /* WebPDemux.xcframework */; };
 		BF4F7C4F2B0A42C40043244E /* WebPMux.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060E2A1C99DD00F1BA6A /* WebPMux.xcframework */; settings = {ATTRIBUTES = (Required, ); }; };
-		BF573EC426B69E25002A9E8C /* ImageSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC326B69E25002A9E8C /* ImageSelector.xib */; };
 		BF573EC526B69E28002A9E8C /* ImageSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573EC126B69E19002A9E8C /* ImageSelector.swift */; };
 		BF573EC926B69F0C002A9E8C /* GalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573EC726B69F0C002A9E8C /* GalleryCell.swift */; };
-		BF573ECA26B69F0C002A9E8C /* GalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC826B69F0C002A9E8C /* GalleryCell.xib */; };
 		BF573ECD26B6A14E002A9E8C /* ScreenshotCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF573ECC26B6A14E002A9E8C /* ScreenshotCreator.swift */; };
-		BF573ECF26B6A157002A9E8C /* ScreenshotCreator.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573ECE26B6A157002A9E8C /* ScreenshotCreator.xib */; };
 		BF573ED026B6CBBA002A9E8C /* ScreenshotImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170426B670CF006F408A /* ScreenshotImageCell.swift */; };
-		BF573ED126B6CBBF002A9E8C /* ScreenshotImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF63170526B670CF006F408A /* ScreenshotImageCell.xib */; };
 		BF5896D52B9F863300070769 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5896D42B9F863300070769 /* Attributes.swift */; };
 		BF5ED7DD25593DDE00A1698E /* CampaignPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5ED7DC25593DDE00A1698E /* CampaignPresentor.swift */; };
 		BF5ED7E52559DB1900A1698E /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5ED7E42559DB1900A1698E /* Parser.swift */; };
 		BF6248C1255B24910039F855 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6248C0255B24910039F855 /* DataManager.swift */; };
 		BF6316FC26B27A0B006F408A /* ScreenshotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6316F826B279ED006F408A /* ScreenshotCell.swift */; };
-		BF63170226B2B25D006F408A /* ScreenshotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF6316F926B279ED006F408A /* ScreenshotCell.xib */; };
 		BF63171126B67501006F408A /* ImageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170B26B67465006F408A /* ImageCollection.swift */; };
 		BF63171226B67504006F408A /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170C26B67465006F408A /* ImageManager.swift */; };
-		BF63171326B67509006F408A /* ImageCollection.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF63170D26B67465006F408A /* ImageCollection.xib */; };
 		BF885EE42715ED7900F110A0 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF885EE32715ED7900F110A0 /* UIButton+.swift */; };
 		BF885EE62715FB1B00F110A0 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF885EE52715FB1B00F110A0 /* UIAlertController+.swift */; };
 		BFA54F8427AA86A2003D6411 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA54F8327AA86A2003D6411 /* Crypto.swift */; };
@@ -186,18 +174,6 @@
 		BFB509D02D50E6D000021998 /* WebPDecoder.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB060F2A1C99DD00F1BA6A /* WebPDecoder.xcframework */; };
 		BFB509D12D50E6D000021998 /* WebPDemux.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061B2A1C99DD00F1BA6A /* WebPDemux.xcframework */; };
 		BFB509D22D50E6D000021998 /* WebP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBB061C2A1C99DD00F1BA6A /* WebP.xcframework */; };
-		BFB509D52D50E6D000021998 /* RadiobuttonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28068B2562B18F006F2D61 /* RadiobuttonCell.xib */; };
-		BFB509D62D50E6D000021998 /* RadioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF28068D2562B18F006F2D61 /* RadioCell.xib */; };
-		BFB509D72D50E6D000021998 /* ScreenshotCreator.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573ECE26B6A157002A9E8C /* ScreenshotCreator.xib */; };
-		BFB509D92D50E6D000021998 /* CheckboxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806942562B18F006F2D61 /* CheckboxCell.xib */; };
-		BFB509DA2D50E6D000021998 /* CheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF2806982562B18F006F2D61 /* CheckCell.xib */; };
-		BFB509DC2D50E6D000021998 /* RatingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF0CE19A27661C2200916B32 /* RatingCell.xib */; };
-		BFB509E02D50E6D000021998 /* ImageCollection.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF63170D26B67465006F408A /* ImageCollection.xib */; };
-		BFB509E32D50E6D000021998 /* ScreenshotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF6316F926B279ED006F408A /* ScreenshotCell.xib */; };
-		BFB509E42D50E6D000021998 /* ImageSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC326B69E25002A9E8C /* ImageSelector.xib */; };
-		BFB509E52D50E6D000021998 /* ScreenshotImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF63170526B670CF006F408A /* ScreenshotImageCell.xib */; };
-		BFB509E62D50E6D000021998 /* NpsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF40564D265CD86700709351 /* NpsCell.xib */; };
-		BFB509E92D50E6D000021998 /* GalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF573EC826B69F0C002A9E8C /* GalleryCell.xib */; };
 		BFB509F12D50ECDB00021998 /* YYAnimatedImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF42A4324A8009975EB /* YYAnimatedImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFB509F22D50ECDB00021998 /* YYFrameImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF22A4324A8009975EB /* YYFrameImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFB509F32D50ECDB00021998 /* YYImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF437FF02A4324A8009975EB /* YYImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -260,6 +236,8 @@
 		BFF3520C2D50F3640010A245 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = BFDE2FD02A86233000F6C6CF /* Documentation.docc */; };
 		BFF3520E2D51076C0010A245 /* AttributeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF3520D2D5107640010A245 /* AttributeManager.swift */; };
 		BFF3520F2D51076C0010A245 /* AttributeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF3520D2D5107640010A245 /* AttributeManager.swift */; };
+		BFF352722D5BD8A00010A245 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF352712D5BD89F0010A245 /* SliderView.swift */; };
+		BFF352732D5BD8A00010A245 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF352712D5BD89F0010A245 /* SliderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -349,17 +327,12 @@
 		BF02FD31255C0AE300C794E6 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		BF02FD3E255C65B000C794E6 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		BF0CE19927661C2200916B32 /* RatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
-		BF0CE19A27661C2200916B32 /* RatingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingCell.xib; sourceTree = "<group>"; };
 		BF2806882562B18F006F2D61 /* StarsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarsCell.swift; sourceTree = "<group>"; };
-		BF28068B2562B18F006F2D61 /* RadiobuttonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadiobuttonCell.xib; sourceTree = "<group>"; };
-		BF28068D2562B18F006F2D61 /* RadioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadioCell.xib; sourceTree = "<group>"; };
 		BF28068E2562B18F006F2D61 /* RadioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioCell.swift; sourceTree = "<group>"; };
 		BF28068F2562B18F006F2D61 /* RadiobuttonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadiobuttonCell.swift; sourceTree = "<group>"; };
 		BF2806922562B18F006F2D61 /* InputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputCell.swift; sourceTree = "<group>"; };
-		BF2806942562B18F006F2D61 /* CheckboxCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckboxCell.xib; sourceTree = "<group>"; };
 		BF2806952562B18F006F2D61 /* CheckboxCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckboxCell.swift; sourceTree = "<group>"; };
 		BF2806972562B18F006F2D61 /* CheckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckCell.swift; sourceTree = "<group>"; };
-		BF2806982562B18F006F2D61 /* CheckCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckCell.xib; sourceTree = "<group>"; };
 		BF28069B2562B18F006F2D61 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		BF28069E2562B18F006F2D61 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		BF2806A12562B18F006F2D61 /* TextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
@@ -376,7 +349,6 @@
 		BF31860D2975570800B54EF5 /* DataRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequestManager.swift; sourceTree = "<group>"; };
 		BF3186102975672700B54EF5 /* RequestModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RequestModel.xcdatamodel; sourceTree = "<group>"; };
 		BF40564C265CD86700709351 /* NpsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NpsCell.swift; sourceTree = "<group>"; };
-		BF40564D265CD86700709351 /* NpsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NpsCell.xib; sourceTree = "<group>"; };
 		BF405659265CECF700709351 /* UILabel+Align.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Align.swift"; sourceTree = "<group>"; };
 		BF40565C265D0B0600709351 /* UIView+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Image.swift"; sourceTree = "<group>"; };
 		BF4081792AA50B0700B1013F /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
@@ -402,22 +374,16 @@
 		BF437FF92A4324A8009975EB /* YYSpriteSheetImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSpriteSheetImage.h; sourceTree = "<group>"; };
 		BF43809E2A444B44009975EB /* YoHe.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = YoHe.xcassets; sourceTree = "<group>"; };
 		BF573EC126B69E19002A9E8C /* ImageSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelector.swift; sourceTree = "<group>"; };
-		BF573EC326B69E25002A9E8C /* ImageSelector.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageSelector.xib; sourceTree = "<group>"; };
 		BF573EC726B69F0C002A9E8C /* GalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCell.swift; sourceTree = "<group>"; };
-		BF573EC826B69F0C002A9E8C /* GalleryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryCell.xib; sourceTree = "<group>"; };
 		BF573ECC26B6A14E002A9E8C /* ScreenshotCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotCreator.swift; sourceTree = "<group>"; };
-		BF573ECE26B6A157002A9E8C /* ScreenshotCreator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScreenshotCreator.xib; sourceTree = "<group>"; };
 		BF5896D42B9F863300070769 /* Attributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
 		BF5ED7DC25593DDE00A1698E /* CampaignPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignPresentor.swift; sourceTree = "<group>"; };
 		BF5ED7E42559DB1900A1698E /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		BF6248C0255B24910039F855 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		BF6316F826B279ED006F408A /* ScreenshotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotCell.swift; sourceTree = "<group>"; };
-		BF6316F926B279ED006F408A /* ScreenshotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScreenshotCell.xib; sourceTree = "<group>"; };
 		BF63170426B670CF006F408A /* ScreenshotImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotImageCell.swift; sourceTree = "<group>"; };
-		BF63170526B670CF006F408A /* ScreenshotImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScreenshotImageCell.xib; sourceTree = "<group>"; };
 		BF63170B26B67465006F408A /* ImageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollection.swift; sourceTree = "<group>"; };
 		BF63170C26B67465006F408A /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
-		BF63170D26B67465006F408A /* ImageCollection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCollection.xib; sourceTree = "<group>"; };
 		BF885EE32715ED7900F110A0 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		BF885EE52715FB1B00F110A0 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
 		BFA54F8327AA86A2003D6411 /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
@@ -475,6 +441,7 @@
 		BFF304642A43163900E513EA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/iOSSupport/System/Library/PrivateFrameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
 		BFF304672A43173C00E513EA /* YoHeSDK.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YoHeSDK.plist; sourceTree = "<group>"; };
 		BFF3520D2D5107640010A245 /* AttributeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeManager.swift; sourceTree = "<group>"; };
+		BFF352712D5BD89F0010A245 /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -644,6 +611,7 @@
 		0A6CDB872243C8F900C17007 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BFF352712D5BD89F0010A245 /* SliderView.swift */,
 				BF2806A32562B18F006F2D61 /* CampaignViewController.swift */,
 				BF2806A42562B18F006F2D61 /* _BASE */,
 				BF28069D2562B18F006F2D61 /* Button */,
@@ -697,7 +665,6 @@
 			isa = PBXGroup;
 			children = (
 				BF0CE19927661C2200916B32 /* RatingCell.swift */,
-				BF0CE19A27661C2200916B32 /* RatingCell.xib */,
 			);
 			path = Rating;
 			sourceTree = "<group>";
@@ -722,7 +689,6 @@
 		BF28068A2562B18F006F2D61 /* RadioButton */ = {
 			isa = PBXGroup;
 			children = (
-				BF28068B2562B18F006F2D61 /* RadiobuttonCell.xib */,
 				BF28068F2562B18F006F2D61 /* RadiobuttonCell.swift */,
 				BF28068C2562B18F006F2D61 /* Cell */,
 			);
@@ -732,7 +698,6 @@
 		BF28068C2562B18F006F2D61 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				BF28068D2562B18F006F2D61 /* RadioCell.xib */,
 				BF28068E2562B18F006F2D61 /* RadioCell.swift */,
 			);
 			path = Cell;
@@ -749,7 +714,6 @@
 		BF2806932562B18F006F2D61 /* Checkbox */ = {
 			isa = PBXGroup;
 			children = (
-				BF2806942562B18F006F2D61 /* CheckboxCell.xib */,
 				BF2806952562B18F006F2D61 /* CheckboxCell.swift */,
 				BF2806962562B18F006F2D61 /* Cell */,
 			);
@@ -760,7 +724,6 @@
 			isa = PBXGroup;
 			children = (
 				BF2806972562B18F006F2D61 /* CheckCell.swift */,
-				BF2806982562B18F006F2D61 /* CheckCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -834,7 +797,6 @@
 			isa = PBXGroup;
 			children = (
 				BF40564C265CD86700709351 /* NpsCell.swift */,
-				BF40564D265CD86700709351 /* NpsCell.xib */,
 			);
 			path = NPS;
 			sourceTree = "<group>";
@@ -886,7 +848,6 @@
 			children = (
 				BF573EC626B69EF5002A9E8C /* UXFGalleryCell */,
 				BF573EC126B69E19002A9E8C /* ImageSelector.swift */,
-				BF573EC326B69E25002A9E8C /* ImageSelector.xib */,
 			);
 			path = ImageSelector;
 			sourceTree = "<group>";
@@ -895,7 +856,6 @@
 			isa = PBXGroup;
 			children = (
 				BF573EC726B69F0C002A9E8C /* GalleryCell.swift */,
-				BF573EC826B69F0C002A9E8C /* GalleryCell.xib */,
 			);
 			path = UXFGalleryCell;
 			sourceTree = "<group>";
@@ -904,7 +864,6 @@
 			isa = PBXGroup;
 			children = (
 				BF573ECC26B6A14E002A9E8C /* ScreenshotCreator.swift */,
-				BF573ECE26B6A157002A9E8C /* ScreenshotCreator.xib */,
 			);
 			path = ImageCreator;
 			sourceTree = "<group>";
@@ -918,7 +877,6 @@
 				BF63170A26B67465006F408A /* ImageViewer */,
 				BF63170326B670B9006F408A /* ImageCell */,
 				BF6316F826B279ED006F408A /* ScreenshotCell.swift */,
-				BF6316F926B279ED006F408A /* ScreenshotCell.xib */,
 			);
 			path = Screenshot;
 			sourceTree = "<group>";
@@ -927,7 +885,6 @@
 			isa = PBXGroup;
 			children = (
 				BF63170426B670CF006F408A /* ScreenshotImageCell.swift */,
-				BF63170526B670CF006F408A /* ScreenshotImageCell.xib */,
 			);
 			path = ImageCell;
 			sourceTree = "<group>";
@@ -936,7 +893,6 @@
 			isa = PBXGroup;
 			children = (
 				BF63170B26B67465006F408A /* ImageCollection.swift */,
-				BF63170D26B67465006F408A /* ImageCollection.xib */,
 			);
 			path = ImageViewer;
 			sourceTree = "<group>";
@@ -1223,19 +1179,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF2806D82562B6A5006F2D61 /* RadiobuttonCell.xib in Resources */,
-				BF2806D92562B6A5006F2D61 /* RadioCell.xib in Resources */,
-				BF573ECF26B6A157002A9E8C /* ScreenshotCreator.xib in Resources */,
-				BF2806DB2562B6A5006F2D61 /* CheckboxCell.xib in Resources */,
-				BF2806DC2562B6A5006F2D61 /* CheckCell.xib in Resources */,
-				BF0CE19E27661DAD00916B32 /* RatingCell.xib in Resources */,
 				BF1C11BE2ABD67CC0085DB10 /* UXFeedbackSDK.plist in Resources */,
-				BF63171326B67509006F408A /* ImageCollection.xib in Resources */,
-				BF63170226B2B25D006F408A /* ScreenshotCell.xib in Resources */,
-				BF573EC426B69E25002A9E8C /* ImageSelector.xib in Resources */,
-				BF573ED126B6CBBF002A9E8C /* ScreenshotImageCell.xib in Resources */,
-				BF405651265CD8A200709351 /* NpsCell.xib in Resources */,
-				BF573ECA26B69F0C002A9E8C /* GalleryCell.xib in Resources */,
 				0A4689A722840BB90074E1A3 /* UXFeedback.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1245,18 +1189,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFF352092D50F2B80010A245 /* YoHeSDK.plist in Resources */,
-				BFB509D52D50E6D000021998 /* RadiobuttonCell.xib in Resources */,
-				BFB509D62D50E6D000021998 /* RadioCell.xib in Resources */,
-				BFB509D72D50E6D000021998 /* ScreenshotCreator.xib in Resources */,
-				BFB509D92D50E6D000021998 /* CheckboxCell.xib in Resources */,
-				BFB509DA2D50E6D000021998 /* CheckCell.xib in Resources */,
-				BFB509DC2D50E6D000021998 /* RatingCell.xib in Resources */,
-				BFB509E02D50E6D000021998 /* ImageCollection.xib in Resources */,
-				BFB509E32D50E6D000021998 /* ScreenshotCell.xib in Resources */,
-				BFB509E42D50E6D000021998 /* ImageSelector.xib in Resources */,
-				BFB509E52D50E6D000021998 /* ScreenshotImageCell.xib in Resources */,
-				BFB509E62D50E6D000021998 /* NpsCell.xib in Resources */,
-				BFB509E92D50E6D000021998 /* GalleryCell.xib in Resources */,
 				BFB50A022D50ECE500021998 /* YoHe.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1311,6 +1243,7 @@
 				0A4689AC22840BBF0074E1A3 /* Text.swift in Sources */,
 				0A4689B622840BE00074E1A3 /* UIControl+blocks.swift in Sources */,
 				0A4689B822840BE00074E1A3 /* UIVIewAddition.swift in Sources */,
+				BFF352722D5BD8A00010A245 /* SliderView.swift in Sources */,
 				BF573EC526B69E28002A9E8C /* ImageSelector.swift in Sources */,
 				BFCC90A62A974E4D00B51FC4 /* Progress.swift in Sources */,
 				BFF3520F2D51076C0010A245 /* AttributeManager.swift in Sources */,
@@ -1411,6 +1344,7 @@
 				BFB509852D50E6D000021998 /* GalleryCell.swift in Sources */,
 				BFB509862D50E6D000021998 /* Text.swift in Sources */,
 				BFB509872D50E6D000021998 /* UIControl+blocks.swift in Sources */,
+				BFF352732D5BD8A00010A245 /* SliderView.swift in Sources */,
 				BFB509882D50E6D000021998 /* UIVIewAddition.swift in Sources */,
 				BFB509892D50E6D000021998 /* ImageSelector.swift in Sources */,
 				BFF3520E2D51076C0010A245 /* AttributeManager.swift in Sources */,

@@ -86,25 +86,19 @@ internal class CampaignViewController: UIViewController {
                       forCellReuseIdentifier: String(describing: EmailCell.self))
         view.register(ImageCell.self,
                       forCellReuseIdentifier: String(describing: ImageCell.self))
+        view.register(CheckboxCell.self,
+                      forCellReuseIdentifier: String(describing: CheckboxCell.self))
+        view.register(RadiobuttonCell.self,
+                      forCellReuseIdentifier: String(describing: RadiobuttonCell.self))
+        view.register(NpsCell.self,
+                      forCellReuseIdentifier: String(describing: NpsCell.self))
+        view.register(RatingCell.self,
+                      forCellReuseIdentifier: String(describing: RatingCell.self))
+        view.register(ScreenshotCell.self,
+                      forCellReuseIdentifier: String(describing: ScreenshotCell.self))
         
         
         
-        
-        view.register(UINib(nibName: "CheckboxCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "CheckboxCell")
-        view.register(UINib(nibName: "RadiobuttonCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "RadiobuttonCell")
-        view.register(UINib(nibName: "NpsCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "NpsCell")
-        view.register(UINib(nibName: "RatingCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "RatingCell")
-        view.register(UINib(nibName: "ScreenshotCell",
-                                 bundle: Consts.bundle),
-                           forCellReuseIdentifier: "ScreenshotCell")
         return view
     }()
     

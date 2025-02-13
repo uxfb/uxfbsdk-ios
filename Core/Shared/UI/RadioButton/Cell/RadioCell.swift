@@ -9,39 +9,105 @@
 import UIKit
 
 class RadioCell: UITableViewCell {
-
-    @IBOutlet var symbolExtView: UIView! {
-        didSet {
-            symbolExtView.layer.cornerRadius = 12
-        }
-    }
-    @IBOutlet var symbolMidView: UIView! {
-        didSet {
-            symbolMidView.layer.cornerRadius = 8
-        }
-    }
-    @IBOutlet var symbolIntView: UIView! {
-        didSet {
-            symbolIntView.layer.cornerRadius = 6
-        }
-    }
-    @IBOutlet var dotView: UIView! {
-        didSet {
-            dotView.layer.cornerRadius = 3
-        }
-    }
     
-    @IBOutlet var radioLabel: UILabel!
-    @IBOutlet var radioView: UIView!
+    private lazy var symbolExtView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 12
+        return view
+    }()
+    private lazy var symbolMidView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 8
+        return view
+    }()
+    
+    private lazy var symbolIntView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 6
+        return view
+    }()
+    private lazy var dotView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 3
+        return view
+    }()
+    private lazy var radioLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        return label
+    }()
+    private lazy var radioView: UIView = {
+        let view = UIView()
+        return view
+    }()
     
     private var theme: ThemeProtocol?
     private var option: Option?
     private var isError: Bool = false
     
+    private func setupSubviews() {
+        symbolIntView.addSubview(dotView)
+        symbolMidView.addSubview(symbolIntView)
+        symbolExtView.addSubview(symbolMidView)
+        radioView.addSubview(symbolExtView)
+        radioView.addSubview(radioLabel)
+        contentView.addSubview(radioView)
+        
+        symbolIntView.translatesAutoresizingMaskIntoConstraints = false
+        symbolMidView.translatesAutoresizingMaskIntoConstraints = false
+        symbolExtView.translatesAutoresizingMaskIntoConstraints = false
+        radioLabel.translatesAutoresizingMaskIntoConstraints = false
+        radioView.translatesAutoresizingMaskIntoConstraints = false
+        dotView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            radioView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+            radioView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
+            radioView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            radioView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            symbolExtView.centerYAnchor.constraint(equalTo: radioView.centerYAnchor),
+            symbolExtView.leadingAnchor.constraint(equalTo: radioView.leadingAnchor, constant: 8),
+            symbolExtView.heightAnchor.constraint(equalToConstant: 24),
+            symbolExtView.widthAnchor.constraint(equalToConstant: 24),
+            
+            radioLabel.centerYAnchor.constraint(equalTo: radioView.centerYAnchor),
+            radioLabel.leadingAnchor.constraint(equalTo: symbolExtView.trailingAnchor, constant: 8),
+            radioLabel.topAnchor.constraint(equalTo: radioView.topAnchor, constant: 4),
+            radioLabel.bottomAnchor.constraint(equalTo: radioView.bottomAnchor, constant: -4),
+            
+            symbolMidView.topAnchor.constraint(equalTo: symbolExtView.topAnchor, constant: 4),
+            symbolMidView.bottomAnchor.constraint(equalTo: symbolExtView.bottomAnchor, constant: -4),
+            symbolMidView.leadingAnchor.constraint(equalTo: symbolExtView.leadingAnchor, constant: 4),
+            symbolMidView.trailingAnchor.constraint(equalTo: symbolExtView.trailingAnchor, constant: -4),
+            
+            symbolIntView.topAnchor.constraint(equalTo: symbolMidView.topAnchor, constant: 2),
+            symbolIntView.bottomAnchor.constraint(equalTo: symbolMidView.bottomAnchor, constant: -2),
+            symbolIntView.leadingAnchor.constraint(equalTo: symbolMidView.leadingAnchor, constant: 2),
+            symbolIntView.trailingAnchor.constraint(equalTo: symbolMidView.trailingAnchor, constant: -2),
+            
+            dotView.topAnchor.constraint(equalTo: symbolIntView.topAnchor, constant: 3),
+            dotView.bottomAnchor.constraint(equalTo: symbolIntView.bottomAnchor, constant: -3),
+            dotView.leadingAnchor.constraint(equalTo: symbolIntView.leadingAnchor, constant: 3),
+            dotView.trailingAnchor.constraint(equalTo: symbolIntView.trailingAnchor, constant: -3),
+        ])
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         contentView.backgroundColor = .clear
         self.backgroundColor = .clear
+        setupSubviews()
+    }
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupSubviews()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupSubviews()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

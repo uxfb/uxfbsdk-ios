@@ -9,23 +9,46 @@
 import UIKit
 
 class RatingCell: BaseCell {
-    @IBOutlet var negativeLabel: UILabel! {
-        didSet {
-            negativeLabel.numberOfLines = 2
+    private lazy var negativeLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 2
+        label.textAlignment = .left
+        return label
+    }()
+    
+    private lazy var positiveLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 2
+        label.textAlignment = .right
+        return label
+    }()
+    
+    private lazy var slider: UISlider = {
+        let slider = UISlider()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(sliderTapped(gestureRecognizer:)))
+        slider.addGestureRecognizer(tapGestureRecognizer)
+        
+        slider.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
+        slider.addTarget(self, action: #selector(touchUpInside(_:)), for: .touchUpInside)
+        slider.addTarget(self, action: #selector(touchUpOutside(_:)), for: .touchUpOutside)
+        
+        return slider
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        
+        for i in 1...10 {
+            let label = VerticalAlignedLabel()
+            label.text = "\(i)"
+            label.tag = i
+            label.textAlignment = .center
+            stackView.addArrangedSubview(label)
         }
-    }
-    @IBOutlet var positiveLabel: UILabel!{
-        didSet {
-            positiveLabel.numberOfLines = 2
-        }
-    }
-    @IBOutlet var slider: UISlider! {
-        didSet {
-            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(sliderTapped(gestureRecognizer:)))
-            self.slider.addGestureRecognizer(tapGestureRecognizer)
-            
-        }
-    }
+        stackView.distribution = .fillEqually
+        return stackView
+    }()
     
     private var sliderView = SliderView(frame: CGRect(origin: .zero,
                                                          size: CGSize(width: 48,
@@ -34,6 +57,40 @@ class RatingCell: BaseCell {
     private var currentValue: Int = 0
     private var defaultValue: Int = 0
     private var maxValue: Int = 0
+    
+    override func setupSubviews() {
+        contentView.addSubview(stackView)
+        contentView.addSubview(slider)
+        contentView.addSubview(positiveLabel)
+        contentView.addSubview(negativeLabel)
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        positiveLabel.translatesAutoresizingMaskIntoConstraints = false
+        negativeLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            stackView.heightAnchor.constraint(equalToConstant: 28),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
+            slider.heightAnchor.constraint(equalToConstant: 48),
+            slider.topAnchor.constraint(equalTo: stackView.bottomAnchor),
+            slider.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18),
+            slider.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -18),
+            
+            negativeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            negativeLabel.topAnchor.constraint(equalTo: slider.bottomAnchor),
+            negativeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            negativeLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5, constant: -20),
+            
+            positiveLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            positiveLabel.topAnchor.constraint(equalTo: slider.bottomAnchor),
+            positiveLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            positiveLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5, constant: -20),
+        ])
+    }
     
     override func updateUI() {
         negativeLabel.font = theme?.fontP2
@@ -50,6 +107,7 @@ class RatingCell: BaseCell {
         sliderView.frame.size.width = max(self.bounds.width / CGFloat(maxValue), 48)
         initLabels()
         
+        slider.minimumValue = 1
         slider.maximumValue = Float(maxValue)
         slider.setValue(Float(currentValue == 0 ? defaultValue : currentValue), animated: false)
         

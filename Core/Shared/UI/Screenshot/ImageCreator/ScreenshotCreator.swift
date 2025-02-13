@@ -15,43 +15,59 @@ class ScreenshotCreator: UIView {
     private var direction: CGFloat = 0
     private var completeAction: imagePickerAction?
     
-    @IBOutlet weak var handBottom: NSLayoutConstraint!
+    private var handBottom: NSLayoutConstraint!
+    private var shadowTop: NSLayoutConstraint!
+    private var shadowBottom: NSLayoutConstraint!
+    private var shadowLeft: NSLayoutConstraint!
+    private var shadowRight: NSLayoutConstraint!
     
-    @IBOutlet weak var shadowTop: NSLayoutConstraint!
-    @IBOutlet weak var shadowBottom: NSLayoutConstraint!
-    @IBOutlet weak var shadowLeft: NSLayoutConstraint!
-    @IBOutlet weak var shadowRight: NSLayoutConstraint!
+    lazy var textLabel: UILabel = {
+        let label = UILabel()
+        label.text = Consts.Texts.startScroll
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.textColor = .white
+        return label
+    }()
+    lazy var touchImage: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFit
+        image.image = UIImage(named: "touch", in: Consts.bundle, compatibleWith: nil)
+        return image
+    }()
+    lazy var arrowImage: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFit
+        image.image = UIImage(named: "line_array", in: Consts.bundle, compatibleWith: nil)
+        return image
+    }()
     
-    @IBOutlet weak var textLabel: UILabel! {
-        didSet {
-            textLabel.text = Consts.Texts.startScroll
-        }
-    }
-    @IBOutlet weak var touchImage: UIImageView!
-    @IBOutlet weak var arrowImage: UIImageView!
-    
-    @IBOutlet weak var okButton: UIButton! {
-        didSet {
-            okButton.layer.masksToBounds = true
-            okButton.addShadowAndRoundCorner(cornerRadius: 28)
-            okButton.isEnabled = true
-        }
-    }
-    @IBOutlet weak var cancelButton: UIButton! {
-        didSet {
-            cancelButton.layer.masksToBounds = true
-            cancelButton.addShadowAndRoundCorner(cornerRadius: 28)
-        }
-    }
-    @IBOutlet weak var shadowView: UIView! {
-        didSet {
-            shadowView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-            
-            let panGestureRecognizer = UIPanGestureRecognizer()
-            panGestureRecognizer.addTarget(self, action: #selector(onPan(pan:)))
-            shadowView.addGestureRecognizer(panGestureRecognizer)
-        }
-    }
+    lazy var okButton: UIButton = {
+        let button = UIButton()
+        button.layer.masksToBounds = true
+        button.addShadowAndRoundCorner(cornerRadius: 28)
+        button.setImage(UIImage(named: "check", in: Consts.bundle, compatibleWith: nil), for: .normal)
+        button.isEnabled = true
+        button.addTarget(self, action: #selector(pressOk(_:)), for: .touchUpInside)
+        return button
+    }()
+    lazy var cancelButton: UIButton = {
+        let button = UIButton()
+        button.layer.masksToBounds = true
+        button.addShadowAndRoundCorner(cornerRadius: 28)
+        button.setImage(UIImage(named: "close", in: Consts.bundle, compatibleWith: nil), for: .normal)
+        button.addTarget(self, action: #selector(pressCancel(_:)), for: .touchUpInside)
+        return button
+    }()
+    lazy var shadowView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        
+        let panGestureRecognizer = UIPanGestureRecognizer()
+        panGestureRecognizer.addTarget(self, action: #selector(onPan(pan:)))
+        view.addGestureRecognizer(panGestureRecognizer)
+        return view
+    }()
     
     private var displayLink: CADisplayLink?
     private var startTime: TimeInterval?
@@ -70,7 +86,105 @@ class ScreenshotCreator: UIView {
         displayLink?.add(to: RunLoop.main, forMode: .common)
     }
     
+    override init(frame: CGRect){
+        super.init(frame: frame)
+        setupSubviews()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupSubviews()
+    }
+    
+    private func setupSubviews() {
+        shadowView.addSubview(textLabel)
+        shadowView.addSubview(arrowImage)
+        shadowView.addSubview(touchImage)
+        addSubview(shadowView)
+        addSubview(okButton)
+        addSubview(cancelButton)
+        
+        okButton.translatesAutoresizingMaskIntoConstraints = false
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        arrowImage.translatesAutoresizingMaskIntoConstraints = false
+        touchImage.translatesAutoresizingMaskIntoConstraints = false
+        shadowView.translatesAutoresizingMaskIntoConstraints = false
+        
+        handBottom = NSLayoutConstraint(item: textLabel,
+                                        attribute: .top,
+                                        relatedBy: .equal,
+                                        toItem: touchImage,
+                                        attribute: .bottom,
+                                        multiplier: 1,
+                                        constant: 48)
+        
+        shadowLeft = NSLayoutConstraint(item: shadowView,
+                                        attribute: .leading,
+                                        relatedBy: .equal,
+                                        toItem: self,
+                                        attribute: .leading,
+                                        multiplier: 1,
+                                        constant: 0)
+        
+        shadowRight = NSLayoutConstraint(item: self,
+                                         attribute: .trailing,
+                                         relatedBy: .equal,
+                                         toItem: shadowView,
+                                         attribute: .trailing,
+                                         multiplier: 1,
+                                         constant: 0)
+        
+        shadowTop = NSLayoutConstraint(item: shadowView,
+                                       attribute: .top,
+                                       relatedBy: .equal,
+                                       toItem: self,
+                                       attribute: .top,
+                                       multiplier: 1,
+                                       constant: 0)
+        
+        shadowBottom = NSLayoutConstraint(item: self,
+                                          attribute: .bottom,
+                                          relatedBy: .equal,
+                                          toItem: shadowView,
+                                          attribute: .bottom,
+                                          multiplier: 1,
+                                          constant: 0)
+        
+        NSLayoutConstraint.activate([
+            shadowLeft,
+            shadowRight,
+            shadowTop,
+            shadowBottom,
+            
+            okButton.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 32),
+            okButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -48),
+            okButton.heightAnchor.constraint(equalToConstant: 56),
+            okButton.widthAnchor.constraint(equalToConstant: 56),
+            
+            cancelButton.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -32),
+            cancelButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -48),
+            cancelButton.heightAnchor.constraint(equalToConstant: 56),
+            cancelButton.widthAnchor.constraint(equalToConstant: 56),
+            
+            arrowImage.heightAnchor.constraint(equalToConstant: 65),
+            arrowImage.widthAnchor.constraint(equalToConstant: 38),
+            arrowImage.bottomAnchor.constraint(equalTo: okButton.topAnchor, constant: -60),
+            arrowImage.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 48),
+            
+            textLabel.bottomAnchor.constraint(equalTo: arrowImage.topAnchor, constant: -32),
+            textLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 60),
+            textLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -60),
+            
+            touchImage.centerXAnchor.constraint(equalTo: centerXAnchor),
+            touchImage.widthAnchor.constraint(equalToConstant: 64),
+            touchImage.heightAnchor.constraint(equalToConstant: 64),
+            handBottom
+        ])
+    }
+    
     private func updateUI() {
+//        textLabel.textColor = theme?.btnTextColor
         okButton.backgroundColor = theme?.btnBgColor
         okButton.setTitleColor(theme?.btnTextColor, for: .normal)
         okButton.imageView?.tintColor = theme?.btnTextColor
@@ -95,8 +209,6 @@ class ScreenshotCreator: UIView {
         
         let diffPos = 28.0 * fraction
         
-        //        self.handBottom.constant = 48 + diffPos
-        
         if Int(whole) % 2 == 0 {
             self.handBottom.constant = 48 + CGFloat(diffPos)
         } else {
@@ -104,7 +216,8 @@ class ScreenshotCreator: UIView {
         }
     }
     
-    @IBAction func pressOk(_ sender: Any) {
+    @objc
+    private func pressOk(_ sender: Any) {
         let flashView = UIView(frame: self.bounds)
         flashView.backgroundColor = .white
         flashView.alpha = 1.0
@@ -168,7 +281,8 @@ class ScreenshotCreator: UIView {
         }
     }
     
-    @IBAction func pressCancel(_ sender: Any) {
+    @objc
+    private func pressCancel(_ sender: Any) {
         self.displayLink?.invalidate()
         ImageManager.hide(animated: true)
     }
@@ -207,6 +321,7 @@ class ScreenshotCreator: UIView {
                         self.shadowView.layer.masksToBounds = true
                     } completion: { finished in
                         self.okButton.isEnabled = true
+                        pan.isEnabled = false
                     }
                 }
                 

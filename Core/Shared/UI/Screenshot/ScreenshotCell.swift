@@ -11,47 +11,106 @@ import UIKit
 class ScreenshotCell: BaseCell {
 
     var platform: String?
+        
+    private lazy var takeView: UIView = {
+        let view = UIView()
+        view.isHidden = true
+        return view
+    }()
     
-    @IBOutlet var stackView: UIStackView!
-    @IBOutlet var stackViewHeight: NSLayoutConstraint!
+    private lazy var takeButton: UIButton = {
+        let view = UIButton(type: .custom)
+        view.setTitle("", for: .normal)
+        view.addTarget(self, action: #selector(takeDown(_:)), for: .touchDown)
+        view.addTarget(self, action: #selector(takeUpInside(_:)), for: .touchUpInside)
+        view.addTarget(self, action: #selector(takeUpOutside(_:)), for: .touchCancel)
+        view.addTarget(self, action: #selector(takeUpOutside(_:)), for: .touchDragExit)
+        view.addTarget(self, action: #selector(takeUpOutside(_:)), for: .touchDragOutside)
+        view.addTarget(self, action: #selector(takeUpOutside(_:)), for: .touchUpOutside)
+        return view
+    }()
     
-    @IBOutlet var collectionViewWidth: NSLayoutConstraint!
+    private lazy var takeLabel: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    private lazy var takeImage: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFit
+        image.image = UIImage(named: "screenshot",
+                              in: Consts.bundle,
+                              compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+        return image
+    }()
     
-    @IBOutlet var takeView: UIView!  {
-        didSet {
-            takeView.isHidden = true
-        }
-    }
-    @IBOutlet var takeLabel: UILabel!
-    @IBOutlet var takeImage: UIImageView! {
-        didSet {
-            takeImage.image = takeImage.image?.withRenderingMode(.alwaysTemplate)
-        }
-    }
+    private lazy var selectView: UIView = {
+        let view = UIView()
+        view.isHidden = true
+        return view
+    }()
     
-    @IBOutlet var selectView: UIView! {
-        didSet {
-            selectView.isHidden = true
-        }
-    }
-    @IBOutlet var selectLabel: UILabel!
-    @IBOutlet var selectImage: UIImageView! {
-        didSet {
-            selectImage.image = selectImage.image?.withRenderingMode(.alwaysTemplate)
-        }
-    }
+    private lazy var selectButton: UIButton = {
+        let view = UIButton(type: .custom)
+        view.setTitle("", for: .normal)
+        view.addTarget(self, action: #selector(selectDown(_:)), for: .touchDown)
+        view.addTarget(self, action: #selector(selectUpInside(_:)), for: .touchUpInside)
+        view.addTarget(self, action: #selector(selectUpOutside(_:)), for: .touchCancel)
+        view.addTarget(self, action: #selector(selectUpOutside(_:)), for: .touchDragExit)
+        view.addTarget(self, action: #selector(selectUpOutside(_:)), for: .touchDragOutside)
+        view.addTarget(self, action: #selector(selectUpOutside(_:)), for: .touchUpOutside)
+        return view
+    }()
     
-    @IBOutlet var countLabel: UILabel!
+    private lazy var selectLabel: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    private lazy var selectImage: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFit
+        image.image = UIImage(named: "attach",
+                              in: Consts.bundle,
+                              compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+        return image
+    }()
     
-    @IBOutlet var collectionView: UICollectionView! {
-        didSet {
-            collectionView.delegate = self
-            collectionView.dataSource = self
-            collectionView.register(UINib(nibName: "ScreenshotImageCell",
-                                          bundle: Consts.bundle),
-                                    forCellWithReuseIdentifier: "ScreenshotImageCell")
-        }
-    }
+    private lazy var stackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.distribution = .fillEqually
+        view.spacing = 2
+        return view
+    }()
+    
+    private var stackViewHeight: NSLayoutConstraint!
+    private var collectionViewWidth: NSLayoutConstraint!
+    
+    private lazy var countLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.itemSize = .init(width: 76, height: 76)
+        layout.minimumLineSpacing = 16
+        layout.minimumInteritemSpacing = 16
+        layout.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 0)
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(ScreenshotImageCell.self,
+                                forCellWithReuseIdentifier: String(describing: ScreenshotImageCell.self))
+        collectionView.backgroundColor = .clear
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
+    }()
+    
     private var screenshots: [Screenshot] = []
     
     private var maxCount: Int = 3
@@ -81,6 +140,102 @@ class ScreenshotCell: BaseCell {
         setEnabledBtns(screenshots.count < maxCount)
         
         countLabel.text = screenshots.count > 0 ? "\(Consts.Texts.screenshots) \(screenshots.count) \(Consts.Texts.of) \(maxCount)" : ""
+    }
+    
+    override func setupSubviews() {
+        takeView.addSubview(takeButton)
+        takeView.addSubview(takeLabel)
+        takeView.addSubview(takeImage)
+        selectView.addSubview(selectButton)
+        selectView.addSubview(selectLabel)
+        selectView.addSubview(selectImage)
+        
+        
+        stackView.addArrangedSubview(takeView)
+        stackView.addArrangedSubview(selectView)
+        
+        contentView.addSubview(stackView)
+        
+        contentView.addSubview(collectionView)
+        
+        contentView.addSubview(countLabel)
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        countLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        takeView.translatesAutoresizingMaskIntoConstraints = false
+        takeButton.translatesAutoresizingMaskIntoConstraints = false
+        takeLabel.translatesAutoresizingMaskIntoConstraints = false
+        takeImage.translatesAutoresizingMaskIntoConstraints = false
+        
+        selectView.translatesAutoresizingMaskIntoConstraints = false
+        selectButton.translatesAutoresizingMaskIntoConstraints = false
+        selectLabel.translatesAutoresizingMaskIntoConstraints = false
+        selectImage.translatesAutoresizingMaskIntoConstraints = false
+        
+        stackViewHeight = NSLayoutConstraint(item: stackView,
+                                             attribute: .height,
+                                             relatedBy: .equal,
+                                             toItem: nil,
+                                             attribute: .height,
+                                             multiplier: 1,
+                                             constant: 48)
+        
+        collectionViewWidth = NSLayoutConstraint(item: collectionView,
+                                                 attribute: .width,
+                                                 relatedBy: .equal,
+                                                 toItem: nil,
+                                                 attribute: .width,
+                                                 multiplier: 1,
+                                                 constant: 192)
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            stackViewHeight,
+            
+            countLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
+            countLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            countLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            countLabel.heightAnchor.constraint(equalToConstant: 32),
+            
+            collectionView.topAnchor.constraint(equalTo: countLabel.bottomAnchor, constant: 16),
+            collectionView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: 76),
+            collectionViewWidth,
+            
+            takeButton.topAnchor.constraint(equalTo: takeView.topAnchor),
+            takeButton.leadingAnchor.constraint(equalTo: takeView.leadingAnchor),
+            takeButton.trailingAnchor.constraint(equalTo: takeView.trailingAnchor),
+            takeButton.bottomAnchor.constraint(equalTo: takeView.bottomAnchor),
+            
+            takeImage.leadingAnchor.constraint(equalTo: takeView.leadingAnchor, constant: 12),
+            takeImage.heightAnchor.constraint(equalToConstant: 24),
+            takeImage.widthAnchor.constraint(equalToConstant: 24),
+            takeImage.centerYAnchor.constraint(equalTo: takeView.centerYAnchor),
+            
+            takeLabel.leadingAnchor.constraint(equalTo: takeImage.trailingAnchor, constant: 12),
+            takeLabel.trailingAnchor.constraint(equalTo: takeView.trailingAnchor, constant: -12),
+            takeLabel.topAnchor.constraint(equalTo: takeView.topAnchor, constant: 7),
+            takeLabel.bottomAnchor.constraint(equalTo: takeView.bottomAnchor, constant: -7),
+            
+            selectButton.topAnchor.constraint(equalTo: selectView.topAnchor),
+            selectButton.leadingAnchor.constraint(equalTo: selectView.leadingAnchor),
+            selectButton.trailingAnchor.constraint(equalTo: selectView.trailingAnchor),
+            selectButton.bottomAnchor.constraint(equalTo: selectView.bottomAnchor),
+            
+            selectImage.leadingAnchor.constraint(equalTo: selectView.leadingAnchor, constant: 12),
+            selectImage.heightAnchor.constraint(equalToConstant: 24),
+            selectImage.widthAnchor.constraint(equalToConstant: 24),
+            selectImage.centerYAnchor.constraint(equalTo: selectView.centerYAnchor),
+            
+            selectLabel.leadingAnchor.constraint(equalTo: selectImage.trailingAnchor, constant: 12),
+            selectLabel.trailingAnchor.constraint(equalTo: selectView.trailingAnchor, constant: -12),
+            selectLabel.topAnchor.constraint(equalTo: selectView.topAnchor, constant: 7),
+            selectLabel.bottomAnchor.constraint(equalTo: selectView.bottomAnchor, constant: -7)
+        ])
     }
     
     override func updateUI() {
@@ -150,15 +305,16 @@ class ScreenshotCell: BaseCell {
         takeLabel.textColor = isEnabled ? theme?.text01Color : theme?.text01Color
     }
 
-    
-    @IBAction func takeDown(_ sender: Any) {
+    @objc
+    private func takeDown(_ sender: Any) {
         if !isEnabled {
             return
         }
         takeSetHighlight(true)
     }
     
-    @IBAction func takeUpInside(_ sender: Any) {
+    @objc
+    private func takeUpInside(_ sender: Any) {
         if !isEnabled {
             showMaxCount()
             return
@@ -170,21 +326,24 @@ class ScreenshotCell: BaseCell {
         takeSetHighlight(false)
     }
     
-    @IBAction func takeUpOutside(_ sender: Any) {
+    @objc
+    private func takeUpOutside(_ sender: Any) {
         if !isEnabled {
             return
         }
         takeSetHighlight(false)
     }
     
-    @IBAction func selectDown(_ sender: Any) {
+    @objc
+    private func selectDown(_ sender: Any) {
         if !isEnabled {
             return
         }
         selectSetHighlight(true)
     }
     
-    @IBAction func selectUpInside(_ sender: Any) {
+    @objc
+    private func selectUpInside(_ sender: Any) {
         if !isEnabled {
             showMaxCount()
             return
@@ -195,7 +354,8 @@ class ScreenshotCell: BaseCell {
         selectSetHighlight(false)
     }
     
-    @IBAction func selectUpOutside(_ sender: Any) {
+    @objc
+    private func selectUpOutside(_ sender: Any) {
         if !isEnabled {
             return
         }
@@ -207,7 +367,7 @@ class ScreenshotCell: BaseCell {
         let message = screenshot.type == .screenshot ? Consts.Texts.screenshotDeleteInfo : Consts.Texts.screenshotDeleteFuture
         let alert = UIAlertController(title: Consts.Texts.screenshotDeleteQuestion, message: message, preferredStyle: .alert)
         let noDeleteAction = UIAlertAction(title: Consts.Texts.noDelete, style: .default) { alertAction in
-            alert.dismiss(animated: true, completion: nil)
+            alert.dismissGlobally(animated: true)
         }
         
         let deleteAction = UIAlertAction(title: Consts.Texts.delete, style: .default) { alertAction in
@@ -217,7 +377,7 @@ class ScreenshotCell: BaseCell {
             
             self.delegate?.screenshotChanged(self.field!, screenshots: self.screenshots)
             
-            alert.dismiss(animated: true, completion: nil)
+            alert.dismissGlobally(animated: true)
         }
         alert.addAction(noDeleteAction)
         alert.addAction(deleteAction)
@@ -227,7 +387,7 @@ class ScreenshotCell: BaseCell {
     private func showMaxCount() {
         let alert = UIAlertController(title: Consts.Texts.screenshotMaxCount, message: Consts.Texts.screenshotMaxCountNext, preferredStyle: .alert)
         let okAction = UIAlertAction(title: Consts.Texts.okay, style: .default) { alertAction in
-            alert.dismiss(animated: true, completion: nil)
+            alert.dismissGlobally(animated: true)
         }
 
         alert.addAction(okAction)
@@ -241,7 +401,8 @@ class ScreenshotCell: BaseCell {
 
 extension ScreenshotCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ScreenshotImageCell", for: indexPath) as! ScreenshotImageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ScreenshotImageCell.self),
+                                                      for: indexPath) as! ScreenshotImageCell
         
         cell.configure(image: screenshots[indexPath.row].image, theme: theme) {
             self.showDeleteConfirmation(index: indexPath.row)

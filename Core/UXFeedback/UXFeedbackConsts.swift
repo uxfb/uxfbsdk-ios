@@ -10,11 +10,11 @@ import Foundation
 
 internal class Consts {
     static let os: String = "iOS"
-    static let version: String = "2.9.3"
+    static let version: String = "2.10.0"
     static let cryptoKey: String = "UXFeedback"
     static let defaultHref: String = "https://uxfeedback.ru?utm_campaign=default&utm_medium=app"
-//    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
-    static let defaultEndpoint: String = "https://develop.api.uxfb.dev"
+    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
+//    static let defaultEndpoint: String = "https://develop.api.uxfb.dev"
 //    static let defaultEndpoint: String = "https://epic-dev-5216-stars.api.uxfb.dev"
 
     static let apiVersion: String = "v13"
@@ -23,6 +23,7 @@ internal class Consts {
     static let bundle: Bundle = Bundle(for: UXFeedback.self)
     
     class Texts {
+        static let manage = "Управлять"
         static let close = "Закрыть"
         static let cancel = "Отмена"
         static let selected = "Выбрано:"

@@ -21,6 +21,7 @@ internal class Consts {
     static let bundle: Bundle = Bundle(for: YoHe.self)
     
     class Texts {
+        static let manage = "Manage"
          static let close = "Close"
          static let cancel = "Cancel"
          static let selected = "Selected:"

@@ -95,7 +95,7 @@ class ImageManager: NSObject {
         titleLabel.font = .systemFont(ofSize: 14)
         titleLabel.text = "\(tappedIndex + 1) \(Consts.Texts.of) \(images.count)"
         
-        let imageCollection = Consts.bundle.loadNibNamed("ImageCollection", owner: self, options: nil)?.first as! ImageCollection
+        let imageCollection = ImageCollection(frame: .zero)
         imageCollection.configure(frame: CGRect(origin: startPoint, size: startSize), images: images, currentIndex: tappedIndex) { title in
             titleLabel.text = title
         }
@@ -166,7 +166,7 @@ class ImageManager: NSObject {
         currentMainWindow.addSubview(overlay)
         currentMainWindow.bringSubviewToFront(overlay)
         
-        let imageSelector = Consts.bundle.loadNibNamed("ImageSelector", owner: self, options: nil)?.first as! ImageSelector
+        let imageSelector = ImageSelector(frame: .zero)
         imageSelector.theme = theme
         imageSelector.configure(frame: overlay.bounds, maxCount: maxCount, completion: action)
         imageSelector.center.y = imageSelector.center.y + imageSelector.frame.size.height
@@ -190,7 +190,7 @@ class ImageManager: NSObject {
         currentMainWindow.addSubview(overlay)
         currentMainWindow.bringSubviewToFront(overlay)
         
-        let imageCreator = Consts.bundle.loadNibNamed("ScreenshotCreator", owner: self, options: nil)?.first as! ScreenshotCreator
+        let imageCreator = ScreenshotCreator(frame: .zero)
         imageCreator.theme = theme
         imageCreator.alpha = 0
         imageCreator.configure(frame: overlay.bounds, completion: action)

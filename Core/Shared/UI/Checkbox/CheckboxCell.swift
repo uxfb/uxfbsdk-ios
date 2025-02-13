@@ -9,17 +9,33 @@
 import UIKit
 
 class CheckboxCell: BaseCell, UITableViewDelegate, UITableViewDataSource {
-    @IBOutlet var tableView: UITableView! {
-        didSet {
-            tableView.register(UINib(nibName: "CheckCell", bundle: Consts.bundle), forCellReuseIdentifier: "CheckCell")
-            tableView.delegate = self
-            tableView.dataSource = self
-            tableView.backgroundColor = .clear
-        }
-    }
+    
+    private lazy var tableView: UITableView = {
+        let view = UITableView()
+        view.register(CheckCell.self,
+                      forCellReuseIdentifier: String(describing: CheckCell.self))
+        view.delegate = self
+        view.dataSource = self
+        view.backgroundColor = .clear
+        view.separatorStyle = .none
+        view.allowsMultipleSelection = true
+        return view
+    }()
     
     private var options: Array<Option> = []
     private var isError: Bool = false
+    
+    override func setupSubviews() {
+        contentView.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            tableView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
+    }
     
     override func updateUI() {
         guard let data = try? JSONSerialization.data(withJSONObject: field?.uiData["options"] as Any, options: .prettyPrinted) else {

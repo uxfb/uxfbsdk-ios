@@ -12,16 +12,17 @@ class ImageCollection: UIView, UIScrollViewDelegate {
     
     var imageViews: [UIImageView] = []
     
-    @IBOutlet weak var scrollView: UIScrollView!{
-        didSet{
-            scrollView.delegate = self
-            
-        }
-    }
+    lazy var scrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.delegate = self
+        return view
+    }()
     
-    @IBOutlet weak var numberLabel: UILabel!
-    
-    @IBOutlet weak var frontImageView: UIImageView!
+    lazy var frontImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
     
     var onPageChange: ((String) -> ())?
     
@@ -31,6 +32,36 @@ class ImageCollection: UIView, UIScrollViewDelegate {
                 onPageChange!("\(selectedIndex + 1) \(Consts.Texts.of) \(imageViews.count)")
             }
         }
+    }
+    
+    private func setupSubviews() {
+        addSubview(frontImageView)
+        addSubview(scrollView)
+        
+        frontImageView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            frontImageView.topAnchor.constraint(equalTo: self.topAnchor),
+            frontImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            frontImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            frontImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            
+            scrollView.topAnchor.constraint(equalTo: self.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+        ])
+    }
+    
+    override init(frame: CGRect){
+        super.init(frame: frame)
+        setupSubviews()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupSubviews()
     }
 
     func configure(frame: CGRect, images: [UIImage], currentIndex: Int, onPageChange: @escaping (String) -> () ) {

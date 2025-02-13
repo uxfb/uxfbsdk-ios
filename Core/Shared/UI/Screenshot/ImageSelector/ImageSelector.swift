@@ -13,94 +13,112 @@ class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
     
     var theme: ThemeProtocol?
     
-    @IBOutlet weak var permissionView: UIView! {
-        didSet {
-            permissionView.backgroundColor = Theme().controlBgColor
-        }
-    }
+    lazy var permissionView: UIView = {
+        let view = UIView()
+        view.backgroundColor = Theme().controlBgColor
+        return view
+    }()
     
-    @IBOutlet weak var permissionLabel: UILabel! {
-        didSet {
-            permissionLabel.textColor = Theme().text02Color
-        }
-    }
+    lazy var permissionLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = Theme().text02Color
+        label.text = "Вы предоставили доступ только к некоторым фото. Выберите больше или откройте доступ ко всем фото."
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 12)
+        return label
+    }()
     
-    @IBOutlet weak var permissionButton: UIButton! {
-        didSet {
-            let color = UIColor.white
-            permissionButton.setTitleColor(color, for: .normal)
-            permissionButton.setTitleColor(color.withAlphaComponent(0.5), for: .highlighted)
-            permissionButton.backgroundColor = Theme().mainColor
-            permissionButton.layer.cornerRadius = 4.0
-            permissionButton.layer.masksToBounds = true
-            
-            permissionButton.addAction {
-                if #available(iOS 14, *) {
-                    DispatchQueue.main.async {
+    lazy var permissionButton: UIButton = {
+        let button = UIButton(type: .custom)
+        let color = UIColor.white
+        button.setTitle(Consts.Texts.manage, for: .normal)
+        button.setTitleColor(color, for: .normal)
+        button.setTitleColor(color.withAlphaComponent(0.5), for: .highlighted)
+        button.backgroundColor = Theme().mainColor
+        button.layer.cornerRadius = 4.0
+        button.layer.masksToBounds = true
+        
+        button.addAction {
+            if #available(iOS 14, *) {
+                DispatchQueue.main.async {
+                    
+                    let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                    
+                    let openSettingsAction = UIAlertAction(title: Consts.Texts.changeSettings, style: .default) { alertAction in
+                        alert.dismissGlobally(animated: true)
+                        guard let url = URL(string: UIApplication.openSettingsURLString),
+                              UIApplication.shared.canOpenURL(url) else {
+                            return
+                        }
                         
-                        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-                        
-                        let openSettingsAction = UIAlertAction(title: Consts.Texts.changeSettings, style: .default) { alertAction in
-                            alert.dismiss(animated: true, completion: nil)
-                            guard let url = URL(string: UIApplication.openSettingsURLString),
-                                    UIApplication.shared.canOpenURL(url) else {
-                                        return
-                            }
-
-                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                        }
-                        let openPhotoAccessAction = UIAlertAction(title: Consts.Texts.takeMorePhoto, style: .default) { alertAction in
-                            alert.dismiss(animated: true, completion: nil)
-                            
-                            if var topController = UIApplication.shared.keyWindow?.rootViewController {
-                                while let presentedViewController = topController.presentedViewController {
-                                    topController = presentedViewController
-                                }
-                                PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: topController)
-                            }
-                        }
-                        let closeAction = UIAlertAction(title: Consts.Texts.cancel, style: .cancel) { alertAction in
-                            alert.dismiss(animated: true, completion: nil)
-                        }
-                        alert.addAction(openSettingsAction)
-                        alert.addAction(openPhotoAccessAction)
-                        alert.addAction(closeAction)
-                        alert.presentGlobally(animated: true, completion: nil)
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     }
+                    let openPhotoAccessAction = UIAlertAction(title: Consts.Texts.takeMorePhoto, style: .default) { alertAction in
+                        alert.dismissGlobally(animated: true)
+                        
+                        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+                            while let presentedViewController = topController.presentedViewController {
+                                topController = presentedViewController
+                            }
+                            PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: topController)
+                        }
+                    }
+                    let closeAction = UIAlertAction(title: Consts.Texts.cancel, style: .cancel) { alertAction in
+                        alert.dismissGlobally(animated: true)
+                    }
+                    alert.addAction(openSettingsAction)
+                    alert.addAction(openPhotoAccessAction)
+                    alert.addAction(closeAction)
+                    alert.presentGlobally(animated: true, completion: nil)
                 }
             }
         }
-    }
+        return button
+    }()
     
-    @IBOutlet weak var galleryTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var permissionHeightConstraint: NSLayoutConstraint!
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.init("#232735")
+        label.textAlignment = .center
+        return label
+    }()
     
-    @IBOutlet weak var titleLabel: UILabel! {
-        didSet {
-            titleLabel.textColor = UIColor.init("#232735")
-        }
-    }
-    
-    @IBOutlet weak var closeButton: UIButton!
+    lazy var closeButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "close", in: Consts.bundle, compatibleWith: nil), for: .normal)
+        button.addTarget(self, action: #selector(pressHide(_:)), for: .touchUpInside)
+        return button
+    }()
   
-    @IBOutlet weak var completeButton: UIButton! {
-        didSet {
-            completeButton.layer.masksToBounds = true
-            completeButton.addShadowAndRoundCorner(cornerRadius: 28)
-        }
-    }
+    lazy var completeButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.layer.masksToBounds = true
+        button.addShadowAndRoundCorner(cornerRadius: 28)
+        button.setImage(UIImage(named: "check", in: Consts.bundle, compatibleWith: nil), for: .normal)
+        button.addTarget(self, action: #selector(pressCompletete(_:)), for: .touchUpInside)
+        return button
+    }()
     
-    @IBOutlet weak var collectionView: UICollectionView! {
-        didSet {
-            collectionView.allowsMultipleSelection = true
-            collectionView.register(UINib(nibName: "GalleryCell",
-                                          bundle: Consts.bundle),
-                                    forCellWithReuseIdentifier: "GalleryCell")
-            collectionView.delegate = self
-            collectionView.dataSource = self
-            collectionView.backgroundColor = .clear
-        }
-    }
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.itemSize = .init(width: 128, height: 128)
+        layout.minimumLineSpacing = 2
+        layout.minimumInteritemSpacing = 2
+        layout.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 0)
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.allowsMultipleSelection = true
+        collectionView.register(GalleryCell.self,
+                                forCellWithReuseIdentifier: String(describing: GalleryCell.self))
+        collectionView.backgroundColor = .clear
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
+    }()
+    
+    private var topSpaceCollectionView: NSLayoutConstraint!
     
     private var selectedIndexes: [Int] = []
     private var maxCount = 0
@@ -123,6 +141,79 @@ class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
             }
         })
         return thumbnail
+    }
+    
+    private func setupSubviews() {
+        self.addSubview(collectionView)
+        self.addSubview(titleLabel)
+        self.addSubview(completeButton)
+        self.addSubview(closeButton)
+        permissionView.addSubview(permissionLabel)
+        permissionView.addSubview(permissionButton)
+        self.addSubview(permissionView)
+        
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        completeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        permissionLabel.translatesAutoresizingMaskIntoConstraints = false
+        permissionButton.translatesAutoresizingMaskIntoConstraints = false
+        permissionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        topSpaceCollectionView = NSLayoutConstraint(item: collectionView,
+                                                    attribute: .top,
+                                                    relatedBy: .equal,
+                                                    toItem: titleLabel,
+                                                    attribute: .bottom,
+                                                    multiplier: 1,
+                                                    constant: 16)
+        
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            titleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
+            titleLabel.heightAnchor.constraint(equalToConstant: 18),
+            
+            closeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
+            closeButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 8),
+            closeButton.heightAnchor.constraint(equalToConstant: 32),
+            closeButton.widthAnchor.constraint(equalToConstant: 32),
+            
+            permissionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            permissionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            permissionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            
+            permissionButton.centerYAnchor.constraint(equalTo: permissionView.centerYAnchor),
+            permissionButton.trailingAnchor.constraint(equalTo: permissionView.trailingAnchor, constant: -8),
+            permissionButton.heightAnchor.constraint(equalToConstant: 28),
+            permissionButton.widthAnchor.constraint(equalToConstant: 104),
+            
+            permissionLabel.leadingAnchor.constraint(equalTo: permissionView.leadingAnchor, constant: 8),
+            permissionLabel.trailingAnchor.constraint(equalTo: permissionButton.leadingAnchor, constant: -8),
+            permissionLabel.topAnchor.constraint(equalTo: permissionView.topAnchor, constant: 8),
+            permissionLabel.bottomAnchor.constraint(equalTo: permissionView.bottomAnchor, constant: -8),
+            
+            topSpaceCollectionView,
+            collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
+            collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
+            
+            completeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            completeButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            completeButton.heightAnchor.constraint(equalToConstant: 56),
+            completeButton.widthAnchor.constraint(equalToConstant: 56)
+        ])
+    }
+    
+    override init(frame: CGRect){
+        super.init(frame: frame)
+        setupSubviews()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupSubviews()
     }
     
     private func updateUI() {
@@ -166,30 +257,31 @@ class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         self.assets = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+        var isGranted = false
         DispatchQueue.main.async {
             self.collectionView.reloadData()
             if #available(iOS 14, *) {
                 if status == .limited {
-                    let text = self.permissionLabel.text
-                    let height = text?.height(withConstrainedWidth: self.frame.width - 128, font: .systemFont(ofSize: 12)) ?? 0
-                    self.galleryTopConstraint.constant = height + 40
-                    self.permissionHeightConstraint.constant = height + 16
+                    isGranted = false
                 } else {
-                    self.galleryTopConstraint.constant = 16
+                    isGranted = true
                 }
             } else {
-                self.galleryTopConstraint.constant = 16
+                isGranted = true
             }
-            self.permissionView.isHidden = self.galleryTopConstraint.constant == 16
+            self.permissionView.isHidden = isGranted
+            self.topSpaceCollectionView.constant = isGranted ? 16 : self.permissionLabel.intrinsicContentSize.height + 16 + 16
             self.layoutIfNeeded()
         }
     }
     
-    @IBAction func pressHide(_ sender: Any) {
+    @objc
+    private func pressHide(_ sender: Any) {
         ImageManager.hide(animated: true)
     }
     
-    @IBAction func pressCompletete(_ sender: Any) {
+    @objc
+    private func pressCompletete(_ sender: Any) {
         if completeAction != nil {
             var result: [UIImage] = []
             for index in selectedIndexes {
