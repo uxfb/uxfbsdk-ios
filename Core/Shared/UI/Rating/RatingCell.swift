@@ -98,8 +98,7 @@ class RatingCell: BaseCell {
         
         currentValue = Int(field?.answers.first ?? "") ?? 0
         maxValue = (field?.uiData["ratingCount"] as? Int) ?? 3
-        let halfValue = (Double(maxValue)/2).rounded(.up)
-        defaultValue = Int(halfValue)
+        defaultValue = 0
         guard field != nil, theme != nil else {
             return
         }

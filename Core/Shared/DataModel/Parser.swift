@@ -57,7 +57,22 @@ class Parser {
         return copyright
     }
     
-    func parseCampaign(campaignInfo: Dictionary<String,Any>, copyright: Copyright?) -> Campaign?{
+    func parseTextProperties(textPropertiesInfo: Dictionary<String,Any>) -> TextProperties? {
+        var textProperties: TextProperties?
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: textPropertiesInfo, options: [])
+            let decoder = JSONDecoder()
+            let textPropertiesValue = try decoder.decode(TextProperties.self, from: jsonData)
+            
+            textProperties = textPropertiesValue
+        } catch {
+            print(error)
+        }
+        
+        return textProperties
+    }
+    
+    func parseCampaign(campaignInfo: Dictionary<String,Any>, copyright: Copyright?, textProperties: TextProperties?) -> Campaign?{
         
         let type = "\(campaignInfo["type"] as! Int)"
         let campaingId = "\(campaignInfo["campaignId"] as! Int)"
@@ -162,6 +177,19 @@ class Parser {
              }
          }
         
+        var textProperties: TextProperties?
+        if let textPropertiesDict = campaignInfo["textProperties"] as? Dictionary<String, Any> {
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: textPropertiesDict, options: [])
+                let decoder = JSONDecoder()
+                let textPropertiesValue = try decoder.decode(TextProperties.self, from: jsonData)
+                
+                textProperties = textPropertiesValue
+            } catch {
+                print(error)
+            }
+        }
+        
          return Campaign(campaignId: campaingId,
                          theme: theme,
                          pages: pages,
@@ -172,6 +200,7 @@ class Parser {
                          autoclose: autoclose,
                          copyright: copyright,
                          privacy: privacy,
-                         progress: progress)
+                         progress: progress,
+                         textProperties: textProperties)
     }
 }

@@ -9,8 +9,8 @@
 import UIKit
 
 class TextCell: BaseCell {
-    private lazy var label: UILabel = {
-        let label = UILabel()
+    private lazy var label: LinkLabel = {
+        let label = LinkLabel()
         label.numberOfLines = 0
         return label
     }()
@@ -32,9 +32,12 @@ class TextCell: BaseCell {
         guard field != nil, theme != nil else {
             return
         }
-        label.font = theme?.fontP1
-        label.text = field?.value
+
         label.textColor = theme?.text02Color
-        label.textAlignment = (field?.isLastPage ?? false) ? .center : .left
+        let value = field?.value ?? ""
+        label.attributedText = TextPropertyManager.convert(value,
+                                                           theme: theme!,
+                                                           defaultFont: theme!.fontP1,
+                                                           textProperties: nil, withRequired: false)
     }
 }

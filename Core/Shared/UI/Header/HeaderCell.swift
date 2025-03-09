@@ -10,8 +10,8 @@ import UIKit
 
 class HeaderCell: BaseCell {
     
-    private lazy var label: UILabel = {
-        let label = UILabel()
+    private lazy var label: LinkLabel = {
+        let label = LinkLabel()
         label.numberOfLines = 0
         return label
     }()
@@ -33,10 +33,13 @@ class HeaderCell: BaseCell {
         guard field != nil, theme != nil else {
             return
         }
-        label.font = theme!.fontH1
-        label.text = field?.value
+        
         label.textColor = theme?.text01Color
-        label.textAlignment = (field?.isLastPage ?? false) ? .center : .left
+        label.attributedText = TextPropertyManager.convert(field?.value ?? "",
+                                                           theme: theme!,
+                                                           defaultFont: theme!.fontH1,
+                                                           textProperties: nil,
+                                                           withRequired: false)
     }
 }
 

@@ -93,7 +93,7 @@ class MainViewController_swift: UIViewController {
                 .build()
             
 
-                UXFeedback.sdk.startCampaign(eventName: "реgg", attributes: atts)
+                UXFeedback.sdk.startCampaign(eventName: "mark", attributes: atts)
 //            UXFeedback.sdk.settings.
             break
         case 2:

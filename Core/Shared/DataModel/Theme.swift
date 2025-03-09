@@ -78,19 +78,19 @@ class Theme: NSObject, Decodable, ThemeProtocol {
     var bgColor: UIColor =  UIColor.init("#FFFFFF")
     
     var fontH1: UIFont = .systemFont(ofSize: 22,
-                                              weight: .semibold)
+                                     weight: .semibold) 
    
     var fontH2: UIFont = .systemFont(ofSize: 17,
-                                              weight: .semibold)
+                                     weight: .semibold)
     
     var fontP1: UIFont = .systemFont(ofSize: 17,
-                                              weight: .regular)
+                                     weight: .regular)
     
     var fontP2: UIFont = .systemFont(ofSize: 14,
-                                              weight: .regular)
+                                     weight: .regular)
     
     var fontBtn: UIFont = .systemFont(ofSize: 16,
-                                             weight: .semibold)
+                                      weight: .semibold)
     
     
     enum CodingKeys: String, CodingKey {

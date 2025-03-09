@@ -113,8 +113,15 @@ class APIClient {
                             copyright = self?._parser.parseCopyright(copyrightInfo: copyrightInfo)
                         }
                         
+                        var textProperties: TextProperties? = nil
+                        if let textPropertiesInfo = results["textProperties"] as? Dictionary<String, Any> {
+                            textProperties = self?._parser.parseTextProperties(textPropertiesInfo: textPropertiesInfo)
+                        }
+                        
                         for compaignInfo in campaignsResults {
-                            if let campaign =  self?._parser.parseCampaign(campaignInfo: compaignInfo, copyright: copyright) {
+                            if let campaign =  self?._parser.parseCampaign(campaignInfo: compaignInfo,
+                                                                           copyright: copyright,
+                                                                           textProperties: textProperties) {
                                 campaigns.append(campaign)
                             }
                         }

@@ -107,7 +107,7 @@ class NpsCell: BaseCell {
         
         sliderView.frame.size.width = max(self.bounds.width / CGFloat(11), 48)
         
-        slider.setValue(Float(currentValue == -1 ? 5 : currentValue), animated: false)
+        slider.setValue(Float(currentValue == -1 ? 0 : currentValue), animated: false)
         
         
         if field?.isError ?? false && currentValue == -1 {

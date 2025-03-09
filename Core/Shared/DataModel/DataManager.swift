@@ -326,16 +326,16 @@ class DataManager: FieldDelegate {
                 break
         }
         
-        let required = (field.uiData["required"] as? Bool) ?? false
-        if required {
-            value = "* " + value
-        }
-        
         let font = (campaign?.theme.fontH2)!
-        let lines = value.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
-                                     font: font)
-        let valueHeight = CGFloat(lines) * font.lineHeight + getTitleSpacing(field)
-        return valueHeight
+        let required = (field.uiData["required"] as? Bool) ?? false
+        let attributedValue = TextPropertyManager.convert(field.value!,
+                                                theme: campaign!.theme,
+                                                defaultFont: font,
+                                                textProperties: nil,
+                                                withRequired: required)
+        let valueHeight = TextPropertyManager.heightForAttributed(string: attributedValue,
+                                                                  and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
+        return valueHeight + getTitleSpacing(field)
     }
     
     private func getFieldFooterHeight(_ field: Field) -> CGFloat {
@@ -368,23 +368,20 @@ class DataManager: FieldDelegate {
         
         
         
-        let label = UILabel(frame: CGRect(origin: .init(x: 16, y: 0),
+        let label = LinkLabel(frame: CGRect(origin: .init(x: 16, y: 0),
                                           size: CGSize(width: view.frame.width - extraSpace,
                                                        height: view.frame.height - getTitleSpacing(field))))// - 16)))
         
         label.textColor = campaign?.theme.text01Color
         
         let required = (field.uiData["required"] as? Bool) ?? false
-        let text = "\(required ? "* " : "")\(field.value ?? "")"
-        let range = (text as NSString).range(of: "*")
-        let attributedString = NSMutableAttributedString(string:text)
-        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: campaign?.theme.errorColorPrimary ?? Theme.init().errorColorPrimary, range: range)
-        label.attributedText = attributedString
         
+        label.attributedText = TextPropertyManager.convert(field.value ?? "",
+                                                           theme: campaign!.theme,
+                                                           defaultFont: campaign!.theme.fontH2,
+                                                           textProperties: nil,
+                                                           withRequired: required)
         
-        label.font = campaign?.theme.fontH2
-        
-        label.textAlignment = .left
         label.numberOfLines = 0
         view.addSubview(label)
         view.backgroundColor = campaign?.theme.bgColor
@@ -453,9 +450,13 @@ class DataManager: FieldDelegate {
                 
             case .header:
                 let font = (campaign?.theme.fontH1)!
-                let lines = field.value!.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
-                                                    font: font)
-                let valueHeight = ceil(CGFloat(lines) * font.lineHeight)
+                let value = TextPropertyManager.convert(field.value!,
+                                                        theme: campaign!.theme,
+                                                        defaultFont: font,
+                                                        textProperties: nil,
+                                                        withRequired: false)
+                let valueHeight = TextPropertyManager.heightForAttributed(string: value,
+                                                                          and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
                 return valueHeight
                 
             case .image:
@@ -496,9 +497,13 @@ class DataManager: FieldDelegate {
                 
             case .text:
                 let font = (campaign?.theme.fontP1)!
-                let lines = field.value!.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
-                                                    font: font)
-                let valueHeight = ceil(CGFloat(lines) * font.lineHeight)
+                let value = TextPropertyManager.convert(field.value!,
+                                                        theme: campaign!.theme,
+                                                        defaultFont: font,
+                                                        textProperties: nil,
+                                                        withRequired: false)
+                let valueHeight = TextPropertyManager.heightForAttributed(string: value,
+                                                                          and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
                 return valueHeight
                 
             case .stars:

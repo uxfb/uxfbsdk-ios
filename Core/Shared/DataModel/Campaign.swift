@@ -25,6 +25,7 @@ struct Campaign {
     private(set) var copyright: Copyright!
     private(set) var privacy: Privacy?
     private(set) var progress: Bool?
+    private(set) var textProperties: TextProperties?
     
     func showDelay(eventName: String) -> TimeInterval {
         var delay: TimeInterval = 0.1
