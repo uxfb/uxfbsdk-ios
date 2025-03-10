@@ -154,7 +154,7 @@ class NpsCell: BaseCell {
     }
     
     private func initLabels() {
-        let calculatedValue = currentValue == -1 ? 5 : currentValue
+        let calculatedValue = currentValue == -1 ? 0 : currentValue
         for i in 0...10 {
             if let label = contentView.viewWithTag(i+1) as? VerticalAlignedLabel {
                 if i == calculatedValue {
