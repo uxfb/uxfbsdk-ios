@@ -99,7 +99,7 @@ class MainViewController_swift: UIViewController {
         case 2:
 //            showActivityOverlay()
             
-            UXFeedback.sdk.startCampaign(eventName: "credit_topup")
+            UXFeedback.sdk.startCampaign(eventName: "vika2")
             break
         default:
             break

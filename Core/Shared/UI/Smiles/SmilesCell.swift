@@ -24,7 +24,7 @@ class SmilesCell: BaseCell {
     
     private lazy var smile2: UIButton = {
         let view = UIButton(type: .custom)
-        view.setImage(UIImage(named: "confused",
+        view.setImage(UIImage(named: "mad",
                               in: Consts.bundle,
                               compatibleWith: nil),
                       for: .normal)
@@ -35,7 +35,7 @@ class SmilesCell: BaseCell {
     
     private lazy var smile3: UIButton = {
         let view = UIButton(type: .custom)
-        view.setImage(UIImage(named: "happy",
+        view.setImage(UIImage(named: "confused",
                               in: Consts.bundle,
                               compatibleWith: nil),
                       for: .normal)
@@ -46,7 +46,7 @@ class SmilesCell: BaseCell {
     
     private lazy var smile4: UIButton = {
         let view = UIButton(type: .custom)
-        view.setImage(UIImage(named: "in-love",
+        view.setImage(UIImage(named: "happy",
                               in: Consts.bundle,
                               compatibleWith: nil),
                       for: .normal)
@@ -57,7 +57,7 @@ class SmilesCell: BaseCell {
     
     private lazy var smile5: UIButton = {
         let view = UIButton(type: .custom)
-        view.setImage(UIImage(named: "mad",
+        view.setImage(UIImage(named: "in-love",
                               in: Consts.bundle,
                               compatibleWith: nil),
                       for: .normal)

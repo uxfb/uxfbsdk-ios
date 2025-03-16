@@ -46,6 +46,7 @@ class RadioCell: UITableViewCell {
     private var isError: Bool = false
     
     private func setupSubviews() {
+        backgroundColor = .clear
         symbolIntView.addSubview(dotView)
         symbolMidView.addSubview(symbolIntView)
         symbolExtView.addSubview(symbolMidView)

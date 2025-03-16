@@ -41,6 +41,7 @@ class CheckCell: UITableViewCell {
     private var isError: Bool = false
     
     private func setupSubviews() {
+        backgroundColor = .clear
         symbolMidView.addSubview(symbolIntView)
         symbolExtView.addSubview(symbolMidView)
         checkView.addSubview(symbolExtView)
