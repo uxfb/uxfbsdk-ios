@@ -83,21 +83,24 @@ class MainViewController_swift: UIViewController {
 //            UXFeedback.sharedSDK.setProperties(["property_first": "non-value",
 //                                                "property_second": 2])
             
-            UXFeedback.sdk.properties = ["ios": "ios-data"]
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "yyyy-MM-dd"
-//            var date = dateFormatter.date(from: "2024-03-29")
-//            
-                let atts = UXFBAttributesBuilder()
-                    .addValue("test_att", value: 7)
-                .build()
-            
+//            UXFeedback.sdk.properties = ["ios": "ios-data"]
 
-                UXFeedback.sdk.startCampaign(eventName: "mark", attributes: atts)
-//            UXFeedback.sdk.settings.
+//                let atts = UXFBAttributesBuilder()
+//                    .addValue("step", value: 2)
+//                .build()
+//
+                let event = "1"
+//                var attributes: [Attribute]?
+//                
+//                if event == "exitByCard" {
+//                    attributes = UXFBAttributesBuilder()
+//                        .addValue("step", value: 2)
+//                        .build()
+//                }
+
+                UXFeedback.sdk.startCampaign(eventName: event, attributes: nil)
             break
         case 2:
-//            showActivityOverlay()
             
             UXFeedback.sdk.startCampaign(eventName: "vika2")
             break

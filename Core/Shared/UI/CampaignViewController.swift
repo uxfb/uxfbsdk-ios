@@ -141,7 +141,7 @@ internal class CampaignViewController: UIViewController {
     
     private var dataManager: DataManager?
     
-    var keyboardHeight: CGFloat = 0
+    var withKeyboard = false
     
 //    convenience init() {
 //        self.init(nibName: String(describing: type(of: self)), bundle: Consts.bundle)
@@ -170,6 +170,8 @@ internal class CampaignViewController: UIViewController {
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
+        withKeyboard = true
+        
         guard
             let userinfo = notification.userInfo,
             let duration = (userinfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
@@ -200,6 +202,8 @@ internal class CampaignViewController: UIViewController {
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
+        withKeyboard = false
+        
         guard let userinfo = notification.userInfo else {
             return
         }

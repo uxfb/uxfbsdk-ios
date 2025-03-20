@@ -227,6 +227,15 @@ class DataManager: FieldDelegate {
         return field
     }
     
+    internal func rowForField(_ field: Field) -> Int? {
+        let page = campaign?.pages[currentPage]
+        let index = page?.fields.firstIndex(where: { item in
+            item.id == field.id
+        })
+        
+        return index
+    }
+    
     var progress: String {
         get {
             return "\(currentPage + 1)/\(campaign?.pages.count ?? 0)"
@@ -537,6 +546,23 @@ class DataManager: FieldDelegate {
         }
     }
     
+	//MARK: - Navigate to next page
+    
+    private func checkAndNavigate() {
+        if needsComplete() {
+            isError = true
+            viewController?.updateUI()
+        } else {
+            let nextIndex = getNextIndex()
+            if campaign?.pages[currentPage].type == 2 || nextIndex == -1 {
+                endCampaign(terminated: false, isLink: nextIndex == -1)
+            }
+            else {
+                nextPage(nextIndex)
+            }
+        }
+    }
+    
     //MARK: - UXFFieldDelegate
     
     func buttonTapped(_ field: Field, answer: [String], refresh: Bool) {
@@ -553,18 +579,7 @@ class DataManager: FieldDelegate {
             return
         }
         
-        if needsComplete() {
-            isError = true
-            viewController?.updateUI()
-        } else {
-            let nextIndex = getNextIndex()
-            if campaign?.pages[currentPage].type == 2 || nextIndex == -1 {
-                endCampaign(terminated: false, isLink: nextIndex == -1)
-            }
-            else {
-                nextPage(nextIndex)
-            }
-        }
+        checkAndNavigate()
     }
     
     func fieldChanged(_ field: Field, answer: [String], refresh: Bool = true) {
@@ -792,6 +807,10 @@ class DataManager: FieldDelegate {
         let fields = page!.fields
         for field in fields {
             if fieldNeedComplete(field) {
+                if let index = rowForField(field) {
+                    viewController?.tableView.scrollToRow(at: IndexPath(row: 0, section: index),
+                                                          at: .middle, animated: true)
+                }
                 return true
             }
         }

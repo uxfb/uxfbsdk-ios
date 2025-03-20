@@ -53,6 +53,7 @@ internal class TextPropertyManager {
         case left = "<left>"
         case center = "<center>"
         case right = "<right>"
+        case req = "<req>"
     }
     
     private enum TextPropertyStyle: String {
@@ -118,6 +119,7 @@ internal class TextPropertyManager {
         resultString = resultString.replacingOccurrences(of: TextPropertyAlignment.left.rawValue, with: "")
         resultString = resultString.replacingOccurrences(of: TextPropertyAlignment.center.rawValue, with: "")
         resultString = resultString.replacingOccurrences(of: TextPropertyAlignment.right.rawValue, with: "")
+        resultString = resultString.replacingOccurrences(of: TextPropertyAlignment.req.rawValue, with: "")
         
         resultString = resultString.replacingOccurrences(of: TextPropertyStyle.h1.rawValue, with: "")
         resultString = resultString.replacingOccurrences(of: TextPropertyStyle.h2.rawValue, with: "")

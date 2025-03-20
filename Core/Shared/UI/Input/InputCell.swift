@@ -62,7 +62,6 @@ extension InputCell: UITextViewDelegate {
         let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
         if delegate != nil {
             delegate?.textChanged(field!, answer: [newText])
-//            delegate?.fieldChanged(field!, answer: newText != "" ? [newText] : [], refresh: true)
         }
         
         return true

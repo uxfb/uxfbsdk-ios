@@ -66,10 +66,19 @@ class EmailCell: BaseCell, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        let newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-//        if delegate != nil {
-//            self.delegate?.fieldChanged(self.field!, answer: [newText], refresh: false)
-//        }
+        guard let textFieldText = textField.text,
+              let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+            return false
+        }
+        if let text = textField.text,
+           let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange,
+                                                       with: string)
+            if delegate != nil {
+                delegate?.fieldChanged(field!, answer: [updatedText], refresh: false)
+            }
+        }
+        
         return true
     }
     
