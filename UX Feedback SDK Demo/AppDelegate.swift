@@ -13,7 +13,8 @@ import UXFeedbackSDK
 //let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
 //let uxfAppID = "clxumovt700003d5t606qrz5p"
 //let uxfAppID = "cl0dv9ld600033963rtwqowiu" //prod
-let uxfAppID = "ck9n0jwi000003b5x7566k1n2" //gosuslugi
+//let uxfAppID = "ck9n0jwi000003b5x7566k1n2" //gosuslugi
+let uxfAppID = "ck78uf73w0000315rlomponmb" //crashes
 
 internal func DDLogDebug(_ value: Any){
     #if DEBUG

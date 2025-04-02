@@ -10,7 +10,7 @@ import Foundation
 
 internal class Consts {
     static let os: String = "iOS"
-    static let version: String = "3.0.0"
+    static let version: String = "3.0.1"
     static let cryptoKey: String = "UXFeedback"
     static let defaultHref: String = "https://uxfeedback.ru?utm_campaign=default&utm_medium=app"
     static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"

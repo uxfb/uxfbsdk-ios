@@ -442,7 +442,6 @@ internal class CampaignViewController: UIViewController {
         contentHeight.constant = dataManager?.heightForCurrentPage() ?? 0
         //        contentView.backgroundColor = campaign?.theme.inputBgColor ?? .white
         
-        let bottom = dataManager?.bottomSpace ?? 0
         tableViewBottomConstraint.constant = dataManager?.bottomSpace ?? 0
         titleViewHeightConstaint.constant = dataManager?.titleViewHeight ?? 54
         switch campaign?.type {
