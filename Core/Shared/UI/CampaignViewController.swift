@@ -35,8 +35,8 @@ internal class CampaignViewController: UIViewController {
         return view
     }()
     
-    lazy var shadowView: AnimatingShadowView = {
-        let view = AnimatingShadowView()
+    lazy var shadowView: UIView = {
+        let view = UIView()
         view.backgroundColor = campaign?.theme.bgColor ?? .white
         return view
     }()
@@ -386,7 +386,7 @@ internal class CampaignViewController: UIViewController {
         tableViewBottomConstraint = NSLayoutConstraint(item: tableView,
                                                        attribute: .bottom,
                                                        relatedBy: .equal,
-                                                       toItem: view,
+                                                       toItem: contentView,
                                                        attribute: .bottom,
                                                        multiplier: 1,
                                                        constant: 0)
@@ -442,6 +442,7 @@ internal class CampaignViewController: UIViewController {
         contentHeight.constant = dataManager?.heightForCurrentPage() ?? 0
         //        contentView.backgroundColor = campaign?.theme.inputBgColor ?? .white
         
+        let bottom = dataManager?.bottomSpace ?? 0
         tableViewBottomConstraint.constant = dataManager?.bottomSpace ?? 0
         titleViewHeightConstaint.constant = dataManager?.titleViewHeight ?? 54
         switch campaign?.type {

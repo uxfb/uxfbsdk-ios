@@ -64,102 +64,14 @@ extension UIView {
 
 extension UIView {
     func addShadowAndRoundCorner(cornerRadius : CGFloat) {
-        self.layer.shadowOffset = CGSize(width: 1.0, height: 4.0)
-        self.layer.shadowOpacity = 1.0
-        self.layer.shadowRadius = 6.0
-        self.layer.shadowColor = UIColor.black.withAlphaComponent(0.5).cgColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        self.layer.shadowOpacity = 0.15
+        self.layer.shadowRadius = 5.0
+        self.layer.shadowColor = UIColor.black.cgColor
         self.layer.masksToBounds = false
         self.layer.cornerRadius = cornerRadius
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = UIScreen.main.scale
+        self.clipsToBounds = false
     }
 }
-
-
-class AnimatingShadowView: UIView {
-
-    struct DropShadowParameters {
-        var shadowOpacity: Float = 0
-        var shadowColor: UIColor? = .black
-        var shadowRadius: CGFloat = 0
-        var shadowOffset: CGSize = .zero
-
-        static let defaultParameters = DropShadowParameters(shadowOpacity: 0.15,
-                                                            shadowColor: .black,
-                                                            shadowRadius: 5,
-                                                            shadowOffset: CGSize(width: 0, height: 1))
-    }
-
-//    @IBOutlet weak var contentView: UIView!  // no sense in have a shadowView without content!
-    lazy var contentView: UIView = {
-        let view = UIView()
-        return view
-    }()
-
-    var shadowParameters: DropShadowParameters = DropShadowParameters.defaultParameters
-
-    private func apply(dropShadow: DropShadowParameters) {
-        let layer = self.layer
-        layer.shadowColor = dropShadow.shadowColor?.cgColor
-        layer.shadowOffset = dropShadow.shadowOffset
-        layer.shadowOpacity = dropShadow.shadowOpacity
-        layer.shadowRadius = dropShadow.shadowRadius
-        layer.masksToBounds = false
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let layer = self.layer
-        layer.backgroundColor = nil
-
-        if self.contentView.superview == nil {
-            self.addSubview(contentView)
-        }
-
-        let contentLayer = self.contentView.layer
-        assert(contentLayer.superlayer == layer, "contentView must be a direct subview of AnimatingShadowView!")
-
-        self.apply(dropShadow: self.shadowParameters)
-
-        let radius = contentLayer.cornerRadius
-        layer.shadowPath = UIBezierPath(roundedRect: contentLayer.frame, cornerRadius: radius).cgPath
-    }
-
-    override func action(for layer: CALayer, forKey event: String) -> CAAction? {
-        guard event == "shadowPath" else {
-            return super.action(for: layer, forKey: event)
-        }
-
-        guard let priorPath = layer.shadowPath else {
-            return super.action(for: layer, forKey: event)
-        }
-
-        guard let sizeAnimation = layer.animation(forKey: "bounds.size") as? CABasicAnimation else {
-            return super.action(for: layer, forKey: event)
-        }
-
-        let animation = sizeAnimation.copy() as! CABasicAnimation
-        animation.keyPath = "shadowPath"
-        let action = ShadowingViewAction()
-        action.priorPath = priorPath
-        action.pendingAnimation = animation
-        return action
-    }
-}
-
-
-private class ShadowingViewAction: NSObject, CAAction {
-    var pendingAnimation: CABasicAnimation? = nil
-    var priorPath: CGPath? = nil
-
-    // CAAction Protocol
-    func run(forKey event: String, object anObject: Any, arguments dict: [AnyHashable : Any]?) {
-        guard let layer = anObject as? CALayer, let animation = self.pendingAnimation else {
-            return
-        }
-
-        animation.fromValue = self.priorPath
-        animation.toValue = layer.shadowPath
-        layer.add(animation, forKey: "shadowPath")
-    }
-} 

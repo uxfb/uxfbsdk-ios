@@ -66,14 +66,14 @@ class MainViewController_swift: UIViewController {
     
     @IBAction func eventTap(_ sender: UIButton){
         
-        UXFeedback.sdk.settings.closeOnSwipe = true
-        UXFeedback.sdk.settings.slideInUiBlocked = true
-        UXFeedback.sdk.settings.slideInUiBlackoutBlur = 4
-        UXFeedback.sdk.settings.slideInUiBlackoutOpacity = 50
-        UXFeedback.sdk.settings.slideInUiBlackoutColor = "000000"
-        UXFeedback.sdk.settings.popupUiBlackoutBlur = 4
-        UXFeedback.sdk.settings.popupUiBlackoutOpacity = 50
-        UXFeedback.sdk.settings.popupUiBlackoutColor = "000000"
+//        UXFeedback.sdk.settings.closeOnSwipe = true
+//        UXFeedback.sdk.settings.slideInUiBlocked = true
+//        UXFeedback.sdk.settings.slideInUiBlackoutBlur = 4
+//        UXFeedback.sdk.settings.slideInUiBlackoutOpacity = 50
+//        UXFeedback.sdk.settings.slideInUiBlackoutColor = "000000"
+//        UXFeedback.sdk.settings.popupUiBlackoutBlur = 4
+//        UXFeedback.sdk.settings.popupUiBlackoutOpacity = 50
+//        UXFeedback.sdk.settings.popupUiBlackoutColor = "000000"
         
         let eventNumber = sender.tag
         assert(eventNumber > 0, "Invalid eventNumber")
@@ -102,7 +102,7 @@ class MainViewController_swift: UIViewController {
             
         case 2:
             
-            UXFeedback.sdk.startCampaign(eventName: "text")
+            UXFeedback.sdk.startCampaign(eventName: "45")
             break
         default:
             break
