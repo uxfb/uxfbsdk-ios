@@ -20,6 +20,7 @@ public protocol FeedbackCampaignDelegate: AnyObject {
     func campaignDidTerminate(campaignId: String, eventName: String, terminatedPage: Int, totalPages: Int)
     func campaignDidSend(campaignId: String)
     func campaignDidAnswered(campaignId: String, answers: [String: Any])
+    func noCampaignToStart(eventName: String)
 }
 
 

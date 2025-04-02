@@ -102,7 +102,7 @@ class MainViewController_swift: UIViewController {
             
         case 2:
             
-            UXFeedback.sdk.startCampaign(eventName: "vika2")
+            UXFeedback.sdk.startCampaign(eventName: "text")
             break
         default:
             break
@@ -146,6 +146,10 @@ extension MainViewController_swift: UXFeedbackLogDelegate {
 }
 
 extension MainViewController_swift: UXFeedbackCampaignDelegate{
+    func noCampaignToStart(eventName: String) {
+        
+    }
+    
     func campaignDidShow(campaignId: String, eventName: String) {
         
     }

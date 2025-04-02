@@ -363,6 +363,7 @@ open class UXFeedback: NSObject {
       }
     } else {
       self.clearTask()
+        self.campaignDelegate?.noCampaignToStart(eventName: eventName)
       DDLog("Event not found: \(eventName)")
     }
   }
