@@ -233,9 +233,12 @@ open class UXFeedback: NSObject {
     
     _eventToSend = eventName
     _attributes = attributes
-    
+      
     if let campaign = _campaigns.first(where: { campaign in
-        campaign.targeting.value == eventName
+        if let targeting = campaign.targeting {
+            return targeting.value == eventName
+        }
+        return false
     }), let targeting = campaign.targeting {
         AttributeManager.checkAttributes(appId: self.appId!,
                                          requestManager: self._requestManager,
