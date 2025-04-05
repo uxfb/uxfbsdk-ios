@@ -101,9 +101,8 @@ class MainViewController_swift: UIViewController {
                 UXFeedback.sdk.startCampaign(eventName: event)
             
         case 2:
+            UXFeedback.sdk.startCampaign(eventName: "45")
             
-            UXFeedback.sdk.startCampaign(eventName: "all")
-            break
         default:
             break
         }

@@ -58,10 +58,9 @@ internal class CampaignViewController: UIViewController {
     }()
     
     lazy var tableView: UITableView = {
-        let view = UITableView(frame: .zero, style: .grouped)
-        view.tableHeaderView = UIView(frame: CGRect(origin: .zero,
-                                                         size: CGSize(width: 1,
-                                                                      height: 1)))
+        let view: UITableView = UITableView(frame: .zero, style: .grouped)
+        
+        view.tableHeaderView = UIView(frame: .zero)
         view.delegate = self
         view.dataSource = self
         view.allowsSelection = false
@@ -97,7 +96,7 @@ internal class CampaignViewController: UIViewController {
         view.register(ScreenshotCell.self,
                       forCellReuseIdentifier: String(describing: ScreenshotCell.self))
         
-        
+        view.contentInset = .zero
         
         return view
     }()
@@ -223,6 +222,11 @@ internal class CampaignViewController: UIViewController {
         })
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
+    }
+    
     open override func viewDidLayoutSubviews() {
         DispatchQueue.main.async {
             self.updateLayouts()
@@ -259,7 +263,7 @@ internal class CampaignViewController: UIViewController {
     //MARK: - Support
     
     private func createFooter(withPrivacy: Bool) {
-        var height: CGFloat = campaign?.copyright.isShow ?? true ? 50 : 16
+        var height: CGFloat = campaign?.copyright.isShow ?? true ? 50 : 0
         
         if withPrivacy {
             privacyView?.frame.origin.y = height

@@ -18,6 +18,7 @@ class RadiobuttonCell: BaseCell, UITableViewDelegate, UITableViewDataSource {
         view.backgroundColor = .clear
         view.allowsSelection = true
         view.separatorStyle = .none
+        view.isScrollEnabled = false
         return view
     }()
     

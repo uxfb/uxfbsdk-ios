@@ -19,6 +19,7 @@ class CheckboxCell: BaseCell, UITableViewDelegate, UITableViewDataSource {
         view.backgroundColor = .clear
         view.separatorStyle = .none
         view.allowsMultipleSelection = true
+        view.isScrollEnabled = false
         return view
     }()
     
