@@ -76,6 +76,12 @@ class SmilesCell: BaseCell {
         contentView.addSubview(smile4)
         contentView.addSubview(smile5)
         
+        for i in 1...5 {
+            if let smile = contentView.viewWithTag(i) as? UIButton {
+                smile.adjustsImageWhenHighlighted = false
+            }
+        }
+        
         smile1.translatesAutoresizingMaskIntoConstraints = false
         smile2.translatesAutoresizingMaskIntoConstraints = false
         smile3.translatesAutoresizingMaskIntoConstraints = false

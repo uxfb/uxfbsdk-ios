@@ -68,6 +68,7 @@ internal class CampaignViewController: UIViewController {
         view.backgroundColor = campaign?.theme.bgColor ?? .white
         view.separatorStyle = .none
         view.separatorColor = .clear
+        view.bounces = false
         view.backgroundColor = .white
         view.register(ButtonCell.self,
                       forCellReuseIdentifier: String(describing: ButtonCell.self))
@@ -961,6 +962,7 @@ extension CampaignViewController: PrivacyDelegate {
     }
     
     func tapPrivacy() {
+        tableView.reloadData()
         dataManager?.tapPrivacy()
     }
 }
