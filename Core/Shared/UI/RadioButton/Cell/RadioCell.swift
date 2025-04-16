@@ -74,6 +74,7 @@ class RadioCell: UITableViewCell {
             
             radioLabel.centerYAnchor.constraint(equalTo: radioView.centerYAnchor),
             radioLabel.leadingAnchor.constraint(equalTo: symbolExtView.trailingAnchor, constant: 8),
+            radioLabel.trailingAnchor.constraint(equalTo: radioView.trailingAnchor, constant: -4),
             radioLabel.topAnchor.constraint(equalTo: radioView.topAnchor, constant: 4),
             radioLabel.bottomAnchor.constraint(equalTo: radioView.bottomAnchor, constant: -4),
             

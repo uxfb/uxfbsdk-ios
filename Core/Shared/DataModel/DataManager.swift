@@ -129,17 +129,24 @@ class DataManager: FieldDelegate {
     
     internal func heightForCurrentPage() -> CGFloat {
         let page = campaign?.pages[currentPage]
-        var height: CGFloat = 64
-        if campaign?.copyright.isShow ?? true {
-            height += 34
-        }
+        var height: CGFloat = 54
+        
+        height += viewController?.tableView.tableFooterView?.frame.height ?? 0
+        
+//        if campaign?.copyright.isShow ?? true {
+//            height += 34
+//        }
         for field in (page?.fields)! {
             height += checkFieldTransfromed(field) ? (getFieldHeight(field) + getFieldHeaderHeight(field) + getFieldFooterHeight(field)) : 2
         }
         for button in (page?.buttons)! {
             height += getFieldHeight(button) + getFieldHeaderHeight(button) + getFieldFooterHeight(button)
         }
-        height += 12
+        
+        if campaign?.type == .slidein {
+            height -= safeSpace
+        }
+
         var areas = .bottomArea + .topArea //+ extraSpace
         switch campaign?.type {
             case .slidein:
@@ -155,7 +162,7 @@ class DataManager: FieldDelegate {
                 break
         }
         
-        height += privacyHeight
+//        height += privacyHeight
         
         let maxHeight = self.height - areas
         
@@ -378,7 +385,7 @@ class DataManager: FieldDelegate {
         
         
         let label = LinkLabel(frame: CGRect(origin: .init(x: 16, y: 0),
-                                          size: CGSize(width: view.frame.width - extraSpace,
+                                          size: CGSize(width: view.frame.width - extraSpace - 40,
                                                        height: view.frame.height - getTitleSpacing(field))))// - 16)))
         
         label.textColor = campaign?.theme.text01Color
@@ -443,7 +450,7 @@ class DataManager: FieldDelegate {
                 return 40
                 
             case .checkbox:
-                let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 48
+                let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 48 - 36
                 var height: CGFloat = 0
                 let checkboxes = field.uiData["options"] as? Array<Dictionary<String, Any>> ?? []
                 for checkbox in checkboxes {
@@ -493,7 +500,7 @@ class DataManager: FieldDelegate {
                 return max(valueHeight, minHeight)
                 
             case .radiobutton:
-                let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 48
+                let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 48 - 36
                 var height: CGFloat = 0
                 let buttons = field.uiData["options"] as? Array<Dictionary<String, Any>> ?? []
                 for button in buttons {
@@ -659,6 +666,16 @@ class DataManager: FieldDelegate {
     
     //MARK: - PRIVACY
     
+    var privacyEnabled: Bool {
+        get {
+            if let privacy = campaign?.privacy,
+               (campaign?.privacy?.privacyPages ?? []).contains(campaign?.pages[currentPage].id ?? "") {
+                return true
+            }
+            return false
+        }
+    }
+    
     var privacyNeeded: Bool {
         get {
             if let privacy = campaign?.privacy,
@@ -706,13 +723,11 @@ class DataManager: FieldDelegate {
             let privacyText: String? = campaign?.privacy?.declaration
             
             viewController?.updatePrivacy(enabled: height != .leastNonzeroMagnitude,
-                                          height: privacyHeight,
                                           warning: warningText,
                                           text: privacyText,
                                           checked: isPrivacyChecked)
         } else {
             viewController?.updatePrivacy(enabled: false,
-                                          height: .leastNonzeroMagnitude,
                                           warning: nil,
                                           text: nil,
                                           checked: isPrivacyChecked)
@@ -729,6 +744,9 @@ class DataManager: FieldDelegate {
         currentPage = index
         viewController?.scrollToTop(animated: false)
         viewController?.updateUI()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.viewController?.updateFooter()
+        }
     }
     
     public func endCampaign(terminated: Bool, isLink: Bool = false) {
@@ -803,13 +821,18 @@ class DataManager: FieldDelegate {
     }
     
     private func needsComplete() -> Bool {
+
         let page = campaign?.pages[currentPage]
         let fields = page!.fields
         for field in fields {
             if fieldNeedComplete(field) {
                 if let index = rowForField(field) {
-                    viewController?.tableView.scrollToRow(at: IndexPath(row: 0, section: index),
-                                                          at: .middle, animated: true)
+                    if self.viewController?.tableView.indexPathsForVisibleRows?.contains(IndexPath(row: 0, section: index)) == false {
+                        self.viewController?.tableView.scrollToRow(at: IndexPath(row: 0,
+                                                                                 section: index),
+                                                                   at: .top,
+                                                                   animated: true)
+                    }
                 }
                 return true
             }

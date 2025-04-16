@@ -219,11 +219,13 @@ class RatingCell: BaseCell {
     private func sliderTapped(gestureRecognizer: UIGestureRecognizer) {
         let pointTapped: CGPoint = gestureRecognizer.location(in: self.contentView)
 
+        
         let positionOfSlider: CGPoint = slider.frame.origin
         let widthOfSlider: CGFloat = slider.frame.size.width
-        let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(slider.maximumValue) / widthOfSlider)
-
-        slider.setValue(Float(newValue), animated: true)
+        let itemWidth = widthOfSlider / CGFloat(slider.maximumValue)
+        let modValue = Int(pointTapped.x - positionOfSlider.x) / Int(itemWidth) + 1
+        
+        slider.setValue(Float(modValue), animated: true)
         roundSlider()
     }
     

@@ -98,10 +98,10 @@ class MainViewController_swift: UIViewController {
                         .build()
                 }
 
-                UXFeedback.sdk.startCampaign(eventName: event)
+                UXFeedback.sdk.startCampaign(eventName: "obyaz")
             
         case 2:
-            UXFeedback.sdk.startCampaign(eventName: "45")
+            UXFeedback.sdk.startCampaign(eventName: "mall_item")
             
         default:
             break

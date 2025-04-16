@@ -67,6 +67,7 @@ class CheckCell: UITableViewCell {
             
             checkLabel.centerYAnchor.constraint(equalTo: checkView.centerYAnchor),
             checkLabel.leadingAnchor.constraint(equalTo: symbolExtView.trailingAnchor, constant: 8),
+            checkLabel.trailingAnchor.constraint(equalTo: checkView.trailingAnchor, constant: -4),
             checkLabel.topAnchor.constraint(equalTo: checkView.topAnchor, constant: 4),
             checkLabel.bottomAnchor.constraint(equalTo: checkView.bottomAnchor, constant: -4),
             

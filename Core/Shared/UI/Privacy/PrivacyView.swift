@@ -21,12 +21,14 @@ class PrivacyView: UIView {
     private var delegate: PrivacyDelegate?
     private var theme: ThemeProtocol?
     
-    init(frame: CGRect, theme: ThemeProtocol, delegate: PrivacyDelegate?) {
-        super.init(frame: frame)
+    init (theme: ThemeProtocol, delegate: PrivacyDelegate?) {
+        super.init(frame: .zero)
+        
         self.delegate = delegate
         self.theme = theme
         self.backgroundColor = theme.inputBgColor
         privacyLabel.defaultColor = theme.text03Color
+        privacyLabel.textColor = theme.text03Color
         privacyLabel.linkColor = theme.btnBgColor
         privacyLabel.textFont = theme.fontP2
         privacyLabel.numberOfLines = 0
@@ -36,14 +38,15 @@ class PrivacyView: UIView {
         privacyLabel.delegate = self
         privacyImageView.contentMode = .center
         self.isOpaque = false
-        self.addSubview(privacyImageBgView)
-        privacyImageBgView.addSubview(privacyImageView)
-        self.addSubview(privacyLabel)
-        self.addSubview(privacyWarningLabel)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(checkboxTapped))
         privacyImageBgView.isUserInteractionEnabled = true
         privacyImageBgView.addGestureRecognizer(tapGesture)
+        
+        privacyImageBgView.addSubview(privacyImageView)
+        addSubview(privacyImageBgView)
+        addSubview(privacyLabel)
+        addSubview(privacyWarningLabel)
         
         setupConstraints()
     }
@@ -109,6 +112,7 @@ class PrivacyView: UIView {
     
     func fillTexts(_ text: String, warning: String) {
         privacyLabel.html = text
+        
         privacyWarningLabel.text = warning
     }
     
@@ -119,23 +123,39 @@ class PrivacyView: UIView {
         privacyWarningLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            privacyImageBgView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            privacyImageBgView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            privacyImageBgView.topAnchor.constraint(equalTo: self.topAnchor,
+                                                    constant: 16),
+            privacyImageBgView.leadingAnchor.constraint(equalTo: self.leadingAnchor,
+                                                        constant: 16),
             privacyImageBgView.widthAnchor.constraint(equalToConstant: 24),
             privacyImageBgView.heightAnchor.constraint(equalToConstant: 24),
+            privacyImageBgView.bottomAnchor.constraint(lessThanOrEqualTo: self.bottomAnchor,
+                                                       constant: -16),
             
-            privacyImageView.topAnchor.constraint(equalTo: privacyImageBgView.topAnchor, constant: 4),
-            privacyImageView.leadingAnchor.constraint(equalTo: privacyImageBgView.leadingAnchor, constant: 4),
-            privacyImageView.trailingAnchor.constraint(equalTo: privacyImageBgView.trailingAnchor, constant: -4),
-            privacyImageView.bottomAnchor.constraint(equalTo: privacyImageBgView.bottomAnchor, constant: -4),
+            privacyImageView.topAnchor.constraint(equalTo: privacyImageBgView.topAnchor,
+                                                  constant: 4),
+            privacyImageView.leadingAnchor.constraint(equalTo: privacyImageBgView.leadingAnchor,
+                                                      constant: 4),
+            privacyImageView.trailingAnchor.constraint(equalTo: privacyImageBgView.trailingAnchor,
+                                                       constant: -4),
+            privacyImageView.bottomAnchor.constraint(equalTo: privacyImageBgView.bottomAnchor,
+                                                     constant: -4),
             
-            privacyLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            privacyLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 48),
-            privacyLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            privacyLabel.centerYAnchor.constraint(equalTo: privacyImageBgView.centerYAnchor,
+                                                  constant: 0),
+            privacyLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,
+                                                  constant: 48),
+            privacyLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,
+                                                   constant: -16),
             
-            privacyWarningLabel.topAnchor.constraint(equalTo: privacyLabel.bottomAnchor, constant: 0),
-            privacyWarningLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 48),
-            privacyWarningLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
+            privacyWarningLabel.topAnchor.constraint(equalTo: privacyLabel.bottomAnchor,
+                                                     constant: 4),
+            privacyWarningLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,
+                                                         constant: 48),
+            privacyWarningLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,
+                                                          constant: -16),
+            privacyWarningLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor,
+                                                        constant: -16)
         ])
     }
     

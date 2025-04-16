@@ -34,6 +34,7 @@ class NpsCell: BaseCell {
         slider.addTarget(self, action: #selector(touchUpOutside(_:)), for: .touchUpOutside)
         
         slider.value = 5
+        slider.minimumValue = 0
         slider.maximumValue = 10
         return slider
     }()
@@ -216,9 +217,11 @@ class NpsCell: BaseCell {
 
         let positionOfSlider: CGPoint = slider.frame.origin
         let widthOfSlider: CGFloat = slider.frame.size.width
-        let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(slider.maximumValue) / widthOfSlider)
+        let itemWidth = widthOfSlider / CGFloat(11)
+        
+        let modValue = Int(pointTapped.x - positionOfSlider.x) / Int(itemWidth)
 
-        slider.setValue(Float(newValue), animated: true)
+        slider.setValue(Float(modValue), animated: true)
         roundSlider()
     }
     

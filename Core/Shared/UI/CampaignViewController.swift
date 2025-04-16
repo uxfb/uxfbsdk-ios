@@ -26,7 +26,6 @@ enum ViewControllerState {
 }
 
 internal class CampaignViewController: UIViewController {
-    private var privacyView: PrivacyView?
     
     //MARK: - Outlets
     lazy var contentView: UIView = {
@@ -57,8 +56,91 @@ internal class CampaignViewController: UIViewController {
         return button
     }()
     
+    lazy var privacyView: PrivacyView = {
+        let view = PrivacyView(theme: campaign!.theme, delegate: self)
+        view.frame = .init(x: 0, y: 0, width: 100, height: 100)
+        return view
+    }()
+    
+    lazy var copyrightView: UIView = {
+        let view = UIView()
+        let image = UIImageView()
+        var urlString: String?
+        let scale = UIScreen.main.scale
+        switch scale {
+            case 1:
+                urlString = campaign?.copyright.image?["1x"] as? String
+            case 2:
+                urlString = campaign?.copyright.image?["2x"] as? String
+            case 3:
+                urlString = campaign?.copyright.image?["3x"] as? String
+                
+            default:
+                break
+        }
+        if let urlString = urlString, let url = URL(string: urlString) {
+            image.cacheImage(url: url, withTemplate: true)
+        } else {
+            image.image = UIImage(named: "logo", in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+        }
+        
+        image.tintColor = campaign?.theme.inputBorderColor
+        
+        view.addSubview(image)
+        image.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            image.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            image.topAnchor.constraint(equalTo: view.topAnchor, constant: 12),
+            image.heightAnchor.constraint(equalToConstant: 30),
+            image.widthAnchor.constraint(equalToConstant: 30),
+            image.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12)
+        ])
+        
+        let tapGestureRecognizer = UITapGestureRecognizer()
+        tapGestureRecognizer.cancelsTouchesInView = false
+        tapGestureRecognizer.addTarget(self, action: #selector(onLogoTap(tap:)))
+        tapGestureRecognizer.delegate = self
+        image.addGestureRecognizer(tapGestureRecognizer)
+        image.isUserInteractionEnabled = true
+        view.isUserInteractionEnabled = true
+        return view
+    }()
+    
+    lazy var holderView: UIView = {
+        let view = UIView()
+        view.backgroundColor = campaign?.theme.inputBgColor ?? .clear
+        view.heightAnchor.constraint(equalToConstant: dataManager?.safeSpace ?? 0).isActive = true
+        return view
+    }()
+    
+    lazy var footerView: UIView = {
+        let view = UIView(frame: .zero)
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.addArrangedSubview(copyrightView)
+        stackView.addArrangedSubview(privacyView)
+        if campaign?.type == .slidein {
+            stackView.addArrangedSubview(holderView)
+        }
+        view.addSubview(stackView)
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+        return view
+    }()
+    
     lazy var tableView: UITableView = {
-        let view: UITableView = UITableView(frame: .zero, style: .grouped)
+        var view: UITableView!
+        if #available(iOS 13.0, *) {
+            view = UITableView(frame: .zero, style: .insetGrouped)
+        } else {
+            view = UITableView(frame: .zero, style: .grouped)
+        }
         
         view.tableHeaderView = UIView(frame: .zero)
         view.delegate = self
@@ -68,6 +150,7 @@ internal class CampaignViewController: UIViewController {
         view.backgroundColor = campaign?.theme.bgColor ?? .white
         view.separatorStyle = .none
         view.separatorColor = .clear
+        view.showsHorizontalScrollIndicator = false
         view.bounces = false
         view.backgroundColor = .white
         view.register(ButtonCell.self,
@@ -108,7 +191,7 @@ internal class CampaignViewController: UIViewController {
         return view
     }()
     
-    var contentHeight: NSLayoutConstraint!
+    var contentHeight: NSLayoutConstraint = NSLayoutConstraint()
     var verticallyConstraint: NSLayoutConstraint!
     var leftConstraint: NSLayoutConstraint!
     var rightConstraint: NSLayoutConstraint!
@@ -142,10 +225,6 @@ internal class CampaignViewController: UIViewController {
     private var dataManager: DataManager?
     
     var withKeyboard = false
-    
-//    convenience init() {
-//        self.init(nibName: String(describing: type(of: self)), bundle: Consts.bundle)
-//    }
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -250,75 +329,68 @@ internal class CampaignViewController: UIViewController {
             if let effectView = self.view.viewWithTag(visualEffectViewTag) {
                 effectView.frame = UIScreen.main.bounds
             }
-            self.dataManager?.checkPrivacy(nil)
-            self.tableView.reloadData()
+//            self.dataManager?.checkPrivacy(nil)
+//            self.tableView.reloadData()
         }
     }
     
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         DispatchQueue.main.async {
-            self.tableView.reloadData()
+//            self.tableView.reloadData()
         }
     }
     
     //MARK: - Support
     
-    private func createFooter(withPrivacy: Bool) {
-        var height: CGFloat = campaign?.copyright.isShow ?? true ? 50 : 0
+    private func updateFooterWithDynamicContent(fromCreate: Bool = false) {
+        guard let footerView = tableView.tableFooterView else { return }
         
+        footerView.layoutIfNeeded()
+        let newSize = footerView.systemLayoutSizeFitting(
+            CGSize(width: tableView.bounds.width, height: UIView.layoutFittingCompressedSize.height),
+            withHorizontalFittingPriority: .required,
+            verticalFittingPriority: .fittingSizeLevel
+        )
+        
+        UIView.performWithoutAnimation {
+            let oldFooterHeight = tableView.tableFooterView?.frame.height ?? 0
+            
+            footerView.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: newSize.height)
+
+            tableView.tableFooterView = footerView
+            
+            let footerHeight = tableView.tableFooterView?.frame.height ?? 0
+            let contentHeight = tableView.contentSize.height
+            let tableViewHeight = tableView.frame.height
+            if !fromCreate {
+                let offsetY = max(-tableView.contentInset.top, contentHeight + footerHeight - tableViewHeight)
+                if newSize.height != oldFooterHeight {
+                    tableView.setContentOffset(CGPoint(x: 0, y: offsetY), animated: false)
+                }
+            }
+        }
+    }
+    
+    func updateFooter() {
+        let withPrivacy = dataManager?.privacyEnabled ?? false
+        copyrightView.isHidden = !(campaign?.copyright.isShow ?? false)
+        privacyView.isHidden = !withPrivacy
+        holderView.backgroundColor = withPrivacy ? campaign?.theme.inputBgColor : campaign?.theme.bgColor
         if withPrivacy {
-            privacyView?.frame.origin.y = height
-            height += privacyView?.frame.size.height ?? .leastNonzeroMagnitude
+            privacyView.preparePrivacy(campaign?.privacy?.type ?? "")
         }
-        
-        let tableFooterView = UIView(frame: CGRect(origin: .zero,
-                                                   size: CGSize(width: UIScreen.main.bounds.width - 32,
-                                                                height: height)))
-        if campaign?.copyright.isShow ?? true {
-            let image = UIImageView(frame: CGRect(origin: CGPoint(x: 16,
-                                                                  y: 12),
-                                                  size: CGSize(width: 30,
-                                                               height: 30)))
-            image.contentMode = .scaleAspectFit
-            
-            var urlString: String?
-            let scale = UIScreen.main.scale
-            switch scale {
-                case 1:
-                    urlString = campaign?.copyright.image?["1x"] as? String
-                case 2:
-                    urlString = campaign?.copyright.image?["2x"] as? String
-                case 3:
-                    urlString = campaign?.copyright.image?["3x"] as? String
-                    
-                default:
-                    break
-            }
-            if let urlString = urlString, let url = URL(string: urlString) {
-                image.cacheImage(url: url, withTemplate: true)
-            } else {
-                image.image = UIImage(named: "logo", in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-            }
-            
-            let tapGestureRecognizer = UITapGestureRecognizer()
-            tapGestureRecognizer.cancelsTouchesInView = false
-            tapGestureRecognizer.addTarget(self, action: #selector(onLogoTap(tap:)))
-            tapGestureRecognizer.delegate = self
-            image.addGestureRecognizer(tapGestureRecognizer)
-            image.isUserInteractionEnabled = true
-            
-            image.tintColor = campaign?.theme.inputBorderColor
-            tableFooterView.backgroundColor = campaign?.theme.bgColor ?? .white
-            tableFooterView.addSubview(image)
+        updateFooterWithDynamicContent(fromCreate: true)
+    }
+    
+    func createFooter(withPrivacy: Bool) {
+        copyrightView.isHidden = !(campaign?.copyright.isShow ?? false)
+        privacyView.isHidden = !withPrivacy
+        holderView.backgroundColor = withPrivacy ? campaign?.theme.inputBgColor : campaign?.theme.bgColor
+        if withPrivacy {
+            privacyView.preparePrivacy(campaign?.privacy?.type ?? "")
         }
-        if withPrivacy && privacyView != nil {
-            privacyView?.removeFromSuperview()
-            tableFooterView.addSubview(privacyView!)
-        }
-        
-        DispatchQueue.main.async {
-            self.tableView.tableFooterView = tableFooterView
-        }
+        tableView.tableFooterView = footerView
+        updateFooterWithDynamicContent(fromCreate: true)
     }
     
     private func createViews() {
@@ -329,12 +401,7 @@ internal class CampaignViewController: UIViewController {
         view.addSubview(shadowView)
         view.addSubview(contentView)
         
-        createFooter(withPrivacy: false)
-        
-        if let theme = campaign?.theme {
-            privacyView = PrivacyView(frame: .zero, theme: theme, delegate: self)
-            privacyView?.preparePrivacy(campaign?.privacy?.type ?? "")
-        }
+        createFooter(withPrivacy: dataManager?.privacyEnabled ?? false)
         
         if presentHandler != nil {
             presentHandler!()
@@ -908,14 +975,14 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         self.updateHeight()
-        self.dataManager?.checkPrivacy(nil)
-        self.tableView.setContentOffset(.zero, animated: true)
+//        self.dataManager?.checkPrivacy(nil)
+//        self.tableView.setContentOffset(.zero, animated: true)
     }
     
     func didBeginEditing(_ section: Int) {
         let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
         self.tableView.contentInset = edgeInsets
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: section), at: .middle, animated: true)
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: section), at: .top, animated: true)
     }
     
     func updateHeight() {
@@ -930,14 +997,15 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     
     //MARK: - Privacy
     
-    func updatePrivacy(enabled: Bool, height: CGFloat, warning: String?, text: String?, checked: Bool) {
+    func updatePrivacy(enabled: Bool, warning: String?, text: String?, checked: Bool) {
         if enabled {
-            self.privacyView?.fillPrivacy(self.campaign?.privacy?.type ?? "", checked: checked)
-            self.privacyView?.fillTexts(text ?? "", warning: warning ?? "")
-            self.privacyView?.frame = .init(origin: .zero, size: .init(width: self.campaign?.type == .popup ? UIScreen.main.bounds.width-48 : UIScreen.main.bounds.width,
-                                                                       height: height))
+            self.privacyView.fillPrivacy(self.campaign?.privacy?.type ?? "", checked: checked)
+            self.privacyView.fillTexts(text ?? "", warning: warning ?? "")
         }
-        self.createFooter(withPrivacy: enabled)
+
+        self.updateFooterWithDynamicContent()
+        
+        contentHeight.constant = dataManager?.heightForCurrentPage() ?? 0
     }
     
     //MARK: - Autorotate
@@ -962,7 +1030,6 @@ extension CampaignViewController: PrivacyDelegate {
     }
     
     func tapPrivacy() {
-        tableView.reloadData()
         dataManager?.tapPrivacy()
     }
 }

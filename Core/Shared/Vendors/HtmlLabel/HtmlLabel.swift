@@ -27,16 +27,27 @@ class HtmlLabel: UILabel {
 
             guard let string = html else { return }
 
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
+//            DispatchQueue.main.async { [weak self] in
+//                guard let self = self else { return }
 
                 if let data = string.data(using: String.Encoding.unicode),
-                   let attributedString = try? NSAttributedString(
+                   let attributedString = try? NSMutableAttributedString(
                     data: data,
                     options: [.documentType: NSAttributedString.DocumentType.html],
                     documentAttributes: nil
                    ) {
+                    
+                    
 
+                    
+                    if attributedString.length >= 2 {
+                        let range = NSRange(location: attributedString.length - 1, length: 1)
+                        let lineBreaking = attributedString.attributedSubstring(from: range)
+                        if lineBreaking.string == "\n" {
+                            attributedString.replaceCharacters(in: range, with: "")
+                        }
+                    }
+                    
                     var universalLabelLinks: [HtmlTextWithLink] = []
 
                     attributedString.enumerateAttributes(in: attributedString.range) { (attributes, range, _) in
@@ -51,7 +62,7 @@ class HtmlLabel: UILabel {
                     self.concat(textsWithLinks: universalLabelLinks)
                 }
             }
-        }
+//        }
     }
 
     override init(frame: CGRect) {
@@ -105,7 +116,7 @@ extension HtmlLabel {
                 labelLinks.append(labelLink)
             }
         }
-
+        
         self.attributedText = attributedText
         labelLinks.forEach { addLink($0) }
     }
