@@ -123,6 +123,9 @@ class APIClient {
                                                                            copyright: copyright,
                                                                            textProperties: textProperties) {
                                 campaigns.append(campaign)
+                                if campaign.campaignId == "21" {
+                                    
+                                }
                             }
                         }
                         

@@ -273,8 +273,16 @@ internal class CampaignViewController: UIViewController {
                 self.tableView.contentInset = .zero
             }
         } else {
+            
+            let halfScreen = UIScreen.main.bounds.height / 2
+            
+            let halfContent = (self.dataManager?.heightForCurrentPage() ?? 0) / 2
+            
+            let needsSpace = endFrame.height - (halfScreen - halfContent)
+            
             UIView.animate(withDuration: duration, delay: 0, options: [.beginFromCurrentState, .init(rawValue: curveOption)], animations: {
-                let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: endFrame.height, right: 0)
+                
+                let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: needsSpace, right: 0)
                 self.tableView.contentInset = edgeInsets
             })
         }
@@ -975,7 +983,7 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         self.updateHeight()
-//        self.dataManager?.checkPrivacy(nil)
+        self.dataManager?.checkPrivacy(nil)
 //        self.tableView.setContentOffset(.zero, animated: true)
     }
     

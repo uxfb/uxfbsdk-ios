@@ -133,11 +133,8 @@ class DataManager: FieldDelegate {
         
         height += viewController?.tableView.tableFooterView?.frame.height ?? 0
         
-//        if campaign?.copyright.isShow ?? true {
-//            height += 34
-//        }
         for field in (page?.fields)! {
-            height += checkFieldTransfromed(field) ? (getFieldHeight(field) + getFieldHeaderHeight(field) + getFieldFooterHeight(field)) : 2
+            height += checkFieldTransfromed(field) ? (getFieldHeight(field) + getFieldHeaderHeight(field) + getFieldFooterHeight(field)) : 0
         }
         for button in (page?.buttons)! {
             height += getFieldHeight(button) + getFieldHeaderHeight(button) + getFieldFooterHeight(button)
@@ -147,7 +144,7 @@ class DataManager: FieldDelegate {
             height -= safeSpace
         }
 
-        var areas = .bottomArea + .topArea //+ extraSpace
+        var areas = .bottomArea + .topArea 
         switch campaign?.type {
             case .slidein:
                 areas -= .bottomArea
@@ -669,6 +666,7 @@ class DataManager: FieldDelegate {
     var privacyEnabled: Bool {
         get {
             if let privacy = campaign?.privacy,
+               privacy.enabled,
                (campaign?.privacy?.privacyPages ?? []).contains(campaign?.pages[currentPage].id ?? "") {
                 return true
             }
