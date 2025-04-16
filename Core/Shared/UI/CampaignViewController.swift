@@ -983,7 +983,7 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         self.updateHeight()
-        self.dataManager?.checkPrivacy(nil)
+//        self.dataManager?.checkPrivacy(nil)
 //        self.tableView.setContentOffset(.zero, animated: true)
     }
     

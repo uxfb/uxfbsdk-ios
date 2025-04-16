@@ -616,11 +616,31 @@ class DataManager: FieldDelegate {
                     }
                 })
                 
-                let newAnswer = ["pageId": self.campaign?.pages[self.currentPage].id ?? "",
+                var positions: [Int] = []
+                
+                if field.type == .radiobutton || field.type == .checkbox {
+                    if let optionsData = try? JSONSerialization.data(withJSONObject: field.uiData["options"] as Any, options: .prettyPrinted),
+                       let options = try? JSONDecoder().decode([Option].self,
+                                                               from: optionsData) {
+                        for answerItem in answer {
+                            if let index = options.firstIndex(where: { option in
+                                option.id == answerItem
+                            }) {
+                                positions.append(index)
+                            }
+                        }
+                    }
+                }
+                
+                var newAnswer = ["pageId": self.campaign?.pages[self.currentPage].id ?? "",
                                  "fieldId": field.id as Any,
                                  "type": field.type?.rawValue as Any,
                                  "value": answer,
                                  "scenarios": scenariosResult] as [String : Any]
+                
+                if positions.count > 0 {
+                    newAnswer["position"] = positions
+                }
                 self.answers.append(newAnswer)
             }
             
