@@ -616,9 +616,14 @@ class DataManager: FieldDelegate {
                     }
                 })
                 
-                var positions: [Int] = []
+                var newAnswer = ["pageId": self.campaign?.pages[self.currentPage].id ?? "",
+                                 "fieldId": field.id as Any,
+                                 "type": field.type?.rawValue as Any,
+                                 "value": answer,
+                                 "scenarios": scenariosResult] as [String : Any]
                 
-                if field.type == .radiobutton || field.type == .checkbox {
+                if field.type == .checkbox {
+                    var positions: [Int] = []
                     if let optionsData = try? JSONSerialization.data(withJSONObject: field.uiData["options"] as Any, options: .prettyPrinted),
                        let options = try? JSONDecoder().decode([Option].self,
                                                                from: optionsData) {
@@ -629,18 +634,25 @@ class DataManager: FieldDelegate {
                                 positions.append(index)
                             }
                         }
+                        
+                        if positions.count > 0 {
+                            newAnswer["position"] = positions
+                        }
+                    }
+                } else if field.type == .radiobutton {
+                    if let optionsData = try? JSONSerialization.data(withJSONObject: field.uiData["options"] as Any, options: .prettyPrinted),
+                       let options = try? JSONDecoder().decode([Option].self,
+                                                               from: optionsData) {
+                        
+                        if let answerItem = answer.first,
+                            let position = options.firstIndex(where: { option in
+                            option.id == answerItem
+                        }) {
+                            newAnswer["position"] = position
+                        }
                     }
                 }
                 
-                var newAnswer = ["pageId": self.campaign?.pages[self.currentPage].id ?? "",
-                                 "fieldId": field.id as Any,
-                                 "type": field.type?.rawValue as Any,
-                                 "value": answer,
-                                 "scenarios": scenariosResult] as [String : Any]
-                
-                if positions.count > 0 {
-                    newAnswer["position"] = positions
-                }
                 self.answers.append(newAnswer)
             }
             
