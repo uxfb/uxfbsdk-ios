@@ -132,7 +132,6 @@ class ScreenshotCell: BaseCell {
     public func setScreenshots(_ screenshots: [Screenshot]) {
         self.screenshots = screenshots
         
-        
         collectionViewWidth.constant = CGFloat(screenshots.count * 76 + (screenshots.count - 1) * 16)
         
         collectionView.reloadData()
@@ -258,11 +257,15 @@ class ScreenshotCell: BaseCell {
             if let takeButton = buttons["create"] {
                 takeLabel.text = takeButton
                 takeView.isHidden = false
+            } else {
+                takeView.isHidden = true
             }
             
             if let selectButton = buttons["upload"] {
                 selectLabel.text = selectButton
                 selectView.isHidden = false
+            } else {
+                selectView.isHidden = true
             }
         }
     }
@@ -425,6 +428,5 @@ extension ScreenshotCell: UICollectionViewDelegate, UICollectionViewDataSource, 
         
         let images = screenshots.map { $0.image }
         ImageManager.showImageFullScreen(images: images, tappedIndex: indexPath.row, startPoint: globalPoint, startSize: myCell.imageView.frame.size) { } closeAction: { }
-
     }
 }

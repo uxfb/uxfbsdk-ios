@@ -185,8 +185,11 @@ class DataManager: FieldDelegate {
     
     internal func heightForFieldHeader(index: Int) -> CGFloat {
         let field = ((campaign?.pages[currentPage].fields ?? []) + (campaign?.pages[currentPage].buttons ?? []))[index]
-        
-        return checkFieldTransfromed(field) ? getFieldHeaderHeight(field) : CGFloat.leastNonzeroMagnitude
+        let height = getFieldHeaderHeight(field)
+        if checkFieldTransfromed(field) && height > 12 {
+            return UITableView.automaticDimension
+        }
+        return CGFloat.leastNonzeroMagnitude
     }
     
     internal func heightForFieldFooter(index: Int) -> CGFloat {
@@ -371,16 +374,42 @@ class DataManager: FieldDelegate {
         return height + getFooterSpacing(field)
     }
     
-    private func getFieldHeader(_ field: Field) -> UIView {
+    private func getFieldHeader(_ field: Field) -> UIView? {
         if [FieldType.header, FieldType.text, FieldType.button, FieldType.image].contains(field.type) || field.value == nil || !checkFieldTransfromed(field) {
-            return UIView()
+            return nil
         }
         
+        let view = UIView()
+        let label = LinkLabel()
+        
+        label.textColor = campaign?.theme.text01Color
+        
+        let required = (field.uiData["required"] as? Bool) ?? false
+        
+        label.attributedText = TextPropertyManager.convert(field.value ?? "",
+                                                           theme: campaign!.theme,
+                                                           defaultFont: campaign!.theme.fontH2,
+                                                           textProperties: nil,
+                                                           withRequired: required)
+        
+        label.numberOfLines = 0
+        view.addSubview(label)
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+        ])
+        
+        view.backgroundColor = campaign?.theme.bgColor
+        return view
+        
+        /*
         let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.width - .leftArea - .rightArea,
                                                                     height: getFieldHeaderHeight(field))))
-        
-        
-        
+                
         let label = LinkLabel(frame: CGRect(origin: .init(x: 16, y: 0),
                                           size: CGSize(width: view.frame.width - extraSpace - 40,
                                                        height: view.frame.height - getTitleSpacing(field))))// - 16)))
@@ -399,13 +428,43 @@ class DataManager: FieldDelegate {
         view.addSubview(label)
         view.backgroundColor = campaign?.theme.bgColor
         return view
+         */
     }
     
-    private func getFieldFooter(_ field: Field) -> UIView {
+    private func getFieldFooter(_ field: Field) -> UIView? {
         if isError && fieldNeedComplete(field) {
             guard let warning = field.uiData["warning"] as? String else {
-                return UIView()
+                return nil
             }
+            
+            let view = UIView()
+            let label = UILabel()
+            
+            label.text = warning
+            label.textColor = campaign?.theme.errorColorPrimary
+            let font = (campaign?.theme.fontP2)!
+            label.font = font
+            label.numberOfLines = 0
+            let fieldIndex = Int((campaign?.pages[currentPage].fields.firstIndex(where: { (fld) -> Bool in
+                fld.id == field.id
+            }))!)
+            label.tag = fieldIndex
+            view.addSubview(label)
+            view.clipsToBounds = true
+            view.backgroundColor = campaign?.theme.bgColor
+            
+            label.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                label.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
+                label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+                label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            ])
+            
+            view.backgroundColor = campaign?.theme.bgColor
+            return view
+            
+            /*
             let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.width - .leftArea - .rightArea - extraSpace,
                                                                         height: getFieldFooterHeight(field))))
             let font = (campaign?.theme.fontP2)!
@@ -429,9 +488,10 @@ class DataManager: FieldDelegate {
             view.clipsToBounds = true
             view.backgroundColor = campaign?.theme.bgColor
             return view
+             */
         }
         else {
-            return UIView()
+            return nil
         }
     }
     
@@ -462,6 +522,7 @@ class DataManager: FieldDelegate {
                 return 40
                 
             case .header:
+//                return UITableView.automaticDimension
                 let font = (campaign?.theme.fontH1)!
                 let value = TextPropertyManager.convert(field.value!,
                                                         theme: campaign!.theme,
@@ -470,7 +531,7 @@ class DataManager: FieldDelegate {
                                                         withRequired: false)
                 let valueHeight = TextPropertyManager.heightForAttributed(string: value,
                                                                           and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
-                return valueHeight
+                return valueHeight + 1
                 
             case .image:
                 return 56

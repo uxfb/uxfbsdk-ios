@@ -33,6 +33,11 @@ internal class BaseCell: UITableViewCell {
     }
     
     internal func configureWith(_ value: Field, theme: ThemeProtocol, delegate: FieldDelegate, valueIndex: Int = 0) {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(rotated),
+                                               name: NSNotification.Name("Rotated"),
+                                               object: nil)
+        
         self.field = value
         self.theme = theme
         self.delegate = delegate
@@ -42,4 +47,6 @@ internal class BaseCell: UITableViewCell {
     internal func setupSubviews() { }
     
     internal func updateUI() { }
+    
+    @objc internal func rotated() { }
 }

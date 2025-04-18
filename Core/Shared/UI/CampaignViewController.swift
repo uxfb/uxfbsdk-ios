@@ -142,6 +142,10 @@ internal class CampaignViewController: UIViewController {
             view = UITableView(frame: .zero, style: .grouped)
         }
         
+        if #available(iOS 15.0, *) {
+            view.sectionHeaderTopPadding = .leastNonzeroMagnitude
+        }
+        
         view.tableHeaderView = UIView(frame: .zero)
         view.delegate = self
         view.dataSource = self
@@ -343,6 +347,14 @@ internal class CampaignViewController: UIViewController {
     }
     
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { _ in
+                // Animation in progress
+            }, completion: { _ in
+                // Rotation animation completed
+                NotificationCenter.default.post(name: NSNotification.Name("Rotated"), object: nil)
+            })
+        
         DispatchQueue.main.async {
 //            self.tableView.reloadData()
         }

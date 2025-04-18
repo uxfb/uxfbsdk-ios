@@ -155,52 +155,63 @@ class NpsCell: BaseCell {
     }
     
     private func initLabels() {
+        let k = UIScreen.main.bounds.width > 375 ? 1 : 0.92
+        
         let calculatedValue = currentValue == -1 ? 0 : currentValue
         for i in 0...10 {
             if let label = contentView.viewWithTag(i+1) as? VerticalAlignedLabel {
                 if i == calculatedValue {
                     label.textColor = currentValue == -1 ? theme?.text03Color : theme?.mainColor
-                    label.font = theme?.fontH1
+                    label.font = theme?.fontH1.withSize((theme?.fontH1.pointSize ?? .bigFontSize) * k)
+                    label.contentMode = .bottom
                 } else if i == calculatedValue-1 || i == calculatedValue+1 {
                     label.textColor = currentValue == -1 ? theme?.text03Color : theme?.text02Color
-                    label.font = theme?.fontP1
+                    label.font = theme?.fontP1.withSize((theme?.fontP1.pointSize ?? .mediumFontSize) * k)
                     label.contentMode = .bottom
                 }
                 else {
                     label.textColor = theme?.text03Color
-                    label.font = theme?.fontP2
+                    label.font = theme?.fontP2.withSize((theme?.fontP2.pointSize ?? .smallFontSize) * k)
                     label.contentMode = .bottom
                 }
             }
         }
     }
     
+    override func rotated() {
+        slider.setNeedsLayout()
+        slider.layoutIfNeeded()
+    }
+    
     private func updateLabels() {
+        
+        let k = UIScreen.main.bounds.width > 375 ? 1 : 0.92
+        
         setActiveStyle()
         let nearestValue = Int(round(slider.value))
-        let firstDiff: CGFloat = .bigFontSize - .mediumFontSize
-        let secondDiff: CGFloat = .mediumFontSize - .smallFontSize
+        let firstDiff: CGFloat = .bigFontSize * k - .mediumFontSize * k
+        let secondDiff: CGFloat = .mediumFontSize * k - .smallFontSize * k
         
         for i in 0...10 {
             if let label = contentView.viewWithTag(i+1) as? VerticalAlignedLabel {
                 let diff = abs(Float(i) - slider.value)
                 if diff == 0 {
                     label.textColor = theme?.mainColor
-                    label.font = theme?.fontH1
-                    label.contentMode = .center
+                    label.font = theme?.fontH1.withSize((theme?.fontH1.pointSize ?? .bigFontSize) * k)
+                    label.contentMode = .bottom
                 } else if diff <= 1 {
                     label.textColor = i == nearestValue ? theme?.mainColor : theme?.text02Color
-                    let font = theme?.fontP1.withSize(.mediumFontSize + firstDiff * CGFloat(1-diff))
+                    let font = theme?.fontP1.withSize((.mediumFontSize + firstDiff * CGFloat(1-diff)) * k)
                     label.font = font
                     label.contentMode = .bottom
                 } else if diff <= 2 {
                     label.textColor = (abs(nearestValue-i) == 1) ? theme?.text02Color : theme?.text03Color
-                    let font = theme?.fontP2.withSize(.smallFontSize + secondDiff * CGFloat(2-diff))
+                    let font = theme?.fontP2.withSize((.smallFontSize + secondDiff * CGFloat(2-diff)) * k)
                     label.font = font
                     label.contentMode = .bottom
                 } else {
                     label.textColor = theme?.text03Color
-                    label.font = theme?.fontP2
+                    label.font = theme?.fontP2.withSize((theme?.fontP2.pointSize ?? .smallFontSize) * k)
                     label.contentMode = .bottom
                 }
             }

@@ -167,6 +167,7 @@ class RatingCell: BaseCell {
                 if i == calculatedValue {
                     label.textColor = currentValue == 0 ? theme?.text03Color : theme?.mainColor
                     label.font = theme?.fontH1
+                    label.contentMode = .bottom
                 } else if i == calculatedValue-1 || i == calculatedValue+1 {
                     label.textColor = currentValue == 0 ? theme?.text03Color : theme?.text02Color
                     label.font = theme?.fontP1
@@ -179,6 +180,11 @@ class RatingCell: BaseCell {
                 }
             }
         }
+    }
+    
+    override func rotated() {
+        slider.setNeedsLayout()
+        slider.layoutIfNeeded()
     }
     
     private func updateLabels() {
@@ -219,7 +225,6 @@ class RatingCell: BaseCell {
     private func sliderTapped(gestureRecognizer: UIGestureRecognizer) {
         let pointTapped: CGPoint = gestureRecognizer.location(in: self.contentView)
 
-        
         let positionOfSlider: CGPoint = slider.frame.origin
         let widthOfSlider: CGFloat = slider.frame.size.width
         let itemWidth = widthOfSlider / CGFloat(slider.maximumValue)
