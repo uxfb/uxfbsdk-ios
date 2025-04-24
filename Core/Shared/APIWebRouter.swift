@@ -59,7 +59,7 @@ enum APIWebRouter {
   case checkToggle(appID: String)
   case getCampaing(appID: String)
   case showForm(uid: String, campaingId: String)
-  case saveFormData(projectId: String?, createdAtClient: String, uid: String, campaignId: String, pages: Array<Dictionary<String, Any>>, info: Dictionary<String, Any>, properties: Dictionary<String, Any>, idempotency: String)
+    case saveFormData(appId: String?, projectId: String?, createdAtClient: String, uid: String, campaignId: String, pages: Array<Dictionary<String, Any>>, info: Dictionary<String, Any>, properties: Dictionary<String, Any>, idempotency: String)
   case saveScreenshot(screenshot: ScreenshotData)
   case checkAttribute(appID: String, campaignID: String, attributes: [Attribute], debug: Bool)
   
@@ -80,8 +80,12 @@ enum APIWebRouter {
         return "/mobile/toggles/\(appId)"
       case .getCampaing(let appId):
         return "/mobile/campaigns/\(appId)"
-      case .saveFormData(_, _, _, _, _, _, _, _):
-        return "/mobile/answers"
+      case .saveFormData(let appId, _, _, _, _, _, _, _, _):
+            if let appId = appId {
+                return "/mobile/answers/\(appId)"
+            } else {
+                return "/mobile/answers"
+            }
       case .showForm(_, _):
         return "/mobile/visits"
       case .saveScreenshot(_ ):
@@ -93,7 +97,7 @@ enum APIWebRouter {
   
   var parameters: [String:Any]? {
     switch self {
-      case .saveFormData(_, let createdAtClient, let uid, let campaignId, let pages, let info, let properties, _):
+      case .saveFormData(_, _, let createdAtClient, let uid, let campaignId, let pages, let info, let properties, _):
         var params = [HTTPHeaderField.uid.rawValue : uid,
                       HTTPHeaderField.createdAtClient.rawValue : createdAtClient,
                       HTTPHeaderField.campaignId.rawValue : campaignId,
@@ -174,7 +178,7 @@ enum APIWebRouter {
       case .checkAttribute(_ ,_ ,_ , let debug):
         parameters[HTTPHeaderField.debug.rawValue] = debug
         
-      case .saveFormData(let projectId, _, _, _, _, _, _, _):
+      case .saveFormData(_, let projectId, _, _, _, _, _, _, _):
         if projectId != nil {
           parameters =  [HTTPHeaderField.projectId.rawValue : projectId!]
         }
@@ -195,7 +199,7 @@ enum APIWebRouter {
                 HTTPHeaderField.sdkPlatform.rawValue: APIWebRouter.settings?.sdkPlatform ?? "Native",
                 HTTPHeaderField.sdkPlatformVersion.rawValue: APIWebRouter.settings?.sdkPlatformVersion ?? Consts.version,
                 HTTPHeaderField.sdkAppVersion.rawValue: APIWebRouter.appVersion]
-      case .saveFormData(_, _, _, _, _, _, _, let idempotency):
+      case .saveFormData(_, _, _, _, _, _, _, _, let idempotency):
         
         return [HTTPHeaderField.acceptType.rawValue: ContentType.json.rawValue,
                 HTTPHeaderField.contentType.rawValue: ContentType.json.rawValue,
