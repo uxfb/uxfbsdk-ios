@@ -98,7 +98,7 @@ class MainViewController_swift: UIViewController {
                         .build()
                 }
 
-                UXFeedback.sdk.startCampaign(eventName: "ger_1")
+                UXFeedback.sdk.startCampaign(eventName: "ios_bugs")
             
         case 2:
             UXFeedback.sdk.startCampaign(eventName: "appsl_appsl")

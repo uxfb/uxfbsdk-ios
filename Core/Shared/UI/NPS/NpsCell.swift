@@ -48,9 +48,14 @@ class NpsCell: BaseCell {
             label.text = "\(i)"
             label.tag = i + 1
             label.textAlignment = .center
+            label.isUserInteractionEnabled = true
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(labelTapped(gestureRecognizer:)))
+            tapGesture.cancelsTouchesInView = true
+            label.addGestureRecognizer(tapGesture)
             stackView.addArrangedSubview(label)
         }
         stackView.distribution = .fillEqually
+        stackView.isUserInteractionEnabled = true
         return stackView
     }()
     
@@ -219,8 +224,16 @@ class NpsCell: BaseCell {
         }
     }
     
-    
     //MARK: - Actions
+    
+    @objc
+    private func labelTapped(gestureRecognizer: UIGestureRecognizer) {
+        if let label = gestureRecognizer.view as? VerticalAlignedLabel {
+            let selectedIndex = label.tag - 1
+            slider.setValue(Float(selectedIndex), animated: true)
+            roundSlider()
+        }
+    }
     
     @objc
     private func sliderTapped(gestureRecognizer: UIGestureRecognizer) {

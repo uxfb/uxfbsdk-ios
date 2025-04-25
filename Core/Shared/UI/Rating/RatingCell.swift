@@ -44,8 +44,13 @@ class RatingCell: BaseCell {
             label.text = "\(i)"
             label.tag = i
             label.textAlignment = .center
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(labelTapped(gestureRecognizer:)))
+            tapGesture.cancelsTouchesInView = true
+            label.isUserInteractionEnabled = true
+            label.addGestureRecognizer(tapGesture)
             stackView.addArrangedSubview(label)
         }
+        stackView.isUserInteractionEnabled = true
         stackView.distribution = .fillEqually
         return stackView
     }()
@@ -220,7 +225,17 @@ class RatingCell: BaseCell {
     }
     
     
-    //MARK :- Actions
+    //MARK: -  Actions
+    
+    @objc
+    private func labelTapped(gestureRecognizer: UIGestureRecognizer) {
+        if let label = gestureRecognizer.view as? VerticalAlignedLabel {
+            let selectedIndex = label.tag
+            slider.setValue(Float(selectedIndex), animated: true)
+            roundSlider()
+        }
+    }
+    
     @objc
     private func sliderTapped(gestureRecognizer: UIGestureRecognizer) {
         let pointTapped: CGPoint = gestureRecognizer.location(in: self.contentView)
