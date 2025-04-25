@@ -230,6 +230,10 @@ internal class CampaignViewController: UIViewController {
     
     var withKeyboard = false
     
+    override func loadView() {
+        self.view = PassthroughToWindowView()
+    }
+    
     open override func viewDidLoad() {
         super.viewDidLoad()
         dataManager = DataManager(self, campaign: campaign)
