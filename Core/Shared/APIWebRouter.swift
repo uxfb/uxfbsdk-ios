@@ -81,11 +81,11 @@ enum APIWebRouter {
       case .getCampaing(let appId):
         return "/mobile/campaigns/\(appId)"
       case .saveFormData(let appId, _, _, _, _, _, _, _, _):
-            if let appId = appId {
-                return "/mobile/answers/\(appId)"
-            } else {
+//            if let appId = appId {
+//                return "/mobile/answers/\(appId)"
+//            } else {
                 return "/mobile/answers"
-            }
+//            }
       case .showForm(_, _):
         return "/mobile/visits"
       case .saveScreenshot(_ ):
