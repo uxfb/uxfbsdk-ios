@@ -11,7 +11,7 @@ import CoreData
 
 protocol RequestManagerDelegate {
   func campaingsLoaded(success: Bool, message: String?, delay: Int?, campaigns: Array<Campaign>)
-  func formDataSaved(success: Bool, message: String?, capmaignId: String)
+  func formDataSaved(success: Bool, message: String?, campaignId: Int)
 }
 
 @_documentation(visibility: internal)
@@ -59,7 +59,7 @@ final class DataRequestManager: NSObject {
   
   public func sendFormData(projectId: String?,
                            createdAtClient: String,
-                           campaignId: String,
+                           campaignId: Int,
                            pages: Array<Dictionary<String,Any>>?,
                            properties: Dictionary<String,Any>?) {
     
@@ -77,7 +77,7 @@ final class DataRequestManager: NSObject {
     createRequest("SEND_FORM", parameters: jsonData)
   }
   
-  public func sendShowForm(campaignId: String) {
+  public func sendShowForm(campaignId: Int) {
     let parameters = ["campaignId": campaignId]
     let jsonData = try? JSONSerialization.data(withJSONObject: parameters)
     createRequest("SHOW_FORM", parameters: jsonData)
@@ -94,7 +94,7 @@ final class DataRequestManager: NSObject {
     }
   }
   
-  public func sendAttributes(appId: String, campaignId: String, attributes: [Attribute], completion: @escaping (Bool) -> Void) {
+  public func sendAttributes(appId: String, campaignId: Int, attributes: [Attribute], completion: @escaping (Bool) -> Void) {
     self._apiClient.checkAttribues(appId, campaignId, attributes, true) { success in
       completion(success)
     }
@@ -160,7 +160,7 @@ final class DataRequestManager: NSObject {
               let dict = try? JSONSerialization.jsonObject(with: data) as? [String : Any],
               let projectId = dict["projectId"] as? String,
               let createdAtClient = dict["createdAtClient"] as? String,
-              let campaignId = dict["campaignId"] as? String,
+              let campaignId = dict["campaignId"] as? Int,
               let pages = dict["pages"] as? Array<Dictionary<String,Any>>,
               let properties = dict["properties"] as? Dictionary<String,Any>
         else {
@@ -177,14 +177,14 @@ final class DataRequestManager: NSObject {
           self.validateResponse(for: request, success: success, httpCode: httpCode) {
             self.delegate?.formDataSaved(success: success,
                                          message: message,
-                                         capmaignId: campaignId)
+                                         campaignId: campaignId)
           }
         }
         
       case "SHOW_FORM":
         guard let data = data,
               let dict = try? JSONSerialization.jsonObject(with: data) as? [String : Any],
-              let campaignId = dict["campaignId"] as? String
+              let campaignId = dict["campaignId"] as? Int
         else {
           self.deleteRequest(request, completion: { })
           return

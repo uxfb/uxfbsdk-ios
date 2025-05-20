@@ -123,9 +123,6 @@ class APIClient {
                                                                            copyright: copyright,
                                                                            textProperties: textProperties) {
                                 campaigns.append(campaign)
-                                if campaign.campaignId == "21" {
-                                    
-                                }
                             }
                         }
                         
@@ -150,7 +147,7 @@ class APIClient {
     
     func saveFormData(projectId: String?,
                       createdAtClient: String,
-                      campaignId: String,
+                      campaignId: Int,
                       pages: Array<Dictionary<String,Any>>?,
                       properties: Dictionary<String,Any>?,
                       idempotency: String,
@@ -175,7 +172,7 @@ class APIClient {
                                 completion: responseHandler)
     }
     
-    func showForm(campaingId: String,
+    func showForm(campaingId: Int,
                   completion: ((_ success: Bool, _ httpCode: Int)->())?){
         
         let responseHandler = {(status: APIClientResponseResult, httpCode: Int, message: String?, result: Any?) in
@@ -200,7 +197,7 @@ class APIClient {
     }
     
     func checkAttribues(_ appId: String,
-                        _ campaignId: String,
+                        _ campaignId: Int,
                         _ attributes: [Attribute],
                         _ debug: Bool,
                         completion: ((_ success: Bool)->())?){

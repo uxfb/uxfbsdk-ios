@@ -58,10 +58,10 @@ enum APIWebRouter {
   
   case checkToggle(appID: String)
   case getCampaing(appID: String)
-  case showForm(uid: String, campaingId: String)
-    case saveFormData(appId: String?, projectId: String?, createdAtClient: String, uid: String, campaignId: String, pages: Array<Dictionary<String, Any>>, info: Dictionary<String, Any>, properties: Dictionary<String, Any>, idempotency: String)
+  case showForm(uid: String, campaingId: Int)
+    case saveFormData(appId: String?, projectId: String?, createdAtClient: String, uid: String, campaignId: Int, pages: Array<Dictionary<String, Any>>, info: Dictionary<String, Any>, properties: Dictionary<String, Any>, idempotency: String)
   case saveScreenshot(screenshot: ScreenshotData)
-  case checkAttribute(appID: String, campaignID: String, attributes: [Attribute], debug: Bool)
+  case checkAttribute(appID: String, campaignID: Int, attributes: [Attribute], debug: Bool)
   
   var method: String {
     switch self {

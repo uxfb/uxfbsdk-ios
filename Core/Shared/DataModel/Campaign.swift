@@ -14,7 +14,7 @@ enum CampaignType: String {
 }
 
 struct Campaign {
-    private(set) var campaignId: String!
+    private(set) var campaignId: Int!
     private(set) var theme: ThemeProtocol!
     private(set) var pages: Array<Page> = []
     private(set) var type: CampaignType!

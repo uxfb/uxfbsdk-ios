@@ -149,24 +149,24 @@ extension MainViewController_swift: UXFeedbackCampaignDelegate{
         
     }
     
-    func campaignDidShow(campaignId: String, eventName: String) {
+    func campaignDidShow(campaignId: Int, eventName: String) {
         
     }
     
-    func campaignDidClose(campaignId: String, eventName: String) {
+    func campaignDidClose(campaignId: Int, eventName: String) {
         
     }
     
-    func campaignDidTerminate(campaignId: String, eventName: String, terminatedPage: Int, totalPages: Int) {
+    func campaignDidTerminate(campaignId: Int, eventName: String, terminatedPage: Int, totalPages: Int) {
         
     }
     
     
-    func campaignDidSend(campaignId: String) {
+    func campaignDidSend(campaignId: Int) {
         
     }
     
-    func campaignDidAnswered(campaignId: String, answers: [String : Any]) {
+    func campaignDidAnswered(campaignId: Int, answers: [String : Any]) {
         
     }
     

@@ -7,7 +7,7 @@
 //
 
 class AttributeManager {
-    static func checkAttributes(appId: String, requestManager: DataRequestManager, campaignId: String, targeting: Targeting, attributes: [Attribute], completion: @escaping (Bool) -> Void) {
+    static func checkAttributes(appId: String, requestManager: DataRequestManager, campaignId: Int, targeting: Targeting, attributes: [Attribute], completion: @escaping (Bool) -> Void) {
         guard let campaignAttributes = targeting.attributes, campaignAttributes.count > 0  else {
           completion(true)
           return

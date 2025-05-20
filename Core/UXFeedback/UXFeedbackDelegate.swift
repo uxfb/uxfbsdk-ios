@@ -25,13 +25,13 @@ public protocol UXFeedbackCampaignDelegate: FeedbackCampaignDelegate {
     /// - Parameters:
     /// - campaignId: Идентификатор кампании
     /// - eventName: Имя переданного в startCampaign события
-    func campaignDidShow(campaignId: String, eventName: String)
+    func campaignDidShow(campaignId: Int, eventName: String)
     
     /// Событие закрытия формы кампании
     /// - Parameters:
     /// - campaignId: Идентификатор кампании
     /// - eventName: Имя переданного в startCampaign события
-    func campaignDidClose(campaignId: String, eventName: String)
+    func campaignDidClose(campaignId: Int, eventName: String)
     
     /// Событие прерывания прохождения кампании
     /// - Parameters:
@@ -39,17 +39,17 @@ public protocol UXFeedbackCampaignDelegate: FeedbackCampaignDelegate {
     ///   - eventName: Имя переданного в startCampaign события
     ///   - terminatedPage: Страница, на которой прохождение кампании было прервано
     ///   - totalPages: Общее количество страниц кампании
-    func campaignDidTerminate(campaignId: String, eventName: String, terminatedPage: Int, totalPages: Int)
+    func campaignDidTerminate(campaignId: Int, eventName: String, terminatedPage: Int, totalPages: Int)
     
     /// Событие отправки результатов кампании на сервер
     /// - Parameter campaignId: Идентификатор кампании
-    func campaignDidSend(campaignId: String)
+    func campaignDidSend(campaignId: Int)
     
     /// Событие завершения прохождения кампании с получением ответов
     /// - Parameters:
     ///   - campaignId: Идентификатор кампании
     ///   - answers: Массив ответов в формате Ключ: Значение, где ключ - идентификатор блока
-    func campaignDidAnswered(campaignId: String, answers: [String: Any])
+    func campaignDidAnswered(campaignId: Int, answers: [String: Any])
     
     /// Событие вызывается когда кампания не была найдена
     /// - Parameters:

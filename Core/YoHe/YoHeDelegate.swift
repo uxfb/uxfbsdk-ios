@@ -21,27 +21,27 @@ public protocol YoHeCampaignDelegate: FeedbackCampaignDelegate {
      ///- Parameters:
      /// - campaignId: Campaign identificator
      /// - eventName: Name of the event passed to startCampaign
-     func campaignDidShow(campaignId: String, eventName: String)
+     func campaignDidShow(campaignId: Int, eventName: String)
      /// Campaign form closing event
      /// - Parameters:
      /// - eventName: Name of the event passed to startCampaign
      /// - campaignId: Campaign identificator
-     func campaignDidClose(campaignId: String, eventName: String)
+     func campaignDidClose(campaignId: Int, eventName: String)
      /// Campaign abort event
      /// - Parameters:
      /// - campaignId: Campaign identificator
      /// - eventName: Name of the event passed to startCampaign
      /// - terminatedPage: The page where the campaign was terminated
      /// - totalPages: Total number of campaign pages
-     func campaignDidTerminate(campaignId: String, eventName: String, terminatedPage: Int, totalPages: Int)
+     func campaignDidTerminate(campaignId: Int, eventName: String, terminatedPage: Int, totalPages: Int)
      /// Event of sending campaign results to the server
      /// - Parameter campaignId: Campaign ID
-     func campaignDidSend(campaignId: String)
+     func campaignDidSend(campaignId: Int)
      /// Campaign completion event with responses received
      /// - Parameters:
      /// - campaignId: Campaign ID
      /// - answers: An array of answers in the format Key: Value, where key is the block ID
-     func campaignDidAnswered(campaignId: String, answers: [String: Any])
+     func campaignDidAnswered(campaignId: Int, answers: [String: Any])
 }
 
 

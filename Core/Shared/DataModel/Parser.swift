@@ -75,7 +75,7 @@ class Parser {
     func parseCampaign(campaignInfo: Dictionary<String,Any>, copyright: Copyright?, textProperties: TextProperties?) -> Campaign?{
         
         let type = "\(campaignInfo["type"] as! Int)"
-        let campaingId = "\(campaignInfo["campaignId"] as! Int)"
+        let campaingId = campaignInfo["campaignId"] as! Int
         let projectId = "\(campaignInfo["projectId"] as! Int)"
         let autoclose: Double = campaignInfo["autoclose"] as? Double ?? 0.0
         let progress: Bool = campaignInfo["progress"] as? Bool ?? false

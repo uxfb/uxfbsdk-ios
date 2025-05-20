@@ -395,9 +395,9 @@ extension UXFeedback: RequestManagerDelegate {
     }
   }
   
-  func formDataSaved(success: Bool, message: String?, capmaignId: String) {
+  func formDataSaved(success: Bool, message: String?, campaignId: Int) {
     if success {
-      self.campaignDelegate?.campaignDidSend(campaignId: capmaignId)
+      self.campaignDelegate?.campaignDidSend(campaignId: campaignId)
     }
   }
 }
