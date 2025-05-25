@@ -17,7 +17,7 @@ internal class Consts {
     static let defaultEndpoint: String = "https://develop.api.uxfb.dev"
 //    static let defaultEndpoint: String = "https://epic-dev-5045-text-formatting.api.uxfb.dev"
 
-    static let apiVersion: String = "v13"
+    static let apiVersion: String = "v14"
     static let identifier: String  = "biz.andalex.uxfeedback.sdk"
     
     static let bundle: Bundle = Bundle(for: UXFeedback.self)

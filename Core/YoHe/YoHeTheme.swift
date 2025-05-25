@@ -61,6 +61,11 @@ open class YoHeTheme: NSObject, ThemeProtocol {
     /// Stars color
     open var iconRating: UIColor = UIColor.init("#FECA00")
     
+    /// Smiles colors
+    open var iconRating2: UIColor = UIColor.init("#FECA00") //yellow
+    open var iconRating3: UIColor = UIColor.init("#232735") //black
+    open var iconRating4: UIColor = UIColor.init("#E84047") //red
+    
     /// Button rounding radius
      open var btnBorderRadius: CGFloat = 4
     

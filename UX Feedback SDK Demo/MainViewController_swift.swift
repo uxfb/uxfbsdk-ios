@@ -48,9 +48,13 @@ class MainViewController_swift: UIViewController {
             customTheme.btnTextColor =  UIColor.init("#FFFFFF")
             customTheme.bgColor =  UIColor.init("#123456")
             
+            customTheme.iconRating2 =  UIColor.init("#AAAAAA")
+            customTheme.iconRating3 =  UIColor.init("#FB1A23")
+            customTheme.iconRating4 =  UIColor.init("#000000")
             
             
-//            UXFeedback.sdk.theme = customTheme
+            
+            UXFeedback.sdk.theme = customTheme
             
         }
     }
@@ -101,7 +105,7 @@ class MainViewController_swift: UIViewController {
                 UXFeedback.sdk.startCampaign(eventName: "ios_bugs")
             
         case 2:
-            UXFeedback.sdk.startCampaign(eventName: "appsl_appsl")
+            UXFeedback.sdk.startCampaign(eventName: "colored_smiles")
             
         default:
             break

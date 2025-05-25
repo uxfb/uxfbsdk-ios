@@ -48,6 +48,10 @@ protocol ThemeProtocol {
     var bgColor: UIColor { get set }
     var iconRating: UIColor { get set }
     
+    var iconRating2: UIColor { get set }
+    var iconRating3: UIColor { get set }
+    var iconRating4: UIColor { get set }
+    
     var fontH1: UIFont { get set }
     var fontH2: UIFont { get set }
     var fontP1: UIFont { get set }
@@ -60,7 +64,6 @@ class Theme: NSObject, Decodable, ThemeProtocol {
     var text03Color: UIColor = UIColor.init("#8B90A0")
     var inputBorderColor: UIColor = UIColor.init("#D3D4D8")
     var iconColor: UIColor =  UIColor.init("#B5B8C2")
-    var iconRating: UIColor =  UIColor.init("#FECA00")
     var btnBgColorActive: UIColor =  UIColor.init("#1983C8")
     var btnBorderRadius: CGFloat = 4
     var errorColorSecondary: UIColor =  UIColor.init("#F4A0A3")
@@ -76,6 +79,11 @@ class Theme: NSObject, Decodable, ThemeProtocol {
     var text02Color: UIColor =  UIColor.init("#505565")
     var btnTextColor: UIColor =  UIColor.init("#FFFFFF")
     var bgColor: UIColor =  UIColor.init("#FFFFFF")
+    
+    var iconRating: UIColor =  UIColor.init("#FECA00")
+    var iconRating2: UIColor = UIColor.init("#FECA00")
+    var iconRating3: UIColor = UIColor.init("#232735")
+    var iconRating4: UIColor = UIColor.init("#E84047")
     
     var fontH1: UIFont = .systemFont(ofSize: 22,
                                      weight: .semibold) 
