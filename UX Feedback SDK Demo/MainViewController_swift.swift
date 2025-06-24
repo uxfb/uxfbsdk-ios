@@ -48,14 +48,11 @@ class MainViewController_swift: UIViewController {
             customTheme.btnTextColor =  UIColor.init("#FFFFFF")
             customTheme.bgColor =  UIColor.init("#123456")
             
-            customTheme.iconRating2 =  UIColor.init("#AAAAAA")
-            customTheme.iconRating3 =  UIColor.init("#FB1A23")
-            customTheme.iconRating4 =  UIColor.init("#000000")
-            
-            
+            customTheme.iconSmile1Color =  UIColor.init("#AAAAAA")
+            customTheme.iconSmile2Color =  UIColor.init("#FB1A23")
+            customTheme.iconSmile3Color =  UIColor.init("#000000")
             
             UXFeedback.sdk.theme = customTheme
-            
         }
     }
 
@@ -71,13 +68,13 @@ class MainViewController_swift: UIViewController {
     @IBAction func eventTap(_ sender: UIButton){
         
 //        UXFeedback.sdk.settings.closeOnSwipe = true
-//        UXFeedback.sdk.settings.slideInUiBlocked = true
-//        UXFeedback.sdk.settings.slideInUiBlackoutBlur = 4
-//        UXFeedback.sdk.settings.slideInUiBlackoutOpacity = 50
-//        UXFeedback.sdk.settings.slideInUiBlackoutColor = "000000"
-//        UXFeedback.sdk.settings.popupUiBlackoutBlur = 4
-//        UXFeedback.sdk.settings.popupUiBlackoutOpacity = 50
-//        UXFeedback.sdk.settings.popupUiBlackoutColor = "000000"
+        UXFeedback.sdk.settings.slideInUiBlocked = true
+        UXFeedback.sdk.settings.slideInUiBlackoutBlur = 0
+        UXFeedback.sdk.settings.slideInUiBlackoutOpacity = 0
+        UXFeedback.sdk.settings.slideInUiBlackoutColor = "#00FFFF"
+        UXFeedback.sdk.settings.popupUiBlackoutBlur = 0
+        UXFeedback.sdk.settings.popupUiBlackoutOpacity = 0
+        UXFeedback.sdk.settings.popupUiBlackoutColor = nil
         
         let eventNumber = sender.tag
         assert(eventNumber > 0, "Invalid eventNumber")

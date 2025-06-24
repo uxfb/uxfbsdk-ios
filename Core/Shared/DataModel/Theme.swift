@@ -46,11 +46,11 @@ protocol ThemeProtocol {
     var text02Color: UIColor { get set }
     var btnTextColor: UIColor { get set }
     var bgColor: UIColor { get set }
-    var iconRating: UIColor { get set }
+    var iconStarColor: UIColor { get set }
     
-    var iconRating2: UIColor { get set }
-    var iconRating3: UIColor { get set }
-    var iconRating4: UIColor { get set }
+    var iconSmile1Color: UIColor { get set }
+    var iconSmile2Color: UIColor { get set }
+    var iconSmile3Color: UIColor { get set }
     
     var fontH1: UIFont { get set }
     var fontH2: UIFont { get set }
@@ -80,10 +80,10 @@ class Theme: NSObject, Decodable, ThemeProtocol {
     var btnTextColor: UIColor =  UIColor.init("#FFFFFF")
     var bgColor: UIColor =  UIColor.init("#FFFFFF")
     
-    var iconRating: UIColor =  UIColor.init("#FECA00")
-    var iconRating2: UIColor = UIColor.init("#FECA00")
-    var iconRating3: UIColor = UIColor.init("#232735")
-    var iconRating4: UIColor = UIColor.init("#E84047")
+    var iconStarColor: UIColor =  UIColor.init("#FECA00")
+    var iconSmile1Color: UIColor = UIColor.init("#FECA00")
+    var iconSmile2Color: UIColor = UIColor.init("#232735")
+    var iconSmile3Color: UIColor = UIColor.init("#E84047")
     
     var fontH1: UIFont = .systemFont(ofSize: 22,
                                      weight: .semibold) 
@@ -120,7 +120,10 @@ class Theme: NSObject, Decodable, ThemeProtocol {
         case errorColorSecondary
         case errorColorPrimary
         case controlBgColorActive
-        case iconRating
+        case iconStarColor
+        case iconSmile1Color
+        case iconSmile2Color
+        case iconSmile3Color
     }
     
     required public init(from decoder: Decoder) throws {
@@ -173,8 +176,17 @@ class Theme: NSObject, Decodable, ThemeProtocol {
         if let bgColorString = try? container.decode(String.self, forKey: .bgColor){
             self.bgColor = UIColor.init(bgColorString)
         }
-        if let iconRating = try? container.decode(String.self, forKey: .iconRating){
-            self.iconRating = UIColor.init(iconRating)
+        if let iconStarColor = try? container.decode(String.self, forKey: .iconStarColor){
+            self.iconStarColor = UIColor.init(iconStarColor)
+        }
+        if let iconSmile1Color = try? container.decode(String.self, forKey: .iconSmile1Color){
+            self.iconSmile1Color = UIColor.init(iconSmile1Color)
+        }
+        if let iconSmile2Color = try? container.decode(String.self, forKey: .iconSmile2Color){
+            self.iconSmile2Color = UIColor.init(iconSmile2Color)
+        }
+        if let iconSmile3Color = try? container.decode(String.self, forKey: .iconSmile3Color){
+            self.iconSmile3Color = UIColor.init(iconSmile3Color)
         }
     }
     

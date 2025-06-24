@@ -51,7 +51,13 @@ private extension UIVisualEffectView {
         gaussianBlur?.setValue(1.0, forKeyPath: "requestedScaleHint")
     }
     func applyChanges() {
-        backdropView?.perform(Selector(("applyRequestedFilterEffects")))
+        if #available(iOS 14, *) {
+            if ios14_colorTint != nil {
+                backdropView?.perform(Selector(("applyRequestedFilterEffects")))
+            }
+        } else {
+            backdropView?.perform(Selector(("applyRequestedFilterEffects")))
+        }
     }
 }
 

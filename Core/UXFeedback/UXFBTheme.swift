@@ -49,12 +49,12 @@ open class UXFBTheme: NSObject, ThemeProtocol {
     /// Цвет фона формы
     open var bgColor: UIColor =  UIColor.init("#FFFFFF")
     /// Цвет звезд
-    open var iconRating: UIColor = UIColor.init("#FECA00")
+    open var iconStarColor: UIColor = UIColor.init("#FECA00")
     
     /// Цвета смайлов
-    open var iconRating2: UIColor = UIColor.init("#FECA00") //желтый
-    open var iconRating3: UIColor = UIColor.init("#232735") //черный
-    open var iconRating4: UIColor = UIColor.init("#E84047") //красный
+    open var iconSmile1Color: UIColor = UIColor.init("#FECA00") //желтый
+    open var iconSmile2Color: UIColor = UIColor.init("#232735") //черный
+    open var iconSmile3Color: UIColor = UIColor.init("#E84047") //красный
     
     /// Шрифт заголовка формы. По умолчанию System:Semibold:22
     open var fontH1: UIFont = .systemFont(ofSize: 22,

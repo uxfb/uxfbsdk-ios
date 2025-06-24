@@ -108,9 +108,11 @@ internal class CampaignPresentor: NSObject {
             
             self._currentForm = controller
             
+            let blackout = (uiBlocked && blackout?.color != .clear) ? blackout : nil
+            
             controller.presentDirection = direction
             controller.closeOnSwipe = closeOnSwipe
-            controller.blackout = uiBlocked ? blackout : nil
+            controller.blackout = blackout
             controller.properties = properties
             
             if let view = controller.view as? PassthroughToWindowView {

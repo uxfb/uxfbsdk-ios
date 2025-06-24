@@ -11,15 +11,15 @@ import UIKit
 class SmilesCell: BaseCell {
     private func replaceColorsInImage(_ image: UIImage) -> UIImage? {
         guard let cgImage = image.cgImage,
-              let newYellow = theme?.iconRating2,
-              let newBlack = theme?.iconRating3,
-              let newRed = theme?.iconRating4 else { return image }
+              let newYellow = theme?.iconSmile1Color,
+              let newBlack = theme?.iconSmile2Color,
+              let newRed = theme?.iconSmile3Color else { return image }
         
         let defaultTheme = Theme()
         let colorMap: [UIColor: UIColor] = [
-            defaultTheme.iconRating2: newYellow,
-            defaultTheme.iconRating3: newBlack,
-            defaultTheme.iconRating4: newRed
+            defaultTheme.iconSmile1Color: newYellow,
+            defaultTheme.iconSmile2Color: newBlack,
+            defaultTheme.iconSmile3Color: newRed
         ]
         
         let width = cgImage.width

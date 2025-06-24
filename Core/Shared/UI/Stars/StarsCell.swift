@@ -108,7 +108,7 @@ class StarsCell: BaseCell {
                 (self.contentView.viewWithTag(tag) as? UIImageView)?.image = UIImage(named: "star_active",
                                                                                      in: Consts.bundle,
                                                                                      compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-                (self.contentView.viewWithTag(tag) as? UIImageView)?.tintColor = theme?.iconRating
+                (self.contentView.viewWithTag(tag) as? UIImageView)?.tintColor = theme?.iconStarColor
             }
         }
         
@@ -152,7 +152,7 @@ class StarsCell: BaseCell {
     private func animateStar(tag: Int, completion: @escaping () -> Void) {
         UIView.transition(with: self.contentView.viewWithTag(tag) as! UIImageView, duration: 0.0025, options: [.transitionCrossDissolve]) {
             if tag <= self.currentValue {
-                (self.contentView.viewWithTag(tag) as? UIImageView)?.tintColor = self.theme?.iconRating
+                (self.contentView.viewWithTag(tag) as? UIImageView)?.tintColor = self.theme?.iconStarColor
                 (self.contentView.viewWithTag(tag) as? UIImageView)?.image = UIImage(named: "star_active",
                                                                                      in: Consts.bundle,
                                                                                      compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
