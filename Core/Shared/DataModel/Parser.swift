@@ -72,7 +72,39 @@ class Parser {
         return textProperties
     }
     
-    func parseCampaign(campaignInfo: Dictionary<String,Any>, copyright: Copyright?, textProperties: TextProperties?) -> Campaign?{
+    func parseCampaignData(campaignDataInfo: Dictionary<String,Any>,
+                           copyright: Copyright?,
+                           textProperties: TextProperties?) -> CampaignData? {
+        if let id = campaignDataInfo["campaignId"] as? Int16,
+           let priority = campaignDataInfo["priority"] as? Int16 {
+            
+            var jsonData: Data?
+            if let dict = campaignDataInfo["data"] as? Dictionary<String, Any> {
+                jsonData = try? JSONSerialization.data(withJSONObject: dict)
+            }
+            
+            var copyrightData: Data?
+            var textPropertiesData: Data?
+            if let copyrightDict = copyright?.dict {
+                copyrightData = try? JSONSerialization.data(withJSONObject: copyrightDict)
+            }
+            if let textPropertiesDict = textProperties?.dict {
+                textPropertiesData = try? JSONSerialization.data(withJSONObject: textPropertiesDict)
+            }
+            
+            return CampaignData(campaignId: id,
+                                priority: priority,
+                                data: jsonData,
+                                copyright: copyrightData,
+                                textProperties: textPropertiesData)
+        }
+        
+        return nil
+    }
+    
+    func parseCampaign(campaignInfo: Dictionary<String,Any>,
+                       copyright: Copyright?,
+                       textProperties: TextProperties?) -> Campaign? {
         
         let type = "\(campaignInfo["type"] as! Int)"
         let campaingId = campaignInfo["campaignId"] as! Int

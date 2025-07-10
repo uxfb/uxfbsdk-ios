@@ -7,17 +7,12 @@
 //
 
 import Foundation
-
-import Foundation
 import CoreData
 
 @objc(DataRequest)
-internal class DataRequest: NSManagedObject {
-
-}
+internal class DataRequest: NSManagedObject { }
 
 extension DataRequest {
-
     @nonobjc public class func fetchRequest() -> NSFetchRequest<DataRequest> {
         return NSFetchRequest<DataRequest>(entityName: "DataRequest")
     }
@@ -25,7 +20,6 @@ extension DataRequest {
     @NSManaged public var apiMethod: String?
     @NSManaged public var created: Date?
     @NSManaged public var parametersData: Data?
-
 }
 
 extension DataRequest : Identifiable { }

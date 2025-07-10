@@ -368,8 +368,8 @@ open class YoHe: NSObject {
 }
 
 extension YoHe: RequestManagerDelegate {
-    func campaingsLoaded(success: Bool, message: String?, delay: Int?, campaigns: Array<Campaign>) {
-        self._campaigns = campaigns
+    func campaingsLoaded(success: Bool, message: String?, delay: Int?, campaigns: Array<CampaignData>, state: String) {
+//        self._campaigns = campaigns
         self.settings.globalDelayTimer = delay ?? self.settings.globalDelayTimer
         if success == true {
             self.DDLog("Campaigns loaded: \(campaigns.count)")

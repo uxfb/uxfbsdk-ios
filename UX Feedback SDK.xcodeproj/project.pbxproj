@@ -86,6 +86,12 @@
 		BF6316FC26B27A0B006F408A /* ScreenshotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6316F826B279ED006F408A /* ScreenshotCell.swift */; };
 		BF63171126B67501006F408A /* ImageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170B26B67465006F408A /* ImageCollection.swift */; };
 		BF63171226B67504006F408A /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170C26B67465006F408A /* ImageManager.swift */; };
+		BF81D8152E1F01E7000C0373 /* DataCampaign+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92EDB82E1EFB1B00508E99 /* DataCampaign+CoreData.swift */; };
+		BF81D8162E1F01E7000C0373 /* DataCampaign+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92EDB82E1EFB1B00508E99 /* DataCampaign+CoreData.swift */; };
+		BF81D8172E1F01F0000C0373 /* DataCampaignLastUpdate+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92EDBB2E1EFEF200508E99 /* DataCampaignLastUpdate+CoreData.swift */; };
+		BF81D8182E1F01F0000C0373 /* DataCampaignLastUpdate+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92EDBB2E1EFEF200508E99 /* DataCampaignLastUpdate+CoreData.swift */; };
+		BF81D8212E1FD4CD000C0373 /* CampaignManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF81D8202E1FD4C7000C0373 /* CampaignManager.swift */; };
+		BF81D8222E1FD4CD000C0373 /* CampaignManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF81D8202E1FD4C7000C0373 /* CampaignManager.swift */; };
 		BF885EE42715ED7900F110A0 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF885EE32715ED7900F110A0 /* UIButton+.swift */; };
 		BF885EE62715FB1B00F110A0 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF885EE52715FB1B00F110A0 /* UIAlertController+.swift */; };
 		BFA54F8427AA86A2003D6411 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA54F8327AA86A2003D6411 /* Crypto.swift */; };
@@ -392,8 +398,11 @@
 		BF63170426B670CF006F408A /* ScreenshotImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotImageCell.swift; sourceTree = "<group>"; };
 		BF63170B26B67465006F408A /* ImageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollection.swift; sourceTree = "<group>"; };
 		BF63170C26B67465006F408A /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		BF81D8202E1FD4C7000C0373 /* CampaignManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignManager.swift; sourceTree = "<group>"; };
 		BF885EE32715ED7900F110A0 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		BF885EE52715FB1B00F110A0 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
+		BF92EDB82E1EFB1B00508E99 /* DataCampaign+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataCampaign+CoreData.swift"; sourceTree = "<group>"; };
+		BF92EDBB2E1EFEF200508E99 /* DataCampaignLastUpdate+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataCampaignLastUpdate+CoreData.swift"; sourceTree = "<group>"; };
 		BFA54F8327AA86A2003D6411 /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		BFAFC6792919321900F99607 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		BFAFC67A2919323200F99607 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -800,8 +809,10 @@
 		BF31861A29781F1A00B54EF5 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				BF31860F2975672700B54EF5 /* RequestModel.xcdatamodeld */,
+				BF92EDBB2E1EFEF200508E99 /* DataCampaignLastUpdate+CoreData.swift */,
+				BF92EDB82E1EFB1B00508E99 /* DataCampaign+CoreData.swift */,
 				BF2D682029EEDD0B00547634 /* DataRequest+CoreData.swift */,
+				BF31860F2975672700B54EF5 /* RequestModel.xcdatamodeld */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -1006,6 +1017,7 @@
 				0A019A5922367CD6002FD4F8 /* APIClient.swift */,
 				0A019A6C2237B773002FD4F8 /* APIWebRouter.swift */,
 				BFF3520D2D5107640010A245 /* AttributeManager.swift */,
+				BF81D8202E1FD4C7000C0373 /* CampaignManager.swift */,
 				BF5ED7DC25593DDE00A1698E /* CampaignPresentor.swift */,
 				BFA54F8327AA86A2003D6411 /* Crypto.swift */,
 				BF31860D2975570800B54EF5 /* DataRequestManager.swift */,
@@ -1268,6 +1280,7 @@
 				0A4689A622840BB90074E1A3 /* StatisticManager.swift in Sources */,
 				BF2806AF2562B18F006F2D61 /* StarsCell.swift in Sources */,
 				BF2806C32562B18F006F2D61 /* BaseCell.swift in Sources */,
+				BF81D8222E1FD4CD000C0373 /* CampaignManager.swift in Sources */,
 				0A4689AA22840BBF0074E1A3 /* Page.swift in Sources */,
 				BF405650265CD89E00709351 /* NpsCell.swift in Sources */,
 				BF01BDF525613086008C641B /* Option.swift in Sources */,
@@ -1275,8 +1288,10 @@
 				BFDE30132A862C7E00F6C6CF /* UXFeedbackSDK.docc in Sources */,
 				BF2806C02562B18F006F2D61 /* TextCell.swift in Sources */,
 				0A4689A922840BBF0074E1A3 /* Campaign.swift in Sources */,
+				BF81D8152E1F01E7000C0373 /* DataCampaign+CoreData.swift in Sources */,
 				BF6248C1255B24910039F855 /* DataManager.swift in Sources */,
 				BF5ED7E52559DB1900A1698E /* Parser.swift in Sources */,
+				BF81D8172E1F01F0000C0373 /* DataCampaignLastUpdate+CoreData.swift in Sources */,
 				BFB17FC62BB804050024FED5 /* Targeting.swift in Sources */,
 				BFB6DEFE27044E4300732D29 /* Data+.swift in Sources */,
 				BFF304302A42F5A900E513EA /* UXFeedbackDelegate.swift in Sources */,
@@ -1372,6 +1387,7 @@
 				BFB5098D2D50E6D000021998 /* SmilesCell.swift in Sources */,
 				BFB5098E2D50E6D000021998 /* StatisticManager.swift in Sources */,
 				BFB5098F2D50E6D000021998 /* StarsCell.swift in Sources */,
+				BF81D8212E1FD4CD000C0373 /* CampaignManager.swift in Sources */,
 				BFB509902D50E6D000021998 /* BaseCell.swift in Sources */,
 				BFB509912D50E6D000021998 /* Page.swift in Sources */,
 				BFB509922D50E6D000021998 /* NpsCell.swift in Sources */,
@@ -1379,8 +1395,10 @@
 				BFB509942D50E6D000021998 /* URLComponents.swift in Sources */,
 				BFB509962D50E6D000021998 /* TextCell.swift in Sources */,
 				BFB509972D50E6D000021998 /* Campaign.swift in Sources */,
+				BF81D8162E1F01E7000C0373 /* DataCampaign+CoreData.swift in Sources */,
 				BFB509982D50E6D000021998 /* DataManager.swift in Sources */,
 				BFB509992D50E6D000021998 /* Parser.swift in Sources */,
+				BF81D8182E1F01F0000C0373 /* DataCampaignLastUpdate+CoreData.swift in Sources */,
 				BFB5099A2D50E6D000021998 /* Targeting.swift in Sources */,
 				BFB5099B2D50E6D000021998 /* Data+.swift in Sources */,
 				BFB5099D2D50E6D000021998 /* Crypto.swift in Sources */,

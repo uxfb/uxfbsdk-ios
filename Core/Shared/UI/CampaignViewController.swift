@@ -69,11 +69,11 @@ internal class CampaignViewController: UIViewController {
         let scale = UIScreen.main.scale
         switch scale {
             case 1:
-                urlString = campaign?.copyright.image?["1x"] as? String
+                urlString = campaign?.copyright?.image?["1x"] as? String
             case 2:
-                urlString = campaign?.copyright.image?["2x"] as? String
+                urlString = campaign?.copyright?.image?["2x"] as? String
             case 3:
-                urlString = campaign?.copyright.image?["3x"] as? String
+                urlString = campaign?.copyright?.image?["3x"] as? String
                 
             default:
                 break
@@ -397,7 +397,7 @@ internal class CampaignViewController: UIViewController {
     
     func updateFooter() {
         let withPrivacy = dataManager?.privacyEnabled ?? false
-        copyrightView.isHidden = !(campaign?.copyright.isShow ?? false)
+        copyrightView.isHidden = !(campaign?.copyright?.isShow ?? false)
         privacyView.isHidden = !withPrivacy
         holderView.backgroundColor = withPrivacy ? campaign?.theme.inputBgColor : campaign?.theme.bgColor
         if withPrivacy {
@@ -407,7 +407,7 @@ internal class CampaignViewController: UIViewController {
     }
     
     func createFooter(withPrivacy: Bool) {
-        copyrightView.isHidden = !(campaign?.copyright.isShow ?? false)
+        copyrightView.isHidden = !(campaign?.copyright?.isShow ?? false)
         privacyView.isHidden = !withPrivacy
         holderView.backgroundColor = withPrivacy ? campaign?.theme.inputBgColor : campaign?.theme.bgColor
         if withPrivacy {
@@ -612,8 +612,8 @@ internal class CampaignViewController: UIViewController {
     @objc func onLogoTap(tap: UITapGestureRecognizer) -> Void {
         view.endEditing(true)
         var href: String = ""
-        if (campaign?.copyright.href) != nil {
-            href = (campaign?.copyright.href)!
+        if (campaign?.copyright?.href) != nil {
+            href = (campaign?.copyright?.href)!
         } else {
             href = Consts.defaultHref
         }
