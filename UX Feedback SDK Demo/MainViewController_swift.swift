@@ -7,8 +7,8 @@
 //
 
 import UIKit
-//import YoHe
-import UXFeedbackSDK
+import YoHeSDK
+//import UXFeedbackSDK
 
 class MainViewController_swift: UIViewController {
     
@@ -19,7 +19,7 @@ class MainViewController_swift: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = .white
-        UXFeedback.sdk.campaignDelegate = self
+        YoHe.sdk.campaignDelegate = self
 
         self.buttonsStackView.isUserInteractionEnabled = false
         self.buttonsStackView.alpha = 0.5
@@ -28,57 +28,57 @@ class MainViewController_swift: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            let customTheme = UXFBTheme()
-            customTheme.text03Color =  UIColor.init("#000000")
-            customTheme.inputBorderColor =  UIColor.init("#D3D4D8")
-            customTheme.iconColor =  UIColor.init("#B5B8C2")
-            customTheme.btnBgColorActive =  UIColor.init("#1983C8")
-            customTheme.btnBorderRadius = 4
-            customTheme.errorColorSecondary =  UIColor.init("#F4A0A3")
-            customTheme.errorColorPrimary =  UIColor.init("#E84047")
-            customTheme.mainColor =  UIColor.init("#AFAFAF")
-            customTheme.controlBgColorActive =  UIColor.init("#DBF1FF")
-            customTheme.formBorderRadius = 20
-            customTheme.inputBgColor =  UIColor.init("#F3F3F3")
-            customTheme.text01Color =  UIColor.init("#232735")
-            customTheme.controlBgColor =  UIColor.init("#ABABAB")
-            customTheme.controlIconColor =  UIColor.init("#FFFFFF")
-            customTheme.btnBgColor =  UIColor.init("#0076C2")
-            customTheme.text02Color =  UIColor.init("#505565")
-            customTheme.btnTextColor =  UIColor.init("#FFFFFF")
-            customTheme.bgColor =  UIColor.init("#123456")
-            
-            customTheme.iconSmile1Color =  UIColor.init("#AAAAAA")
-            customTheme.iconSmile2Color =  UIColor.init("#FB1A23")
-            customTheme.iconSmile3Color =  UIColor.init("#000000")
-            
-            UXFeedback.sdk.theme = customTheme
+//            let customTheme = UXFBTheme()
+//            customTheme.text03Color =  UIColor.init("#000000")
+//            customTheme.inputBorderColor =  UIColor.init("#D3D4D8")
+//            customTheme.iconColor =  UIColor.init("#B5B8C2")
+//            customTheme.btnBgColorActive =  UIColor.init("#1983C8")
+//            customTheme.btnBorderRadius = 4
+//            customTheme.errorColorSecondary =  UIColor.init("#F4A0A3")
+//            customTheme.errorColorPrimary =  UIColor.init("#E84047")
+//            customTheme.mainColor =  UIColor.init("#AFAFAF")
+//            customTheme.controlBgColorActive =  UIColor.init("#DBF1FF")
+//            customTheme.formBorderRadius = 20
+//            customTheme.inputBgColor =  UIColor.init("#F3F3F3")
+//            customTheme.text01Color =  UIColor.init("#232735")
+//            customTheme.controlBgColor =  UIColor.init("#ABABAB")
+//            customTheme.controlIconColor =  UIColor.init("#FFFFFF")
+//            customTheme.btnBgColor =  UIColor.init("#0076C2")
+//            customTheme.text02Color =  UIColor.init("#505565")
+//            customTheme.btnTextColor =  UIColor.init("#FFFFFF")
+//            customTheme.bgColor =  UIColor.init("#123456")
+//            
+//            customTheme.iconSmile1Color =  UIColor.init("#AAAAAA")
+//            customTheme.iconSmile2Color =  UIColor.init("#FB1A23")
+//            customTheme.iconSmile3Color =  UIColor.init("#000000")
+//            
+//            UXFeedback.sdk.theme = customTheme
         }
     }
 
     @IBAction func stopCampaign(_ sender: UIButton){
-        UXFeedback.sdk.stopCampaign()
+//        UXFeedback.sdk.stopCampaign()
     }
     
     func configureSDK() {
-        UXFeedback.sdk.settings.slideInUiBlocked = false
-        UXFeedback.sdk.settings.closeOnSwipe = true
+//        UXFeedback.sdk.settings.slideInUiBlocked = false
+//        UXFeedback.sdk.settings.closeOnSwipe = true
     }
     
     @IBAction func eventTap(_ sender: UIButton){
         
 //        UXFeedback.sdk.settings.closeOnSwipe = true
-        UXFeedback.sdk.settings.slideInUiBlocked = true
-        UXFeedback.sdk.settings.slideInUiBlackoutBlur = 0
-        UXFeedback.sdk.settings.slideInUiBlackoutOpacity = 0
-        UXFeedback.sdk.settings.slideInUiBlackoutColor = "#00FFFF"
-        UXFeedback.sdk.settings.popupUiBlackoutBlur = 0
-        UXFeedback.sdk.settings.popupUiBlackoutOpacity = 0
-        UXFeedback.sdk.settings.popupUiBlackoutColor = nil
+//        UXFeedback.sdk.settings.slideInUiBlocked = true
+//        UXFeedback.sdk.settings.slideInUiBlackoutBlur = 0
+//        UXFeedback.sdk.settings.slideInUiBlackoutOpacity = 0
+//        UXFeedback.sdk.settings.slideInUiBlackoutColor = "#00FFFF"
+//        UXFeedback.sdk.settings.popupUiBlackoutBlur = 0
+//        UXFeedback.sdk.settings.popupUiBlackoutOpacity = 0
+//        UXFeedback.sdk.settings.popupUiBlackoutColor = nil
         
         let eventNumber = sender.tag
         assert(eventNumber > 0, "Invalid eventNumber")
-        UXFeedback.sdk.settings.globalDelayTimer = 1
+        YoHe.sdk.settings.globalDelayTimer = 1
         switch eventNumber {
         case 1:
 //            UXFeedback.sharedSDK.setProperties(["property_first": "non-value",
@@ -90,19 +90,21 @@ class MainViewController_swift: UIViewController {
 //                    .addValue("step", value: 2)
 //                .build()
 //
-                let event = "exitByCard"
-                var attributes: [Attribute]?
-                
-                if event == "exitByCard" {
-                    attributes = UXFBAttributesBuilder()
-                        .addValue("step", value: 2)
-                        .build()
-                }
+//                let event = "exitByCard"
+//                var attributes: [Attribute]?
+//                
+//                if event == "exitByCard" {
+//                    attributes = UXFBAttributesBuilder()
+//                        .addValue("step", value: 2)
+//                        .build()
+//                }
 
-                UXFeedback.sdk.startCampaign(eventName: "ios_bugs")
+                YoHe.sdk.startCampaign(eventName: "bug")
+//                UXFeedback.sdk.startCampaign(eventName: "ios_bugs")
             
         case 2:
-            UXFeedback.sdk.startCampaign(eventName: "colored_smiles")
+                YoHe.sdk.startCampaign(eventName: "ios_bugs")
+//            UXFeedback.sdk.startCampaign(eventName: "colored_smiles")
             
         default:
             break
@@ -139,13 +141,13 @@ class MainViewController_swift: UIViewController {
 
 }
 
-extension MainViewController_swift: UXFeedbackLogDelegate {
+extension MainViewController_swift: YoHeLogDelegate {
     func logDidReceive(message: String) {
 //        print(message)
     }
 }
 
-extension MainViewController_swift: UXFeedbackCampaignDelegate{
+extension MainViewController_swift: YoHeCampaignDelegate{
     func noCampaignToStart(eventName: String) {
         
     }
