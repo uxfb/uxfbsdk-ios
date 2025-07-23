@@ -75,8 +75,8 @@ class Parser {
     func parseCampaignData(campaignDataInfo: Dictionary<String,Any>,
                            copyright: Copyright?,
                            textProperties: TextProperties?) -> CampaignData? {
-        if let id = campaignDataInfo["campaignId"] as? Int16,
-           let priority = campaignDataInfo["priority"] as? Int16 {
+        if let id = campaignDataInfo["campaignId"] as? Int,
+           let priority = campaignDataInfo["priority"] as? Int {
             
             var jsonData: Data?
             if let dict = campaignDataInfo["data"] as? Dictionary<String, Any> {

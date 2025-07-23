@@ -99,7 +99,7 @@ class MainViewController_swift: UIViewController {
                         .build()
                 }
 
-                UXFeedback.sdk.startCampaign(eventName: "screen")
+                UXFeedback.sdk.startCampaign(eventName: "ios1")
             
         case 2:
             UXFeedback.sdk.startCampaign(eventName: "colored_smiles")

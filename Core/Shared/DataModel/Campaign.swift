@@ -14,8 +14,8 @@ enum CampaignType: String {
 }
 
 struct CampaignData {
-    private(set) var campaignId: Int16
-    private(set) var priority: Int16
+    private(set) var campaignId: Int
+    private(set) var priority: Int
     private(set) var data: Data?
     private(set) var copyright: Data?
     private(set) var textProperties: Data?

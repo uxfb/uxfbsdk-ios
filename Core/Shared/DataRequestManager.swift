@@ -172,7 +172,7 @@ final class DataRequestManager: NSObject {
                 
                 if let jsonData = record.data as Data?,
                    let jsonObject = try? JSONSerialization.jsonObject(with: jsonData, options: []),
-                   let jsonDict = jsonObject as? [String: Any] {
+                   var jsonDict = jsonObject as? [String: Any] {
                     
                     var copyright: Copyright?
                     if let copyrightData = record.copyright as Data?,
@@ -188,6 +188,10 @@ final class DataRequestManager: NSObject {
                        let jsonDict = jsonObject as? [String: Any],
                        let textPropertiesValue = self._parser.parseTextProperties(textPropertiesInfo: jsonDict) {
                         textProperties = textPropertiesValue
+                    }
+                    
+                    if jsonDict["campaignId"] == nil {
+                        jsonDict["campaignId"] = record.id
                     }
                     
                    let campaign = self._parser.parseCampaign(campaignInfo: jsonDict,

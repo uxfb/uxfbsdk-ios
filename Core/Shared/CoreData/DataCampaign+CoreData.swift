@@ -17,8 +17,8 @@ extension DataCampaign {
         return NSFetchRequest<DataCampaign>(entityName: "DataCampaign")
     }
 
-    @NSManaged public var id: Int16
-    @NSManaged public var priority: Int16
+    @NSManaged public var id: Int
+    @NSManaged public var priority: Int
     @NSManaged public var data: Data?
     @NSManaged public var copyright: Data?
     @NSManaged public var textProperties: Data?
