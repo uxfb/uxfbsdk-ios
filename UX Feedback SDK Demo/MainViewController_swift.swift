@@ -102,7 +102,7 @@ class MainViewController_swift: UIViewController {
                 UXFeedback.sdk.startCampaign(eventName: "ios1")
             
         case 2:
-            UXFeedback.sdk.startCampaign(eventName: "colored_smiles")
+            UXFeedback.sdk.startCampaign(eventName: "ios2")
             
         default:
             break

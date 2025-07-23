@@ -235,6 +235,14 @@ final class DataRequestManager: NSObject {
                     if let data = campaign.data {
                         record.data = data
                     }
+                    
+                    if let copyright = campaign.copyright {
+                        record.copyright = copyright
+                    }
+                    
+                    if let textProperties = campaign.textProperties {
+                        record.textProperties = textProperties
+                    }
                     record.priority = campaign.priority
                     
                     try? context.save()
