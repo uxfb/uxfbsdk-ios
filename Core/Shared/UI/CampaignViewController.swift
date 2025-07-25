@@ -109,7 +109,11 @@ internal class CampaignViewController: UIViewController {
     lazy var holderView: UIView = {
         let view = UIView()
         view.backgroundColor = campaign?.theme.inputBgColor ?? .clear
-        view.heightAnchor.constraint(equalToConstant: dataManager?.safeSpace ?? 0).isActive = true
+        if campaign?.type == .slidein {
+            view.heightAnchor.constraint(equalToConstant: dataManager?.safeSpace ?? 0).isActive = true
+        } else {
+            view.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        }
         return view
     }()
     
@@ -120,9 +124,9 @@ internal class CampaignViewController: UIViewController {
         stackView.axis = .vertical
         stackView.addArrangedSubview(copyrightView)
         stackView.addArrangedSubview(privacyView)
-        if campaign?.type == .slidein {
+//        if campaign?.type == .slidein {
             stackView.addArrangedSubview(holderView)
-        }
+//        }
         view.addSubview(stackView)
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

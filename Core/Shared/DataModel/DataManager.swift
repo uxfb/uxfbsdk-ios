@@ -131,7 +131,10 @@ class DataManager: FieldDelegate {
         let page = campaign?.pages[currentPage]
         var height: CGFloat = 54
         
-        height += viewController?.tableView.tableFooterView?.frame.height ?? 0
+        if let footerHeight = viewController?.tableView.tableFooterView?.frame.height,
+           footerHeight > 0 {
+            height += footerHeight
+        }
         
         for field in (page?.fields)! {
             height += checkFieldTransfromed(field) ? (getFieldHeight(field) + getFieldHeaderHeight(field) + getFieldFooterHeight(field)) : 0
