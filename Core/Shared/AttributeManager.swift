@@ -15,7 +15,7 @@ class AttributeManager {
             return
         }
         
-        if campaignAttributes.count > attributes.count {
+        if campaignAttributes.count == 0 || campaignAttributes.count > attributes.count {
             completion(false)
             return
         }

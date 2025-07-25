@@ -90,16 +90,11 @@ class MainViewController_swift: UIViewController {
 //                    .addValue("step", value: 2)
 //                .build()
 //
-                let event = "exitByCard"
-                var attributes: [Attribute]?
-                
-                if event == "exitByCard" {
-                    attributes = UXFBAttributesBuilder()
-                        .addValue("step", value: 2)
-                        .build()
-                }
+                let attributes = UXFBAttributesBuilder()
+                    .addValue("a", value: "a")
+                    .build()
 
-                UXFeedback.sdk.startCampaign(eventName: "ios1")
+                UXFeedback.sdk.startCampaign(eventName: "1b", attributes: attributes)
             
         case 2:
             UXFeedback.sdk.startCampaign(eventName: "ios2")

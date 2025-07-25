@@ -8,10 +8,6 @@
 
 class CampaignManager {
     static func findCampaignInCandidates(_ canditates: [CampaignData], appId: String, requestManager: DataRequestManager, attributes: [Attribute]? = nil, completion: @escaping (Campaign?) -> Void) {
-        if attributes == nil {
-            completion(canditates.first?.campaign)
-            return
-        }
         
         var campaign: Campaign?
         
@@ -19,6 +15,12 @@ class CampaignManager {
         var shouldStop = false
         
 		for canditate in canditates {
+            
+            if attributes == nil && (canditate.campaign?.targeting.attributes == nil || canditate.campaign?.targeting.attributes?.count == 0 ){
+                completion(canditate.campaign)
+                return
+            }
+            
             guard !shouldStop else { break }
             
             group.enter()
