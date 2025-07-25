@@ -8,11 +8,16 @@
 
 class AttributeManager {
     static func checkAttributes(appId: String, requestManager: DataRequestManager, campaignId: Int, targeting: Targeting, attributes: [Attribute], completion: @escaping (Bool) -> Void) {
-        guard let campaignAttributes = targeting.attributes,
-                campaignAttributes.count > 0,
-                attributes.count > campaignAttributes.count  else {
-          completion(false)
-          return
+        let campaignAttributes = targeting.attributes ?? []
+        
+        if attributes.count == 0 && campaignAttributes.count == 0 {
+            completion(true)
+            return
+        }
+        
+        if campaignAttributes.count > attributes.count {
+            completion(false)
+            return
         }
         
         var checkAttributes: [Attribute] = []
