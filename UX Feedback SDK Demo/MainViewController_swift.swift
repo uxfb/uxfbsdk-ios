@@ -94,10 +94,10 @@ class MainViewController_swift: UIViewController {
                     .addValue("a", value: "a")
                     .build()
 
-                UXFeedback.sdk.startCampaign(eventName: "1b", attributes: attributes)
+                UXFeedback.sdk.startCampaign(eventName: "mos", attributes: nil)
             
         case 2:
-            UXFeedback.sdk.startCampaign(eventName: "1b")
+            UXFeedback.sdk.startCampaign(eventName: "checkbox", attributes: nil)
             
         default:
             break

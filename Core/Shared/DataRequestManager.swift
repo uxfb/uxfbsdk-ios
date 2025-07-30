@@ -206,7 +206,10 @@ final class DataRequestManager: NSObject {
                 completion(nil)
             } else {
                 let filtered = fullData.filter {
-                    $0.campaign?.targeting.value == eventName
+                    if let value = $0.campaign?.targeting.value {
+                        return value == eventName
+                    }
+                    return false
                 }
                 
                 if filtered.count > 0 {
@@ -255,6 +258,8 @@ final class DataRequestManager: NSObject {
                         request.id = campaign.campaignId
                         request.priority = campaign.priority
                         request.data = campaign.data
+                        request.copyright = campaign.copyright
+                        request.textProperties = campaign.textProperties
                         try? context.save()
                     }
                 }

@@ -404,6 +404,10 @@ internal class CampaignViewController: UIViewController {
         copyrightView.isHidden = !(campaign?.copyright?.isShow ?? false)
         privacyView.isHidden = !withPrivacy
         holderView.backgroundColor = withPrivacy ? campaign?.theme.inputBgColor : campaign?.theme.bgColor
+        if campaign?.type == .popup {
+            holderView.heightAnchor.constraint(equalToConstant: (copyrightView.isHidden && privacyView.isHidden) ? 32 : 0).isActive = true
+        }
+        
         if withPrivacy {
             privacyView.preparePrivacy(campaign?.privacy?.type ?? "")
         }
@@ -417,6 +421,11 @@ internal class CampaignViewController: UIViewController {
         if withPrivacy {
             privacyView.preparePrivacy(campaign?.privacy?.type ?? "")
         }
+        
+        if campaign?.type == .popup {
+            holderView.heightAnchor.constraint(equalToConstant: (copyrightView.isHidden && privacyView.isHidden) ? 32 : 0).isActive = true
+        }
+        
         tableView.tableFooterView = footerView
         updateFooterWithDynamicContent(fromCreate: true)
     }

@@ -124,6 +124,8 @@ class Parser {
                 } catch {
                     print(error)
                 }
+            } else {
+                targetings = Targeting()
             }
         }
         

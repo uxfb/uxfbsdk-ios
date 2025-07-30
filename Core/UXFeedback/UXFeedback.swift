@@ -358,17 +358,6 @@ open class UXFeedback: NSObject {
                 }
             }
         }
-        
-//        _requestManager.getCampaign(eventName: eventName, completion: { campaign in
-//            if let campaign = campaign,
-//               let targeting = campaign.targeting {
-//                
-//            } else {
-//                self.clearTask()
-//                self.campaignDelegate?.noCampaignToStart(eventName: eventName)
-//                self.DDLog("Event not found: \(eventName)")
-//            }
-//        })
     }
     
     /// Метод отмены показа кампании. Если кампания уже показана - она будет закрыта
