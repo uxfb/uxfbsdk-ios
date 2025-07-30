@@ -21,7 +21,7 @@ extension UIImageView {
             self.image = imageFromCache
             return
         }
-        
+        self.showSkeleton()
         URLSession.shared.dataTask(with: url) {
             data, response, error in
             if data != nil {
@@ -34,6 +34,7 @@ extension UIImageView {
                     } else {
                         self.image = imageToCache?.withRenderingMode(.alwaysOriginal)
                     }
+                    self.hideSkeleton()
                 }
             }
             }.resume()
