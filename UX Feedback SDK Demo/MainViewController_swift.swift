@@ -52,7 +52,7 @@ class MainViewController_swift: UIViewController {
             customTheme.iconSmile2Color =  UIColor.init("#FB1A23")
             customTheme.iconSmile3Color =  UIColor.init("#000000")
             
-            UXFeedback.sdk.theme = customTheme
+//            UXFeedback.sdk.theme = customTheme
         }
     }
 

@@ -328,12 +328,14 @@ final class DataRequestManager: NSObject {
         self.attempts += 1
         switch request.apiMethod {
             case "GET_CAMPAIGNS":
-                let lastUpdate = "" //getLastUpdate()
-                self._apiClient.getAllCampaings(state: lastUpdate) { [weak self] (success, httpCode, message, delay, campaigns, state)  in
-                    self?.validateResponse(for: request, success: success, httpCode: httpCode) {
-                        self?.delegate?.campaingsLoaded(success: success, message: message, delay: delay, campaigns: campaigns, state: state)
+                getLastUpdate { state in
+                    self._apiClient.getAllCampaings(state: state) { [weak self] (success, httpCode, message, delay, campaigns, state)  in
+                        self?.validateResponse(for: request, success: success, httpCode: httpCode) {
+                            self?.delegate?.campaingsLoaded(success: success, message: message, delay: delay, campaigns: campaigns, state: state)
+                        }
                     }
                 }
+                
                 
             case "SEND_FORM":
                 guard let data = data,

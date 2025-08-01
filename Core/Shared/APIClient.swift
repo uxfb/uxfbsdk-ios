@@ -280,7 +280,7 @@ class APIClient {
                         if let result = values["data"] {
                             completion(.success, httpCode, nil, result, nil)
                         } else if values["campaigns"] != nil {
-                            
+                            let allHeaders = response.allHeaderFields
                             let state = response.allHeaderFields["x-state"] as? String
                             completion(.success, httpCode, nil, values, state)
                                 

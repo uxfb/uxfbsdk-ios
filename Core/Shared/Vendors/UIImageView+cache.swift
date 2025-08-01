@@ -13,29 +13,33 @@ import Foundation
 let imageCache: NSCache<AnyObject,AnyObject> = NSCache.init()
 
 extension UIImageView {
-    func cacheImage(url: URL, withTemplate: Bool){
+    func cacheImage(url: URL, withTemplate: Bool, completion: ((Bool) -> Void)? = nil){
         
         image = nil
         
         if let imageFromCache = imageCache.object(forKey: url.absoluteString as AnyObject) as? UIImage {
             self.image = imageFromCache
+            completion?(true)
             return
         }
-        self.showSkeleton()
         URLSession.shared.dataTask(with: url) {
             data, response, error in
             if data != nil {
                 DispatchQueue.main.async {
-                    let imageToCache = UIImage(data: data!)
-                    imageCache.setObject(imageToCache!, forKey: url.absoluteString as AnyObject)
-                    let size = imageToCache?.size
-                    if withTemplate {
-                        self.image = imageToCache?.withRenderingMode(.alwaysTemplate)
+                    if let imageToCache = UIImage(data: data!) {
+                        imageCache.setObject(imageToCache, forKey: url.absoluteString as AnyObject)
+                        if withTemplate {
+                            self.image = imageToCache.withRenderingMode(.alwaysTemplate)
+                        } else {
+                            self.image = imageToCache.withRenderingMode(.alwaysOriginal)
+                        }
+                        completion?(true)
                     } else {
-                        self.image = imageToCache?.withRenderingMode(.alwaysOriginal)
+                        completion?(false)
                     }
-                    self.hideSkeleton()
                 }
+            } else {
+                completion?(false)
             }
             }.resume()
     }

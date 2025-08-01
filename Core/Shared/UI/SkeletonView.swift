@@ -11,7 +11,7 @@ import UIKit
 class SkeletonView: UIView {
     private var gradientLayer: CAGradientLayer!
     
-    private var colors: [CGColor] = [UIColor.init("#EDEDED").cgColor,
+    var colors: [CGColor] = [UIColor.init("#EDEDED").cgColor,
                                      UIColor.init("#F8F8FA").cgColor,
                                      UIColor.init("#EDEDED").cgColor]
     
@@ -27,9 +27,7 @@ class SkeletonView: UIView {
     
     private func setupSkeleton() {
         gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [
-            
-        ]
+        gradientLayer.colors = colors
         gradientLayer.locations = [0, 0.5, 1]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
@@ -46,22 +44,36 @@ class SkeletonView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = bounds
-        gradientLayer.cornerRadius = layer.cornerRadius
+        gradientLayer.cornerRadius = 4
     }
 }
 
 extension UIImageView {
-    func showSkeleton() {
+    func showSkeleton(baseColor: UIColor?, shineColor: UIColor?) {
         let skeletonView = SkeletonView(frame: bounds)
+        if let baseColor = baseColor,
+           let shineColor = shineColor {
+            skeletonView.colors = [baseColor.cgColor, shineColor.cgColor, baseColor.cgColor]
+        }
+        
         skeletonView.layer.cornerRadius = layer.cornerRadius
         skeletonView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(skeletonView)
+        skeletonView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            skeletonView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+            skeletonView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
+            skeletonView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
+            skeletonView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
+        ])
     }
     
     func hideSkeleton() {
-        subviews.forEach { view in
-            if view is SkeletonView {
-                view.removeFromSuperview()
+        DispatchQueue.main.async {
+            self.subviews.forEach { view in
+                if view is SkeletonView {
+                    view.removeFromSuperview()
+                }
             }
         }
     }
