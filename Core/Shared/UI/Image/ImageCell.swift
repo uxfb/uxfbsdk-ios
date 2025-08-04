@@ -82,6 +82,7 @@ class ImageCell: BaseCell {
             self.canReload = !result
             if result {
                 self.cellImageView.backgroundColor = .clear
+                self.cellImageView.contentMode = .scaleAspectFit
             } else {
                 DispatchQueue.main.async {
                     let image = UIImage(named: "retry",
