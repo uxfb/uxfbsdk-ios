@@ -65,6 +65,7 @@ internal class CampaignViewController: UIViewController {
     lazy var copyrightView: UIView = {
         let view = UIView()
         let image = UIImageView()
+        image.contentMode = .scaleAspectFit
         var urlString: String?
         let scale = UIScreen.main.scale
         switch scale {
@@ -79,7 +80,11 @@ internal class CampaignViewController: UIViewController {
                 break
         }
         if let urlString = urlString, let url = URL(string: urlString) {
-            image.cacheImage(url: url, withTemplate: true)
+            image.cacheImage(url: url, withTemplate: true) { result in
+                if !result {
+                    image.image = UIImage(named: "logo", in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+                }
+            }
         } else {
             image.image = UIImage(named: "logo", in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
         }
