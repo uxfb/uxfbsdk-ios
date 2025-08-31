@@ -921,12 +921,22 @@ class DataManager: FieldDelegate {
         for field in fields {
             if fieldNeedComplete(field) {
                 if let index = rowForField(field) {
-                    if self.viewController?.tableView.indexPathsForVisibleRows?.contains(IndexPath(row: 0, section: index)) == false {
+                    if let indexPaths = self.viewController?.tableView.indexPathsForVisibleRows,
+                       indexPaths.contains(where: { indexPath in
+                           indexPath.row == 0 && indexPath.section == index
+                       }){
                         self.viewController?.tableView.scrollToRow(at: IndexPath(row: 0,
                                                                                  section: index),
                                                                    at: .top,
                                                                    animated: true)
                     }
+                    
+//                    if self.viewController?.tableView.indexPathsForVisibleRows?.contains(IndexPath(row: 0, section: index)) == false {
+//                        self.viewController?.tableView.scrollToRow(at: IndexPath(row: 0,
+//                                                                                 section: index),
+//                                                                   at: .top,
+//                                                                   animated: true)
+//                    }
                 }
                 return true
             }
