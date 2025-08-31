@@ -65,21 +65,26 @@ internal class CampaignViewController: UIViewController {
     lazy var copyrightView: UIView = {
         let view = UIView()
         let image = UIImageView()
+        image.contentMode = .scaleAspectFit
         var urlString: String?
         let scale = UIScreen.main.scale
         switch scale {
             case 1:
-                urlString = campaign?.copyright.image?["1x"] as? String
+                urlString = campaign?.copyright?.image?["1x"] as? String
             case 2:
-                urlString = campaign?.copyright.image?["2x"] as? String
+                urlString = campaign?.copyright?.image?["2x"] as? String
             case 3:
-                urlString = campaign?.copyright.image?["3x"] as? String
+                urlString = campaign?.copyright?.image?["3x"] as? String
                 
             default:
                 break
         }
         if let urlString = urlString, let url = URL(string: urlString) {
-            image.cacheImage(url: url, withTemplate: true)
+            image.cacheImage(url: url, withTemplate: true) { result in
+                if !result {
+                    image.image = UIImage(named: "logo", in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+                }
+            }
         } else {
             image.image = UIImage(named: "logo", in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
         }
@@ -109,7 +114,11 @@ internal class CampaignViewController: UIViewController {
     lazy var holderView: UIView = {
         let view = UIView()
         view.backgroundColor = campaign?.theme.inputBgColor ?? .clear
-        view.heightAnchor.constraint(equalToConstant: dataManager?.safeSpace ?? 0).isActive = true
+        if campaign?.type == .slidein {
+            view.heightAnchor.constraint(equalToConstant: dataManager?.safeSpace ?? 0).isActive = true
+        } else {
+            view.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        }
         return view
     }()
     
@@ -120,9 +129,9 @@ internal class CampaignViewController: UIViewController {
         stackView.axis = .vertical
         stackView.addArrangedSubview(copyrightView)
         stackView.addArrangedSubview(privacyView)
-        if campaign?.type == .slidein {
+//        if campaign?.type == .slidein {
             stackView.addArrangedSubview(holderView)
-        }
+//        }
         view.addSubview(stackView)
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -397,9 +406,13 @@ internal class CampaignViewController: UIViewController {
     
     func updateFooter() {
         let withPrivacy = dataManager?.privacyEnabled ?? false
-        copyrightView.isHidden = !(campaign?.copyright.isShow ?? false)
+        copyrightView.isHidden = !(campaign?.copyright?.isShow ?? false)
         privacyView.isHidden = !withPrivacy
         holderView.backgroundColor = withPrivacy ? campaign?.theme.inputBgColor : campaign?.theme.bgColor
+        if campaign?.type == .popup {
+            holderView.heightAnchor.constraint(equalToConstant: (copyrightView.isHidden && privacyView.isHidden) ? 32 : 0).isActive = true
+        }
+        
         if withPrivacy {
             privacyView.preparePrivacy(campaign?.privacy?.type ?? "")
         }
@@ -407,12 +420,17 @@ internal class CampaignViewController: UIViewController {
     }
     
     func createFooter(withPrivacy: Bool) {
-        copyrightView.isHidden = !(campaign?.copyright.isShow ?? false)
+        copyrightView.isHidden = !(campaign?.copyright?.isShow ?? false)
         privacyView.isHidden = !withPrivacy
         holderView.backgroundColor = withPrivacy ? campaign?.theme.inputBgColor : campaign?.theme.bgColor
         if withPrivacy {
             privacyView.preparePrivacy(campaign?.privacy?.type ?? "")
         }
+        
+        if campaign?.type == .popup {
+            holderView.heightAnchor.constraint(equalToConstant: (copyrightView.isHidden && privacyView.isHidden) ? 32 : 0).isActive = true
+        }
+        
         tableView.tableFooterView = footerView
         updateFooterWithDynamicContent(fromCreate: true)
     }
@@ -612,8 +630,8 @@ internal class CampaignViewController: UIViewController {
     @objc func onLogoTap(tap: UITapGestureRecognizer) -> Void {
         view.endEditing(true)
         var href: String = ""
-        if (campaign?.copyright.href) != nil {
-            href = (campaign?.copyright.href)!
+        if (campaign?.copyright?.href) != nil {
+            href = (campaign?.copyright?.href)!
         } else {
             href = Consts.defaultHref
         }

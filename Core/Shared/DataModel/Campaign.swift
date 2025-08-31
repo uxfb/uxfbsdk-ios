@@ -13,6 +13,15 @@ enum CampaignType: String {
     case slidein = "102"
 }
 
+struct CampaignData {
+    private(set) var campaignId: Int
+    private(set) var priority: Int
+    private(set) var data: Data?
+    private(set) var copyright: Data?
+    private(set) var textProperties: Data?
+    var campaign: Campaign?
+}
+
 struct Campaign {
     private(set) var campaignId: Int!
     private(set) var theme: ThemeProtocol!
@@ -22,7 +31,7 @@ struct Campaign {
     private(set) var transforms: Array<Transform>!
     private(set) var projectId: String!
     private(set) var autoclose: Double!
-    private(set) var copyright: Copyright!
+    private(set) var copyright: Copyright?
     private(set) var privacy: Privacy?
     private(set) var progress: Bool?
     private(set) var textProperties: TextProperties?

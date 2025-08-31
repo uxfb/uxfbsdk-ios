@@ -86,8 +86,14 @@
 		BF6316FC26B27A0B006F408A /* ScreenshotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6316F826B279ED006F408A /* ScreenshotCell.swift */; };
 		BF63171126B67501006F408A /* ImageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170B26B67465006F408A /* ImageCollection.swift */; };
 		BF63171226B67504006F408A /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63170C26B67465006F408A /* ImageManager.swift */; };
-		BF7AEE322E28D6D200DB7E69 /* YoHeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB509EF2D50E6D000021998 /* YoHeSDK.framework */; };
-		BF7AEE332E28D6D200DB7E69 /* YoHeSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFB509EF2D50E6D000021998 /* YoHeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BF7AEE562E3A00E500DB7E69 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7AEE552E3A00E200DB7E69 /* SkeletonView.swift */; };
+		BF7AEE572E3A00E500DB7E69 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7AEE552E3A00E200DB7E69 /* SkeletonView.swift */; };
+		BF81D8152E1F01E7000C0373 /* DataCampaign+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92EDB82E1EFB1B00508E99 /* DataCampaign+CoreData.swift */; };
+		BF81D8162E1F01E7000C0373 /* DataCampaign+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92EDB82E1EFB1B00508E99 /* DataCampaign+CoreData.swift */; };
+		BF81D8172E1F01F0000C0373 /* DataCampaignLastUpdate+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92EDBB2E1EFEF200508E99 /* DataCampaignLastUpdate+CoreData.swift */; };
+		BF81D8182E1F01F0000C0373 /* DataCampaignLastUpdate+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92EDBB2E1EFEF200508E99 /* DataCampaignLastUpdate+CoreData.swift */; };
+		BF81D8212E1FD4CD000C0373 /* CampaignManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF81D8202E1FD4C7000C0373 /* CampaignManager.swift */; };
+		BF81D8222E1FD4CD000C0373 /* CampaignManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF81D8202E1FD4C7000C0373 /* CampaignManager.swift */; };
 		BF885EE42715ED7900F110A0 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF885EE32715ED7900F110A0 /* UIButton+.swift */; };
 		BF885EE62715FB1B00F110A0 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF885EE52715FB1B00F110A0 /* UIAlertController+.swift */; };
 		BFA54F8427AA86A2003D6411 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA54F8327AA86A2003D6411 /* Crypto.swift */; };
@@ -384,8 +390,12 @@
 		BF63170426B670CF006F408A /* ScreenshotImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotImageCell.swift; sourceTree = "<group>"; };
 		BF63170B26B67465006F408A /* ImageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollection.swift; sourceTree = "<group>"; };
 		BF63170C26B67465006F408A /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		BF7AEE552E3A00E200DB7E69 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
+		BF81D8202E1FD4C7000C0373 /* CampaignManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignManager.swift; sourceTree = "<group>"; };
 		BF885EE32715ED7900F110A0 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		BF885EE52715FB1B00F110A0 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
+		BF92EDB82E1EFB1B00508E99 /* DataCampaign+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataCampaign+CoreData.swift"; sourceTree = "<group>"; };
+		BF92EDBB2E1EFEF200508E99 /* DataCampaignLastUpdate+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataCampaignLastUpdate+CoreData.swift"; sourceTree = "<group>"; };
 		BFA54F8327AA86A2003D6411 /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		BFAFC6792919321900F99607 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		BFAFC67A2919323200F99607 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -614,6 +624,7 @@
 		0A6CDB872243C8F900C17007 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BF7AEE552E3A00E200DB7E69 /* SkeletonView.swift */,
 				BFCE59DA2D7E26EB005411A3 /* LinkLabel.swift */,
 				BFF352712D5BD89F0010A245 /* SliderView.swift */,
 				BF2806A32562B18F006F2D61 /* CampaignViewController.swift */,
@@ -791,8 +802,10 @@
 		BF31861A29781F1A00B54EF5 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				BF31860F2975672700B54EF5 /* RequestModel.xcdatamodeld */,
+				BF92EDBB2E1EFEF200508E99 /* DataCampaignLastUpdate+CoreData.swift */,
+				BF92EDB82E1EFB1B00508E99 /* DataCampaign+CoreData.swift */,
 				BF2D682029EEDD0B00547634 /* DataRequest+CoreData.swift */,
+				BF31860F2975672700B54EF5 /* RequestModel.xcdatamodeld */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -997,6 +1010,7 @@
 				0A019A5922367CD6002FD4F8 /* APIClient.swift */,
 				0A019A6C2237B773002FD4F8 /* APIWebRouter.swift */,
 				BFF3520D2D5107640010A245 /* AttributeManager.swift */,
+				BF81D8202E1FD4C7000C0373 /* CampaignManager.swift */,
 				BF5ED7DC25593DDE00A1698E /* CampaignPresentor.swift */,
 				BFA54F8327AA86A2003D6411 /* Crypto.swift */,
 				BF31860D2975570800B54EF5 /* DataRequestManager.swift */,
@@ -1258,6 +1272,7 @@
 				0A4689A622840BB90074E1A3 /* StatisticManager.swift in Sources */,
 				BF2806AF2562B18F006F2D61 /* StarsCell.swift in Sources */,
 				BF2806C32562B18F006F2D61 /* BaseCell.swift in Sources */,
+				BF81D8222E1FD4CD000C0373 /* CampaignManager.swift in Sources */,
 				0A4689AA22840BBF0074E1A3 /* Page.swift in Sources */,
 				BF405650265CD89E00709351 /* NpsCell.swift in Sources */,
 				BF01BDF525613086008C641B /* Option.swift in Sources */,
@@ -1265,8 +1280,10 @@
 				BFDE30132A862C7E00F6C6CF /* UXFeedbackSDK.docc in Sources */,
 				BF2806C02562B18F006F2D61 /* TextCell.swift in Sources */,
 				0A4689A922840BBF0074E1A3 /* Campaign.swift in Sources */,
+				BF81D8152E1F01E7000C0373 /* DataCampaign+CoreData.swift in Sources */,
 				BF6248C1255B24910039F855 /* DataManager.swift in Sources */,
 				BF5ED7E52559DB1900A1698E /* Parser.swift in Sources */,
+				BF81D8172E1F01F0000C0373 /* DataCampaignLastUpdate+CoreData.swift in Sources */,
 				BFB17FC62BB804050024FED5 /* Targeting.swift in Sources */,
 				BFB6DEFE27044E4300732D29 /* Data+.swift in Sources */,
 				BFF304302A42F5A900E513EA /* UXFeedbackDelegate.swift in Sources */,
@@ -1302,6 +1319,7 @@
 				BFDE301A2A86332100F6C6CF /* YYSpriteSheetImage.m in Sources */,
 				0AF49827229C3D4A000CB7D6 /* UIColorInputError.swift in Sources */,
 				0A4689B522840BE00074E1A3 /* UIImage+Tinting.swift in Sources */,
+				BF7AEE572E3A00E500DB7E69 /* SkeletonView.swift in Sources */,
 				BF885EE42715ED7900F110A0 /* UIButton+.swift in Sources */,
 				0AB2FF3A22ABBABB0024A88A /* Reachability.swift in Sources */,
 				BF2806C52562B18F006F2D61 /* HeaderCell.swift in Sources */,
@@ -1362,6 +1380,7 @@
 				BFB5098D2D50E6D000021998 /* SmilesCell.swift in Sources */,
 				BFB5098E2D50E6D000021998 /* StatisticManager.swift in Sources */,
 				BFB5098F2D50E6D000021998 /* StarsCell.swift in Sources */,
+				BF81D8212E1FD4CD000C0373 /* CampaignManager.swift in Sources */,
 				BFB509902D50E6D000021998 /* BaseCell.swift in Sources */,
 				BFB509912D50E6D000021998 /* Page.swift in Sources */,
 				BFB509922D50E6D000021998 /* NpsCell.swift in Sources */,
@@ -1369,8 +1388,10 @@
 				BFB509942D50E6D000021998 /* URLComponents.swift in Sources */,
 				BFB509962D50E6D000021998 /* TextCell.swift in Sources */,
 				BFB509972D50E6D000021998 /* Campaign.swift in Sources */,
+				BF81D8162E1F01E7000C0373 /* DataCampaign+CoreData.swift in Sources */,
 				BFB509982D50E6D000021998 /* DataManager.swift in Sources */,
 				BFB509992D50E6D000021998 /* Parser.swift in Sources */,
+				BF81D8182E1F01F0000C0373 /* DataCampaignLastUpdate+CoreData.swift in Sources */,
 				BFB5099A2D50E6D000021998 /* Targeting.swift in Sources */,
 				BFB5099B2D50E6D000021998 /* Data+.swift in Sources */,
 				BFB5099D2D50E6D000021998 /* Crypto.swift in Sources */,
@@ -1406,6 +1427,7 @@
 				BFB509B72D50E6D000021998 /* DataRequestManager.swift in Sources */,
 				BFB509B82D50E6D000021998 /* Attributes.swift in Sources */,
 				BFB509BA2D50E6D000021998 /* UIColorInputError.swift in Sources */,
+				BF7AEE562E3A00E500DB7E69 /* SkeletonView.swift in Sources */,
 				BFB509BB2D50E6D000021998 /* UIImage+Tinting.swift in Sources */,
 				BFB509BC2D50E6D000021998 /* UIButton+.swift in Sources */,
 				BFB509BD2D50E6D000021998 /* Reachability.swift in Sources */,
@@ -2140,7 +2162,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.6.0;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.swiftui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2180,7 +2202,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.6.0;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.swiftui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2219,7 +2241,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.6.0;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.swiftui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

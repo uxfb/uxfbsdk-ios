@@ -66,6 +66,10 @@ open class YoHeTheme: NSObject, ThemeProtocol {
     open var iconSmile2Color: UIColor = UIColor.init("#232735") //black
     open var iconSmile3Color: UIColor = UIColor.init("#E84047") //red
     
+    /// Skeleton colors
+    open var skeletonBase: UIColor = UIColor.init("#EDEDED")
+    open var skeletonShine: UIColor = UIColor.init("#F8F8FA")
+    
     /// Button rounding radius
      open var btnBorderRadius: CGFloat = 4
     

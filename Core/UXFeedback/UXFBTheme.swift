@@ -56,6 +56,10 @@ open class UXFBTheme: NSObject, ThemeProtocol {
     open var iconSmile2Color: UIColor = UIColor.init("#232735") //черный
     open var iconSmile3Color: UIColor = UIColor.init("#E84047") //красный
     
+    /// Цвета скелетона
+    open var skeletonBase: UIColor = UIColor.init("#EDEDED")
+    open var skeletonShine: UIColor = UIColor.init("#F8F8FA")
+    
     /// Шрифт заголовка формы. По умолчанию System:Semibold:22
     open var fontH1: UIFont = .systemFont(ofSize: 22,
                                               weight: .semibold)

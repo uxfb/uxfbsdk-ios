@@ -75,7 +75,7 @@ class APIClient {
         DDLogDebug("Check toggles:")
         
         _ = self.performRequest(route: APIWebRouter.checkToggle(appID: self.appID))
-        { (status, httpCode, message, result) in
+        { (status, httpCode, message, result, state) in
             if status == .success,
                let result = result as? Dictionary<String, Any>  {
                 do {
@@ -94,20 +94,23 @@ class APIClient {
         }
     }
     
-    func getAllCampaings(completion: ((_ success: Bool,
+    func getAllCampaings(state: String,
+                         completion: ((_ success: Bool,
                                        _ httpCode: Int,
                                        _ message: String?,
                                        _ intervalIos: Int?,
-                                       _ campaigns: Array<Campaign>)->())?) {
+                                       _ campaigns: Array<CampaignData>,
+                                       _ state: String)->())?) {
         
         DDLogDebug("Get all campaings:")
         
-        _ = self.performRequest(route: APIWebRouter.getCampaing(appID: self.appID))
-        { [weak self] (status, httpCode, message, result) in
+        _ = self.performRequest(route: APIWebRouter.getCampaign(appID: self.appID, state: state))
+        { [weak self] (status, httpCode, message, result, state) in
             if status == .success {
                 if let results = result as? Dictionary<String, Any> {
                     if let campaignsResults = results["campaigns"] as? Array<Dictionary<String, Any>> {
-                        var campaigns: Array<Campaign> = []
+//                        var campaigns: Array<Campaign> = []
+                        var campaigns: Array<CampaignData> = []
                         var copyright: Copyright? = nil
                         if let copyrightInfo = results["copyright"] as? Dictionary<String, Any> {
                             copyright = self?._parser.parseCopyright(copyrightInfo: copyrightInfo)
@@ -119,28 +122,31 @@ class APIClient {
                         }
                         
                         for compaignInfo in campaignsResults {
-                            if let campaign =  self?._parser.parseCampaign(campaignInfo: compaignInfo,
-                                                                           copyright: copyright,
-                                                                           textProperties: textProperties) {
+//                            if let campaign =  self?._parser.parseCampaign(campaignInfo: compaignInfo,
+//                                                                           copyright: copyright,
+//                                                                           textProperties: textProperties) {
+                            if let campaign = self?._parser.parseCampaignData(campaignDataInfo: compaignInfo,
+                                                                              copyright: copyright,
+                                                                              textProperties: textProperties) {
                                 campaigns.append(campaign)
                             }
                         }
                         
                         let delay = results["showCampaignsInterval"] as? Int
                         DDLogDebug("Get all campaings successful")
-                        completion?(true, httpCode, nil, delay, campaigns)
+                        completion?(true, httpCode, nil, delay, campaigns, state ?? "")
                     } else {
                         DDLogDebug("No campaings detected")
-                        completion?(false, httpCode, "No campaings detected", nil, [])
+                        completion?(false, httpCode, "No campaings detected", nil, [], "")
                     }
                 } else {
                     DDLogDebug("No campaings detected")
-                    completion?(false, httpCode, "No campaings detected", nil, [])
+                    completion?(false, httpCode, "No campaings detected", nil, [], "")
                 }
             }
             else{
                 DDLogDebug("Get all campaings failed")
-                completion?(false, httpCode, message, nil, [])
+                completion?(false, httpCode, message, nil, [], "")
             }
         }
     }
@@ -153,7 +159,7 @@ class APIClient {
                       idempotency: String,
                       completion: ((_ success: Bool, _ httpCode: Int, _ message: String?)->())?){
         
-        let responseHandler = {(status: APIClientResponseResult, httpCode: Int, message: String?, result: Any?) in
+        let responseHandler = {(status: APIClientResponseResult, httpCode: Int, message: String?, result: Any?, state: String?) in
             DDLogDebug(String(describing: result))
             completion?(status == .success, httpCode, message)
         }
@@ -175,7 +181,7 @@ class APIClient {
     func showForm(campaingId: Int,
                   completion: ((_ success: Bool, _ httpCode: Int)->())?){
         
-        let responseHandler = {(status: APIClientResponseResult, httpCode: Int, message: String?, result: Any?) in
+        let responseHandler = {(status: APIClientResponseResult, httpCode: Int, message: String?, result: Any?, state: String?) in
             DDLogDebug(String(describing: result))
             completion?(status == .success, httpCode)
         }
@@ -187,7 +193,7 @@ class APIClient {
     
     func saveScreenshotsData(_ screenshot: ScreenshotData,
                              completion: ((_ success: Bool, _ httpCode: Int)->())?){
-        let responseHandler = {(status: APIClientResponseResult, httpCode: Int, message: String?, result: Any?) in
+        let responseHandler = {(status: APIClientResponseResult, httpCode: Int, message: String?, result: Any?, state: String?) in
             DDLogDebug(String(describing: result))
             completion?(status == .success, httpCode)
         }
@@ -201,7 +207,7 @@ class APIClient {
                         _ attributes: [Attribute],
                         _ debug: Bool,
                         completion: ((_ success: Bool)->())?){
-        let responseHandler = {(status: APIClientResponseResult, httpCode: Int, message: String?, result: Any?) in
+        let responseHandler = {(status: APIClientResponseResult, httpCode: Int, message: String?, result: Any?, state: String?) in
             if status == .success,
                let result = result as? Dictionary<String, Any>  {
                 do {
@@ -228,13 +234,13 @@ class APIClient {
     
     //MARK: internal request
     
-    internal func performRequest(route: APIWebRouter, completion: @escaping (APIClientResponseResult, Int, String?, Any?)->()) -> URLSessionDataTask?{
+    internal func performRequest(route: APIWebRouter, completion: @escaping (APIClientResponseResult, Int, String?, Any?, String?)->()) -> URLSessionDataTask?{
         
         APIWebRouter.endpoint = "\(self._endpoint)/\(_version)"
         APIWebRouter.settings = _settings
         
         guard var urlRequest = try? route.asURLRequest() else{
-            completion(.fail, 0, "Error url request", nil)
+            completion(.fail, 0, "Error url request", nil, nil)
             return nil
         }
         
@@ -263,30 +269,33 @@ class APIClient {
                 
                 if error != nil{
                     if error!.code == uxfErrorRequestCancelled{
-                        completion(.cancelled, httpCode, nil, nil)
+                        completion(.cancelled, httpCode, nil, nil, nil)
                     }
                     else {
-                        completion(.fail, httpCode, "Error in request \(String(describing: error!))".localized(), nil)
+                        completion(.fail, httpCode, "Error in request \(String(describing: error!))".localized(), nil, nil)
                     }
                 }
                 else{
                     if let values =  try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as? Dictionary<String,Any>{
                         if let result = values["data"] {
-                            completion(.success, httpCode, nil, result)
+                            completion(.success, httpCode, nil, result, nil)
                         } else if values["campaigns"] != nil {
-                            completion(.success, httpCode, nil, values)
+                            let allHeaders = response.allHeaderFields
+                            let state = response.allHeaderFields["x-state"] as? String
+                            completion(.success, httpCode, nil, values, state)
+                                
                         } else if values.count > 0 {
-                            completion(.success, httpCode, nil, values)
+                            completion(.success, httpCode, nil, values, nil)
                         } else {
-                            completion(.fail, httpCode, "Response data is empty", nil)
+                            completion(.fail, httpCode, "Response data is empty", nil, nil)
                         }
                     }else{
-                        completion(.fail, httpCode, "Response data error", nil)
+                        completion(.fail, httpCode, "Response data error", nil, nil)
                     }
                 }
             } catch {
                 DDLogDebug("Request failed with error: \(error.localizedDescription)")
-                completion(.fail, 0, error.localizedDescription, nil)
+                completion(.fail, 0, error.localizedDescription, nil, nil)
             }
         }
         

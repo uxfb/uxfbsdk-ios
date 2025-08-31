@@ -28,30 +28,30 @@ class MainViewController_swift: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//            let customTheme = UXFBTheme()
-//            customTheme.text03Color =  UIColor.init("#000000")
-//            customTheme.inputBorderColor =  UIColor.init("#D3D4D8")
-//            customTheme.iconColor =  UIColor.init("#B5B8C2")
-//            customTheme.btnBgColorActive =  UIColor.init("#1983C8")
-//            customTheme.btnBorderRadius = 4
-//            customTheme.errorColorSecondary =  UIColor.init("#F4A0A3")
-//            customTheme.errorColorPrimary =  UIColor.init("#E84047")
-//            customTheme.mainColor =  UIColor.init("#AFAFAF")
-//            customTheme.controlBgColorActive =  UIColor.init("#DBF1FF")
-//            customTheme.formBorderRadius = 20
-//            customTheme.inputBgColor =  UIColor.init("#F3F3F3")
-//            customTheme.text01Color =  UIColor.init("#232735")
-//            customTheme.controlBgColor =  UIColor.init("#ABABAB")
-//            customTheme.controlIconColor =  UIColor.init("#FFFFFF")
-//            customTheme.btnBgColor =  UIColor.init("#0076C2")
-//            customTheme.text02Color =  UIColor.init("#505565")
-//            customTheme.btnTextColor =  UIColor.init("#FFFFFF")
-//            customTheme.bgColor =  UIColor.init("#123456")
-//            
-//            customTheme.iconSmile1Color =  UIColor.init("#AAAAAA")
-//            customTheme.iconSmile2Color =  UIColor.init("#FB1A23")
-//            customTheme.iconSmile3Color =  UIColor.init("#000000")
-//            
+            let customTheme = UXFBTheme()
+            customTheme.text03Color =  UIColor.init("#000000")
+            customTheme.inputBorderColor =  UIColor.init("#D3D4D8")
+            customTheme.iconColor =  UIColor.init("#B5B8C2")
+            customTheme.btnBgColorActive =  UIColor.init("#1983C8")
+            customTheme.btnBorderRadius = 4
+            customTheme.errorColorSecondary =  UIColor.init("#F4A0A3")
+            customTheme.errorColorPrimary =  UIColor.init("#E84047")
+            customTheme.mainColor =  UIColor.init("#AFAFAF")
+            customTheme.controlBgColorActive =  UIColor.init("#DBF1FF")
+            customTheme.formBorderRadius = 20
+            customTheme.inputBgColor =  UIColor.init("#F3F3F3")
+            customTheme.text01Color =  UIColor.init("#232735")
+            customTheme.controlBgColor =  UIColor.init("#ABABAB")
+            customTheme.controlIconColor =  UIColor.init("#FFFFFF")
+            customTheme.btnBgColor =  UIColor.init("#0076C2")
+            customTheme.text02Color =  UIColor.init("#505565")
+            customTheme.btnTextColor =  UIColor.init("#FFFFFF")
+            customTheme.bgColor =  UIColor.init("#123456")
+            
+            customTheme.iconSmile1Color =  UIColor.init("#AAAAAA")
+            customTheme.iconSmile2Color =  UIColor.init("#FB1A23")
+            customTheme.iconSmile3Color =  UIColor.init("#000000")
+            
 //            UXFeedback.sdk.theme = customTheme
         }
     }
@@ -90,21 +90,14 @@ class MainViewController_swift: UIViewController {
 //                    .addValue("step", value: 2)
 //                .build()
 //
-//                let event = "exitByCard"
-//                var attributes: [Attribute]?
-//                
-//                if event == "exitByCard" {
-//                    attributes = UXFBAttributesBuilder()
-//                        .addValue("step", value: 2)
-//                        .build()
-//                }
+                let attributes = UXFBAttributesBuilder()
+                    .addValue("a", value: "a")
+                    .build()
 
-                YoHe.sdk.startCampaign(eventName: "bug")
-//                UXFeedback.sdk.startCampaign(eventName: "ios_bugs")
+                UXFeedback.sdk.startCampaign(eventName: "mos", attributes: nil)
             
         case 2:
-                YoHe.sdk.startCampaign(eventName: "ios_bugs")
-//            UXFeedback.sdk.startCampaign(eventName: "colored_smiles")
+            UXFeedback.sdk.startCampaign(eventName: "checkbox", attributes: nil)
             
         default:
             break

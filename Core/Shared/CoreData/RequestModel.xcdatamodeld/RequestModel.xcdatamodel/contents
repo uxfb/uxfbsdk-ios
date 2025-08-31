@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22A400" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788.4" systemVersion="24F74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DataCampaign" representedClassName="DataCampaign" syncable="YES">
+        <attribute name="copyright" optional="YES" attributeType="Binary"/>
+        <attribute name="data" optional="YES" attributeType="Binary"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="priority" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="textProperties" optional="YES" attributeType="Binary"/>
+    </entity>
+    <entity name="DataCampaignLastUpdate" representedClassName="DataCampaignLastUpdate" syncable="YES">
+        <attribute name="stateHeader" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="DataRequest" representedClassName="DataRequest" syncable="YES">
         <attribute name="apiMethod" optional="YES" attributeType="String"/>
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

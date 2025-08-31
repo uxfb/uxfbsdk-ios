@@ -52,6 +52,9 @@ protocol ThemeProtocol {
     var iconSmile2Color: UIColor { get set }
     var iconSmile3Color: UIColor { get set }
     
+    var skeletonBase: UIColor { get set }
+    var skeletonShine: UIColor { get set }
+    
     var fontH1: UIFont { get set }
     var fontH2: UIFont { get set }
     var fontP1: UIFont { get set }
@@ -84,6 +87,9 @@ class Theme: NSObject, Decodable, ThemeProtocol {
     var iconSmile1Color: UIColor = UIColor.init("#FECA00")
     var iconSmile2Color: UIColor = UIColor.init("#232735")
     var iconSmile3Color: UIColor = UIColor.init("#E84047")
+    
+    var skeletonBase: UIColor = UIColor.init("#EDEDED")
+    var skeletonShine: UIColor = UIColor.init("#F8F8FA")
     
     var fontH1: UIFont = .systemFont(ofSize: 22,
                                      weight: .semibold) 

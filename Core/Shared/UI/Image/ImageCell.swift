@@ -13,6 +13,12 @@ class ImageCell: BaseCell {
     private lazy var cellImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        tapGesture.numberOfTapsRequired = 1
+        view.addGestureRecognizer(tapGesture)
+        view.isUserInteractionEnabled = true
+        
         return view
     }()
     
@@ -34,6 +40,20 @@ class ImageCell: BaseCell {
             return
         }
         
+        loadImage()
+    }
+    
+    var canReload = false
+    
+    @objc
+    private func handleTap() {
+        if canReload {
+            cellImageView.image = nil
+        	loadImage()
+        }
+    }
+    
+    private func loadImage() {
         guard let sets = field?.uiData["image"] as? Dictionary<String, Any> else {
             return
         }
@@ -50,9 +70,30 @@ class ImageCell: BaseCell {
             urlString = sets["2x"] as? String
             break
         }
+        
         guard let urlString = urlString, let url = URL(string: urlString) else {
             return
         }
-        cellImageView.cacheImage(url: url, withTemplate: false)
+        
+        cellImageView.showSkeleton(baseColor: theme?.skeletonBase, shineColor: theme?.skeletonShine)
+        
+        cellImageView.cacheImage(url: url, withTemplate: false) { result in
+            self.cellImageView.hideSkeleton()
+            self.canReload = !result
+            if result {
+                self.cellImageView.backgroundColor = .clear
+                self.cellImageView.contentMode = .scaleAspectFit
+            } else {
+                DispatchQueue.main.async {
+                    let image = UIImage(named: "retry",
+                                        in: Consts.bundle,
+                                        compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
+                    
+                    self.cellImageView.contentMode = .center
+                    self.cellImageView.backgroundColor = self.theme?.skeletonShine
+                    self.cellImageView.image = image
+                }
+            }
+        }
     }
 }
