@@ -57,6 +57,20 @@ final class DataRequestManager: NSObject {
     
     //MARK: - Public methods
     
+    public func removeCampaign(campaignId: Int) {
+        context.performAndWait {
+            let request = NSFetchRequest<DataCampaign>(entityName: "DataCampaign")
+            request.predicate = NSPredicate(format: "id == %@", campaignId)
+            if let records = try? self.context.fetch(request)  {
+                for record in records {
+                    context.delete(record)
+                }
+                
+                try? context.save()
+            }
+        }
+    }
+    
     public func getAllCampaigns() {
         createRequest("GET_CAMPAIGNS", parameters: nil)
     }
