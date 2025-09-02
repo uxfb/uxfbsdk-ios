@@ -7,15 +7,15 @@
 //
 
 import UIKit
-import YoHeSDK
-//import UXFeedbackSDK
+//import YoHeSDK
+import UXFeedbackSDK
 
 let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
 //let uxfAppID = "cm7xc7w6u00003b6s1m4wi9ed"
 //let uxfAppID = "cl0dv9ld600033963rtwqowiu" //prod
 //let uxfAppID = "ck9n0jwi000003b5x7566k1n2" //gosuslugi
 //let uxfAppID = "ck78uf73w0000315rlomponmb" //crashes
-let yoheAppID = "cldskoxcu0000356ev6udbcmf" //YoHe
+//let yoheAppID = "cldskoxcu0000356ev6udbcmf" //YoHe
 
 internal func DDLogDebug(_ value: Any){
     #if DEBUG
@@ -53,17 +53,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        customTheme.fontP1 = .boldSystemFont(ofSize: 14)
         
 //    endpoint: "AAAAAAAAAAAAAHYwMhEVF1hOTAolMWgBABIHDQwbey0+AwABBgMCCD52NBA=",
-      let settings = YoHeSettings()
+      let settings = UXFBSettings()
       settings.debugEnabled = true
     settings.slideInUiBlocked = false
         
-        YoHe.setup(appID: yoheAppID, settings: settings)
+        UXFeedback.setup(appID: uxfAppID, settings: settings)
         
 //        UXFeedback.setup(appID: yoheAppID,
 //                         settings: settings)
         
 //        UXFeedback.sdk.theme = customTheme
-        YoHe.sdk.settings.debugEnabled = true
+        UXFeedback.sdk.settings.debugEnabled = true
         
         return true
     }

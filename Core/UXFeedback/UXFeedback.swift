@@ -260,7 +260,7 @@ open class UXFeedback: NSObject {
                         self.eventCounter[eventName] = 0
                     }
                     self._eventToSend = nil
-                    let task = DispatchWorkItem {
+                    self.tasks[campaign.campaignId] = DispatchWorkItem {
                         if !isMultiVisited {
                             guard self.checkGlobalDelay() else {
                                 self.campaignDelegate?.campaignDidReceiveError(errorString: "Global timer")
@@ -342,6 +342,8 @@ open class UXFeedback: NSObject {
                         self.eventCounter[eventName] = 0
                         self.clearTask(campaignId: campaign.campaignId)
                     }
+                    
+                    
                     
                     guard self.tasks[campaign.campaignId] != nil else {
                         return

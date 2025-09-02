@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import YoHeSDK
-//import UXFeedbackSDK
+//import YoHeSDK
+import UXFeedbackSDK
 
 class MainViewController_swift: UIViewController {
     
@@ -19,7 +19,7 @@ class MainViewController_swift: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = .white
-        YoHe.sdk.campaignDelegate = self
+        UXFeedback.sdk.campaignDelegate = self
 
         self.buttonsStackView.isUserInteractionEnabled = false
         self.buttonsStackView.alpha = 0.5
@@ -78,7 +78,7 @@ class MainViewController_swift: UIViewController {
         
         let eventNumber = sender.tag
         assert(eventNumber > 0, "Invalid eventNumber")
-        YoHe.sdk.settings.globalDelayTimer = 1
+        UXFeedback.sdk.settings.globalDelayTimer = 1
         switch eventNumber {
         case 1:
 //            UXFeedback.sharedSDK.setProperties(["property_first": "non-value",
@@ -94,10 +94,10 @@ class MainViewController_swift: UIViewController {
                     .addValue("a", value: "a")
                     .build()
 
-                UXFeedback.sdk.startCampaign(eventName: "mos", attributes: nil)
+                UXFeedback.sdk.startCampaign(eventName: "mtest", attributes: nil)
             
         case 2:
-            UXFeedback.sdk.startCampaign(eventName: "checkbox", attributes: nil)
+            UXFeedback.sdk.startCampaign(eventName: "65", attributes: nil)
             
         default:
             break
@@ -134,13 +134,13 @@ class MainViewController_swift: UIViewController {
 
 }
 
-extension MainViewController_swift: YoHeLogDelegate {
+extension MainViewController_swift: UXFeedbackLogDelegate {
     func logDidReceive(message: String) {
 //        print(message)
     }
 }
 
-extension MainViewController_swift: YoHeCampaignDelegate{
+extension MainViewController_swift: UXFeedbackCampaignDelegate{
     func noCampaignToStart(eventName: String) {
         
     }
