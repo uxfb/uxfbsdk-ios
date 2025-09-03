@@ -359,7 +359,10 @@ open class UXFeedback: NSObject {
     
     /// Метод отмены показа кампании. Если кампания уже показана - она будет закрыта
     open func stopCampaign(campaignIds: [Int] = []) {
-        self._formPresentor?.stopCampaign()
+        if let presentorCampaignId = self._formPresentor?._campaign.campaignId,
+            campaignIds.contains(presentorCampaignId) {
+            self._formPresentor?.stopCampaign()
+        }
         if campaignIds.count > 0 {
             campaignIds.forEach { campaignId in
                 self.clearTask(campaignId: campaignId)

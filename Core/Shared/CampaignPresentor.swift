@@ -20,7 +20,7 @@ internal class CampaignPresentor: NSObject {
     weak var delegate: CampaignFormPresentorProtocol?
     var isAnimationFormEnabled: Bool = true
     
-    private var _campaign: Campaign!
+    var _campaign: Campaign!
     private weak var _appWindow: UIWindow!
     internal weak var _currentForm: CampaignViewController?
     

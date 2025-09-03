@@ -122,33 +122,39 @@ final class DataRequestManager: NSObject {
         }
     }
     
+    private func clearLastUpdate(completion: @escaping (Bool) -> Void) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DataCampaignLastUpdate")
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+            do {
+                try context.execute(batchDeleteRequest)
+                completion(true)
+            } catch {
+                completion(false)
+            }
+    }
+    
     public func getLastUpdate(completion: @escaping (String) -> Void) {
         context.perform {
             var result = ""
             do {
                 let fetchRequest = NSFetchRequest<DataCampaignLastUpdate>(entityName: "DataCampaignLastUpdate")
-                
-//                fetchRequest.fetchLimit = 1
-                let request = try self.context.fetch(fetchRequest)
-                
-                result = request.first?.stateHeader ?? ""
+                let fetchResult = try self.context.fetch(fetchRequest)
+                result = fetchResult.first?.stateHeader ?? ""
             } catch { }
             completion(result)
         }
     }
     
     public func setLastUpdate(_ value: String, completion: @escaping (Bool) -> Void) {
-        getLastUpdate { lastUpdate in
-            if lastUpdate == "" {
+        clearLastUpdate { success in
+            if success {
                 self.context.performAndWait {
                     do {
                         let request = NSEntityDescription.insertNewObject(forEntityName: "DataCampaignLastUpdate", into: self.context) as! DataCampaignLastUpdate
                         request.stateHeader = value
                         try self.context.save()
                         
-                        self.getLastUpdate { last in
-                            print(last)
-                        }
                         completion(true)
                     } catch {
                         completion(false)
