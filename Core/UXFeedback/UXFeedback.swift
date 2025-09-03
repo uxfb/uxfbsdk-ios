@@ -244,6 +244,11 @@ open class UXFeedback: NSObject {
                                                      requestManager: self._requestManager,
                                                      attributes: attributes) { campaign in
                 if let campaign = campaign {
+                    if self.tasks[campaign.campaignId] != nil {
+                        self.DDLog("Campaign already started")
+                        return
+                    }
+                    
                     let isMultiVisited = campaign.targeting.isMultiVisited ?? false
                     
                     let counts = campaign.targeting.counts ?? 1
