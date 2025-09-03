@@ -60,12 +60,10 @@ final class DataRequestManager: NSObject {
     public func removeCampaign(campaignId: Int) {
         context.performAndWait {
             let request = NSFetchRequest<DataCampaign>(entityName: "DataCampaign")
-            request.predicate = NSPredicate(format: "id == %@", campaignId)
-            if let records = try? self.context.fetch(request)  {
-                for record in records {
-                    context.delete(record)
-                }
-                
+            request.predicate = NSPredicate(format: "id == %d", campaignId)
+            
+            if let record = try? self.context.fetch(request).first  {
+                context.delete(record)
                 try? context.save()
             }
         }

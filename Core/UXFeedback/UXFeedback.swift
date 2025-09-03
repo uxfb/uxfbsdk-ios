@@ -343,8 +343,6 @@ open class UXFeedback: NSObject {
                         self.clearTask(campaignId: campaign.campaignId)
                     }
                     
-                    
-                    
                     guard self.tasks[campaign.campaignId] != nil else {
                         return
                     }

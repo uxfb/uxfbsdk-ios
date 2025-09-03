@@ -94,7 +94,7 @@ class MainViewController_swift: UIViewController {
                     .addValue("a", value: "a")
                     .build()
 
-                UXFeedback.sdk.startCampaign(eventName: "mtest", attributes: nil)
+                UXFeedback.sdk.startCampaign(eventName: "mtest", attributes: attributes)
             
         case 2:
             UXFeedback.sdk.startCampaign(eventName: "65", attributes: nil)
