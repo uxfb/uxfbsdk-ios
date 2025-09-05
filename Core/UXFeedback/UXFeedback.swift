@@ -62,7 +62,7 @@ open class UXFeedback: NSObject {
     
     private var isInitTheme: Bool = false
     
-    private var tasks: [Int: DispatchWorkItem?] = [:]
+    private var tasks: [String: DispatchWorkItem?] = [:]
     
 //    private var task: DispatchWorkItem?
     private var eventCounter: [String: Int] = [:]
@@ -198,9 +198,9 @@ open class UXFeedback: NSObject {
         }
     }
     
-    private func clearTask(campaignId: Int) {
-        self.tasks[campaignId]??.cancel()
-        self.tasks[campaignId] = nil
+    private func clearTask(eventName: String) {
+        self.tasks[eventName]??.cancel()
+        self.tasks[eventName] = nil
     }
     
     /// Метод показа кампании по указанному событию
@@ -244,7 +244,7 @@ open class UXFeedback: NSObject {
                                                      requestManager: self._requestManager,
                                                      attributes: attributes) { campaign in
                 if let campaign = campaign {
-                    if self.tasks[campaign.campaignId] != nil {
+                    if self.tasks[eventName] != nil {
                         self.DDLog("Campaign already started")
                         return
                     }
@@ -265,11 +265,11 @@ open class UXFeedback: NSObject {
                         self.eventCounter[eventName] = 0
                     }
                     self._eventToSend = nil
-                    self.tasks[campaign.campaignId] = DispatchWorkItem {
+                    self.tasks[eventName] = DispatchWorkItem {
                         if !isMultiVisited {
                             guard self.checkGlobalDelay() else {
                                 self.campaignDelegate?.campaignDidReceiveError(errorString: "Global timer")
-                                self.clearTask(campaignId: campaign.campaignId)
+                                self.clearTask(eventName: eventName)
                                 return
                             }
                         }
@@ -278,7 +278,7 @@ open class UXFeedback: NSObject {
                         guard !formOnScreen else {
                             self.DDLog("Form already on screen")
                             self.campaignDelegate?.campaignDidReceiveError(errorString: "Form is on screen")
-                            self.clearTask(campaignId: campaign.campaignId)
+                            self.clearTask(eventName: eventName)
                             return
                         }
                         
@@ -345,16 +345,16 @@ open class UXFeedback: NSObject {
                         }
                         
                         self.eventCounter[eventName] = 0
-                        self.clearTask(campaignId: campaign.campaignId)
+                        self.clearTask(eventName: eventName)
                     }
                     
-                    guard self.tasks[campaign.campaignId] != nil else {
+                    guard self.tasks[eventName] != nil else {
                         return
                     }
                     
-                    DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay(eventName: eventName)), execute: self.tasks[campaign.campaignId]!! )
+                    DispatchQueue.main.asyncAfter(deadline: (.now() + campaign.showDelay(eventName: eventName)), execute: self.tasks[eventName]!! )
                 } else {
-                    self.clearTask(campaignId: (campaign?.campaignId)!)
+                    self.clearTask(eventName: eventName)
                     self.campaignDelegate?.campaignDidReceiveError(errorString: "Checking attributes failed")
                     self.DDLog("Checking attributes failed")
                 }
@@ -363,15 +363,13 @@ open class UXFeedback: NSObject {
     }
     
     /// Метод отмены показа кампании. Если кампания уже показана - она будет закрыта
-    open func stopCampaign(campaignIds: [Int] = []) {
-        if let presentorCampaignId = self._formPresentor?._campaign.campaignId,
-            campaignIds.contains(presentorCampaignId) {
+    open func stopCampaign(eventForStop: String? = nil) {
+        if let presentorEventName = self._formPresentor?._campaign.targeting.value,
+           eventForStop == presentorEventName {
             self._formPresentor?.stopCampaign()
         }
-        if campaignIds.count > 0 {
-            campaignIds.forEach { campaignId in
-                self.clearTask(campaignId: campaignId)
-            }
+        if let eventName = eventForStop {
+            clearTask(eventName: eventName)
         } else {
             self.tasks.forEach { task in
                 task.value?.cancel()

@@ -142,6 +142,7 @@ final class DataRequestManager: NSObject {
                 let fetchResult = try self.context.fetch(fetchRequest)
                 result = fetchResult.first?.stateHeader ?? ""
             } catch { }
+            
             completion(result)
         }
     }
