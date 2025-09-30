@@ -368,7 +368,8 @@ open class UXFeedback: NSObject {
            eventForStop == presentorEventName {
             self._formPresentor?.stopCampaign()
         }
-        if let eventName = eventForStop {
+        if let eventName = eventForStop,
+            eventName.count > 0 {
             clearTask(eventName: eventName)
         } else {
             self.tasks.forEach { task in

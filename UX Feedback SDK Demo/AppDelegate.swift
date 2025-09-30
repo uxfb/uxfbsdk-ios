@@ -29,6 +29,8 @@ internal func DDLogDebug(_ value: Any){
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    let settings = UXFBSettings()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -55,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        customTheme.fontP1 = .boldSystemFont(ofSize: 14)
         
 //    endpoint: "AAAAAAAAAAAAAHYwMhEVF1hOTAolMWgBABIHDQwbey0+AwABBgMCCD52NBA=",
-      let settings = UXFBSettings()
+      
       settings.debugEnabled = true
     settings.slideInUiBlocked = false
         
