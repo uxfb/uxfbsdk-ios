@@ -94,7 +94,7 @@ class MainViewController_swift: UIViewController {
                     .addValue("a", value: "a")
                     .build()
 
-                UXFeedback.sdk.startCampaign(eventName: "screen", attributes: nil)
+                UXFeedback.sdk.startCampaign(eventName: "test", attributes: nil)
             
         case 2:
 //                UXFeedback.setup(appID: uxfAppID, settings: (UIApplication.shared.delegate as! AppDelegate).settings)

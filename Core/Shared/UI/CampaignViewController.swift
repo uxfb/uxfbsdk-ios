@@ -280,7 +280,7 @@ internal class CampaignViewController: UIViewController {
         if space > 240 {
             if campaign?.type == .popup {
                 let diff = space / 2 - endFrame.height
-                self.bottomConstraint.constant = diff < 0 ? -diff : 0
+                self.verticallyConstraint.constant = diff < 0 ? (diff + 40) : 0
             } else {
                 self.bottomConstraint.constant = -endFrame.height + (self.dataManager?.safeSpace ?? 0)
             }
@@ -317,7 +317,9 @@ internal class CampaignViewController: UIViewController {
             let curveOption = userinfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt else {
             return
         }
-        
+        if campaign?.type == .popup {
+            self.verticallyConstraint.constant = 0
+        }
         self.bottomConstraint.constant = 0
         
         UIView.animate(withDuration: duration, delay: 0, options: [.beginFromCurrentState, .init(rawValue: curveOption)], animations: {
