@@ -91,10 +91,10 @@ class MainViewController_swift: UIViewController {
 //                .build()
 //
                 let attributes = UXFBAttributesBuilder()
-                    .addValue("a", value: "a")
+                    .addValue("hash_user_id", value: "132ff1f86bd5b5045b75c19e626439fd")
                     .build()
 
-                UXFeedback.sdk.startCampaign(eventName: "test", attributes: nil)
+                UXFeedback.sdk.startCampaign(eventName: "ces_pro_cabinet_open_event", attributes: attributes)
             
         case 2:
 //                UXFeedback.setup(appID: uxfAppID, settings: (UIApplication.shared.delegate as! AppDelegate).settings)
