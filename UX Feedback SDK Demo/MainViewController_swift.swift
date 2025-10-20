@@ -19,11 +19,11 @@ class MainViewController_swift: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = .white
-        UXFeedback.sdk.campaignDelegate = self
+//        UXFeedback.sdk.campaignDelegate = self
 
-        self.buttonsStackView.isUserInteractionEnabled = false
-        self.buttonsStackView.alpha = 0.5
-        busyIndicator.startAnimating()
+//        self.buttonsStackView.isUserInteractionEnabled = false
+//        self.buttonsStackView.alpha = 0.5
+//        busyIndicator.startAnimating()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,8 +93,10 @@ class MainViewController_swift: UIViewController {
                 let attributes = UXFBAttributesBuilder()
                     .addValue("hash_user_id", value: "132ff1f86bd5b5045b75c19e626439fd")
                     .build()
-
-                UXFeedback.sdk.startCampaign(eventName: "ces_pro_cabinet_open_event", attributes: attributes)
+//                for i in 0...10000 {
+                    UXFeedback.sdk.startCampaign(eventName: "ces_pro_cabinet_open_event", attributes: attributes)
+//                }
+                
             
         case 2:
 //                UXFeedback.setup(appID: uxfAppID, settings: (UIApplication.shared.delegate as! AppDelegate).settings)

@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                         settings: settings)
         
 //        UXFeedback.sdk.theme = customTheme
-        UXFeedback.sdk.settings.debugEnabled = true
+//        UXFeedback.sdk.settings.debugEnabled = true
         
         return true
     }

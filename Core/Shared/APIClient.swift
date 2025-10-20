@@ -274,8 +274,7 @@ class APIClient {
                     else {
                         completion(.fail, httpCode, "Error in request \(String(describing: error!))".localized(), nil, nil)
                     }
-                }
-                else{
+                } else {
                     if let values =  try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as? Dictionary<String,Any>{
                         if let result = values["data"] {
                             completion(.success, httpCode, nil, result, nil)

@@ -6,6 +6,7 @@
 //  Copyright © 2025 UXF. All rights reserved.
 //
 
+@objcMembers
 class AttributeManager {
     static func checkAttributes(appId: String, requestManager: DataRequestManager, campaignId: Int, targeting: Targeting, attributes: [Attribute], completion: @escaping (Bool) -> Void) {
         let campaignAttributes = targeting.attributes ?? []
