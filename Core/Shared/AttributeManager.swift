@@ -131,8 +131,10 @@ class AttributeManager {
             DispatchQueue.global(qos: .userInitiated).async {
                 requestManager.sendAttributes(appId: appId,
                                               campaignId: campaignId,
-                                              attributes: checkAttributes) { result in
-                    completion(result)
+                                              attributes: checkAttributes) { [weak requestManager] result in
+                    DispatchQueue.main.async {
+                        completion(result)
+                    }
                 }
             }
         } else {
