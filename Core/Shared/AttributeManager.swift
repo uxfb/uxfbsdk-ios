@@ -128,15 +128,15 @@ class AttributeManager {
         }
         
         if checkAttributes.count > 0 {
-          DispatchQueue.global(qos: .utility).async {
-            requestManager.sendAttributes(appId: appId,
-                                                campaignId: campaignId,
-                                                attributes: checkAttributes) { result in
-              completion(result)
+            DispatchQueue.global(qos: .userInitiated).async {
+                requestManager.sendAttributes(appId: appId,
+                                              campaignId: campaignId,
+                                              attributes: checkAttributes) { result in
+                    completion(result)
+                }
             }
-          }
         } else {
-          completion(true)
+            completion(true)
         }
     }
 }

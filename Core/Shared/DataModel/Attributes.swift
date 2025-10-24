@@ -68,10 +68,21 @@ public struct CampaignAttribute: Decodable {
   public var valueTo: AttributeDecodable?
 }
 
-public struct Attribute {
-  public var attributeName: String
-  public var attributeValue: (any Codable)?
+@objcMembers
+public class Attribute {
+    public var attributeName: String
+    public var attributeValue: (any Codable)?
+    
+    init(attributeName: String, attributeValue: (any Codable)? = nil) {
+        self.attributeName = attributeName
+        self.attributeValue = attributeValue
+    }
 }
+//
+//public struct Attribute {
+//  public var attributeName: String
+//  public var attributeValue: (any Codable)?
+//}
 
 public struct CheckAttribute: Codable {
   public let checkAttributes: Bool

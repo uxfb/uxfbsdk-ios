@@ -91,10 +91,12 @@ class MainViewController_swift: UIViewController {
 //                .build()
 //
                 let attributes = UXFBAttributesBuilder()
-                    .addValue("hash_user_id", value: "132ff1f86bd5b5045b75c19e626439fd")
+                    .addValue("hash_user_id", value: "aaca4f68bf5d7e61b2894cb70622d094                                ")
                     .build()
 //                for i in 0...10000 {
                     UXFeedback.sdk.startCampaign(eventName: "ces_pro_cabinet_open_event", attributes: attributes)
+                
+                
 //                }
                 
             
