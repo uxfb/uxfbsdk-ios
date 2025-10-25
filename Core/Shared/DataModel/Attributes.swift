@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum AttributeDecodable: Decodable {
+internal enum AttributeDecodable: Decodable {
   
   case string(String)
   case int(Int)
@@ -60,7 +60,7 @@ public enum AttributeDecodable: Decodable {
   }
 }
 
-public struct CampaignAttribute: Decodable {
+internal struct CampaignAttribute: Decodable {
   public var attributeName: String
   public var value: AttributeDecodable?
   public var rule: String
@@ -79,11 +79,12 @@ public class Attribute {
     }
 }
 
-public struct CheckAttribute: Codable {
+internal struct CheckAttribute: Codable {
   public let checkAttributes: Bool
   public let attributes: [String: Bool]?
 }
 
+@objcMembers
 public class AttributesBuilder {
   private var attributes: [Attribute] = []
   
