@@ -78,11 +78,6 @@ public class Attribute {
         self.attributeValue = attributeValue
     }
 }
-//
-//public struct Attribute {
-//  public var attributeName: String
-//  public var attributeValue: (any Codable)?
-//}
 
 public struct CheckAttribute: Codable {
   public let checkAttributes: Bool

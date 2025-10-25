@@ -6,6 +6,7 @@
 //  Copyright © 2025 UXF. All rights reserved.
 //
 
+@objcMembers
 class CampaignManager {
     static func findCampaignInCandidates(_ candidates: [CampaignData], appId: String, requestManager: DataRequestManager, attributes: [Attribute]? = nil, completion: @escaping (Campaign?) -> Void) {
         let stateQueue = DispatchQueue(label: "campaignmanager.state")
