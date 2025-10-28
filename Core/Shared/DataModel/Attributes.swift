@@ -68,8 +68,8 @@ internal struct CampaignAttribute: Decodable {
   public var valueTo: AttributeDecodable?
 }
 
-@objcMembers
-public class Attribute {
+@objc
+public class Attribute : NSObject{
     public var attributeName: String
     public var attributeValue: (any Codable)?
     
@@ -84,11 +84,11 @@ internal struct CheckAttribute: Codable {
   public let attributes: [String: Bool]?
 }
 
-@objcMembers
-public class AttributesBuilder {
+@objc
+public class AttributesBuilder: NSObject {
   private var attributes: [Attribute] = []
   
-  public init() {
+    public override init() {
     attributes = []
   }
   

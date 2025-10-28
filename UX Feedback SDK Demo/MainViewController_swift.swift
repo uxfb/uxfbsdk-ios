@@ -94,7 +94,7 @@ class MainViewController_swift: UIViewController {
                     .addValue("hash_user_id", value: "aaca4f68bf5d7e61b2894cb70622d094                                ")
                     .build()
 //                for i in 0...10000 {
-                    UXFeedback.sdk.startCampaign(eventName: "ces_pro_cabinet_open_event", attributes: attributes)
+                    UXFeedback.sdk.startCampaign(eventName: "imagef")
                 
                 
 //                }
@@ -103,7 +103,7 @@ class MainViewController_swift: UIViewController {
         case 2:
 //                UXFeedback.setup(appID: uxfAppID, settings: (UIApplication.shared.delegate as! AppDelegate).settings)
 //                UXFeedback.sdk.stopCampaign(eventForStop: "")
-            UXFeedback.sdk.startCampaign(eventName: "ger", attributes: nil)
+            UXFeedback.sdk.startCampaign(eventName: "image", attributes: nil)
             
         default:
             break

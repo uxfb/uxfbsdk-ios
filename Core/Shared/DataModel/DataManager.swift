@@ -352,8 +352,14 @@ class DataManager: FieldDelegate {
                                                 defaultFont: font,
                                                 textProperties: nil,
                                                 withRequired: required)
-        let valueHeight = TextPropertyManager.heightForAttributed(string: attributedValue,
+        var valueHeight = TextPropertyManager.heightForAttributed(string: attributedValue,
                                                                   and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
+        
+        if let imageData = field.uiData["image"] as? [String: Any] {
+            let isDefault = ((imageData["type"] as? String) ?? "default") == "default"
+            valueHeight += 48 + (isDefault ? 100 : 240)
+        }
+        
         return valueHeight + getTitleSpacing(field)
     }
     
@@ -400,38 +406,111 @@ class DataManager: FieldDelegate {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
             label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
         ])
         
+        if let imageData = field.uiData["image"] as? Dictionary<String, Any>,
+           let position = imageData["position"] as? String,
+           let alignment = imageData["alignment"] as? String,
+           let src = imageData["src"] as? String,
+           let url = URL(string: src) {
+            let imageView = UIImageView()
+            imageView.showSkeleton(baseColor: campaign!.theme?.skeletonBase, shineColor: campaign!.theme?.skeletonShine)
+            
+            view.addSubview(imageView)
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            
+            let isDefault = ((imageData["type"] as? String) ?? "default") == "default"
+            
+            if position == "topHeader" {
+                NSLayoutConstraint.activate([
+                    label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
+                    imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
+                    imageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -16),
+                    imageView.heightAnchor.constraint(equalToConstant: isDefault ? 100 : 240)
+                ])
+            } else {
+                NSLayoutConstraint.activate([
+                    label.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
+                    imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
+                    imageView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
+                    imageView.heightAnchor.constraint(equalToConstant: isDefault ? 100 : 240)
+                ])
+            }
+            
+            imageView.loadImageWithResult(url: url, withTemplate: false) { loadedImage in
+                imageView.hideSkeleton()
+                if let loadedImage = loadedImage {
+                    imageView.backgroundColor = .clear
+                    imageView.contentMode = .scaleAspectFit
+                    imageView.image = loadedImage
+                    
+                    if !isDefault {
+                        let tapGesture = GestureRecognizer {
+                            let globalPoint = imageView.superview?.convert(imageView.frame.origin, to: nil) ?? .zero
+                            ImageManager.showImageFullScreen(images: [imageView.image ?? loadedImage], tappedIndex: 0, startPoint: globalPoint, startSize: imageView.frame.size, withNav: false) { } closeAction: { }
+                        }
+                        
+                        imageView.addGestureRecognizer(tapGesture)
+                        imageView.isUserInteractionEnabled = true
+                    }
+                    
+                    let size = loadedImage.size
+                    
+                    let maxWidth = self.width - self.safeSpace - self.extraSpace
+                    
+                    let kHeight = 240 / size.height
+                    
+                    let calcWidth = maxWidth - (kHeight * size.width)
+                    
+                    let space = calcWidth > 0 ? calcWidth : 0
+                    
+                    switch alignment {
+                        case "left":
+                            NSLayoutConstraint.activate([
+                                imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                                imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16-space)
+                                
+                            ])
+                        case "right":
+                            NSLayoutConstraint.activate([
+                                imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16+space),
+                                imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                            ])
+                        
+                        default:
+                            NSLayoutConstraint.activate([
+                                imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                                imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                            ])
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        let image = UIImage(named: "retry",
+                                            in: Consts.bundle,
+                                            compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
+                        
+                        imageView.contentMode = .center
+                        imageView.backgroundColor = self.campaign!.theme?.skeletonShine
+                        imageView.image = image
+                        
+                        NSLayoutConstraint.activate([
+                            label.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+                            label.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 0)
+                        ])
+                    }
+                }
+            }
+        } else {
+            NSLayoutConstraint.activate([
+                label.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+                label.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 0)
+            ])
+        }
+        
         view.backgroundColor = campaign?.theme.bgColor
         return view
-        
-        /*
-        let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.width - .leftArea - .rightArea,
-                                                                    height: getFieldHeaderHeight(field))))
-                
-        let label = LinkLabel(frame: CGRect(origin: .init(x: 16, y: 0),
-                                          size: CGSize(width: view.frame.width - extraSpace - 40,
-                                                       height: view.frame.height - getTitleSpacing(field))))// - 16)))
-        
-        label.textColor = campaign?.theme.text01Color
-        
-        let required = (field.uiData["required"] as? Bool) ?? false
-        
-        label.attributedText = TextPropertyManager.convert(field.value ?? "",
-                                                           theme: campaign!.theme,
-                                                           defaultFont: campaign!.theme.fontH2,
-                                                           textProperties: nil,
-                                                           withRequired: required)
-        
-        label.numberOfLines = 0
-        view.addSubview(label)
-        view.backgroundColor = campaign?.theme.bgColor
-        return view
-         */
     }
     
     private func getFieldFooter(_ field: Field) -> UIView? {

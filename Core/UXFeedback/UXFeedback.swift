@@ -206,7 +206,7 @@ open class UXFeedback: NSObject {
     /// Метод показа кампании по указанному событию
     /// - Parameter eventName: Название события
     /// - Parameter attributes: Аттрибуты показа кампании
-    open func startCampaign(eventName: String, attributes: [Attribute]? = nil) {
+    @objc open func startCampaign(eventName: String, attributes: [Attribute]? = nil) {
         var attributesString: [String] = []
         
         if let attributes = attributes {

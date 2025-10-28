@@ -73,7 +73,7 @@ class ImageManager: NSObject {
     
     //MARK: - Show
     
-    public static func showImageFullScreen(images: [UIImage], tappedIndex: Int, startPoint: CGPoint, startSize: CGSize, action: @escaping closeAction, closeAction: @escaping closeAction) {
+    public static func showImageFullScreen(images: [UIImage], tappedIndex: Int, startPoint: CGPoint, startSize: CGSize, withNav: Bool = true, action: @escaping closeAction, closeAction: @escaping closeAction) {
         guard let currentMainWindow = UIApplication.shared.keyWindow else {
             return
         }
@@ -103,37 +103,38 @@ class ImageManager: NSObject {
         
         overlay.addSubview(imageCollection)
         
-        let navView = UIView(frame: CGRect(x: overlay.frame.origin.x,
-                                           y: overlay.frame.origin.y,
-                                           width: overlay.frame.size.width,
-                                           height: addTop + 48))
-        navView.backgroundColor = UIColor.black.withAlphaComponent(0.75)
-        navView.tag = 1234
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ImageManager.navViewAction))
-        tapGesture.cancelsTouchesInView = false
-        tapGesture.numberOfTapsRequired = 1
-        imageCollection.addGestureRecognizer(tapGesture)
-        
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(ImageManager.panAction(pan:)))
         panGesture.cancelsTouchesInView = false
         imageCollection.addGestureRecognizer(panGesture)
         
-        let cancelButton = UIButton(frame: CGRect(x: overlay.frame.size.width - 60,
-                                                  y: overlay.frame.origin.y + addTop,
-                                                  width: 44,
-                                                  height: 44))
-        cancelButton.setTitle("", for: .normal)
-        cancelButton.setImage(UIImage(named: "close", in: Consts.bundle, compatibleWith: nil), for: .normal)
-        cancelButton.addTargetClosure(closure: { (cancelUIButton) in
-            hide(animated: true)
-        })
-        cancelButton.contentHorizontalAlignment = .right
         
-        navView.addSubview(titleLabel)
-        navView.addSubview(cancelButton)
-        overlay.addSubview(navView)
-        
+        if withNav {
+            let navView = UIView(frame: CGRect(x: overlay.frame.origin.x,
+                                               y: overlay.frame.origin.y,
+                                               width: overlay.frame.size.width,
+                                               height: addTop + 48))
+            navView.backgroundColor = UIColor.black.withAlphaComponent(0.75)
+            navView.tag = 1234
+            
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ImageManager.navViewAction))
+            tapGesture.cancelsTouchesInView = false
+            tapGesture.numberOfTapsRequired = 1
+            imageCollection.addGestureRecognizer(tapGesture)
+            let cancelButton = UIButton(frame: CGRect(x: overlay.frame.size.width - 60,
+                                                      y: overlay.frame.origin.y + addTop,
+                                                      width: 44,
+                                                      height: 44))
+            cancelButton.setTitle("", for: .normal)
+            cancelButton.setImage(UIImage(named: "close", in: Consts.bundle, compatibleWith: nil), for: .normal)
+            cancelButton.addTargetClosure(closure: { (cancelUIButton) in
+                hide(animated: true)
+            })
+            cancelButton.contentHorizontalAlignment = .right
+            
+            navView.addSubview(titleLabel)
+            navView.addSubview(cancelButton)
+            overlay.addSubview(navView)
+        }
         
         hideAction = closeAction
         currentOverlay = overlay

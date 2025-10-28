@@ -54,22 +54,11 @@ class ImageCell: BaseCell {
     }
     
     private func loadImage() {
-        guard let sets = field?.uiData["image"] as? Dictionary<String, Any> else {
+        guard let image = field?.uiData["image"] as? Dictionary<String, Any> else {
             return
         }
-        var urlString = sets["2x"] as? String
-        let scale = UIScreen.main.scale
-        switch scale {
-        case 2:
-            urlString = sets["2x"] as? String
-            break
-        case 3:
-            urlString = sets["3x"] as? String
-            break
-        default:
-            urlString = sets["2x"] as? String
-            break
-        }
+        
+        let urlString = image["src"] as? String
         
         guard let urlString = urlString, let url = URL(string: urlString) else {
             return

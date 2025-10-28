@@ -43,4 +43,29 @@ extension UIImageView {
             }
             }.resume()
     }
+    
+    func loadImageWithResult(url: URL, withTemplate: Bool, completion: ((UIImage?) -> Void)? = nil){
+        
+        image = nil
+        
+        if let imageFromCache = imageCache.object(forKey: url.absoluteString as AnyObject) as? UIImage {
+            completion?(imageFromCache)
+            return
+        }
+        URLSession.shared.dataTask(with: url) {
+            data, response, error in
+            if data != nil {
+                DispatchQueue.main.async {
+                    if let imageToCache = UIImage(data: data!) {
+                        imageCache.setObject(imageToCache, forKey: url.absoluteString as AnyObject)
+                        completion?(imageToCache)
+                    } else {
+                        completion?(nil)
+                    }
+                }
+            } else {
+                completion?(nil)
+            }
+            }.resume()
+    }
 }
