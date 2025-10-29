@@ -146,8 +146,8 @@ class DataManager: FieldDelegate {
         if campaign?.type == .slidein {
             height -= safeSpace
         }
-
-        var areas = .bottomArea + .topArea 
+        
+        var areas = .bottomArea + .topArea
         switch campaign?.type {
             case .slidein:
                 areas -= .bottomArea
@@ -161,8 +161,6 @@ class DataManager: FieldDelegate {
             default:
                 break
         }
-        
-//        height += privacyHeight
         
         let maxHeight = self.height - areas
         
@@ -332,7 +330,7 @@ class DataManager: FieldDelegate {
     }
     
     private func getFieldHeaderHeight(_ field: Field) -> CGFloat {
-        guard var value = field.value, value != "" else {
+        guard let value = field.value, value != "" else {
             return CGFloat.leastNonzeroMagnitude //12
         }
         
@@ -348,10 +346,10 @@ class DataManager: FieldDelegate {
         let font = (campaign?.theme.fontH2)!
         let required = (field.uiData["required"] as? Bool) ?? false
         let attributedValue = TextPropertyManager.convert(field.value!,
-                                                theme: campaign!.theme,
-                                                defaultFont: font,
-                                                textProperties: nil,
-                                                withRequired: required)
+                                                          theme: campaign!.theme,
+                                                          defaultFont: font,
+                                                          textProperties: nil,
+                                                          withRequired: required)
         var valueHeight = TextPropertyManager.heightForAttributed(string: attributedValue,
                                                                   and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
         
@@ -415,74 +413,107 @@ class DataManager: FieldDelegate {
            let src = imageData["src"] as? String,
            let url = URL(string: src) {
             let imageView = UIImageView()
-            imageView.showSkeleton(baseColor: campaign!.theme?.skeletonBase, shineColor: campaign!.theme?.skeletonShine)
-            
             view.addSubview(imageView)
+            DispatchQueue.main.async {
+                imageView.showSkeleton(baseColor: self.campaign!.theme?.skeletonBase,
+                                       shineColor: self.campaign!.theme?.skeletonShine)
+            }
+            
             imageView.translatesAutoresizingMaskIntoConstraints = false
             
             let isDefault = ((imageData["type"] as? String) ?? "default") == "default"
+            
+            let leadingConstraint = NSLayoutConstraint(item: imageView,
+                                                       attribute: .leading,
+                                                       relatedBy: .equal,
+                                                       toItem: view,
+                                                       attribute: .leading,
+                                                       multiplier: 1,
+                                                       constant: 16)
+            let trailingConstraint = NSLayoutConstraint(item: imageView,
+                                                       attribute: .trailing,
+                                                       relatedBy: .equal,
+                                                       toItem: view,
+                                                       attribute: .trailing,
+                                                       multiplier: 1,
+                                                       constant: -16)
             
             if position == "topHeader" {
                 NSLayoutConstraint.activate([
                     label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
                     imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
                     imageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -16),
-                    imageView.heightAnchor.constraint(equalToConstant: isDefault ? 100 : 240)
+                    imageView.heightAnchor.constraint(equalToConstant: isDefault ? 100 : 240),
+                    leadingConstraint,
+                    trailingConstraint
                 ])
             } else {
                 NSLayoutConstraint.activate([
                     label.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
                     imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
                     imageView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
-                    imageView.heightAnchor.constraint(equalToConstant: isDefault ? 100 : 240)
+                    imageView.heightAnchor.constraint(equalToConstant: isDefault ? 100 : 240),
+                    leadingConstraint,
+                    trailingConstraint
                 ])
             }
             
             imageView.loadImageWithResult(url: url, withTemplate: false) { loadedImage in
-                imageView.hideSkeleton()
+                print("LOAD IMAGE = \(url)")
+                DispatchQueue.main.async {
+                    imageView.hideSkeleton()
+                }
                 if let loadedImage = loadedImage {
-                    imageView.backgroundColor = .clear
-                    imageView.contentMode = .scaleAspectFit
-                    imageView.image = loadedImage
-                    
-                    if !isDefault {
-                        let tapGesture = GestureRecognizer {
-                            let globalPoint = imageView.superview?.convert(imageView.frame.origin, to: nil) ?? .zero
-                            ImageManager.showImageFullScreen(images: [imageView.image ?? loadedImage], tappedIndex: 0, startPoint: globalPoint, startSize: imageView.frame.size, withNav: false) { } closeAction: { }
+                    DispatchQueue.main.async {
+                        imageView.backgroundColor = .clear
+                        imageView.contentMode = .scaleAspectFit
+                        imageView.image = loadedImage
+                        
+                        if !isDefault {
+                            let tapGesture = GestureRecognizer {
+                                let globalPoint = imageView.superview?.convert(imageView.frame.origin, to: nil) ?? .zero
+                                ImageManager.showImageFullScreen(images: [imageView.image ?? loadedImage], tappedIndex: 0, startPoint: globalPoint, startSize: imageView.frame.size, withNav: false) { } closeAction: { }
+                            }
+                            
+                            imageView.addGestureRecognizer(tapGesture)
+                            imageView.isUserInteractionEnabled = true
                         }
                         
-                        imageView.addGestureRecognizer(tapGesture)
-                        imageView.isUserInteractionEnabled = true
-                    }
-                    
-                    let size = loadedImage.size
-                    
-                    let maxWidth = self.width - self.safeSpace - self.extraSpace
-                    
-                    let kHeight = 240 / size.height
-                    
-                    let calcWidth = maxWidth - (kHeight * size.width)
-                    
-                    let space = calcWidth > 0 ? calcWidth : 0
-                    
-                    switch alignment {
-                        case "left":
-                            NSLayoutConstraint.activate([
-                                imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                                imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16-space)
-                                
-                            ])
-                        case "right":
-                            NSLayoutConstraint.activate([
-                                imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16+space),
-                                imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                            ])
+                        let size = loadedImage.size
                         
-                        default:
-                            NSLayoutConstraint.activate([
-                                imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                                imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                            ])
+                        let maxWidth = self.width - self.safeSpace - self.extraSpace
+                        
+                        let kHeight = 240 / size.height
+                        
+                        let calcWidth = maxWidth - (kHeight * size.width)
+                        
+                        let space = calcWidth > 0 ? calcWidth : 0
+                        
+                        NSLayoutConstraint.deactivate([
+                            leadingConstraint,
+                            trailingConstraint
+                        ])
+                        
+                        switch alignment {
+                            case "left":
+                                trailingConstraint.constant = -16 - space
+                                NSLayoutConstraint.activate([
+                                    leadingConstraint,
+                                    trailingConstraint
+                                ])
+                            case "right":
+                                leadingConstraint.constant = 16 + space
+                                NSLayoutConstraint.activate([
+                                    leadingConstraint,
+                                    trailingConstraint
+                                ])
+                                
+                            default:
+                                NSLayoutConstraint.activate([
+                                    imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                                    imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                                ])
+                        }
                     }
                 } else {
                     DispatchQueue.main.async {
@@ -502,10 +533,12 @@ class DataManager: FieldDelegate {
                 }
             }
         } else {
-            NSLayoutConstraint.activate([
-                label.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-                label.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 0)
-            ])
+            DispatchQueue.main.async {
+                NSLayoutConstraint.activate([
+                    label.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+                    label.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 0)
+                ])
+            }
         }
         
         view.backgroundColor = campaign?.theme.bgColor
@@ -546,29 +579,29 @@ class DataManager: FieldDelegate {
             return view
             
             /*
-            let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.width - .leftArea - .rightArea - extraSpace,
-                                                                        height: getFieldFooterHeight(field))))
-            let font = (campaign?.theme.fontP2)!
-            let lines = warning.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
-                                           font: font)
-            let valueHeight = CGFloat(lines) * font.lineHeight
-            let label = UILabel(frame: CGRect(origin: CGPoint(x: 16,
-                                                              y: 8),
-                                              size: CGSize(width: view.frame.size.width - 32,
-                                                           height: valueHeight)))
-            
-            label.text = warning
-            label.textColor = campaign?.theme.errorColorPrimary
-            label.font = font
-            label.numberOfLines = 0
-            let fieldIndex = Int((campaign?.pages[currentPage].fields.firstIndex(where: { (fld) -> Bool in
-                fld.id == field.id
-            }))!)
-            label.tag = fieldIndex
-            view.addSubview(label)
-            view.clipsToBounds = true
-            view.backgroundColor = campaign?.theme.bgColor
-            return view
+             let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.width - .leftArea - .rightArea - extraSpace,
+             height: getFieldFooterHeight(field))))
+             let font = (campaign?.theme.fontP2)!
+             let lines = warning.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
+             font: font)
+             let valueHeight = CGFloat(lines) * font.lineHeight
+             let label = UILabel(frame: CGRect(origin: CGPoint(x: 16,
+             y: 8),
+             size: CGSize(width: view.frame.size.width - 32,
+             height: valueHeight)))
+             
+             label.text = warning
+             label.textColor = campaign?.theme.errorColorPrimary
+             label.font = font
+             label.numberOfLines = 0
+             let fieldIndex = Int((campaign?.pages[currentPage].fields.firstIndex(where: { (fld) -> Bool in
+             fld.id == field.id
+             }))!)
+             label.tag = fieldIndex
+             view.addSubview(label)
+             view.clipsToBounds = true
+             view.backgroundColor = campaign?.theme.bgColor
+             return view
              */
         }
         else {
@@ -603,7 +636,7 @@ class DataManager: FieldDelegate {
                 return 40
                 
             case .header:
-//                return UITableView.automaticDimension
+                //                return UITableView.automaticDimension
                 let font = (campaign?.theme.fontH1)!
                 let value = TextPropertyManager.convert(field.value!,
                                                         theme: campaign!.theme,
@@ -692,7 +725,7 @@ class DataManager: FieldDelegate {
         }
     }
     
-	//MARK: - Navigate to next page
+    //MARK: - Navigate to next page
     
     private func checkAndNavigate() {
         if needsComplete() {
@@ -787,9 +820,9 @@ class DataManager: FieldDelegate {
                                                                from: optionsData) {
                         
                         if let answerItem = answer.first,
-                            let position = options.firstIndex(where: { option in
-                            option.id == answerItem
-                        }) {
+                           let position = options.firstIndex(where: { option in
+                               option.id == answerItem
+                           }) {
                             newAnswer["position"] = position
                         }
                     }
@@ -993,7 +1026,7 @@ class DataManager: FieldDelegate {
     }
     
     private func needsComplete() -> Bool {
-
+        
         let page = campaign?.pages[currentPage]
         let fields = page!.fields
         for field in fields {
@@ -1008,13 +1041,6 @@ class DataManager: FieldDelegate {
                                                                    at: .top,
                                                                    animated: true)
                     }
-                    
-//                    if self.viewController?.tableView.indexPathsForVisibleRows?.contains(IndexPath(row: 0, section: index)) == false {
-//                        self.viewController?.tableView.scrollToRow(at: IndexPath(row: 0,
-//                                                                                 section: index),
-//                                                                   at: .top,
-//                                                                   animated: true)
-//                    }
                 }
                 return true
             }
@@ -1174,54 +1200,6 @@ class DataManager: FieldDelegate {
         let checkedTransforms = completedTransforms().filter({
             transforms.map {$0.id}.contains($0.id)
         })
-        
-        //        let checkedTransforms = transforms.filter({
-        //            let scenarios = $0.scenarios.filter({
-        //                let conditions = $0.conditions.filter { condition in
-        //                    let answer = answers.first(where: { (dict) -> Bool in
-        //                        ((dict["fieldId"] as? String) ?? "") == condition.from.field
-        //                    })
-        //                    let answers = (answer?["value"] as? [String]) ?? []
-        //                    let type = FieldType(rawValue: (answer?["type"] as? String) ?? "")
-        //
-        //                    switch condition.condition?.rule {
-        //                        case "equal":
-        //                            let sameCount = condition.condition?.value?.filter() { answers.contains($0) }.count ?? 0
-        //                            if sameCount == condition.condition?.value?.count &&
-        //                                sameCount == fieldAnswersCount(condition.from.field ?? "") {
-        //                                return true
-        //                            }
-        //                        case "contain":
-        //                            let same = condition.condition?.value?.filter() { answers.contains($0) }
-        //                            if same?.count ?? 0 > 0 {
-        //                                return true
-        //                            }
-        //
-        //                        case "filled":
-        //                            if type == .checkbox {
-        //                                if answers.count > 0 {
-        //                                    return true
-        //                                }
-        //                            } else {
-        //                                if (answers.first ?? "").count > 0 {
-        //                                    return true
-        //                                }
-        //                            }
-        //
-        //                        case "unfilled":
-        //                            if answer == nil {
-        //                                return true
-        //                            }
-        //
-        //                        default:
-        //                            break
-        //                        }
-        //                    return false
-        //                }
-        //                return $0.conditions.count == conditions.count
-        //            })
-        //            return scenarios.count > 0
-        //        })
         
         if checkedTransforms.count > 0 {
             return true

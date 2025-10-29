@@ -702,6 +702,8 @@ internal class CampaignViewController: UIViewController {
                 break
         }
     }
+    
+    private var headerCache = [Int: UIView]()
 }
 
 extension CampaignViewController: UIGestureRecognizerDelegate {
@@ -720,9 +722,17 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
         return dataManager?.heightForFieldFooter(index: section) ?? 12
     }
     
+    
+    
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        print("Get Field Header: \(section)")
-        return dataManager?.viewForFieldHeader(index: section)
+        
+        if let cachedHeader = headerCache[section] {
+            return cachedHeader
+        }
+        
+        let header = dataManager?.viewForFieldHeader(index: section)
+        headerCache[section] = header
+        return header
     }
     
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
