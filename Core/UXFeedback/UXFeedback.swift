@@ -196,6 +196,11 @@ open class UXFeedback: NSObject {
                 self.sdk._requestManager.getAllCampaigns()
             }
         }
+        
+        sdk._appWindow = PassthroughWindow(frame: UIScreen.main.bounds)
+        
+        sdk._appWindow.rootViewController = UIViewController()
+        sdk._appWindow?.windowLevel = UXFeedback._windowLevel
     }
     
     private func clearTask(eventName: String) {
@@ -207,6 +212,11 @@ open class UXFeedback: NSObject {
     /// - Parameter eventName: Название события
     /// - Parameter attributes: Аттрибуты показа кампании
     @objc open func startCampaign(eventName: String, attributes: [Attribute]? = nil) {
+        guard (self._appWindow != nil) else {
+            self.DDLog("Campaigns not loaded")
+            return
+        }
+        
         var attributesString: [String] = []
         
         if let attributes = attributes {
@@ -401,10 +411,10 @@ extension UXFeedback: RequestManagerDelegate {
             }
             
             DispatchQueue.main.async {
-                self._appWindow = PassthroughWindow(frame: UIScreen.main.bounds)
-                
-                self._appWindow.rootViewController = UIViewController()
-                self._appWindow?.windowLevel = UXFeedback._windowLevel
+//                self._appWindow = PassthroughWindow(frame: UIScreen.main.bounds)
+//                
+//                self._appWindow.rootViewController = UIViewController()
+//                self._appWindow?.windowLevel = UXFeedback._windowLevel
                 self.campaignDelegate?.campaignDidLoad(success: success)
             }
         }

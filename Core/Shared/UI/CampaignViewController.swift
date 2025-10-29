@@ -721,6 +721,7 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        print("Get Field Header: \(section)")
         return dataManager?.viewForFieldHeader(index: section)
     }
     

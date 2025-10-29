@@ -134,8 +134,12 @@ class ImageManager: NSObject {
             navView.addSubview(titleLabel)
             navView.addSubview(cancelButton)
             overlay.addSubview(navView)
+        } else {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ImageManager.tapHide(_:)))
+            tapGesture.cancelsTouchesInView = false
+            tapGesture.numberOfTapsRequired = 1
+            imageCollection.addGestureRecognizer(tapGesture)
         }
-        
         hideAction = closeAction
         currentOverlay = overlay
         UIView.animate(withDuration: 0.3, animations: {

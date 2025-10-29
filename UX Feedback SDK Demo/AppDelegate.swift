@@ -60,7 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
       settings.debugEnabled = true
     settings.slideInUiBlocked = false
-        print(UXFeedback.sdk)
 //        UXFeedback.sdk.startCampaign(eventName: <#T##String#>)
         
         UXFeedback.setup(appID: uxfAppID, settings: settings)

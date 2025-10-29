@@ -387,7 +387,6 @@ class DataManager: FieldDelegate {
         if [FieldType.header, FieldType.text, FieldType.button, FieldType.image].contains(field.type) || field.value == nil || !checkFieldTransfromed(field) {
             return nil
         }
-        
         let view = UIView()
         let label = LinkLabel()
         
