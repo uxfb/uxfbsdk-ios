@@ -726,13 +726,13 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        if let cachedHeader = headerCache[section] {
-            return cachedHeader
-        }
-        
-        let header = dataManager?.viewForFieldHeader(index: section)
-        headerCache[section] = header
-        return header
+//        if let cachedHeader = headerCache[section] {
+//            return cachedHeader
+//        }
+//        
+//        let header =
+//        headerCache[section] = header
+        return dataManager?.viewForFieldHeader(index: section)
     }
     
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
