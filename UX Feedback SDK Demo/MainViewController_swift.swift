@@ -94,7 +94,7 @@ class MainViewController_swift: UIViewController {
 //                    .addValue("hash_user_id", value: "aaca4f68bf5d7e61b2894cb70622d094                                ")
 //                    .build()
 //                for i in 0...10000 {
-                    UXFeedback.sdk.startCampaign(eventName: "ima")
+                    UXFeedback.sdk.startCampaign(eventName: "imagef")
                 
                 
 //                }

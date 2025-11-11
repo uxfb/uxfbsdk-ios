@@ -355,7 +355,7 @@ class DataManager: FieldDelegate {
         
         if let imageData = field.uiData["image"] as? [String: Any] {
             let isDefault = ((imageData["type"] as? String) ?? "default") == "default"
-            valueHeight += 48 + (isDefault ? 100 : 240)
+            valueHeight += 16 + (isDefault ? 100 : 240)
         }
         
         return valueHeight + getTitleSpacing(field)
@@ -381,6 +381,18 @@ class DataManager: FieldDelegate {
         return height + getFooterSpacing(field)
     }
     
+    private func getImageConstraint(for size: CGSize) -> CGFloat {
+        let maxWidth = self.width - self.safeSpace - self.extraSpace
+        
+        let kHeight = 240 / size.height
+        
+        let calcWidth = maxWidth - (kHeight * size.width)
+        
+        let space = calcWidth > 0 ? calcWidth : 0
+        
+        return space
+    }
+    
     private func getFieldHeader(_ field: Field) -> UIView? {
         if [FieldType.header, FieldType.text, FieldType.button, FieldType.image].contains(field.type) || field.value == nil || !checkFieldTransfromed(field) {
             return nil
@@ -404,7 +416,7 @@ class DataManager: FieldDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
         
         if let imageData = field.uiData["image"] as? Dictionary<String, Any>,
@@ -413,16 +425,23 @@ class DataManager: FieldDelegate {
            let src = imageData["src"] as? String,
            let url = URL(string: src) {
             let imageView = UIImageView()
-            view.addSubview(imageView)
-            DispatchQueue.main.async {
-                imageView.showSkeleton(baseColor: self.campaign!.theme?.skeletonBase,
-                                       shineColor: self.campaign!.theme?.skeletonShine)
-            }
-            
-            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.backgroundColor = .clear
+            imageView.contentMode = .scaleAspectFit
             
             let isDefault = ((imageData["type"] as? String) ?? "default") == "default"
             
+            if !isDefault {
+                let tapGesture = GestureRecognizer {
+                    let globalPoint = imageView.superview?.convert(imageView.frame.origin, to: nil) ?? .zero
+                    ImageManager.showImageFullScreen(images: [imageView.image ?? UIImage()], tappedIndex: 0, startPoint: globalPoint, startSize: imageView.frame.size, withNav: false) { } closeAction: { }
+                }
+                
+                imageView.addGestureRecognizer(tapGesture)
+                imageView.isUserInteractionEnabled = true
+            }
+            
+            view.addSubview(imageView)
+            imageView.translatesAutoresizingMaskIntoConstraints = false
             let leadingConstraint = NSLayoutConstraint(item: imageView,
                                                        attribute: .leading,
                                                        relatedBy: .equal,
@@ -431,18 +450,64 @@ class DataManager: FieldDelegate {
                                                        multiplier: 1,
                                                        constant: 16)
             let trailingConstraint = NSLayoutConstraint(item: imageView,
-                                                       attribute: .trailing,
-                                                       relatedBy: .equal,
-                                                       toItem: view,
-                                                       attribute: .trailing,
-                                                       multiplier: 1,
-                                                       constant: -16)
+                                                        attribute: .trailing,
+                                                        relatedBy: .equal,
+                                                        toItem: view,
+                                                        attribute: .trailing,
+                                                        multiplier: 1,
+                                                        constant: -16)
+            
+            
+            let imageFromCache = ImageCache.shared.object(forKey: url.absoluteString as NSString)
+            
+            if imageFromCache == nil {
+                imageView.loadImageWithResult(url: url, withTemplate: false) { loadedImage in
+                    DispatchQueue.main.async {
+                        imageView.hideSkeleton()
+                        if let loadedImage = loadedImage {
+                            imageView.image = loadedImage
+                            let space = self.getImageConstraint(for: loadedImage.size)
+                            
+                            switch alignment {
+                                case "left":
+                                    trailingConstraint.constant = -16 - space
+                                    
+                                case "right":
+                                    leadingConstraint.constant = 16 + space
+                                    
+                                default:
+                                    trailingConstraint.constant = -16
+                                    leadingConstraint.constant = 16
+                            }
+                            
+                            UIView.performWithoutAnimation {
+                                view.layoutIfNeeded()
+                            }
+                        }
+                    }
+                }
+            } else {
+                imageView.image = imageFromCache
+                let space = getImageConstraint(for: imageFromCache?.size ?? .zero)
+                
+                switch alignment {
+                    case "left":
+                        trailingConstraint.constant = -16 - space
+                        
+                    case "right":
+                        leadingConstraint.constant = 16 + space
+                        
+                    default:
+                        trailingConstraint.constant = -16
+                        leadingConstraint.constant = 16
+                }
+            }
             
             if position == "topHeader" {
                 NSLayoutConstraint.activate([
                     label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
-                    imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
-                    imageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -16),
+                    imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
+                    imageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -8),
                     imageView.heightAnchor.constraint(equalToConstant: isDefault ? 100 : 240),
                     leadingConstraint,
                     trailingConstraint
@@ -450,95 +515,18 @@ class DataManager: FieldDelegate {
             } else {
                 NSLayoutConstraint.activate([
                     label.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
-                    imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
-                    imageView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
+                    imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8),
+                    imageView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
                     imageView.heightAnchor.constraint(equalToConstant: isDefault ? 100 : 240),
                     leadingConstraint,
                     trailingConstraint
                 ])
             }
-            
-            imageView.loadImageWithResult(url: url, withTemplate: false) { loadedImage in
-                print("LOAD IMAGE = \(url)")
-                DispatchQueue.main.async {
-                    imageView.hideSkeleton()
-                }
-                if let loadedImage = loadedImage {
-                    DispatchQueue.main.async {
-                        imageView.backgroundColor = .clear
-                        imageView.contentMode = .scaleAspectFit
-                        imageView.image = loadedImage
-                        
-                        if !isDefault {
-                            let tapGesture = GestureRecognizer {
-                                let globalPoint = imageView.superview?.convert(imageView.frame.origin, to: nil) ?? .zero
-                                ImageManager.showImageFullScreen(images: [imageView.image ?? loadedImage], tappedIndex: 0, startPoint: globalPoint, startSize: imageView.frame.size, withNav: false) { } closeAction: { }
-                            }
-                            
-                            imageView.addGestureRecognizer(tapGesture)
-                            imageView.isUserInteractionEnabled = true
-                        }
-                        
-                        let size = loadedImage.size
-                        
-                        let maxWidth = self.width - self.safeSpace - self.extraSpace
-                        
-                        let kHeight = 240 / size.height
-                        
-                        let calcWidth = maxWidth - (kHeight * size.width)
-                        
-                        let space = calcWidth > 0 ? calcWidth : 0
-                        
-                        NSLayoutConstraint.deactivate([
-                            leadingConstraint,
-                            trailingConstraint
-                        ])
-                        
-                        switch alignment {
-                            case "left":
-                                trailingConstraint.constant = -16 - space
-                                NSLayoutConstraint.activate([
-                                    leadingConstraint,
-                                    trailingConstraint
-                                ])
-                            case "right":
-                                leadingConstraint.constant = 16 + space
-                                NSLayoutConstraint.activate([
-                                    leadingConstraint,
-                                    trailingConstraint
-                                ])
-                                
-                            default:
-                                NSLayoutConstraint.activate([
-                                    imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                                    imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                                ])
-                        }
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        let image = UIImage(named: "retry",
-                                            in: Consts.bundle,
-                                            compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
-                        
-                        imageView.contentMode = .center
-                        imageView.backgroundColor = self.campaign!.theme?.skeletonShine
-                        imageView.image = image
-                        
-                        NSLayoutConstraint.activate([
-                            label.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-                            label.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 0)
-                        ])
-                    }
-                }
-            }
         } else {
-            DispatchQueue.main.async {
-                NSLayoutConstraint.activate([
-                    label.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-                    label.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 0)
-                ])
-            }
+            NSLayoutConstraint.activate([
+                label.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
+                label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8)
+            ])
         }
         
         view.backgroundColor = campaign?.theme.bgColor
@@ -577,32 +565,6 @@ class DataManager: FieldDelegate {
             
             view.backgroundColor = campaign?.theme.bgColor
             return view
-            
-            /*
-             let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.width - .leftArea - .rightArea - extraSpace,
-             height: getFieldFooterHeight(field))))
-             let font = (campaign?.theme.fontP2)!
-             let lines = warning.linesCount(width: self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace,
-             font: font)
-             let valueHeight = CGFloat(lines) * font.lineHeight
-             let label = UILabel(frame: CGRect(origin: CGPoint(x: 16,
-             y: 8),
-             size: CGSize(width: view.frame.size.width - 32,
-             height: valueHeight)))
-             
-             label.text = warning
-             label.textColor = campaign?.theme.errorColorPrimary
-             label.font = font
-             label.numberOfLines = 0
-             let fieldIndex = Int((campaign?.pages[currentPage].fields.firstIndex(where: { (fld) -> Bool in
-             fld.id == field.id
-             }))!)
-             label.tag = fieldIndex
-             view.addSubview(label)
-             view.clipsToBounds = true
-             view.backgroundColor = campaign?.theme.bgColor
-             return view
-             */
         }
         else {
             return nil

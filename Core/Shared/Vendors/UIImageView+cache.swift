@@ -25,8 +25,6 @@ internal class ImageCache {
 
 extension UIImageView {
     func cacheImage(url: URL, withTemplate: Bool, completion: ((Bool) -> Void)? = nil){
-        
-        
         if let imageFromCache = ImageCache.shared.object(forKey: url.absoluteString as NSString) {
             self.image = imageFromCache
             completion?(true)

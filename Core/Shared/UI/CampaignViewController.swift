@@ -322,16 +322,19 @@ internal class CampaignViewController: UIViewController {
         }
         self.bottomConstraint.constant = 0
         
-        UIView.animate(withDuration: duration, delay: 0, options: [.beginFromCurrentState, .init(rawValue: curveOption)], animations: {
-            let edgeInsets = UIEdgeInsets.zero
-            self.tableView.contentInset = edgeInsets
+        UIView.performWithoutAnimation {
+            self.tableView.contentInset = UIEdgeInsets.zero
             self.view.layoutIfNeeded()
-        })
+        }
+        
+//        UIView.animate(withDuration: duration, delay: 0, options: [.beginFromCurrentState, .init(rawValue: curveOption)], animations: {
+//            
+//        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tableView.reloadData()
+        self.reloadTableView()
     }
     
     open override func viewDidLayoutSubviews() {
@@ -346,7 +349,7 @@ internal class CampaignViewController: UIViewController {
                 if let effectView = self.view.viewWithTag(visualEffectViewTag) {
                     effectView.frame = UIScreen.main.bounds
                 }
-                self.tableView.reloadData()
+                self.reloadTableView()
             }
         }
     }
@@ -702,8 +705,6 @@ internal class CampaignViewController: UIViewController {
                 break
         }
     }
-    
-    private var headerCache = [Int: UIView]()
 }
 
 extension CampaignViewController: UIGestureRecognizerDelegate {
@@ -725,13 +726,6 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-//        if let cachedHeader = headerCache[section] {
-//            return cachedHeader
-//        }
-//        
-//        let header =
-//        headerCache[section] = header
         return dataManager?.viewForFieldHeader(index: section)
     }
     
@@ -1000,6 +994,15 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     
     //MARK: - Update changes
     
+    private func reloadTableView() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        
+        self.tableView.reloadData()
+        
+        CATransaction.commit()
+    }
+    
     func scrollToTop(animated: Bool) {
         self.tableView.setContentOffset(.zero, animated: animated)
     }
@@ -1013,7 +1016,8 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
         indexSet.remove(idx)
         
         //        self.tableView.reloadSections(indexSet, with: .none)
-        self.tableView.reloadData()
+//        self.tableView.reloadData()
+        reloadTableView()
         self.updateHeight()
     }
     
@@ -1026,7 +1030,7 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
                 }
             }
         } else {
-            self.tableView.reloadData()
+            self.reloadTableView()
         }
         
         self.updateHeight()
