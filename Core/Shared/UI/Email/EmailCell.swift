@@ -83,6 +83,7 @@ class EmailCell: BaseCell, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        delegate?.didEndEditing(field!)
         textField.borderColor = theme?.inputBorderColor
         if delegate != nil {
             let email = textField.text!

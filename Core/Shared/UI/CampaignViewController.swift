@@ -239,6 +239,8 @@ internal class CampaignViewController: UIViewController {
     
     var withKeyboard = false
     
+    private var offsetBeforeEditing: CGPoint = .zero
+    
     override func loadView() {
         self.view = PassthroughToWindowView()
     }
@@ -275,6 +277,8 @@ internal class CampaignViewController: UIViewController {
             let curveOption = userinfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt else {
             return
         }
+        
+        offsetBeforeEditing = tableView.contentOffset
         
         let space = UIScreen.main.bounds.height - (self.dataManager?.heightForCurrentPage() ?? 0)
         if space > 240 {
@@ -317,19 +321,18 @@ internal class CampaignViewController: UIViewController {
             let curveOption = userinfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt else {
             return
         }
+        
         if campaign?.type == .popup {
             self.verticallyConstraint.constant = 0
+        } else {
+            self.bottomConstraint.constant = 0
         }
-        self.bottomConstraint.constant = 0
         
-        UIView.performWithoutAnimation {
-            self.tableView.contentInset = UIEdgeInsets.zero
+        UIView.animate(withDuration: duration, delay: 0, options: [.beginFromCurrentState, .init(rawValue: curveOption)]) {
             self.view.layoutIfNeeded()
+            self.tableView.contentInset = UIEdgeInsets.zero
+            self.tableView.contentOffset = self.offsetBeforeEditing
         }
-        
-//        UIView.animate(withDuration: duration, delay: 0, options: [.beginFromCurrentState, .init(rawValue: curveOption)], animations: {
-//            
-//        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -1042,6 +1045,10 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
         let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
         self.tableView.contentInset = edgeInsets
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: section), at: .top, animated: true)
+    }
+    
+    func didEndEditing(_ section: Int) {
+//        self.tableView.scrollToRow(at: IndexPath(row: 0, section: section), at: .middle, animated: true)
     }
     
     func updateHeight() {

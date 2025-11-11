@@ -34,6 +34,7 @@ protocol FieldDelegate {
     func textChanged(_ field: Field, answer: [String])
     func screenshotChanged(_ field: Field, screenshots: [Screenshot])
     func didBeginEditing(_ field: Field)
+    func didEndEditing(_ field: Field)
 }
 
 protocol RouterDelegate {
@@ -828,6 +829,16 @@ class DataManager: FieldDelegate {
         }
         
         viewController?.didBeginEditing(fieldIndex)
+    }
+    
+    func didEndEditing(_ field: Field) {
+        guard let fieldIndex = campaign?.pages[currentPage].fields.firstIndex(where: { (fld) -> Bool in
+            fld.id == field.id
+        }) else {
+            return
+        }
+        
+        viewController?.didEndEditing(fieldIndex)
     }
     
     //MARK: - PRIVACY

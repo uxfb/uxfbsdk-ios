@@ -78,6 +78,7 @@ extension InputCell: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        delegate?.didEndEditing(field!)
         textView.borderColor = theme?.inputBorderColor
         if textView.text.isEmpty {
             comment = ""
