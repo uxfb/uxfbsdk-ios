@@ -265,6 +265,7 @@ internal class CampaignViewController: UIViewController {
                                                selector: #selector(rotated),
                                                name: UIDevice.orientationDidChangeNotification,
                                                object: nil)
+        
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -1042,9 +1043,9 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func didBeginEditing(_ section: Int) {
-        let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
-        self.tableView.contentInset = edgeInsets
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: section), at: .top, animated: true)
+//        let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 1000, right: 0)
+//        self.tableView.contentInset = edgeInsets
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: section), at: .middle, animated: true)
     }
     
     func didEndEditing(_ section: Int) {

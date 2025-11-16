@@ -12,9 +12,19 @@ import Photos
 typealias imagePickerAction = ([UIImage]) -> Void
 typealias closeAction = () -> Void
 
+internal protocol OverlayProtocol {
+    
+}
+
+internal
+class OverlayView: UIView {
+    
+}
+
+internal
 class ImageManager: NSObject {
     
-    static var currentOverlay: UIView?
+    static var currentOverlay: OverlayView?
     static var hideAction: closeAction?
     
     static var theme: ThemeProtocol?
@@ -25,8 +35,8 @@ class ImageManager: NSObject {
     
     //MARK: - Create Overlay
     
-    private static func createOverlay(overlayTarget: UIView) -> UIView {
-        let overlay = UIView(frame: overlayTarget.frame)
+    private static func createOverlay(overlayTarget: UIView) -> OverlayView {
+        let overlay = OverlayView(frame: overlayTarget.frame)
         overlay.center = overlayTarget.center
         overlay.alpha = 1
         overlay.backgroundColor = UIColor.clear
@@ -95,6 +105,14 @@ class ImageManager: NSObject {
         titleLabel.font = .systemFont(ofSize: 14)
         titleLabel.text = "\(tappedIndex + 1) \(Consts.Texts.of) \(images.count)"
         
+        overlay.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            overlay.leadingAnchor.constraint(equalTo: currentMainWindow.leadingAnchor),
+            overlay.trailingAnchor.constraint(equalTo: currentMainWindow.trailingAnchor),
+            overlay.topAnchor.constraint(equalTo: currentMainWindow.topAnchor),
+            overlay.bottomAnchor.constraint(equalTo: currentMainWindow.bottomAnchor),
+        ])
+        
         let imageCollection = ImageCollection(frame: .zero)
         imageCollection.configure(frame: CGRect(origin: startPoint, size: startSize), images: images, currentIndex: tappedIndex) { title in
             titleLabel.text = title
@@ -102,6 +120,14 @@ class ImageManager: NSObject {
         imageCollection.tag = 999
         
         overlay.addSubview(imageCollection)
+        
+        imageCollection.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            imageCollection.leadingAnchor.constraint(equalTo: overlay.leadingAnchor),
+            imageCollection.trailingAnchor.constraint(equalTo: overlay.trailingAnchor),
+            imageCollection.topAnchor.constraint(equalTo: overlay.topAnchor),
+            imageCollection.bottomAnchor.constraint(equalTo: overlay.bottomAnchor),
+        ])
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(ImageManager.panAction(pan:)))
         panGesture.cancelsTouchesInView = false
@@ -177,6 +203,22 @@ class ImageManager: NSObject {
         imageSelector.center.y = imageSelector.center.y + imageSelector.frame.size.height
         overlay.addSubview(imageSelector)
         
+        overlay.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            overlay.leadingAnchor.constraint(equalTo: currentMainWindow.leadingAnchor),
+            overlay.trailingAnchor.constraint(equalTo: currentMainWindow.trailingAnchor),
+            overlay.topAnchor.constraint(equalTo: currentMainWindow.topAnchor),
+            overlay.bottomAnchor.constraint(equalTo: currentMainWindow.bottomAnchor),
+        ])
+        
+        imageSelector.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            imageSelector.leadingAnchor.constraint(equalTo: overlay.leadingAnchor),
+            imageSelector.trailingAnchor.constraint(equalTo: overlay.trailingAnchor),
+            imageSelector.topAnchor.constraint(equalTo: overlay.topAnchor),
+            imageSelector.bottomAnchor.constraint(equalTo: overlay.bottomAnchor),
+        ])
+        
         hideAction = nil
         currentOverlay = overlay
         UIView.animate(withDuration: 0.3, animations: {
@@ -184,6 +226,11 @@ class ImageManager: NSObject {
         }) { (finished) in
             
         }
+    }
+    
+    @objc
+    public static func rotated() {
+        
     }
     
     public static func showScreenshotTake(action: @escaping imagePickerAction, closeAction: @escaping closeAction) {
@@ -195,11 +242,27 @@ class ImageManager: NSObject {
         currentMainWindow.addSubview(overlay)
         currentMainWindow.bringSubviewToFront(overlay)
         
+        overlay.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            overlay.leadingAnchor.constraint(equalTo: currentMainWindow.leadingAnchor),
+            overlay.trailingAnchor.constraint(equalTo: currentMainWindow.trailingAnchor),
+            overlay.topAnchor.constraint(equalTo: currentMainWindow.topAnchor),
+            overlay.bottomAnchor.constraint(equalTo: currentMainWindow.bottomAnchor),
+        ])
+        
         let imageCreator = ScreenshotCreator(frame: .zero)
         imageCreator.theme = theme
         imageCreator.alpha = 0
         imageCreator.configure(frame: overlay.bounds, completion: action)
         overlay.addSubview(imageCreator)
+        
+        imageCreator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            imageCreator.leadingAnchor.constraint(equalTo: overlay.leadingAnchor),
+            imageCreator.trailingAnchor.constraint(equalTo: overlay.trailingAnchor),
+            imageCreator.topAnchor.constraint(equalTo: overlay.topAnchor),
+            imageCreator.bottomAnchor.constraint(equalTo: overlay.bottomAnchor),
+        ])
         
         hideAction = closeAction
         currentOverlay = overlay

@@ -106,6 +106,24 @@ class DataManager: FieldDelegate {
         }
     }
     
+    internal var safeSidesSpace: CGFloat {
+        get {
+            if #available(iOS 13.0, *) {
+                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                    return (scene.windows.first?.safeAreaInsets.left ?? .leastNonzeroMagnitude) + (scene.windows.first?.safeAreaInsets.right ?? .leastNonzeroMagnitude)
+                } else if let window = UIApplication.shared.windows.first {
+                    return window.safeAreaInsets.left + window.safeAreaInsets.right
+                }
+            } else {
+                if let window = UIApplication.shared.windows.first {
+                    return window.safeAreaInsets.left + window.safeAreaInsets.right
+                }
+            }
+            
+            return .leastNonzeroMagnitude
+        }
+    }
+    
     init(_ target: CampaignViewController, campaign: Campaign?) {
         self.campaign = campaign
         self.viewController = target
@@ -383,13 +401,17 @@ class DataManager: FieldDelegate {
     }
     
     private func getImageConstraint(for size: CGSize) -> CGFloat {
-        let maxWidth = self.width - self.safeSpace - self.extraSpace
+        let maxWidth = self.width
+        
+        let extraSpace = self.extraSpace + self.safeSidesSpace + 32
         
         let kHeight = 240 / size.height
         
-        let calcWidth = maxWidth - (kHeight * size.width)
+        let newWidth = size.width * kHeight
         
-        let space = calcWidth > 0 ? calcWidth : 0
+        let calcSpace = maxWidth - extraSpace - newWidth
+        
+        let space = calcSpace > 0 ? calcSpace : 0
         
         return space
     }

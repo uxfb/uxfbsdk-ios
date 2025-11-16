@@ -85,8 +85,9 @@ class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
     
     lazy var closeButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "close", in: Consts.bundle, compatibleWith: nil), for: .normal)
+        button.setImage(UIImage(named: "close", in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.addTarget(self, action: #selector(pressHide(_:)), for: .touchUpInside)
+        button.imageView?.tintColor = .black.withAlphaComponent(0.6)
         return button
     }()
   
@@ -143,7 +144,12 @@ class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
         return thumbnail
     }
     
-    private func setupSubviews() {
+    private func createViews() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(rotated(_ :)),
+                                               name: UIDevice.orientationDidChangeNotification,
+                                               object: nil)
+        
         self.addSubview(collectionView)
         self.addSubview(titleLabel)
         self.addSubview(completeButton)
@@ -152,7 +158,10 @@ class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
         permissionView.addSubview(permissionButton)
         self.addSubview(permissionView)
         
-        
+        createConstraints()
+    }
+    
+    private func createConstraints() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         completeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -208,12 +217,12 @@ class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
     
     override init(frame: CGRect){
         super.init(frame: frame)
-        setupSubviews()
+        createViews()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupSubviews()
+        createViews()
     }
     
     private func updateUI() {
@@ -222,12 +231,20 @@ class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
       titleLabel.text = "\(Consts.Texts.selected) \(selectedIndexes.count) \(Consts.Texts.of) \(maxCount)"
       titleLabel.textColor = theme?.iconColor
       closeButton.imageView?.tintColor = theme?.iconColor
-      closeButton.imageView?.image = closeButton.imageView?.image?.withRenderingMode(.alwaysTemplate)
       completeButton.isEnabled = selectedIndexes.count > 0
       completeButton.backgroundColor = theme?.btnBgColor
       completeButton.setTitleColor(theme?.btnTextColor, for: .normal)
       completeButton.imageView?.tintColor = selectedIndexes.count > 0 ? theme?.btnTextColor : theme?.iconColor
       completeButton.imageView?.image = completeButton.imageView?.image?.withRenderingMode(.alwaysTemplate)
+    }
+    
+    @objc
+    private func rotated(_ notification: Notification) {
+        let dispatchWorkItem = {
+//            self.updateUI()
+            self.collectionView.reloadData()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: dispatchWorkItem)
     }
     
     public func configure(frame: CGRect, maxCount: Int, completion: @escaping imagePickerAction) {
