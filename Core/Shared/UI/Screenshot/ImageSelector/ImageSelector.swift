@@ -241,7 +241,6 @@ class ImageSelector: UIView, PHPhotoLibraryChangeObserver {
     @objc
     private func rotated(_ notification: Notification) {
         let dispatchWorkItem = {
-//            self.updateUI()
             self.collectionView.reloadData()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: dispatchWorkItem)

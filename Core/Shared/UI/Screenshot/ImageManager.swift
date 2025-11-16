@@ -160,6 +160,30 @@ class ImageManager: NSObject {
             navView.addSubview(titleLabel)
             navView.addSubview(cancelButton)
             overlay.addSubview(navView)
+            
+            titleLabel.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                titleLabel.leadingAnchor.constraint(equalTo: navView.leadingAnchor),
+                titleLabel.trailingAnchor.constraint(equalTo: navView.trailingAnchor),
+                titleLabel.bottomAnchor.constraint(equalTo: navView.bottomAnchor, constant: -2),
+                titleLabel.heightAnchor.constraint(equalToConstant: 44),
+            ])
+            
+            cancelButton.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                cancelButton.trailingAnchor.constraint(equalTo: navView.trailingAnchor, constant: -16),
+                cancelButton.bottomAnchor.constraint(equalTo: navView.bottomAnchor, constant: -2),
+                cancelButton.heightAnchor.constraint(equalToConstant: 44),
+                cancelButton.widthAnchor.constraint(equalToConstant: 44)
+            ])
+            
+            navView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                navView.leadingAnchor.constraint(equalTo: overlay.leadingAnchor),
+                navView.trailingAnchor.constraint(equalTo: overlay.trailingAnchor),
+                navView.topAnchor.constraint(equalTo: overlay.topAnchor),
+                navView.heightAnchor.constraint(equalToConstant: addTop + 48)
+            ])
         } else {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ImageManager.tapHide(_:)))
             tapGesture.cancelsTouchesInView = false

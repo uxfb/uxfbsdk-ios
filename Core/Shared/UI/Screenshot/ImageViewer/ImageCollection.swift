@@ -35,6 +35,11 @@ class ImageCollection: UIView, UIScrollViewDelegate {
     }
     
     private func setupSubviews() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(rotated(_ :)),
+                                               name: UIDevice.orientationDidChangeNotification,
+                                               object: nil)
+        
         addSubview(frontImageView)
         addSubview(scrollView)
         
@@ -64,6 +69,14 @@ class ImageCollection: UIView, UIScrollViewDelegate {
         setupSubviews()
     }
 
+    @objc
+    private func rotated(_ notification: Notification) {
+        let dispatchWorkItem = {
+            self.layoutSubviews()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: dispatchWorkItem)
+    }
+    
     func configure(frame: CGRect, images: [UIImage], currentIndex: Int, onPageChange: @escaping (String) -> () ) {
         self.frame = frame
         frontImageView.isHidden = false
