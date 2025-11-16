@@ -64,23 +64,27 @@ class ImageCell: BaseCell {
             return
         }
         
-        cellImageView.showSkeleton(baseColor: theme?.skeletonBase, shineColor: theme?.skeletonShine)
-        
-        cellImageView.cacheImage(url: url, withTemplate: false) { result in
-            self.cellImageView.hideSkeleton()
-            self.canReload = !result
-            if result {
-                self.cellImageView.backgroundColor = .clear
-                self.cellImageView.contentMode = .scaleAspectFit
-            } else {
-                DispatchQueue.main.async {
-                    let image = UIImage(named: "retry",
-                                        in: Consts.bundle,
-                                        compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
-                    
-                    self.cellImageView.contentMode = .center
-                    self.cellImageView.backgroundColor = self.theme?.skeletonShine
-                    self.cellImageView.image = image
+        if let cachedImage = ImageCache.shared.object(forKey: url.absoluteString as NSString) {
+            self.cellImageView.image = cachedImage
+        } else {
+            cellImageView.showSkeleton(baseColor: theme?.skeletonBase, shineColor: theme?.skeletonShine)
+            
+            cellImageView.cacheImage(url: url, withTemplate: false) { result in
+                self.cellImageView.hideSkeleton()
+                self.canReload = !result
+                if result {
+                    self.cellImageView.backgroundColor = .clear
+                    self.cellImageView.contentMode = .scaleAspectFit
+                } else {
+                    DispatchQueue.main.async {
+                        let image = UIImage(named: "retry",
+                                            in: Consts.bundle,
+                                            compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
+                        
+                        self.cellImageView.contentMode = .center
+                        self.cellImageView.backgroundColor = self.theme?.skeletonShine
+                        self.cellImageView.image = image
+                    }
                 }
             }
         }
