@@ -117,6 +117,7 @@ class PrivacyView: UIView {
     }
     
     private func setupConstraints() {
+        self.translatesAutoresizingMaskIntoConstraints = false
         privacyImageBgView.translatesAutoresizingMaskIntoConstraints = false
         privacyImageView.translatesAutoresizingMaskIntoConstraints = false
         privacyLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -141,12 +142,16 @@ class PrivacyView: UIView {
             privacyImageView.bottomAnchor.constraint(equalTo: privacyImageBgView.bottomAnchor,
                                                      constant: -4),
             
-            privacyLabel.centerYAnchor.constraint(equalTo: privacyImageBgView.centerYAnchor,
-                                                  constant: 0),
+//            privacyLabel.centerYAnchor.constraint(equalTo: privacyImageBgView.centerYAnchor,
+//                                                  constant: 0),
             privacyLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,
                                                   constant: 48),
             privacyLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,
                                                    constant: -16),
+            privacyLabel.topAnchor.constraint(equalTo: self.topAnchor,
+                                                   constant: 4),
+            privacyLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor,
+                                                   constant: -4),
             
             privacyWarningLabel.topAnchor.constraint(equalTo: privacyLabel.bottomAnchor,
                                                      constant: 4),

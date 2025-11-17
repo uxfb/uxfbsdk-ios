@@ -129,9 +129,8 @@ internal class CampaignViewController: UIViewController {
         stackView.axis = .vertical
         stackView.addArrangedSubview(copyrightView)
         stackView.addArrangedSubview(privacyView)
-//        if campaign?.type == .slidein {
-            stackView.addArrangedSubview(holderView)
-//        }
+        stackView.addArrangedSubview(holderView)
+
         view.addSubview(stackView)
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

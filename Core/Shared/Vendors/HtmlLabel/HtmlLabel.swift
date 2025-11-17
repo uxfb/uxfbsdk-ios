@@ -118,7 +118,9 @@ extension HtmlLabel {
         }
         
         self.attributedText = attributedText
-        labelLinks.forEach { addLink($0) }
+        labelLinks.forEach {
+            addLink($0)
+        }
     }
 }
 
@@ -193,6 +195,7 @@ extension HtmlLabel {
 
 private extension HtmlLabel {
     func setupCommon() {
+        numberOfLines = 0
         isUserInteractionEnabled = true
         setupTapGestureRecognizer()
     }
