@@ -72,9 +72,9 @@ class ImageCollection: UIView, UIScrollViewDelegate {
     @objc
     private func rotated(_ notification: Notification) {
         let dispatchWorkItem = {
-            self.layoutSubviews()
+            self.hideFront()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: dispatchWorkItem)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: dispatchWorkItem)
     }
     
     func configure(frame: CGRect, images: [UIImage], currentIndex: Int, onPageChange: @escaping (String) -> () ) {
@@ -87,15 +87,15 @@ class ImageCollection: UIView, UIScrollViewDelegate {
         }
         if images.count > 0 {
             frontImageView.image = images[currentIndex]
-            frontImageView.frame = frame
+//            frontImageView.frame = frame
         }
         self.onPageChange = onPageChange
         self.layoutIfNeeded()
     }
     
     func updateFrame(frame: CGRect) {
-        self.frame = frame
-        frontImageView.frame = frame
+//        self.frame = frame
+//        frontImageView.frame = frame
         self.layoutIfNeeded()
     }
     

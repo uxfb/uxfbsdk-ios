@@ -400,159 +400,17 @@ class DataManager: FieldDelegate {
         return height + getFooterSpacing(field)
     }
     
-    private func getImageConstraint(for size: CGSize) -> CGFloat {
-        let maxWidth = self.width
-        
-        let extraSpace = self.extraSpace + self.safeSidesSpace + 32
-        
-        let kHeight = 240 / size.height
-        
-        let newWidth = size.width * kHeight
-        
-        let calcSpace = maxWidth - extraSpace - newWidth
-        
-        let space = calcSpace > 0 ? calcSpace : 0
-        
-        return space
-    }
-    
     private func getFieldHeader(_ field: Field) -> UIView? {
         if [FieldType.header, FieldType.text, FieldType.button, FieldType.image].contains(field.type) || field.value == nil || !checkFieldTransfromed(field) {
             return nil
         }
-        let view = UIView()
-        let label = LinkLabel()
         
-        label.textColor = campaign?.theme.text01Color
+        let size: CGSize = .init(width: width,
+                                 height: getFieldHeaderHeight(field))
         
-        let required = (field.uiData["required"] as? Bool) ?? false
-        
-        label.attributedText = TextPropertyManager.convert(field.value ?? "",
-                                                           theme: campaign!.theme,
-                                                           defaultFont: campaign!.theme.fontH2,
-                                                           textProperties: nil,
-                                                           withRequired: required)
-        
-        label.numberOfLines = 0
-        view.addSubview(label)
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
-        ])
-        
-        if let imageData = field.uiData["image"] as? Dictionary<String, Any>,
-           let position = imageData["position"] as? String,
-           let alignment = imageData["alignment"] as? String,
-           let src = imageData["src"] as? String,
-           let url = URL(string: src) {
-            let imageView = UIImageView()
-            imageView.backgroundColor = .clear
-            imageView.contentMode = .scaleAspectFit
-            
-            let isDefault = ((imageData["type"] as? String) ?? "default") == "default"
-            
-            if !isDefault {
-                let tapGesture = GestureRecognizer {
-                    let globalPoint = imageView.superview?.convert(imageView.frame.origin, to: nil) ?? .zero
-                    ImageManager.showImageFullScreen(images: [imageView.image ?? UIImage()], tappedIndex: 0, startPoint: globalPoint, startSize: imageView.frame.size, withNav: false) { } closeAction: { }
-                }
-                
-                imageView.addGestureRecognizer(tapGesture)
-                imageView.isUserInteractionEnabled = true
-            }
-            
-            view.addSubview(imageView)
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            let leadingConstraint = NSLayoutConstraint(item: imageView,
-                                                       attribute: .leading,
-                                                       relatedBy: .equal,
-                                                       toItem: view,
-                                                       attribute: .leading,
-                                                       multiplier: 1,
-                                                       constant: 16)
-            let trailingConstraint = NSLayoutConstraint(item: imageView,
-                                                        attribute: .trailing,
-                                                        relatedBy: .equal,
-                                                        toItem: view,
-                                                        attribute: .trailing,
-                                                        multiplier: 1,
-                                                        constant: -16)
-            
-            
-            let imageFromCache = ImageCache.shared.object(forKey: url.absoluteString as NSString)
-            
-            if imageFromCache == nil {
-                imageView.loadImageWithResult(url: url, withTemplate: false) { loadedImage in
-                    DispatchQueue.main.async {
-                        imageView.hideSkeleton()
-                        if let loadedImage = loadedImage {
-                            imageView.image = loadedImage
-                            let space = self.getImageConstraint(for: loadedImage.size)
-                            
-                            switch alignment {
-                                case "left":
-                                    trailingConstraint.constant = -16 - space
-                                    
-                                case "right":
-                                    leadingConstraint.constant = 16 + space
-                                    
-                                default:
-                                    trailingConstraint.constant = -16
-                                    leadingConstraint.constant = 16
-                            }
-                            
-                            UIView.performWithoutAnimation {
-                                view.layoutIfNeeded()
-                            }
-                        }
-                    }
-                }
-            } else {
-                imageView.image = imageFromCache
-                let space = getImageConstraint(for: imageFromCache?.size ?? .zero)
-                
-                switch alignment {
-                    case "left":
-                        trailingConstraint.constant = -16 - space
-                        
-                    case "right":
-                        leadingConstraint.constant = 16 + space
-                        
-                    default:
-                        trailingConstraint.constant = -16
-                        leadingConstraint.constant = 16
-                }
-            }
-            
-            if position == "topHeader" {
-                NSLayoutConstraint.activate([
-                    label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
-                    imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
-                    imageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -8),
-                    imageView.heightAnchor.constraint(equalToConstant: isDefault ? 100 : 240),
-                    leadingConstraint,
-                    trailingConstraint
-                ])
-            } else {
-                NSLayoutConstraint.activate([
-                    label.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
-                    imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8),
-                    imageView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
-                    imageView.heightAnchor.constraint(equalToConstant: isDefault ? 100 : 240),
-                    leadingConstraint,
-                    trailingConstraint
-                ])
-            }
-        } else {
-            NSLayoutConstraint.activate([
-                label.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
-                label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8)
-            ])
-        }
-        
-        view.backgroundColor = campaign?.theme.bgColor
+        let view = HeaderView(frame: .init(origin: .zero,
+                                           size: size))
+        view.configure(field: field, theme: campaign!.theme, extraSpace: self.extraSpace, extraSafeSidesSpace: self.safeSidesSpace)
         return view
     }
     
@@ -976,19 +834,21 @@ class DataManager: FieldDelegate {
                 return page?.id == pageId ?? ""
             }
             
-            var result: [String: Any] = [:]
-            result["pageId"] = page?.id ?? ""
-            if fields.count > 0 {
-                result["fields"] = fields.map { $0.filter{ $0.key != "pageId" } }
+            if !fields.isEmpty {
+                var result: [String: Any] = [:]
+                result["pageId"] = page?.id ?? ""
+                if fields.count > 0 {
+                    result["fields"] = fields.map { $0.filter{ $0.key != "pageId" } }
+                }
+                
+                let currentPageId = campaign?.pages[currentPage].id ?? ""
+                
+                result["close"] = page?.id == currentPageId ? 1 : 0
+                
+                result["externalLink"] = isLink ? 1 : 0
+                
+                results.append(result)
             }
-            
-            let currentPageId = campaign?.pages[currentPage].id ?? ""
-            
-            result["close"] = page?.id == currentPageId ? 1 : 0
-            
-            result["externalLink"] = isLink ? 1 : 0
-            
-            results.append(result)
         }
         
         if isPrivacyChecked || !privacyNeeded {

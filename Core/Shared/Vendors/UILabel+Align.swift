@@ -8,6 +8,7 @@
 
 import UIKit
 
+internal
 class VerticalAlignedLabel: UILabel {
     
     override func drawText(in rect: CGRect) {

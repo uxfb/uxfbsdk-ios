@@ -59,6 +59,7 @@ internal class CampaignViewController: UIViewController {
     lazy var privacyView: PrivacyView = {
         let view = PrivacyView(theme: campaign!.theme, delegate: self)
         view.frame = .init(x: 0, y: 0, width: 100, height: 100)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -372,7 +373,6 @@ internal class CampaignViewController: UIViewController {
         coordinator.animate(alongsideTransition: { _ in
                 // Animation in progress
             }, completion: { _ in
-                // Rotation animation completed
                 NotificationCenter.default.post(name: NSNotification.Name("Rotated"), object: nil)
             })
         
@@ -386,27 +386,29 @@ internal class CampaignViewController: UIViewController {
     private func updateFooterWithDynamicContent(fromCreate: Bool = false) {
         guard let footerView = tableView.tableFooterView else { return }
         
-        footerView.layoutIfNeeded()
-        let newSize = footerView.systemLayoutSizeFitting(
-            CGSize(width: tableView.bounds.width, height: UIView.layoutFittingCompressedSize.height),
-            withHorizontalFittingPriority: .required,
-            verticalFittingPriority: .fittingSizeLevel
-        )
-        
-        UIView.performWithoutAnimation {
-            let oldFooterHeight = tableView.tableFooterView?.frame.height ?? 0
+        DispatchQueue.main.async {
+            footerView.layoutIfNeeded()
+            let newSize = footerView.systemLayoutSizeFitting(
+                CGSize(width: self.tableView.bounds.width, height: UIView.layoutFittingCompressedSize.height),
+                withHorizontalFittingPriority: .required,
+                verticalFittingPriority: .fittingSizeLevel
+            )
             
-            footerView.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: newSize.height)
-
-            tableView.tableFooterView = footerView
-            
-            let footerHeight = tableView.tableFooterView?.frame.height ?? 0
-            let contentHeight = tableView.contentSize.height
-            let tableViewHeight = tableView.frame.height
-            if !fromCreate {
-                let offsetY = max(-tableView.contentInset.top, contentHeight + footerHeight - tableViewHeight)
-                if newSize.height != oldFooterHeight {
-                    tableView.setContentOffset(CGPoint(x: 0, y: offsetY), animated: false)
+            UIView.performWithoutAnimation {
+                let oldFooterHeight = self.tableView.tableFooterView?.frame.height ?? 0
+                
+                footerView.frame = CGRect(x: 0, y: 0, width: self.tableView.bounds.width, height: newSize.height)
+                
+                self.tableView.tableFooterView = footerView
+                
+                let footerHeight = self.tableView.tableFooterView?.frame.height ?? 0
+                let contentHeight = self.tableView.contentSize.height
+                let tableViewHeight = self.tableView.frame.height
+                if !fromCreate {
+                    let offsetY = max(-self.tableView.contentInset.top, contentHeight + footerHeight - tableViewHeight)
+                    if newSize.height != oldFooterHeight {
+                        self.tableView.setContentOffset(CGPoint(x: 0, y: offsetY), animated: false)
+                    }
                 }
             }
         }

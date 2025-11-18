@@ -8,8 +8,10 @@
 
 import UIKit
 
+internal
 typealias UIButtonTargetClosure = (UIButton) -> ()
 
+internal
 class ClosureWrapper: NSObject {
     let closure: UIButtonTargetClosure
     init(_ closure: @escaping UIButtonTargetClosure) {

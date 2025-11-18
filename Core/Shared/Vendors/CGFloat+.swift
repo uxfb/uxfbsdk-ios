@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+internal
 extension CGFloat {
     static var leftArea: CGFloat {
         get {

@@ -47,6 +47,8 @@
 	<string>Take and save screenshots</string>
 	<key>PHPhotoLibraryPreventAutomaticLimitedAccessAlert</key>
 	<true/>
+	<key>UIDesignRequiresCompatibility</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen_swift</string>
 	<key>UIMainStoryboardFile</key>

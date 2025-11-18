@@ -112,7 +112,6 @@ class PrivacyView: UIView {
     
     func fillTexts(_ text: String, warning: String) {
         privacyLabel.html = text
-        
         privacyWarningLabel.text = warning
     }
     
@@ -149,9 +148,9 @@ class PrivacyView: UIView {
             privacyLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,
                                                    constant: -16),
             privacyLabel.topAnchor.constraint(equalTo: self.topAnchor,
-                                                   constant: 4),
+                                                   constant: 8),
             privacyLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor,
-                                                   constant: -4),
+                                                   constant: -8),
             
             privacyWarningLabel.topAnchor.constraint(equalTo: privacyLabel.bottomAnchor,
                                                      constant: 4),

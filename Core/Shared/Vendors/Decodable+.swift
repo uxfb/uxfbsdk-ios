@@ -8,6 +8,7 @@
 
 import Foundation
 
+internal
 extension Decodable {
   init(from: Any) throws {
     let data = try JSONSerialization.data(withJSONObject: from, options: .prettyPrinted)

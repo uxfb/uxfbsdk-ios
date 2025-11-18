@@ -8,6 +8,7 @@
 
 import Foundation
 
+internal
 extension CGFloat {
     static let bigFontSize: CGFloat = 22
     static let mediumFontSize: CGFloat = 17

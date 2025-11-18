@@ -8,6 +8,7 @@ let tintedImage = originalImage.tintWithColor(UIColor(red: 0.9, green: 0.7, blue
 
 import UIKit
 
+internal
 extension UIImage {
   
     func tint(with color: UIColor) -> UIImage
