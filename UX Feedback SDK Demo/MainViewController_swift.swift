@@ -103,7 +103,7 @@ class MainViewController_swift: UIViewController {
         case 2:
 //                UXFeedback.setup(appID: uxfAppID, settings: (UIApplication.shared.delegate as! AppDelegate).settings)
 //                UXFeedback.sdk.stopCampaign(eventForStop: "")
-            UXFeedback.sdk.startCampaign(eventName: "event1909", attributes: nil)
+            UXFeedback.sdk.startCampaign(eventName: "imagef", attributes: nil)
             
         default:
             break

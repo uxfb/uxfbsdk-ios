@@ -14,10 +14,6 @@ class HeaderView: UIView {
     
     private var theme: ThemeProtocol?
     
-    private var extraSpace: CGFloat?
-    
-    private var safeSidesSpace: CGFloat?
-    
     lazy var label: LinkLabel = {
         let label = LinkLabel()
         label.numberOfLines = 0
@@ -53,35 +49,28 @@ class HeaderView: UIView {
         label.textColor = theme.text01Color
     }
     
-    func configure(field: Field, theme: ThemeProtocol, extraSpace: CGFloat, extraSafeSidesSpace: CGFloat) {
+    func configure(field: Field, theme: ThemeProtocol) {
         self.field = field
         self.theme = theme
-        self.extraSpace = extraSpace
-        self.safeSidesSpace = extraSafeSidesSpace
         updateUI()
     }
     
     private func getImageConstraint(for size: CGSize) -> CGFloat {
-        let maxWidth = UIScreen.main.bounds.width
-        
-        let extraSpace = (self.extraSpace ?? .leastNonzeroMagnitude) + (self.safeSidesSpace ?? .leastNonzeroMagnitude) + 32
-        
         let kHeight = 240 / size.height
         
         let newWidth = size.width * kHeight
         
         return newWidth
-        
-//        let calcSpace = maxWidth - extraSpace - newWidth
-//        
-//        let space = calcSpace > 0 ? calcSpace : 0
-//        
-//        return space
     }
     
     private func setup() {
         addSubview(label)
         addSubview(imageView)
+        
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
+        ])
     }
     
     private func updateWidthConstraints() {
@@ -151,8 +140,6 @@ class HeaderView: UIView {
             self.imageView.isUserInteractionEnabled = true
         }
         
-        self.updateImageConstraints()
-        
         let imageFromCache = ImageCache.shared.object(forKey: url.absoluteString as NSString)
         
         if imageFromCache == nil {
@@ -190,11 +177,6 @@ class HeaderView: UIView {
                                                            textProperties: nil,
                                                            withRequired: required)
         
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
-        ])
-        
         if let imageData = field.uiData["image"] as? Dictionary<String, Any>,
            let position = imageData["position"] as? String,
            let alignment = imageData["alignment"] as? String,
@@ -204,6 +186,7 @@ class HeaderView: UIView {
             self.isDefault = isDefault
             self.position = position
             self.alignment = alignment
+            self.updateImageConstraints()
             self.updateImage(url: url)
         } else {
             NSLayoutConstraint.activate([

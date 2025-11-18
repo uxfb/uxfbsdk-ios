@@ -207,7 +207,7 @@ class DataManager: FieldDelegate {
         let field = ((campaign?.pages[currentPage].fields ?? []) + (campaign?.pages[currentPage].buttons ?? []))[index]
         let height = getFieldHeaderHeight(field)
         if checkFieldTransfromed(field) && height > 12 {
-            return UITableView.automaticDimension
+            return getFieldHeaderHeight(field)
         }
         return CGFloat.leastNonzeroMagnitude
     }
@@ -410,7 +410,7 @@ class DataManager: FieldDelegate {
         
         let view = HeaderView(frame: .init(origin: .zero,
                                            size: size))
-        view.configure(field: field, theme: campaign!.theme, extraSpace: self.extraSpace, extraSafeSidesSpace: self.safeSidesSpace)
+        view.configure(field: field, theme: campaign!.theme)
         return view
     }
     

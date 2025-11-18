@@ -146,7 +146,7 @@ internal class CampaignViewController: UIViewController {
     lazy var tableView: UITableView = {
         var view: UITableView!
         if #available(iOS 13.0, *) {
-            view = UITableView(frame: .zero, style: .insetGrouped)
+            view = UITableView(frame: .zero, style: .grouped)
         } else {
             view = UITableView(frame: .zero, style: .grouped)
         }
@@ -724,11 +724,13 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
         return dataManager?.heightForFieldHeader(index: section) ?? 12
     }
     
+    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return dataManager?.heightForFieldHeader(index: section) ?? 12
+    }
+    
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return dataManager?.heightForFieldFooter(index: section) ?? 12
     }
-    
-    
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return dataManager?.viewForFieldHeader(index: section)
@@ -747,6 +749,10 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return dataManager?.heightForFieldCell(indexPath: indexPath) ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return dataManager?.heightForFieldCell(indexPath: indexPath) ?? 0
     }
     
