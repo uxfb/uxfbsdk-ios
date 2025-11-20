@@ -94,7 +94,21 @@ class MainViewController_swift: UIViewController {
 //                    .addValue("hash_user_id", value: "aaca4f68bf5d7e61b2894cb70622d094                                ")
 //                    .build()
 //                for i in 0...10000 {
-                    UXFeedback.sdk.startCampaign(eventName: "ima")
+                
+                let eventNames = [
+                    "ger_1",
+                    "ger",
+                    "seller",
+                    "filter",
+                    "mvideo",
+                    "roundtrip",
+                    "resume",
+                    "pvz",
+                    "image",
+                    "person"
+                ]
+                
+                    UXFeedback.sdk.startCampaign(eventName: eventNames[8])
                 
                 
 //                }
@@ -103,7 +117,7 @@ class MainViewController_swift: UIViewController {
         case 2:
 //                UXFeedback.setup(appID: uxfAppID, settings: (UIApplication.shared.delegate as! AppDelegate).settings)
 //                UXFeedback.sdk.stopCampaign(eventForStop: "")
-            UXFeedback.sdk.startCampaign(eventName: "imagef", attributes: nil)
+            UXFeedback.sdk.startCampaign(eventName: "hardlogick", attributes: nil)
             
         default:
             break

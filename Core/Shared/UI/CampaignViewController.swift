@@ -266,6 +266,7 @@ internal class CampaignViewController: UIViewController {
                                                name: UIDevice.orientationDidChangeNotification,
                                                object: nil)
         
+        self.updateFooter()
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -363,8 +364,6 @@ internal class CampaignViewController: UIViewController {
             if let effectView = self.view.viewWithTag(visualEffectViewTag) {
                 effectView.frame = UIScreen.main.bounds
             }
-//            self.dataManager?.checkPrivacy(nil)
-//            self.tableView.reloadData()
         }
     }
     
@@ -375,40 +374,36 @@ internal class CampaignViewController: UIViewController {
             }, completion: { _ in
                 NotificationCenter.default.post(name: NSNotification.Name("Rotated"), object: nil)
             })
-        
-        DispatchQueue.main.async {
-//            self.tableView.reloadData()
-        }
     }
     
     //MARK: - Support
     
     private func updateFooterWithDynamicContent(fromCreate: Bool = false) {
         guard let footerView = tableView.tableFooterView else { return }
+    
+        footerView.layoutIfNeeded()
+        let newSize = footerView.systemLayoutSizeFitting(
+            CGSize(width: self.tableView.bounds.width, height: UIView.layoutFittingCompressedSize.height),
+            withHorizontalFittingPriority: .required,
+            verticalFittingPriority: .fittingSizeLevel
+        )
         
-        DispatchQueue.main.async {
-            footerView.layoutIfNeeded()
-            let newSize = footerView.systemLayoutSizeFitting(
-                CGSize(width: self.tableView.bounds.width, height: UIView.layoutFittingCompressedSize.height),
-                withHorizontalFittingPriority: .required,
-                verticalFittingPriority: .fittingSizeLevel
-            )
+        UIView.performWithoutAnimation {
+            let oldFooterHeight = self.tableView.tableFooterView?.frame.height ?? 0
             
-            UIView.performWithoutAnimation {
-                let oldFooterHeight = self.tableView.tableFooterView?.frame.height ?? 0
-                
-                footerView.frame = CGRect(x: 0, y: 0, width: self.tableView.bounds.width, height: newSize.height)
-                
-                self.tableView.tableFooterView = footerView
-                
+            footerView.frame = CGRect(x: 0, y: 0, width: self.tableView.bounds.width, height: newSize.height)
+            
+            self.tableView.tableFooterView = footerView
+            
+            
+            if !fromCreate {
                 let footerHeight = self.tableView.tableFooterView?.frame.height ?? 0
                 let contentHeight = self.tableView.contentSize.height
                 let tableViewHeight = self.tableView.frame.height
-                if !fromCreate {
-                    let offsetY = max(-self.tableView.contentInset.top, contentHeight + footerHeight - tableViewHeight)
-                    if newSize.height != oldFooterHeight {
-                        self.tableView.setContentOffset(CGPoint(x: 0, y: offsetY), animated: false)
-                    }
+                
+                let offsetY = max(-self.tableView.contentInset.top, contentHeight + footerHeight - tableViewHeight)
+                if newSize.height != oldFooterHeight {
+                    self.tableView.setContentOffset(CGPoint(x: 0, y: offsetY), animated: false)
                 }
             }
         }
@@ -427,6 +422,8 @@ internal class CampaignViewController: UIViewController {
             privacyView.preparePrivacy(campaign?.privacy?.type ?? "")
         }
         updateFooterWithDynamicContent(fromCreate: true)
+        
+        contentHeight.constant = dataManager?.heightForCurrentPage() ?? 0
     }
     
     func createFooter(withPrivacy: Bool) {
@@ -1006,12 +1003,13 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     //MARK: - Update changes
     
     private func reloadTableView() {
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
+//        CATransaction.begin()
+//        CATransaction.setDisableActions(true)
+        UIView.performWithoutAnimation {
+            self.tableView.reloadData()
+        }
         
-        self.tableView.reloadData()
-        
-        CATransaction.commit()
+//        CATransaction.commit()
     }
     
     func scrollToTop(animated: Bool) {
@@ -1026,8 +1024,6 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
         var indexSet = IndexSet(integersIn: 0..<self.tableView.numberOfSections)
         indexSet.remove(idx)
         
-        //        self.tableView.reloadSections(indexSet, with: .none)
-//        self.tableView.reloadData()
         reloadTableView()
         self.updateHeight()
     }
@@ -1050,9 +1046,9 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func didBeginEditing(_ section: Int) {
-//        let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 1000, right: 0)
-//        self.tableView.contentInset = edgeInsets
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: section), at: .middle, animated: true)
+        let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 180, right: 0)
+        self.tableView.contentInset = edgeInsets
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: section), at: .top, animated: true)
     }
     
     func didEndEditing(_ section: Int) {
@@ -1077,9 +1073,11 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
             self.privacyView.fillTexts(text ?? "", warning: warning ?? "")
         }
 
-        self.updateFooterWithDynamicContent()
-        
-        contentHeight.constant = dataManager?.heightForCurrentPage() ?? 0
+        let dispatchWorkItem = {
+            self.updateFooterWithDynamicContent()
+            self.contentHeight.constant = self.dataManager?.heightForCurrentPage() ?? 0
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: dispatchWorkItem)
     }
     
     //MARK: - Autorotate

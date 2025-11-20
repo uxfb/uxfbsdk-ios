@@ -9,8 +9,8 @@
 import UIKit
 //import YoHeSDK
 import UXFeedbackSDK
-let uxfAppID = "cmde6s2fb00003570frwmms4o" //images
-//let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
+//let uxfAppID = "cmde6s2fb00003570frwmms4o" //images
+let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
 //let uxfAppID = "cm6zh73bw00003b6nq7vrelv0" //dev
 
 //let uxfAppID = "cm7xc7w6u00003b6s1m4wi9ed"

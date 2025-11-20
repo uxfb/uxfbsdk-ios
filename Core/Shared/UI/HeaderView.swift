@@ -74,7 +74,9 @@ class HeaderView: UIView {
     }
     
     private func updateWidthConstraints() {
-        guard let image = imageView.image else { return }
+        guard let image = imageView.image else {
+            return
+        }
         
         let width = self.getImageConstraint(for: image.size )
         

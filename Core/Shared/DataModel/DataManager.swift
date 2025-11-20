@@ -207,6 +207,7 @@ class DataManager: FieldDelegate {
         let field = ((campaign?.pages[currentPage].fields ?? []) + (campaign?.pages[currentPage].buttons ?? []))[index]
         let height = getFieldHeaderHeight(field)
         if checkFieldTransfromed(field) && height > 12 {
+//            return UITableView.automaticDimension
             return getFieldHeaderHeight(field)
         }
         return CGFloat.leastNonzeroMagnitude
@@ -464,7 +465,7 @@ class DataManager: FieldDelegate {
                 return 40
                 
             case .checkbox:
-                let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 48 - 36
+                let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 44 
                 var height: CGFloat = 0
                 let checkboxes = field.uiData["options"] as? Array<Dictionary<String, Any>> ?? []
                 for checkbox in checkboxes {
@@ -515,7 +516,7 @@ class DataManager: FieldDelegate {
                 return max(valueHeight, minHeight)
                 
             case .radiobutton:
-                let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 48 - 36
+                let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 44
                 var height: CGFloat = 0
                 let buttons = field.uiData["options"] as? Array<Dictionary<String, Any>> ?? []
                 for button in buttons {
@@ -802,9 +803,7 @@ class DataManager: FieldDelegate {
         currentPage = index
         viewController?.scrollToTop(animated: false)
         viewController?.updateUI()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.viewController?.updateFooter()
-        }
+        self.viewController?.updateFooter()
     }
     
     public func endCampaign(terminated: Bool, isLink: Bool = false) {

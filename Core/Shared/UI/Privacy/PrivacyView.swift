@@ -123,7 +123,7 @@ class PrivacyView: UIView {
         privacyWarningLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            privacyImageBgView.topAnchor.constraint(equalTo: self.topAnchor,
+            privacyImageBgView.topAnchor.constraint(greaterThanOrEqualTo: self.topAnchor,
                                                     constant: 16),
             privacyImageBgView.leadingAnchor.constraint(equalTo: self.leadingAnchor,
                                                         constant: 16),
@@ -131,6 +131,7 @@ class PrivacyView: UIView {
             privacyImageBgView.heightAnchor.constraint(equalToConstant: 24),
             privacyImageBgView.bottomAnchor.constraint(lessThanOrEqualTo: self.bottomAnchor,
                                                        constant: -16),
+            privacyImageBgView.centerYAnchor.constraint(equalTo: privacyLabel.centerYAnchor),
             
             privacyImageView.topAnchor.constraint(equalTo: privacyImageBgView.topAnchor,
                                                   constant: 4),
@@ -149,8 +150,9 @@ class PrivacyView: UIView {
                                                    constant: -16),
             privacyLabel.topAnchor.constraint(equalTo: self.topAnchor,
                                                    constant: 8),
-            privacyLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor,
-                                                   constant: -8),
+            privacyLabel.bottomAnchor.constraint(lessThanOrEqualTo: self.bottomAnchor,
+                                                       constant: -16),
+            
             
             privacyWarningLabel.topAnchor.constraint(equalTo: privacyLabel.bottomAnchor,
                                                      constant: 4),

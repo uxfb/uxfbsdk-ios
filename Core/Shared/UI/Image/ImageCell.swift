@@ -58,7 +58,8 @@ class ImageCell: BaseCell {
             return
         }
         
-        let urlString = image["src"] as? String
+        let urlString = (image["src"] as? String) ?? (image["3x"] as? String)
+        
         
         guard let urlString = urlString, let url = URL(string: urlString) else {
             return
