@@ -105,7 +105,6 @@ internal class TextPropertyManager {
         }
         
         if withRequired {
-//            let range = (text as NSString).range(of: "*")
             attributedString.addAttribute(NSAttributedString.Key.foregroundColor,
                                           value: theme.errorColorPrimary,
                                           range: NSRange(location: 0, length: 1))

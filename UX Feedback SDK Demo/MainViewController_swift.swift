@@ -108,7 +108,7 @@ class MainViewController_swift: UIViewController {
                     "person"
                 ]
                 
-                    UXFeedback.sdk.startCampaign(eventName: eventNames[8])
+                    UXFeedback.sdk.startCampaign(eventName: eventNames[0])
                 
                 
 //                }

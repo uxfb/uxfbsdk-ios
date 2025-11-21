@@ -47,6 +47,7 @@ class HeaderView: UIView {
         guard let theme = theme else { return }
         
         label.textColor = theme.text01Color
+        self.backgroundColor = theme.bgColor
     }
     
     func configure(field: Field, theme: ThemeProtocol) {
@@ -169,7 +170,7 @@ class HeaderView: UIView {
     private func updateUI() {
         guard let field = field, let theme = theme else { return }
         
-        self.backgroundColor = theme.bgColor
+        updateTheme()
         
         let required = (field.uiData["required"] as? Bool) ?? false
         

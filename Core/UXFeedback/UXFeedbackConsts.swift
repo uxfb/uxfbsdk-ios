@@ -13,8 +13,8 @@ internal class Consts {
     static let version: String = "4.1.0"
     static let cryptoKey: String = "UXFeedback"
     static let defaultHref: String = "https://uxfeedback.ru?utm_campaign=default&utm_medium=app"
-//    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
-    static let defaultEndpoint: String = "https://develop.api.uxfb.dev"
+    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
+//    static let defaultEndpoint: String = "https://develop.api.uxfb.dev"
 //    static let defaultEndpoint: String = "https://epic-dev-6469-fields-images.api.uxfb.dev"
 
     static let apiVersion: String = "v17"
