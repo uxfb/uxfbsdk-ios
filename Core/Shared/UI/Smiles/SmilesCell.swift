@@ -9,11 +9,30 @@
 import UIKit
 
 class SmilesCell: BaseCell {
-    private func replaceColorsInImage(_ image: UIImage) -> UIImage? {
+    enum SmileState {
+        case touched
+        case selected
+        case disabled
+    }
+    
+    
+    private func replaceColorsInImage(_ image: UIImage, state: SmileState) -> UIImage? {
         guard let cgImage = image.cgImage,
-              let newYellow = theme?.iconSmile1Color,
+              var newYellow = theme?.iconSmile1Color,
               let newBlack = theme?.iconSmile2Color,
-              let newRed = theme?.iconSmile3Color else { return image }
+              var newRed = theme?.iconSmile3Color else { return image }
+        
+        switch state {
+            case .selected:
+                break
+                
+            case .touched:
+                newYellow = theme?.iconSmile4Color ?? newYellow
+                
+            case .disabled:
+                newYellow = theme?.borderDisabled ?? newYellow
+                newRed = newBlack
+        }
         
         let defaultTheme = Theme()
         let colorMap: [UIColor: UIColor] = [
@@ -93,49 +112,48 @@ class SmilesCell: BaseCell {
         return UIImage(cgImage: newCGImage)
     }
     
-    private func coloredAngry() -> UIImage {
+    private func coloredAngry(state: SmileState) -> UIImage {
         let image = UIImage(named: "angry",
                             in: Consts.bundle,
                             compatibleWith: nil)
         
-        return replaceColorsInImage(image!) ?? image!
+        return replaceColorsInImage(image!, state: state) ?? image!
     }
     
-    private func coloredMad() -> UIImage {
+    private func coloredMad(state: SmileState) -> UIImage {
         let image = UIImage(named: "mad",
                             in: Consts.bundle,
                             compatibleWith: nil)
         
-        return replaceColorsInImage(image!) ?? image!
+        return replaceColorsInImage(image!, state: state) ?? image!
     }
     
-    private func coloredConfused() -> UIImage {
+    private func coloredConfused(state: SmileState) -> UIImage {
         let image = UIImage(named: "confused",
                             in: Consts.bundle,
                             compatibleWith: nil)
         
-        return replaceColorsInImage(image!) ?? image!
+        return replaceColorsInImage(image!, state: state) ?? image!
     }
     
-    private func coloredHappy() -> UIImage {
+    private func coloredHappy(state: SmileState) -> UIImage {
         let image = UIImage(named: "happy",
                             in: Consts.bundle,
                             compatibleWith: nil)
         
-        return replaceColorsInImage(image!) ?? image!
+        return replaceColorsInImage(image!, state: state) ?? image!
     }
     
-    private func coloredInLove() -> UIImage {
+    private func coloredInLove(state: SmileState) -> UIImage {
         let image = UIImage(named: "in-love",
                             in: Consts.bundle,
                             compatibleWith: nil)
         
-        return replaceColorsInImage(image!) ?? image!
+        return replaceColorsInImage(image!, state: state) ?? image!
     }
     
     private lazy var smile1: UIButton = {
         let view = UIButton(type: .custom)
-        view.addTarget(self, action: #selector(smileTapped(_:)), for: .touchUpInside)
         view.tag = 1
         view.contentMode = .scaleAspectFit
         return view
@@ -143,7 +161,6 @@ class SmilesCell: BaseCell {
     
     private lazy var smile2: UIButton = {
         let view = UIButton(type: .custom)
-        view.addTarget(self, action: #selector(smileTapped(_:)), for: .touchUpInside)
         view.tag = 2
         view.contentMode = .scaleAspectFit
         return view
@@ -151,7 +168,6 @@ class SmilesCell: BaseCell {
     
     private lazy var smile3: UIButton = {
         let view = UIButton(type: .custom)
-        view.addTarget(self, action: #selector(smileTapped(_:)), for: .touchUpInside)
         view.tag = 3
         view.contentMode = .scaleAspectFit
         return view
@@ -159,7 +175,6 @@ class SmilesCell: BaseCell {
     
     private lazy var smile4: UIButton = {
         let view = UIButton(type: .custom)
-        view.addTarget(self, action: #selector(smileTapped(_:)), for: .touchUpInside)
         view.tag = 4
         view.contentMode = .scaleAspectFit
         return view
@@ -167,7 +182,6 @@ class SmilesCell: BaseCell {
     
     private lazy var smile5: UIButton = {
         let view = UIButton(type: .custom)
-        view.addTarget(self, action: #selector(smileTapped(_:)), for: .touchUpInside)
         view.tag = 5
         view.contentMode = .scaleAspectFit
         return view
@@ -186,6 +200,7 @@ class SmilesCell: BaseCell {
         for i in 1...5 {
             if let smile = contentView.viewWithTag(i) as? UIButton {
                 smile.adjustsImageWhenHighlighted = false
+                smile.layer.cornerRadius = 19
             }
         }
         
@@ -221,30 +236,66 @@ class SmilesCell: BaseCell {
             smile5.heightAnchor.constraint(equalToConstant: 38),
             smile5.widthAnchor.constraint(equalToConstant: 38),
         ])
+        
+        for i in 1...5 {
+            if let smile = contentView.viewWithTag(i) as? UIButton {
+                smile.adjustsImageWhenHighlighted = false
+                smile.layer.cornerRadius = 19
+
+                smile.addTarget(self, action: #selector(smileTouchDown(_:)), for: .touchDown)
+
+                smile.addTarget(self, action: #selector(smileDragEnter(_:)), for: .touchDragEnter)
+                smile.addTarget(self, action: #selector(smileDragExit(_:)),  for: .touchDragExit)
+
+                smile.addTarget(self, action: #selector(smileTouchUpInside(_:)), for: .touchUpInside)
+                smile.addTarget(self, action: #selector(smileTouchCancel(_:)), for: [.touchUpOutside, .touchCancel])
+            }
+        }
+
     }
     
     override func updateUI() {
         currentValue = Int(field?.answers.first ?? "") ?? -1
         
-        for tag in 1...5 {
-            self.contentView.viewWithTag(tag)?.cornerRadius = 19
-            
-            if currentValue == -1 {
-                self.contentView.viewWithTag(tag)?.alpha = 1
-            } else {
-                self.contentView.viewWithTag(tag)?.alpha = tag != (currentValue + 1) ? 0.2 : 1
-            }
-        }
+        applyState()
         
         if (field?.isError ?? false) && currentValue == -1 {
             animateSmiles()
         }
-        
-        smile1.setImage(coloredAngry(), for: .normal)
-        smile2.setImage(coloredMad(), for: .normal)
-        smile3.setImage(coloredConfused(), for: .normal)
-        smile4.setImage(coloredHappy(), for: .normal)
-        smile5.setImage(coloredInLove(), for: .normal)
+    }
+    
+    private func setSmileState(tag: Int, state: SmileState) {
+        switch tag {
+            case 1:
+                smile1.setImage(coloredAngry(state: state), for: .normal)
+                
+            case 2:
+                smile2.setImage(coloredMad(state: state), for: .normal)
+                
+            case 3:
+                smile3.setImage(coloredConfused(state: state), for: .normal)
+                
+            case 4:
+                smile4.setImage(coloredHappy(state: state), for: .normal)
+                
+            case 5:
+                smile5.setImage(coloredInLove(state: state), for: .normal)
+                
+            default:
+                break
+                
+        }
+    }
+    
+    private func applyState() {
+        for i in 1...5 {
+            self.contentView.viewWithTag(i)?.borderWidth = 0
+            if (i == currentValue + 1) || currentValue == -1 {
+                setSmileState(tag: i, state: .selected)
+            } else {
+                setSmileState(tag: i, state: .disabled)
+            }
+        }
     }
     
     func animateSmiles() {
@@ -281,7 +332,21 @@ class SmilesCell: BaseCell {
     }
     
     @objc
+    private func smileTouched(_ sender: UIButton) {
+        setSmileState(tag: sender.tag, state: .touched)
+        sender.layer.borderColor = theme?.iconSmile4Color.withAlphaComponent(0.2).cgColor
+        sender.layer.borderWidth = 5
+    }
+    
+    @objc
+    private func smileOutside(_ sender: UIButton) {
+        applyState()
+        sender.layer.borderWidth = 0
+    }
+    
+    @objc
     private func smileTapped(_ sender: UIButton) {
+        sender.layer.borderWidth = 0
         guard !animationInProgress, sender.tag != currentValue+1 else {
             return
         }
@@ -289,19 +354,111 @@ class SmilesCell: BaseCell {
         animationInProgress = true
         currentValue = sender.tag
         UIView.animate(withDuration: 0.15) {
-            sender.alpha = 1
-            for tag in 1...5 {
-                self.contentView.viewWithTag(tag)?.borderColor = .clear
-                
-                if tag != self.currentValue {
-                    self.contentView.viewWithTag(tag)?.alpha = 0.2
-                }
-            }
+//            self.applyState()
         } completion: { (finished) in
             self.animationInProgress = false
-            if self.delegate != nil {
-                self.delegate?.fieldChanged(self.field!, answer: [String(self.currentValue - 1)], refresh: true)
+            
+        }
+    }
+
+    private func clearHighlights() {
+        for i in 1...5 {
+            if let b = contentView.viewWithTag(i) as? UIButton {
+                b.layer.borderWidth = 0
             }
         }
     }
+
+    private func highlight(_ sender: UIButton) {
+        clearHighlights()
+        setSmileState(tag: sender.tag, state: .touched)
+        sender.layer.borderColor = theme?.iconSmile4Color.withAlphaComponent(0.2).cgColor
+        sender.layer.borderWidth = 5
+    }
+
+    @objc private func smileTouchDown(_ sender: UIButton) {
+        highlight(sender)
+    }
+
+    @objc private func smileDragEnter(_ sender: UIButton) {
+        highlight(sender)
+    }
+
+    @objc private func smileDragExit(_ sender: UIButton) {
+        sender.layer.borderWidth = 0
+        applyState()
+    }
+
+    @objc private func smileTouchUpInside(_ sender: UIButton) {
+        clearHighlights()
+
+        currentValue = sender.tag - 1
+        delegate?.fieldChanged(field!, answer: [String(currentValue)], refresh: true)
+
+        applyState()
+    }
+
+    @objc private func smileTouchCancel(_ sender: UIButton) {
+        clearHighlights()
+        applyState()
+    }
+    
+    /*
+    private func touchPoint(_ location: CGPoint) {
+        applyState()
+        for i in 1...5 {
+            guard let smile = contentView.viewWithTag(i) as? UIButton else { continue }
+            
+            let p = contentView.convert(location, to: smile)
+            
+            if smile.bounds.contains(p) {
+                smile.layer.borderColor = theme?.iconSmile4Color.withAlphaComponent(0.2).cgColor
+                smile.layer.borderWidth = 5
+                setSmileState(tag: smile.tag, state: .touched)
+            } else {
+                smile.layer.borderWidth = 0
+            }
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        let location : CGPoint = (touch?.location(in: self.contentView))!
+		
+        touchPoint(location)
+        super.touchesBegan(touches, with:event)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        let location : CGPoint = (touch?.location(in: self.contentView))!
+
+        touchPoint(location)
+        super.touchesMoved(touches, with: event)
+    }
+  
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        let location : CGPoint = (touch?.location(in: self.contentView))!
+
+        for i in 1...5 {
+            if let smile = contentView.viewWithTag(i) as? UIButton {
+                if smile.point(inside: self.contentView.convert(location, to: smile.forLastBaselineLayout), with: nil) {
+                    self.currentValue = smile.tag
+                    if self.delegate != nil {
+                        self.delegate?.fieldChanged(self.field!, answer: [String(self.currentValue - 1)], refresh: true)
+                    }
+                }
+            }
+        }
+        
+        super.touchesEnded(touches, with: event)
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+		applyState()
+
+        super.touchesCancelled(touches, with: event)
+    }
+     */
 }

@@ -150,9 +150,11 @@ class Parser {
                     let fieldId: String? = fieldDict["id"] as? String
                     let fieldType: String? = fieldDict["type"] as? String
                     let fieldValue: String? = fieldDict["value"] as? String
+                    let fieldDescription: String? = fieldDict["description"] as? String
                     let field = Field(id: fieldId,
                                          type: FieldType(rawValue: fieldType ?? ""),
                                          value: fieldValue,
+                                         description: fieldDescription,
                                          uiData: fieldDict)
                     fields.append(field)
                 }

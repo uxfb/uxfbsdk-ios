@@ -48,7 +48,7 @@ class MainViewController_swift: UIViewController {
             customTheme.btnTextColor =  UIColor.init("#FFFFFF")
             customTheme.bgColor =  UIColor.init("#123456")
             
-            customTheme.iconSmile1Color =  UIColor.init("#AAAAAA")
+            customTheme.iconSmile1Color =  UIColor.init("#FFFFFF")
             customTheme.iconSmile2Color =  UIColor.init("#FB1A23")
             customTheme.iconSmile3Color =  UIColor.init("#000000")
             
@@ -96,6 +96,7 @@ class MainViewController_swift: UIViewController {
 //                for i in 0...10000 {
                 
                 let eventNames = [
+                    "mos",
                     "ger_1",
                     "ger",
                     "seller",

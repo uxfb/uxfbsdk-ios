@@ -117,8 +117,8 @@ class CheckCell: UITableViewCell {
         checkView.layer.cornerRadius = theme?.btnBorderRadius ?? 4
         checkView.layer.masksToBounds = true
         
-        checkView.borderWidth = 2
-        checkView.borderColor = isError ? theme?.errorColorSecondary : UIColor.clear
+        checkView.borderWidth = isError ? 2 : 1
+        checkView.borderColor = isError ? theme?.errorColorSecondary : theme?.inputBorderColor
         
         UIView.animate(withDuration: 0.2) {
             self.checkLabel.text = self.option?.value

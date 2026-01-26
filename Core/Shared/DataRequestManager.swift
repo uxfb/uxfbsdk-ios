@@ -111,7 +111,7 @@ final class DataRequestManager: NSObject {
     }
     
     public func sendAttributes(appId: String, campaignId: Int, attributes: [Attribute], completion: @escaping (Bool) -> Void) {
-        self._apiClient.checkAttribues(appId, campaignId, attributes, true) { success in
+        self._apiClient.checkAttribues(appId, campaignId, attributes, false) { success in
             completion(success)
         }
     }

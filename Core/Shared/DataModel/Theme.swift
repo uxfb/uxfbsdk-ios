@@ -51,45 +51,56 @@ protocol ThemeProtocol {
     var iconSmile1Color: UIColor { get set }
     var iconSmile2Color: UIColor { get set }
     var iconSmile3Color: UIColor { get set }
+    var iconSmile4Color: UIColor { get set }
     
     var skeletonBase: UIColor { get set }
     var skeletonShine: UIColor { get set }
+    
+    var bgDisabled: UIColor { get set }
+    var fgDisabled: UIColor { get set }
+    var borderDisabled: UIColor { get set }
     
     var fontH1: UIFont { get set }
     var fontH2: UIFont { get set }
     var fontP1: UIFont { get set }
     var fontP2: UIFont { get set }
     var fontBtn: UIFont { get set }
+    var fontCaption: UIFont { get set }
 }
 
 @objcMembers
 class Theme: NSObject, Decodable, ThemeProtocol {
-    var text03Color: UIColor = UIColor.init("#8B90A0")
-    var inputBorderColor: UIColor = UIColor.init("#D3D4D8")
-    var iconColor: UIColor =  UIColor.init("#B5B8C2")
-    var btnBgColorActive: UIColor =  UIColor.init("#1983C8")
-    var btnBorderRadius: CGFloat = 4
-    var errorColorSecondary: UIColor =  UIColor.init("#F4A0A3")
-    var errorColorPrimary: UIColor =  UIColor.init("#E84047")
-    var mainColor: UIColor =  UIColor.init("#0076C2")
-    var controlBgColorActive: UIColor =  UIColor.init("#DBF1FF")
-    var formBorderRadius: CGFloat = 8
-    var inputBgColor: UIColor =  UIColor.init("#F3F3F3")
-    var text01Color: UIColor =  UIColor.init("#232735")
-    var controlBgColor: UIColor =  UIColor.init("#F3F3F3")
-    var controlIconColor: UIColor =  UIColor.init("#FFFFFF")
-    var btnBgColor: UIColor =  UIColor.init("#0076C2")
-    var text02Color: UIColor =  UIColor.init("#505565")
-    var btnTextColor: UIColor =  UIColor.init("#FFFFFF")
     var bgColor: UIColor =  UIColor.init("#FFFFFF")
+    var mainColor: UIColor =  UIColor.init("#536CED")
+    var iconColor: UIColor =  UIColor.init("#B5B8C2")
+    var text01Color: UIColor =  UIColor.init("#232735")
+    var text02Color: UIColor =  UIColor.init("#505565")
+    var text03Color: UIColor =  UIColor.init("#8B90A0")
+    var inputBgColor: UIColor =  UIColor.init("#F8F8FA")
+    var inputBorderColor: UIColor =  UIColor.init("#D3D4D8")
+    var controlBgColor: UIColor =  UIColor.init("#FFFFFF")
+    var controlBgColorActive: UIColor =  UIColor.init("#F8F8FA")
+    var controlIconColor: UIColor =  UIColor.init("#FFFFFF")
+    var errorColorPrimary: UIColor =  UIColor.init("#F15E61")
+    var errorColorSecondary: UIColor =  UIColor.init("#F15E61")
+    var btnBgColor: UIColor =  UIColor.init("#536CED")
+    var btnBgColorActive: UIColor =  UIColor.init("#2D3CA6")
+    var btnTextColor: UIColor =  UIColor.init("#FFFFFF")
+    var btnBorderRadius: CGFloat = 12
+    var formBorderRadius: CGFloat = 8
     
-    var iconStarColor: UIColor =  UIColor.init("#FECA00")
-    var iconSmile1Color: UIColor = UIColor.init("#FECA00")
+    var iconStarColor: UIColor = UIColor.init("#FFCA28")  
+    var iconSmile1Color: UIColor = UIColor.init("#FFCA28")
     var iconSmile2Color: UIColor = UIColor.init("#232735")
     var iconSmile3Color: UIColor = UIColor.init("#E84047")
+    var iconSmile4Color: UIColor = UIColor.init("#FFD740")
     
     var skeletonBase: UIColor = UIColor.init("#EDEDED")
     var skeletonShine: UIColor = UIColor.init("#F8F8FA")
+    
+    var bgDisabled: UIColor =  UIColor.init("#99A1B1")
+    var fgDisabled: UIColor =  UIColor.init("#99A1B1")
+    var borderDisabled: UIColor =  UIColor.init("#99A1B1")
     
     var fontH1: UIFont = .systemFont(ofSize: 22,
                                      weight: .semibold) 
@@ -105,6 +116,9 @@ class Theme: NSObject, Decodable, ThemeProtocol {
     
     var fontBtn: UIFont = .systemFont(ofSize: 16,
                                       weight: .semibold)
+    
+    var fontCaption: UIFont = .systemFont(ofSize: 16,
+                                      weight: .regular)
     
     
     enum CodingKeys: String, CodingKey {

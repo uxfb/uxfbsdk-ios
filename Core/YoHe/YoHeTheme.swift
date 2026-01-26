@@ -65,10 +65,16 @@ open class YoHeTheme: NSObject, ThemeProtocol {
     open var iconSmile1Color: UIColor = UIColor.init("#FECA00") //yellow
     open var iconSmile2Color: UIColor = UIColor.init("#232735") //black
     open var iconSmile3Color: UIColor = UIColor.init("#E84047") //red
+    open var iconSmile4Color: UIColor = UIColor.init("#FFD740") //highlight
     
     /// Skeleton colors
     open var skeletonBase: UIColor = UIColor.init("#EDEDED")
     open var skeletonShine: UIColor = UIColor.init("#F8F8FA")
+    
+    /// Disabled colors
+    open var bgDisabled: UIColor =  UIColor.init("#99A1B1")
+    open var fgDisabled: UIColor =  UIColor.init("#99A1B1")
+    open var borderDisabled: UIColor =  UIColor.init("#99A1B1")
     
     /// Button rounding radius
      open var btnBorderRadius: CGFloat = 4
@@ -96,6 +102,9 @@ open class YoHeTheme: NSObject, ThemeProtocol {
      /// Button font. Default System:Semibold:16
      open var fontBtn: UIFont = .systemFont(ofSize: 16,
                                               weight: .semibold)
+    
+    var fontCaption: UIFont = .systemFont(ofSize: 16,
+                                          weight: .regular)
     
     /// Initialize theme object
     public override init() {

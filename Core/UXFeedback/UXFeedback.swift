@@ -58,13 +58,15 @@ open class UXFeedback: NSObject {
     private var _formPresentor: CampaignPresentor?
     private var _parser: Parser!
     
+    private var localProps: [Int: [String: Any]?] = [:]
+    
     static private let _windowLevel = UIWindow.Level.alert + 10
     
     private var isInitTheme: Bool = false
     
     private var tasks: [String: DispatchWorkItem?] = [:]
     
-//    private var task: DispatchWorkItem?
+    //    private var task: DispatchWorkItem?
     private var eventCounter: [String: Int] = [:]
     
     private var currentForm: CampaignViewController?{
@@ -211,7 +213,7 @@ open class UXFeedback: NSObject {
     /// Метод показа кампании по указанному событию
     /// - Parameter eventName: Название события
     /// - Parameter attributes: Аттрибуты показа кампании
-    @objc open func startCampaign(eventName: String, attributes: [Attribute]? = nil) {
+    @objc open func startCampaign(eventName: String, attributes: [Attribute]? = nil, localProps: [String: Any]? = nil) {
         guard (self._appWindow != nil) else {
             self.DDLog("Campaigns not loaded")
             return
@@ -234,10 +236,10 @@ open class UXFeedback: NSObject {
         }
         DDLog("Attempt starting: \(eventName)\nAttributes: \(attributesString)")
         
-//        guard task == nil else {
-//            DDLog("Same campaign already started")
-//            return
-//        }
+        //        guard task == nil else {
+        //            DDLog("Same campaign already started")
+        //            return
+        //        }
         
         _eventToSend = eventName
         
@@ -340,6 +342,7 @@ open class UXFeedback: NSObject {
                         }
                         
                         self.DDLog("Show form for event: \(eventName)")
+                        self.localProps[campaign.campaignId] = localProps
                         self._formPresentor?.showCampaign(uiBlocked: self.settings.slideInUiBlocked,
                                                           closeOnSwipe: self.settings.closeOnSwipe,
                                                           blackout: blackout,
@@ -379,7 +382,7 @@ open class UXFeedback: NSObject {
             self._formPresentor?.stopCampaign()
         }
         if let eventName = eventForStop,
-            eventName.count > 0 {
+           eventName.count > 0 {
             clearTask(eventName: eventName)
         } else {
             self.tasks.forEach { task in
@@ -387,6 +390,24 @@ open class UXFeedback: NSObject {
             }
             self.tasks = [:]
         }
+    }
+    
+    /// Метод получения глобальных properties
+    open func addGlobalProperty(key: String, value: Any) {
+        properties[key] = value
+    }
+    
+    /// Метод добавления глобального property
+    open func removeGlobalProperty(key: String) {
+        properties.removeValue(forKey: key)
+    }
+    /// Метод удаления глобального property
+    open func clearGlobalProperties() {
+        properties = [:]
+    }
+    /// Метод удаления всех глобальных properties
+    open func getGlobalProperties() -> [String: Any] {
+        return properties
     }
 }
 
@@ -447,11 +468,17 @@ extension UXFeedback: CampaignFormPresentorProtocol {
         self.campaignDelegate?.campaignDidAnswered(campaignId: campaign.campaignId,
                                                    answers: answers)
         
+        var props = properties
+        if let localProps = self.localProps[campaign.campaignId],
+           localProps != nil {
+            props = props.merging(localProps!) { current, _ in current }
+        }
+        
         _requestManager.sendFormData(projectId: campaign.projectId,
                                      createdAtClient: StatisticManager.getTimeUTC(),
                                      campaignId: campaign.campaignId,
                                      pages: info,
-                                     properties: properties)
+                                     properties: props)
         
         _requestManager.sendScreenshotsData(screenshots: screenshots)
     }

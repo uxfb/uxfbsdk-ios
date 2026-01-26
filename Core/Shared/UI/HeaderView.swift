@@ -21,6 +21,13 @@ class HeaderView: UIView {
         return label
     }()
     
+    lazy var descriptionLabel: LinkLabel = {
+        let label = LinkLabel()
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     lazy var imageView: UIImageView = {
         let view = UIImageView()
         view.backgroundColor = .clear
@@ -66,11 +73,18 @@ class HeaderView: UIView {
     
     private func setup() {
         addSubview(label)
+        addSubview(descriptionLabel)
         addSubview(imageView)
         
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
+        ])
+        
+        NSLayoutConstraint.activate([
+            descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            descriptionLabel.topAnchor.constraint(equalTo: label.bottomAnchor)
         ])
     }
     
@@ -113,7 +127,8 @@ class HeaderView: UIView {
         
         if position == "topHeader" {
             NSLayoutConstraint.activate([
-                label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+                descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+                label.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -12),
                 imageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
                 imageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -8),
                 imageView.heightAnchor.constraint(equalToConstant: isDefault ? 100 : 240)
@@ -122,7 +137,7 @@ class HeaderView: UIView {
             NSLayoutConstraint.activate([
                 label.topAnchor.constraint(equalTo: topAnchor, constant: 16),
                 imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-                imageView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
+                imageView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8),
                 imageView.heightAnchor.constraint(equalToConstant: isDefault ? 100 : 240)
             ])
         }
@@ -180,6 +195,13 @@ class HeaderView: UIView {
                                                            textProperties: nil,
                                                            withRequired: required)
         
+        if let descriptionData = field.description {
+            descriptionLabel.attributedText = TextPropertyManager.convert(descriptionData, theme: theme, defaultFont: theme.fontP1, textProperties: nil, withRequired: false)
+        } else {
+            descriptionLabel.text = nil
+            descriptionLabel.attributedText = nil
+        }
+        
         if let imageData = field.uiData["image"] as? Dictionary<String, Any>,
            let position = imageData["position"] as? String,
            let alignment = imageData["alignment"] as? String,
@@ -194,7 +216,7 @@ class HeaderView: UIView {
         } else {
             NSLayoutConstraint.activate([
                 label.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-                label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+                descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
             ])
         }
     }

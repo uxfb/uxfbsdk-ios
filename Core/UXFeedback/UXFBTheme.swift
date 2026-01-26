@@ -11,7 +11,7 @@ import Foundation
 /// Класс темы SDK. Для создания экземпляра настроек по умолчанию необходимо вызвать метод ``init()``.  **ВАЖНО**: все цвета задаются в формате HEX с решеткой в начале, например #ABC123
 @objcMembers
 open class UXFBTheme: NSObject, ThemeProtocol {
-    
+    /*
     /// Цвет текста счетчика страниц, плейсхолдеров, чекбоксов и радиокнопок в нормальном состоянии
     open var text03Color: UIColor = UIColor.init("#8B90A0")
     /// Цвет бордера инпутов в нормальном состоянии
@@ -21,7 +21,7 @@ open class UXFBTheme: NSObject, ThemeProtocol {
     /// Цвет кнопки в состоянии highlighted
     open var btnBgColorActive: UIColor =  UIColor.init("#1983C8")
     /// Радиус скругления кнопки
-    open var btnBorderRadius: CGFloat = 4
+    open var btnBorderRadius: CGFloat = 12
     /// Цвет бордера инпута в состонии ошибки
     open var errorColorSecondary: UIColor =  UIColor.init("#F4A0A3")
     /// Цвет подписи текста ошибки к блоку, цвет NPS/рейтинга в состонии ошибки
@@ -79,6 +79,60 @@ open class UXFBTheme: NSObject, ThemeProtocol {
     /// Шрифт кнопок. По умолчанию System:Semibold:16
     open var fontBtn: UIFont = .systemFont(ofSize: 16,
                                              weight: .semibold)
+    
+    var fontCaption: UIFont = .systemFont(ofSize: 16,
+                                          weight: .regular)
+    */
+    
+    open var bgColor: UIColor =  UIColor.init("#FFFFFF")
+    open var mainColor: UIColor =  UIColor.init("#536CED")
+    open var iconColor: UIColor =  UIColor.init("#B5B8C2")
+    open var text01Color: UIColor =  UIColor.init("#232735")
+    open var text02Color: UIColor =  UIColor.init("#505565")
+    open var text03Color: UIColor =  UIColor.init("#8B90A0")
+    open var inputBgColor: UIColor =  UIColor.init("#F8F8FA")
+    open var inputBorderColor: UIColor =  UIColor.init("#D3D4D8")
+    open var controlBgColor: UIColor =  UIColor.init("#FFFFFF")
+    open var controlBgColorActive: UIColor =  UIColor.init("#F8F8FA")
+    open var controlIconColor: UIColor =  UIColor.init("#FFFFFF")
+    open var errorColorPrimary: UIColor =  UIColor.init("#F15E61")
+    open var errorColorSecondary: UIColor =  UIColor.init("#F15E61")
+    open var btnBgColor: UIColor =  UIColor.init("#536CED")
+    open var btnBgColorActive: UIColor =  UIColor.init("#2D3CA6")
+    open var btnTextColor: UIColor =  UIColor.init("#FFFFFF")
+    open var btnBorderRadius: CGFloat = 12
+    open var formBorderRadius: CGFloat = 8
+    
+    open var iconStarColor: UIColor = UIColor.init("#FFCA28")
+    open var iconSmile1Color: UIColor = UIColor.init("#FFCA28")
+    open var iconSmile2Color: UIColor = UIColor.init("#232735")
+    open var iconSmile3Color: UIColor = UIColor.init("#E84047")
+    open var iconSmile4Color: UIColor = UIColor.init("#FFD740")
+    
+    open var skeletonBase: UIColor = UIColor.init("#EDEDED")
+    open var skeletonShine: UIColor = UIColor.init("#F8F8FA")
+    
+    open var bgDisabled: UIColor =  UIColor.init("#99A1B1")
+    open var fgDisabled: UIColor =  UIColor.init("#99A1B1")
+    open var borderDisabled: UIColor =  UIColor.init("#99A1B1")
+    
+    open var fontH1: UIFont = .systemFont(ofSize: 22,
+                                     weight: .semibold)
+   
+    open var fontH2: UIFont = .systemFont(ofSize: 17,
+                                     weight: .semibold)
+    
+    open var fontP1: UIFont = .systemFont(ofSize: 17,
+                                     weight: .regular)
+    
+    open var fontP2: UIFont = .systemFont(ofSize: 14,
+                                     weight: .regular)
+    
+    open var fontBtn: UIFont = .systemFont(ofSize: 16,
+                                      weight: .semibold)
+    
+    open var fontCaption: UIFont = .systemFont(ofSize: 16,
+                                      weight: .regular)
     
     /// Инициализация объекта темы
     public override init() {

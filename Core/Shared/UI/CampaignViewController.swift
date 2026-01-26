@@ -155,6 +155,7 @@ internal class CampaignViewController: UIViewController {
             view.sectionHeaderTopPadding = .leastNonzeroMagnitude
         }
         
+        view.delaysContentTouches = false
         view.tableHeaderView = UIView(frame: .zero)
         view.delegate = self
         view.dataSource = self
@@ -225,6 +226,8 @@ internal class CampaignViewController: UIViewController {
     var dismissDirection: ViewPopupDirection = .upToDown
     
     var closeOnSwipe: Bool = false
+    
+    var isHalf: Bool = true
     
     var rotateToggle: Bool = false
     
@@ -695,10 +698,12 @@ internal class CampaignViewController: UIViewController {
                     }
                 }
                 else if direction < -120 {
+                    dataManager?.isHalfScreen = false
                     self.bottomConstraint.constant = 0
+                    updateHeight()
                 }
                 
-                UIView.animate(withDuration: 0.1) {
+                UIView.animate(withDuration: 0.2) {
                     self.view.layoutIfNeeded()
                 }
                 

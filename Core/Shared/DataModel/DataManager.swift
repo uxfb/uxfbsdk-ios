@@ -52,6 +52,8 @@ class DataManager: FieldDelegate {
         return viewController?.view.bounds.height ?? UIScreen.main.bounds.height
     }
     
+    var isHalfScreen: Bool = true
+    
     private var currentPage: Int = 0
     private var campaign: Campaign?
     var extraSpace: CGFloat {
@@ -171,7 +173,7 @@ class DataManager: FieldDelegate {
             case .slidein:
                 areas -= .bottomArea
                 height += .bottomArea
-                height = min(self.height, height)
+                height = min(self.height * (isHalfScreen ? 0.5 : 0.85) , height)
                 break
             case .popup:
                 areas += extraSpace / 2
@@ -364,6 +366,7 @@ class DataManager: FieldDelegate {
         }
         
         let font = (campaign?.theme.fontH2)!
+        let fontDescr = (campaign?.theme.fontP1)!
         let required = (field.uiData["required"] as? Bool) ?? false
         let attributedValue = TextPropertyManager.convert(field.value!,
                                                           theme: campaign!.theme,
@@ -373,12 +376,20 @@ class DataManager: FieldDelegate {
         var valueHeight = TextPropertyManager.heightForAttributed(string: attributedValue,
                                                                   and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
         
+        let attributedDescription = TextPropertyManager.convert(field.description ?? "",
+                                                          theme: campaign!.theme,
+                                                          defaultFont: fontDescr,
+                                                          textProperties: nil,
+                                                          withRequired: required)
+        let descriptionHeight = TextPropertyManager.heightForAttributed(string: attributedDescription,
+                                                                  and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
+        
         if let imageData = field.uiData["image"] as? [String: Any] {
             let isDefault = ((imageData["type"] as? String) ?? "default") == "default"
             valueHeight += 16 + (isDefault ? 100 : 240)
         }
         
-        return valueHeight + getTitleSpacing(field)
+        return valueHeight + descriptionHeight + getTitleSpacing(field)
     }
     
     private func getFieldFooterHeight(_ field: Field) -> CGFloat {
@@ -606,6 +617,8 @@ class DataManager: FieldDelegate {
     }
     
     func fieldChanged(_ field: Field, answer: [String], refresh: Bool = true) {
+        isHalfScreen = false
+        viewController?.updateHeight()
         DispatchQueue.main.async {
             self.answers = self.answers.filter { answer in ((answer["fieldId"] as? String) ?? "") != field.id }
             if answer.count > 0 {

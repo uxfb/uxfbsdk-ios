@@ -78,10 +78,10 @@ class RadioCell: UITableViewCell {
             radioLabel.topAnchor.constraint(equalTo: radioView.topAnchor, constant: 4),
             radioLabel.bottomAnchor.constraint(equalTo: radioView.bottomAnchor, constant: -4),
             
-            symbolMidView.topAnchor.constraint(equalTo: symbolExtView.topAnchor, constant: 4),
-            symbolMidView.bottomAnchor.constraint(equalTo: symbolExtView.bottomAnchor, constant: -4),
-            symbolMidView.leadingAnchor.constraint(equalTo: symbolExtView.leadingAnchor, constant: 4),
-            symbolMidView.trailingAnchor.constraint(equalTo: symbolExtView.trailingAnchor, constant: -4),
+            symbolMidView.topAnchor.constraint(equalTo: symbolExtView.topAnchor, constant: 6),
+            symbolMidView.bottomAnchor.constraint(equalTo: symbolExtView.bottomAnchor, constant: -6),
+            symbolMidView.leadingAnchor.constraint(equalTo: symbolExtView.leadingAnchor, constant: 6),
+            symbolMidView.trailingAnchor.constraint(equalTo: symbolExtView.trailingAnchor, constant: -6),
             
             symbolIntView.topAnchor.constraint(equalTo: symbolMidView.topAnchor, constant: 2),
             symbolIntView.bottomAnchor.constraint(equalTo: symbolMidView.bottomAnchor, constant: -2),
@@ -129,20 +129,21 @@ class RadioCell: UITableViewCell {
         radioView.layer.cornerRadius = theme?.btnBorderRadius ?? 4
         radioView.layer.masksToBounds = true
         
-        radioView.borderWidth = 2
-        radioView.borderColor = isError ? theme?.errorColorSecondary : UIColor.clear
+        radioView.borderWidth = isError ? 2 : 1
+        radioView.borderColor = isError ? theme?.errorColorSecondary : theme?.inputBorderColor
         
         UIView.animate(withDuration: 0.2) {
             self.radioLabel.text = self.option?.value
             if self.isSelected {
                 self.radioLabel.textColor = self.theme?.text01Color
                 
-                self.symbolExtView.backgroundColor = self.theme?.mainColor.withAlphaComponent(0.2)
+                self.symbolExtView.backgroundColor = .clear
+//                self.symbolExtView.backgroundColor = self.theme?.mainColor.withAlphaComponent(0.2)
                 self.symbolMidView.backgroundColor = self.theme?.mainColor
-                self.symbolIntView.backgroundColor = self.theme?.controlIconColor
+                self.symbolIntView.backgroundColor = self.theme?.mainColor
                 
                 self.radioView.backgroundColor = self.theme?.controlBgColorActive
-                self.dotView.backgroundColor = self.theme?.mainColor
+                self.dotView.backgroundColor = self.theme?.controlIconColor
             }
             else {
                 self.radioLabel.textColor = self.theme?.text02Color
