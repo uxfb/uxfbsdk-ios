@@ -15,6 +15,13 @@ class ScreenshotCell: BaseCell {
     private lazy var takeView: UIView = {
         let view = UIView()
         view.isHidden = true
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    private lazy var spaceView: UIView = {
+        let view = UIView()
+        
         return view
     }()
     
@@ -32,7 +39,7 @@ class ScreenshotCell: BaseCell {
     
     private lazy var takeLabel: UILabel = {
         let label = UILabel()
-        
+        label.numberOfLines = 0
         return label
     }()
     private lazy var takeImage: UIImageView = {
@@ -47,6 +54,7 @@ class ScreenshotCell: BaseCell {
     private lazy var selectView: UIView = {
         let view = UIView()
         view.isHidden = true
+        view.backgroundColor = .clear
         return view
     }()
     
@@ -64,7 +72,7 @@ class ScreenshotCell: BaseCell {
     
     private lazy var selectLabel: UILabel = {
         let label = UILabel()
-        
+        label.numberOfLines = 0
         return label
     }()
     private lazy var selectImage: UIImageView = {
@@ -79,8 +87,8 @@ class ScreenshotCell: BaseCell {
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
-        view.distribution = .fillEqually
-        view.spacing = 2
+//        view.distribution = .fillEqually
+        view.spacing = 0
         return view
     }()
     
@@ -151,6 +159,7 @@ class ScreenshotCell: BaseCell {
         
         
         stackView.addArrangedSubview(takeView)
+        stackView.addArrangedSubview(spaceView)
         stackView.addArrangedSubview(selectView)
         
         contentView.addSubview(stackView)
@@ -172,7 +181,7 @@ class ScreenshotCell: BaseCell {
         selectButton.translatesAutoresizingMaskIntoConstraints = false
         selectLabel.translatesAutoresizingMaskIntoConstraints = false
         selectImage.translatesAutoresizingMaskIntoConstraints = false
-        
+        spaceView.translatesAutoresizingMaskIntoConstraints = false
         stackViewHeight = NSLayoutConstraint(item: stackView,
                                              attribute: .height,
                                              relatedBy: .equal,
@@ -190,6 +199,11 @@ class ScreenshotCell: BaseCell {
                                                  constant: 192)
         
         NSLayoutConstraint.activate([
+            spaceView.widthAnchor.constraint(equalToConstant: 1),
+            spaceView.heightAnchor.constraint(equalToConstant: 1),
+            
+            takeView.widthAnchor.constraint(equalTo: selectView.widthAnchor),
+            
             stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
@@ -238,6 +252,13 @@ class ScreenshotCell: BaseCell {
     }
     
     override func updateUI() {
+        
+        stackView.layer.borderWidth = 1
+        stackView.layer.borderColor = theme?.borderDisabled.cgColor ?? UIColor.clear.cgColor
+        stackView.layer.cornerRadius = theme?.btnBorderRadius ?? .zero
+        
+        spaceView.backgroundColor = theme?.borderDisabled
+        
         countLabel.font = theme?.fontP2
         countLabel.textColor = theme?.text03Color
         
@@ -279,9 +300,11 @@ class ScreenshotCell: BaseCell {
             self.axis = .vertical
             height += takeLabel.isHidden ? 0 : 40
             height += selectLabel.isHidden ? 0 : 40
+            stackView.spacing = 8
         case .slidein:
             self.axis = .horizontal
             height += 48
+            stackView.spacing = 0
         }
         
         self.stackView.axis = axis
@@ -292,12 +315,12 @@ class ScreenshotCell: BaseCell {
     
     private func takeSetHighlight(_ isHighlighted: Bool) {
         takeImage.tintColor = isHighlighted ? theme?.btnBgColor : theme?.iconColor
-        takeView.backgroundColor = isHighlighted ? theme?.controlBgColorActive : theme?.controlBgColor
+        takeView.backgroundColor = isHighlighted ? theme?.controlBgColorActive : .clear
     }
     
     private func selectSetHighlight(_ isHighlighted: Bool) {
         selectImage.tintColor = isHighlighted ? theme?.btnBgColor : theme?.iconColor
-        selectView.backgroundColor = isHighlighted ? theme?.controlBgColorActive : theme?.controlBgColor
+        selectView.backgroundColor = isHighlighted ? theme?.controlBgColorActive : .clear
     }
     
     private func setEnabledBtns(_ isEnabled: Bool) {

@@ -16,13 +16,14 @@ class CheckCell: UITableViewCell {
     }()
     private lazy var symbolMidView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 2
+        view.layer.cornerRadius = 4
         return view
     }()
     
     private lazy var symbolIntView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 2
         return imageView
     }()
     private lazy var checkLabel: UILabel = {
@@ -125,7 +126,7 @@ class CheckCell: UITableViewCell {
             if self.isSelected {
                 self.checkLabel.textColor = self.theme?.text01Color
                 
-                self.symbolExtView.backgroundColor = self.theme?.mainColor.withAlphaComponent(0.2)
+                self.symbolExtView.backgroundColor = .clear
                 self.symbolMidView.backgroundColor = self.theme?.mainColor
                 self.symbolIntView.tintColor = self.theme?.controlIconColor
                 

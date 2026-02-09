@@ -100,7 +100,7 @@ class Theme: NSObject, Decodable, ThemeProtocol {
     
     var bgDisabled: UIColor =  UIColor.init("#99A1B1")
     var fgDisabled: UIColor =  UIColor.init("#99A1B1")
-    var borderDisabled: UIColor =  UIColor.init("#99A1B1")
+    var borderDisabled: UIColor =  UIColor.init("#777F8E").withAlphaComponent(0.2)
     
     var fontH1: UIFont = .systemFont(ofSize: 22,
                                      weight: .semibold) 

@@ -12,35 +12,45 @@ class StarsCell: BaseCell {
     
     private lazy var star1: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage(named: "star_unactive")
+        view.image = UIImage(named: "star_active",
+                             in: Consts.bundle,
+                             compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
         view.tag = 1
         return view
     }()
     
     private lazy var star2: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage(named: "star_unactive")
+        view.image = UIImage(named: "star_active",
+                             in: Consts.bundle,
+                             compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
         view.tag = 2
         return view
     }()
     
     private lazy var star3: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage(named: "star_unactive")
+        view.image = UIImage(named: "star_active",
+                             in: Consts.bundle,
+                             compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
         view.tag = 3
         return view
     }()
     
     private lazy var star4: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage(named: "star_unactive")
+        view.image = UIImage(named: "star_active",
+                             in: Consts.bundle,
+                             compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
         view.tag = 4
         return view
     }()
     
     private lazy var star5: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage(named: "star_unactive")
+        view.image = UIImage(named: "star_active",
+                             in: Consts.bundle,
+                             compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
         view.tag = 5
         return view
     }()
@@ -92,7 +102,7 @@ class StarsCell: BaseCell {
     override func updateUI() {
         currentValue = Int(field?.answers.first ?? "") ?? -1
         
-        let color = (field!.isError && currentValue == -1) ? theme?.iconColor : theme?.iconColor
+        let color = (field!.isError && currentValue == -1) ? theme?.borderDisabled : theme?.borderDisabled
         
         for tag in 1...5 {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(starTapped(_ :)))
@@ -100,14 +110,8 @@ class StarsCell: BaseCell {
             self.contentView.viewWithTag(tag)?.addGestureRecognizer(tapGesture)
             
             if currentValue == -1 || tag > self.currentValue  {
-                (self.contentView.viewWithTag(tag) as? UIImageView)?.image = UIImage(named: "star_unactive",
-                                                                                     in: Consts.bundle,
-                                                                                     compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
                 (self.contentView.viewWithTag(tag) as? UIImageView)?.tintColor = color
             } else {
-                (self.contentView.viewWithTag(tag) as? UIImageView)?.image = UIImage(named: "star_active",
-                                                                                     in: Consts.bundle,
-                                                                                     compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
                 (self.contentView.viewWithTag(tag) as? UIImageView)?.tintColor = theme?.iconStarColor
             }
         }
@@ -152,15 +156,11 @@ class StarsCell: BaseCell {
     private func animateStar(tag: Int, completion: @escaping () -> Void) {
         UIView.transition(with: self.contentView.viewWithTag(tag) as! UIImageView, duration: 0.0025, options: [.transitionCrossDissolve]) {
             if tag <= self.currentValue {
-                (self.contentView.viewWithTag(tag) as? UIImageView)?.tintColor = self.theme?.iconStarColor
-                (self.contentView.viewWithTag(tag) as? UIImageView)?.image = UIImage(named: "star_active",
-                                                                                     in: Consts.bundle,
-                                                                                     compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+                let imageView = self.contentView.viewWithTag(tag) as? UIImageView
+                imageView?.tintColor = self.theme?.iconStarColor
             } else {
-                (self.contentView.viewWithTag(tag) as? UIImageView)?.tintColor = self.theme?.iconColor
-                (self.contentView.viewWithTag(tag) as? UIImageView)?.image = UIImage(named: "star_unactive",
-                                                                                     in: Consts.bundle,
-                                                                                     compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+                let imageView = self.contentView.viewWithTag(tag) as? UIImageView
+                imageView?.tintColor = self.theme?.borderDisabled
             }
         } completion: { finished in
             completion()

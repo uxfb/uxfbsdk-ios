@@ -40,7 +40,7 @@ class EmailCell: BaseCell, UITextFieldDelegate {
         textField.textColor = theme?.text01Color
         textField.layer.cornerRadius = theme?.btnBorderRadius ?? 4
         textField.layer.masksToBounds = true
-        textField.backgroundColor = theme?.inputBgColor
+        textField.backgroundColor = .clear //theme?.inputBgColor
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 12))
         textField.leftViewMode = .always
         textField.keyboardType = .emailAddress

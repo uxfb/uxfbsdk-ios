@@ -26,7 +26,7 @@ class PrivacyView: UIView {
         
         self.delegate = delegate
         self.theme = theme
-        self.backgroundColor = theme.inputBgColor
+        self.backgroundColor = theme.controlBgColor
         privacyLabel.defaultColor = theme.text03Color
         privacyLabel.textColor = theme.text03Color
         privacyLabel.linkColor = theme.btnBgColor
@@ -56,9 +56,9 @@ class PrivacyView: UIView {
     }
     
     func preparePrivacy(_ type: String) {
-        privacyImageBgView.layer.cornerRadius = 2
+        privacyImageBgView.layer.cornerRadius = 4
         privacyImageBgView.layer.masksToBounds = true
-        privacyImageView.layer.cornerRadius = 2
+        privacyImageView.layer.cornerRadius = 4
         privacyImageView.layer.borderColor = UIColor.clear.cgColor
         privacyImageView.layer.borderWidth = 2
         privacyImageView.layer.masksToBounds = true
@@ -89,7 +89,8 @@ class PrivacyView: UIView {
                 
                 privacyImageView.tintColor = theme?.controlIconColor
                 privacyImageView.backgroundColor = theme?.mainColor
-                privacyImageBgView.backgroundColor = theme?.mainColor.withAlphaComponent(0.2)
+//                privacyImageBgView.backgroundColor = theme?.mainColor.withAlphaComponent(0.2)
+                privacyImageBgView.backgroundColor = .clear
             } else {
                 privacyImageView.layer.borderColor = theme?.iconColor.cgColor ?? UIColor.clear.cgColor
                 privacyImageView.image = nil

@@ -41,7 +41,7 @@ class InputCell: BaseCell {
         textView.textColor = comment.isEmpty ? theme?.text03Color : theme?.text01Color
         textView.layer.cornerRadius = theme?.btnBorderRadius ?? 4
         textView.layer.masksToBounds = true
-        textView.backgroundColor = theme?.inputBgColor ?? .white
+//        textView.backgroundColor = theme?.inputBgColor ?? .white
         
         textView.font = theme?.fontP1
         

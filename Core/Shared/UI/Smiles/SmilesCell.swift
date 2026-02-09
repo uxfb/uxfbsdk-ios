@@ -21,96 +21,116 @@ class SmilesCell: BaseCell {
               var newYellow = theme?.iconSmile1Color,
               let newBlack = theme?.iconSmile2Color,
               var newRed = theme?.iconSmile3Color else { return image }
-        
+
         switch state {
-            case .selected:
-                break
-                
-            case .touched:
-                newYellow = theme?.iconSmile4Color ?? newYellow
-                
-            case .disabled:
-                newYellow = theme?.borderDisabled ?? newYellow
-                newRed = newBlack
+        case .selected:
+            break
+
+        case .touched:
+            newYellow = theme?.iconSmile4Color ?? newYellow
+
+        case .disabled:
+            newYellow = theme?.borderDisabled ?? newYellow
+            newRed = theme?.text03Color ?? newRed
+            // newRed = newBlack
         }
-        
+
         let defaultTheme = Theme()
         let colorMap: [UIColor: UIColor] = [
             defaultTheme.iconSmile1Color: newYellow,
             defaultTheme.iconSmile2Color: newBlack,
             defaultTheme.iconSmile3Color: newRed
         ]
-        
-        let width = cgImage.width
-        let height = cgImage.height
+
+        guard let cg = image.cgImage else { return image }
+
+        let width = cg.width
+        let height = cg.height
         let bytesPerPixel = 4
         let bytesPerRow = bytesPerPixel * width
         let bitsPerComponent = 8
-        
+
         var pixelData = [UInt8](repeating: 0, count: width * height * bytesPerPixel)
-        
-        guard let context = CGContext(data: &pixelData,
-                                    width: width,
-                                    height: height,
-                                    bitsPerComponent: bitsPerComponent,
-                                    bytesPerRow: bytesPerRow,
-                                    space: CGColorSpaceCreateDeviceRGB(),
-                                    bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else {
-            return nil
-        }
-        
-        context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
-        
+
+        guard let context = CGContext(
+            data: &pixelData,
+            width: width,
+            height: height,
+            bitsPerComponent: bitsPerComponent,
+            bytesPerRow: bytesPerRow,
+            space: CGColorSpaceCreateDeviceRGB(),
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+        ) else { return nil }
+
+        context.draw(cg, in: CGRect(x: 0, y: 0, width: width, height: height))
+
+        // Prepare map in 0...255 RGBA (but we'll match ignoring A)
         let preparedColorMap: [([UInt8], [UInt8])] = colorMap.compactMap { oldColor, newColor in
             var oldR: CGFloat = 0, oldG: CGFloat = 0, oldB: CGFloat = 0, oldA: CGFloat = 0
             var newR: CGFloat = 0, newG: CGFloat = 0, newB: CGFloat = 0, newA: CGFloat = 0
-            
+
             guard oldColor.getRed(&oldR, green: &oldG, blue: &oldB, alpha: &oldA),
                   newColor.getRed(&newR, green: &newG, blue: &newB, alpha: &newA) else {
                 return nil
             }
-            
-            let oldComponents = [
-                UInt8(oldR * 255),
-                UInt8(oldG * 255),
-                UInt8(oldB * 255),
-                UInt8(oldA * 255)
+
+            let oldRGB: [UInt8] = [
+                UInt8(clamping: Int(oldR * 255)),
+                UInt8(clamping: Int(oldG * 255)),
+                UInt8(clamping: Int(oldB * 255))
             ]
-            
-            let newComponents = [
-                UInt8(newR * 255),
-                UInt8(newG * 255),
-                UInt8(newB * 255),
-                UInt8(newA * 255)
+
+            let newRGBA: [UInt8] = [
+                UInt8(clamping: Int(newR * 255)),
+                UInt8(clamping: Int(newG * 255)),
+                UInt8(clamping: Int(newB * 255)),
+                UInt8(clamping: Int(newA * 255))
             ]
-            
-            return (oldComponents, newComponents)
+
+            return (oldRGB, newRGBA)
         }
-        
+
+        // Tolerance for matching (increase if your source has gradients/compression)
+        let tol = 12
+
         for i in stride(from: 0, to: pixelData.count, by: 4) {
             let r = pixelData[i]
-            let g = pixelData[i+1]
-            let b = pixelData[i+2]
-            let a = pixelData[i+3]
-            
-            for (oldComponents, newComponents) in preparedColorMap {
-                if abs(Int(r) - Int(oldComponents[0])) < 10 &&
-                   abs(Int(g) - Int(oldComponents[1])) < 10 &&
-                   abs(Int(b) - Int(oldComponents[2])) < 10 &&
-                   abs(Int(a) - Int(oldComponents[3])) < 10 {
-                    
-                    pixelData[i] = newComponents[0]
-                    pixelData[i+1] = newComponents[1]
-                    pixelData[i+2] = newComponents[2]
-                    pixelData[i+3] = newComponents[3]
+            let g = pixelData[i + 1]
+            let b = pixelData[i + 2]
+            let srcA = pixelData[i + 3]
+
+            if srcA == 0 { continue }
+
+            for (oldRGB, newRGBA) in preparedColorMap {
+                if abs(Int(r) - Int(oldRGB[0])) < tol &&
+                    abs(Int(g) - Int(oldRGB[1])) < tol &&
+                    abs(Int(b) - Int(oldRGB[2])) < tol {
+
+                    let newA = newRGBA[3]
+
+                    // Combine the original pixel alpha with the replacement color alpha
+                    let srcAlpha = CGFloat(srcA) / 255.0
+                    let repAlpha = CGFloat(newA) / 255.0
+                    let finalAlpha = srcAlpha * repAlpha
+                    let finalAByte = UInt8(clamping: Int(finalAlpha * 255.0))
+
+                    // Premultiply RGB for premultipliedLast bitmap
+                    pixelData[i]     = UInt8(clamping: Int(CGFloat(newRGBA[0]) * finalAlpha))
+                    pixelData[i + 1] = UInt8(clamping: Int(CGFloat(newRGBA[1]) * finalAlpha))
+                    pixelData[i + 2] = UInt8(clamping: Int(CGFloat(newRGBA[2]) * finalAlpha))
+                    pixelData[i + 3] = finalAByte
+
                     break
                 }
             }
         }
-        
+
         guard let newCGImage = context.makeImage() else { return nil }
-        return UIImage(cgImage: newCGImage)
+        return UIImage(cgImage: newCGImage, scale: image.scale, orientation: image.imageOrientation)
     }
+
+
+
     
     private func coloredAngry(state: SmileState) -> UIImage {
         let image = UIImage(named: "angry",
@@ -335,7 +355,7 @@ class SmilesCell: BaseCell {
     private func smileTouched(_ sender: UIButton) {
         setSmileState(tag: sender.tag, state: .touched)
         sender.layer.borderColor = theme?.iconSmile4Color.withAlphaComponent(0.2).cgColor
-        sender.layer.borderWidth = 5
+        sender.layer.borderWidth = 7
     }
     
     @objc
@@ -373,7 +393,7 @@ class SmilesCell: BaseCell {
         clearHighlights()
         setSmileState(tag: sender.tag, state: .touched)
         sender.layer.borderColor = theme?.iconSmile4Color.withAlphaComponent(0.2).cgColor
-        sender.layer.borderWidth = 5
+        sender.layer.borderWidth = 15
     }
 
     @objc private func smileTouchDown(_ sender: UIButton) {

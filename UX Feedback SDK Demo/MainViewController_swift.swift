@@ -96,7 +96,7 @@ class MainViewController_swift: UIViewController {
 //                for i in 0...10000 {
                 
                 let eventNames = [
-                    "mos",
+                    "bs",
                     "ger_1",
                     "ger",
                     "seller",

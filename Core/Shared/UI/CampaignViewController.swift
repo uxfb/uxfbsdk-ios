@@ -114,7 +114,7 @@ internal class CampaignViewController: UIViewController {
     
     lazy var holderView: UIView = {
         let view = UIView()
-        view.backgroundColor = campaign?.theme.inputBgColor ?? .clear
+        view.backgroundColor = campaign?.theme.controlBgColor ?? .clear
         if campaign?.type == .slidein {
             view.heightAnchor.constraint(equalToConstant: dataManager?.safeSpace ?? 0).isActive = true
         } else {
@@ -416,7 +416,7 @@ internal class CampaignViewController: UIViewController {
         let withPrivacy = dataManager?.privacyEnabled ?? false
         copyrightView.isHidden = !(campaign?.copyright?.isShow ?? false)
         privacyView.isHidden = !withPrivacy
-        holderView.backgroundColor = withPrivacy ? campaign?.theme.inputBgColor : campaign?.theme.bgColor
+        holderView.backgroundColor = withPrivacy ? campaign?.theme.controlBgColor : campaign?.theme.bgColor
         if campaign?.type == .popup {
             holderView.heightAnchor.constraint(equalToConstant: (copyrightView.isHidden && privacyView.isHidden) ? 32 : 0).isActive = true
         }
@@ -432,7 +432,7 @@ internal class CampaignViewController: UIViewController {
     func createFooter(withPrivacy: Bool) {
         copyrightView.isHidden = !(campaign?.copyright?.isShow ?? false)
         privacyView.isHidden = !withPrivacy
-        holderView.backgroundColor = withPrivacy ? campaign?.theme.inputBgColor : campaign?.theme.bgColor
+        holderView.backgroundColor = withPrivacy ? campaign?.theme.controlBgColor : campaign?.theme.bgColor
         if withPrivacy {
             privacyView.preparePrivacy(campaign?.privacy?.type ?? "")
         }
@@ -721,6 +721,17 @@ extension CampaignViewController: UIGestureRecognizerDelegate {
 }
 
 extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        view.endEditing(true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.isDragging || scrollView.isDecelerating {
+            dataManager?.isHalfScreen = false
+            updateHeight()
+        }
+    }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return dataManager?.heightForFieldHeader(index: section) ?? 12
@@ -1063,10 +1074,13 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     func updateHeight() {
         let newHeight = self.dataManager?.heightForCurrentPage() ?? 0
         let currentHeight = self.contentView.frame.size.height
-        
-        if newHeight != currentHeight {
-            self.contentHeight.constant = newHeight
-            self.view.layoutIfNeeded()
+
+        guard newHeight != currentHeight else { return }
+
+        self.contentHeight.constant = newHeight
+
+        UIView.animate(withDuration: 0.2) {
+            self.contentView.layoutIfNeeded()
         }
     }
     
@@ -1079,7 +1093,7 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         let dispatchWorkItem = {
-            self.updateFooterWithDynamicContent()
+            self.updateFooterWithDynamicContent(fromCreate: self.dataManager?.isHalfScreen ?? false)
             self.contentHeight.constant = self.dataManager?.heightForCurrentPage() ?? 0
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: dispatchWorkItem)

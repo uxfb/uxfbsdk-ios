@@ -28,7 +28,7 @@ class RadioCell: UITableViewCell {
     }()
     private lazy var dotView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 3
+        view.layer.cornerRadius = 4
         return view
     }()
     private lazy var radioLabel: UILabel = {
@@ -78,20 +78,20 @@ class RadioCell: UITableViewCell {
             radioLabel.topAnchor.constraint(equalTo: radioView.topAnchor, constant: 4),
             radioLabel.bottomAnchor.constraint(equalTo: radioView.bottomAnchor, constant: -4),
             
-            symbolMidView.topAnchor.constraint(equalTo: symbolExtView.topAnchor, constant: 6),
-            symbolMidView.bottomAnchor.constraint(equalTo: symbolExtView.bottomAnchor, constant: -6),
-            symbolMidView.leadingAnchor.constraint(equalTo: symbolExtView.leadingAnchor, constant: 6),
-            symbolMidView.trailingAnchor.constraint(equalTo: symbolExtView.trailingAnchor, constant: -6),
+            symbolMidView.topAnchor.constraint(equalTo: symbolExtView.topAnchor, constant: 4),
+            symbolMidView.bottomAnchor.constraint(equalTo: symbolExtView.bottomAnchor, constant: -4),
+            symbolMidView.leadingAnchor.constraint(equalTo: symbolExtView.leadingAnchor, constant: 4),
+            symbolMidView.trailingAnchor.constraint(equalTo: symbolExtView.trailingAnchor, constant: -4),
             
             symbolIntView.topAnchor.constraint(equalTo: symbolMidView.topAnchor, constant: 2),
             symbolIntView.bottomAnchor.constraint(equalTo: symbolMidView.bottomAnchor, constant: -2),
             symbolIntView.leadingAnchor.constraint(equalTo: symbolMidView.leadingAnchor, constant: 2),
             symbolIntView.trailingAnchor.constraint(equalTo: symbolMidView.trailingAnchor, constant: -2),
             
-            dotView.topAnchor.constraint(equalTo: symbolIntView.topAnchor, constant: 3),
-            dotView.bottomAnchor.constraint(equalTo: symbolIntView.bottomAnchor, constant: -3),
-            dotView.leadingAnchor.constraint(equalTo: symbolIntView.leadingAnchor, constant: 3),
-            dotView.trailingAnchor.constraint(equalTo: symbolIntView.trailingAnchor, constant: -3),
+            dotView.topAnchor.constraint(equalTo: symbolIntView.topAnchor, constant: 2),
+            dotView.bottomAnchor.constraint(equalTo: symbolIntView.bottomAnchor, constant: -2),
+            dotView.leadingAnchor.constraint(equalTo: symbolIntView.leadingAnchor, constant: 2),
+            dotView.trailingAnchor.constraint(equalTo: symbolIntView.trailingAnchor, constant: -2),
         ])
     }
     
