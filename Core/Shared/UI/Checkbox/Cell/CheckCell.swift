@@ -143,7 +143,7 @@ class CheckCell: UITableViewCell {
                 self.symbolExtView.backgroundColor = .clear
                 self.symbolMidView.backgroundColor = self.theme?.iconColor
                 self.symbolIntView.image = nil
-                self.symbolIntView.backgroundColor = self.theme?.controlBgColor
+                self.symbolIntView.backgroundColor = self.theme?.bgColor ?? .white
                 self.checkView.backgroundColor = .clear //self.theme?.controlBgColor
             }
         }

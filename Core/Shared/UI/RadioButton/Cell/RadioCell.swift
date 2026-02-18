@@ -149,7 +149,7 @@ class RadioCell: UITableViewCell {
                 self.radioLabel.textColor = self.theme?.text02Color
                 self.symbolExtView.backgroundColor = .clear
                 self.symbolMidView.backgroundColor = self.theme?.iconColor
-                self.symbolIntView.backgroundColor = self.theme?.controlBgColor
+                self.symbolIntView.backgroundColor = self.theme?.bgColor ?? .white
                 self.radioView.backgroundColor = .clear //self.theme?.controlBgColor
                 self.dotView.backgroundColor = .clear
             }
