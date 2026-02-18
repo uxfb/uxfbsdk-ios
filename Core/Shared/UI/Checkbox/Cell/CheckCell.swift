@@ -136,6 +136,7 @@ class CheckCell: UITableViewCell {
                 self.symbolIntView.backgroundColor = .clear
                 
                 self.checkView.backgroundColor = self.theme?.controlBgColorActive
+                
             }
             else {
                 self.checkLabel.textColor = self.theme?.text02Color
@@ -143,7 +144,7 @@ class CheckCell: UITableViewCell {
                 self.symbolMidView.backgroundColor = self.theme?.iconColor
                 self.symbolIntView.image = nil
                 self.symbolIntView.backgroundColor = self.theme?.controlBgColor
-                self.checkView.backgroundColor = self.theme?.controlBgColor
+                self.checkView.backgroundColor = .clear //self.theme?.controlBgColor
             }
         }
         

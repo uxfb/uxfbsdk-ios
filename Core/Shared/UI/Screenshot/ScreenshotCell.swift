@@ -89,6 +89,7 @@ class ScreenshotCell: BaseCell {
         view.axis = .horizontal
 //        view.distribution = .fillEqually
         view.spacing = 0
+        view.layer.masksToBounds = true
         return view
     }()
     
@@ -184,7 +185,7 @@ class ScreenshotCell: BaseCell {
         spaceView.translatesAutoresizingMaskIntoConstraints = false
         stackViewHeight = NSLayoutConstraint(item: stackView,
                                              attribute: .height,
-                                             relatedBy: .equal,
+                                             relatedBy: .greaterThanOrEqual,
                                              toItem: nil,
                                              attribute: .height,
                                              multiplier: 1,
@@ -231,8 +232,8 @@ class ScreenshotCell: BaseCell {
             
             takeLabel.leadingAnchor.constraint(equalTo: takeImage.trailingAnchor, constant: 12),
             takeLabel.trailingAnchor.constraint(equalTo: takeView.trailingAnchor, constant: -12),
-            takeLabel.topAnchor.constraint(equalTo: takeView.topAnchor, constant: 7),
-            takeLabel.bottomAnchor.constraint(equalTo: takeView.bottomAnchor, constant: -7),
+            takeLabel.topAnchor.constraint(equalTo: takeView.topAnchor, constant: 0),
+            takeLabel.bottomAnchor.constraint(equalTo: takeView.bottomAnchor, constant: 0),
             
             selectButton.topAnchor.constraint(equalTo: selectView.topAnchor),
             selectButton.leadingAnchor.constraint(equalTo: selectView.leadingAnchor),
@@ -246,9 +247,11 @@ class ScreenshotCell: BaseCell {
             
             selectLabel.leadingAnchor.constraint(equalTo: selectImage.trailingAnchor, constant: 12),
             selectLabel.trailingAnchor.constraint(equalTo: selectView.trailingAnchor, constant: -12),
-            selectLabel.topAnchor.constraint(equalTo: selectView.topAnchor, constant: 7),
-            selectLabel.bottomAnchor.constraint(equalTo: selectView.bottomAnchor, constant: -7)
+            selectLabel.topAnchor.constraint(equalTo: selectView.topAnchor, constant: 0),
+            selectLabel.bottomAnchor.constraint(equalTo: selectView.bottomAnchor, constant: 0)
         ])
+        
+        self.contentView.layoutIfNeeded()
     }
     
     override func updateUI() {
@@ -262,12 +265,12 @@ class ScreenshotCell: BaseCell {
         countLabel.font = theme?.fontP2
         countLabel.textColor = theme?.text03Color
         
-        takeView.backgroundColor = theme?.controlBgColor
+        takeView.backgroundColor = .clear //theme?.controlBgColor
         takeImage.tintColor = theme?.iconColor
         takeLabel.textColor = theme?.text01Color
         takeLabel.font = theme?.fontP2
         
-        selectView.backgroundColor = theme?.controlBgColor
+        selectView.backgroundColor = .clear//theme?.controlBgColor
         selectImage.tintColor = theme?.iconColor
         selectLabel.textColor = theme?.text01Color
         selectLabel.font = theme?.fontP2
@@ -292,18 +295,39 @@ class ScreenshotCell: BaseCell {
     }
     
     public func setActions(take: @escaping (() -> ()), select: @escaping (() -> ()), campaignType: CampaignType) {
+        var takeText = ""
+        var selectText = ""
+        
+        if let buttons = field?.uiData["buttons"] as? [String: String] {
+            if let takeButton = buttons["create"] {
+                takeText = takeButton
+            }
+            
+            if let selectButton = buttons["upload"] {
+                selectText = selectButton
+            }
+        }
+        
         self.takeAction = take
         self.selectAction = select
         var height: CGFloat = 0
         switch campaignType {
         case .popup:
             self.axis = .vertical
-            height += takeLabel.isHidden ? 0 : 40
-            height += selectLabel.isHidden ? 0 : 40
+                let lWidth = (UIScreen.main.bounds.width - 204)/2
+                height += takeLabel.isHidden ? 0 : takeText.height(withConstrainedWidth: lWidth,
+                                                                   font: theme?.fontP2 ?? .systemFont(ofSize: 14, weight: .regular)) + 8
+            height += selectLabel.isHidden ? 0 : selectText.height(withConstrainedWidth: lWidth,
+                                                                   font: theme?.fontP2 ?? .systemFont(ofSize: 14, weight: .regular)) + 8
             stackView.spacing = 8
         case .slidein:
             self.axis = .horizontal
-            height += 48
+                let lWidth = (UIScreen.main.bounds.width - 156)/2
+                let takeHeight = takeText.height(withConstrainedWidth: lWidth,
+                                                 font: theme?.fontP2 ?? .systemFont(ofSize: 14, weight: .regular)) + 8
+                let selectHeight = takeText.height(withConstrainedWidth: lWidth,
+                                                   font: theme?.fontP2 ?? .systemFont(ofSize: 14, weight: .regular)) + 8
+            height += max(takeHeight, selectHeight, 48)
             stackView.spacing = 0
         }
         

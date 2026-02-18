@@ -10,6 +10,7 @@ import UIKit
 
 class SmilesCell: BaseCell {
     enum SmileState {
+        case normal
         case touched
         case selected
         case disabled
@@ -23,6 +24,9 @@ class SmilesCell: BaseCell {
               var newRed = theme?.iconSmile3Color else { return image }
 
         switch state {
+            case .normal:
+                break
+                
         case .selected:
             break
 
@@ -133,7 +137,7 @@ class SmilesCell: BaseCell {
 
     
     private func coloredAngry(state: SmileState) -> UIImage {
-        let image = UIImage(named: "angry",
+        let image = UIImage(named: (state == .selected || state == .touched) ? "angry_highlight" : "angry",
                             in: Consts.bundle,
                             compatibleWith: nil)
         
@@ -141,7 +145,7 @@ class SmilesCell: BaseCell {
     }
     
     private func coloredMad(state: SmileState) -> UIImage {
-        let image = UIImage(named: "mad",
+        let image = UIImage(named: (state == .selected || state == .touched) ? "mad_highlight" : "mad",
                             in: Consts.bundle,
                             compatibleWith: nil)
         
@@ -149,7 +153,7 @@ class SmilesCell: BaseCell {
     }
     
     private func coloredConfused(state: SmileState) -> UIImage {
-        let image = UIImage(named: "confused",
+        let image = UIImage(named: (state == .selected || state == .touched) ? "confused_highlight" : "confused",
                             in: Consts.bundle,
                             compatibleWith: nil)
         
@@ -157,7 +161,7 @@ class SmilesCell: BaseCell {
     }
     
     private func coloredHappy(state: SmileState) -> UIImage {
-        let image = UIImage(named: "happy",
+        let image = UIImage(named: (state == .selected || state == .touched) ? "happy_highlight" : "happy",
                             in: Consts.bundle,
                             compatibleWith: nil)
         
@@ -165,7 +169,7 @@ class SmilesCell: BaseCell {
     }
     
     private func coloredInLove(state: SmileState) -> UIImage {
-        let image = UIImage(named: "in-love",
+        let image = UIImage(named: (state == .selected || state == .touched) ? "in-love_highlight" : "in-love",
                             in: Consts.bundle,
                             compatibleWith: nil)
         
@@ -175,35 +179,50 @@ class SmilesCell: BaseCell {
     private lazy var smile1: UIButton = {
         let view = UIButton(type: .custom)
         view.tag = 1
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .center
+        view.imageView?.contentMode = .center
+        view.clipsToBounds = false
+        view.imageView?.clipsToBounds = false
         return view
     }()
     
     private lazy var smile2: UIButton = {
         let view = UIButton(type: .custom)
         view.tag = 2
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .center
+        view.imageView?.contentMode = .center
+        view.clipsToBounds = false
+        view.imageView?.clipsToBounds = false
         return view
     }()
     
     private lazy var smile3: UIButton = {
         let view = UIButton(type: .custom)
         view.tag = 3
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .center
+        view.imageView?.contentMode = .center
+        view.clipsToBounds = false
+        view.imageView?.clipsToBounds = false
         return view
     }()
     
     private lazy var smile4: UIButton = {
         let view = UIButton(type: .custom)
         view.tag = 4
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .center
+        view.imageView?.contentMode = .center
+        view.clipsToBounds = false
+        view.imageView?.clipsToBounds = false
         return view
     }()
     
     private lazy var smile5: UIButton = {
         let view = UIButton(type: .custom)
         view.tag = 5
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .center
+        view.imageView?.contentMode = .center
+        view.clipsToBounds = false
+        view.imageView?.clipsToBounds = false
         return view
     }()
     
@@ -211,6 +230,8 @@ class SmilesCell: BaseCell {
     private var currentValue: Int = -1
     
     override func setupSubviews() {
+        clipsToBounds = false
+        contentView.clipsToBounds = false
         contentView.addSubview(smile1)
         contentView.addSubview(smile2)
         contentView.addSubview(smile3)
@@ -287,19 +308,49 @@ class SmilesCell: BaseCell {
     private func setSmileState(tag: Int, state: SmileState) {
         switch tag {
             case 1:
-                smile1.setImage(coloredAngry(state: state), for: .normal)
+                UIView.transition(with: self.smile1,
+                                  duration: 0.25,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                    self.smile1.setImage(self.coloredAngry(state: state), for: .normal)
+                })
+                
                 
             case 2:
-                smile2.setImage(coloredMad(state: state), for: .normal)
+                UIView.transition(with: self.smile2,
+                                  duration: 0.25,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                    self.smile2.setImage(self.coloredMad(state: state), for: .normal)
+                })
+                
                 
             case 3:
-                smile3.setImage(coloredConfused(state: state), for: .normal)
+                UIView.transition(with: self.smile3,
+                                  duration: 0.25,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                    self.smile3.setImage(self.coloredConfused(state: state), for: .normal)
+                })
+                
                 
             case 4:
-                smile4.setImage(coloredHappy(state: state), for: .normal)
+                UIView.transition(with: self.smile4,
+                                  duration: 0.25,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                    self.smile4.setImage(self.coloredHappy(state: state), for: .normal)
+                })
+                
                 
             case 5:
-                smile5.setImage(coloredInLove(state: state), for: .normal)
+                UIView.transition(with: self.smile5,
+                                  duration: 0.25,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                    self.smile5.setImage(self.coloredInLove(state: state), for: .normal)
+                })
+                
                 
             default:
                 break
@@ -310,8 +361,10 @@ class SmilesCell: BaseCell {
     private func applyState() {
         for i in 1...5 {
             self.contentView.viewWithTag(i)?.borderWidth = 0
-            if (i == currentValue + 1) || currentValue == -1 {
+            if (i == currentValue + 1) {
                 setSmileState(tag: i, state: .selected)
+            } else if currentValue == -1 {
+                setSmileState(tag: i, state: .normal)
             } else {
                 setSmileState(tag: i, state: .disabled)
             }
@@ -354,7 +407,7 @@ class SmilesCell: BaseCell {
     @objc
     private func smileTouched(_ sender: UIButton) {
         setSmileState(tag: sender.tag, state: .touched)
-        sender.layer.borderColor = theme?.iconSmile4Color.withAlphaComponent(0.2).cgColor
+        sender.layer.borderColor = theme?.iconSmile4Color.withAlphaComponent(1.0).cgColor
         sender.layer.borderWidth = 7
     }
     
@@ -384,7 +437,11 @@ class SmilesCell: BaseCell {
     private func clearHighlights() {
         for i in 1...5 {
             if let b = contentView.viewWithTag(i) as? UIButton {
-                b.layer.borderWidth = 0
+                for layer in b.layer.sublayers ?? [] {
+                    if layer.accessibilityLabel == "SmilesCell.Highlighted" && currentValue != b.tag - 1 {
+                        layer.removeFromSuperlayer()
+                    }
+                }
             }
         }
     }
@@ -392,8 +449,19 @@ class SmilesCell: BaseCell {
     private func highlight(_ sender: UIButton) {
         clearHighlights()
         setSmileState(tag: sender.tag, state: .touched)
-        sender.layer.borderColor = theme?.iconSmile4Color.withAlphaComponent(0.2).cgColor
-        sender.layer.borderWidth = 15
+        
+        let borderLayer = CAShapeLayer()
+        borderLayer.path = UIBezierPath(
+            roundedRect: sender.bounds.insetBy(dx: 0, dy: 0),
+            cornerRadius: sender.layer.cornerRadius + 3
+        ).cgPath
+
+        borderLayer.strokeColor = theme?.iconSmile4Color.withAlphaComponent(0.2).cgColor
+        borderLayer.fillColor = theme?.iconSmile4Color.withAlphaComponent(0.2).cgColor
+        borderLayer.lineWidth = 6
+        borderLayer.accessibilityLabel = "SmilesCell.Highlighted"
+//        sender.layer.addSublayer(borderLayer)
+        
     }
 
     @objc private func smileTouchDown(_ sender: UIButton) {
@@ -410,11 +478,9 @@ class SmilesCell: BaseCell {
     }
 
     @objc private func smileTouchUpInside(_ sender: UIButton) {
-        clearHighlights()
-
         currentValue = sender.tag - 1
+        clearHighlights()
         delegate?.fieldChanged(field!, answer: [String(currentValue)], refresh: true)
-
         applyState()
     }
 

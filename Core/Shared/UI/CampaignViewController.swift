@@ -1072,8 +1072,8 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func updateHeight() {
-        let newHeight = self.dataManager?.heightForCurrentPage() ?? 0
-        let currentHeight = self.contentView.frame.size.height
+        let newHeight = (self.dataManager?.heightForCurrentPage() ?? 0).rounded()
+        let currentHeight = self.contentView.frame.size.height.rounded()
 
         guard newHeight != currentHeight else { return }
 

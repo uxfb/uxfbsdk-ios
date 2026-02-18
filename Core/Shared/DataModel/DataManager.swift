@@ -382,7 +382,7 @@ class DataManager: FieldDelegate {
                                                           textProperties: nil,
                                                           withRequired: required)
         let descriptionHeight = TextPropertyManager.heightForAttributed(string: attributedDescription,
-                                                                  and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
+                                                                  and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace) + 8
         
         if let imageData = field.uiData["image"] as? [String: Any] {
             let isDefault = ((imageData["type"] as? String) ?? "default") == "default"
@@ -473,7 +473,7 @@ class DataManager: FieldDelegate {
                 return 40
                 
             case .smiles:
-                return 40
+                return 48
                 
             case .checkbox:
                 let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 44 
@@ -500,7 +500,25 @@ class DataManager: FieldDelegate {
                                                         withRequired: false)
                 let valueHeight = TextPropertyManager.heightForAttributed(string: value,
                                                                           and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
-                return valueHeight + 1
+                var descriptionHeight: CGFloat = .leastNonzeroMagnitude
+                if let descriptionData = field.description {
+                    let description = TextPropertyManager.convert(descriptionData,
+                                                                      theme: campaign!.theme,
+                                                                      defaultFont: (campaign?.theme.fontP1)!,
+                                                                      textProperties: nil,
+                                                                      withRequired: false)
+                    descriptionHeight = TextPropertyManager.heightForAttributed(string: description,
+                                                                              and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace) + 8
+                }
+                
+                var imageHeight: CGFloat = .leastNonzeroMagnitude
+                
+                if let imageData = field.uiData["image"] as? [String: Any] {
+                    let isDefault = ((imageData["type"] as? String) ?? "default") == "default"
+                    imageHeight = 16 + (isDefault ? 100 : 240)
+                }
+                
+                return valueHeight + descriptionHeight + imageHeight + 1
                 
             case .image:
                 return 56
@@ -565,11 +583,35 @@ class DataManager: FieldDelegate {
             case .screenshot:
                 var buttonsHeight: CGFloat = 0
                 
+                var takeText = ""
+                var selectText = ""
+                
+                if let buttons = field.uiData["buttons"] as? [String: String] {
+                    if let takeButton = buttons["create"] {
+                        takeText = takeButton
+                    }
+                    
+                    if let selectButton = buttons["upload"] {
+                        selectText = selectButton
+                    }
+                }
+                
                 switch campaign?.type {
                     case .popup:
-                        buttonsHeight = 82
+                        let lWidth = (UIScreen.main.bounds.width - 204)/2
+                        buttonsHeight += takeText.height(withConstrainedWidth: lWidth,
+                                                         font: campaign?.theme?.fontP2 ?? .systemFont(ofSize: 14, weight: .regular)) + 8
+                        buttonsHeight += selectText.height(withConstrainedWidth: lWidth,
+                                                           font: campaign?.theme?.fontP2 ?? .systemFont(ofSize: 14, weight: .regular)) + 8
+                        
                     case .slidein:
-                        buttonsHeight = 48
+                        let lWidth = (UIScreen.main.bounds.width - 156)/2
+                        let takeHeight = takeText.height(withConstrainedWidth: lWidth,
+                                                         font: campaign?.theme?.fontP2 ?? .systemFont(ofSize: 14, weight: .regular)) + 8
+                        let selectHeight = takeText.height(withConstrainedWidth: lWidth,
+                                                           font: campaign?.theme?.fontP2 ?? .systemFont(ofSize: 14, weight: .regular)) + 8
+                        buttonsHeight += max(takeHeight, selectHeight, 48)
+                        
                     case .none:
                         return 0
                 }
@@ -722,7 +764,11 @@ class DataManager: FieldDelegate {
             return
         }
         
+        isHalfScreen = false
+        viewController?.updateHeight()
+        
         viewController?.didBeginEditing(fieldIndex)
+        
     }
     
     func didEndEditing(_ field: Field) {

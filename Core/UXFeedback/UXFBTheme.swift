@@ -92,7 +92,7 @@ open class UXFBTheme: NSObject, ThemeProtocol {
     open var text03Color: UIColor =  UIColor.init("#8B90A0")
     open var inputBgColor: UIColor =  UIColor.init("#F8F8FA")
     open var inputBorderColor: UIColor =  UIColor.init("#D3D4D8")
-    open var controlBgColor: UIColor =  UIColor.init("#FFFFFF")
+    open var controlBgColor: UIColor =  UIColor.init("#809AFB").withAlphaComponent(0.15)
     open var controlBgColorActive: UIColor =  UIColor.init("#F8F8FA")
     open var controlIconColor: UIColor =  UIColor.init("#FFFFFF")
     open var errorColorPrimary: UIColor =  UIColor.init("#F15E61")

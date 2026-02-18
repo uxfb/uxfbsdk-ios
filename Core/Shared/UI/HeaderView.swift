@@ -84,7 +84,7 @@ class HeaderView: UIView {
         NSLayoutConstraint.activate([
             descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            descriptionLabel.topAnchor.constraint(equalTo: label.bottomAnchor)
+            descriptionLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8)
         ])
     }
     
