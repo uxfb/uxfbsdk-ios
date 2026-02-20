@@ -518,7 +518,7 @@ class DataManager: FieldDelegate {
                     imageHeight = 16 + (isDefault ? 100 : 240)
                 }
                 
-                return valueHeight + descriptionHeight + imageHeight + 1
+                return valueHeight + descriptionHeight + imageHeight + 25
                 
             case .image:
                 return 56

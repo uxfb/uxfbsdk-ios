@@ -311,6 +311,9 @@ class ScreenshotCell: BaseCell {
         self.takeAction = take
         self.selectAction = select
         var height: CGFloat = 0
+        NSLayoutConstraint.deactivate([
+            takeView.heightAnchor.constraint(equalTo: selectView.heightAnchor)
+        ])
         switch campaignType {
         case .popup:
             self.axis = .vertical
@@ -319,7 +322,13 @@ class ScreenshotCell: BaseCell {
                                                                    font: theme?.fontP2 ?? .systemFont(ofSize: 14, weight: .regular)) + 8
             height += selectLabel.isHidden ? 0 : selectText.height(withConstrainedWidth: lWidth,
                                                                    font: theme?.fontP2 ?? .systemFont(ofSize: 14, weight: .regular)) + 8
-            stackView.spacing = 8
+            stackView.spacing = 0
+                if !takeLabel.isHidden, !selectLabel.isHidden {
+                    NSLayoutConstraint.activate([
+                        takeView.heightAnchor.constraint(equalTo: selectView.heightAnchor)
+                    ])
+                }
+                
         case .slidein:
             self.axis = .horizontal
                 let lWidth = (UIScreen.main.bounds.width - 156)/2

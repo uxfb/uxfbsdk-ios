@@ -58,7 +58,7 @@ open class UXFeedback: NSObject {
     private var _formPresentor: CampaignPresentor?
     private var _parser: Parser!
     
-    private var localProps: [Int: [String: Any]?] = [:]
+    internal var localProps: [Int: [String: Any]?] = [:]
     
     static private let _windowLevel = UIWindow.Level.alert + 10
     
@@ -343,11 +343,20 @@ open class UXFeedback: NSObject {
                         
                         self.DDLog("Show form for event: \(eventName)")
                         self.localProps[campaign.campaignId] = localProps
+                        
+                        
+                        var properties = self.properties
+                        
+                        if let localProps = self.localProps[campaign.campaignId],
+                           localProps != nil {
+                            properties = properties.merging(localProps!) { current, _ in current }
+                        }
+                        
                         self._formPresentor?.showCampaign(uiBlocked: self.settings.slideInUiBlocked,
                                                           closeOnSwipe: self.settings.closeOnSwipe,
                                                           blackout: blackout,
                                                           rotateToggle: self.settings.rotateToggle,
-                                                          properties: self.properties)
+                                                          properties: properties)
                         
                         if !isMultiVisited {
                             self.saveShowingTime()

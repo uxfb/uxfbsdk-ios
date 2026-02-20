@@ -96,7 +96,7 @@ class MainViewController_swift: UIViewController {
 //                for i in 0...10000 {
                 
                 let eventNames = [
-                    "3001",
+                    "3001f",
                     "ger_1",
                     "ger",
                     "seller",
@@ -109,7 +109,7 @@ class MainViewController_swift: UIViewController {
                     "person"
                 ]
                 
-                    UXFeedback.sdk.startCampaign(eventName: eventNames[0])
+                UXFeedback.sdk.startCampaign(eventName: eventNames[0], localProps: ["a": "b", "c": "d"])
                 
                 
 //                }
