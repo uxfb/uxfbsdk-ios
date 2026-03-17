@@ -11624,308 +11624,315 @@
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "StringLiteral",
-      "offset": 881,
+      "offset": 1105,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "StringLiteral",
-      "offset": 1147,
+      "offset": 1371,
       "length": 13,
       "value": "\"close_image\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 1538,
+      "offset": 1762,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 1544,
+      "offset": 1768,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 1554,
+      "offset": 1778,
       "length": 3,
       "value": "100"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 1567,
+      "offset": 1791,
       "length": 3,
       "value": "100"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 1629,
+      "offset": 1853,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 1924,
+      "offset": 2148,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "StringLiteral",
-      "offset": 1983,
+      "offset": 2207,
       "length": 4,
       "value": "\"1x\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 2017,
+      "offset": 2241,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "StringLiteral",
-      "offset": 2076,
+      "offset": 2300,
       "length": 4,
       "value": "\"2x\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 2110,
+      "offset": 2334,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "StringLiteral",
-      "offset": 2169,
+      "offset": 2393,
       "length": 4,
       "value": "\"3x\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 2517,
+      "length": 6,
+      "value": "\"logo\""
+    },
+    {
+      "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 2382,
+      "offset": 2736,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "StringLiteral",
-      "offset": 2478,
+      "offset": 2832,
       "length": 6,
       "value": "\"logo\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "StringLiteral",
-      "offset": 2652,
+      "offset": 3006,
       "length": 6,
       "value": "\"logo\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 2912,
+      "offset": 3266,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 3038,
+      "offset": 3392,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 3117,
+      "offset": 3471,
       "length": 2,
       "value": "12"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 3181,
+      "offset": 3535,
       "length": 2,
       "value": "30"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 3244,
+      "offset": 3598,
       "length": 2,
       "value": "30"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 3329,
+      "offset": 3683,
       "length": 3,
       "value": "-12"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 3466,
+      "offset": 3820,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 3696,
+      "offset": 4050,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 3741,
+      "offset": 4095,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 4039,
+      "offset": 4393,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4053,
+      "offset": 4407,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 4133,
+      "offset": 4487,
       "length": 2,
       "value": "32"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4148,
+      "offset": 4502,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4372,
+      "offset": 4726,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5416,
+      "offset": 5762,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5565,
+      "offset": 5911,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5607,
+      "offset": 5953,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5797,
+      "offset": 6143,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5826,
+      "offset": 6172,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8099,
+      "offset": 8445,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8632,
+      "offset": 8978,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8666,
+      "offset": 9012,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8705,
+      "offset": 9051,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "Dictionary",
-      "offset": 8752,
+      "offset": 9098,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 8840,
+      "offset": 9186,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 8879,
+      "offset": 9225,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8956,
+      "offset": 9302,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/Shared\/UI\/CampaignViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 14392,
+      "offset": 14738,
       "length": 5,
       "value": "false"
     },
@@ -12837,7 +12844,7 @@
       "kind": "StringLiteral",
       "offset": 261,
       "length": 7,
-      "value": "\"4.2.0\""
+      "value": "\"4.2.1\""
     },
     {
       "filePath": "\/Users\/alexpotemka\/_projects\/-ios\/ios-sdk\/Core\/UXFeedback\/UXFeedbackConsts.swift",
