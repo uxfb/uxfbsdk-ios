@@ -91,6 +91,11 @@ class SliderView: UIView {
     }
     
     override func layoutSubviews() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        super.layoutSubviews()
+        CATransaction.commit()
+        
         bigBorderView.center = center
         smallBorderView.center = center
         imageContentView.center = center

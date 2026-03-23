@@ -10,6 +10,7 @@ import Foundation
 
 internal class Consts {
     static let os: String = "iOS"
+    static let language: String = "en-US"
     static let cryptoKey: String = "YoHe"
     static let version: String = "2.0.0"
     static let defaultHref: String = ""

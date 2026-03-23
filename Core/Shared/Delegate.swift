@@ -15,12 +15,12 @@ import UIKit
 public protocol FeedbackCampaignDelegate: AnyObject {
     func campaignDidLoad(success: Bool)
     func campaignDidReceiveError(errorString: String)
-    func campaignDidShow(campaignId: Int, eventName: String)
-    func campaignDidClose(campaignId: Int, eventName: String)
-    func campaignDidTerminate(campaignId: Int, eventName: String, terminatedPage: Int, totalPages: Int)
-    func campaignDidSend(campaignId: Int)
-    func campaignDidAnswered(campaignId: Int, answers: [String: Any])
-    func noCampaignToStart(eventName: String)
+    func campaignDidShow(campaignId: Int, eventName: String, invocationId: String)
+    func campaignDidClose(campaignId: Int, eventName: String, invocationId: String)
+    func campaignDidTerminate(campaignId: Int, eventName: String, terminatedPage: Int, totalPages: Int, invocationId: String)
+    func campaignDidSend(campaignId: Int, invocationId: String)
+    func campaignDidAnswered(campaignId: Int, answers: [String: Any], invocationId: String)
+    func noCampaignToStart(eventName: String, invocationId: String)
 }
 
 

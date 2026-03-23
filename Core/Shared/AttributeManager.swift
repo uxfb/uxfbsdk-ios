@@ -22,8 +22,6 @@ class AttributeManager {
             return
         }
         
-        
-        
         var checkAttributes: [Attribute] = []
         for campaignAttribute in campaignAttributes {
           if let attribute = attributes.first(where: { att in

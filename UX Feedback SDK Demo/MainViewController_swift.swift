@@ -118,7 +118,7 @@ class MainViewController_swift: UIViewController {
         case 2:
 //                UXFeedback.setup(appID: uxfAppID, settings: (UIApplication.shared.delegate as! AppDelegate).settings)
 //                UXFeedback.sdk.stopCampaign(eventForStop: "")
-            UXFeedback.sdk.startCampaign(eventName: "hardlogick", attributes: nil)
+            UXFeedback.sdk.startCampaign(eventName: "resume", attributes: nil)
             
         default:
             break

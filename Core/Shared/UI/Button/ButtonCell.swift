@@ -66,7 +66,11 @@ class ButtonCell: BaseCell {
     }
     
     override func layoutSubviews() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
         super.layoutSubviews()
+        CATransaction.commit()
+        
         var isLandscape = true
         if #available(iOS 13.0, *) {
             isLandscape = UIApplication.shared.keyWindow?.windowScene?.interfaceOrientation.isLandscape ?? true

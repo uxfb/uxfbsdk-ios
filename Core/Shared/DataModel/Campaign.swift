@@ -20,6 +20,7 @@ struct CampaignData {
     private(set) var copyright: Data?
     private(set) var textProperties: Data?
     var campaign: Campaign?
+    var needsToShow: Bool = false
 }
 
 struct Campaign {

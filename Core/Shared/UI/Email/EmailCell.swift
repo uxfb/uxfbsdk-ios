@@ -34,6 +34,7 @@ class EmailCell: BaseCell, UITextFieldDelegate {
         guard field != nil, theme != nil else {
             return
         }
+        textField.tintColor = theme?.text01Color
         let placeholder = field?.uiData["placeholder"] as? String
         textField.attributedPlaceholder = NSAttributedString(string: placeholder ?? "",
                                                              attributes: [NSAttributedString.Key.foregroundColor: theme?.text03Color ?? .lightGray])

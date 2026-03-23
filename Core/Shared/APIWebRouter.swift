@@ -169,12 +169,16 @@ enum APIWebRouter {
                 parameters = [HTTPHeaderField.uid.rawValue: uid]
                 if let language = Locale.autoupdatingCurrent.collatorIdentifier?.lowercased() {
                     parameters[HTTPHeaderField.language.rawValue] = language
+                } else {
+                    parameters[HTTPHeaderField.language.rawValue] = Consts.language
                 }
                 
             case .getCampaign(_, _):
                 parameters = [HTTPHeaderField.uid.rawValue: uid]
                 if let language = Locale.autoupdatingCurrent.collatorIdentifier?.lowercased() {
                     parameters[HTTPHeaderField.language.rawValue] = language
+                } else {
+                    parameters[HTTPHeaderField.language.rawValue] = Consts.language
                 }
             case .checkAttribute(_ ,_ ,_ , let debug):
                 parameters[HTTPHeaderField.debug.rawValue] = debug

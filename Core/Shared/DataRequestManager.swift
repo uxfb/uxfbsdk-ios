@@ -11,7 +11,7 @@ import CoreData
 
 protocol RequestManagerDelegate {
     func campaingsLoaded(success: Bool, message: String?, delay: Int?, campaigns: Array<CampaignData>, state: String)
-    func formDataSaved(success: Bool, message: String?, campaignId: Int)
+    func formDataSaved(success: Bool, message: String?, campaignId: Int, invocationId: String)
 }
 
 @_documentation(visibility: internal)
@@ -378,7 +378,8 @@ final class DataRequestManager: NSObject {
                     self.validateResponse(for: request, success: success, httpCode: httpCode) {
                         self.delegate?.formDataSaved(success: success,
                                                      message: message,
-                                                     campaignId: campaignId)
+                                                     campaignId: campaignId,
+                                                     invocationId: <#String#>)
                     }
                 }
                 

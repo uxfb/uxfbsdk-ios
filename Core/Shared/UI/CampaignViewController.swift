@@ -25,6 +25,15 @@ enum ViewControllerState {
     case dismissOnly
 }
 
+internal class TableView: UITableView {
+    override func layoutSubviews() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        super.layoutSubviews()
+        CATransaction.commit()
+    }
+}
+
 internal class CampaignViewController: UIViewController {
     
     //MARK: - Outlets
@@ -80,6 +89,8 @@ internal class CampaignViewController: UIViewController {
             default:
                 break
         }
+        image.image = UIImage(named: "logo", in: Consts.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+        
         if let urlString = urlString, let url = URL(string: urlString) {
             image.cacheImage(url: url, withTemplate: true) { result in
                 if !result {
@@ -143,12 +154,12 @@ internal class CampaignViewController: UIViewController {
         return view
     }()
     
-    lazy var tableView: UITableView = {
-        var view: UITableView!
+    lazy var tableView: TableView = {
+        var view: TableView!
         if #available(iOS 13.0, *) {
-            view = UITableView(frame: .zero, style: .grouped)
+            view = TableView(frame: .zero, style: .grouped)
         } else {
-            view = UITableView(frame: .zero, style: .grouped)
+            view = TableView(frame: .zero, style: .grouped)
         }
         
         if #available(iOS 15.0, *) {
@@ -1078,10 +1089,10 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
         guard newHeight != currentHeight else { return }
 
         self.contentHeight.constant = newHeight
-
+        
         UIView.animate(withDuration: 0.2) {
             self.contentView.layoutIfNeeded()
-        }
+        } 
     }
     
     //MARK: - Privacy

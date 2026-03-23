@@ -49,4 +49,11 @@ internal class BaseCell: UITableViewCell {
     internal func updateUI() { }
     
     @objc internal func rotated() { }
+    
+    override func layoutSubviews() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        super.layoutSubviews()
+        CATransaction.commit()
+    }
 }

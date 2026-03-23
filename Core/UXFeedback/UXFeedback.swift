@@ -213,10 +213,12 @@ open class UXFeedback: NSObject {
     /// Метод показа кампании по указанному событию
     /// - Parameter eventName: Название события
     /// - Parameter attributes: Аттрибуты показа кампании
-    @objc open func startCampaign(eventName: String, attributes: [Attribute]? = nil, localProps: [String: Any]? = nil) {
+    @objc open func startCampaign(eventName: String, attributes: [Attribute]? = nil, localProps: [String: Any]? = nil) -> String? {
+        let uuid = UUID().uuidString
+        self.DDLog("UUID = \(uuid)")
         guard (self._appWindow != nil) else {
             self.DDLog("Campaigns not loaded")
-            return
+            return uuid
         }
         
         var attributesString: [String] = []
@@ -246,7 +248,7 @@ open class UXFeedback: NSObject {
         _requestManager.getCampaignCanditates(eventName: eventName) { candidates in
             self.DDLog("Find candidates: \(candidates?.count ?? 0)")
             guard let candidates = candidates, candidates.count > 0 else {
-                self.campaignDelegate?.noCampaignToStart(eventName: eventName)
+                self.campaignDelegate?.noCampaignToStart(eventName: eventName, invocationId: uuid)
                 self.DDLog("Event not found: \(eventName)")
                 return
             }
@@ -382,6 +384,8 @@ open class UXFeedback: NSObject {
                 }
             }
         }
+        
+        return uuid
     }
     
     /// Метод отмены показа кампании. Если кампания уже показана - она будет закрыта
@@ -433,7 +437,7 @@ extension UXFeedback: RequestManagerDelegate {
             if success == true {
                 self.DDLog("Campaigns loaded: \(campaigns.count)")
                 if let event = self._eventToSend {
-                    self.startCampaign(eventName: event)
+                    let _ = self.startCampaign(eventName: event)
                 }
             } else {
                 self.DDLog("\(message ?? "Unresolved message")")
@@ -450,9 +454,9 @@ extension UXFeedback: RequestManagerDelegate {
         }
     }
     
-    func formDataSaved(success: Bool, message: String?, campaignId: Int) {
+    func formDataSaved(success: Bool, message: String?, campaignId: Int, invocationId: String) {
         if success {
-            self.campaignDelegate?.campaignDidSend(campaignId: campaignId)
+            self.campaignDelegate?.campaignDidSend(campaignId: campaignId, invocationId: invocationId)
         }
     }
 }
@@ -475,7 +479,7 @@ extension UXFeedback: CampaignFormPresentorProtocol {
         }
         
         self.campaignDelegate?.campaignDidAnswered(campaignId: campaign.campaignId,
-                                                   answers: answers)
+                                                   answers: answers, invocationId: "")
         
         var props = properties
         if let localProps = self.localProps[campaign.campaignId],

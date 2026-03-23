@@ -37,10 +37,11 @@ class InputCell: BaseCell {
     override func updateUI() {
         let answer = field?.answers.first
         comment = answer ?? ""
-        
+        textView.tintColor = theme?.text01Color
         textView.textColor = comment.isEmpty ? theme?.text03Color : theme?.text01Color
         textView.layer.cornerRadius = theme?.btnBorderRadius ?? 4
         textView.layer.masksToBounds = true
+        textView.backgroundColor = .clear
 //        textView.backgroundColor = theme?.inputBgColor ?? .white
         
         textView.font = theme?.fontP1

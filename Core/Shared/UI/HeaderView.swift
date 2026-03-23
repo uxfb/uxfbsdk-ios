@@ -50,6 +50,13 @@ class HeaderView: UIView {
         setup()
     }
     
+    override func layoutSubviews() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        super.layoutSubviews()
+        CATransaction.commit()
+    }
+    
     private func updateTheme() {
         guard let theme = theme else { return }
         
