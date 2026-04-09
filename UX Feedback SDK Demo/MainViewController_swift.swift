@@ -84,19 +84,20 @@ class MainViewController_swift: UIViewController {
 //            UXFeedback.sharedSDK.setProperties(["property_first": "non-value",
 //                                                "property_second": 2])
             
-//            UXFeedback.sdk.properties = ["ios": "ios-data"]
+            UXFeedback.sdk.properties = ["ios": "ios-data"]
 
-//                let atts = UXFBAttributesBuilder()
-//                    .addValue("step", value: 2)
-//                .build()
-//
-//                let attributes = UXFBAttributesBuilder()
-//                    .addValue("hash_user_id", value: "aaca4f68bf5d7e61b2894cb70622d094                                ")
-//                    .build()
+                let atts = UXFBAttributesBuilder()
+                    .addValue("step", value: 2)
+                .build()
+
+                let attributes = UXFBAttributesBuilder()
+                    .addValue("A", value: "4")
+                    .addValue("D", value: "4")
+                    .build()
 //                for i in 0...10000 {
                 
                 let eventNames = [
-                    "3001f",
+                    "comment",
                     "ger_1",
                     "ger",
                     "seller",
@@ -109,7 +110,9 @@ class MainViewController_swift: UIViewController {
                     "person"
                 ]
                 
-                UXFeedback.sdk.startCampaign(eventName: eventNames[0], localProps: ["a": "b", "c": "d"])
+                let uuid = UXFeedback.sdk.startCampaign(eventName: eventNames[0])
+                
+                print(uuid)
                 
                 
 //                }
@@ -162,6 +165,30 @@ extension MainViewController_swift: UXFeedbackLogDelegate {
 }
 
 extension MainViewController_swift: UXFeedbackCampaignDelegate{
+    func campaignDidShow(campaignId: Int, eventName: String, invocationId: String) {
+        
+    }
+    
+    func campaignDidClose(campaignId: Int, eventName: String, invocationId: String) {
+        
+    }
+    
+    func campaignDidTerminate(campaignId: Int, eventName: String, terminatedPage: Int, totalPages: Int, invocationId: String) {
+        
+    }
+    
+    func campaignDidSend(campaignId: Int, invocationId: String) {
+        
+    }
+    
+    func campaignDidAnswered(campaignId: Int, answers: [String : Any], invocationId: String) {
+        
+    }
+    
+    func noCampaignToStart(eventName: String, invocationId: String) {
+        
+    }
+    
     func noCampaignToStart(eventName: String) {
         
     }

@@ -358,7 +358,8 @@ open class UXFeedback: NSObject {
                                                           closeOnSwipe: self.settings.closeOnSwipe,
                                                           blackout: blackout,
                                                           rotateToggle: self.settings.rotateToggle,
-                                                          properties: properties)
+                                                          properties: properties,
+                                                          invocationId: uuid)
                         
                         if !isMultiVisited {
                             self.saveShowingTime()
@@ -462,7 +463,7 @@ extension UXFeedback: RequestManagerDelegate {
 }
 
 extension UXFeedback: CampaignFormPresentorProtocol {
-    func formSubmitted(info: Array<Dictionary<String, Any>>?, screenshots: [Screenshot], campaign: Campaign) {
+    func formSubmitted(info: Array<Dictionary<String, Any>>?, screenshots: [Screenshot], campaign: Campaign, invocationId: String) {
         self.DDLog("Campaign finished")
         
         var answers: [String: Any] = [:]
@@ -479,7 +480,7 @@ extension UXFeedback: CampaignFormPresentorProtocol {
         }
         
         self.campaignDelegate?.campaignDidAnswered(campaignId: campaign.campaignId,
-                                                   answers: answers, invocationId: "")
+                                                   answers: answers, invocationId: invocationId)
         
         var props = properties
         if let localProps = self.localProps[campaign.campaignId],
@@ -490,6 +491,7 @@ extension UXFeedback: CampaignFormPresentorProtocol {
         _requestManager.sendFormData(projectId: campaign.projectId,
                                      createdAtClient: StatisticManager.getTimeUTC(),
                                      campaignId: campaign.campaignId,
+                                     invocationId: invocationId,
                                      pages: info,
                                      properties: props)
         

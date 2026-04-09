@@ -8,7 +8,7 @@
 
 @objcMembers
 class AttributeManager {
-    static func checkAttributes(appId: String, requestManager: DataRequestManager, campaignId: Int, targeting: Targeting, attributes: [Attribute], completion: @escaping (Bool) -> Void) {
+    static func checkAttributes(appId: String, requestManager: DataRequestManager, campaignCandidate: CampaignData, targeting: Targeting, attributes: [Attribute], completion: @escaping (Bool) -> Void) {
         let campaignAttributes = targeting.attributes ?? []
         
         if (attributes.count == 0 && campaignAttributes.count == 0) ||
@@ -22,7 +22,7 @@ class AttributeManager {
             return
         }
         
-        var checkAttributes: [Attribute] = []
+//        var checkAttributes: [Attribute] = []
         for campaignAttribute in campaignAttributes {
           if let attribute = attributes.first(where: { att in
             att.attributeName == campaignAttribute.attributeName
@@ -113,7 +113,14 @@ class AttributeManager {
                   return
                 }
               case "list":
-                checkAttributes.append(attribute)
+                    if campaignCandidate.needsToShow {
+                        completion(true)
+                        return
+                    } else {
+                        completion(false)
+                        return
+                    }
+//                checkAttributes.append(attribute)
                 
               default:
                 completion(false)
@@ -123,20 +130,6 @@ class AttributeManager {
             completion(false)
             return
           }
-        }
-        
-        if checkAttributes.count > 0 {
-            DispatchQueue.global(qos: .userInitiated).async {
-                requestManager.sendAttributes(appId: appId,
-                                              campaignId: campaignId,
-                                              attributes: checkAttributes) { [weak requestManager] result in
-                    DispatchQueue.main.async {
-                        completion(result)
-                    }
-                }
-            }
-        } else {
-            completion(true)
         }
     }
 }

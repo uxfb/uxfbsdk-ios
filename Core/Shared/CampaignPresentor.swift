@@ -11,7 +11,7 @@ import SwiftUI
 import Foundation
 
 protocol CampaignFormPresentorProtocol: AnyObject {
-    func formSubmitted(info: Array<Dictionary<String, Any>>?, screenshots: [Screenshot], campaign: Campaign)
+    func formSubmitted(info: Array<Dictionary<String, Any>>?, screenshots: [Screenshot], campaign: Campaign, invocationId: String)
 }
 
 internal class CampaignPresentor: NSObject {
@@ -37,8 +37,8 @@ internal class CampaignPresentor: NSObject {
         isAnimationFormEnabled = animationEnabled
     }
     
-    func showCampaign(uiBlocked: Bool, closeOnSwipe: Bool, blackout: Blackout?, rotateToggle: Bool, properties: [String: Any]) {
-        let form = createCampaignForm(_campaign)
+    func showCampaign(uiBlocked: Bool, closeOnSwipe: Bool, blackout: Blackout?, rotateToggle: Bool, properties: [String: Any], invocationId: String) {
+        let form = createCampaignForm(_campaign, invocationId: invocationId)
         form.rotateToggle = rotateToggle
         switch _campaign.type {
         case .slidein:
@@ -61,7 +61,7 @@ internal class CampaignPresentor: NSObject {
         }
     }
     
-    open func createCampaignForm(_ campaign: Campaign) -> CampaignViewController {
+    open func createCampaignForm(_ campaign: Campaign, invocationId: String) -> CampaignViewController {
         let controller = CampaignViewController()
         controller.campaign = campaign
         var eventName: String = ""
@@ -74,27 +74,27 @@ internal class CampaignPresentor: NSObject {
         controller.presentHandler = { [weak self] in
             if let _ = self?._campaign {
                 self?.isFormOnScreen = true
-                self?.feedbackCampaignDelegate?.campaignDidShow(campaignId: campaign.campaignId, eventName: eventName)
+                self?.feedbackCampaignDelegate?.campaignDidShow(campaignId: campaign.campaignId, eventName: eventName, invocationId: invocationId)
             }
         }
         controller.didCloseHandler = { [weak self] in
             ImageManager.dispose()
             DispatchQueue.main.async {
                 self?.isFormOnScreen = false
-                self?.feedbackCampaignDelegate?.campaignDidClose(campaignId: campaign.campaignId, eventName: eventName)
+                self?.feedbackCampaignDelegate?.campaignDidClose(campaignId: campaign.campaignId, eventName: eventName, invocationId: invocationId)
             }
         }
         controller.completeHandler = { [weak self] (info, screenshots) in
             ImageManager.dispose()
             if let campaign = self?._campaign {
-                self?.delegate?.formSubmitted(info: info, screenshots: screenshots, campaign: campaign)
+                self?.delegate?.formSubmitted(info: info, screenshots: screenshots, campaign: campaign, invocationId: invocationId)
             }
         }
         controller.didTerminateHandler = { [weak self] (info, screenshots, terminatedPage, totalPages) in
             ImageManager.dispose()
             if let campaign = self?._campaign {
-                self?.delegate?.formSubmitted(info: info, screenshots: screenshots, campaign: campaign)
-                self?.feedbackCampaignDelegate?.campaignDidTerminate(campaignId: campaign.campaignId, eventName: eventName, terminatedPage: terminatedPage, totalPages: totalPages)
+                self?.delegate?.formSubmitted(info: info, screenshots: screenshots, campaign: campaign, invocationId: invocationId)
+                self?.feedbackCampaignDelegate?.campaignDidTerminate(campaignId: campaign.campaignId, eventName: eventName, terminatedPage: terminatedPage, totalPages: totalPages, invocationId: invocationId)
                 self?.isFormOnScreen = false
             }
         }

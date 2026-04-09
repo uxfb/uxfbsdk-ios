@@ -41,7 +41,7 @@ internal class ApiError : NSError {
 }
 
 class APIClient {
-    private(set) var appID: String!
+    private(set) var appID: String
     private var _parser: Parser!
     private var _endpoint: String
     private var _settings: SettingsProtocol
@@ -203,10 +203,11 @@ class APIClient {
     }
     
     func checkAttribues(_ appId: String,
-                        _ campaignId: Int,
+                        _ campaignIds: [Int],
                         _ attributes: [Attribute],
                         _ debug: Bool,
-                        completion: ((_ success: Bool)->())?){
+                        completion: ((_ success: Bool,
+                                      _ campaignId: Int?)->())?){
         let responseHandler = {(status: APIClientResponseResult, httpCode: Int, message: String?, result: Any?, state: String?) in
             if status == .success,
                let result = result as? Dictionary<String, Any>  {
@@ -214,19 +215,19 @@ class APIClient {
                     let jsonData = try JSONSerialization.data(withJSONObject: result, options: [])
                     let decoder = JSONDecoder()
                     let checkValue = try decoder.decode(CheckAttribute.self, from: jsonData)
-                    completion?(checkValue.checkAttributes)
+                    completion?(true, checkValue.campaignId)
                 } catch {
                     DDLogDebug("Check attributes failed")
-                    completion?(false)
+                    completion?(false, nil)
                 }
             } else {
                 DDLogDebug("Check attributes failed")
-                completion?(false)
+                completion?(false, nil)
             }
         }
         
         _ = performRequest(route: APIWebRouter.checkAttribute(appID: appId,
-                                                              campaignID: campaignId,
+                                                              campaignIDs: campaignIds,
                                                               attributes: attributes,
                                                               debug: debug),
                            completion: responseHandler)
@@ -259,7 +260,9 @@ class APIClient {
                 guard let data = data,
                       let response = response as? HTTPURLResponse,
                       error == nil else {
+#if DEBUG
                     DDLogDebug("httpCode= \((response as? HTTPURLResponse)?.statusCode ?? 0), response=\(String(decoding: data ?? Data(), as: UTF8.self))")
+#endif
                     throw error ?? ApiError.init(description: "Request error")
                 }
                 

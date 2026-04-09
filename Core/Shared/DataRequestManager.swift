@@ -35,6 +35,8 @@ final class DataRequestManager: NSObject {
     
     private var attempts = 0
     
+    private var isStorageAvailable = false
+    
     init(endpoint: String?,
          appID: String,
          parser: Parser,
@@ -64,7 +66,7 @@ final class DataRequestManager: NSObject {
             
             if let record = try? self.context.fetch(request).first  {
                 context.delete(record)
-                try? context.save()
+                self.saveContext()
             }
         }
     }
@@ -76,6 +78,7 @@ final class DataRequestManager: NSObject {
     public func sendFormData(projectId: String?,
                              createdAtClient: String,
                              campaignId: Int,
+                             invocationId: String,
                              pages: Array<Dictionary<String,Any>>?,
                              properties: Dictionary<String,Any>?) {
         
@@ -85,6 +88,7 @@ final class DataRequestManager: NSObject {
         let parameters = ["projectId": projectId as Any,
                           "createdAtClient": createdAtClient as Any,
                           "campaignId": campaignId,
+                          "invocationId": invocationId,
                           "pages": pages as Any,
                           "properties": properties as Any,
                           "idempotency": uuid] as [String : Any]
@@ -110,9 +114,9 @@ final class DataRequestManager: NSObject {
         }
     }
     
-    public func sendAttributes(appId: String, campaignId: Int, attributes: [Attribute], completion: @escaping (Bool) -> Void) {
-        self._apiClient.checkAttribues(appId, campaignId, attributes, false) { success in
-            completion(success)
+    public func sendAttributes(appId: String, campaignIds: [Int], attributes: [Attribute], completion: @escaping (Bool, Int?) -> Void) {
+        self._apiClient.checkAttribues(appId, campaignIds, attributes, false) { success, campaignId  in
+            completion(success, campaignId)
         }
     }
     
@@ -267,7 +271,7 @@ final class DataRequestManager: NSObject {
                     }
                     record.priority = campaign.priority
                     
-                    try? context.save()
+                    self.saveContext()
                 } else {
                     if campaign.data == nil {
                         needsReload = true
@@ -279,7 +283,7 @@ final class DataRequestManager: NSObject {
                         request.data = campaign.data
                         request.copyright = campaign.copyright
                         request.textProperties = campaign.textProperties
-                        try? context.save()
+                        self.saveContext()
                     }
                 }
             }
@@ -297,7 +301,7 @@ final class DataRequestManager: NSObject {
                     context.delete(record)
                 }
                 
-                try? context.save()
+                self.saveContext()
             }
         }
         
@@ -359,7 +363,6 @@ final class DataRequestManager: NSObject {
             case "SEND_FORM":
                 guard let data = data,
                       let dict = try? JSONSerialization.jsonObject(with: data) as? [String : Any],
-                      let projectId = dict["projectId"] as? String,
                       let createdAtClient = dict["createdAtClient"] as? String,
                       let campaignId = dict["campaignId"] as? Int,
                       let pages = dict["pages"] as? Array<Dictionary<String,Any>>,
@@ -368,6 +371,8 @@ final class DataRequestManager: NSObject {
                     self.deleteRequest(request, completion: { })
                     return
                 }
+                let invocationId = dict["invocationId"] as? String ?? ""
+                let projectId = dict["projectId"] as? String
                 let idempotency = dict["idempotency"] as? String ?? ""
                 self._apiClient.saveFormData(projectId: projectId,
                                              createdAtClient: createdAtClient,
@@ -379,7 +384,7 @@ final class DataRequestManager: NSObject {
                         self.delegate?.formDataSaved(success: success,
                                                      message: message,
                                                      campaignId: campaignId,
-                                                     invocationId: <#String#>)
+                                                     invocationId: invocationId)
                     }
                 }
                 
@@ -440,7 +445,11 @@ final class DataRequestManager: NSObject {
         
         container.loadPersistentStores { (storeDescription, error) in
             if let error = error as NSError? {
-                print("Unresolved error \(error), \(error.userInfo)")
+                // Диск полон или другая ошибка — SDK работает без персистентности
+                DDLogDebug("CoreData unavailable: \(error)")
+                self.isStorageAvailable = false
+            } else {
+                self.isStorageAvailable = true
             }
         }
         
@@ -468,6 +477,10 @@ final class DataRequestManager: NSObject {
     }
     
     private func createRequest(_ apiMethod: String, parameters: Data?) {
+        guard isStorageAvailable else {
+            return
+        }
+        
         context.performAndWait {
             if apiMethod == "GET_CAMPAIGNS" {
                 let fetchRequest = NSFetchRequest<DataRequest>(entityName: "DataRequest")
@@ -483,7 +496,7 @@ final class DataRequestManager: NSObject {
             request.created = Date()
             request.parametersData = parameters
             //            request.time = settings.requestTimeout
-            try? self.context.save()
+            self.saveContext()
             
             if !self.isActive {
                 self.finishContext()
@@ -494,7 +507,7 @@ final class DataRequestManager: NSObject {
     private func deleteRequest(_ request: DataRequest, completion: (() -> ())? = nil ) {
         context.performAndWait {
             context.delete(request)
-            try? context.save()
+            self.saveContext()
             finishContext(completion: completion)
         }
     }
@@ -503,5 +516,18 @@ final class DataRequestManager: NSObject {
         isActive = false
         completion?()
         self.prepareAndSend()
+    }
+    
+    private func saveContext() {
+        guard isStorageAvailable, context.hasChanges else { return }
+        do {
+            try context.save()
+        } catch let error as NSError {
+            DDLogDebug("CoreData save error: \(error)")
+            // Если диск заполнился уже после инициализации:
+            if error.code == NSFileWriteOutOfSpaceError {
+                isStorageAvailable = false
+            }
+        }
     }
 }

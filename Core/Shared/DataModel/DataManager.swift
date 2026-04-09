@@ -690,7 +690,13 @@ class DataManager: FieldDelegate {
                     }
                 })
                 
-                var newAnswer = ["pageId": self.campaign?.pages[self.currentPage].id ?? "",
+                let page = self.campaign?.pages.first { page in
+                    page.fields.contains { f in
+                        f.id == field.id
+                    }
+                }
+                
+                var newAnswer = ["pageId": page?.id ?? "",
                                  "fieldId": field.id as Any,
                                  "type": field.type?.rawValue as Any,
                                  "value": answer,
@@ -745,6 +751,12 @@ class DataManager: FieldDelegate {
                              "value": answer,
                              "transforms": ""] as [String : Any]
             answers.append(newAnswer)
+        }
+        
+        if let fieldIndex = campaign?.pages[currentPage].fields.firstIndex(where: { f in
+            f.id == field.id
+        }) {
+            viewController?.updateUI(fieldIndex)
         }
     }
     
@@ -892,7 +904,7 @@ class DataManager: FieldDelegate {
                 return page?.id == pageId ?? ""
             }
             
-            if !fields.isEmpty {
+            if !fields.isEmpty || i == currentPage {
                 var result: [String: Any] = [:]
                 result["pageId"] = page?.id ?? ""
                 if fields.count > 0 {

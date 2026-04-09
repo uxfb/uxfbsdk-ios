@@ -49,7 +49,7 @@ open class YoHe: NSObject {
     
     private var _requestManager: DataRequestManager!
     
-    private var _campaigns: Array<Campaign> = []
+    private var _campaignData: Array<CampaignData> = []
     private var _eventToSend: String?
     private var _attributes: [Attribute]?
     private var _resetAllCampaingHandler: (()->())?
@@ -153,6 +153,12 @@ open class YoHe: NSObject {
                              campaignDelegate: YoHeCampaignDelegate? = nil,
                              logDelegate: YoHeLogDelegate? = nil) {
         
+        // Validate appID
+        guard !appID.isEmpty, !appID.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            campaignDelegate?.campaignDidReceiveError(errorString: "Invalid appID: appID cannot be empty")
+            return
+        }
+        
         sdk.appId = appID
         sdk.settings = settings
         sdk.campaignDelegate = campaignDelegate
@@ -226,16 +232,16 @@ open class YoHe: NSObject {
       
       var targeting: Targeting? = nil
       
-      if let campaign = _campaigns.first(where: { campaign in
-          if campaign.targeting.value == eventName {
+      if let campaignData = _campaignData.first(where: { campaignData in
+          if let campaign = campaignData.campaign, campaign.targeting.value == eventName {
               targeting = campaign.targeting
+              return true
           }
-          
-            return targeting != nil
-      }), let targeting = targeting {
+          return false
+      }), let targeting = targeting, let campaign = campaignData.campaign {
           AttributeManager.checkAttributes(appId: self.appId!,
                                            requestManager: self._requestManager,
-                                           campaignId: campaign.campaignId,
+                                           campaignCandidate: campaignData,
                                            targeting: targeting,
                                            attributes: attributes ?? []) { result in
           if result {
@@ -325,12 +331,13 @@ open class YoHe: NSObject {
                                                 closeOnSwipe: self.settings.closeOnSwipe,
                                                 blackout: blackout,
                                                 rotateToggle: self.settings.rotateToggle,
-                                                properties: self.properties)
+                                                properties: self.properties,
+                                                invocationId: "")
               
               if !isMultiVisited {
                 self.saveShowingTime()
-                self._campaigns.removeAll { camp in
-                  camp.campaignId == campaign.campaignId
+                self._campaignData.removeAll { campaignData in
+                  campaignData.campaignId == campaign.campaignId
                 }
               }
               DispatchQueue.global(qos: .utility).async {
@@ -369,7 +376,7 @@ open class YoHe: NSObject {
 
 extension YoHe: RequestManagerDelegate {
     func campaingsLoaded(success: Bool, message: String?, delay: Int?, campaigns: Array<CampaignData>, state: String) {
-//        self._campaigns = campaigns
+        self._campaignData = campaigns
         self.settings.globalDelayTimer = delay ?? self.settings.globalDelayTimer
         if success == true {
             self.DDLog("Campaigns loaded: \(campaigns.count)")
@@ -390,7 +397,7 @@ extension YoHe: RequestManagerDelegate {
         }
     }
     
-    func formDataSaved(success: Bool, message: String?, campaignId: Int) {
+    func formDataSaved(success: Bool, message: String?, campaignId: Int, invocationId: String) {
         if success {
             self.campaignDelegate?.campaignDidSend(campaignId: campaignId)
         }
@@ -398,7 +405,7 @@ extension YoHe: RequestManagerDelegate {
 }
 
 extension YoHe: CampaignFormPresentorProtocol {
-    func formSubmitted(info: Array<Dictionary<String, Any>>?, screenshots: [Screenshot], campaign: Campaign) {
+    func formSubmitted(info: Array<Dictionary<String, Any>>?, screenshots: [Screenshot], campaign: Campaign, invocationId: String) {
         self.DDLog("Campaign finished")
         
         var answers: [String: Any] = [:]
@@ -420,6 +427,7 @@ extension YoHe: CampaignFormPresentorProtocol {
         _requestManager.sendFormData(projectId: campaign.projectId,
                                      createdAtClient: StatisticManager.getTimeUTC(),
                                      campaignId: campaign.campaignId,
+                                     invocationId: invocationId,
                                      pages: info,
                                      properties: properties)
         

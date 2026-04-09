@@ -16,7 +16,7 @@ internal class Consts {
     static let defaultHref: String = "https://uxfeedback.ru?utm_campaign=default&utm_medium=app"
     static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
 //    static let defaultEndpoint: String = "https://develop.api.uxfb.dev"
-//    static let defaultEndpoint: String = "https://epic-dev-6716-mobile-description.api.uxfb.dev"
+//    static let defaultEndpoint: String = "https://epic-release-12.api.uxfb.dev"
 
     static let apiVersion: String = "v18"
     static let identifier: String  = "biz.andalex.uxfeedback.sdk"

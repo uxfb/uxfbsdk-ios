@@ -80,8 +80,9 @@ public class Attribute : NSObject{
 }
 
 internal struct CheckAttribute: Codable {
-  public let checkAttributes: Bool
-  public let attributes: [String: Bool]?
+//  public let checkAttributes: Bool
+//  public let attributes: [String: Bool]?
+    public let campaignId: Int?
 }
 
 @objc

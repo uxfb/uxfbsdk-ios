@@ -18,6 +18,8 @@ class HeaderView: UIView {
         let label = LinkLabel()
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = ""
+        label.attributedText = nil
         return label
     }()
     
@@ -25,6 +27,8 @@ class HeaderView: UIView {
         let label = LinkLabel()
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = ""
+        label.attributedText = nil
         return label
     }()
     
@@ -68,6 +72,11 @@ class HeaderView: UIView {
         self.field = field
         self.theme = theme
         updateUI()
+    }
+    
+    func clear() {
+        label.attributedText = nil
+        descriptionLabel.attributedText = nil
     }
     
     private func getImageConstraint(for size: CGSize) -> CGFloat {

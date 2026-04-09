@@ -30,7 +30,7 @@ struct Campaign {
     private(set) var type: CampaignType!
     private(set) var targeting: Targeting!
     private(set) var transforms: Array<Transform>!
-    private(set) var projectId: String!
+    private(set) var projectId: String?
     private(set) var autoclose: Double!
     private(set) var copyright: Copyright?
     private(set) var privacy: Privacy?

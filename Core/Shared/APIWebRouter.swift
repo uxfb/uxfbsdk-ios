@@ -29,7 +29,7 @@ enum HTTPHeaderField: String {
     case idempotencyKey = "Idempotency-Key"
     case debug = "debug"
     case attributes = "attributes"
-    
+    case attributesCampaignIds = "campaignIds"
     case sdkVersion = "X-SDK-Version"
     case sdkTargetOS = "X-SDK-TargetOS"
     case sdkPlatform = "X-SDK-Platform"
@@ -50,19 +50,30 @@ enum ContentType: String {
 
 enum APIWebRouter {
     
-    static let appVersion = "\(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String)"
+    private static let syncQueue = DispatchQueue(label: "com.uxfeedback.router")
+    private static var _endpoint: String = "\(defaultEndpoint)/\(Consts.apiVersion)"
+    private static var _settings: SettingsProtocol?
+    
+    static let appVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "unknown"
     
     static let defaultEndpoint: String = Consts.defaultEndpoint
     
-    static var endpoint: String = "\(defaultEndpoint)/\(Consts.apiVersion)"
-    static var settings: SettingsProtocol?
+    static var endpoint: String {
+        get { syncQueue.sync { _endpoint } }
+        set { syncQueue.sync { _endpoint = newValue } }
+    }
+
+    static var settings: SettingsProtocol? {
+        get { syncQueue.sync { _settings } }
+        set { syncQueue.sync { _settings = newValue } }
+    }
     
     case checkToggle(appID: String)
     case getCampaign(appID: String, state: String)
     case showForm(uid: String, campaingId: Int)
     case saveFormData(appId: String?, projectId: String?, createdAtClient: String, uid: String, campaignId: Int, pages: Array<Dictionary<String, Any>>, info: Dictionary<String, Any>, properties: Dictionary<String, Any>, idempotency: String)
     case saveScreenshot(screenshot: ScreenshotData)
-    case checkAttribute(appID: String, campaignID: Int, attributes: [Attribute], debug: Bool)
+    case checkAttribute(appID: String, campaignIDs: [Int], attributes: [Attribute], debug: Bool)
     
     var method: String {
         switch self {
@@ -82,7 +93,7 @@ enum APIWebRouter {
             case .getCampaign(let appId, _):
                 return "/mobile/campaigns/\(appId)"
             case .saveFormData(let appId, _, _, _, _, _, _, _, _):
-                if let appId = appId {
+                if let appId = appId, !appId.isEmpty {
                     return "/mobile/answers/\(appId)"
                 } else {
                     return "/mobile/answers"
@@ -91,8 +102,8 @@ enum APIWebRouter {
                 return "/mobile/visits"
             case .saveScreenshot(_ ):
                 return "/mobile/screenshots"
-            case .checkAttribute(let appId, let campaignId, _, _):
-                return "/mobile/campaigns/\(appId)/\(campaignId)/checkattributes"
+            case .checkAttribute(let appId, _, _, _):
+                return "/mobile/campaigns/\(appId)/checkattributes"
         }
     }
     
@@ -113,8 +124,10 @@ enum APIWebRouter {
             case .showForm(let uid, let campaingId):
                 return  [HTTPHeaderField.uid.rawValue : uid,
                          HTTPHeaderField.campaignId.rawValue : campaingId]
-            case .checkAttribute( _, _, let attributes, _):
-                return  [HTTPHeaderField.attributes.rawValue : attributes.convertToDict()]
+            case .checkAttribute( _, let campaignIds, let attributes, _):
+                return  [HTTPHeaderField.attributes.rawValue : attributes.convertToDict(),
+                         HTTPHeaderField.attributesCampaignIds.rawValue : campaignIds]
+                
                 
             default:
                 return [:]
@@ -259,6 +272,9 @@ enum APIWebRouter {
         let urlComponents = URLComponents(baseUrl: APIWebRouter.endpoint,
                                           path: path,
                                           queryParameters: pathParameters)
-        return urlComponents.url!
+        guard let url = urlComponents.url else {
+            throw URLError(.badURL)
+        }
+        return url
     }
 }

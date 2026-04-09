@@ -1057,19 +1057,43 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     
     func updateUI(_ sender: Int? = nil) {
         self.progressLabel.text = dataManager?.progress
+
         if let sender = sender {
-            for i in 0..<(dataManager?.fieldsCount() ?? 0) {
-                if i != sender {
-                    self.tableView.reloadSections([i], with: .automatic)
+            let newCount = dataManager?.fieldsCount() ?? 0
+            let oldCount = tableView.numberOfSections
+            
+            UIView.performWithoutAnimation {
+                tableView.beginUpdates()
+
+                // Синхронизируем количество секций
+                if newCount > oldCount {
+                    tableView.insertSections(IndexSet(integersIn: oldCount..<newCount), with: .none)
+                } else if newCount < oldCount {
+                    tableView.deleteSections(IndexSet(integersIn: newCount..<oldCount), with: .none)
                 }
+
+                // Перезагружаем только те секции, которые уже были и не содержат активное поле
+                let sectionsToReload = IndexSet(
+                    (0..<min(oldCount, newCount)).filter { $0 != sender }
+                )
+                if !sectionsToReload.isEmpty {
+                    tableView.reloadSections(sectionsToReload, with: .none)
+                }
+
+                tableView.endUpdates()
             }
+//            for i in 0..<(dataManager?.fieldsCount() ?? 0) {
+//                if i != sender {
+//                    UIView.performWithoutAnimation {
+//                        self.tableView.reloadSections(IndexSet(integer: i), with: .none)
+//                    }
+//                }
+//            }
         } else {
             self.reloadTableView()
         }
         
         self.updateHeight()
-//        self.dataManager?.checkPrivacy(nil)
-//        self.tableView.setContentOffset(.zero, animated: true)
     }
     
     func didBeginEditing(_ section: Int) {
