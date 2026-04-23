@@ -213,7 +213,7 @@ open class UXFeedback: NSObject {
     /// Метод показа кампании по указанному событию
     /// - Parameter eventName: Название события
     /// - Parameter attributes: Аттрибуты показа кампании
-    @objc open func startCampaign(eventName: String, attributes: [Attribute]? = nil, localProps: [String: Any]? = nil) -> String? {
+    @objc open func startCampaign(eventName: String, attributes: [Attribute]? = nil, localProps: [String: Any]? = nil) -> String {
         let uuid = UUID().uuidString
         self.DDLog("UUID = \(uuid)")
         guard (self._appWindow != nil) else {
