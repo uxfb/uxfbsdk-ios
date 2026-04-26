@@ -87,7 +87,7 @@ class MainViewController_swift: UIViewController {
             UXFeedback.sdk.properties = ["ios": "ios-data"]
 
                 let atts = UXFBAttributesBuilder()
-                    .addValue("step", value: 2)
+                    .addValue("user", value: Date())
                 .build()
 
                 let attributes = UXFBAttributesBuilder()
@@ -97,7 +97,7 @@ class MainViewController_swift: UIViewController {
 //                for i in 0...10000 {
                 
                 let eventNames = [
-                    "comment",
+                    "event2404",
                     "ger_1",
                     "ger",
                     "seller",
@@ -110,7 +110,7 @@ class MainViewController_swift: UIViewController {
                     "person"
                 ]
                 
-                let uuid = UXFeedback.sdk.startCampaign(eventName: eventNames[0])
+                let uuid = UXFeedback.sdk.startCampaign(eventName: eventNames[0], attributes: atts)
                 
                 print(uuid)
                 
