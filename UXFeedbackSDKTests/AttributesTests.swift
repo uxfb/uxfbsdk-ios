@@ -24,7 +24,7 @@ final class AttributeDecodableTests: XCTestCase {
         let decoded = try JSONDecoder().decode(AttributeDecodable.self, from: json)
 
         XCTAssertNil(decoded.getString())
-        XCTAssertEqual(decoded.getNumber()?.doubleValue, 3.14, accuracy: 0.001)
+        XCTAssertEqual(decoded.getNumber()!.doubleValue, 3.14, accuracy: 0.001)
     }
 
     func testGetNumberFromString() throws {
@@ -32,7 +32,7 @@ final class AttributeDecodableTests: XCTestCase {
         let decoded = try JSONDecoder().decode(AttributeDecodable.self, from: json)
 
         XCTAssertEqual(decoded.getString(), "42.5")
-        XCTAssertEqual(decoded.getNumber()?.doubleValue, 42.5, accuracy: 0.001)
+        XCTAssertEqual(decoded.getNumber()!.doubleValue, 42.5, accuracy: 0.001)
     }
 
     func testGetNumberFromNonNumericString() throws {
