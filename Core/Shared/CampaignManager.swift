@@ -83,7 +83,9 @@ class CampaignManager {
                 }
                 
                 if attributes == nil && (candidateCampaign.targeting.attributes == nil || candidateCampaign.targeting.attributes?.isEmpty == true) {
-                    completion(candidateCampaign)
+                    DispatchQueue.main.async {
+                        completion(candidateCampaign)
+                    }
                     return
                 }
                 

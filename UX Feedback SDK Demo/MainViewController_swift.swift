@@ -110,7 +110,9 @@ class MainViewController_swift: UIViewController {
                     "person"
                 ]
                 
-                let uuid = UXFeedback.sdk.startCampaign(eventName: eventNames[0], attributes: atts)
+                let localProps = ["A":"A", "A": "B"]
+                
+                let uuid = UXFeedback.sdk.startCampaign(eventName: eventNames[0], attributes: atts, localProps: localProps)
                 
                 print(uuid)
                 
