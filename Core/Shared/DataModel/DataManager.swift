@@ -795,24 +795,29 @@ class DataManager: FieldDelegate {
     
     //MARK: - PRIVACY
     
-    var privacyEnabled: Bool {
-        get {
-            if let privacy = campaign?.privacy,
-               privacy.enabled,
-               (campaign?.privacy?.privacyPages ?? []).contains(campaign?.pages[currentPage].id ?? "") {
-                return true
-            }
-            return false
-        }
-    }
-    
     var privacyNeeded: Bool {
         get {
-            if let privacy = campaign?.privacy,
-               privacy.enabled,
-               (campaign?.privacy?.privacyPages ?? []).contains(campaign?.pages[currentPage].id ?? "") {
-                return true
+            if let privacy = campaign?.privacy, privacy.enabled {
+                if privacy.showType == "all" {
+                    return true
+                } else if privacy.showType == "withEmail",
+                   (campaign?.privacy?.privacyPages ?? []).contains(campaign?.pages[currentPage].id ?? "") {
+                    
+                    let emailFields = campaign?.pages[currentPage].fields.filter { field in
+                        field.type == .email
+                    } ?? []
+                    
+                    for field in emailFields {
+                        let showed = checkFieldTransfromed(field)
+                        if !showed {
+                            return false
+                        }
+                    }
+                    
+                    return true
+                }
             }
+            
             return false
         }
     }

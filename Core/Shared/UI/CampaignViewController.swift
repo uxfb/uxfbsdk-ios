@@ -424,7 +424,7 @@ internal class CampaignViewController: UIViewController {
     }
     
     func updateFooter() {
-        let withPrivacy = dataManager?.privacyEnabled ?? false
+        let withPrivacy = dataManager?.privacyNeeded ?? false
         copyrightView.isHidden = !(campaign?.copyright?.isShow ?? false)
         privacyView.isHidden = !withPrivacy
         holderView.backgroundColor = withPrivacy ? campaign?.theme.controlBgColor : campaign?.theme.bgColor
@@ -464,7 +464,7 @@ internal class CampaignViewController: UIViewController {
         view.addSubview(shadowView)
         view.addSubview(contentView)
         
-        createFooter(withPrivacy: dataManager?.privacyEnabled ?? false)
+        createFooter(withPrivacy: dataManager?.privacyNeeded ?? false)
         
         if presentHandler != nil {
             presentHandler!()

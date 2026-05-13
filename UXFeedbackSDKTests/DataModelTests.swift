@@ -215,7 +215,7 @@ final class PrivacyTests: XCTestCase {
             "warningMessage": "Please accept",
             "type": "checkbox",
             "declaration": "I agree to terms",
-            "showType": "always",
+            "showType": "all",
             "privacyPages": ["p1", "p2"],
             "enabled": true
         }

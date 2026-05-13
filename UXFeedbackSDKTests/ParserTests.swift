@@ -303,7 +303,7 @@ final class ParserTests: XCTestCase {
                 "warningMessage": "Accept terms",
                 "type": "checkbox",
                 "declaration": "I agree",
-                "showType": "always",
+                "showType": "all",
                 "privacyPages": ["p1"],
                 "enabled": true
             ] as [String : Any]

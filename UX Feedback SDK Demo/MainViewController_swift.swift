@@ -110,9 +110,7 @@ class MainViewController_swift: UIViewController {
                     "person"
                 ]
                 
-                let localProps = ["A":"A", "A": "B"]
-                
-                let uuid = UXFeedback.sdk.startCampaign(eventName: eventNames[0], attributes: atts, localProps: localProps)
+                let uuid = UXFeedback.sdk.startCampaign(eventName: eventNames[2], attributes: nil)
                 
                 print(uuid)
                 
@@ -123,7 +121,7 @@ class MainViewController_swift: UIViewController {
         case 2:
 //                UXFeedback.setup(appID: uxfAppID, settings: (UIApplication.shared.delegate as! AppDelegate).settings)
 //                UXFeedback.sdk.stopCampaign(eventForStop: "")
-            UXFeedback.sdk.startCampaign(eventName: "resume", attributes: nil)
+            let uuid = UXFeedback.sdk.startCampaign(eventName: "hh1603", attributes: nil)
             
         default:
             break

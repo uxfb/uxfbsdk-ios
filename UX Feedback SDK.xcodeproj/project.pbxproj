@@ -38,6 +38,18 @@
 		0AF49826229C3D4A000CB7D6 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49824229C3D4A000CB7D6 /* UIColorExtension.swift */; };
 		0AF49827229C3D4A000CB7D6 /* UIColorInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49825229C3D4A000CB7D6 /* UIColorInputError.swift */; };
 		0AF49829229C3D5D000CB7D6 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF49828229C3D5C000CB7D6 /* StringExtension.swift */; };
+		AA00000000000011 /* DataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000001 /* DataModelTests.swift */; };
+		AA00000000000012 /* AttributesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000002 /* AttributesTests.swift */; };
+		AA00000000000013 /* CryptoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000003 /* CryptoTests.swift */; };
+		AA00000000000014 /* URLComponentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000004 /* URLComponentsTests.swift */; };
+		AA00000000000015 /* APIWebRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000005 /* APIWebRouterTests.swift */; };
+		AA00000000000016 /* AttributeManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000006 /* AttributeManagerTests.swift */; };
+		AA00000000000017 /* TransformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000007 /* TransformTests.swift */; };
+		AA00000000000018 /* StatisticManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000008 /* StatisticManagerTests.swift */; };
+		AA00000000000019 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000009 /* ParserTests.swift */; };
+		AA0000000000001A /* VendorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000A /* VendorExtensionsTests.swift */; };
+		AA0000000000001B /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000B /* ThemeTests.swift */; };
+		AA0000000000001C /* TextPropertyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000C /* TextPropertyManagerTests.swift */; };
 		BF01BDF525613086008C641B /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDF425613086008C641B /* Option.swift */; };
 		BF01BDF725613254008C641B /* Decodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDF625613254008C641B /* Decodable+.swift */; };
 		BF01BDFB25618234008C641B /* CGFloat+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDFA25618234008C641B /* CGFloat+.swift */; };
@@ -254,18 +266,10 @@
 		BFF3520F2D51076C0010A245 /* AttributeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF3520D2D5107640010A245 /* AttributeManager.swift */; };
 		BFF352722D5BD8A00010A245 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF352712D5BD89F0010A245 /* SliderView.swift */; };
 		BFF352732D5BD8A00010A245 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF352712D5BD89F0010A245 /* SliderView.swift */; };
-		AA00000000000011 /* DataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000001 /* DataModelTests.swift */; };
-		AA00000000000012 /* AttributesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000002 /* AttributesTests.swift */; };
-		AA00000000000013 /* CryptoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000003 /* CryptoTests.swift */; };
-		AA00000000000014 /* URLComponentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000004 /* URLComponentsTests.swift */; };
-		AA00000000000015 /* APIWebRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000005 /* APIWebRouterTests.swift */; };
-		AA00000000000016 /* AttributeManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000006 /* AttributeManagerTests.swift */; };
-		AA00000000000017 /* TransformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000007 /* TransformTests.swift */; };
-		AA00000000000018 /* StatisticManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000008 /* StatisticManagerTests.swift */; };
-		AA00000000000019 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000009 /* ParserTests.swift */; };
-		AA0000000000001A /* VendorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000A /* VendorExtensionsTests.swift */; };
-		AA0000000000001B /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000B /* ThemeTests.swift */; };
-		AA0000000000001C /* TextPropertyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000C /* TextPropertyManagerTests.swift */; };
+		BFF5D37E2FB47C4600695928 /* MuseoSansBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFF5D3792FB47C4600695928 /* MuseoSansBold.ttf */; };
+		BFF5D37F2FB47C4600695928 /* MuseoSansItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFF5D37B2FB47C4600695928 /* MuseoSansItalic.ttf */; };
+		BFF5D3802FB47C4600695928 /* MuseoSansBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFF5D37A2FB47C4600695928 /* MuseoSansBoldItalic.ttf */; };
+		BFF5D3812FB47C4600695928 /* MuseoSansRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFF5D37C2FB47C4600695928 /* MuseoSansRegular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -348,6 +352,19 @@
 		0AF49824229C3D4A000CB7D6 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		0AF49825229C3D4A000CB7D6 /* UIColorInputError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorInputError.swift; sourceTree = "<group>"; };
 		0AF49828229C3D5C000CB7D6 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		AA00000000000001 /* DataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelTests.swift; sourceTree = "<group>"; };
+		AA00000000000002 /* AttributesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesTests.swift; sourceTree = "<group>"; };
+		AA00000000000003 /* CryptoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTests.swift; sourceTree = "<group>"; };
+		AA00000000000004 /* URLComponentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentsTests.swift; sourceTree = "<group>"; };
+		AA00000000000005 /* APIWebRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWebRouterTests.swift; sourceTree = "<group>"; };
+		AA00000000000006 /* AttributeManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeManagerTests.swift; sourceTree = "<group>"; };
+		AA00000000000007 /* TransformTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformTests.swift; sourceTree = "<group>"; };
+		AA00000000000008 /* StatisticManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticManagerTests.swift; sourceTree = "<group>"; };
+		AA00000000000009 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
+		AA0000000000000A /* VendorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorExtensionsTests.swift; sourceTree = "<group>"; };
+		AA0000000000000B /* ThemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTests.swift; sourceTree = "<group>"; };
+		AA0000000000000C /* TextPropertyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPropertyManagerTests.swift; sourceTree = "<group>"; };
+		AA00000000000020 /* UXFeedbackSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UXFeedbackSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF01BDF425613086008C641B /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		BF01BDF625613254008C641B /* Decodable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+.swift"; sourceTree = "<group>"; };
 		BF01BDFA25618234008C641B /* CGFloat+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+.swift"; sourceTree = "<group>"; };
@@ -479,19 +496,10 @@
 		BFF304672A43173C00E513EA /* YoHeSDK.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YoHeSDK.plist; sourceTree = "<group>"; };
 		BFF3520D2D5107640010A245 /* AttributeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeManager.swift; sourceTree = "<group>"; };
 		BFF352712D5BD89F0010A245 /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
-		AA00000000000001 /* DataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelTests.swift; sourceTree = "<group>"; };
-		AA00000000000002 /* AttributesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesTests.swift; sourceTree = "<group>"; };
-		AA00000000000003 /* CryptoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTests.swift; sourceTree = "<group>"; };
-		AA00000000000004 /* URLComponentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentsTests.swift; sourceTree = "<group>"; };
-		AA00000000000005 /* APIWebRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWebRouterTests.swift; sourceTree = "<group>"; };
-		AA00000000000006 /* AttributeManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeManagerTests.swift; sourceTree = "<group>"; };
-		AA00000000000007 /* TransformTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformTests.swift; sourceTree = "<group>"; };
-		AA00000000000008 /* StatisticManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticManagerTests.swift; sourceTree = "<group>"; };
-		AA00000000000009 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
-		AA0000000000000A /* VendorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorExtensionsTests.swift; sourceTree = "<group>"; };
-		AA0000000000000B /* ThemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTests.swift; sourceTree = "<group>"; };
-		AA0000000000000C /* TextPropertyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPropertyManagerTests.swift; sourceTree = "<group>"; };
-		AA00000000000020 /* UXFeedbackSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UXFeedbackSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFF5D3792FB47C4600695928 /* MuseoSansBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MuseoSansBold.ttf; sourceTree = "<group>"; };
+		BFF5D37A2FB47C4600695928 /* MuseoSansBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MuseoSansBoldItalic.ttf; sourceTree = "<group>"; };
+		BFF5D37B2FB47C4600695928 /* MuseoSansItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MuseoSansItalic.ttf; sourceTree = "<group>"; };
+		BFF5D37C2FB47C4600695928 /* MuseoSansRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MuseoSansRegular.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -516,6 +524,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AA00000000000041 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFB509CD2D50E6D000021998 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -535,19 +550,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AA00000000000041 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		0A019A3322365E02002FD4F8 = {
 			isa = PBXGroup;
 			children = (
+				BFF5D37D2FB47C4600695928 /* Font */,
 				0A019A52223669CC002FD4F8 /* Core */,
 				BFEF97E42B7CD3CC00931D50 /* UX Feedback SDK Demo SwiftUI */,
 				0A019A3E22365E02002FD4F8 /* UX Feedback SDK Demo */,
@@ -721,6 +730,25 @@
 				0A995FB42288011500A90A0A /* UXFeedbackSDK.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AA00000000000030 /* UXFeedbackSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				AA00000000000001 /* DataModelTests.swift */,
+				AA00000000000002 /* AttributesTests.swift */,
+				AA00000000000003 /* CryptoTests.swift */,
+				AA00000000000004 /* URLComponentsTests.swift */,
+				AA00000000000005 /* APIWebRouterTests.swift */,
+				AA00000000000006 /* AttributeManagerTests.swift */,
+				AA00000000000007 /* TransformTests.swift */,
+				AA00000000000008 /* StatisticManagerTests.swift */,
+				AA00000000000009 /* ParserTests.swift */,
+				AA0000000000000A /* VendorExtensionsTests.swift */,
+				AA0000000000000B /* ThemeTests.swift */,
+				AA0000000000000C /* TextPropertyManagerTests.swift */,
+			);
+			path = UXFeedbackSDKTests;
 			sourceTree = "<group>";
 		};
 		BF0CE19827661C1200916B32 /* Rating */ = {
@@ -1073,23 +1101,15 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		AA00000000000030 /* UXFeedbackSDKTests */ = {
+		BFF5D37D2FB47C4600695928 /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				AA00000000000001 /* DataModelTests.swift */,
-				AA00000000000002 /* AttributesTests.swift */,
-				AA00000000000003 /* CryptoTests.swift */,
-				AA00000000000004 /* URLComponentsTests.swift */,
-				AA00000000000005 /* APIWebRouterTests.swift */,
-				AA00000000000006 /* AttributeManagerTests.swift */,
-				AA00000000000007 /* TransformTests.swift */,
-				AA00000000000008 /* StatisticManagerTests.swift */,
-				AA00000000000009 /* ParserTests.swift */,
-				AA0000000000000A /* VendorExtensionsTests.swift */,
-				AA0000000000000B /* ThemeTests.swift */,
-				AA0000000000000C /* TextPropertyManagerTests.swift */,
+				BFF5D3792FB47C4600695928 /* MuseoSansBold.ttf */,
+				BFF5D37A2FB47C4600695928 /* MuseoSansBoldItalic.ttf */,
+				BFF5D37B2FB47C4600695928 /* MuseoSansItalic.ttf */,
+				BFF5D37C2FB47C4600695928 /* MuseoSansRegular.ttf */,
 			);
-			path = UXFeedbackSDKTests;
+			path = Font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1163,6 +1183,24 @@
 			productReference = 0A46899222840B2C0074E1A3 /* UXFeedbackSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		AA00000000000050 /* UXFeedbackSDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA00000000000080 /* Build configuration list for PBXNativeTarget "UXFeedbackSDKTests" */;
+			buildPhases = (
+				AA00000000000040 /* Sources */,
+				AA00000000000041 /* Frameworks */,
+				AA00000000000042 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA00000000000060 /* PBXTargetDependency */,
+			);
+			name = UXFeedbackSDKTests;
+			productName = UXFeedbackSDKTests;
+			productReference = AA00000000000020 /* UXFeedbackSDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BFB509692D50E6D000021998 /* YoHeSDK */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFB509EB2D50E6D000021998 /* Build configuration list for PBXNativeTarget "YoHeSDK" */;
@@ -1201,24 +1239,6 @@
 			productReference = BFEF97E32B7CD3CC00931D50 /* UX Feedback SDK Demo SwiftUI.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AA00000000000050 /* UXFeedbackSDKTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AA00000000000080 /* Build configuration list for PBXNativeTarget "UXFeedbackSDKTests" */;
-			buildPhases = (
-				AA00000000000040 /* Sources */,
-				AA00000000000041 /* Frameworks */,
-				AA00000000000042 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AA00000000000060 /* PBXTargetDependency */,
-			);
-			name = UXFeedbackSDKTests;
-			productName = UXFeedbackSDKTests;
-			productReference = AA00000000000020 /* UXFeedbackSDKTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1237,12 +1257,12 @@
 						CreatedOnToolsVersion = 10.2;
 						LastSwiftMigration = 1300;
 					};
-					BFEF97E22B7CD3CC00931D50 = {
-						CreatedOnToolsVersion = 15.2;
-					};
 					AA00000000000050 = {
 						CreatedOnToolsVersion = 15.2;
 						TestTargetID = 0A46899122840B2C0074E1A3;
+					};
+					BFEF97E22B7CD3CC00931D50 = {
+						CreatedOnToolsVersion = 15.2;
 					};
 				};
 			};
@@ -1275,6 +1295,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFF5D37E2FB47C4600695928 /* MuseoSansBold.ttf in Resources */,
+				BFF5D37F2FB47C4600695928 /* MuseoSansItalic.ttf in Resources */,
+				BFF5D3802FB47C4600695928 /* MuseoSansBoldItalic.ttf in Resources */,
+				BFF5D3812FB47C4600695928 /* MuseoSansRegular.ttf in Resources */,
 				0A019A4A22365E04002FD4F8 /* LaunchScreen_swift.storyboard in Resources */,
 				BF01BDFD2561EF59008C641B /* Images.xcassets in Resources */,
 				0A019A4722365E04002FD4F8 /* Assets.xcassets in Resources */,
@@ -1288,6 +1312,13 @@
 			files = (
 				BF1C11BE2ABD67CC0085DB10 /* UXFeedbackSDK.plist in Resources */,
 				0A4689A722840BB90074E1A3 /* UXFeedback.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA00000000000042 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1306,13 +1337,6 @@
 			files = (
 				BFEF97ED2B7CD3CE00931D50 /* Preview Assets.xcassets in Resources */,
 				BFEF97EA2B7CD3CE00931D50 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AA00000000000042 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1439,6 +1463,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AA00000000000040 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA00000000000011 /* DataModelTests.swift in Sources */,
+				AA00000000000012 /* AttributesTests.swift in Sources */,
+				AA00000000000013 /* CryptoTests.swift in Sources */,
+				AA00000000000014 /* URLComponentsTests.swift in Sources */,
+				AA00000000000015 /* APIWebRouterTests.swift in Sources */,
+				AA00000000000016 /* AttributeManagerTests.swift in Sources */,
+				AA00000000000017 /* TransformTests.swift in Sources */,
+				AA00000000000018 /* StatisticManagerTests.swift in Sources */,
+				AA00000000000019 /* ParserTests.swift in Sources */,
+				AA0000000000001A /* VendorExtensionsTests.swift in Sources */,
+				AA0000000000001B /* ThemeTests.swift in Sources */,
+				AA0000000000001C /* TextPropertyManagerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFB509712D50E6D000021998 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1555,25 +1598,6 @@
 			files = (
 				BFEF97E82B7CD3CC00931D50 /* ContentView.swift in Sources */,
 				BFEF97E62B7CD3CC00931D50 /* UX_Feedback_SDK_Demo_SwiftUIApp.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AA00000000000040 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AA00000000000011 /* DataModelTests.swift in Sources */,
-				AA00000000000012 /* AttributesTests.swift in Sources */,
-				AA00000000000013 /* CryptoTests.swift in Sources */,
-				AA00000000000014 /* URLComponentsTests.swift in Sources */,
-				AA00000000000015 /* APIWebRouterTests.swift in Sources */,
-				AA00000000000016 /* AttributeManagerTests.swift in Sources */,
-				AA00000000000017 /* TransformTests.swift in Sources */,
-				AA00000000000018 /* StatisticManagerTests.swift in Sources */,
-				AA00000000000019 /* ParserTests.swift in Sources */,
-				AA0000000000001A /* VendorExtensionsTests.swift in Sources */,
-				AA0000000000001B /* ThemeTests.swift in Sources */,
-				AA0000000000001C /* TextPropertyManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2075,6 +2099,91 @@
 			};
 			name = Release;
 		};
+		AA00000000000070 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Core/Vendors/WebP",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.sdk.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UXFeedbackSDK.framework/UXFeedbackSDK";
+			};
+			name = Debug;
+		};
+		AA00000000000071 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Core/Vendors/WebP",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.sdk.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UXFeedbackSDK.framework/UXFeedbackSDK";
+			};
+			name = Release;
+		};
+		AA00000000000072 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Core/Vendors/WebP",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.sdk.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UXFeedbackSDK.framework/UXFeedbackSDK";
+			};
+			name = AdHoc;
+		};
 		BFB509EC2D50E6D000021998 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2378,91 +2487,6 @@
 			};
 			name = AdHoc;
 		};
-		AA00000000000070 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Core/Vendors/WebP",
-				);
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.sdk.tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UXFeedbackSDK.framework/UXFeedbackSDK";
-			};
-			name = Debug;
-		};
-		AA00000000000071 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Core/Vendors/WebP",
-				);
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.sdk.tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UXFeedbackSDK.framework/UXFeedbackSDK";
-			};
-			name = Release;
-		};
-		AA00000000000072 /* AdHoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Core/Vendors/WebP",
-				);
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = biz.andalex.uxfeedback.sdk.tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UXFeedbackSDK.framework/UXFeedbackSDK";
-			};
-			name = AdHoc;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2496,6 +2520,16 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		AA00000000000080 /* Build configuration list for PBXNativeTarget "UXFeedbackSDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA00000000000070 /* Debug */,
+				AA00000000000071 /* Release */,
+				AA00000000000072 /* AdHoc */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BFB509EB2D50E6D000021998 /* Build configuration list for PBXNativeTarget "YoHeSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2512,16 +2546,6 @@
 				BFEF98052B7CD3D000931D50 /* Debug */,
 				BFEF98062B7CD3D000931D50 /* Release */,
 				BFEF98072B7CD3D000931D50 /* AdHoc */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AA00000000000080 /* Build configuration list for PBXNativeTarget "UXFeedbackSDKTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AA00000000000070 /* Debug */,
-				AA00000000000071 /* Release */,
-				AA00000000000072 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
