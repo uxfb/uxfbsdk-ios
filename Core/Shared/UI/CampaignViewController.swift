@@ -436,7 +436,7 @@ internal class CampaignViewController: UIViewController {
             privacyView.preparePrivacy(campaign?.privacy?.type ?? "")
         }
         updateFooterWithDynamicContent(fromCreate: true)
-        
+
         contentHeight.constant = dataManager?.heightForCurrentPage() ?? 0
     }
     
@@ -1059,9 +1059,11 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
         self.progressLabel.text = dataManager?.progress
 
         if let sender = sender {
+            let savedOffset = withKeyboard ? tableView.contentOffset : nil
+
             let newCount = dataManager?.fieldsCount() ?? 0
             let oldCount = tableView.numberOfSections
-            
+
             UIView.performWithoutAnimation {
                 tableView.beginUpdates()
 
@@ -1082,17 +1084,15 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
 
                 tableView.endUpdates()
             }
-//            for i in 0..<(dataManager?.fieldsCount() ?? 0) {
-//                if i != sender {
-//                    UIView.performWithoutAnimation {
-//                        self.tableView.reloadSections(IndexSet(integer: i), with: .none)
-//                    }
-//                }
-//            }
+
+            if let savedOffset = savedOffset {
+                tableView.layoutIfNeeded()
+                tableView.setContentOffset(savedOffset, animated: false)
+            }
         } else {
             self.reloadTableView()
         }
-        
+
         self.updateHeight()
     }
     
@@ -1113,10 +1113,10 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
         guard newHeight != currentHeight else { return }
 
         self.contentHeight.constant = newHeight
-        
+
         UIView.animate(withDuration: 0.2) {
             self.contentView.layoutIfNeeded()
-        } 
+        }
     }
     
     //MARK: - Privacy

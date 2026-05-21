@@ -659,6 +659,7 @@ class DataManager: FieldDelegate {
     }
     
     func fieldChanged(_ field: Field, answer: [String], refresh: Bool = true) {
+        let currentPrivacyState: Bool = self.privacyNeeded
         isHalfScreen = false
         viewController?.updateHeight()
         DispatchQueue.main.async {
@@ -737,6 +738,13 @@ class DataManager: FieldDelegate {
             }
             
             if refresh {
+                
+                let newPrivacyState: Bool = self.privacyNeeded
+                if newPrivacyState != currentPrivacyState {
+                    self.viewController?.updateFooter()
+                    self.checkPrivacy(nil)
+                }
+				
                 self.viewController?.updateUI() //fieldIndex
             }
         }
@@ -1017,6 +1025,9 @@ class DataManager: FieldDelegate {
                             if answer == nil {
                                 return true
                             }
+                            
+                        case nil:
+                            return true
                             
                         default:
                             break

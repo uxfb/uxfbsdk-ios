@@ -76,7 +76,8 @@ class EmailCell: BaseCell, UITextFieldDelegate {
             let updatedText = text.replacingCharacters(in: textRange,
                                                        with: string)
             if delegate != nil {
-                delegate?.fieldChanged(field!, answer: [updatedText], refresh: false)
+                delegate?.textChanged(field!, answer: [updatedText])
+//                delegate?.fieldChanged(field!, answer: [updatedText], refresh: false)
             }
         }
         
