@@ -456,6 +456,8 @@ internal class CampaignViewController: UIViewController {
         updateFooterWithDynamicContent(fromCreate: true)
     }
     
+    private static let sectionFooterReuseId = "SectionFooterView"
+
     private func createViews() {
         topView.addSubview(progressLabel)
         topView.addSubview(closeButton)
@@ -463,7 +465,9 @@ internal class CampaignViewController: UIViewController {
         contentView.addSubview(tableView)
         view.addSubview(shadowView)
         view.addSubview(contentView)
-        
+
+        tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: Self.sectionFooterReuseId)
+
         createFooter(withPrivacy: dataManager?.privacyNeeded ?? false)
         
         if presentHandler != nil {
@@ -761,7 +765,22 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return dataManager?.viewForFieldFooter(index: section)
+        let wrapper = tableView.dequeueReusableHeaderFooterView(withIdentifier: Self.sectionFooterReuseId)!
+        configureSectionFooter(wrapper, for: section)
+        return wrapper
+    }
+
+    private func configureSectionFooter(_ wrapper: UITableViewHeaderFooterView, for section: Int) {
+        wrapper.contentView.subviews.forEach { $0.removeFromSuperview() }
+        guard let content = dataManager?.viewForFieldFooter(index: section) else { return }
+        content.translatesAutoresizingMaskIntoConstraints = false
+        wrapper.contentView.addSubview(content)
+        NSLayoutConstraint.activate([
+            content.topAnchor.constraint(equalTo: wrapper.contentView.topAnchor),
+            content.bottomAnchor.constraint(equalTo: wrapper.contentView.bottomAnchor),
+            content.leadingAnchor.constraint(equalTo: wrapper.contentView.leadingAnchor),
+            content.trailingAnchor.constraint(equalTo: wrapper.contentView.trailingAnchor),
+        ])
     }
     
     public func numberOfSections(in tableView: UITableView) -> Int {
@@ -1074,7 +1093,7 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
                     tableView.deleteSections(IndexSet(integersIn: newCount..<oldCount), with: .none)
                 }
 
-                // Перезагружаем только те секции, которые уже были и не содержат активное поле
+                // Перезагружаем секции кроме активной (чтобы не терять фокус ввода)
                 let sectionsToReload = IndexSet(
                     (0..<min(oldCount, newCount)).filter { $0 != sender }
                 )
@@ -1083,6 +1102,11 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
                 }
 
                 tableView.endUpdates()
+            }
+
+            // Обновляем footer секции sender
+            if let footer = tableView.footerView(forSection: sender) {
+                configureSectionFooter(footer, for: sender)
             }
 
             if let savedOffset = savedOffset {

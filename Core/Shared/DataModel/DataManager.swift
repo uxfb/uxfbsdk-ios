@@ -738,7 +738,6 @@ class DataManager: FieldDelegate {
             }
             
             if refresh {
-                
                 let newPrivacyState: Bool = self.privacyNeeded
                 if newPrivacyState != currentPrivacyState {
                     self.viewController?.updateFooter()
@@ -752,19 +751,29 @@ class DataManager: FieldDelegate {
     
     
     func textChanged(_ field: Field, answer: [String]) {
+        let currentPrivacyState: Bool = self.privacyNeeded
+        
         answers = answers.filter { answer in ((answer["fieldId"] as? String) ?? "") != field.id }
-        if answer.count > 0 {
+        if answer.count > 0, let ans = answer.first {
+            clearAnswers(field.id!)
             let newAnswer = ["fieldId": field.id as Any,
                              "type": field.type?.rawValue as Any,
                              "value": answer,
                              "transforms": ""] as [String : Any]
-            answers.append(newAnswer)
+            if ans.count > 0 {
+                answers.append(newAnswer)
+            }
         }
         
         if let fieldIndex = campaign?.pages[currentPage].fields.firstIndex(where: { f in
             f.id == field.id
         }) {
             viewController?.updateUI(fieldIndex)
+            let newPrivacyState: Bool = self.privacyNeeded
+            if newPrivacyState != currentPrivacyState {
+                self.viewController?.updateFooter()
+                self.checkPrivacy(nil)
+            }
         }
     }
     

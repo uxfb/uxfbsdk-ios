@@ -212,8 +212,8 @@ final class APIWebRouterTests: XCTestCase {
             var popupUiBlackoutBlur: Int = 0
             var endpoint: String?
             var rotateToggle: Bool = false
-            var sdkPlatform: String? = "Flutter"
-            var sdkPlatformVersion: String? = "3.0.0"
+            var sdkPlatform: String? = "Native"
+            var sdkPlatformVersion: String? = "4.4.0"
         }
 
         APIWebRouter.settings = MockSettings()

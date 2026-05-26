@@ -29,8 +29,6 @@ class Parser {
     func parseTheme(jsonDict: Dictionary<String,Any>) -> Theme? {
         if let jsonData = try? JSONSerialization.data(withJSONObject: jsonDict, options: .prettyPrinted) {
            let theme = try! JSONDecoder().decode(Theme.self, from: jsonData)
-            
-            
            return theme
         }
         return nil
