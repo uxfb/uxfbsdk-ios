@@ -61,7 +61,6 @@
 		BF0CE19D27661C3B00916B32 /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0CE19927661C2200916B32 /* RatingCell.swift */; };
 		BF178C402EB152FF00AD08CE /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF178C3F2EB152F900AD08CE /* Gesture.swift */; };
 		BF178C412EB152FF00AD08CE /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF178C3F2EB152F900AD08CE /* Gesture.swift */; };
-		BF1C11BE2ABD67CC0085DB10 /* UXFeedbackSDK.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A46899522840B2C0074E1A3 /* UXFeedbackSDK.plist */; };
 		BF2806AF2562B18F006F2D61 /* StarsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806882562B18F006F2D61 /* StarsCell.swift */; };
 		BF2806B32562B18F006F2D61 /* RadioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28068E2562B18F006F2D61 /* RadioCell.swift */; };
 		BF2806B42562B18F006F2D61 /* RadiobuttonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28068F2562B18F006F2D61 /* RadiobuttonCell.swift */; };
@@ -223,6 +222,7 @@
 		BFBECCDB2BFCAFE300279A5B /* Encodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBECCDA2BFCAFE300279A5B /* Encodable+.swift */; };
 		BFBF357D2C469B2200B3D263 /* ToggleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF357C2C469B2200B3D263 /* ToggleStatus.swift */; };
 		BFC19C952BBAABF8009C664F /* UXFBAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC19C942BBAABF8009C664F /* UXFBAttributes.swift */; };
+		BFCA92982FEAD53B00B549B7 /* UXFeedbackSDK.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A46899522840B2C0074E1A3 /* UXFeedbackSDK.plist */; };
 		BFCC90A62A974E4D00B51FC4 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC90A52A974E4D00B51FC4 /* Progress.swift */; };
 		BFCC90AA2A97691600B51FC4 /* HtmlLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC90A92A97691600B51FC4 /* HtmlLabel.swift */; };
 		BFCC90AD2A97694800B51FC4 /* HtmlHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC90AC2A97694800B51FC4 /* HtmlHelper.swift */; };
@@ -464,6 +464,7 @@
 		BFBF357C2C469B2200B3D263 /* ToggleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleStatus.swift; sourceTree = "<group>"; };
 		BFC19C942BBAABF8009C664F /* UXFBAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFBAttributes.swift; sourceTree = "<group>"; };
 		BFC7212B299CD2D400AAB9BC /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		BFCA92972FEAD0F600B549B7 /* UXFeedbackSDK copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UXFeedbackSDK copy-Info.plist"; sourceTree = "<group>"; };
 		BFCC90A52A974E4D00B51FC4 /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
 		BFCC90A92A97691600B51FC4 /* HtmlLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlLabel.swift; sourceTree = "<group>"; };
 		BFCC90AC2A97694800B51FC4 /* HtmlHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HtmlHelper.swift; sourceTree = "<group>"; };
@@ -555,6 +556,7 @@
 		0A019A3322365E02002FD4F8 = {
 			isa = PBXGroup;
 			children = (
+				BFCA92972FEAD0F600B549B7 /* UXFeedbackSDK copy-Info.plist */,
 				BFF5D37D2FB47C4600695928 /* Font */,
 				0A019A52223669CC002FD4F8 /* Core */,
 				BFEF97E42B7CD3CC00931D50 /* UX Feedback SDK Demo SwiftUI */,
@@ -1308,8 +1310,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF1C11BE2ABD67CC0085DB10 /* UXFeedbackSDK.plist in Resources */,
 				0A4689A722840BB90074E1A3 /* UXFeedback.xcassets in Resources */,
+				BFCA92982FEAD53B00B549B7 /* UXFeedbackSDK.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
