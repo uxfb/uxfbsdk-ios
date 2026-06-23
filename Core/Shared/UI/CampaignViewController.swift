@@ -424,16 +424,25 @@ internal class CampaignViewController: UIViewController {
     }
     
     func updateFooter() {
-        let withPrivacy = dataManager?.privacyNeeded ?? false
-        copyrightView.isHidden = !(campaign?.copyright?.isShow ?? false)
-        privacyView.isHidden = !withPrivacy
-        holderView.backgroundColor = withPrivacy ? campaign?.theme.controlBgColor : campaign?.theme.bgColor
-        if campaign?.type == .popup {
-            holderView.heightAnchor.constraint(equalToConstant: (copyrightView.isHidden && privacyView.isHidden) ? 32 : 0).isActive = true
-        }
+        let isThankYouPage = dataManager?.isProgressHidden ?? false
         
-        if withPrivacy {
-            privacyView.preparePrivacy(campaign?.privacy?.type ?? "")
+        if isThankYouPage {
+            copyrightView.isHidden = true
+            privacyView.isHidden = true
+            holderView.isHidden = true
+        } else {
+            let withPrivacy = dataManager?.privacyNeeded ?? false
+            copyrightView.isHidden = !(campaign?.copyright?.isShow ?? false)
+            privacyView.isHidden = !withPrivacy
+            holderView.isHidden = false
+            holderView.backgroundColor = withPrivacy ? campaign?.theme.controlBgColor : campaign?.theme.bgColor
+            if campaign?.type == .popup {
+                holderView.heightAnchor.constraint(equalToConstant: (copyrightView.isHidden && privacyView.isHidden) ? 32 : 0).isActive = true
+            }
+            
+            if withPrivacy {
+                privacyView.preparePrivacy(campaign?.privacy?.type ?? "")
+            }
         }
         updateFooterWithDynamicContent(fromCreate: true)
 
@@ -1076,6 +1085,9 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     
     func updateUI(_ sender: Int? = nil) {
         self.progressLabel.text = dataManager?.progress
+        if let progress = campaign?.progress, progress {
+            self.progressLabel.isHidden = dataManager?.isProgressHidden ?? true
+        }
 
         if let sender = sender {
             let savedOffset = withKeyboard ? tableView.contentOffset : nil

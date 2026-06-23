@@ -23,75 +23,75 @@ class RatingCell: BaseCell {
         return label
     }()
     
-    private lazy var slider: UISlider = {
-        let slider = UISlider()
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(sliderTapped(gestureRecognizer:)))
-        slider.addGestureRecognizer(tapGestureRecognizer)
-        
-        slider.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
-        slider.addTarget(self, action: #selector(touchUpInside(_:)), for: .touchUpInside)
-        slider.addTarget(self, action: #selector(touchUpOutside(_:)), for: .touchUpOutside)
-        
-        return slider
-    }()
+    private var buttonContainers: [UIView] = []
+    private var buttonLabels: [UILabel] = []
     
-    private lazy var stackView: UIStackView = {
+    private lazy var buttonsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.spacing = 4
+        stackView.distribution = .fillEqually
         
         for i in 1...10 {
-            let label = VerticalAlignedLabel()
-            label.text = "\(i)"
-            label.tag = i
-            label.textAlignment = .center
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(labelTapped(gestureRecognizer:)))
-            tapGesture.cancelsTouchesInView = true
-            label.isUserInteractionEnabled = true
-            label.addGestureRecognizer(tapGesture)
-            stackView.addArrangedSubview(label)
+            let (container, label) = createButton(value: i)
+            stackView.addArrangedSubview(container)
+            buttonContainers.append(container)
+            buttonLabels.append(label)
         }
-        stackView.isUserInteractionEnabled = true
-        stackView.distribution = .fillEqually
+        
         return stackView
     }()
     
-    private var sliderView = SliderView(frame: CGRect(origin: .zero,
-                                                         size: CGSize(width: 48,
-                                                                      height: 48)))
-    
     private var currentValue: Int = 0
-    private var defaultValue: Int = 0
-    private var maxValue: Int = 0
+    private var maxValue: Int = 10
+    
+    private func createButton(value: Int) -> (UIView, UILabel) {
+        let container = UIView()
+        container.layer.cornerRadius = 8
+        container.layer.borderWidth = 1
+        container.layer.masksToBounds = true
+        container.tag = value
+        
+        let label = UILabel()
+        label.text = "\(value)"
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        container.addSubview(label)
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: container.centerYAnchor)
+        ])
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(buttonTapped(_:)))
+        container.addGestureRecognizer(tapGesture)
+        container.isUserInteractionEnabled = true
+        
+        return (container, label)
+    }
     
     override func setupSubviews() {
-        contentView.addSubview(stackView)
-        contentView.addSubview(slider)
+        contentView.addSubview(buttonsStackView)
         contentView.addSubview(positiveLabel)
         contentView.addSubview(negativeLabel)
         
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        slider.translatesAutoresizingMaskIntoConstraints = false
+        buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
         positiveLabel.translatesAutoresizingMaskIntoConstraints = false
         negativeLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            stackView.heightAnchor.constraint(equalToConstant: 28),
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            
-            slider.heightAnchor.constraint(equalToConstant: 48),
-            slider.topAnchor.constraint(equalTo: stackView.bottomAnchor),
-            slider.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18),
-            slider.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -18),
+            buttonsStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            buttonsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            buttonsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            buttonsStackView.heightAnchor.constraint(equalToConstant: 40),
             
             negativeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            negativeLabel.topAnchor.constraint(equalTo: slider.bottomAnchor),
+            negativeLabel.topAnchor.constraint(equalTo: buttonsStackView.bottomAnchor, constant: 8),
             negativeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             negativeLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5, constant: -20),
             
             positiveLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            positiveLabel.topAnchor.constraint(equalTo: slider.bottomAnchor),
+            positiveLabel.topAnchor.constraint(equalTo: buttonsStackView.bottomAnchor, constant: 8),
             positiveLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             positiveLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5, constant: -20),
         ])
@@ -103,26 +103,16 @@ class RatingCell: BaseCell {
         
         currentValue = Int(field?.answers.first ?? "") ?? 0
         maxValue = field?.ratingCount ?? 3
-        defaultValue = 0
-        guard field != nil, theme != nil else {
-            return
+        
+        guard field != nil, theme != nil else { return }
+        
+        // Show/hide buttons based on maxValue
+        for i in 0..<buttonContainers.count {
+            let value = i + 1 // buttons are 1-based
+            buttonContainers[i].isHidden = value > maxValue
         }
         
-        sliderView.frame.size.width = max(self.bounds.width / CGFloat(maxValue), 48)
-        initLabels()
-        
-        slider.minimumValue = 1
-        slider.maximumValue = Float(maxValue)
-        slider.setValue(Float(currentValue == 0 ? defaultValue : currentValue), animated: false)
-        
-        if field?.isError ?? false && currentValue == 0 {
-            setErrorStyle()
-        }
-        else if currentValue == 0 {
-            setInactiveStyle()
-        } else {
-            setActiveStyle()
-        }
+        updateButtonStyles()
         
         negativeLabel.textColor = theme?.text03Color
         positiveLabel.textColor = theme?.text03Color
@@ -133,143 +123,42 @@ class RatingCell: BaseCell {
         }
     }
     
-    //MARK :- Styles
-    
-    private func setInactiveStyle() {
-        slider.minimumTrackTintColor = theme?.iconColor.withAlphaComponent(0.3)
-        slider.maximumTrackTintColor = theme?.iconColor.withAlphaComponent(0.3)
+    private func updateButtonStyles() {
+        let isError = field?.isError ?? false
         
-        sliderView.setStyle(.inactive, theme: theme!)
-        slider.setThumbImage(sliderView.asImage(), for: .normal)
-    }
-    
-    private func setActiveStyle() {
-        slider.minimumTrackTintColor = theme?.mainColor.withAlphaComponent(0.3)
-        slider.maximumTrackTintColor = theme?.mainColor.withAlphaComponent(0.3)
-        
-        sliderView.setStyle(.active, theme: theme!)
-        slider.setThumbImage(sliderView.asImage(), for: .normal)
-    }
-    
-    private func setErrorStyle() {
-        slider.minimumTrackTintColor = theme?.errorColorPrimary.withAlphaComponent(0.3)
-        slider.maximumTrackTintColor = theme?.errorColorPrimary.withAlphaComponent(0.3)
-        
-        sliderView.setStyle(.error, theme: theme!)
-        slider.setThumbImage(sliderView.asImage(), for: .normal)
-    }
-    
-    private func initLabels() {
-        let calculatedValue = currentValue == 0 ? defaultValue : currentValue
-        for i in 1...10 {
-            if let label = contentView.viewWithTag(i) as? VerticalAlignedLabel {
-                label.text = "\(i)"
-                label.backgroundColor = .clear
-                label.isHidden = false
-                if i > maxValue {
-                    label.isHidden = true
-                }
-                if i == calculatedValue {
-                    label.textColor = currentValue == 0 ? theme?.text03Color : theme?.mainColor
-                    label.font = theme?.fontH1
-                    label.contentMode = .bottom
-                } else if i == calculatedValue-1 || i == calculatedValue+1 {
-                    label.textColor = currentValue == 0 ? theme?.text03Color : theme?.text02Color
-                    label.font = theme?.fontP1
-                    label.contentMode = .bottom
-                }
-                else {
-                    label.textColor = theme?.text03Color
-                    label.font = theme?.fontP2
-                    label.contentMode = .bottom
-                }
+        for i in 0..<buttonContainers.count {
+            let value = i + 1
+            let container = buttonContainers[i]
+            let label = buttonLabels[i]
+            
+            guard !container.isHidden else { continue }
+            
+            if value == currentValue {
+                container.backgroundColor = theme?.mainColor
+                container.layer.borderColor = theme?.mainColor.cgColor
+                label.textColor = .white
+                label.font = theme?.fontP2
+            } else if isError && currentValue == 0 {
+                container.backgroundColor = .clear
+                container.layer.borderColor = theme?.errorColorPrimary.cgColor
+                label.textColor = theme?.text02Color
+                label.font = theme?.fontP2
+            } else {
+                container.backgroundColor = .clear
+                container.layer.borderColor = theme?.inputBorderColor.cgColor
+                label.textColor = theme?.text02Color
+                label.font = theme?.fontP2
             }
         }
     }
     
-    override func rotated() {
-        slider.setNeedsLayout()
-        slider.layoutIfNeeded()
-    }
-    
-    private func updateLabels() {
-        setActiveStyle()
-        let nearestValue = Int(round(slider.value))
-        let firstDiff: CGFloat = .bigFontSize - .mediumFontSize
-        let secondDiff: CGFloat = .mediumFontSize - .smallFontSize
-        
-        for i in 1...maxValue {
-            if let label = contentView.viewWithTag(i) as? VerticalAlignedLabel {
-                let diff = abs(Float(i) - slider.value)
-                if diff == 0 {
-                    label.textColor = theme?.mainColor
-                    label.font = theme?.fontH1
-                    label.contentMode = .center
-                } else if diff <= 1 {
-                    label.textColor = i == nearestValue ? theme?.mainColor : theme?.text02Color
-                    let font = theme?.fontP1.withSize(.mediumFontSize + firstDiff * CGFloat(1-diff))
-                    label.font = font
-                    label.contentMode = .bottom
-                } else if diff <= 2 {
-                    label.textColor = (abs(nearestValue-i) == 1) ? theme?.text02Color : theme?.text03Color
-                    let font = theme?.fontP2.withSize(.smallFontSize + secondDiff * CGFloat(2-diff))
-                    label.font = font
-                    label.contentMode = .bottom
-                } else {
-                    label.textColor = theme?.text03Color
-                    label.font = theme?.fontP2
-                    label.contentMode = .bottom
-                }
-            }
-        }
-    }
-    
-    
-    //MARK: -  Actions
+    // MARK: - Actions
     
     @objc
-    private func labelTapped(gestureRecognizer: UIGestureRecognizer) {
-        if let label = gestureRecognizer.view as? VerticalAlignedLabel {
-            let selectedIndex = label.tag
-            slider.setValue(Float(selectedIndex), animated: true)
-            roundSlider()
-        }
-    }
-    
-    @objc
-    private func sliderTapped(gestureRecognizer: UIGestureRecognizer) {
-        let pointTapped: CGPoint = gestureRecognizer.location(in: self.contentView)
-
-        let positionOfSlider: CGPoint = slider.frame.origin
-        let widthOfSlider: CGFloat = slider.frame.size.width
-        let itemWidth = widthOfSlider / CGFloat(slider.maximumValue)
-        let modValue = Int(pointTapped.x - positionOfSlider.x) / Int(itemWidth) + 1
-        
-        slider.setValue(Float(modValue), animated: true)
-        roundSlider()
-    }
-    
-    @IBAction func valueChanged(_ sender: Any) {
-        updateLabels()
-    }
-    
-    @IBAction func touchUpInside(_ sender: Any) {
-        roundSlider()
-    }
-    
-    @IBAction func touchUpOutside(_ sender: Any) {
-        roundSlider()
-    }
-    
-    private func roundSlider() {
-        let newValue = round(slider.value)
-        slider.setValue(newValue, animated: true)
-        currentValue = Int(newValue)
-        updateLabels()
-        
-        if self.delegate != nil {
-            self.delegate?.fieldChanged(self.field!, answer: [String(self.currentValue)], refresh: true)
-        }
-        
+    private func buttonTapped(_ gesture: UITapGestureRecognizer) {
+        guard let view = gesture.view else { return }
+        currentValue = view.tag
+        updateButtonStyles()
+        delegate?.fieldChanged(field!, answer: [String(currentValue)], refresh: true)
     }
 }

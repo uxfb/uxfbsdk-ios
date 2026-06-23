@@ -152,7 +152,8 @@ class DataManager: FieldDelegate {
         let page = campaign?.pages[currentPage]
         var height: CGFloat = 54
         
-        if let footerHeight = viewController?.tableView.tableFooterView?.frame.height,
+        if campaign?.pages[currentPage].type != 2,
+           let footerHeight = viewController?.tableView.tableFooterView?.frame.height,
            footerHeight > 0 {
             height += footerHeight
         }
@@ -268,13 +269,23 @@ class DataManager: FieldDelegate {
     
     var progress: String {
         get {
-            return "\(currentPage + 1)/\(campaign?.pages.count ?? 0)"
+            let totalPages = campaign?.pages.filter { $0.type != 2 }.count ?? 0
+            return "\(currentPage + 1)/\(totalPages)"
         }
+    }
+    
+    var isProgressHidden: Bool {
+        return campaign?.pages[currentPage].type == 2
     }
     
     //MARK: - Support Fields
     
     private func getSpacing(fromField: Field, toField: Field?) -> CGFloat {
+        // Type 2 pages (thank you) use reduced spacing
+        if campaign?.pages[currentPage].type == 2 {
+            return 16
+        }
+        
         if toField?.type == .bottom {
             return 16
         }
@@ -325,7 +336,7 @@ class DataManager: FieldDelegate {
                 }
             }
             else {
-                spacing = getSpacing(fromField: field, toField: nil)
+                // Last visible element — no spacing needed after it
                 break
             }
         }
@@ -376,20 +387,25 @@ class DataManager: FieldDelegate {
         var valueHeight = TextPropertyManager.heightForAttributed(string: attributedValue,
                                                                   and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
         
-        let attributedDescription = TextPropertyManager.convert(field.description ?? "",
-                                                          theme: campaign!.theme,
-                                                          defaultFont: fontDescr,
-                                                          textProperties: nil,
-                                                          withRequired: required)
-        let descriptionHeight = TextPropertyManager.heightForAttributed(string: attributedDescription,
-                                                                  and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace) + 8
+        var descriptionHeight: CGFloat = 0
+        if let descriptionData = field.description, !descriptionData.isEmpty {
+            let attributedDescription = TextPropertyManager.convert(descriptionData,
+                                                              theme: campaign!.theme,
+                                                              defaultFont: fontDescr,
+                                                              textProperties: nil,
+                                                              withRequired: false)
+            descriptionHeight = TextPropertyManager.heightForAttributed(string: attributedDescription,
+                                                                      and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
+        }
         
         if let fieldImage = field.image {
             let isDefault = (fieldImage.type ?? "default") == "default"
             valueHeight += 16 + (isDefault ? 100 : 240)
         }
         
-        return valueHeight + descriptionHeight + getTitleSpacing(field)
+        // 24 = 8(top) + 8(gap between value and description) + 8(bottom)
+        // matches HeaderView constraints exactly
+        return valueHeight + descriptionHeight + 24
     }
     
     private func getFieldFooterHeight(_ field: Field) -> CGFloat {
@@ -476,7 +492,7 @@ class DataManager: FieldDelegate {
                 return 48
                 
             case .checkbox:
-                let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 44 
+                let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 44
                 var height: CGFloat = 0
                 for option in field.options ?? [] {
                     let font = (campaign?.theme.fontP1)!
@@ -498,25 +514,25 @@ class DataManager: FieldDelegate {
                                                         withRequired: false)
                 let valueHeight = TextPropertyManager.heightForAttributed(string: value,
                                                                           and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
-                var descriptionHeight: CGFloat = .leastNonzeroMagnitude
-                if let descriptionData = field.description {
+                var descriptionHeight: CGFloat = 0
+                if let descriptionData = field.description, !descriptionData.isEmpty {
                     let description = TextPropertyManager.convert(descriptionData,
                                                                       theme: campaign!.theme,
                                                                       defaultFont: (campaign?.theme.fontP1)!,
                                                                       textProperties: nil,
                                                                       withRequired: false)
                     descriptionHeight = TextPropertyManager.heightForAttributed(string: description,
-                                                                              and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace) + 8
+                                                                              and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
                 }
                 
-                var imageHeight: CGFloat = .leastNonzeroMagnitude
+                var imageHeight: CGFloat = 0
                 
                 if let fieldImage = field.image {
                     let isDefault = (fieldImage.type ?? "default") == "default"
                     imageHeight = 16 + (isDefault ? 100 : 240)
                 }
                 
-                return valueHeight + descriptionHeight + imageHeight + 25
+                return valueHeight + descriptionHeight + imageHeight + 24
                 
             case .image:
                 return 56
@@ -572,9 +588,9 @@ class DataManager: FieldDelegate {
             case .nps, .rating:
                 if let messages = field.messages {
                     let count = (messages.negative?.count ?? 0) + (messages.positive?.count ?? 0)
-                    return count > 0 ? 110 : 76
+                    return count > 0 ? 80 : 48
                 }
-                return 110
+                return 48
                 
             case .screenshot:
                 var buttonsHeight: CGFloat = 0
@@ -905,7 +921,7 @@ class DataManager: FieldDelegate {
                 return page?.id == pageId ?? ""
             }
             
-            if !fields.isEmpty || i == currentPage {
+//            if !fields.isEmpty || i == currentPage {
                 var result: [String: Any] = [:]
                 result["pageId"] = page?.id ?? ""
                 if fields.count > 0 {
@@ -919,7 +935,7 @@ class DataManager: FieldDelegate {
                 result["externalLink"] = isLink ? 1 : 0
                 
                 results.append(result)
-            }
+//            }
         }
         
         if isPrivacyChecked || !privacyNeeded {

@@ -67,16 +67,16 @@ internal class TextPropertyManager {
         case small = "<##>"
     }
     
+    private static let measurementLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        return label
+    }()
+    
     static func heightForAttributed(string: NSAttributedString, and maxWidth: CGFloat) -> CGFloat {
-        
-        let boundingRect = string.boundingRect(with: .init(width: maxWidth,
-                                                           height: .greatestFiniteMagnitude),
-                                               options: [.usesLineFragmentOrigin, .usesFontLeading],
-                                               context: nil)
-
-        let height = boundingRect.height
-        
-        return height
+        measurementLabel.attributedText = string
+        let size = measurementLabel.sizeThatFits(CGSize(width: maxWidth, height: .greatestFiniteMagnitude))
+        return ceil(size.height)
     }
     
     static func convert(_ data: String, theme: ThemeProtocol, defaultFont: UIFont, textProperties: TextProperties?, withRequired: Bool) -> NSAttributedString {
