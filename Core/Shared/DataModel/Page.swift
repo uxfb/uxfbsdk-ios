@@ -8,9 +8,21 @@
 
 import UIKit
 
-internal struct Page {
+internal struct Page: Decodable {
     private(set) var id: String?
     private(set) var type: Int?
-    private(set) var fields: Array<Field>
-    private(set) var buttons: Array<Field>
+    private(set) var fields: [Field]
+    private(set) var buttons: [Field]
+
+    private enum CodingKeys: String, CodingKey {
+        case id, type, fields, buttons
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decodeIfPresent(String.self, forKey: .id)
+        type = try container.decodeIfPresent(Int.self, forKey: .type)
+        fields = try container.decodeIfPresent([Field].self, forKey: .fields) ?? []
+        buttons = try container.decodeIfPresent([Field].self, forKey: .buttons) ?? []
+    }
 }

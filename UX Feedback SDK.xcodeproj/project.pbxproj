@@ -451,7 +451,6 @@
 		BFB509392D50B6BA00021998 /* YoHeSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoHeSwiftUI.swift; sourceTree = "<group>"; };
 		BFB5093B2D50B6C400021998 /* YoHeAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoHeAttributes.swift; sourceTree = "<group>"; };
 		BFB509EF2D50E6D000021998 /* YoHeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YoHeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BFB509F02D50E6D000021998 /* UXFeedbackSDK copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "UXFeedbackSDK copy-Info.plist"; path = "/Users/alexpotemka/_projects/-ios/ios-sdk/UXFeedbackSDK copy-Info.plist"; sourceTree = "<absolute>"; };
 		BFB6DEFB27043D7200732D29 /* Screenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screenshot.swift; sourceTree = "<group>"; };
 		BFB6DEFD27044E4300732D29 /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
 		BFB85E792A42D7E5000208D2 /* YoHe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoHe.swift; sourceTree = "<group>"; };
@@ -566,7 +565,6 @@
 				0A019A3D22365E02002FD4F8 /* Products */,
 				AA00000000000030 /* UXFeedbackSDKTests */,
 				3EE1448B815C3AA05E865A6C /* Frameworks */,
-				BFB509F02D50E6D000021998 /* UXFeedbackSDK copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};

@@ -183,12 +183,12 @@ class HeaderCell: BaseCell {
             descriptionLabel.text = nil
         }
         
-        if let imageData = self.field?.uiData["image"] as? Dictionary<String, Any>,
-           let position = imageData["position"] as? String,
-           let alignment = imageData["alignment"] as? String,
-           let src = imageData["src"] as? String,
+        if let fieldImage = self.field?.image,
+           let position = fieldImage.position,
+           let alignment = fieldImage.alignment,
+           let src = fieldImage.src,
            let url = URL(string: src) {
-            let isDefault = ((imageData["type"] as? String) ?? "default") == "default"
+            let isDefault = (fieldImage.type ?? "default") == "default"
             self.isDefault = isDefault
             self.position = position
             self.alignment = alignment

@@ -111,15 +111,8 @@ class APIClient {
                     if let campaignsResults = results["campaigns"] as? Array<Dictionary<String, Any>> {
 //                        var campaigns: Array<Campaign> = []
                         var campaigns: Array<CampaignData> = []
-                        var copyright: Copyright? = nil
-                        if let copyrightInfo = results["copyright"] as? Dictionary<String, Any> {
-                            copyright = self?._parser.parseCopyright(copyrightInfo: copyrightInfo)
-                        }
-                        
-                        var textProperties: TextProperties? = nil
-                        if let textPropertiesInfo = results["textProperties"] as? Dictionary<String, Any> {
-                            textProperties = self?._parser.parseTextProperties(textPropertiesInfo: textPropertiesInfo)
-                        }
+                        let copyright: Copyright? = (results["copyright"] as? Dictionary<String, Any>).flatMap { try? Copyright(from: $0) }
+                        let textProperties: TextProperties? = (results["textProperties"] as? Dictionary<String, Any>).flatMap { try? TextProperties(from: $0) }
                         
                         for compaignInfo in campaignsResults {
 //                            if let campaign =  self?._parser.parseCampaign(campaignInfo: compaignInfo,

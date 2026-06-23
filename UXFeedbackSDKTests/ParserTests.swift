@@ -15,9 +15,9 @@ final class ParserTests: XCTestCase {
         super.tearDown()
     }
 
-    // MARK: - Theme Parsing
+    // MARK: - Theme Decoding
 
-    func testParseThemeWithValidData() {
+    func testDecodeThemeWithValidData() {
         let dict: [String: Any] = [
             "bgColor": "#FF0000",
             "mainColor": "#00FF00",
@@ -25,64 +25,64 @@ final class ParserTests: XCTestCase {
             "formBorderRadius": 10
         ]
 
-        let theme = parser.parseTheme(jsonDict: dict)
+        let theme = try? Theme(from: dict)
 
         XCTAssertNotNil(theme)
         XCTAssertEqual(theme?.btnBorderRadius, 16)
         XCTAssertEqual(theme?.formBorderRadius, 10)
     }
 
-    func testParseThemeWithEmptyDict() {
-        let theme = parser.parseTheme(jsonDict: [:])
+    func testDecodeThemeWithEmptyDict() {
+        let theme = try? Theme(from: [:] as [String: Any])
         XCTAssertNotNil(theme)
     }
 
-    func testParseThemeWithPartialData() {
+    func testDecodeThemeWithPartialData() {
         let dict: [String: Any] = [
             "bgColor": "#AABBCC"
         ]
 
-        let theme = parser.parseTheme(jsonDict: dict)
+        let theme = try? Theme(from: dict)
         XCTAssertNotNil(theme)
     }
 
-    // MARK: - Copyright Parsing
+    // MARK: - Copyright Decoding
 
-    func testParseCopyrightValid() {
+    func testDecodeCopyrightValid() {
         let dict: [String: Any] = [
             "isShow": true,
             "href": "https://example.com",
             "image": ["light": "logo.png"]
         ]
 
-        let copyright = parser.parseCopyright(copyrightInfo: dict)
+        let copyright = try? Copyright(from: dict)
 
         XCTAssertNotNil(copyright)
         XCTAssertTrue(copyright!.isShow)
         XCTAssertEqual(copyright?.href, "https://example.com")
     }
 
-    func testParseCopyrightMinimal() {
+    func testDecodeCopyrightMinimal() {
         let dict: [String: Any] = [
             "isShow": false
         ]
 
-        let copyright = parser.parseCopyright(copyrightInfo: dict)
+        let copyright = try? Copyright(from: dict)
 
         XCTAssertNotNil(copyright)
         XCTAssertFalse(copyright!.isShow)
     }
 
-    // MARK: - TextProperties Parsing
+    // MARK: - TextProperties Decoding
 
-    func testParseTextPropertiesValid() {
+    func testDecodeTextPropertiesValid() {
         let dict: [String: Any] = [
             "h1": [["name": "#", "type": "size", "value": "1,09/1,11"]],
             "h2": [["name": "##", "type": "size", "value": "0,9/0,92"]],
             "p": []
         ]
 
-        let textProps = parser.parseTextProperties(textPropertiesInfo: dict)
+        let textProps = try? TextProperties(from: dict)
 
         XCTAssertNotNil(textProps)
         XCTAssertEqual(textProps?.h1?.count, 1)
@@ -90,9 +90,137 @@ final class ParserTests: XCTestCase {
         XCTAssertEqual(textProps?.p?.count, 0)
     }
 
-    func testParseTextPropertiesEmpty() {
-        let textProps = parser.parseTextProperties(textPropertiesInfo: [:])
+    func testDecodeTextPropertiesEmpty() {
+        let textProps = try? TextProperties(from: [:] as [String: Any])
         XCTAssertNotNil(textProps)
+    }
+
+    // MARK: - Field Decoding
+
+    func testDecodeFieldWithAllProperties() {
+        let dict: [String: Any] = [
+            "id": "f1",
+            "type": "header",
+            "value": "Welcome",
+            "description": "A description",
+            "required": true,
+            "placeholder": "Enter text",
+            "mode": "multi",
+            "warning": "Required field",
+            "ratingCount": 5
+        ]
+
+        let field = try? Field(from: dict)
+
+        XCTAssertNotNil(field)
+        XCTAssertEqual(field?.id, "f1")
+        XCTAssertEqual(field?.type, .header)
+        XCTAssertEqual(field?.value, "Welcome")
+        XCTAssertEqual(field?.description, "A description")
+        XCTAssertEqual(field?.required, true)
+        XCTAssertEqual(field?.placeholder, "Enter text")
+        XCTAssertEqual(field?.mode, "multi")
+        XCTAssertEqual(field?.warning, "Required field")
+        XCTAssertEqual(field?.ratingCount, 5)
+    }
+
+    func testDecodeFieldWithOptions() {
+        let dict: [String: Any] = [
+            "id": "f1",
+            "type": "checkboxes",
+            "options": [
+                ["id": "o1", "value": "Option 1", "exceptional": false],
+                ["id": "o2", "value": "Option 2"]
+            ]
+        ]
+
+        let field = try? Field(from: dict)
+
+        XCTAssertNotNil(field)
+        XCTAssertEqual(field?.options?.count, 2)
+        XCTAssertEqual(field?.options?.first?.id, "o1")
+        XCTAssertEqual(field?.options?.first?.value, "Option 1")
+    }
+
+    func testDecodeFieldWithImage() {
+        let dict: [String: Any] = [
+            "id": "f1",
+            "type": "header",
+            "image": [
+                "type": "custom",
+                "position": "top",
+                "alignment": "center",
+                "src": "https://example.com/image.png",
+                "3x": "https://example.com/image@3x.png"
+            ]
+        ]
+
+        let field = try? Field(from: dict)
+
+        XCTAssertNotNil(field?.image)
+        XCTAssertEqual(field?.image?.type, "custom")
+        XCTAssertEqual(field?.image?.position, "top")
+        XCTAssertEqual(field?.image?.alignment, "center")
+        XCTAssertEqual(field?.image?.src, "https://example.com/image.png")
+        XCTAssertEqual(field?.image?.threeX, "https://example.com/image@3x.png")
+    }
+
+    func testDecodeFieldWithMessages() {
+        let dict: [String: Any] = [
+            "id": "f1",
+            "type": "nps",
+            "messages": [
+                "negative": "Not likely",
+                "positive": "Very likely"
+            ]
+        ]
+
+        let field = try? Field(from: dict)
+
+        XCTAssertNotNil(field?.messages)
+        XCTAssertEqual(field?.messages?.negative, "Not likely")
+        XCTAssertEqual(field?.messages?.positive, "Very likely")
+    }
+
+    func testDecodeFieldWithButtons() {
+        let dict: [String: Any] = [
+            "id": "f1",
+            "type": "screenshot",
+            "buttons": [
+                "create": "Take screenshot",
+                "upload": "Upload image"
+            ]
+        ]
+
+        let field = try? Field(from: dict)
+
+        XCTAssertNotNil(field?.buttons)
+        XCTAssertEqual(field?.buttons?.create, "Take screenshot")
+        XCTAssertEqual(field?.buttons?.upload, "Upload image")
+    }
+
+    // MARK: - Page Decoding
+
+    func testDecodePageWithFieldsAndButtons() {
+        let dict: [String: Any] = [
+            "id": "p1",
+            "type": 1,
+            "fields": [
+                ["id": "f1", "type": "header", "value": "Title"],
+                ["id": "f2", "type": "stars"]
+            ],
+            "buttons": [
+                ["id": "b1", "type": "button", "value": "Submit"]
+            ]
+        ]
+
+        let page = try? Page(from: dict)
+
+        XCTAssertNotNil(page)
+        XCTAssertEqual(page?.id, "p1")
+        XCTAssertEqual(page?.type, 1)
+        XCTAssertEqual(page?.fields.count, 2)
+        XCTAssertEqual(page?.buttons.count, 1)
     }
 
     // MARK: - CampaignData Parsing

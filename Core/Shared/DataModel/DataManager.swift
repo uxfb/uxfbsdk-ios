@@ -250,7 +250,7 @@ class DataManager: FieldDelegate {
         
         let answer = answers.first { answer in ((answer["fieldId"] as? String) ?? "") == field.id }
         field.answers = (answer?["value"] as? [String]) ?? []
-        field.isError = isError && ((field.uiData["required"] as? Bool) ?? false)
+        field.isError = isError && (field.required ?? false)
         
         field.isLastPage = campaign?.pages[currentPage].type == 2
         
@@ -367,7 +367,7 @@ class DataManager: FieldDelegate {
         
         let font = (campaign?.theme.fontH2)!
         let fontDescr = (campaign?.theme.fontP1)!
-        let required = (field.uiData["required"] as? Bool) ?? false
+        let required = field.required ?? false
         let attributedValue = TextPropertyManager.convert(field.value!,
                                                           theme: campaign!.theme,
                                                           defaultFont: font,
@@ -384,8 +384,8 @@ class DataManager: FieldDelegate {
         let descriptionHeight = TextPropertyManager.heightForAttributed(string: attributedDescription,
                                                                   and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace) + 8
         
-        if let imageData = field.uiData["image"] as? [String: Any] {
-            let isDefault = ((imageData["type"] as? String) ?? "default") == "default"
+        if let fieldImage = field.image {
+            let isDefault = (fieldImage.type ?? "default") == "default"
             valueHeight += 16 + (isDefault ? 100 : 240)
         }
         
@@ -396,7 +396,7 @@ class DataManager: FieldDelegate {
         var height: CGFloat = .leastNonzeroMagnitude
         
         if isError && fieldNeedComplete(field) {
-            guard let warning = field.uiData["warning"] as? String else {
+            guard let warning = field.warning else {
                 return checkFieldTransfromed(field) ? 12 : .leastNonzeroMagnitude
             }
             let font = (campaign?.theme.fontP2)!
@@ -428,7 +428,7 @@ class DataManager: FieldDelegate {
     
     private func getFieldFooter(_ field: Field) -> UIView? {
         if isError && fieldNeedComplete(field) {
-            guard let warning = field.uiData["warning"] as? String else {
+            guard let warning = field.warning else {
                 return nil
             }
             
@@ -478,11 +478,9 @@ class DataManager: FieldDelegate {
             case .checkbox:
                 let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 44 
                 var height: CGFloat = 0
-                let checkboxes = field.uiData["options"] as? Array<Dictionary<String, Any>> ?? []
-                for checkbox in checkboxes {
-                    let value = checkbox["value"] as? String ?? ""
+                for option in field.options ?? [] {
                     let font = (campaign?.theme.fontP1)!
-                    let lines = CGFloat(value.linesCount(width: width, font: font))
+                    let lines = CGFloat(option.value.linesCount(width: width, font: font))
                     height += max(ceil(lines * font.lineHeight) + 24, 48)
                 }
                 return height
@@ -513,8 +511,8 @@ class DataManager: FieldDelegate {
                 
                 var imageHeight: CGFloat = .leastNonzeroMagnitude
                 
-                if let imageData = field.uiData["image"] as? [String: Any] {
-                    let isDefault = ((imageData["type"] as? String) ?? "default") == "default"
+                if let fieldImage = field.image {
+                    let isDefault = (fieldImage.type ?? "default") == "default"
                     imageHeight = 16 + (isDefault ? 100 : 240)
                 }
                 
@@ -525,7 +523,7 @@ class DataManager: FieldDelegate {
                 
             case .input:
                 var minHeight: CGFloat = 40
-                guard let mode = field.uiData["mode"] as? String else {
+                guard let mode = field.mode else {
                     return 40
                 }
                 
@@ -547,11 +545,9 @@ class DataManager: FieldDelegate {
             case .radiobutton:
                 let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 44
                 var height: CGFloat = 0
-                let buttons = field.uiData["options"] as? Array<Dictionary<String, Any>> ?? []
-                for button in buttons {
-                    let value = button["value"] as? String ?? ""
+                for option in field.options ?? [] {
                     let font = (campaign?.theme.fontP1)!
-                    let lines = CGFloat(value.linesCount(width: width, font: font))
+                    let lines = CGFloat(option.value.linesCount(width: width, font: font))
                     height += max(ceil(lines * font.lineHeight) + 24, 48)
                 }
                 return height
@@ -574,8 +570,8 @@ class DataManager: FieldDelegate {
                 return 40
                 
             case .nps, .rating:
-                if let messages = field.uiData["messages"] as? [String: String] {
-                    let count = (messages["negative"]?.count ?? 0) + (messages["positive"]?.count ?? 0)
+                if let messages = field.messages {
+                    let count = (messages.negative?.count ?? 0) + (messages.positive?.count ?? 0)
                     return count > 0 ? 110 : 76
                 }
                 return 110
@@ -586,14 +582,9 @@ class DataManager: FieldDelegate {
                 var takeText = ""
                 var selectText = ""
                 
-                if let buttons = field.uiData["buttons"] as? [String: String] {
-                    if let takeButton = buttons["create"] {
-                        takeText = takeButton
-                    }
-                    
-                    if let selectButton = buttons["upload"] {
-                        selectText = selectButton
-                    }
+                if let fieldButtons = field.buttons {
+                    takeText = fieldButtons.create ?? ""
+                    selectText = fieldButtons.upload ?? ""
                 }
                 
                 switch campaign?.type {
@@ -704,33 +695,21 @@ class DataManager: FieldDelegate {
                                  "scenarios": scenariosResult] as [String : Any]
                 
                 if field.type == .checkbox {
+                    let options = field.options ?? []
                     var positions: [Int] = []
-                    if let optionsData = try? JSONSerialization.data(withJSONObject: field.uiData["options"] as Any, options: .prettyPrinted),
-                       let options = try? JSONDecoder().decode([Option].self,
-                                                               from: optionsData) {
-                        for answerItem in answer {
-                            if let index = options.firstIndex(where: { option in
-                                option.id == answerItem
-                            }) {
-                                positions.append(index)
-                            }
-                        }
-                        
-                        if positions.count > 0 {
-                            newAnswer["position"] = positions
+                    for answerItem in answer {
+                        if let index = options.firstIndex(where: { $0.id == answerItem }) {
+                            positions.append(index)
                         }
                     }
+                    if positions.count > 0 {
+                        newAnswer["position"] = positions
+                    }
                 } else if field.type == .radiobutton {
-                    if let optionsData = try? JSONSerialization.data(withJSONObject: field.uiData["options"] as Any, options: .prettyPrinted),
-                       let options = try? JSONDecoder().decode([Option].self,
-                                                               from: optionsData) {
-                        
-                        if let answerItem = answer.first,
-                           let position = options.firstIndex(where: { option in
-                               option.id == answerItem
-                           }) {
-                            newAnswer["position"] = position
-                        }
+                    let options = field.options ?? []
+                    if let answerItem = answer.first,
+                       let position = options.firstIndex(where: { $0.id == answerItem }) {
+                        newAnswer["position"] = position
                     }
                 }
                 
@@ -960,7 +939,7 @@ class DataManager: FieldDelegate {
     //MARK: - TRANSFORMATIONS
     
     private func fieldNeedComplete(_ field: Field) -> Bool {
-        let required = ((field.uiData["required"] as? Bool) ?? false) //|| (field.type == .smiles)
+        let required = (field.required ?? false) //|| (field.type == .smiles)
         let transformered = checkFieldTransfromed(field)
         let answered = answers.map({ (dict) -> String in
             (dict["fieldId"] as? String) ?? ""

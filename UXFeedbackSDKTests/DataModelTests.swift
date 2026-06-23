@@ -131,8 +131,8 @@ final class FieldTypeTests: XCTestCase {
 
 final class FieldTests: XCTestCase {
 
-    func testFieldDefaultValues() {
-        let field = Field(id: "f1", type: .text, value: "Hello", uiData: [:])
+    func testFieldDefaultValues() throws {
+        let field = try Field(from: ["id": "f1", "type": "text", "value": "Hello"] as [String: Any])
 
         XCTAssertEqual(field.id, "f1")
         XCTAssertEqual(field.type, .text)
@@ -143,8 +143,8 @@ final class FieldTests: XCTestCase {
         XCTAssertFalse(field.isLastPage)
     }
 
-    func testFieldMutableProperties() {
-        var field = Field(id: "f1", type: .stars, value: nil, uiData: [:])
+    func testFieldMutableProperties() throws {
+        var field = try Field(from: ["id": "f1", "type": "stars"] as [String: Any])
 
         field.answers = ["5"]
         field.isError = true
@@ -195,10 +195,14 @@ final class OptionTests: XCTestCase {
 
 final class PageTests: XCTestCase {
 
-    func testPageInitialization() {
-        let field = Field(id: "f1", type: .text, value: "text", uiData: [:])
-        let button = Field(id: "b1", type: .button, value: "Submit", uiData: [:])
-        let page = Page(id: "p1", type: 1, fields: [field], buttons: [button])
+    func testPageDecoding() throws {
+        let dict: [String: Any] = [
+            "id": "p1",
+            "type": 1,
+            "fields": [["id": "f1", "type": "text", "value": "text"]],
+            "buttons": [["id": "b1", "type": "button", "value": "Submit"]]
+        ]
+        let page = try Page(from: dict)
 
         XCTAssertEqual(page.id, "p1")
         XCTAssertEqual(page.type, 1)

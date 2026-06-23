@@ -39,15 +39,7 @@ class CheckboxCell: BaseCell, UITableViewDelegate, UITableViewDataSource {
     }
     
     override func updateUI() {
-        guard let data = try? JSONSerialization.data(withJSONObject: field?.uiData["options"] as Any, options: .prettyPrinted) else {
-            return
-        }
-
-        guard let opt = try? JSONDecoder().decode([Option].self,
-                                                      from: data) else {
-            return
-        }
-        options = opt
+        options = field?.options ?? []
         tableView.backgroundColor = theme?.bgColor
         
         if field!.isError && field?.answers.count == 0 {

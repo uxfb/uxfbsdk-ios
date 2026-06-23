@@ -54,11 +54,11 @@ class ImageCell: BaseCell {
     }
     
     private func loadImage() {
-        guard let image = field?.uiData["image"] as? Dictionary<String, Any> else {
+        guard let fieldImage = field?.image else {
             return
         }
         
-        let urlString = (image["src"] as? String) ?? (image["3x"] as? String)
+        let urlString = fieldImage.src ?? fieldImage.threeX
         
         
         guard let urlString = urlString, let url = URL(string: urlString) else {

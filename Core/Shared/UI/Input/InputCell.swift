@@ -46,9 +46,9 @@ class InputCell: BaseCell {
         
         textView.font = theme?.fontP1
         
-        textView.text = comment.isEmpty ? field?.uiData["placeholder"] as? String : comment
+        textView.text = comment.isEmpty ? field?.placeholder : comment
         
-        let required = field?.uiData["required"] as? Bool ?? false
+        let required = field?.required ?? false
         if required && field!.isError && comment.isEmpty {
             textView.borderColor = theme?.errorColorSecondary
             textView.borderWidth = 2
@@ -85,7 +85,7 @@ extension InputCell: UITextViewDelegate {
         textView.borderColor = theme?.inputBorderColor
         if textView.text.isEmpty {
             comment = ""
-            textView.text = field?.uiData["placeholder"] as? String
+            textView.text = field?.placeholder
             textView.textColor = theme?.text03Color
         }
         else {

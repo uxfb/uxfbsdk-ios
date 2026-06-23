@@ -127,9 +127,9 @@ class NpsCell: BaseCell {
         negativeLabel.textColor = theme?.text03Color
         positiveLabel.textColor = theme?.text03Color
         
-        if let messages = field?.uiData["messages"] as? [String: String] {
-            negativeLabel.text = messages["negative"]
-            positiveLabel.text = messages["positive"]
+        if let messages = field?.messages {
+            negativeLabel.text = messages.negative
+            positiveLabel.text = messages.positive
         }
     }
     

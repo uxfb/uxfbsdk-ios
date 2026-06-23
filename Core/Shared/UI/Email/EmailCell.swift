@@ -35,7 +35,7 @@ class EmailCell: BaseCell, UITextFieldDelegate {
             return
         }
         textField.tintColor = theme?.text01Color
-        let placeholder = field?.uiData["placeholder"] as? String
+        let placeholder = field?.placeholder
         textField.attributedPlaceholder = NSAttributedString(string: placeholder ?? "",
                                                              attributes: [NSAttributedString.Key.foregroundColor: theme?.text03Color ?? .lightGray])
         textField.textColor = theme?.text01Color
@@ -49,7 +49,7 @@ class EmailCell: BaseCell, UITextFieldDelegate {
         let answer = field?.answers.first ?? ""
         textField.text = answer
         
-        let required = field?.uiData["required"] as? Bool ?? false
+        let required = field?.required ?? false
         if required && field!.isError && answer.isEmpty {
             textField.borderColor = theme?.errorColorSecondary
             textField.layer.borderWidth = 2

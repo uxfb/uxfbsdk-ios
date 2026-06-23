@@ -102,7 +102,7 @@ class RatingCell: BaseCell {
         positiveLabel.font = theme?.fontP2
         
         currentValue = Int(field?.answers.first ?? "") ?? 0
-        maxValue = (field?.uiData["ratingCount"] as? Int) ?? 3
+        maxValue = field?.ratingCount ?? 3
         defaultValue = 0
         guard field != nil, theme != nil else {
             return
@@ -127,9 +127,9 @@ class RatingCell: BaseCell {
         negativeLabel.textColor = theme?.text03Color
         positiveLabel.textColor = theme?.text03Color
         
-        if let messages = field?.uiData["messages"] as? [String: String] {
-            negativeLabel.text = messages["negative"]
-            positiveLabel.text = messages["positive"]
+        if let messages = field?.messages {
+            negativeLabel.text = messages.negative
+            positiveLabel.text = messages.positive
         }
     }
     

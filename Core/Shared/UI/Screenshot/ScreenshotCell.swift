@@ -275,17 +275,15 @@ class ScreenshotCell: BaseCell {
         selectLabel.textColor = theme?.text01Color
         selectLabel.font = theme?.fontP2
         
-        let data = field?.uiData
-        
-        if let buttons = data?["buttons"] as? [String: String] {
-            if let takeButton = buttons["create"] {
+        if let fieldButtons = field?.buttons {
+            if let takeButton = fieldButtons.create {
                 takeLabel.text = takeButton
                 takeView.isHidden = false
             } else {
                 takeView.isHidden = true
             }
             
-            if let selectButton = buttons["upload"] {
+            if let selectButton = fieldButtons.upload {
                 selectLabel.text = selectButton
                 selectView.isHidden = false
             } else {
@@ -298,14 +296,9 @@ class ScreenshotCell: BaseCell {
         var takeText = ""
         var selectText = ""
         
-        if let buttons = field?.uiData["buttons"] as? [String: String] {
-            if let takeButton = buttons["create"] {
-                takeText = takeButton
-            }
-            
-            if let selectButton = buttons["upload"] {
-                selectText = selectButton
-            }
+        if let fieldButtons = field?.buttons {
+            takeText = fieldButtons.create ?? ""
+            selectText = fieldButtons.upload ?? ""
         }
         
         self.takeAction = take
