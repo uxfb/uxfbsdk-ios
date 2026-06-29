@@ -744,7 +744,8 @@ class DataManager: FieldDelegate {
                     self.checkPrivacy(nil)
                 }
 				
-                self.viewController?.updateUI() //fieldIndex
+                let fieldIndex = self.campaign?.pages[self.currentPage].fields.firstIndex(where: { $0.id == field.id })
+                self.viewController?.updateUI(fieldIndex)
             }
         }
     }
