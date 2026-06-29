@@ -57,21 +57,12 @@ class HeaderCell: BaseCell {
         ])
     }
     
-    private let maxImageHeight: CGFloat = 240
-    private let defaultImageHeight: CGFloat = 100
-    
     private func getImageConstraint(for size: CGSize) -> CGFloat {
-        let targetHeight = isDefault ? defaultImageHeight : min(size.height, maxImageHeight)
-        let kHeight = targetHeight / size.height
+        let kHeight = (isDefault ? 100 : 240) / size.height
+        
         let newWidth = size.width * kHeight
+        
         return newWidth
-    }
-    
-    private func getActualImageHeight(for size: CGSize) -> CGFloat {
-        let availableWidth = contentView.bounds.width - 32
-        let scaledHeight = size.height * (availableWidth / size.width)
-        let maxHeight: CGFloat = isDefault ? defaultImageHeight : maxImageHeight
-        return min(scaledHeight, maxHeight)
     }
     
     private func updateImageConstraints() {
@@ -99,8 +90,9 @@ class HeaderCell: BaseCell {
                 break
         }
         
-        let maxHeight: CGFloat = isDefault ? defaultImageHeight : maxImageHeight
-        imageHeightConstraint = headerImageView.heightAnchor.constraint(equalToConstant: maxHeight)
+        imageHeightConstraint?.isActive = false
+        let imgHeight = Self.computeImageHeight(field: field, isDefault: isDefault)
+        imageHeightConstraint = headerImageView.heightAnchor.constraint(equalToConstant: imgHeight)
         
         if position == "topHeader" {
             NSLayoutConstraint.activate([
@@ -108,7 +100,6 @@ class HeaderCell: BaseCell {
                 label.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -12),
                 headerImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
                 headerImageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -8),
-                headerImageView.heightAnchor.constraint(lessThanOrEqualToConstant: maxHeight),
                 imageHeightConstraint!
             ])
         } else {
@@ -117,7 +108,6 @@ class HeaderCell: BaseCell {
                 descriptionLabel.topAnchor.constraint(equalTo: headerImageView.bottomAnchor, constant: 8),
                 descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
                 headerImageView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
-                headerImageView.heightAnchor.constraint(lessThanOrEqualToConstant: maxHeight),
                 imageHeightConstraint!
             ])
         }
@@ -125,6 +115,17 @@ class HeaderCell: BaseCell {
         UIView.performWithoutAnimation {
             self.layoutIfNeeded()
         }
+    }
+    
+    static func computeImageHeight(field: Field?, isDefault: Bool) -> CGFloat {
+        let maxHeight: CGFloat = isDefault ? 100 : 240
+        guard !isDefault, let fieldImage = field?.image else { return maxHeight }
+        let urlString = fieldImage.src ?? fieldImage.threeX
+        guard let urlString = urlString,
+              let cachedImage = ImageCache.shared.object(forKey: urlString as NSString) else {
+            return maxHeight
+        }
+        return min(cachedImage.size.height, maxHeight)
     }
     
     private func updateImage(url: URL) {
@@ -153,24 +154,14 @@ class HeaderCell: BaseCell {
                     if let loadedImage = loadedImage {
                         self.headerImageView.image = loadedImage
                         self.updateWidthConstraints()
-                        self.updateImageHeightForLoadedImage(loadedImage)
+                        NotificationCenter.default.post(name: .headerImageDidLoad, object: nil)
                     }
                 }
             }
         } else {
             headerImageView.image = imageFromCache
             self.updateWidthConstraints()
-            self.updateImageHeightForLoadedImage(imageFromCache!)
         }
-    }
-    
-    private func updateImageHeightForLoadedImage(_ image: UIImage) {
-        let actualHeight = getActualImageHeight(for: image.size)
-        imageHeightConstraint?.constant = actualHeight
-        UIView.performWithoutAnimation {
-            self.layoutIfNeeded()
-        }
-        NotificationCenter.default.post(name: .headerImageDidLoad, object: nil)
     }
     
     override func updateUI() {

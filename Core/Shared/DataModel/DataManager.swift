@@ -316,15 +316,11 @@ class DataManager: FieldDelegate {
     private func getFooterSpacing(_ field: Field) -> CGFloat {
         var spacing: CGFloat = CGFloat.leastNonzeroMagnitude
         
-        guard let fieldIndex = campaign?.pages[currentPage].fields.firstIndex(where: { (fld) -> Bool in
-            fld.id == field.id
-        }) else {
+        let allFields = (campaign?.pages[currentPage].fields ?? []) + (campaign?.pages[currentPage].buttons ?? [])
+        
+        guard let fieldIndex = allFields.firstIndex(where: { $0.id == field.id }) else {
             return spacing
         }
-        
-        
-        let allFields = (campaign?.pages[currentPage].fields ?? []) + (campaign?.pages[currentPage].buttons)!
-        
         
         for i in fieldIndex..<allFields.count {
             let nextIndex = i + 1
@@ -336,7 +332,7 @@ class DataManager: FieldDelegate {
                 }
             }
             else {
-                // Last visible element — no spacing needed after it
+                spacing = 16
                 break
             }
         }
@@ -400,20 +396,8 @@ class DataManager: FieldDelegate {
         
         if let fieldImage = field.image {
             let isDefault = (fieldImage.type ?? "default") == "default"
-            let maxHeight: CGFloat = isDefault ? 100 : 240
-            
-            var imageHeight = maxHeight
-            if !isDefault {
-                let urlString = fieldImage.src ?? fieldImage.threeX
-                if let urlString = urlString,
-                   let cachedImage = ImageCache.shared.object(forKey: urlString as NSString) {
-                    let availableWidth = self.width - CGFloat.leftArea - CGFloat.rightArea
-                    let scaledHeight = cachedImage.size.height * (availableWidth / cachedImage.size.width)
-                    imageHeight = min(scaledHeight, maxHeight)
-                }
-            }
-            
-            valueHeight += 16 + imageHeight
+            let imgHeight = HeaderCell.computeImageHeight(field: field, isDefault: isDefault)
+            valueHeight += 16 + imgHeight
         }
         
         // 24 = 8(top) + 8(gap between value and description) + 8(bottom)
@@ -542,7 +526,8 @@ class DataManager: FieldDelegate {
                 
                 if let fieldImage = field.image {
                     let isDefault = (fieldImage.type ?? "default") == "default"
-                    imageHeight = 16 + (isDefault ? 100 : 240)
+                    let imgH = HeaderCell.computeImageHeight(field: field, isDefault: isDefault)
+                    imageHeight = 16 + imgH
                 }
                 
                 return valueHeight + descriptionHeight + imageHeight + 24

@@ -80,21 +80,12 @@ class HeaderView: UIView {
         descriptionLabel.attributedText = nil
     }
     
-    private let maxImageHeight: CGFloat = 240
-    private let defaultImageHeight: CGFloat = 100
-    
     private func getImageConstraint(for size: CGSize) -> CGFloat {
-        let targetHeight = isDefault ? defaultImageHeight : min(size.height, maxImageHeight)
-        let kHeight = targetHeight / size.height
+        let kHeight = 240 / size.height
+        
         let newWidth = size.width * kHeight
+        
         return newWidth
-    }
-    
-    private func getActualImageHeight(for size: CGSize) -> CGFloat {
-        let availableWidth = bounds.width - 32
-        let scaledHeight = size.height * (availableWidth / size.width)
-        let maxHeight: CGFloat = isDefault ? defaultImageHeight : maxImageHeight
-        return min(scaledHeight, maxHeight)
     }
     
     private func setup() {
@@ -151,8 +142,9 @@ class HeaderView: UIView {
                 break
         }
         
-        let maxHeight: CGFloat = isDefault ? defaultImageHeight : maxImageHeight
-        imageHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: maxHeight)
+        imageHeightConstraint?.isActive = false
+        let imgHeight = HeaderCell.computeImageHeight(field: field, isDefault: isDefault)
+        imageHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: imgHeight)
         
         if position == "topHeader" {
             NSLayoutConstraint.activate([
@@ -160,7 +152,6 @@ class HeaderView: UIView {
                 label.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -12),
                 imageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
                 imageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -8),
-                imageView.heightAnchor.constraint(lessThanOrEqualToConstant: maxHeight),
                 imageHeightConstraint!
             ])
         } else {
@@ -168,7 +159,6 @@ class HeaderView: UIView {
                 label.topAnchor.constraint(equalTo: topAnchor, constant: 16),
                 imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
                 imageView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8),
-                imageView.heightAnchor.constraint(lessThanOrEqualToConstant: maxHeight),
                 imageHeightConstraint!
             ])
         }
@@ -204,24 +194,14 @@ class HeaderView: UIView {
                     if let loadedImage = loadedImage {
                         self.imageView.image = loadedImage
                         self.updateWidthConstraints()
-                        self.updateImageHeightForLoadedImage(loadedImage)
+                        NotificationCenter.default.post(name: .headerImageDidLoad, object: nil)
                     }
                 }
             }
         } else {
             imageView.image = imageFromCache
             self.updateWidthConstraints()
-            self.updateImageHeightForLoadedImage(imageFromCache!)
         }
-    }
-    
-    private func updateImageHeightForLoadedImage(_ image: UIImage) {
-        let actualHeight = getActualImageHeight(for: image.size)
-        imageHeightConstraint?.constant = actualHeight
-        UIView.performWithoutAnimation {
-            self.layoutIfNeeded()
-        }
-        NotificationCenter.default.post(name: .headerImageDidLoad, object: nil)
     }
     
     private func updateUI() {

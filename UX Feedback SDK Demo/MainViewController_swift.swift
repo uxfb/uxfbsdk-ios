@@ -121,7 +121,7 @@ class MainViewController_swift: UIViewController {
         case 2:
 //                UXFeedback.setup(appID: uxfAppID, settings: (UIApplication.shared.delegate as! AppDelegate).settings)
 //                UXFeedback.sdk.stopCampaign(eventForStop: "")
-            let uuid = UXFeedback.sdk.startCampaign(eventName: "mall_item", attributes: nil)
+            let uuid = UXFeedback.sdk.startCampaign(eventName: "oneway", attributes: nil)
             
         default:
             break

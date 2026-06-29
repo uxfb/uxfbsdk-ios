@@ -10,6 +10,7 @@ import UIKit
 /// SDK theme class. To instantiate the default settings, call the ``init()`` method. **IMPORTANT**: all colors are specified in HEX format with a pound sign at the beginning, for example #ABC123
 @objcMembers
 open class YoHeTheme: NSObject, ThemeProtocol {
+    
     /// Form background color
     open var bgColor: UIColor = UIColor.init("#FFFFFF")
     
@@ -75,6 +76,7 @@ open class YoHeTheme: NSObject, ThemeProtocol {
     open var bgDisabled: UIColor =  UIColor.init("#99A1B1")
     open var fgDisabled: UIColor =  UIColor.init("#99A1B1")
     open var borderDisabled: UIColor =  UIColor.init("#99A1B1")
+    open var iconDisabledColor: UIColor =  UIColor.init("#777F8E").withAlphaComponent(0.2)
     
     /// Button rounding radius
      open var btnBorderRadius: CGFloat = 4
