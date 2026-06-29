@@ -34,7 +34,7 @@ class SmilesCell: BaseCell {
             newYellow = theme?.iconSmile4Color ?? newYellow
 
         case .disabled:
-            newYellow = theme?.borderDisabled ?? newYellow
+            newYellow = theme?.iconDisabledColor ?? newYellow
             newRed = theme?.text03Color ?? newRed
             // newRed = newBlack
         }

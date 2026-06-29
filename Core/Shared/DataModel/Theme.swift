@@ -59,6 +59,7 @@ protocol ThemeProtocol {
     var bgDisabled: UIColor { get set }
     var fgDisabled: UIColor { get set }
     var borderDisabled: UIColor { get set }
+    var iconDisabledColor: UIColor { get set }
     
     var fontH1: UIFont { get set }
     var fontH2: UIFont { get set }
@@ -101,6 +102,7 @@ class Theme: NSObject, Decodable, ThemeProtocol {
     var bgDisabled: UIColor =  UIColor.init("#99A1B1")
     var fgDisabled: UIColor =  UIColor.init("#99A1B1")
     var borderDisabled: UIColor =  UIColor.init("#777F8E").withAlphaComponent(0.2)
+    var iconDisabledColor: UIColor =  UIColor.init("#777F8E").withAlphaComponent(0.2)
     
     var fontH1: UIFont = .systemFont(ofSize: 22,
                                      weight: .semibold) 

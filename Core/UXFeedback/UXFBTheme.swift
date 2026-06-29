@@ -115,6 +115,7 @@ open class UXFBTheme: NSObject, ThemeProtocol {
     open var bgDisabled: UIColor =  UIColor.init("#99A1B1")
     open var fgDisabled: UIColor =  UIColor.init("#99A1B1")
     open var borderDisabled: UIColor =  UIColor.init("#777F8E").withAlphaComponent(0.2)
+    open var iconDisabledColor: UIColor =  UIColor.init("#777F8E").withAlphaComponent(0.2)
     
     open var fontH1: UIFont = .systemFont(ofSize: 22,
                                      weight: .semibold)

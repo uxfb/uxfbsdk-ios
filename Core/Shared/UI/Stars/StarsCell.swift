@@ -102,7 +102,7 @@ class StarsCell: BaseCell {
     override func updateUI() {
         currentValue = Int(field?.answers.first ?? "") ?? -1
         
-        let color = (field!.isError && currentValue == -1) ? theme?.borderDisabled : theme?.borderDisabled
+        let color = (field!.isError && currentValue == -1) ? theme?.iconDisabledColor : theme?.iconDisabledColor
         
         for tag in 1...5 {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(starTapped(_ :)))
@@ -160,7 +160,7 @@ class StarsCell: BaseCell {
                 imageView?.tintColor = self.theme?.iconStarColor
             } else {
                 let imageView = self.contentView.viewWithTag(tag) as? UIImageView
-                imageView?.tintColor = self.theme?.borderDisabled
+                imageView?.tintColor = self.theme?.iconDisabledColor
             }
         } completion: { finished in
             completion()
