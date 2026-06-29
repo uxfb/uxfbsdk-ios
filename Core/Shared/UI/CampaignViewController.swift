@@ -280,6 +280,11 @@ internal class CampaignViewController: UIViewController {
                                                name: UIDevice.orientationDidChangeNotification,
                                                object: nil)
         
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(headerImageDidLoad),
+                                               name: .headerImageDidLoad,
+                                               object: nil)
+        
         self.updateFooter()
     }
     
@@ -1140,6 +1145,11 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     
     func didEndEditing(_ section: Int) {
 //        self.tableView.scrollToRow(at: IndexPath(row: 0, section: section), at: .middle, animated: true)
+    }
+    
+    @objc private func headerImageDidLoad() {
+        reloadTableView()
+        updateHeight()
     }
     
     func updateHeight() {

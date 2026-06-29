@@ -400,7 +400,20 @@ class DataManager: FieldDelegate {
         
         if let fieldImage = field.image {
             let isDefault = (fieldImage.type ?? "default") == "default"
-            valueHeight += 16 + (isDefault ? 100 : 240)
+            let maxHeight: CGFloat = isDefault ? 100 : 240
+            
+            var imageHeight = maxHeight
+            if !isDefault {
+                let urlString = fieldImage.src ?? fieldImage.threeX
+                if let urlString = urlString,
+                   let cachedImage = ImageCache.shared.object(forKey: urlString as NSString) {
+                    let availableWidth = self.width - CGFloat.leftArea - CGFloat.rightArea
+                    let scaledHeight = cachedImage.size.height * (availableWidth / cachedImage.size.width)
+                    imageHeight = min(scaledHeight, maxHeight)
+                }
+            }
+            
+            valueHeight += 16 + imageHeight
         }
         
         // 24 = 8(top) + 8(gap between value and description) + 8(bottom)
