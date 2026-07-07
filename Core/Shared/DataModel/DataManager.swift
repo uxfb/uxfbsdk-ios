@@ -1062,6 +1062,11 @@ class DataManager: FieldDelegate {
                 result = result && basePage < toPageIndex
             }
             
+            let hasFieldCondition = transform.scenarios.contains { scenario in
+                scenario.conditions.contains { $0.from.field != nil }
+            }
+            result = result && hasFieldCondition
+            
             return result
         }
         
@@ -1087,12 +1092,10 @@ class DataManager: FieldDelegate {
         }
         
         guard let elseTransform = campaign?.transforms.first(where: { transform in
+            guard transform.to.action == "transition" else { return false }
             return transform.scenarios.first { scenario in
-                scenario.conditions.first { condition in
-                    return (condition.from.page == campaign?.pages[basePage].id &&
-                            transform.to.action == "transition" &&
-                            condition.from.field == nil)
-                } != nil
+                scenario.conditions.allSatisfy { $0.from.field == nil } &&
+                scenario.conditions.contains { $0.from.page == campaign?.pages[basePage].id }
             } != nil
         }) else {
             return currentPage + 1
