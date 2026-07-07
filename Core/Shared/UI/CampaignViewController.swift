@@ -1093,9 +1093,10 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
                     tableView.deleteSections(IndexSet(integersIn: newCount..<oldCount), with: .none)
                 }
 
-                // Перезагружаем секции кроме активной (чтобы не терять фокус ввода)
+                let senderField = dataManager?.fieldForRow(indexPath: IndexPath(row: 0, section: sender))
+                let forceReloadSender = senderField?.type == .screenshot
                 let sectionsToReload = IndexSet(
-                    (0..<min(oldCount, newCount)).filter { $0 != sender }
+                    (0..<min(oldCount, newCount)).filter { $0 != sender || forceReloadSender }
                 )
                 if !sectionsToReload.isEmpty {
                     tableView.reloadSections(sectionsToReload, with: .none)
