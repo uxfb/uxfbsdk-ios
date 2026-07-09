@@ -1127,6 +1127,16 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: section), at: .top, animated: true)
     }
     
+    func refreshFieldFooter(_ section: Int) {
+        UIView.performWithoutAnimation {
+            if let footer = tableView.footerView(forSection: section) {
+                configureSectionFooter(footer, for: section)
+            }
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        }
+    }
+    
     func didEndEditing(_ section: Int) {
 //        self.tableView.scrollToRow(at: IndexPath(row: 0, section: section), at: .middle, animated: true)
     }

@@ -140,6 +140,7 @@ class DataManager: FieldDelegate {
     }
     
     var isError: Bool = false
+    private var silencedErrorFieldIds: Set<String> = []
     
     private var isPrivacyChecked: Bool = false
     private var isPrivacyWarning: Bool = false
@@ -395,7 +396,7 @@ class DataManager: FieldDelegate {
     private func getFieldFooterHeight(_ field: Field) -> CGFloat {
         var height: CGFloat = .leastNonzeroMagnitude
         
-        if isError && fieldNeedComplete(field) {
+        if isError && fieldNeedComplete(field) && !silencedErrorFieldIds.contains(field.id ?? "") {
             guard let warning = field.uiData["warning"] as? String else {
                 return checkFieldTransfromed(field) ? 12 : .leastNonzeroMagnitude
             }
@@ -427,7 +428,7 @@ class DataManager: FieldDelegate {
     }
     
     private func getFieldFooter(_ field: Field) -> UIView? {
-        if isError && fieldNeedComplete(field) {
+        if isError && fieldNeedComplete(field) && !silencedErrorFieldIds.contains(field.id ?? "") {
             guard let warning = field.uiData["warning"] as? String else {
                 return nil
             }
@@ -476,7 +477,10 @@ class DataManager: FieldDelegate {
                 return 48
                 
             case .checkbox:
-                let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 44 
+                let containerWidth = (viewController?.tableView.bounds.width ?? 0) > 0
+                    ? (viewController?.tableView.bounds.width ?? self.width)
+                    : self.width
+                let width = containerWidth - 48 - 32
                 var height: CGFloat = 0
                 let checkboxes = field.uiData["options"] as? Array<Dictionary<String, Any>> ?? []
                 for checkbox in checkboxes {
@@ -545,7 +549,10 @@ class DataManager: FieldDelegate {
                 return max(valueHeight, minHeight)
                 
             case .radiobutton:
-                let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 44
+                let containerWidth = (viewController?.tableView.bounds.width ?? 0) > 0
+                    ? (viewController?.tableView.bounds.width ?? self.width)
+                    : self.width
+                let width = containerWidth - 48 - 32
                 var height: CGFloat = 0
                 let buttons = field.uiData["options"] as? Array<Dictionary<String, Any>> ?? []
                 for button in buttons {
@@ -565,7 +572,14 @@ class DataManager: FieldDelegate {
                                                         withRequired: false)
                 let valueHeight = TextPropertyManager.heightForAttributed(string: value,
                                                                           and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
-                return valueHeight
+                
+                var imageHeight: CGFloat = 0
+                if let imageData = field.uiData["image"] as? [String: Any] {
+                    let isDefault = ((imageData["type"] as? String) ?? "default") == "default"
+                    imageHeight = 16 + (isDefault ? 100 : 240)
+                }
+                
+                return valueHeight + imageHeight
                 
             case .stars:
                 return 40
@@ -627,6 +641,7 @@ class DataManager: FieldDelegate {
     private func checkAndNavigate() {
         if needsComplete() {
             isError = true
+            silencedErrorFieldIds.removeAll()
             viewController?.updateUI()
         } else {
             let nextIndex = getNextIndex()
@@ -795,6 +810,12 @@ class DataManager: FieldDelegate {
         }
         
         isHalfScreen = false
+        
+        if let fieldId = field.id, isError, fieldNeedComplete(field) {
+            silencedErrorFieldIds.insert(fieldId)
+            viewController?.refreshFieldFooter(fieldIndex)
+        }
+        
         viewController?.updateHeight()
         
         viewController?.didBeginEditing(fieldIndex)
