@@ -121,7 +121,7 @@ class MainViewController_swift: UIViewController {
         case 2:
 //                UXFeedback.setup(appID: uxfAppID, settings: (UIApplication.shared.delegate as! AppDelegate).settings)
 //                UXFeedback.sdk.stopCampaign(eventForStop: "")
-            let uuid = UXFeedback.sdk.startCampaign(eventName: "oneway", attributes: nil)
+            let uuid = UXFeedback.sdk.startCampaign(eventName: "regress_constant", attributes: nil)
             
         default:
             break

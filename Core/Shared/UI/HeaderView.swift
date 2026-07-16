@@ -66,6 +66,7 @@ class HeaderView: UIView {
         guard let theme = theme else { return }
         
         label.textColor = theme.text01Color
+        descriptionLabel.textColor = theme.text01Color
         self.backgroundColor = theme.bgColor
     }
     

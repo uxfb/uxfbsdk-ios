@@ -72,10 +72,18 @@ class RadiobuttonCell: BaseCell, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let wasError = isError
         isError = false
         if self.delegate != nil {
             let id = options[indexPath.row]
             self.delegate?.fieldChanged(self.field!, answer:[id.id], refresh: true)
+        }
+        if wasError, let theme = theme {
+            for case let cell as RadioCell in tableView.visibleCells {
+                if let ip = tableView.indexPath(for: cell) {
+                    cell.configure(option: options[ip.row], theme: theme, isError: false)
+                }
+            }
         }
     }
     

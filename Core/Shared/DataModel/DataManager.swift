@@ -140,6 +140,7 @@ class DataManager: FieldDelegate {
     }
     
     var isError: Bool = false
+    private var silencedErrorFieldIds: Set<String> = []
     
     private var isPrivacyChecked: Bool = false
     private var isPrivacyWarning: Bool = false
@@ -408,8 +409,8 @@ class DataManager: FieldDelegate {
     private func getFieldFooterHeight(_ field: Field) -> CGFloat {
         var height: CGFloat = .leastNonzeroMagnitude
         
-        if isError && fieldNeedComplete(field) {
-            guard let warning = field.warning else {
+        if isError && fieldNeedComplete(field) && !silencedErrorFieldIds.contains(field.id ?? "") {
+            guard let warning = field.uiData["warning"] as? String else {
                 return checkFieldTransfromed(field) ? 12 : .leastNonzeroMagnitude
             }
             let font = (campaign?.theme.fontP2)!
@@ -440,8 +441,8 @@ class DataManager: FieldDelegate {
     }
     
     private func getFieldFooter(_ field: Field) -> UIView? {
-        if isError && fieldNeedComplete(field) {
-            guard let warning = field.warning else {
+        if isError && fieldNeedComplete(field) && !silencedErrorFieldIds.contains(field.id ?? "") {
+            guard let warning = field.uiData["warning"] as? String else {
                 return nil
             }
             
@@ -489,7 +490,10 @@ class DataManager: FieldDelegate {
                 return 48
                 
             case .checkbox:
-                let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 44
+                let containerWidth = (viewController?.tableView.bounds.width ?? 0) > 0
+                    ? (viewController?.tableView.bounds.width ?? self.width)
+                    : self.width
+                let width = containerWidth - 48 - 32
                 var height: CGFloat = 0
                 for option in field.options ?? [] {
                     let font = (campaign?.theme.fontP1)!
@@ -557,7 +561,10 @@ class DataManager: FieldDelegate {
                 return max(valueHeight, minHeight)
                 
             case .radiobutton:
-                let width = self.width -  CGFloat.leftArea - CGFloat.rightArea - extraSpace - 44
+                let containerWidth = (viewController?.tableView.bounds.width ?? 0) > 0
+                    ? (viewController?.tableView.bounds.width ?? self.width)
+                    : self.width
+                let width = containerWidth - 48 - 32
                 var height: CGFloat = 0
                 for option in field.options ?? [] {
                     let font = (campaign?.theme.fontP1)!
@@ -575,7 +582,14 @@ class DataManager: FieldDelegate {
                                                         withRequired: false)
                 let valueHeight = TextPropertyManager.heightForAttributed(string: value,
                                                                           and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
-                return valueHeight
+                
+                var imageHeight: CGFloat = 0
+                if let imageData = field.uiData["image"] as? [String: Any] {
+                    let isDefault = ((imageData["type"] as? String) ?? "default") == "default"
+                    imageHeight = 16 + (isDefault ? 100 : 240)
+                }
+                
+                return valueHeight + imageHeight
                 
             case .stars:
                 return 40
@@ -632,6 +646,7 @@ class DataManager: FieldDelegate {
     private func checkAndNavigate() {
         if needsComplete() {
             isError = true
+            silencedErrorFieldIds.removeAll()
             viewController?.updateUI()
         } else {
             let nextIndex = getNextIndex()
@@ -737,7 +752,8 @@ class DataManager: FieldDelegate {
                     self.checkPrivacy(nil)
                 }
 				
-                self.viewController?.updateUI() //fieldIndex
+                let fieldIndex = self.campaign?.pages[self.currentPage].fields.firstIndex(where: { $0.id == field.id })
+                self.viewController?.updateUI(fieldIndex)
             }
         }
     }
@@ -787,6 +803,12 @@ class DataManager: FieldDelegate {
         }
         
         isHalfScreen = false
+        
+        if let fieldId = field.id, isError, fieldNeedComplete(field) {
+            silencedErrorFieldIds.insert(fieldId)
+            viewController?.refreshFieldFooter(fieldIndex)
+        }
+        
         viewController?.updateHeight()
         
         viewController?.didBeginEditing(fieldIndex)
@@ -1054,6 +1076,11 @@ class DataManager: FieldDelegate {
                 result = result && basePage < toPageIndex
             }
             
+            let hasFieldCondition = transform.scenarios.contains { scenario in
+                scenario.conditions.contains { $0.from.field != nil }
+            }
+            result = result && hasFieldCondition
+            
             return result
         }
         
@@ -1079,12 +1106,10 @@ class DataManager: FieldDelegate {
         }
         
         guard let elseTransform = campaign?.transforms.first(where: { transform in
+            guard transform.to.action == "transition" else { return false }
             return transform.scenarios.first { scenario in
-                scenario.conditions.first { condition in
-                    return (condition.from.page == campaign?.pages[basePage].id &&
-                            transform.to.action == "transition" &&
-                            condition.from.field == nil)
-                } != nil
+                scenario.conditions.allSatisfy { $0.from.field == nil } &&
+                scenario.conditions.contains { $0.from.page == campaign?.pages[basePage].id }
             } != nil
         }) else {
             return currentPage + 1

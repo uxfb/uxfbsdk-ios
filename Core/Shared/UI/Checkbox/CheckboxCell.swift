@@ -74,12 +74,29 @@ class CheckboxCell: BaseCell, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let wasError = isError
         isError = false
         checkAnswer(indexPath: indexPath)
+        if wasError, let theme = theme {
+            for case let cell as CheckCell in tableView.visibleCells {
+                if let ip = tableView.indexPath(for: cell) {
+                    cell.configure(option: options[ip.row], theme: theme, isError: false)
+                }
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         checkAnswer(indexPath: indexPath)
+        let selectedRows = tableView.indexPathsForSelectedRows ?? []
+        if selectedRows.isEmpty, (field?.isError ?? false), let theme = theme {
+            isError = true
+            for case let cell as CheckCell in tableView.visibleCells {
+                if let ip = tableView.indexPath(for: cell) {
+                    cell.configure(option: options[ip.row], theme: theme, isError: true)
+                }
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
