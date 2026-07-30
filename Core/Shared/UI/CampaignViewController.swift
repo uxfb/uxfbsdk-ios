@@ -429,25 +429,18 @@ internal class CampaignViewController: UIViewController {
     }
     
     func updateFooter() {
-        let isThankYouPage = dataManager?.isProgressHidden ?? false
-        
-        if isThankYouPage {
-            copyrightView.isHidden = true
-            privacyView.isHidden = true
-            holderView.isHidden = true
-        } else {
-            let withPrivacy = dataManager?.privacyNeeded ?? false
-            copyrightView.isHidden = !(campaign?.copyright?.isShow ?? false)
-            privacyView.isHidden = !withPrivacy
-            holderView.isHidden = false
-            holderView.backgroundColor = withPrivacy ? campaign?.theme.controlBgColor : campaign?.theme.bgColor
-            if campaign?.type == .popup {
-                holderView.heightAnchor.constraint(equalToConstant: (copyrightView.isHidden && privacyView.isHidden) ? 32 : 0).isActive = true
-            }
-            
-            if withPrivacy {
-                privacyView.preparePrivacy(campaign?.privacy?.type ?? "")
-            }
+        let withPrivacy = dataManager?.privacyNeeded ?? false
+        let withCopyright = campaign?.copyright?.isShow ?? false
+        copyrightView.isHidden = !withCopyright
+        privacyView.isHidden = !withPrivacy
+        holderView.isHidden = false
+        holderView.backgroundColor = withPrivacy ? campaign?.theme.controlBgColor : campaign?.theme.bgColor
+        if campaign?.type == .popup {
+            holderView.heightAnchor.constraint(equalToConstant: (copyrightView.isHidden && privacyView.isHidden) ? 32 : 0).isActive = true
+        }
+
+        if withPrivacy {
+            privacyView.preparePrivacy(campaign?.privacy?.type ?? "")
         }
         updateFooterWithDynamicContent(fromCreate: true)
 

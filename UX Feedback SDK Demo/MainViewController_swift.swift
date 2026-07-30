@@ -121,7 +121,12 @@ class MainViewController_swift: UIViewController {
         case 2:
 //                UXFeedback.setup(appID: uxfAppID, settings: (UIApplication.shared.delegate as! AppDelegate).settings)
 //                UXFeedback.sdk.stopCampaign(eventForStop: "")
-            let uuid = UXFeedback.sdk.startCampaign(eventName: "regress_constant", attributes: nil)
+                let atts = UXFBAttributesBuilder()
+                    .addValue("page_type", value: "item_search")
+                    .addValue("abLifeSituationsWidget", value: "test")
+                    .addValue("cid", value: "111")
+                .build()
+            let uuid = UXFeedback.sdk.startCampaign(eventName: "event0704", attributes: atts)
             
         default:
             break

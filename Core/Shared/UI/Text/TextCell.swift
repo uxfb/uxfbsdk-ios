@@ -26,7 +26,8 @@ class TextCell: BaseCell {
     private var alignment: String = "left"
     private var position: String = "topHeader"
     private var isDefault: Bool = false
-    
+    private var imageHeightConstraint: NSLayoutConstraint?
+
     override func setupSubviews() {
         contentView.addSubview(label)
         contentView.addSubview(textImageView)
@@ -77,19 +78,23 @@ class TextCell: BaseCell {
                 break
         }
         
+        imageHeightConstraint?.isActive = false
+        let imgHeight = HeaderCell.computeImageHeight(field: field, isDefault: isDefault)
+        imageHeightConstraint = textImageView.heightAnchor.constraint(equalToConstant: imgHeight)
+
         if position == "topHeader" {
             NSLayoutConstraint.activate([
                 textImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
                 textImageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -8),
                 label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-                textImageView.heightAnchor.constraint(equalToConstant: isDefault ? 100 : 240)
+                imageHeightConstraint!
             ])
         } else {
             NSLayoutConstraint.activate([
                 label.topAnchor.constraint(equalTo: contentView.topAnchor),
                 textImageView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
                 textImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-                textImageView.heightAnchor.constraint(equalToConstant: isDefault ? 100 : 240)
+                imageHeightConstraint!
             ])
         }
         
@@ -124,6 +129,7 @@ class TextCell: BaseCell {
                     if let loadedImage = loadedImage {
                         self.textImageView.image = loadedImage
                         self.updateWidthConstraints()
+                        NotificationCenter.default.post(name: .headerImageDidLoad, object: nil)
                     }
                 }
             }
@@ -151,12 +157,12 @@ class TextCell: BaseCell {
                                                            defaultFont: theme!.fontP1,
                                                            textProperties: nil, withRequired: false)
         
-        if let imageData = self.field?.uiData["image"] as? Dictionary<String, Any>,
-           let position = imageData["position"] as? String,
-           let alignment = imageData["alignment"] as? String,
-           let src = imageData["src"] as? String,
+        if let fieldImage = self.field?.image,
+           let position = fieldImage.position,
+           let alignment = fieldImage.alignment,
+           let src = fieldImage.src,
            let url = URL(string: src) {
-            let isDefault = ((imageData["type"] as? String) ?? "default") == "default"
+            let isDefault = (fieldImage.type ?? "default") == "default"
             self.isDefault = isDefault
             self.position = position
             self.alignment = alignment

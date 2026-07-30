@@ -94,39 +94,41 @@ class SmilesCell: BaseCell {
             return (oldRGB, newRGBA)
         }
 
-        // Tolerance for matching (increase if your source has gradients/compression)
-        let tol = 12
-
         for i in stride(from: 0, to: pixelData.count, by: 4) {
-            let r = pixelData[i]
-            let g = pixelData[i + 1]
-            let b = pixelData[i + 2]
             let srcA = pixelData[i + 3]
 
             if srcA == 0 { continue }
 
+            let r = Int(pixelData[i]) * 255 / Int(srcA)
+            let g = Int(pixelData[i + 1]) * 255 / Int(srcA)
+            let b = Int(pixelData[i + 2]) * 255 / Int(srcA)
+
+            var nearest: [UInt8]?
+            var nearestDistance = Int.max
             for (oldRGB, newRGBA) in preparedColorMap {
-                if abs(Int(r) - Int(oldRGB[0])) < tol &&
-                    abs(Int(g) - Int(oldRGB[1])) < tol &&
-                    abs(Int(b) - Int(oldRGB[2])) < tol {
-
-                    let newA = newRGBA[3]
-
-                    // Combine the original pixel alpha with the replacement color alpha
-                    let srcAlpha = CGFloat(srcA) / 255.0
-                    let repAlpha = CGFloat(newA) / 255.0
-                    let finalAlpha = srcAlpha * repAlpha
-                    let finalAByte = UInt8(clamping: Int(finalAlpha * 255.0))
-
-                    // Premultiply RGB for premultipliedLast bitmap
-                    pixelData[i]     = UInt8(clamping: Int(CGFloat(newRGBA[0]) * finalAlpha))
-                    pixelData[i + 1] = UInt8(clamping: Int(CGFloat(newRGBA[1]) * finalAlpha))
-                    pixelData[i + 2] = UInt8(clamping: Int(CGFloat(newRGBA[2]) * finalAlpha))
-                    pixelData[i + 3] = finalAByte
-
-                    break
+                let dr = r - Int(oldRGB[0])
+                let dg = g - Int(oldRGB[1])
+                let db = b - Int(oldRGB[2])
+                let distance = dr * dr + dg * dg + db * db
+                if distance < nearestDistance {
+                    nearestDistance = distance
+                    nearest = newRGBA
                 }
             }
+
+            guard let newRGBA = nearest else { continue }
+
+            // Combine the original pixel alpha with the replacement color alpha
+            let srcAlpha = CGFloat(srcA) / 255.0
+            let repAlpha = CGFloat(newRGBA[3]) / 255.0
+            let finalAlpha = srcAlpha * repAlpha
+            let finalAByte = UInt8(clamping: Int(finalAlpha * 255.0))
+
+            // Premultiply RGB for premultipliedLast bitmap
+            pixelData[i]     = UInt8(clamping: Int(CGFloat(newRGBA[0]) * finalAlpha))
+            pixelData[i + 1] = UInt8(clamping: Int(CGFloat(newRGBA[1]) * finalAlpha))
+            pixelData[i + 2] = UInt8(clamping: Int(CGFloat(newRGBA[2]) * finalAlpha))
+            pixelData[i + 3] = finalAByte
         }
 
         guard let newCGImage = context.makeImage() else { return nil }

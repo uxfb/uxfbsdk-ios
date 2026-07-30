@@ -10,11 +10,11 @@ import UIKit
 //import YoHeSDK
 import UXFeedbackSDK
 //let uxfAppID = "cmde6s2fb00003570frwmms4o" //images
-//let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
+let uxfAppID = "ckzxywct400003965yjfzyp5m" //dev
 //let uxfAppID = "cml6kgymu00003b6qwhr6fxt6" //dev
 
 //let uxfAppID = "cm7xc7w6u00003b6s1m4wi9ed"
-let uxfAppID = "ck78uf73w0000315rlomponmb" //prod
+//let uxfAppID = "ck78uf73w0000315rlomponmb" //prod
 //let uxfAppID = "ck9n0jwi000003b5x7566k1n2" //gosuslugi
 //let uxfAppID = "ck78uf73w0000315rlomponmb" //crashes
 //let yoheAppID = "cldskoxcu0000356ev6udbcmf" //YoHe
@@ -56,7 +56,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         customTheme.btnBgColor = .orange// UIColor.init("#0076C2")
         customTheme.text02Color =  UIColor.init("#505565")
         customTheme.btnTextColor = .magenta// UIColor.init("#FFFFFF")
-        customTheme.bgColor =  UIColor.init("#000000")
+//        customTheme.bgColor =  UIColor.init("#000000")
+        if #available(iOS 13.0, *) {
+            customTheme.bgColor = UIColor.label
+        } else {
+            
+        }
+        
         customTheme.fontP1 = .init(name: regular, size: 14) ?? .boldSystemFont(ofSize: 12)
         
 //    endpoint: "AAAAAAAAAAAAAHYwMhEVF1hOTAolMWgBABIHDQwbey0+AwABBgMCCD52NBA=",

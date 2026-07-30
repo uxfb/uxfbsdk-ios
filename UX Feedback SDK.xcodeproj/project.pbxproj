@@ -44,6 +44,7 @@
 		AA00000000000014 /* URLComponentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000004 /* URLComponentsTests.swift */; };
 		AA00000000000015 /* APIWebRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000005 /* APIWebRouterTests.swift */; };
 		AA00000000000016 /* AttributeManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000006 /* AttributeManagerTests.swift */; };
+		AA00000000000091 /* SmilesDisabledDiagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000090 /* SmilesDisabledDiagTests.swift */; };
 		AA00000000000017 /* TransformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000007 /* TransformTests.swift */; };
 		AA00000000000018 /* StatisticManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000008 /* StatisticManagerTests.swift */; };
 		AA00000000000019 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000009 /* ParserTests.swift */; };
@@ -358,6 +359,7 @@
 		AA00000000000004 /* URLComponentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentsTests.swift; sourceTree = "<group>"; };
 		AA00000000000005 /* APIWebRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWebRouterTests.swift; sourceTree = "<group>"; };
 		AA00000000000006 /* AttributeManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeManagerTests.swift; sourceTree = "<group>"; };
+		AA00000000000090 /* SmilesDisabledDiagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmilesDisabledDiagTests.swift; sourceTree = "<group>"; };
 		AA00000000000007 /* TransformTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformTests.swift; sourceTree = "<group>"; };
 		AA00000000000008 /* StatisticManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticManagerTests.swift; sourceTree = "<group>"; };
 		AA00000000000009 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
@@ -741,6 +743,7 @@
 				AA00000000000004 /* URLComponentsTests.swift */,
 				AA00000000000005 /* APIWebRouterTests.swift */,
 				AA00000000000006 /* AttributeManagerTests.swift */,
+				AA00000000000090 /* SmilesDisabledDiagTests.swift */,
 				AA00000000000007 /* TransformTests.swift */,
 				AA00000000000008 /* StatisticManagerTests.swift */,
 				AA00000000000009 /* ParserTests.swift */,
@@ -1473,6 +1476,7 @@
 				AA00000000000014 /* URLComponentsTests.swift in Sources */,
 				AA00000000000015 /* APIWebRouterTests.swift in Sources */,
 				AA00000000000016 /* AttributeManagerTests.swift in Sources */,
+				AA00000000000091 /* SmilesDisabledDiagTests.swift in Sources */,
 				AA00000000000017 /* TransformTests.swift in Sources */,
 				AA00000000000018 /* StatisticManagerTests.swift in Sources */,
 				AA00000000000019 /* ParserTests.swift in Sources */,

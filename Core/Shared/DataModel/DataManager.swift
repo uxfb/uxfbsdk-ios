@@ -153,8 +153,7 @@ class DataManager: FieldDelegate {
         let page = campaign?.pages[currentPage]
         var height: CGFloat = 54
         
-        if campaign?.pages[currentPage].type != 2,
-           let footerHeight = viewController?.tableView.tableFooterView?.frame.height,
+        if let footerHeight = viewController?.tableView.tableFooterView?.frame.height,
            footerHeight > 0 {
             height += footerHeight
         }
@@ -410,7 +409,7 @@ class DataManager: FieldDelegate {
         var height: CGFloat = .leastNonzeroMagnitude
         
         if isError && fieldNeedComplete(field) && !silencedErrorFieldIds.contains(field.id ?? "") {
-            guard let warning = field.uiData["warning"] as? String else {
+            guard let warning = field.warning else {
                 return checkFieldTransfromed(field) ? 12 : .leastNonzeroMagnitude
             }
             let font = (campaign?.theme.fontP2)!
@@ -442,7 +441,7 @@ class DataManager: FieldDelegate {
     
     private func getFieldFooter(_ field: Field) -> UIView? {
         if isError && fieldNeedComplete(field) && !silencedErrorFieldIds.contains(field.id ?? "") {
-            guard let warning = field.uiData["warning"] as? String else {
+            guard let warning = field.warning else {
                 return nil
             }
             
@@ -584,11 +583,11 @@ class DataManager: FieldDelegate {
                                                                           and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
                 
                 var imageHeight: CGFloat = 0
-                if let imageData = field.uiData["image"] as? [String: Any] {
-                    let isDefault = ((imageData["type"] as? String) ?? "default") == "default"
-                    imageHeight = 16 + (isDefault ? 100 : 240)
+                if let fieldImage = field.image {
+                    let isDefault = (fieldImage.type ?? "default") == "default"
+                    imageHeight = 16 + HeaderCell.computeImageHeight(field: field, isDefault: isDefault)
                 }
-                
+
                 return valueHeight + imageHeight
                 
             case .stars:

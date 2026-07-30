@@ -27,7 +27,7 @@ final class AttributeManagerTests: XCTestCase {
         let campaignData = makeCampaignData()
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: []) { result in
@@ -45,7 +45,7 @@ final class AttributeManagerTests: XCTestCase {
         let appAttrs = [Attribute(attributeName: "plan", attributeValue: "pro")]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -67,7 +67,7 @@ final class AttributeManagerTests: XCTestCase {
         let appAttrs = [Attribute(attributeName: "plan", attributeValue: "pro")]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -88,7 +88,7 @@ final class AttributeManagerTests: XCTestCase {
         let appAttrs = [Attribute(attributeName: "plan", attributeValue: "pro")]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -107,7 +107,7 @@ final class AttributeManagerTests: XCTestCase {
         let appAttrs = [Attribute(attributeName: "plan", attributeValue: "free")]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -123,10 +123,10 @@ final class AttributeManagerTests: XCTestCase {
         let campaignAttrs = [makeCampaignAttribute(name: "score", rule: "equal", value: .int(100))]
         let targeting = makeTargeting(attributes: campaignAttrs)
         let campaignData = makeCampaignData()
-        let appAttrs = [Attribute(attributeName: "score", attributeValue: NSNumber(value: 100))]
+        let appAttrs = [Attribute(attributeName: "score", attributeValue: 100)]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -145,7 +145,7 @@ final class AttributeManagerTests: XCTestCase {
         let appAttrs = [Attribute(attributeName: "premium", attributeValue: true)]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -164,7 +164,7 @@ final class AttributeManagerTests: XCTestCase {
         let appAttrs = [Attribute(attributeName: "plan", attributeValue: "pro")]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -185,7 +185,7 @@ final class AttributeManagerTests: XCTestCase {
         let appAttrs = [Attribute(attributeName: "email", attributeValue: "user@gmail.com")]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -204,7 +204,7 @@ final class AttributeManagerTests: XCTestCase {
         let appAttrs = [Attribute(attributeName: "email", attributeValue: "user@gmail.com")]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -222,10 +222,10 @@ final class AttributeManagerTests: XCTestCase {
         let campaignAttrs = [makeCampaignAttribute(name: "age", rule: "numberRange", valueFrom: .int(18), valueTo: .int(65))]
         let targeting = makeTargeting(attributes: campaignAttrs)
         let campaignData = makeCampaignData()
-        let appAttrs = [Attribute(attributeName: "age", attributeValue: NSNumber(value: 30))]
+        let appAttrs = [Attribute(attributeName: "age", attributeValue: 30)]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -241,10 +241,10 @@ final class AttributeManagerTests: XCTestCase {
         let campaignAttrs = [makeCampaignAttribute(name: "age", rule: "numberRange", valueFrom: .int(18), valueTo: .int(65))]
         let targeting = makeTargeting(attributes: campaignAttrs)
         let campaignData = makeCampaignData()
-        let appAttrs = [Attribute(attributeName: "age", attributeValue: NSNumber(value: 18))]
+        let appAttrs = [Attribute(attributeName: "age", attributeValue: 18)]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -260,10 +260,10 @@ final class AttributeManagerTests: XCTestCase {
         let campaignAttrs = [makeCampaignAttribute(name: "age", rule: "numberRange", valueFrom: .int(18), valueTo: .int(65))]
         let targeting = makeTargeting(attributes: campaignAttrs)
         let campaignData = makeCampaignData()
-        let appAttrs = [Attribute(attributeName: "age", attributeValue: NSNumber(value: 65))]
+        let appAttrs = [Attribute(attributeName: "age", attributeValue: 65)]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -279,10 +279,10 @@ final class AttributeManagerTests: XCTestCase {
         let campaignAttrs = [makeCampaignAttribute(name: "age", rule: "numberRange", valueFrom: .int(18), valueTo: .int(65))]
         let targeting = makeTargeting(attributes: campaignAttrs)
         let campaignData = makeCampaignData()
-        let appAttrs = [Attribute(attributeName: "age", attributeValue: NSNumber(value: 70))]
+        let appAttrs = [Attribute(attributeName: "age", attributeValue: 70)]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -301,7 +301,7 @@ final class AttributeManagerTests: XCTestCase {
         let appAttrs = [Attribute(attributeName: "age", attributeValue: "thirty")]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -327,7 +327,7 @@ final class AttributeManagerTests: XCTestCase {
         let appAttrs = [Attribute(attributeName: "registered", attributeValue: date)]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -351,7 +351,7 @@ final class AttributeManagerTests: XCTestCase {
         let appAttrs = [Attribute(attributeName: "registered", attributeValue: date)]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -370,7 +370,7 @@ final class AttributeManagerTests: XCTestCase {
         let appAttrs = [Attribute(attributeName: "registered", attributeValue: "not a date")]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -391,7 +391,7 @@ final class AttributeManagerTests: XCTestCase {
         let appAttrs = [Attribute(attributeName: "plan", attributeValue: "pro")]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -410,7 +410,7 @@ final class AttributeManagerTests: XCTestCase {
         let appAttrs = [Attribute(attributeName: "plan", attributeValue: "pro")]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -431,7 +431,161 @@ final class AttributeManagerTests: XCTestCase {
         let appAttrs = [Attribute(attributeName: "plan", attributeValue: "pro")]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
+                                          campaignCandidate: campaignData,
+                                          targeting: targeting,
+                                          attributes: appAttrs) { result in
+            XCTAssertFalse(result)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testMultipleEqualAttributesAllMatch() {
+        let expectation = expectation(description: "completion")
+        let campaignAttrs = [
+            makeCampaignAttribute(name: "plan", rule: "equal", value: .string("pro")),
+            makeCampaignAttribute(name: "score", rule: "equal", value: .int(100))
+        ]
+        let targeting = makeTargeting(attributes: campaignAttrs)
+        let campaignData = makeCampaignData()
+        let appAttrs = [
+            Attribute(attributeName: "plan", attributeValue: "pro"),
+            Attribute(attributeName: "score", attributeValue: 100)
+        ]
+
+        AttributeManager.checkAttributes(appId: "app1",
+                                          requestManager: nil,
+                                          campaignCandidate: campaignData,
+                                          targeting: targeting,
+                                          attributes: appAttrs) { result in
+            XCTAssertTrue(result)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testMultipleEqualAttributesFirstMatchesSecondDoesNot() {
+        let expectation = expectation(description: "completion")
+        let campaignAttrs = [
+            makeCampaignAttribute(name: "plan", rule: "equal", value: .string("pro")),
+            makeCampaignAttribute(name: "score", rule: "equal", value: .int(100))
+        ]
+        let targeting = makeTargeting(attributes: campaignAttrs)
+        let campaignData = makeCampaignData()
+        let appAttrs = [
+            Attribute(attributeName: "plan", attributeValue: "pro"),
+            Attribute(attributeName: "score", attributeValue: 999)
+        ]
+
+        AttributeManager.checkAttributes(appId: "app1",
+                                          requestManager: nil,
+                                          campaignCandidate: campaignData,
+                                          targeting: targeting,
+                                          attributes: appAttrs) { result in
+            XCTAssertFalse(result)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testMultipleEqualAttributesFirstDoesNotMatchSecondMatches() {
+        let expectation = expectation(description: "completion")
+        let campaignAttrs = [
+            makeCampaignAttribute(name: "plan", rule: "equal", value: .string("pro")),
+            makeCampaignAttribute(name: "score", rule: "equal", value: .int(100))
+        ]
+        let targeting = makeTargeting(attributes: campaignAttrs)
+        let campaignData = makeCampaignData()
+        let appAttrs = [
+            Attribute(attributeName: "plan", attributeValue: "free"),
+            Attribute(attributeName: "score", attributeValue: 100)
+        ]
+
+        AttributeManager.checkAttributes(appId: "app1",
+                                          requestManager: nil,
+                                          campaignCandidate: campaignData,
+                                          targeting: targeting,
+                                          attributes: appAttrs) { result in
+            XCTAssertFalse(result)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testMultipleMixedRulesLastDoesNotMatch() {
+        let expectation = expectation(description: "completion")
+        let campaignAttrs = [
+            makeCampaignAttribute(name: "plan", rule: "equal", value: .string("pro")),
+            makeCampaignAttribute(name: "age", rule: "numberRange", valueFrom: .int(18), valueTo: .int(65)),
+            makeCampaignAttribute(name: "email", rule: "contain", value: .string("@yahoo"))
+        ]
+        let targeting = makeTargeting(attributes: campaignAttrs)
+        let campaignData = makeCampaignData()
+        let appAttrs = [
+            Attribute(attributeName: "plan", attributeValue: "pro"),
+            Attribute(attributeName: "age", attributeValue: 30),
+            Attribute(attributeName: "email", attributeValue: "user@gmail.com")
+        ]
+
+        AttributeManager.checkAttributes(appId: "app1",
+                                          requestManager: nil,
+                                          campaignCandidate: campaignData,
+                                          targeting: targeting,
+                                          attributes: appAttrs) { result in
+            XCTAssertFalse(result)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testMultipleMixedRulesAllMatch() {
+        let expectation = expectation(description: "completion")
+        let campaignAttrs = [
+            makeCampaignAttribute(name: "plan", rule: "equal", value: .string("pro")),
+            makeCampaignAttribute(name: "age", rule: "numberRange", valueFrom: .int(18), valueTo: .int(65)),
+            makeCampaignAttribute(name: "email", rule: "contain", value: .string("@gmail"))
+        ]
+        let targeting = makeTargeting(attributes: campaignAttrs)
+        let campaignData = makeCampaignData()
+        let appAttrs = [
+            Attribute(attributeName: "plan", attributeValue: "pro"),
+            Attribute(attributeName: "age", attributeValue: 30),
+            Attribute(attributeName: "email", attributeValue: "user@gmail.com")
+        ]
+
+        AttributeManager.checkAttributes(appId: "app1",
+                                          requestManager: nil,
+                                          campaignCandidate: campaignData,
+                                          targeting: targeting,
+                                          attributes: appAttrs) { result in
+            XCTAssertTrue(result)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testMultipleEqualAttributesSecondMissingInAppAttributes() {
+        let expectation = expectation(description: "completion")
+        let campaignAttrs = [
+            makeCampaignAttribute(name: "plan", rule: "equal", value: .string("pro")),
+            makeCampaignAttribute(name: "score", rule: "equal", value: .int(100))
+        ]
+        let targeting = makeTargeting(attributes: campaignAttrs)
+        let campaignData = makeCampaignData()
+        let appAttrs = [
+            Attribute(attributeName: "plan", attributeValue: "pro"),
+            Attribute(attributeName: "other_attr", attributeValue: "value")
+        ]
+
+        AttributeManager.checkAttributes(appId: "app1",
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in
@@ -452,7 +606,7 @@ final class AttributeManagerTests: XCTestCase {
         let appAttrs = [Attribute(attributeName: "other_attr", attributeValue: "value")]
 
         AttributeManager.checkAttributes(appId: "app1",
-                                          requestManager: DataRequestManager(),
+                                          requestManager: nil,
                                           campaignCandidate: campaignData,
                                           targeting: targeting,
                                           attributes: appAttrs) { result in

@@ -8,7 +8,7 @@
 
 @objcMembers
 class AttributeManager {
-    static func checkAttributes(appId: String, requestManager: DataRequestManager, campaignCandidate: CampaignData, targeting: Targeting, attributes: [Attribute], completion: @escaping (Bool) -> Void) {
+    static func checkAttributes(appId: String, requestManager: DataRequestManager?, campaignCandidate: CampaignData, targeting: Targeting, attributes: [Attribute], completion: @escaping (Bool) -> Void) {
         let campaignAttributes = targeting.attributes ?? []
         
         if (attributes.count == 0 && campaignAttributes.count == 0) ||
