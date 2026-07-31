@@ -20,6 +20,7 @@ class PrivacyView: UIView {
     private let privacyWarningLabel = UILabel()
     private var delegate: PrivacyDelegate?
     private var theme: ThemeProtocol?
+    private var isPrepared = false
     
     init (theme: ThemeProtocol, delegate: PrivacyDelegate?) {
         super.init(frame: .zero)
@@ -62,17 +63,23 @@ class PrivacyView: UIView {
         privacyImageView.layer.borderColor = UIColor.clear.cgColor
         privacyImageView.layer.borderWidth = 2
         privacyImageView.layer.masksToBounds = true
-        
+
+        guard !isPrepared else {
+            delegate?.checked(nil)
+            return
+        }
+        isPrepared = true
+
         switch type {
         case "checkboxEnabled":
             delegate?.checked(true)
-            
+
         case "checkboxDisabled":
             delegate?.checked(false)
-            
+
         case "text":
             delegate?.checked(true)
-            
+
         default:
             delegate?.checked(nil)
 

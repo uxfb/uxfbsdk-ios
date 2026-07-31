@@ -252,6 +252,36 @@ final class PrivacyTests: XCTestCase {
     }
 }
 
+final class PrivacyViewStateTests: XCTestCase {
+
+    private final class RecordingDelegate: PrivacyDelegate {
+        var received: [Bool?] = []
+        func checked(_ value: Bool?) { received.append(value) }
+        func tapPrivacy() {}
+    }
+
+    func testPreparePrivacyAppliesDefaultOnlyOnce() {
+        let delegate = RecordingDelegate()
+        let view = PrivacyView(theme: Theme(), delegate: delegate)
+
+        view.preparePrivacy("checkboxDisabled")
+        XCTAssertEqual(delegate.received, [false])
+
+        view.preparePrivacy("checkboxDisabled")
+        view.preparePrivacy("checkboxDisabled")
+        XCTAssertEqual(delegate.received, [false, nil, nil])
+    }
+
+    func testPreparePrivacyCheckboxEnabledDefault() {
+        let delegate = RecordingDelegate()
+        let view = PrivacyView(theme: Theme(), delegate: delegate)
+
+        view.preparePrivacy("checkboxEnabled")
+        view.preparePrivacy("checkboxEnabled")
+        XCTAssertEqual(delegate.received, [true, nil])
+    }
+}
+
 final class CopyrightTests: XCTestCase {
 
     func testCopyrightCodable() throws {
