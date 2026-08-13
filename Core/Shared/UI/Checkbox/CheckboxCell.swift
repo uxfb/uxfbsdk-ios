@@ -123,11 +123,17 @@ class CheckboxCell: BaseCell, UITableViewDelegate, UITableViewDataSource {
             
             if (options[indexPath.row].exceptional ?? false) && answers.contains(options[indexPath.row].id) {
                 answers = [options[indexPath.row].id]
+                for selected in tableView.indexPathsForSelectedRows ?? [] where selected != indexPath {
+                    tableView.deselectRow(at: selected, animated: true)
+                }
             } else if !(options[indexPath.row].exceptional ?? false) {
                 answers.removeAll { answer in
                     return options.filter { $0.exceptional ?? false }
                         .map { $0.id }
                         .contains(answer)
+                }
+                for selected in tableView.indexPathsForSelectedRows ?? [] where options[selected.row].exceptional ?? false {
+                    tableView.deselectRow(at: selected, animated: true)
                 }
             }
             
