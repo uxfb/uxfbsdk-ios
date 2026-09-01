@@ -280,12 +280,11 @@ open class UXFeedback: NSObject {
                     }
                     self._eventToSend = nil
                     self.tasks[eventName] = DispatchWorkItem {
-                        if !isMultiVisited {
-                            guard self.checkGlobalDelay() else {
-                                self.campaignDelegate?.campaignDidReceiveError(errorString: "Global timer")
-                                self.clearTask(eventName: eventName)
-                                return
-                            }
+                        guard self.checkGlobalDelay() else {
+                            self.campaignDelegate?.campaignDidReceiveError(errorString: "Global timer")
+                            self.eventCounter[eventName] = 0
+                            self.clearTask(eventName: eventName)
+                            return
                         }
                         
                         let formOnScreen = self._formPresentor?.isFormOnScreen ?? false
@@ -351,7 +350,7 @@ open class UXFeedback: NSObject {
                         
                         if let localProps = self.localProps[campaign.campaignId],
                            localProps != nil {
-                            properties = properties.merging(localProps!) { current, _ in current }
+                            properties = properties.merging(localProps!) { _, local in local }
                         }
                         
                         self._formPresentor?.showCampaign(uiBlocked: self.settings.slideInUiBlocked,
@@ -361,8 +360,8 @@ open class UXFeedback: NSObject {
                                                           properties: properties,
                                                           invocationId: uuid)
                         
+                        self.saveShowingTime()
                         if !isMultiVisited {
-                            self.saveShowingTime()
                             self._requestManager.removeCampaign(campaignId: campaign.campaignId)
                         }
                         DispatchQueue.global(qos: .utility).async {
@@ -485,7 +484,7 @@ extension UXFeedback: CampaignFormPresentorProtocol {
         var props = properties
         if let localProps = self.localProps[campaign.campaignId],
            localProps != nil {
-            props = props.merging(localProps!) { current, _ in current }
+            props = props.merging(localProps!) { _, local in local }
         }
         
         _requestManager.sendFormData(projectId: campaign.projectId,

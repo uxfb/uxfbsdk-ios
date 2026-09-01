@@ -12,4 +12,12 @@ struct Option: Codable {
     let id: String
     let value: String
     let exceptional: Bool?
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        value = try container.decode(String.self, forKey: .value)
+            .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines.union(.controlCharacters))
+        exceptional = try container.decodeIfPresent(Bool.self, forKey: .exceptional)
+    }
 }

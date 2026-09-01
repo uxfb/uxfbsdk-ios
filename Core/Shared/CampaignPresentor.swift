@@ -103,7 +103,9 @@ internal class CampaignPresentor: NSObject {
     }
     
     private func showCampaignController(controller: CampaignViewController, direction: ViewPopupDirection, uiBlocked: Bool = false, closeOnSwipe: Bool = false, blackout: Blackout? = nil, properties: [String: Any]) {
-        
+
+        isFormOnScreen = true
+
         _ = self.dismissCurrentForm() {
             
             self._currentForm = controller
