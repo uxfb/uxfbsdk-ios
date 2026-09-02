@@ -77,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UXFeedback.setup(appID: yoheAppID,
 //                         settings: settings)
         
-//        UXFeedback.sdk.theme = customTheme
+        UXFeedback.sdk.theme = customTheme
 //        UXFeedback.sdk.settings.debugEnabled = true
         
         return true
