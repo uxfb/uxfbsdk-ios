@@ -42,9 +42,18 @@ class RatingCell: BaseCell {
         return stackView
     }()
     
+    private lazy var noAnswerView: NoAnswerView = {
+        let view = NoAnswerView()
+        view.isHidden = true
+        view.onToggle = { [weak self] isOn in
+            self?.noAnswerToggled(isOn)
+        }
+        return view
+    }()
+
     private var currentValue: Int = 0
     private var maxValue: Int = 10
-    
+
     private func createButton(value: Int) -> (UIView, UILabel) {
         let container = UIView()
         container.layer.cornerRadius = 8
@@ -74,44 +83,56 @@ class RatingCell: BaseCell {
         contentView.addSubview(buttonsStackView)
         contentView.addSubview(positiveLabel)
         contentView.addSubview(negativeLabel)
-        
+        contentView.addSubview(noAnswerView)
+
         buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
         positiveLabel.translatesAutoresizingMaskIntoConstraints = false
         negativeLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+        noAnswerView.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             buttonsStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             buttonsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             buttonsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             buttonsStackView.heightAnchor.constraint(equalToConstant: 40),
-            
+
             negativeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             negativeLabel.topAnchor.constraint(equalTo: buttonsStackView.bottomAnchor, constant: 8),
-            negativeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             negativeLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5, constant: -20),
-            
+
             positiveLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             positiveLabel.topAnchor.constraint(equalTo: buttonsStackView.bottomAnchor, constant: 8),
-            positiveLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             positiveLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5, constant: -20),
+
+            noAnswerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            noAnswerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            noAnswerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            noAnswerView.heightAnchor.constraint(equalToConstant: NoAnswerView.height),
         ])
     }
-    
+
     override func updateUI() {
         negativeLabel.font = theme?.fontP2
         positiveLabel.font = theme?.fontP2
-        
-        currentValue = Int(field?.answers.first ?? "") ?? 0
+
+        let noAnswer = isNoAnswerSelected
+        currentValue = noAnswer ? 0 : Int(field?.answers.first ?? "") ?? 0
         maxValue = field?.ratingCount ?? 3
-        
+
         guard field != nil, theme != nil else { return }
-        
-        // Show/hide buttons based on maxValue
+
+        noAnswerView.isHidden = noAnswerName == nil
+        if let name = noAnswerName {
+            noAnswerView.configure(title: name, theme: theme, isOn: noAnswer)
+        }
+        buttonsStackView.isUserInteractionEnabled = !noAnswer
+        buttonsStackView.alpha = noAnswer ? 0.4 : 1
+
         for i in 0..<buttonContainers.count {
-            let value = i + 1 // buttons are 1-based
+            let value = i + 1
             buttonContainers[i].isHidden = value > maxValue
         }
-        
+
         updateButtonStyles()
         
         negativeLabel.textColor = theme?.text03Color
@@ -138,7 +159,7 @@ class RatingCell: BaseCell {
                 container.layer.borderColor = theme?.mainColor.cgColor
                 label.textColor = .white
                 label.font = theme?.fontP2
-            } else if isError && currentValue == 0 {
+            } else if isError && currentValue == 0 && !isNoAnswerSelected {
                 container.backgroundColor = .clear
                 container.layer.borderColor = theme?.errorColorPrimary.cgColor
                 label.textColor = theme?.text02Color

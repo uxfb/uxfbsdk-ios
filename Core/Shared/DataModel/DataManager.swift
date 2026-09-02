@@ -477,6 +477,13 @@ class DataManager: FieldDelegate {
         }
     }
     
+    private func noAnswerExtraHeight(_ field: Field) -> CGFloat {
+        guard let name = field.noAnswerName, !name.isEmpty else {
+            return 0
+        }
+        return NoAnswerView.height + NoAnswerView.topSpacing
+    }
+
     private func getFieldHeight(_ field: Field) -> CGFloat {
         if !checkFieldTransfromed(field) {
             return .leastNonzeroMagnitude
@@ -484,9 +491,9 @@ class DataManager: FieldDelegate {
         switch field.type {
             case .button:
                 return 40
-                
+
             case .smiles:
-                return 48
+                return 48 + noAnswerExtraHeight(field)
                 
             case .checkbox:
                 let containerWidth = (viewController?.tableView.bounds.width ?? 0) > 0
@@ -591,17 +598,18 @@ class DataManager: FieldDelegate {
                 return valueHeight + imageHeight
                 
             case .stars:
-                return 40
-                
+                return 40 + noAnswerExtraHeight(field)
+
             case .bottom:
                 return 40
-                
+
             case .nps, .rating:
+                var height: CGFloat = 48
                 if let messages = field.messages {
                     let count = (messages.negative?.count ?? 0) + (messages.positive?.count ?? 0)
-                    return count > 0 ? 80 : 48
+                    height = count > 0 ? 80 : 48
                 }
-                return 48
+                return height + noAnswerExtraHeight(field)
                 
             case .screenshot:
                 var buttonsHeight: CGFloat = 0

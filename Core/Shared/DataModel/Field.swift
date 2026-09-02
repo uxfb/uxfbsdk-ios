@@ -45,6 +45,7 @@ struct Field: Decodable {
     private(set) var buttons: FieldButtons?
     private(set) var messages: FieldMessages?
     private(set) var ratingCount: Int?
+    private(set) var noAnswerName: String?
     var answers: [String] = []
     var isError: Bool = false
     var isLastPage: Bool = false
@@ -53,6 +54,7 @@ struct Field: Decodable {
         case id, type, value, description
         case required, placeholder, options, mode
         case image, warning, buttons, messages, ratingCount
+        case noAnswerName
     }
 
     init(from decoder: Decoder) throws {
@@ -71,5 +73,6 @@ struct Field: Decodable {
         buttons = try container.decodeIfPresent(FieldButtons.self, forKey: .buttons)
         messages = try container.decodeIfPresent(FieldMessages.self, forKey: .messages)
         ratingCount = try container.decodeIfPresent(Int.self, forKey: .ratingCount)
+        noAnswerName = try container.decodeIfPresent(String.self, forKey: .noAnswerName)
     }
 }

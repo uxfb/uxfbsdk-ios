@@ -252,9 +252,18 @@ class SmilesCell: BaseCell {
         return view
     }()
     
+    private lazy var noAnswerView: NoAnswerView = {
+        let view = NoAnswerView()
+        view.isHidden = true
+        view.onToggle = { [weak self] isOn in
+            self?.noAnswerToggled(isOn)
+        }
+        return view
+    }()
+
     private var animationInProgress: Bool = false
     private var currentValue: Int = -1
-    
+
     override func setupSubviews() {
         clipsToBounds = false
         contentView.clipsToBounds = false
@@ -263,6 +272,7 @@ class SmilesCell: BaseCell {
         contentView.addSubview(smile3)
         contentView.addSubview(smile4)
         contentView.addSubview(smile5)
+        contentView.addSubview(noAnswerView)
         
         for i in 1...5 {
             if let smile = contentView.viewWithTag(i) as? UIButton {
@@ -276,32 +286,38 @@ class SmilesCell: BaseCell {
         smile3.translatesAutoresizingMaskIntoConstraints = false
         smile4.translatesAutoresizingMaskIntoConstraints = false
         smile5.translatesAutoresizingMaskIntoConstraints = false
-        
+        noAnswerView.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             smile3.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            smile3.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            smile3.centerYAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
             smile3.heightAnchor.constraint(equalToConstant: 38),
             smile3.widthAnchor.constraint(equalToConstant: 38),
-            
+
             smile2.trailingAnchor.constraint(equalTo: smile3.leadingAnchor, constant: -20),
-            smile2.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            smile2.centerYAnchor.constraint(equalTo: smile3.centerYAnchor),
             smile2.heightAnchor.constraint(equalToConstant: 38),
             smile2.widthAnchor.constraint(equalToConstant: 38),
-            
+
             smile1.trailingAnchor.constraint(equalTo: smile2.leadingAnchor, constant: -20),
-            smile1.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            smile1.centerYAnchor.constraint(equalTo: smile3.centerYAnchor),
             smile1.heightAnchor.constraint(equalToConstant: 38),
             smile1.widthAnchor.constraint(equalToConstant: 38),
-            
+
             smile4.leadingAnchor.constraint(equalTo: smile3.trailingAnchor, constant: 20),
-            smile4.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            smile4.centerYAnchor.constraint(equalTo: smile3.centerYAnchor),
             smile4.heightAnchor.constraint(equalToConstant: 38),
             smile4.widthAnchor.constraint(equalToConstant: 38),
-            
+
             smile5.leadingAnchor.constraint(equalTo: smile4.trailingAnchor, constant: 20),
-            smile5.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            smile5.centerYAnchor.constraint(equalTo: smile3.centerYAnchor),
             smile5.heightAnchor.constraint(equalToConstant: 38),
             smile5.widthAnchor.constraint(equalToConstant: 38),
+
+            noAnswerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            noAnswerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            noAnswerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            noAnswerView.heightAnchor.constraint(equalToConstant: NoAnswerView.height),
         ])
         
         for i in 1...5 {
@@ -322,11 +338,16 @@ class SmilesCell: BaseCell {
     }
     
     override func updateUI() {
-        currentValue = Int(field?.answers.first ?? "") ?? -1
-        
+        currentValue = isNoAnswerSelected ? -1 : Int(field?.answers.first ?? "") ?? -1
+
+        noAnswerView.isHidden = noAnswerName == nil
+        if let name = noAnswerName {
+            noAnswerView.configure(title: name, theme: theme, isOn: isNoAnswerSelected)
+        }
+
         applyState()
-        
-        if (field?.isError ?? false) && currentValue == -1 {
+
+        if (field?.isError ?? false) && currentValue == -1 && !isNoAnswerSelected {
             animateSmiles()
         }
     }
@@ -385,9 +406,13 @@ class SmilesCell: BaseCell {
     }
     
     private func applyState() {
+        let noAnswer = isNoAnswerSelected
         for i in 1...5 {
             self.contentView.viewWithTag(i)?.borderWidth = 0
-            if (i == currentValue + 1) {
+            self.contentView.viewWithTag(i)?.isUserInteractionEnabled = !noAnswer
+            if noAnswer {
+                setSmileState(tag: i, state: .disabled)
+            } else if (i == currentValue + 1) {
                 setSmileState(tag: i, state: .selected)
             } else if currentValue == -1 {
                 setSmileState(tag: i, state: .normal)

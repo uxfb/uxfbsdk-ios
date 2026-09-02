@@ -13,6 +13,12 @@ struct Option: Codable {
     let value: String
     let exceptional: Bool?
 
+    init(id: String, value: String, exceptional: Bool?) {
+        self.id = id
+        self.value = value
+        self.exceptional = exceptional
+    }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
