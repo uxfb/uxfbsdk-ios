@@ -308,21 +308,10 @@ final class NoAnswerToggleTests: XCTestCase {
         XCTAssertEqual(delegate.lastAnswer, [])
     }
 
-    func testStarsDisabledWhenNoAnswerSelected() throws {
+    func testStarsStayInteractiveWhenNoAnswerSelected() throws {
         let cell = StarsCell(style: .default, reuseIdentifier: "stars")
         cell.frame = CGRect(x: 0, y: 0, width: 320, height: 88)
         cell.configureWith(try makeField(type: "stars", noAnswerName: "ЗО", answers: ["-1"]),
-                           theme: Theme(), delegate: RecordingDelegate())
-
-        for tag in 1...5 {
-            XCTAssertFalse(cell.contentView.viewWithTag(tag)?.isUserInteractionEnabled ?? true)
-        }
-    }
-
-    func testStarsEnabledWhenNoAnswerNotSelected() throws {
-        let cell = StarsCell(style: .default, reuseIdentifier: "stars")
-        cell.frame = CGRect(x: 0, y: 0, width: 320, height: 88)
-        cell.configureWith(try makeField(type: "stars", noAnswerName: "ЗО"),
                            theme: Theme(), delegate: RecordingDelegate())
 
         for tag in 1...5 {
@@ -330,14 +319,26 @@ final class NoAnswerToggleTests: XCTestCase {
         }
     }
 
-    func testSmilesDisabledWhenNoAnswerSelected() throws {
+    func testStarsDimmedWhenNoAnswerSelected() throws {
+        let theme = Theme()
+        let cell = StarsCell(style: .default, reuseIdentifier: "stars")
+        cell.frame = CGRect(x: 0, y: 0, width: 320, height: 88)
+        cell.configureWith(try makeField(type: "stars", noAnswerName: "ЗО", answers: ["-1"]),
+                           theme: theme, delegate: RecordingDelegate())
+
+        for tag in 1...5 {
+            XCTAssertEqual((cell.contentView.viewWithTag(tag) as? UIImageView)?.tintColor, theme.iconDisabledColor)
+        }
+    }
+
+    func testSmilesStayInteractiveWhenNoAnswerSelected() throws {
         let cell = SmilesCell(style: .default, reuseIdentifier: "smiles")
         cell.frame = CGRect(x: 0, y: 0, width: 320, height: 96)
         cell.configureWith(try makeField(type: "smiles", noAnswerName: "ЗО", answers: ["-1"]),
                            theme: Theme(), delegate: RecordingDelegate())
 
         for tag in 1...5 {
-            XCTAssertFalse(cell.contentView.viewWithTag(tag)?.isUserInteractionEnabled ?? true)
+            XCTAssertTrue(cell.contentView.viewWithTag(tag)?.isUserInteractionEnabled ?? false)
         }
     }
 }

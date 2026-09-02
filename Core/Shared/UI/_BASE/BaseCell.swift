@@ -37,9 +37,9 @@ internal class NoAnswerView: UIView {
 
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: toggle.leadingAnchor, constant: -12),
             titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            toggle.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 12),
-            toggle.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
+            toggle.trailingAnchor.constraint(equalTo: trailingAnchor),
             toggle.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
 
@@ -50,8 +50,12 @@ internal class NoAnswerView: UIView {
         titleLabel.text = title
         titleLabel.font = theme?.fontP2
         titleLabel.textColor = theme?.text03Color
-        toggle.onTintColor = theme?.mainColor
+        toggle.onTintColor = theme?.btnBgColor
         toggle.setOn(isOn, animated: false)
+    }
+
+    func setOn(_ isOn: Bool) {
+        toggle.setOn(isOn, animated: true)
     }
 
     @objc private func toggleChanged() {
@@ -76,8 +80,15 @@ internal class BaseCell: UITableViewCell {
     }
 
     internal func noAnswerToggled(_ isOn: Bool) {
-        guard let field = field else { return }
-        delegate?.fieldChanged(field, answer: isOn ? [NoAnswerView.noAnswerValue] : [], refresh: true)
+        guard var field = field else { return }
+        field.answers = isOn ? [NoAnswerView.noAnswerValue] : []
+        self.field = field
+        delegate?.fieldChanged(field, answer: field.answers, refresh: true)
+    }
+
+    internal func syncScaleAnswer(_ value: String, noAnswerView: NoAnswerView) {
+        field?.answers = [value]
+        noAnswerView.setOn(false)
     }
     
     override func awakeFromNib() {

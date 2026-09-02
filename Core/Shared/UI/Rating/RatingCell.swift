@@ -46,7 +46,11 @@ class RatingCell: BaseCell {
         let view = NoAnswerView()
         view.isHidden = true
         view.onToggle = { [weak self] isOn in
-            self?.noAnswerToggled(isOn)
+            guard let self = self else { return }
+            self.noAnswerToggled(isOn)
+            self.currentValue = 0
+            self.buttonsStackView.alpha = isOn ? 0.4 : 1
+            self.updateButtonStyles()
         }
         return view
     }()
@@ -125,7 +129,6 @@ class RatingCell: BaseCell {
         if let name = noAnswerName {
             noAnswerView.configure(title: name, theme: theme, isOn: noAnswer)
         }
-        buttonsStackView.isUserInteractionEnabled = !noAnswer
         buttonsStackView.alpha = noAnswer ? 0.4 : 1
 
         for i in 0..<buttonContainers.count {
@@ -179,6 +182,8 @@ class RatingCell: BaseCell {
     private func buttonTapped(_ gesture: UITapGestureRecognizer) {
         guard let view = gesture.view else { return }
         currentValue = view.tag
+        syncScaleAnswer(String(currentValue), noAnswerView: noAnswerView)
+        buttonsStackView.alpha = 1
         updateButtonStyles()
         delegate?.fieldChanged(field!, answer: [String(currentValue)], refresh: true)
     }

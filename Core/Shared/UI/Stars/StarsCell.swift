@@ -59,7 +59,12 @@ class StarsCell: BaseCell {
         let view = NoAnswerView()
         view.isHidden = true
         view.onToggle = { [weak self] isOn in
-            self?.noAnswerToggled(isOn)
+            guard let self = self else { return }
+            self.noAnswerToggled(isOn)
+            self.currentValue = -1
+            for tag in 1...5 {
+                (self.contentView.viewWithTag(tag) as? UIImageView)?.tintColor = self.theme?.iconDisabledColor
+            }
         }
         return view
     }()
@@ -128,7 +133,7 @@ class StarsCell: BaseCell {
 
         for tag in 1...5 {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(starTapped(_ :)))
-            self.contentView.viewWithTag(tag)?.isUserInteractionEnabled = !noAnswer
+            self.contentView.viewWithTag(tag)?.isUserInteractionEnabled = true
             self.contentView.viewWithTag(tag)?.addGestureRecognizer(tapGesture)
 
             if currentValue == -1 || tag > self.currentValue  {
@@ -227,7 +232,8 @@ class StarsCell: BaseCell {
         let oldValue = currentValue
         animationInProgress = true
         currentValue = sender.view?.tag ?? -1
-        
+        syncScaleAnswer(String(currentValue), noAnswerView: noAnswerView)
+
         animateStars(reversed: oldValue > currentValue) {
             self.animationInProgress = false
             if self.delegate != nil {

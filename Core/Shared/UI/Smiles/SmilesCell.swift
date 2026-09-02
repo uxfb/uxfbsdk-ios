@@ -257,6 +257,8 @@ class SmilesCell: BaseCell {
         view.isHidden = true
         view.onToggle = { [weak self] isOn in
             self?.noAnswerToggled(isOn)
+            self?.currentValue = -1
+            self?.applyState()
         }
         return view
     }()
@@ -409,7 +411,6 @@ class SmilesCell: BaseCell {
         let noAnswer = isNoAnswerSelected
         for i in 1...5 {
             self.contentView.viewWithTag(i)?.borderWidth = 0
-            self.contentView.viewWithTag(i)?.isUserInteractionEnabled = !noAnswer
             if noAnswer {
                 setSmileState(tag: i, state: .disabled)
             } else if (i == currentValue + 1) {
@@ -530,6 +531,7 @@ class SmilesCell: BaseCell {
 
     @objc private func smileTouchUpInside(_ sender: UIButton) {
         currentValue = sender.tag - 1
+        syncScaleAnswer(String(currentValue), noAnswerView: noAnswerView)
         clearHighlights()
         delegate?.fieldChanged(field!, answer: [String(currentValue)], refresh: true)
         applyState()
