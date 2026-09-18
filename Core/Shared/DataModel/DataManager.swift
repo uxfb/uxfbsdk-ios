@@ -61,6 +61,17 @@ class DataManager: FieldDelegate {
             return campaign?.type == .popup ? 80 : 32
         }
     }
+
+    // Фактическая ширина текста в блоке «Заголовок»: реальная ширина таблицы
+    // за вычетом safe area и отступов лейблов (16 + 16).
+    // Пока таблица не получила размер — прежняя оценка от ширины экрана.
+    private var headerContentWidth: CGFloat {
+        let tableWidth = viewController?.tableView.bounds.width ?? 0
+        guard tableWidth > 0 else {
+            return width - CGFloat.leftArea - CGFloat.rightArea - extraSpace
+        }
+        return tableWidth - CGFloat.leftArea - CGFloat.rightArea - 32
+    }
     
     internal var isFullScreen = false
     
@@ -372,37 +383,48 @@ class DataManager: FieldDelegate {
                 break
         }
         
-        let font = (campaign?.theme.fontH2)!
-        let fontDescr = (campaign?.theme.fontP1)!
-        let required = field.required ?? false
-        let attributedValue = TextPropertyManager.convert(field.value!,
-                                                          theme: campaign!.theme,
-                                                          defaultFont: font,
+        return Self.headerBlockHeight(field: field,
+                                      theme: campaign!.theme,
+                                      contentWidth: headerContentWidth,
+                                      titleFont: (campaign?.theme.fontH2)!,
+                                      withRequired: field.required ?? false)
+    }
+
+    // Высота блока «Заголовок» (текст + описание + картинка) по фактической ширине контента.
+    // Паддинги совпадают с констрейнтами HeaderCell/HeaderView:
+    // без картинки — 8(top) + 8(gap) + 8(bottom) = 24;
+    // с картинкой topHeader — 8 + 8 + 12 + 16 = 44; картинка снизу — 16 + 8 + 8 + 8 = 40.
+    static func headerBlockHeight(field: Field,
+                                  theme: ThemeProtocol,
+                                  contentWidth: CGFloat,
+                                  titleFont: UIFont,
+                                  withRequired: Bool) -> CGFloat {
+        let attributedValue = TextPropertyManager.convert(field.value ?? "",
+                                                          theme: theme,
+                                                          defaultFont: titleFont,
                                                           textProperties: nil,
-                                                          withRequired: required)
-        var valueHeight = TextPropertyManager.heightForAttributed(string: attributedValue,
-                                                                  and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
-        
-        var descriptionHeight: CGFloat = 0
+                                                          withRequired: withRequired)
+        var height = TextPropertyManager.heightForAttributed(string: attributedValue,
+                                                             and: contentWidth)
+
         if let descriptionData = field.description, !descriptionData.isEmpty {
             let attributedDescription = TextPropertyManager.convert(descriptionData,
-                                                              theme: campaign!.theme,
-                                                              defaultFont: fontDescr,
-                                                              textProperties: nil,
-                                                              withRequired: false)
-            descriptionHeight = TextPropertyManager.heightForAttributed(string: attributedDescription,
-                                                                      and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
+                                                                    theme: theme,
+                                                                    defaultFont: theme.fontP1,
+                                                                    textProperties: nil,
+                                                                    withRequired: false)
+            height += TextPropertyManager.heightForAttributed(string: attributedDescription,
+                                                              and: contentWidth)
         }
-        
+
         if let fieldImage = field.image {
             let isDefault = (fieldImage.type ?? "default") == "default"
             let imgHeight = HeaderCell.computeImageHeight(field: field, isDefault: isDefault)
-            valueHeight += 16 + imgHeight
+            let isTopHeader = (fieldImage.position ?? "topHeader") == "topHeader"
+            height += imgHeight + (isTopHeader ? 20 : 16)
         }
-        
-        // 24 = 8(top) + 8(gap between value and description) + 8(bottom)
-        // matches HeaderView constraints exactly
-        return valueHeight + descriptionHeight + 24
+
+        return height + 24
     }
     
     private func getFieldFooterHeight(_ field: Field) -> CGFloat {
@@ -512,35 +534,11 @@ class DataManager: FieldDelegate {
                 return 40
                 
             case .header:
-                //                return UITableView.automaticDimension
-                let font = (campaign?.theme.fontH1)!
-                let value = TextPropertyManager.convert(field.value!,
-                                                        theme: campaign!.theme,
-                                                        defaultFont: font,
-                                                        textProperties: nil,
-                                                        withRequired: false)
-                let valueHeight = TextPropertyManager.heightForAttributed(string: value,
-                                                                          and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
-                var descriptionHeight: CGFloat = 0
-                if let descriptionData = field.description, !descriptionData.isEmpty {
-                    let description = TextPropertyManager.convert(descriptionData,
-                                                                      theme: campaign!.theme,
-                                                                      defaultFont: (campaign?.theme.fontP1)!,
-                                                                      textProperties: nil,
-                                                                      withRequired: false)
-                    descriptionHeight = TextPropertyManager.heightForAttributed(string: description,
-                                                                              and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
-                }
-                
-                var imageHeight: CGFloat = 0
-                
-                if let fieldImage = field.image {
-                    let isDefault = (fieldImage.type ?? "default") == "default"
-                    let imgH = HeaderCell.computeImageHeight(field: field, isDefault: isDefault)
-                    imageHeight = 16 + imgH
-                }
-                
-                return valueHeight + descriptionHeight + imageHeight + 24
+                return Self.headerBlockHeight(field: field,
+                                              theme: campaign!.theme,
+                                              contentWidth: headerContentWidth,
+                                              titleFont: (campaign?.theme.fontH1)!,
+                                              withRequired: false)
                 
             case .image:
                 return 56

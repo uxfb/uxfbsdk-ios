@@ -11,14 +11,14 @@ import Foundation
 internal class Consts {
     static let os: String = "iOS"
     static let language: String = "ru-RU"
-    static let version: String = "4.5.1"
+    static let version: String = "4.6.0"
     static let cryptoKey: String = "UXFeedback"
     static let defaultHref: String = "https://uxfeedback.ru?utm_campaign=default&utm_medium=app"
-    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
-//    static let defaultEndpoint: String = "https://develop.api.uxfb.dev"
+//    static let defaultEndpoint: String = "https://public-api.uxfeedback.ru"
+    static let defaultEndpoint: String = "https://develop.api.uxfb.dev"
 //    static let defaultEndpoint: String = "https://epic-release-12.api.uxfb.dev"
 
-    static let apiVersion: String = "v18"
+    static let apiVersion: String = "v19"
     static let identifier: String  = "biz.andalex.uxfeedback.sdk"
     
     static let bundle: Bundle = Bundle(for: UXFeedback.self)

@@ -44,13 +44,13 @@
 		AA00000000000014 /* URLComponentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000004 /* URLComponentsTests.swift */; };
 		AA00000000000015 /* APIWebRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000005 /* APIWebRouterTests.swift */; };
 		AA00000000000016 /* AttributeManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000006 /* AttributeManagerTests.swift */; };
-		AA00000000000091 /* SmilesDisabledDiagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000090 /* SmilesDisabledDiagTests.swift */; };
 		AA00000000000017 /* TransformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000007 /* TransformTests.swift */; };
 		AA00000000000018 /* StatisticManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000008 /* StatisticManagerTests.swift */; };
 		AA00000000000019 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000009 /* ParserTests.swift */; };
 		AA0000000000001A /* VendorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000A /* VendorExtensionsTests.swift */; };
 		AA0000000000001B /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000B /* ThemeTests.swift */; };
 		AA0000000000001C /* TextPropertyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000C /* TextPropertyManagerTests.swift */; };
+		AA00000000000091 /* SmilesDisabledDiagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000090 /* SmilesDisabledDiagTests.swift */; };
 		BF01BDF525613086008C641B /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDF425613086008C641B /* Option.swift */; };
 		BF01BDF725613254008C641B /* Decodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDF625613254008C641B /* Decodable+.swift */; };
 		BF01BDFB25618234008C641B /* CGFloat+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF01BDFA25618234008C641B /* CGFloat+.swift */; };
@@ -219,6 +219,10 @@
 		BFB50A032D50ECF300021998 /* UXFeedbackSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEF97A52B7CCBEA00931D50 /* UXFeedbackSwiftUI.swift */; };
 		BFB6DEFC27043D7200732D29 /* Screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFB27043D7200732D29 /* Screenshot.swift */; };
 		BFB6DEFE27044E4300732D29 /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFD27044E4300732D29 /* Data+.swift */; };
+		BFBACC1030513A1300E80A80 /* HeaderHeightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBACC0F30513A1300E80A80 /* HeaderHeightTests.swift */; };
+		BFBACC1230513E1C00E80A80 /* CampaignCoverageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBACC1130513E1C00E80A80 /* CampaignCoverageTests.swift */; };
+		BFBACC143051432A00E80A80 /* NetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBACC133051432A00E80A80 /* NetworkLayerTests.swift */; };
+		BFBACC163051460900E80A80 /* UXFeedbackFacadeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBACC153051460900E80A80 /* UXFeedbackFacadeTests.swift */; };
 		BFBAFA952ADFE99B003CC167 /* Copyright.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBAFA942ADFE99B003CC167 /* Copyright.swift */; };
 		BFBECCDB2BFCAFE300279A5B /* Encodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBECCDA2BFCAFE300279A5B /* Encodable+.swift */; };
 		BFBF357D2C469B2200B3D263 /* ToggleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF357C2C469B2200B3D263 /* ToggleStatus.swift */; };
@@ -359,7 +363,6 @@
 		AA00000000000004 /* URLComponentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentsTests.swift; sourceTree = "<group>"; };
 		AA00000000000005 /* APIWebRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWebRouterTests.swift; sourceTree = "<group>"; };
 		AA00000000000006 /* AttributeManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeManagerTests.swift; sourceTree = "<group>"; };
-		AA00000000000090 /* SmilesDisabledDiagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmilesDisabledDiagTests.swift; sourceTree = "<group>"; };
 		AA00000000000007 /* TransformTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformTests.swift; sourceTree = "<group>"; };
 		AA00000000000008 /* StatisticManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticManagerTests.swift; sourceTree = "<group>"; };
 		AA00000000000009 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
@@ -367,6 +370,7 @@
 		AA0000000000000B /* ThemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTests.swift; sourceTree = "<group>"; };
 		AA0000000000000C /* TextPropertyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPropertyManagerTests.swift; sourceTree = "<group>"; };
 		AA00000000000020 /* UXFeedbackSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UXFeedbackSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA00000000000090 /* SmilesDisabledDiagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmilesDisabledDiagTests.swift; sourceTree = "<group>"; };
 		BF01BDF425613086008C641B /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		BF01BDF625613254008C641B /* Decodable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+.swift"; sourceTree = "<group>"; };
 		BF01BDFA25618234008C641B /* CGFloat+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+.swift"; sourceTree = "<group>"; };
@@ -457,6 +461,10 @@
 		BFB6DEFD27044E4300732D29 /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
 		BFB85E792A42D7E5000208D2 /* YoHe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoHe.swift; sourceTree = "<group>"; };
 		BFB85E822A42D817000208D2 /* YoHeSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YoHeSDK.h; sourceTree = "<group>"; };
+		BFBACC0F30513A1300E80A80 /* HeaderHeightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderHeightTests.swift; sourceTree = "<group>"; };
+		BFBACC1130513E1C00E80A80 /* CampaignCoverageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignCoverageTests.swift; sourceTree = "<group>"; };
+		BFBACC133051432A00E80A80 /* NetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayerTests.swift; sourceTree = "<group>"; };
+		BFBACC153051460900E80A80 /* UXFeedbackFacadeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXFeedbackFacadeTests.swift; sourceTree = "<group>"; };
 		BFBAFA942ADFE99B003CC167 /* Copyright.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copyright.swift; sourceTree = "<group>"; };
 		BFBB060E2A1C99DD00F1BA6A /* WebPMux.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebPMux.xcframework; sourceTree = "<group>"; };
 		BFBB060F2A1C99DD00F1BA6A /* WebPDecoder.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebPDecoder.xcframework; sourceTree = "<group>"; };
@@ -737,6 +745,10 @@
 		AA00000000000030 /* UXFeedbackSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				BFBACC153051460900E80A80 /* UXFeedbackFacadeTests.swift */,
+				BFBACC133051432A00E80A80 /* NetworkLayerTests.swift */,
+				BFBACC1130513E1C00E80A80 /* CampaignCoverageTests.swift */,
+				BFBACC0F30513A1300E80A80 /* HeaderHeightTests.swift */,
 				AA00000000000001 /* DataModelTests.swift */,
 				AA00000000000002 /* AttributesTests.swift */,
 				AA00000000000003 /* CryptoTests.swift */,
@@ -1475,12 +1487,16 @@
 				AA00000000000013 /* CryptoTests.swift in Sources */,
 				AA00000000000014 /* URLComponentsTests.swift in Sources */,
 				AA00000000000015 /* APIWebRouterTests.swift in Sources */,
+				BFBACC1230513E1C00E80A80 /* CampaignCoverageTests.swift in Sources */,
 				AA00000000000016 /* AttributeManagerTests.swift in Sources */,
 				AA00000000000091 /* SmilesDisabledDiagTests.swift in Sources */,
 				AA00000000000017 /* TransformTests.swift in Sources */,
 				AA00000000000018 /* StatisticManagerTests.swift in Sources */,
 				AA00000000000019 /* ParserTests.swift in Sources */,
+				BFBACC163051460900E80A80 /* UXFeedbackFacadeTests.swift in Sources */,
 				AA0000000000001A /* VendorExtensionsTests.swift in Sources */,
+				BFBACC143051432A00E80A80 /* NetworkLayerTests.swift in Sources */,
+				BFBACC1030513A1300E80A80 /* HeaderHeightTests.swift in Sources */,
 				AA0000000000001B /* ThemeTests.swift in Sources */,
 				AA0000000000001C /* TextPropertyManagerTests.swift in Sources */,
 			);
