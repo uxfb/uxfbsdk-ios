@@ -239,6 +239,42 @@ final class HeaderHeightTests: XCTestCase {
 
     // MARK: - Соответствие расчёта реальной раскладке HeaderView
 
+    func testHeaderCellLabelsNotCompressedOnHeightMismatch() {
+        let src = "https://example.com/compress.png"
+        let image = UIGraphicsImageRenderer(size: CGSize(width: 120, height: 80)).image { ctx in
+            UIColor.blue.setFill()
+            ctx.fill(CGRect(x: 0, y: 0, width: 120, height: 80))
+        }
+        ImageCache.shared.setObject(image, forKey: src as NSString)
+
+        let field = makeField(value: "Заголовок опроса в несколько слов",
+                              description: "Описание блока, которое тоже занимает какое-то место",
+                              image: ["type": "custom", "position": "topHeader", "alignment": "center", "src": src])
+        let width: CGFloat = 375
+        let computedHeight = DataManager.headerBlockHeight(field: field,
+                                                           theme: theme,
+                                                           contentWidth: width - 32,
+                                                           titleFont: theme.fontH1,
+                                                           withRequired: false)
+
+        for cellHeight in [computedHeight, computedHeight - 6] {
+            let cell = HeaderCell(style: .default, reuseIdentifier: nil)
+            cell.frame = CGRect(x: 0, y: 0, width: width, height: cellHeight)
+            let delegate = DataManager(CampaignViewController(), campaign: nil)
+            cell.configureWith(field, theme: theme, delegate: delegate)
+            cell.layoutIfNeeded()
+
+            let labels = cell.contentView.subviews.compactMap { $0 as? LinkLabel }
+            XCTAssertEqual(labels.count, 2)
+            for label in labels {
+                guard let text = label.attributedText, text.length > 0 else { continue }
+                let required = label.sizeThatFits(CGSize(width: width - 32, height: .greatestFiniteMagnitude)).height
+                XCTAssertGreaterThanOrEqual(label.frame.height + 1, required,
+                                            "Лейбл сжат при высоте ячейки \(cellHeight) — текст будет обрезан")
+            }
+        }
+    }
+
     func testHeaderBlockHeightFitsActualLabelsAtVariousWidths() {
         let field = makeField(value: "Насколько легко вам было пользоваться нашим мобильным приложением сегодня?",
                               description: "Оцените по шкале от 1 до 10, где 10 — очень легко, а 1 — очень сложно")

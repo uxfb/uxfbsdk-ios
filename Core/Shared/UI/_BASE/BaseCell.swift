@@ -12,6 +12,12 @@ internal class NoAnswerView: UIView {
     static let noAnswerValue = "-1"
     static let height: CGFloat = 31
     static let topSpacing: CGFloat = 16
+    static let toggleReservedWidth: CGFloat = 63
+
+    static func height(for title: String, width: CGFloat, font: UIFont) -> CGFloat {
+        guard width > 0 else { return height }
+        return max(height, ceil(title.height(withConstrainedWidth: width, font: font)))
+    }
 
     var onToggle: ((Bool) -> Void)?
 
@@ -35,9 +41,20 @@ internal class NoAnswerView: UIView {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         toggle.translatesAutoresizingMaskIntoConstraints = false
 
+        titleLabel.numberOfLines = 0
+        titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        toggle.setContentCompressionResistancePriority(.required, for: .horizontal)
+        toggle.setContentHuggingPriority(.required, for: .horizontal)
+
+        let heightConstraint = heightAnchor.constraint(equalToConstant: NoAnswerView.height)
+        heightConstraint.priority = .defaultHigh
+
         NSLayoutConstraint.activate([
+            heightConstraint,
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: toggle.leadingAnchor, constant: -12),
+            titleLabel.trailingAnchor.constraint(equalTo: toggle.leadingAnchor, constant: -12),
+            titleLabel.topAnchor.constraint(greaterThanOrEqualTo: topAnchor),
+            bottomAnchor.constraint(greaterThanOrEqualTo: titleLabel.bottomAnchor),
             titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             toggle.trailingAnchor.constraint(equalTo: trailingAnchor),
             toggle.centerYAnchor.constraint(equalTo: centerYAnchor)

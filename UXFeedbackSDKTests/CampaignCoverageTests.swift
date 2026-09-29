@@ -157,6 +157,16 @@ final class DataManagerLogicTests: XCTestCase {
         XCTAssertEqual(height(manager, 0), 48 + NoAnswerView.height + NoAnswerView.topSpacing)
     }
 
+    func testNoAnswerLongTitleIncreasesHeight() {
+        let longTitle = "Затрудняюсь ответить на этот вопрос, потому что не пользовался этой функцией приложения ни разу"
+        let fields: [[String: Any]] = [
+            ["id": "f1", "type": "smiles", "value": "Оцените", "noAnswerName": longTitle]
+        ]
+        let (manager, _) = makeManager(campaign: makeCampaign(pages: [makePage(fields: fields)]))
+
+        XCTAssertGreaterThan(height(manager, 0), 48 + NoAnswerView.height + NoAnswerView.topSpacing)
+    }
+
     func testExtraSpaceDependsOnCampaignType() {
         let (popup, _) = makeManager(campaign: makeCampaign(pages: [makePage(fields: allFieldsPage)], type: .popup))
         let (slidein, _) = makeManager(campaign: makeCampaign(pages: [makePage(fields: allFieldsPage)], type: .slidein))
@@ -194,12 +204,54 @@ final class DataManagerLogicTests: XCTestCase {
     }
 
     func testErrorFooterForRequiredField() {
-        let (manager, _) = makeManager(campaign: makeCampaign(pages: [makePage(fields: allFieldsPage)]))
-        manager.isError = true
+        let (manager, vc) = makeManager(campaign: makeCampaign(pages: [makePage(fields: allFieldsPage)]))
+        vc.tableView.reloadData()
 
-        // smiles (index 2) — required с warning
+        let button = manager.fieldForRow(indexPath: IndexPath(row: 0, section: allFieldsPage.count))
+        manager.buttonTapped(button, answer: [], refresh: true)
+
+        // smiles (index 2) — required с warning, был видим в момент отправки
         XCTAssertGreaterThan(manager.heightForFieldFooter(index: 2), 12)
         XCTAssertNotNil(manager.viewForFieldFooter(index: 2))
+        XCTAssertTrue(manager.fieldForRow(indexPath: IndexPath(row: 0, section: 2)).isError)
+    }
+
+    func testErrorMarksOnlyFieldsVisibleAtSubmit() {
+        let fields: [[String: Any]] = [
+            ["id": "f1", "type": "radiobuttons", "value": "Вопрос", "required": true, "warning": "Заполните",
+             "options": [["id": "yes", "value": "Да"]]],
+            ["id": "f2", "type": "comment", "value": "Скрытый", "required": true, "warning": "Заполните", "mode": "single"]
+        ]
+        let transform = try! Transform(from: [
+            "id": "t1",
+            "to": ["action": "show", "value": "f2", "type": "toField"],
+            "scenarios": [[
+                "id": "s1", "name": "s",
+                "conditions": [[
+                    "id": "c1",
+                    "from": ["field": "f1"],
+                    "condition": ["rule": "equal", "value": ["yes"]]
+                ]]
+            ]]
+        ] as [String: Any])
+        let (manager, vc) = makeManager(campaign: makeCampaign(pages: [makePage(fields: fields)],
+                                                               transforms: [transform]))
+        vc.tableView.reloadData()
+
+        let button = manager.fieldForRow(indexPath: IndexPath(row: 0, section: 2))
+        manager.buttonTapped(button, answer: [], refresh: true)
+
+        XCTAssertTrue(manager.isError)
+        XCTAssertTrue(manager.fieldForRow(indexPath: IndexPath(row: 0, section: 0)).isError)
+
+        // Отвечаем на f1 → раскрывается f2, но он не был видим при отправке — без ошибки
+        let f1 = manager.fieldForRow(indexPath: IndexPath(row: 0, section: 0))
+        manager.fieldChanged(f1, answer: ["yes"], refresh: false)
+        waitMainQueue()
+
+        XCTAssertEqual(manager.numberForFieldCell(index: 1), 1)
+        XCTAssertFalse(manager.fieldForRow(indexPath: IndexPath(row: 0, section: 1)).isError)
+        XCTAssertNil(manager.viewForFieldFooter(index: 1))
     }
 
     func testNoFooterWithoutError() {
@@ -1225,6 +1277,128 @@ final class NavigationAndSmallViewsTests: XCTestCase {
         answer(manager, section: 0, value: ["yes"])
         tapNextButton(manager, fieldsCount: 1)
 
+        wait(for: [exp], timeout: 5)
+    }
+
+    private func fourPageCampaign(transforms: [Transform]) -> Campaign {
+        let p1 = makePage(id: "p1", fields: [
+            ["id": "f1", "type": "radiobuttons", "value": "Вопрос 1",
+             "options": [["id": "yes", "value": "Да"], ["id": "no", "value": "Нет"]]]
+        ])
+        let p2 = makePage(id: "p2", fields: [
+            ["id": "f2", "type": "comment", "value": "Вопрос 2", "mode": "single"]
+        ])
+        let p3 = makePage(id: "p3", fields: [
+            ["id": "f3", "type": "comment", "value": "Вопрос 3", "mode": "single"]
+        ])
+        let p4 = makePage(id: "p4", type: 2, fields: [
+            ["id": "f4", "type": "header", "value": "Спасибо!"]
+        ])
+        return makeCampaign(pages: [p1, p2, p3, p4], transforms: transforms)
+    }
+
+    func testSkippedPageDefaultTransitionApplied() {
+        let showTransform = makeTransform([
+            "id": "t1",
+            "to": ["action": "show", "value": "f2", "type": "toField"],
+            "scenarios": [[
+                "id": "s1", "name": "s",
+                "conditions": [[
+                    "id": "c1",
+                    "from": ["field": "f1"],
+                    "condition": ["rule": "equal", "value": ["yes"]]
+                ]]
+            ]]
+        ])
+        let defaultTransition = makeTransform([
+            "id": "t2",
+            "to": ["action": "transition", "value": "p4", "type": "toPage"],
+            "scenarios": [[
+                "id": "s2", "name": "s",
+                "conditions": [[
+                    "id": "c2",
+                    "from": ["page": "p2"],
+                    "condition": ["rule": "unfilled"]
+                ]]
+            ]]
+        ])
+        let (manager, vc) = makeManager(campaign: fourPageCampaign(transforms: [showTransform, defaultTransition]))
+        vc.tableView.reloadData()
+
+        answer(manager, section: 0, value: ["no"])
+        tapNextButton(manager, fieldsCount: 1)
+
+        XCTAssertTrue(manager.isProgressHidden,
+                      "Пропущенная страница p2 должна применить свой безусловный переход на p4")
+    }
+
+    func testTransformRulesDoNotLeakToNextPages() {
+        let containRule = makeTransform([
+            "id": "t1",
+            "to": ["action": "transition", "value": "p2", "type": "toPage"],
+            "scenarios": [[
+                "id": "s1", "name": "s",
+                "conditions": [[
+                    "id": "c1",
+                    "from": ["field": "f1"],
+                    "condition": ["rule": "contain", "value": ["yes"]]
+                ]]
+            ]]
+        ])
+        let filledRule = makeTransform([
+            "id": "t2",
+            "to": ["action": "transition", "value": "p4", "type": "toPage"],
+            "scenarios": [[
+                "id": "s2", "name": "s",
+                "conditions": [[
+                    "id": "c2",
+                    "from": ["field": "f1"],
+                    "condition": ["rule": "filled"]
+                ]]
+            ]]
+        ])
+        let (manager, vc) = makeManager(campaign: fourPageCampaign(transforms: [containRule, filledRule]))
+        vc.tableView.reloadData()
+
+        answer(manager, section: 0, value: ["yes"])
+        tapNextButton(manager, fieldsCount: 1)
+        XCTAssertEqual(manager.progress, "2/3")
+
+        tapNextButton(manager, fieldsCount: 1)
+
+        XCTAssertEqual(manager.progress, "3/3",
+                       "Правила страницы p1 не должны срабатывать при уходе со страницы p2")
+        XCTAssertFalse(manager.isProgressHidden)
+    }
+
+    func testEndCampaignRecordsOnlyVisitedPages() {
+        let jumpRule = makeTransform([
+            "id": "t1",
+            "to": ["action": "transition", "value": "p4", "type": "toPage"],
+            "scenarios": [[
+                "id": "s1", "name": "s",
+                "conditions": [[
+                    "id": "c1",
+                    "from": ["field": "f1"],
+                    "condition": ["rule": "equal", "value": ["yes"]]
+                ]]
+            ]]
+        ])
+        let (manager, vc) = makeManager(campaign: fourPageCampaign(transforms: [jumpRule]))
+        vc.tableView.reloadData()
+
+        answer(manager, section: 0, value: ["yes"])
+        tapNextButton(manager, fieldsCount: 1)
+        XCTAssertTrue(manager.isProgressHidden)
+
+        let exp = expectation(description: "completed")
+        vc.completeHandler = { results, _ in
+            let pageIds = results?.compactMap { $0["pageId"] as? String } ?? []
+            XCTAssertEqual(pageIds, ["p1", "p4"],
+                           "В статистику должны попадать только показанные страницы")
+            exp.fulfill()
+        }
+        tapNextButton(manager, fieldsCount: 1)
         wait(for: [exp], timeout: 5)
     }
 

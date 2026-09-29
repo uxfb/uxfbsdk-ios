@@ -89,11 +89,19 @@ class HeaderView: UIView {
         return newWidth
     }
     
+    private func breakable(_ constraint: NSLayoutConstraint) -> NSLayoutConstraint {
+        constraint.priority = .defaultHigh
+        return constraint
+    }
+
     private func setup() {
         addSubview(label)
         addSubview(descriptionLabel)
         addSubview(imageView)
-        
+
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
+        descriptionLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
@@ -149,7 +157,7 @@ class HeaderView: UIView {
         
         if position == "topHeader" {
             NSLayoutConstraint.activate([
-                descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+                breakable(descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)),
                 label.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -12),
                 imageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
                 imageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -8),
@@ -158,7 +166,7 @@ class HeaderView: UIView {
         } else {
             NSLayoutConstraint.activate([
                 label.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-                imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+                breakable(imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)),
                 imageView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8),
                 imageHeightConstraint!
             ])
@@ -239,7 +247,7 @@ class HeaderView: UIView {
         } else {
             NSLayoutConstraint.activate([
                 label.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-                descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+                breakable(descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8))
             ])
         }
     }

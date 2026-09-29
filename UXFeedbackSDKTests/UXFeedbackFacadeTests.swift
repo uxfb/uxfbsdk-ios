@@ -168,14 +168,6 @@ final class UXFeedbackFacadeTests: XCTestCase {
     }
 
     func testStartCampaignShowsFormForStoredCampaign() {
-        setupSDK()
-
-        // Кладём кампанию в общее CoreData-хранилище через отдельный менеджер
-        let seeder = DataRequestManager(endpoint: "https://stub.test",
-                                        appID: appId,
-                                        parser: Parser(theme: nil),
-                                        sdkSettings: UXFBSettings(),
-                                        delegate: nil)
         let campaignDict: [String: Any] = [
             "type": 102,
             "campaignId": 501,
@@ -187,12 +179,6 @@ final class UXFeedbackFacadeTests: XCTestCase {
                        "buttons": [["id": "b1", "type": "button", "value": "Далее"]]]],
             "transforms": []
         ]
-        let data = CampaignData(campaignId: 501,
-                                priority: 1,
-                                data: try! JSONSerialization.data(withJSONObject: campaignDict))
-        let seedExp = expectation(description: "seeded")
-        seeder.setCampaigns([data]) { _ in seedExp.fulfill() }
-        wait(for: [seedExp], timeout: 5)
 
         // В headless-среде презентация UIWindow не завершается, поэтому ждём
         // детерминированные сигналы показа: запрос /mobile/visits и отметку времени показа
@@ -205,8 +191,17 @@ final class UXFeedbackFacadeTests: XCTestCase {
             if request.url?.path.contains("visits") ?? false {
                 visitExp.fulfill()
             }
-            return .init(body: Data("{\"campaigns\": []}".utf8))
+            return .init(body: try! JSONSerialization.data(withJSONObject: [
+                "campaigns": [["campaignId": 501, "priority": 1, "data": campaignDict]]
+            ]))
         }
+
+        let loadExp = expectation(description: "campaigns loaded")
+        loadExp.assertForOverFulfill = false
+        delegateSpy.onLoad = { _ in loadExp.fulfill() }
+
+        setupSDK()
+        wait(for: [loadExp], timeout: 10)
 
         _ = UXFeedback.sdk.startCampaign(eventName: "evt_facade_501")
 
@@ -215,7 +210,7 @@ final class UXFeedbackFacadeTests: XCTestCase {
         // saveShowingTime зафиксировал показ
         XCTAssertNotNil(UserDefaults.standard.object(forKey: appId) as? Date)
 
-        UXFeedback.sdk.stopCampaign()
+        UXFeedback.sdk.stopCampaign(eventForStop: "evt_facade_501")
     }
 
     // MARK: CampaignPresentor: хендлеры формы → делегат
@@ -284,6 +279,53 @@ final class UXFeedbackFacadeTests: XCTestCase {
 
         presentor.stopCampaign()
         XCTAssertFalse(presentor.isFormOnScreen)
+    }
+
+    func testMultiVisitedCampaignIgnoresGlobalDelay() {
+        let campaignDict: [String: Any] = [
+            "type": 102,
+            "campaignId": 502,
+            "projectId": 7,
+            "autoclose": 0.0,
+            "targeting": ["trigger": ["value": "evt_multi_502", "seconds": 0, "isMultiVisited": true]],
+            "pages": [["id": "p1",
+                       "fields": [["id": "f1", "type": "header", "value": "Привет"]],
+                       "buttons": [["id": "b1", "type": "button", "value": "Далее"]]]],
+            "transforms": []
+        ]
+
+        let visitExp = expectation(description: "shown despite global delay")
+        visitExp.assertForOverFulfill = false
+        StubURLProtocol.stubProvider = { request in
+            if request.url?.path.contains("toggles") ?? false {
+                return .init(body: try! JSONSerialization.data(withJSONObject: ["data": ["togglesStatus": false]]))
+            }
+            if request.url?.path.contains("visits") ?? false {
+                visitExp.fulfill()
+            }
+            return .init(body: try! JSONSerialization.data(withJSONObject: [
+                "campaigns": [["campaignId": 502, "priority": 1, "data": campaignDict]]
+            ]))
+        }
+
+        let loadExp = expectation(description: "campaigns loaded")
+        loadExp.assertForOverFulfill = false
+        delegateSpy.onLoad = { _ in loadExp.fulfill() }
+
+        let settings = makeSettings()
+        settings.globalDelayTimer = 3600
+        UXFeedback.setup(appID: appId,
+                         settings: settings,
+                         campaignDelegate: delegateSpy,
+                         logDelegate: nil)
+        wait(for: [loadExp], timeout: 10)
+
+        UserDefaults.standard.set(Date(), forKey: appId)
+
+        _ = UXFeedback.sdk.startCampaign(eventName: "evt_multi_502")
+
+        wait(for: [visitExp], timeout: 15)
+        UXFeedback.sdk.stopCampaign(eventForStop: "evt_multi_502")
     }
 
     // MARK: stopCampaign

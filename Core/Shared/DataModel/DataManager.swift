@@ -62,9 +62,6 @@ class DataManager: FieldDelegate {
         }
     }
 
-    // Фактическая ширина текста в блоке «Заголовок»: реальная ширина таблицы
-    // за вычетом safe area и отступов лейблов (16 + 16).
-    // Пока таблица не получила размер — прежняя оценка от ширины экрана.
     private var headerContentWidth: CGFloat {
         let tableWidth = viewController?.tableView.bounds.width ?? 0
         guard tableWidth > 0 else {
@@ -143,6 +140,7 @@ class DataManager: FieldDelegate {
     }
     
     private var answers = Array<Dictionary<String, Any>>()
+    private var visitedPages: Set<Int> = [0]
     private var _screenshots: [Screenshot] = []
     public var screenshots: [Screenshot] {
         get {
@@ -152,6 +150,15 @@ class DataManager: FieldDelegate {
     
     var isError: Bool = false
     private var silencedErrorFieldIds: Set<String> = []
+    private var errorFieldIds: Set<String> = []
+
+    private func markErrors() {
+        isError = true
+        silencedErrorFieldIds.removeAll()
+        errorFieldIds = Set((campaign?.pages[currentPage].fields ?? [])
+            .filter { fieldNeedComplete($0) }
+            .compactMap { $0.id })
+    }
     
     private var isPrivacyChecked: Bool = false
     private var isPrivacyWarning: Bool = false
@@ -262,7 +269,7 @@ class DataManager: FieldDelegate {
         
         let answer = answers.first { answer in ((answer["fieldId"] as? String) ?? "") == field.id }
         field.answers = (answer?["value"] as? [String]) ?? []
-        field.isError = isError && (field.required ?? false)
+        field.isError = isError && (field.required ?? false) && errorFieldIds.contains(field.id ?? "")
         
         field.isLastPage = campaign?.pages[currentPage].type == 2
         
@@ -390,10 +397,6 @@ class DataManager: FieldDelegate {
                                       withRequired: field.required ?? false)
     }
 
-    // Высота блока «Заголовок» (текст + описание + картинка) по фактической ширине контента.
-    // Паддинги совпадают с констрейнтами HeaderCell/HeaderView:
-    // без картинки — 8(top) + 8(gap) + 8(bottom) = 24;
-    // с картинкой topHeader — 8 + 8 + 12 + 16 = 44; картинка снизу — 16 + 8 + 8 + 8 = 40.
     static func headerBlockHeight(field: Field,
                                   theme: ThemeProtocol,
                                   contentWidth: CGFloat,
@@ -430,7 +433,7 @@ class DataManager: FieldDelegate {
     private func getFieldFooterHeight(_ field: Field) -> CGFloat {
         var height: CGFloat = .leastNonzeroMagnitude
         
-        if isError && fieldNeedComplete(field) && !silencedErrorFieldIds.contains(field.id ?? "") {
+        if isError && fieldNeedComplete(field) && errorFieldIds.contains(field.id ?? "") && !silencedErrorFieldIds.contains(field.id ?? "") {
             guard let warning = field.warning else {
                 return checkFieldTransfromed(field) ? 12 : .leastNonzeroMagnitude
             }
@@ -462,7 +465,7 @@ class DataManager: FieldDelegate {
     }
     
     private func getFieldFooter(_ field: Field) -> UIView? {
-        if isError && fieldNeedComplete(field) && !silencedErrorFieldIds.contains(field.id ?? "") {
+        if isError && fieldNeedComplete(field) && errorFieldIds.contains(field.id ?? "") && !silencedErrorFieldIds.contains(field.id ?? "") {
             guard let warning = field.warning else {
                 return nil
             }
@@ -503,7 +506,11 @@ class DataManager: FieldDelegate {
         guard let name = field.noAnswerName, !name.isEmpty else {
             return 0
         }
-        return NoAnswerView.height + NoAnswerView.topSpacing
+        let labelWidth = headerContentWidth - NoAnswerView.toggleReservedWidth
+        let height = NoAnswerView.height(for: name,
+                                         width: labelWidth,
+                                         font: (campaign?.theme.fontP2) ?? .systemFont(ofSize: 14))
+        return height + NoAnswerView.topSpacing
     }
 
     private func getFieldHeight(_ field: Field) -> CGFloat {
@@ -650,8 +657,7 @@ class DataManager: FieldDelegate {
     
     private func checkAndNavigate() {
         if needsComplete() {
-            isError = true
-            silencedErrorFieldIds.removeAll()
+            markErrors()
             viewController?.updateUI()
         } else {
             let nextIndex = getNextIndex()
@@ -669,12 +675,13 @@ class DataManager: FieldDelegate {
     func buttonTapped(_ field: Field, answer: [String], refresh: Bool) {
         viewController?.view.endEditing(true)
         isError = false
+        errorFieldIds.removeAll()
         if !isPrivacyChecked && privacyNeeded {
             isPrivacyWarning = true
             checkPrivacy(nil)
-            
+
             if needsComplete() {
-                isError = true
+                markErrors()
                 viewController?.updateUI()
             }
             return
@@ -914,6 +921,7 @@ class DataManager: FieldDelegate {
     
     private func toPage(index: Int) {
         currentPage = index
+        visitedPages.insert(index)
         viewController?.scrollToTop(animated: false)
         viewController?.updateUI()
         self.viewController?.updateFooter()
@@ -940,27 +948,26 @@ class DataManager: FieldDelegate {
         var results: [[String: Any]] = []
         
         for i in 0...currentPage {
+            guard visitedPages.contains(i) else { continue }
             let page = campaign?.pages[i]
             let fields = formattedAnswers.filter { (answer) -> Bool in
                 let pageId = answer["pageId"] as? String
                 return page?.id == pageId ?? ""
             }
-            
-//            if !fields.isEmpty || i == currentPage {
-                var result: [String: Any] = [:]
-                result["pageId"] = page?.id ?? ""
-                if fields.count > 0 {
-                    result["fields"] = fields.map { $0.filter{ $0.key != "pageId" } }
-                }
-                
-                let currentPageId = campaign?.pages[currentPage].id ?? ""
-                
-                result["close"] = page?.id == currentPageId ? 1 : 0
-                
-                result["externalLink"] = isLink ? 1 : 0
-                
-                results.append(result)
-//            }
+
+            var result: [String: Any] = [:]
+            result["pageId"] = page?.id ?? ""
+            if fields.count > 0 {
+                result["fields"] = fields.map { $0.filter{ $0.key != "pageId" } }
+            }
+
+            let currentPageId = campaign?.pages[currentPage].id ?? ""
+
+            result["close"] = page?.id == currentPageId ? 1 : 0
+
+            result["externalLink"] = isLink ? 1 : 0
+
+            results.append(result)
         }
         
         if isPrivacyChecked || !privacyNeeded {
@@ -1072,20 +1079,30 @@ class DataManager: FieldDelegate {
     }
     
     private func prepareNextIndex(_ currentPage: Int, basePage: Int) -> Int {
+        let leavingPageId = campaign?.pages[currentPage].id
+        let leavingFieldIds = Set(campaign?.pages[currentPage].fields.compactMap { $0.id } ?? [])
         let transforms = completedTransforms().filter { transform in
             var result = transform.to.action == "transition" &&
-            transform.to.value != self.campaign?.pages[currentPage].id
+            transform.to.value != leavingPageId
             if let toPageIndex = campaign?.pages.lastIndex(where: { (page) -> Bool in
                 page.id == transform.to.value
             }) {
                 result = result && basePage < toPageIndex
             }
-            
+
             let hasFieldCondition = transform.scenarios.contains { scenario in
                 scenario.conditions.contains { $0.from.field != nil }
             }
             result = result && hasFieldCondition
-            
+
+            let belongsToLeavingPage = transform.scenarios.contains { scenario in
+                scenario.conditions.contains { condition in
+                    condition.from.page == leavingPageId ||
+                    (condition.from.field.map { leavingFieldIds.contains($0) } ?? false)
+                }
+            }
+            result = result && belongsToLeavingPage
+
             return result
         }
         
@@ -1139,7 +1156,7 @@ class DataManager: FieldDelegate {
         var needsShow = false
         
         while !needsShow {
-            nextIndex = prepareNextIndex(nextIndex, basePage: currentPage)
+            nextIndex = prepareNextIndex(nextIndex, basePage: nextIndex)
             
             if campaign.pages.indices.contains(nextIndex) {
                 if campaign.pages[nextIndex].type == 2 {
