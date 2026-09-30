@@ -1234,19 +1234,11 @@ extension CampaignViewController: RouterDelegate {
         let userParams = properties
         
         for param in params?.system ?? [] {
-            if let sParam = systemParams[param] {
-                queryDict[param] = sParam
-            } else {
-                queryDict[param] = "nodata"
-            }
+            queryDict[param] = systemParams[param] ?? "nodata"
         }
         
         for param in params?.user ?? [] {
-            if let uParam = userParams[param] {
-                queryDict[param] = uParam
-            } else {
-                queryDict[param] = "nodata"
-            }
+            queryDict[param] = userParams[param.lowercased()] ?? "nodata"
         }
         
         let queryParams = buildQuery(queryDict)
