@@ -105,7 +105,7 @@ class HeaderCell: BaseCell {
         if position == "topHeader" {
             NSLayoutConstraint.activate([
                 breakable(descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)),
-                label.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -12),
+                label.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -8),
                 headerImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
                 headerImageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -8),
                 imageHeightConstraint!

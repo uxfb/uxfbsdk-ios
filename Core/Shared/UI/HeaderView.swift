@@ -158,7 +158,7 @@ class HeaderView: UIView {
         if position == "topHeader" {
             NSLayoutConstraint.activate([
                 breakable(descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)),
-                label.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -12),
+                label.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -8),
                 imageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
                 imageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -8),
                 imageHeightConstraint!
@@ -245,9 +245,11 @@ class HeaderView: UIView {
             self.updateImageConstraints()
             self.updateImage(url: url)
         } else {
+            let hasDescription = !((field.description ?? "").isEmpty)
+            let lastElement: UIView = hasDescription ? descriptionLabel : label
             NSLayoutConstraint.activate([
                 label.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-                breakable(descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8))
+                breakable(lastElement.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12))
             ])
         }
     }

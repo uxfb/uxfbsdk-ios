@@ -325,7 +325,7 @@ class DataManager: FieldDelegate {
         }
         
         if (toField?.type == .button && fromField.type != .header && fromField.type != .text && fromField.type != .image) {
-            return 32
+            return 24
         }
         
         return 24
@@ -389,12 +389,44 @@ class DataManager: FieldDelegate {
             default:
                 break
         }
-        
-        return Self.headerBlockHeight(field: field,
-                                      theme: campaign!.theme,
-                                      contentWidth: headerContentWidth,
-                                      titleFont: (campaign?.theme.fontH2)!,
-                                      withRequired: field.required ?? false)
+
+        if field.image != nil {
+            return Self.headerBlockHeight(field: field,
+                                          theme: campaign!.theme,
+                                          contentWidth: headerContentWidth,
+                                          titleFont: (campaign?.theme.fontH2)!,
+                                          withRequired: field.required ?? false)
+        }
+
+        return Self.sectionHeaderHeight(field: field,
+                                        theme: campaign!.theme,
+                                        contentWidth: headerContentWidth,
+                                        titleFont: (campaign?.theme.fontH2)!,
+                                        withRequired: field.required ?? false)
+    }
+
+    static func sectionHeaderHeight(field: Field,
+                                    theme: ThemeProtocol,
+                                    contentWidth: CGFloat,
+                                    titleFont: UIFont,
+                                    withRequired: Bool) -> CGFloat {
+        let attributedValue = TextPropertyManager.convert(field.value ?? "",
+                                                          theme: theme,
+                                                          defaultFont: titleFont,
+                                                          textProperties: nil,
+                                                          withRequired: withRequired)
+        var height = 8 + TextPropertyManager.heightForAttributed(string: attributedValue, and: contentWidth)
+
+        if let descriptionData = field.description, !descriptionData.isEmpty {
+            let attributedDescription = TextPropertyManager.convert(descriptionData,
+                                                                    theme: theme,
+                                                                    defaultFont: theme.fontP1,
+                                                                    textProperties: nil,
+                                                                    withRequired: false)
+            height += 8 + TextPropertyManager.heightForAttributed(string: attributedDescription, and: contentWidth)
+        }
+
+        return height + 12
     }
 
     static func headerBlockHeight(field: Field,
@@ -423,8 +455,8 @@ class DataManager: FieldDelegate {
         if let fieldImage = field.image {
             let isDefault = (fieldImage.type ?? "default") == "default"
             let imgHeight = HeaderCell.computeImageHeight(field: field, isDefault: isDefault)
-            let isTopHeader = (fieldImage.position ?? "topHeader") == "topHeader"
-            height += imgHeight + (isTopHeader ? 20 : 16)
+            _ = (fieldImage.position ?? "topHeader") == "topHeader"
+            height += imgHeight + 16
         }
 
         return height + 24

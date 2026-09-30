@@ -161,8 +161,8 @@ final class HeaderHeightTests: XCTestCase {
                                                    titleFont: theme.fontH1,
                                                    withRequired: false)
 
-        // topHeader: 8(top) + 8(gap) + 12(gap) + 16(bottom) = 44 = 24 + 20
-        let expected = titleHeight(field, width: width, font: theme.fontH1) + 100 + 20 + 24
+        // topHeader: 8(top) + 8(gap) + 8(gap) + 16(bottom) = 40 = 24 + 16
+        let expected = titleHeight(field, width: width, font: theme.fontH1) + 100 + 16 + 24
         XCTAssertEqual(height, expected)
     }
 
@@ -195,7 +195,7 @@ final class HeaderHeightTests: XCTestCase {
                                                    titleFont: theme.fontH1,
                                                    withRequired: false)
 
-        let expected = titleHeight(field, width: width, font: theme.fontH1) + 120 + 20 + 24
+        let expected = titleHeight(field, width: width, font: theme.fontH1) + 120 + 16 + 24
         XCTAssertEqual(height, expected)
     }
 
@@ -273,6 +273,34 @@ final class HeaderHeightTests: XCTestCase {
                                             "Лейбл сжат при высоте ячейки \(cellHeight) — текст будет обрезан")
             }
         }
+    }
+
+    func testSectionHeaderHeightHasTwelvePointBottomGap() {
+        let width: CGFloat = 343
+        let titleFont = theme.fontH2
+
+        // без описания: 8(top) + title + 12(bottom)
+        let noDesc = makeField(value: "Насколько легко пользоваться нашим сайтом?")
+        let titleH = TextPropertyManager.heightForAttributed(
+            string: TextPropertyManager.convert(noDesc.value!, theme: theme, defaultFont: titleFont,
+                                                 textProperties: nil, withRequired: false),
+            and: width)
+        XCTAssertEqual(
+            DataManager.sectionHeaderHeight(field: noDesc, theme: theme, contentWidth: width,
+                                            titleFont: titleFont, withRequired: false),
+            8 + titleH + 12)
+
+        // с описанием: 8(top) + title + 8(gap) + desc + 12(bottom)
+        let withDesc = makeField(value: "Насколько легко пользоваться нашим сайтом?",
+                                 description: "Дополнительное описание для вопроса в несколько строк")
+        let descH = TextPropertyManager.heightForAttributed(
+            string: TextPropertyManager.convert(withDesc.description!, theme: theme, defaultFont: theme.fontP1,
+                                                 textProperties: nil, withRequired: false),
+            and: width)
+        XCTAssertEqual(
+            DataManager.sectionHeaderHeight(field: withDesc, theme: theme, contentWidth: width,
+                                            titleFont: titleFont, withRequired: false),
+            8 + titleH + 8 + descH + 12)
     }
 
     func testHeaderBlockHeightFitsActualLabelsAtVariousWidths() {
