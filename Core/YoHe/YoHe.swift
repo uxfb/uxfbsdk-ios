@@ -399,7 +399,7 @@ extension YoHe: RequestManagerDelegate {
     
     func formDataSaved(success: Bool, message: String?, campaignId: Int, invocationId: String) {
         if success {
-            self.campaignDelegate?.campaignDidSend(campaignId: campaignId)
+            self.campaignDelegate?.campaignDidSend(campaignId: campaignId, invocationId: invocationId)
         }
     }
 }
@@ -422,7 +422,8 @@ extension YoHe: CampaignFormPresentorProtocol {
         }
         
         self.campaignDelegate?.campaignDidAnswered(campaignId: campaign.campaignId,
-                                                   answers: answers)
+                                                   answers: answers,
+                                                   invocationId: invocationId)
         
         _requestManager.sendFormData(projectId: campaign.projectId,
                                      createdAtClient: StatisticManager.getTimeUTC(),
