@@ -12,7 +12,7 @@ variables:
   PROJECT: "UX Feedback SDK.xcodeproj"
   TEST_SCHEME: "UXFeedbackSDKTests"
   SDK_SCHEME: "UXFeedbackSDK"
-  TEST_DESTINATION: "platform=iOS Simulator,name=iPhone 17"
+  TEST_DESTINATION: "platform=iOS Simulator,name=iPhone 17,OS=26.2"
 
 smoke:
   stage: smoke
