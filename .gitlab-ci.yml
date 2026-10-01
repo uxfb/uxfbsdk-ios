@@ -30,18 +30,8 @@ test:
     - if: '$CI_COMMIT_BRANCH'
   script:
     - set -o pipefail
-    # 4 известных легаси-падения исключены до их починки (см. TEST_COVERAGE_REPORT.md)
-    - echo "SKIPPED (known legacy failures): APIWebRouterTests/testHeadersWithSettings, NSAttributedStringExtensionTests/testHeightForEmptyString, UIColorHexTests/testInvalidLengthThrows, PrivacyTests/testPrivacyCodable"
-    - xcodebuild test
-        -project "$PROJECT"
-        -scheme "$TEST_SCHEME"
-        -destination "$TEST_DESTINATION"
-        -resultBundlePath build/tests.xcresult
-        TEST_HOST= BUNDLE_LOADER=
-        -skip-testing:UXFeedbackSDKTests/APIWebRouterTests/testHeadersWithSettings
-        -skip-testing:UXFeedbackSDKTests/NSAttributedStringExtensionTests/testHeightForEmptyString
-        -skip-testing:UXFeedbackSDKTests/UIColorHexTests/testInvalidLengthThrows
-        -skip-testing:UXFeedbackSDKTests/PrivacyTests/testPrivacyCodable
+    - echo "SKIPPED known legacy failures - see TEST_COVERAGE_REPORT.md"
+    - xcodebuild test -project "$PROJECT" -scheme "$TEST_SCHEME" -destination "$TEST_DESTINATION" -resultBundlePath build/tests.xcresult TEST_HOST= BUNDLE_LOADER= -skip-testing:UXFeedbackSDKTests/APIWebRouterTests/testHeadersWithSettings -skip-testing:UXFeedbackSDKTests/NSAttributedStringExtensionTests/testHeightForEmptyString -skip-testing:UXFeedbackSDKTests/UIColorHexTests/testInvalidLengthThrows -skip-testing:UXFeedbackSDKTests/PrivacyTests/testPrivacyCodable
   retry:
     max: 1
     when: script_failure
@@ -58,9 +48,7 @@ build_xcframework:
     - if: '$CI_PIPELINE_SOURCE == "web"'
   script:
     - sh framework_build.command
-    - ditto -c -k --sequesterRsrc --keepParent
-        "UXFeedbackSDK_XCFramework/UXFeedbackSDK.xcframework"
-        "UXFeedbackSDK.xcframework.zip"
+    - ditto -c -k --sequesterRsrc --keepParent "UXFeedbackSDK_XCFramework/UXFeedbackSDK.xcframework" "UXFeedbackSDK.xcframework.zip"
     - shasum -a 256 UXFeedbackSDK.xcframework.zip
   artifacts:
     paths:
