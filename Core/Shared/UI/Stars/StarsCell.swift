@@ -55,68 +55,94 @@ class StarsCell: BaseCell {
         return view
     }()
     
+    private lazy var noAnswerView: NoAnswerView = {
+        let view = NoAnswerView()
+        view.isHidden = true
+        view.onToggle = { [weak self] isOn in
+            guard let self = self else { return }
+            self.noAnswerToggled(isOn)
+            self.currentValue = -1
+            for tag in 1...5 {
+                (self.contentView.viewWithTag(tag) as? UIImageView)?.tintColor = self.theme?.iconDisabledColor
+            }
+        }
+        return view
+    }()
+
     private var animationInProgress: Bool = false
     private var currentValue: Int = -1
-    
+
     override func setupSubviews() {
         contentView.addSubview(star1)
         contentView.addSubview(star2)
         contentView.addSubview(star3)
         contentView.addSubview(star4)
         contentView.addSubview(star5)
-        
+        contentView.addSubview(noAnswerView)
+
         star1.translatesAutoresizingMaskIntoConstraints = false
         star2.translatesAutoresizingMaskIntoConstraints = false
         star3.translatesAutoresizingMaskIntoConstraints = false
         star4.translatesAutoresizingMaskIntoConstraints = false
         star5.translatesAutoresizingMaskIntoConstraints = false
-        
+        noAnswerView.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             star3.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            star3.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            star3.centerYAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             star3.heightAnchor.constraint(equalToConstant: 38),
             star3.widthAnchor.constraint(equalToConstant: 38),
-            
+
             star2.trailingAnchor.constraint(equalTo: star3.leadingAnchor, constant: -20),
-            star2.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            star2.centerYAnchor.constraint(equalTo: star3.centerYAnchor),
             star2.heightAnchor.constraint(equalToConstant: 38),
             star2.widthAnchor.constraint(equalToConstant: 38),
-            
+
             star1.trailingAnchor.constraint(equalTo: star2.leadingAnchor, constant: -20),
-            star1.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            star1.centerYAnchor.constraint(equalTo: star3.centerYAnchor),
             star1.heightAnchor.constraint(equalToConstant: 38),
             star1.widthAnchor.constraint(equalToConstant: 38),
-            
+
             star4.leadingAnchor.constraint(equalTo: star3.trailingAnchor, constant: 20),
-            star4.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            star4.centerYAnchor.constraint(equalTo: star3.centerYAnchor),
             star4.heightAnchor.constraint(equalToConstant: 38),
             star4.widthAnchor.constraint(equalToConstant: 38),
-            
+
             star5.leadingAnchor.constraint(equalTo: star4.trailingAnchor, constant: 20),
-            star5.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            star5.centerYAnchor.constraint(equalTo: star3.centerYAnchor),
             star5.heightAnchor.constraint(equalToConstant: 38),
             star5.widthAnchor.constraint(equalToConstant: 38),
+
+            noAnswerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            noAnswerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            noAnswerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
-    
+
     override func updateUI() {
-        currentValue = Int(field?.answers.first ?? "") ?? -1
-        
+        let noAnswer = isNoAnswerSelected
+        currentValue = noAnswer ? -1 : Int(field?.answers.first ?? "") ?? -1
+
+        noAnswerView.isHidden = noAnswerName == nil
+        if let name = noAnswerName {
+            noAnswerView.configure(title: name, theme: theme, isOn: noAnswer)
+        }
+
         let color = (field!.isError && currentValue == -1) ? theme?.iconDisabledColor : theme?.iconDisabledColor
-        
+
         for tag in 1...5 {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(starTapped(_ :)))
             self.contentView.viewWithTag(tag)?.isUserInteractionEnabled = true
             self.contentView.viewWithTag(tag)?.addGestureRecognizer(tapGesture)
-            
+
             if currentValue == -1 || tag > self.currentValue  {
                 (self.contentView.viewWithTag(tag) as? UIImageView)?.tintColor = color
             } else {
                 (self.contentView.viewWithTag(tag) as? UIImageView)?.tintColor = theme?.iconStarColor
             }
         }
-        
-        if (field?.isError ?? false) && currentValue == -1 {
+
+        if (field?.isError ?? false) && currentValue == -1 && !noAnswer {
             animateStarsError()
         }
     }
@@ -205,7 +231,8 @@ class StarsCell: BaseCell {
         let oldValue = currentValue
         animationInProgress = true
         currentValue = sender.view?.tag ?? -1
-        
+        syncScaleAnswer(String(currentValue), noAnswerView: noAnswerView)
+
         animateStars(reversed: oldValue > currentValue) {
             self.animationInProgress = false
             if self.delegate != nil {

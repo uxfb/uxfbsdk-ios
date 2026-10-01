@@ -1,0 +1,17 @@
+stages:
+  - smoke
+
+default:
+  tags: [macos]
+
+smoke:
+  stage: smoke
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+    - if: '$CI_COMMIT_BRANCH'
+  script:
+    - sw_vers
+    - echo "Active Xcode:" && xcode-select -p
+    - xcodebuild -version
+    - echo "Available iPhone simulators:" && xcrun simctl list devices available | grep iPhone || true
+    - echo "Runner OK"

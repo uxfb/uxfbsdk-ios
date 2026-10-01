@@ -68,7 +68,6 @@ class SmilesCell: BaseCell {
 
         context.draw(cg, in: CGRect(x: 0, y: 0, width: width, height: height))
 
-        // Prepare map in 0...255 RGBA (but we'll match ignoring A)
         let preparedColorMap: [([UInt8], [UInt8])] = colorMap.compactMap { oldColor, newColor in
             var oldR: CGFloat = 0, oldG: CGFloat = 0, oldB: CGFloat = 0, oldA: CGFloat = 0
             var newR: CGFloat = 0, newG: CGFloat = 0, newB: CGFloat = 0, newA: CGFloat = 0
@@ -94,41 +93,66 @@ class SmilesCell: BaseCell {
             return (oldRGB, newRGBA)
         }
 
+        let anchors: [(rgb: [Double], replacement: [Double])] = preparedColorMap.map { oldRGB, newRGBA in
+            (oldRGB.map { Double($0) }, newRGBA.map { Double($0) })
+        }
+
         for i in stride(from: 0, to: pixelData.count, by: 4) {
             let srcA = pixelData[i + 3]
 
             if srcA == 0 { continue }
 
-            let r = Int(pixelData[i]) * 255 / Int(srcA)
-            let g = Int(pixelData[i + 1]) * 255 / Int(srcA)
-            let b = Int(pixelData[i + 2]) * 255 / Int(srcA)
+            let p = [
+                Double(pixelData[i]) * 255 / Double(srcA),
+                Double(pixelData[i + 1]) * 255 / Double(srcA),
+                Double(pixelData[i + 2]) * 255 / Double(srcA)
+            ]
 
-            var nearest: [UInt8]?
-            var nearestDistance = Int.max
-            for (oldRGB, newRGBA) in preparedColorMap {
-                let dr = r - Int(oldRGB[0])
-                let dg = g - Int(oldRGB[1])
-                let db = b - Int(oldRGB[2])
-                let distance = dr * dr + dg * dg + db * db
-                if distance < nearestDistance {
-                    nearestDistance = distance
-                    nearest = newRGBA
+            var bestResidual = Double.greatestFiniteMagnitude
+            var bestColor: [Double]?
+
+            for a in 0..<anchors.count {
+                for b in a..<anchors.count {
+                    let ca = anchors[a]
+                    let cb = anchors[b]
+
+                    var t = 0.0
+                    if a != b {
+                        var dot = 0.0
+                        var lengthSquared = 0.0
+                        for k in 0..<3 {
+                            let ab = cb.rgb[k] - ca.rgb[k]
+                            dot += (p[k] - ca.rgb[k]) * ab
+                            lengthSquared += ab * ab
+                        }
+                        if lengthSquared > 0 {
+                            t = min(max(dot / lengthSquared, 0), 1)
+                        }
+                    }
+
+                    var residual = 0.0
+                    for k in 0..<3 {
+                        let d = p[k] - (ca.rgb[k] + (cb.rgb[k] - ca.rgb[k]) * t)
+                        residual += d * d
+                    }
+
+                    if residual < bestResidual {
+                        bestResidual = residual
+                        bestColor = (0..<4).map { k in
+                            ca.replacement[k] + (cb.replacement[k] - ca.replacement[k]) * t
+                        }
+                    }
                 }
             }
 
-            guard let newRGBA = nearest else { continue }
+            guard let newColor = bestColor else { continue }
 
-            // Combine the original pixel alpha with the replacement color alpha
-            let srcAlpha = CGFloat(srcA) / 255.0
-            let repAlpha = CGFloat(newRGBA[3]) / 255.0
-            let finalAlpha = srcAlpha * repAlpha
-            let finalAByte = UInt8(clamping: Int(finalAlpha * 255.0))
+            let finalAlpha = (Double(srcA) / 255.0) * (newColor[3] / 255.0)
 
-            // Premultiply RGB for premultipliedLast bitmap
-            pixelData[i]     = UInt8(clamping: Int(CGFloat(newRGBA[0]) * finalAlpha))
-            pixelData[i + 1] = UInt8(clamping: Int(CGFloat(newRGBA[1]) * finalAlpha))
-            pixelData[i + 2] = UInt8(clamping: Int(CGFloat(newRGBA[2]) * finalAlpha))
-            pixelData[i + 3] = finalAByte
+            pixelData[i]     = UInt8(clamping: Int(newColor[0] * finalAlpha))
+            pixelData[i + 1] = UInt8(clamping: Int(newColor[1] * finalAlpha))
+            pixelData[i + 2] = UInt8(clamping: Int(newColor[2] * finalAlpha))
+            pixelData[i + 3] = UInt8(clamping: Int(finalAlpha * 255.0))
         }
 
         guard let newCGImage = context.makeImage() else { return nil }
@@ -228,9 +252,20 @@ class SmilesCell: BaseCell {
         return view
     }()
     
+    private lazy var noAnswerView: NoAnswerView = {
+        let view = NoAnswerView()
+        view.isHidden = true
+        view.onToggle = { [weak self] isOn in
+            self?.noAnswerToggled(isOn)
+            self?.currentValue = -1
+            self?.applyState()
+        }
+        return view
+    }()
+
     private var animationInProgress: Bool = false
     private var currentValue: Int = -1
-    
+
     override func setupSubviews() {
         clipsToBounds = false
         contentView.clipsToBounds = false
@@ -239,6 +274,7 @@ class SmilesCell: BaseCell {
         contentView.addSubview(smile3)
         contentView.addSubview(smile4)
         contentView.addSubview(smile5)
+        contentView.addSubview(noAnswerView)
         
         for i in 1...5 {
             if let smile = contentView.viewWithTag(i) as? UIButton {
@@ -252,32 +288,37 @@ class SmilesCell: BaseCell {
         smile3.translatesAutoresizingMaskIntoConstraints = false
         smile4.translatesAutoresizingMaskIntoConstraints = false
         smile5.translatesAutoresizingMaskIntoConstraints = false
-        
+        noAnswerView.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             smile3.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            smile3.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            smile3.centerYAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
             smile3.heightAnchor.constraint(equalToConstant: 38),
             smile3.widthAnchor.constraint(equalToConstant: 38),
-            
+
             smile2.trailingAnchor.constraint(equalTo: smile3.leadingAnchor, constant: -20),
-            smile2.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            smile2.centerYAnchor.constraint(equalTo: smile3.centerYAnchor),
             smile2.heightAnchor.constraint(equalToConstant: 38),
             smile2.widthAnchor.constraint(equalToConstant: 38),
-            
+
             smile1.trailingAnchor.constraint(equalTo: smile2.leadingAnchor, constant: -20),
-            smile1.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            smile1.centerYAnchor.constraint(equalTo: smile3.centerYAnchor),
             smile1.heightAnchor.constraint(equalToConstant: 38),
             smile1.widthAnchor.constraint(equalToConstant: 38),
-            
+
             smile4.leadingAnchor.constraint(equalTo: smile3.trailingAnchor, constant: 20),
-            smile4.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            smile4.centerYAnchor.constraint(equalTo: smile3.centerYAnchor),
             smile4.heightAnchor.constraint(equalToConstant: 38),
             smile4.widthAnchor.constraint(equalToConstant: 38),
-            
+
             smile5.leadingAnchor.constraint(equalTo: smile4.trailingAnchor, constant: 20),
-            smile5.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            smile5.centerYAnchor.constraint(equalTo: smile3.centerYAnchor),
             smile5.heightAnchor.constraint(equalToConstant: 38),
             smile5.widthAnchor.constraint(equalToConstant: 38),
+
+            noAnswerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            noAnswerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            noAnswerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
         
         for i in 1...5 {
@@ -298,11 +339,16 @@ class SmilesCell: BaseCell {
     }
     
     override func updateUI() {
-        currentValue = Int(field?.answers.first ?? "") ?? -1
-        
+        currentValue = isNoAnswerSelected ? -1 : Int(field?.answers.first ?? "") ?? -1
+
+        noAnswerView.isHidden = noAnswerName == nil
+        if let name = noAnswerName {
+            noAnswerView.configure(title: name, theme: theme, isOn: isNoAnswerSelected)
+        }
+
         applyState()
-        
-        if (field?.isError ?? false) && currentValue == -1 {
+
+        if (field?.isError ?? false) && currentValue == -1 && !isNoAnswerSelected {
             animateSmiles()
         }
     }
@@ -361,9 +407,12 @@ class SmilesCell: BaseCell {
     }
     
     private func applyState() {
+        let noAnswer = isNoAnswerSelected
         for i in 1...5 {
             self.contentView.viewWithTag(i)?.borderWidth = 0
-            if (i == currentValue + 1) {
+            if noAnswer {
+                setSmileState(tag: i, state: .disabled)
+            } else if (i == currentValue + 1) {
                 setSmileState(tag: i, state: .selected)
             } else if currentValue == -1 {
                 setSmileState(tag: i, state: .normal)
@@ -481,6 +530,7 @@ class SmilesCell: BaseCell {
 
     @objc private func smileTouchUpInside(_ sender: UIButton) {
         currentValue = sender.tag - 1
+        syncScaleAnswer(String(currentValue), noAnswerView: noAnswerView)
         clearHighlights()
         delegate?.fieldChanged(field!, answer: [String(currentValue)], refresh: true)
         applyState()

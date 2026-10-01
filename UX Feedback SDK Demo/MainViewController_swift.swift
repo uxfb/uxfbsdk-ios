@@ -126,7 +126,7 @@ class MainViewController_swift: UIViewController {
                     .addValue("abLifeSituationsWidget", value: "test")
                     .addValue("cid", value: "111")
                 .build()
-            let uuid = UXFeedback.sdk.startCampaign(eventName: "perehod", attributes: nil)
+            let uuid = UXFeedback.sdk.startCampaign(eventName: "screen2", attributes: nil)
             
         default:
             break

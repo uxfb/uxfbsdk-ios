@@ -61,6 +61,14 @@ class DataManager: FieldDelegate {
             return campaign?.type == .popup ? 80 : 32
         }
     }
+
+    private var headerContentWidth: CGFloat {
+        let tableWidth = viewController?.tableView.bounds.width ?? 0
+        guard tableWidth > 0 else {
+            return width - CGFloat.leftArea - CGFloat.rightArea - extraSpace
+        }
+        return tableWidth - CGFloat.leftArea - CGFloat.rightArea - 32
+    }
     
     internal var isFullScreen = false
     
@@ -132,6 +140,7 @@ class DataManager: FieldDelegate {
     }
     
     private var answers = Array<Dictionary<String, Any>>()
+    private var visitedPages: Set<Int> = [0]
     private var _screenshots: [Screenshot] = []
     public var screenshots: [Screenshot] {
         get {
@@ -141,6 +150,15 @@ class DataManager: FieldDelegate {
     
     var isError: Bool = false
     private var silencedErrorFieldIds: Set<String> = []
+    private var errorFieldIds: Set<String> = []
+
+    private func markErrors() {
+        isError = true
+        silencedErrorFieldIds.removeAll()
+        errorFieldIds = Set((campaign?.pages[currentPage].fields ?? [])
+            .filter { fieldNeedComplete($0) }
+            .compactMap { $0.id })
+    }
     
     private var isPrivacyChecked: Bool = false
     private var isPrivacyWarning: Bool = false
@@ -251,7 +269,7 @@ class DataManager: FieldDelegate {
         
         let answer = answers.first { answer in ((answer["fieldId"] as? String) ?? "") == field.id }
         field.answers = (answer?["value"] as? [String]) ?? []
-        field.isError = isError && (field.required ?? false)
+        field.isError = isError && (field.required ?? false) && errorFieldIds.contains(field.id ?? "")
         
         field.isLastPage = campaign?.pages[currentPage].type == 2
         
@@ -307,7 +325,7 @@ class DataManager: FieldDelegate {
         }
         
         if (toField?.type == .button && fromField.type != .header && fromField.type != .text && fromField.type != .image) {
-            return 32
+            return 24
         }
         
         return 24
@@ -371,44 +389,83 @@ class DataManager: FieldDelegate {
             default:
                 break
         }
-        
-        let font = (campaign?.theme.fontH2)!
-        let fontDescr = (campaign?.theme.fontP1)!
-        let required = field.required ?? false
-        let attributedValue = TextPropertyManager.convert(field.value!,
-                                                          theme: campaign!.theme,
-                                                          defaultFont: font,
+
+        if field.image != nil {
+            return Self.headerBlockHeight(field: field,
+                                          theme: campaign!.theme,
+                                          contentWidth: headerContentWidth,
+                                          titleFont: (campaign?.theme.fontH2)!,
+                                          withRequired: field.required ?? false)
+        }
+
+        return Self.sectionHeaderHeight(field: field,
+                                        theme: campaign!.theme,
+                                        contentWidth: headerContentWidth,
+                                        titleFont: (campaign?.theme.fontH2)!,
+                                        withRequired: field.required ?? false)
+    }
+
+    static func sectionHeaderHeight(field: Field,
+                                    theme: ThemeProtocol,
+                                    contentWidth: CGFloat,
+                                    titleFont: UIFont,
+                                    withRequired: Bool) -> CGFloat {
+        let attributedValue = TextPropertyManager.convert(field.value ?? "",
+                                                          theme: theme,
+                                                          defaultFont: titleFont,
                                                           textProperties: nil,
-                                                          withRequired: required)
-        var valueHeight = TextPropertyManager.heightForAttributed(string: attributedValue,
-                                                                  and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
-        
-        var descriptionHeight: CGFloat = 0
+                                                          withRequired: withRequired)
+        var height = 8 + TextPropertyManager.heightForAttributed(string: attributedValue, and: contentWidth)
+
         if let descriptionData = field.description, !descriptionData.isEmpty {
             let attributedDescription = TextPropertyManager.convert(descriptionData,
-                                                              theme: campaign!.theme,
-                                                              defaultFont: fontDescr,
-                                                              textProperties: nil,
-                                                              withRequired: false)
-            descriptionHeight = TextPropertyManager.heightForAttributed(string: attributedDescription,
-                                                                      and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
+                                                                    theme: theme,
+                                                                    defaultFont: theme.fontP1,
+                                                                    textProperties: nil,
+                                                                    withRequired: false)
+            height += 8 + TextPropertyManager.heightForAttributed(string: attributedDescription, and: contentWidth)
         }
-        
+
+        return height + 12
+    }
+
+    static func headerBlockHeight(field: Field,
+                                  theme: ThemeProtocol,
+                                  contentWidth: CGFloat,
+                                  titleFont: UIFont,
+                                  withRequired: Bool) -> CGFloat {
+        let attributedValue = TextPropertyManager.convert(field.value ?? "",
+                                                          theme: theme,
+                                                          defaultFont: titleFont,
+                                                          textProperties: nil,
+                                                          withRequired: withRequired)
+        var height = TextPropertyManager.heightForAttributed(string: attributedValue,
+                                                             and: contentWidth)
+
+        if let descriptionData = field.description, !descriptionData.isEmpty {
+            let attributedDescription = TextPropertyManager.convert(descriptionData,
+                                                                    theme: theme,
+                                                                    defaultFont: theme.fontP1,
+                                                                    textProperties: nil,
+                                                                    withRequired: false)
+            height += TextPropertyManager.heightForAttributed(string: attributedDescription,
+                                                              and: contentWidth)
+        }
+
         if let fieldImage = field.image {
             let isDefault = (fieldImage.type ?? "default") == "default"
             let imgHeight = HeaderCell.computeImageHeight(field: field, isDefault: isDefault)
-            valueHeight += 16 + imgHeight
+            _ = (fieldImage.position ?? "topHeader") == "topHeader"
+            height += imgHeight + 16
         }
-        
-        // 24 = 8(top) + 8(gap between value and description) + 8(bottom)
-        // matches HeaderView constraints exactly
-        return valueHeight + descriptionHeight + 24
+
+        return height + 24
     }
     
     private func getFieldFooterHeight(_ field: Field) -> CGFloat {
         var height: CGFloat = .leastNonzeroMagnitude
         
-        if isError && fieldNeedComplete(field) && !silencedErrorFieldIds.contains(field.id ?? "") {
+        if isError && fieldNeedComplete(field) && errorFieldIds.contains(field.id ?? "") && !silencedErrorFieldIds.contains(field.id ?? "") {
             guard let warning = field.warning else {
                 return checkFieldTransfromed(field) ? 12 : .leastNonzeroMagnitude
             }
@@ -440,7 +497,7 @@ class DataManager: FieldDelegate {
     }
     
     private func getFieldFooter(_ field: Field) -> UIView? {
-        if isError && fieldNeedComplete(field) && !silencedErrorFieldIds.contains(field.id ?? "") {
+        if isError && fieldNeedComplete(field) && errorFieldIds.contains(field.id ?? "") && !silencedErrorFieldIds.contains(field.id ?? "") {
             guard let warning = field.warning else {
                 return nil
             }
@@ -477,6 +534,17 @@ class DataManager: FieldDelegate {
         }
     }
     
+    private func noAnswerExtraHeight(_ field: Field) -> CGFloat {
+        guard let name = field.noAnswerName, !name.isEmpty else {
+            return 0
+        }
+        let labelWidth = headerContentWidth - NoAnswerView.toggleReservedWidth
+        let height = NoAnswerView.height(for: name,
+                                         width: labelWidth,
+                                         font: (campaign?.theme.fontP2) ?? .systemFont(ofSize: 14))
+        return height + NoAnswerView.topSpacing
+    }
+
     private func getFieldHeight(_ field: Field) -> CGFloat {
         if !checkFieldTransfromed(field) {
             return .leastNonzeroMagnitude
@@ -484,9 +552,9 @@ class DataManager: FieldDelegate {
         switch field.type {
             case .button:
                 return 40
-                
+
             case .smiles:
-                return 48
+                return 48 + noAnswerExtraHeight(field)
                 
             case .checkbox:
                 let containerWidth = (viewController?.tableView.bounds.width ?? 0) > 0
@@ -505,35 +573,11 @@ class DataManager: FieldDelegate {
                 return 40
                 
             case .header:
-                //                return UITableView.automaticDimension
-                let font = (campaign?.theme.fontH1)!
-                let value = TextPropertyManager.convert(field.value!,
-                                                        theme: campaign!.theme,
-                                                        defaultFont: font,
-                                                        textProperties: nil,
-                                                        withRequired: false)
-                let valueHeight = TextPropertyManager.heightForAttributed(string: value,
-                                                                          and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
-                var descriptionHeight: CGFloat = 0
-                if let descriptionData = field.description, !descriptionData.isEmpty {
-                    let description = TextPropertyManager.convert(descriptionData,
-                                                                      theme: campaign!.theme,
-                                                                      defaultFont: (campaign?.theme.fontP1)!,
-                                                                      textProperties: nil,
-                                                                      withRequired: false)
-                    descriptionHeight = TextPropertyManager.heightForAttributed(string: description,
-                                                                              and: self.width - CGFloat.leftArea - CGFloat.rightArea - extraSpace)
-                }
-                
-                var imageHeight: CGFloat = 0
-                
-                if let fieldImage = field.image {
-                    let isDefault = (fieldImage.type ?? "default") == "default"
-                    let imgH = HeaderCell.computeImageHeight(field: field, isDefault: isDefault)
-                    imageHeight = 16 + imgH
-                }
-                
-                return valueHeight + descriptionHeight + imageHeight + 24
+                return Self.headerBlockHeight(field: field,
+                                              theme: campaign!.theme,
+                                              contentWidth: headerContentWidth,
+                                              titleFont: (campaign?.theme.fontH1)!,
+                                              withRequired: false)
                 
             case .image:
                 return 56
@@ -591,17 +635,18 @@ class DataManager: FieldDelegate {
                 return valueHeight + imageHeight
                 
             case .stars:
-                return 40
-                
+                return 40 + noAnswerExtraHeight(field)
+
             case .bottom:
                 return 40
-                
+
             case .nps, .rating:
+                var height: CGFloat = 48
                 if let messages = field.messages {
                     let count = (messages.negative?.count ?? 0) + (messages.positive?.count ?? 0)
-                    return count > 0 ? 80 : 48
+                    height = count > 0 ? 80 : 48
                 }
-                return 48
+                return height + noAnswerExtraHeight(field)
                 
             case .screenshot:
                 var buttonsHeight: CGFloat = 0
@@ -644,8 +689,7 @@ class DataManager: FieldDelegate {
     
     private func checkAndNavigate() {
         if needsComplete() {
-            isError = true
-            silencedErrorFieldIds.removeAll()
+            markErrors()
             viewController?.updateUI()
         } else {
             let nextIndex = getNextIndex()
@@ -663,12 +707,13 @@ class DataManager: FieldDelegate {
     func buttonTapped(_ field: Field, answer: [String], refresh: Bool) {
         viewController?.view.endEditing(true)
         isError = false
+        errorFieldIds.removeAll()
         if !isPrivacyChecked && privacyNeeded {
             isPrivacyWarning = true
             checkPrivacy(nil)
-            
+
             if needsComplete() {
-                isError = true
+                markErrors()
                 viewController?.updateUI()
             }
             return
@@ -908,6 +953,7 @@ class DataManager: FieldDelegate {
     
     private func toPage(index: Int) {
         currentPage = index
+        visitedPages.insert(index)
         viewController?.scrollToTop(animated: false)
         viewController?.updateUI()
         self.viewController?.updateFooter()
@@ -934,27 +980,26 @@ class DataManager: FieldDelegate {
         var results: [[String: Any]] = []
         
         for i in 0...currentPage {
+            guard visitedPages.contains(i) else { continue }
             let page = campaign?.pages[i]
             let fields = formattedAnswers.filter { (answer) -> Bool in
                 let pageId = answer["pageId"] as? String
                 return page?.id == pageId ?? ""
             }
-            
-//            if !fields.isEmpty || i == currentPage {
-                var result: [String: Any] = [:]
-                result["pageId"] = page?.id ?? ""
-                if fields.count > 0 {
-                    result["fields"] = fields.map { $0.filter{ $0.key != "pageId" } }
-                }
-                
-                let currentPageId = campaign?.pages[currentPage].id ?? ""
-                
-                result["close"] = page?.id == currentPageId ? 1 : 0
-                
-                result["externalLink"] = isLink ? 1 : 0
-                
-                results.append(result)
-//            }
+
+            var result: [String: Any] = [:]
+            result["pageId"] = page?.id ?? ""
+            if fields.count > 0 {
+                result["fields"] = fields.map { $0.filter{ $0.key != "pageId" } }
+            }
+
+            let currentPageId = campaign?.pages[currentPage].id ?? ""
+
+            result["close"] = page?.id == currentPageId ? 1 : 0
+
+            result["externalLink"] = isLink ? 1 : 0
+
+            results.append(result)
         }
         
         if isPrivacyChecked || !privacyNeeded {
@@ -1066,20 +1111,30 @@ class DataManager: FieldDelegate {
     }
     
     private func prepareNextIndex(_ currentPage: Int, basePage: Int) -> Int {
+        let leavingPageId = campaign?.pages[currentPage].id
+        let leavingFieldIds = Set(campaign?.pages[currentPage].fields.compactMap { $0.id } ?? [])
         let transforms = completedTransforms().filter { transform in
             var result = transform.to.action == "transition" &&
-            transform.to.value != self.campaign?.pages[currentPage].id
+            transform.to.value != leavingPageId
             if let toPageIndex = campaign?.pages.lastIndex(where: { (page) -> Bool in
                 page.id == transform.to.value
             }) {
                 result = result && basePage < toPageIndex
             }
-            
+
             let hasFieldCondition = transform.scenarios.contains { scenario in
                 scenario.conditions.contains { $0.from.field != nil }
             }
             result = result && hasFieldCondition
-            
+
+            let belongsToLeavingPage = transform.scenarios.contains { scenario in
+                scenario.conditions.contains { condition in
+                    condition.from.page == leavingPageId ||
+                    (condition.from.field.map { leavingFieldIds.contains($0) } ?? false)
+                }
+            }
+            result = result && belongsToLeavingPage
+
             return result
         }
         
@@ -1133,7 +1188,7 @@ class DataManager: FieldDelegate {
         var needsShow = false
         
         while !needsShow {
-            nextIndex = prepareNextIndex(nextIndex, basePage: currentPage)
+            nextIndex = prepareNextIndex(nextIndex, basePage: nextIndex)
             
             if campaign.pages.indices.contains(nextIndex) {
                 if campaign.pages[nextIndex].type == 2 {

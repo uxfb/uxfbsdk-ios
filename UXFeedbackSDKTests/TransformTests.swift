@@ -56,6 +56,16 @@ final class TransformTests: XCTestCase {
         XCTAssertEqual(condition.value, ["1", "2", "3"])
     }
 
+    func testTransformConditionWithNoAnswerValue() throws {
+        let json = """
+        { "rule": "equal", "value": [-1] }
+        """.data(using: .utf8)!
+
+        let condition = try JSONDecoder().decode(TransformCondition.self, from: json)
+
+        XCTAssertEqual(condition.value, ["-1"])
+    }
+
     func testTransformConditionWithStringValues() throws {
         let json = """
         { "rule": "contain", "value": ["a", "b", "c"] }

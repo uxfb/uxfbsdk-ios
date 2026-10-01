@@ -154,6 +154,18 @@ final class FieldTests: XCTestCase {
         XCTAssertTrue(field.isError)
         XCTAssertTrue(field.isLastPage)
     }
+
+    func testFieldNoAnswerNameDecoding() throws {
+        let field = try Field(from: ["id": "f1", "type": "nps", "noAnswerName": "Затрудняюсь ответить"] as [String: Any])
+
+        XCTAssertEqual(field.noAnswerName, "Затрудняюсь ответить")
+    }
+
+    func testFieldNoAnswerNameAbsent() throws {
+        let field = try Field(from: ["id": "f1", "type": "nps"] as [String: Any])
+
+        XCTAssertNil(field.noAnswerName)
+    }
 }
 
 final class OptionTests: XCTestCase {
@@ -190,6 +202,144 @@ final class OptionTests: XCTestCase {
         XCTAssertEqual(decoded.id, option.id)
         XCTAssertEqual(decoded.value, option.value)
         XCTAssertEqual(decoded.exceptional, option.exceptional)
+    }
+
+    func testOptionValueTrimsControlCharactersAtEdges() throws {
+        let json = """
+        {"id": "opt4", "value": "\\r\\n Вариант A \\r"}
+        """.data(using: .utf8)!
+
+        let option = try JSONDecoder().decode(Option.self, from: json)
+
+        XCTAssertEqual(option.value, "Вариант A")
+    }
+
+    func testOptionValueKeepsInnerCharacters() throws {
+        let json = """
+        {"id": "opt5", "value": "Вариант\\rA"}
+        """.data(using: .utf8)!
+
+        let option = try JSONDecoder().decode(Option.self, from: json)
+
+        XCTAssertEqual(option.value, "Вариант\rA")
+    }
+}
+
+final class NoAnswerToggleTests: XCTestCase {
+
+    private final class RecordingDelegate: FieldDelegate {
+        var lastAnswer: [String]?
+        func fieldChanged(_ field: Field, answer: [String], refresh: Bool) { lastAnswer = answer }
+        func buttonTapped(_ field: Field, answer: [String], refresh: Bool) {}
+        func textChanged(_ field: Field, answer: [String]) {}
+        func screenshotChanged(_ field: Field, screenshots: [Screenshot]) {}
+        func didBeginEditing(_ field: Field) {}
+        func didEndEditing(_ field: Field) {}
+    }
+
+    private func makeField(type: String, noAnswerName: String? = nil, answers: [String] = []) throws -> Field {
+        var dict: [String: Any] = ["id": "f1", "type": type, "value": "Question"]
+        if let noAnswerName = noAnswerName {
+            dict["noAnswerName"] = noAnswerName
+        }
+        var field = try Field(from: dict)
+        field.answers = answers
+        return field
+    }
+
+    func testNoAnswerNameNilWhenAbsent() throws {
+        let cell = NpsCell(style: .default, reuseIdentifier: "nps")
+        cell.configureWith(try makeField(type: "nps"), theme: Theme(), delegate: RecordingDelegate())
+
+        XCTAssertNil(cell.noAnswerName)
+        XCTAssertFalse(cell.isNoAnswerSelected)
+    }
+
+    func testNoAnswerNameNilWhenEmpty() throws {
+        let cell = NpsCell(style: .default, reuseIdentifier: "nps")
+        cell.configureWith(try makeField(type: "nps", noAnswerName: ""), theme: Theme(), delegate: RecordingDelegate())
+
+        XCTAssertNil(cell.noAnswerName)
+    }
+
+    func testIsNoAnswerSelected() throws {
+        let cell = NpsCell(style: .default, reuseIdentifier: "nps")
+        cell.configureWith(try makeField(type: "nps", noAnswerName: "ЗО", answers: ["-1"]),
+                           theme: Theme(), delegate: RecordingDelegate())
+
+        XCTAssertTrue(cell.isNoAnswerSelected)
+    }
+
+    func testIsNoAnswerNotSelectedWithScaleValue() throws {
+        let cell = NpsCell(style: .default, reuseIdentifier: "nps")
+        cell.configureWith(try makeField(type: "nps", noAnswerName: "ЗО", answers: ["7"]),
+                           theme: Theme(), delegate: RecordingDelegate())
+
+        XCTAssertFalse(cell.isNoAnswerSelected)
+    }
+
+    func testIsNoAnswerIgnoredWithoutName() throws {
+        let cell = NpsCell(style: .default, reuseIdentifier: "nps")
+        cell.configureWith(try makeField(type: "nps", answers: ["-1"]),
+                           theme: Theme(), delegate: RecordingDelegate())
+
+        XCTAssertFalse(cell.isNoAnswerSelected)
+    }
+
+    func testToggleOnSendsMinusOne() throws {
+        let delegate = RecordingDelegate()
+        let cell = StarsCell(style: .default, reuseIdentifier: "stars")
+        cell.configureWith(try makeField(type: "stars", noAnswerName: "ЗО"),
+                           theme: Theme(), delegate: delegate)
+
+        cell.noAnswerToggled(true)
+
+        XCTAssertEqual(delegate.lastAnswer, ["-1"])
+    }
+
+    func testToggleOffClearsAnswer() throws {
+        let delegate = RecordingDelegate()
+        let cell = StarsCell(style: .default, reuseIdentifier: "stars")
+        cell.configureWith(try makeField(type: "stars", noAnswerName: "ЗО", answers: ["-1"]),
+                           theme: Theme(), delegate: delegate)
+
+        cell.noAnswerToggled(false)
+
+        XCTAssertEqual(delegate.lastAnswer, [])
+    }
+
+    func testStarsStayInteractiveWhenNoAnswerSelected() throws {
+        let cell = StarsCell(style: .default, reuseIdentifier: "stars")
+        cell.frame = CGRect(x: 0, y: 0, width: 320, height: 88)
+        cell.configureWith(try makeField(type: "stars", noAnswerName: "ЗО", answers: ["-1"]),
+                           theme: Theme(), delegate: RecordingDelegate())
+
+        for tag in 1...5 {
+            XCTAssertTrue(cell.contentView.viewWithTag(tag)?.isUserInteractionEnabled ?? false)
+        }
+    }
+
+    func testStarsDimmedWhenNoAnswerSelected() throws {
+        let theme = Theme()
+        let cell = StarsCell(style: .default, reuseIdentifier: "stars")
+        cell.frame = CGRect(x: 0, y: 0, width: 320, height: 88)
+        cell.configureWith(try makeField(type: "stars", noAnswerName: "ЗО", answers: ["-1"]),
+                           theme: theme, delegate: RecordingDelegate())
+
+        for tag in 1...5 {
+            XCTAssertEqual((cell.contentView.viewWithTag(tag) as? UIImageView)?.tintColor, theme.iconDisabledColor)
+        }
+    }
+
+    func testSmilesStayInteractiveWhenNoAnswerSelected() throws {
+        let cell = SmilesCell(style: .default, reuseIdentifier: "smiles")
+        cell.frame = CGRect(x: 0, y: 0, width: 320, height: 96)
+        cell.configureWith(try makeField(type: "smiles", noAnswerName: "ЗО", answers: ["-1"]),
+                           theme: Theme(), delegate: RecordingDelegate())
+
+        for tag in 1...5 {
+            XCTAssertTrue(cell.contentView.viewWithTag(tag)?.isUserInteractionEnabled ?? false)
+        }
     }
 }
 

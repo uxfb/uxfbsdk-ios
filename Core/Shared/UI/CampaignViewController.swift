@@ -1106,7 +1106,12 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
                 let senderField = dataManager?.fieldForRow(indexPath: IndexPath(row: 0, section: sender))
                 let forceReloadSender = senderField?.type == .screenshot
                 let sectionsToReload = IndexSet(
-                    (0..<min(oldCount, newCount)).filter { $0 != sender || forceReloadSender }
+                    (0..<min(oldCount, newCount)).filter { section in
+                        if section == sender { return forceReloadSender }
+                        let oldRows = tableView.numberOfRows(inSection: section)
+                        let newRows = dataManager?.numberForFieldCell(index: section) ?? oldRows
+                        return oldRows != newRows
+                    }
                 )
                 if !sectionsToReload.isEmpty {
                     tableView.reloadSections(sectionsToReload, with: .none)

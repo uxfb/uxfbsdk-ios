@@ -39,10 +39,18 @@ class HeaderCell: BaseCell {
         contentView.addSubview(label)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(headerImageView)
-        
+
         label.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         headerImageView.translatesAutoresizingMaskIntoConstraints = false
+
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
+        descriptionLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+    }
+
+    private func breakable(_ constraint: NSLayoutConstraint) -> NSLayoutConstraint {
+        constraint.priority = .defaultHigh
+        return constraint
     }
     
     private func updateWidthConstraints() {
@@ -96,8 +104,8 @@ class HeaderCell: BaseCell {
         
         if position == "topHeader" {
             NSLayoutConstraint.activate([
-                descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-                label.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -12),
+                breakable(descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)),
+                label.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -8),
                 headerImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
                 headerImageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -8),
                 imageHeightConstraint!
@@ -106,7 +114,7 @@ class HeaderCell: BaseCell {
             NSLayoutConstraint.activate([
                 label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
                 descriptionLabel.topAnchor.constraint(equalTo: headerImageView.bottomAnchor, constant: 8),
-                descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+                breakable(descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)),
                 headerImageView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
                 imageHeightConstraint!
             ])
@@ -216,7 +224,7 @@ class HeaderCell: BaseCell {
             NSLayoutConstraint.activate([
                 label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
                 descriptionLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
-                descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+                breakable(descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8))
             ])
         }
     }

@@ -43,8 +43,21 @@ class NpsCell: BaseCell {
         return stackView
     }()
     
+    private lazy var noAnswerView: NoAnswerView = {
+        let view = NoAnswerView()
+        view.isHidden = true
+        view.onToggle = { [weak self] isOn in
+            guard let self = self else { return }
+            self.noAnswerToggled(isOn)
+            self.currentValue = -1
+            self.buttonsStackView.alpha = isOn ? 0.4 : 1
+            self.updateButtonStyles()
+        }
+        return view
+    }()
+
     private var currentValue: Int = -1
-    
+
     private func createButton(value: Int) -> (UIView, UILabel) {
         let container = UIView()
         container.layer.cornerRadius = 8
@@ -74,37 +87,48 @@ class NpsCell: BaseCell {
         contentView.addSubview(buttonsStackView)
         contentView.addSubview(positiveLabel)
         contentView.addSubview(negativeLabel)
-        
+        contentView.addSubview(noAnswerView)
+
         buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
         positiveLabel.translatesAutoresizingMaskIntoConstraints = false
         negativeLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+        noAnswerView.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             buttonsStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             buttonsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             buttonsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             buttonsStackView.heightAnchor.constraint(equalToConstant: 40),
-            
+
             negativeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             negativeLabel.topAnchor.constraint(equalTo: buttonsStackView.bottomAnchor, constant: 8),
-            negativeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             negativeLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5, constant: -20),
-            
+
             positiveLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             positiveLabel.topAnchor.constraint(equalTo: buttonsStackView.bottomAnchor, constant: 8),
-            positiveLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             positiveLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5, constant: -20),
+
+            noAnswerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            noAnswerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            noAnswerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
-    
+
     override func updateUI() {
         negativeLabel.font = theme?.fontP2
         positiveLabel.font = theme?.fontP2
-        
-        currentValue = Int(field?.answers.first ?? "") ?? -1
-        
+
+        let noAnswer = isNoAnswerSelected
+        currentValue = noAnswer ? -1 : Int(field?.answers.first ?? "") ?? -1
+
         guard field != nil, theme != nil else { return }
-        
+
+        noAnswerView.isHidden = noAnswerName == nil
+        if let name = noAnswerName {
+            noAnswerView.configure(title: name, theme: theme, isOn: noAnswer)
+        }
+        buttonsStackView.alpha = noAnswer ? 0.4 : 1
+
         updateButtonStyles()
         
         negativeLabel.textColor = theme?.text03Color
@@ -128,7 +152,7 @@ class NpsCell: BaseCell {
                 container.layer.borderColor = theme?.mainColor.cgColor
                 label.textColor = .white
                 label.font = theme?.fontP2
-            } else if isError && currentValue == -1 {
+            } else if isError && currentValue == -1 && !isNoAnswerSelected {
                 container.backgroundColor = .clear
                 container.layer.borderColor = theme?.errorColorPrimary.cgColor
                 label.textColor = theme?.text02Color
@@ -148,6 +172,8 @@ class NpsCell: BaseCell {
     private func buttonTapped(_ gesture: UITapGestureRecognizer) {
         guard let view = gesture.view else { return }
         currentValue = view.tag
+        syncScaleAnswer(String(currentValue), noAnswerView: noAnswerView)
+        buttonsStackView.alpha = 1
         updateButtonStyles()
         delegate?.fieldChanged(field!, answer: [String(currentValue)], refresh: true)
     }
