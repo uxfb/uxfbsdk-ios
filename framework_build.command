@@ -30,11 +30,16 @@ mkdir -p "$SIMULATOR_ARCHIVE_PATH"
 mkdir -p "$IOS_DEVICE_ARCHIVE_PATH"
 mkdir -p "$FRAMEWORK_PATH"
 
-echo "Archiving ${FRAMEWORK_NAME}"
+VERSION_ARGS=""
+if [ -n "${SDK_VERSION:-}" ]; then
+  VERSION_ARGS="MARKETING_VERSION=${SDK_VERSION}"
+fi
 
-xcodebuild archive -scheme ${FRAMEWORK_NAME} -destination="iOS" -archivePath "${IOS_DEVICE_ARCHIVE_PATH}" -derivedDataPath "./build/derived_device" -sdk iphoneos IPHONEOS_DEPLOYMENT_TARGET=15.0 SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES
+echo "Archiving ${FRAMEWORK_NAME} ${SDK_VERSION:-}"
 
-xcodebuild archive -scheme ${FRAMEWORK_NAME} -destination="iOS Simulator" -archivePath "${SIMULATOR_ARCHIVE_PATH}"  -derivedDataPath "./build/derived_simulator" -sdk iphonesimulator IPHONEOS_DEPLOYMENT_TARGET=15.0 SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES
+xcodebuild archive -scheme ${FRAMEWORK_NAME} -destination="iOS" -archivePath "${IOS_DEVICE_ARCHIVE_PATH}" -derivedDataPath "./build/derived_device" -sdk iphoneos IPHONEOS_DEPLOYMENT_TARGET=15.0 ${VERSION_ARGS} SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES
+
+xcodebuild archive -scheme ${FRAMEWORK_NAME} -destination="iOS Simulator" -archivePath "${SIMULATOR_ARCHIVE_PATH}"  -derivedDataPath "./build/derived_simulator" -sdk iphonesimulator IPHONEOS_DEPLOYMENT_TARGET=15.0 ${VERSION_ARGS} SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES
 
 xcodebuild docbuild -scheme ${FRAMEWORK_NAME} \
     -derivedDataPath "${DOCS_ARCHIVE_PATH}" \
