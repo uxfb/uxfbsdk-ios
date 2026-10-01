@@ -2,6 +2,7 @@ stages:
   - smoke
   - test
   - build
+  - publish
 
 default:
   tags: [macos]
@@ -71,3 +72,13 @@ build_yohe:
     paths:
       - YoHeSDK.xcframework.zip
     expire_in: 30 days
+
+publish:
+  stage: publish
+  rules: *build_rules
+  needs: [build_uxfeedback, build_yohe]
+  script:
+    - VERSION="${CI_COMMIT_TAG:-$CI_COMMIT_REF_SLUG}"
+    - echo "Publishing version $VERSION"
+    - 'curl --fail-with-body --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file UXFeedbackSDK.xcframework.zip "$CI_API_V4_URL/projects/$CI_PROJECT_ID/packages/generic/uxfeedbacksdk/$VERSION/UXFeedbackSDK.xcframework.zip"'
+    - 'curl --fail-with-body --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file YoHeSDK.xcframework.zip "$CI_API_V4_URL/projects/$CI_PROJECT_ID/packages/generic/uxfeedbacksdk/$VERSION/YoHeSDK.xcframework.zip"'
