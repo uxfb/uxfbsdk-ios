@@ -34,7 +34,7 @@ test:
   script:
     - set -o pipefail
     - echo "SKIPPED known legacy failures - see TEST_COVERAGE_REPORT.md"
-    - xcodebuild test -project "$PROJECT" -scheme "$TEST_SCHEME" -destination "$TEST_DESTINATION" -resultBundlePath build/tests.xcresult TEST_HOST= BUNDLE_LOADER= -skip-testing:UXFeedbackSDKTests/APIWebRouterTests/testHeadersWithSettings -skip-testing:UXFeedbackSDKTests/NSAttributedStringExtensionTests/testHeightForEmptyString -skip-testing:UXFeedbackSDKTests/UIColorHexTests/testInvalidLengthThrows -skip-testing:UXFeedbackSDKTests/PrivacyTests/testPrivacyCodable
+    - xcodebuild test -project "$PROJECT" -scheme "$TEST_SCHEME" -destination "$TEST_DESTINATION" -resultBundlePath build/tests.xcresult BUILD_LIBRARY_FOR_DISTRIBUTION=NO TEST_HOST= BUNDLE_LOADER= -skip-testing:UXFeedbackSDKTests/APIWebRouterTests/testHeadersWithSettings -skip-testing:UXFeedbackSDKTests/NSAttributedStringExtensionTests/testHeightForEmptyString -skip-testing:UXFeedbackSDKTests/UIColorHexTests/testInvalidLengthThrows -skip-testing:UXFeedbackSDKTests/PrivacyTests/testPrivacyCodable
   retry:
     max: 1
     when: script_failure
