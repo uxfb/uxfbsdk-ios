@@ -92,7 +92,7 @@ publish:
 trigger_testapp:
   stage: publish
   needs: [publish]
-  rules:
-    - if: '$CI_COMMIT_TAG'
+  rules: *build_rules
   script:
-    - 'curl --fail-with-body -X POST -F "token=$TESTAPP_TRIGGER_TOKEN" -F "ref=main" -F "variables[SDK_VERSION]=$CI_COMMIT_TAG" "$CI_API_V4_URL/projects/$TESTAPP_PROJECT_ID/trigger/pipeline"'
+    - VERSION="${CI_COMMIT_TAG:-$CI_COMMIT_REF_SLUG}"
+    - 'curl --fail-with-body -X POST -F "token=$TESTAPP_TRIGGER_TOKEN" -F "ref=main" -F "variables[SDK_VERSION]=$VERSION" "$CI_API_V4_URL/projects/$TESTAPP_PROJECT_ID/trigger/pipeline"'
