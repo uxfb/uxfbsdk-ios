@@ -12,7 +12,8 @@ variables:
   PROJECT: "UX Feedback SDK.xcodeproj"
   TEST_SCHEME: "UXFeedbackSDKTests"
   SDK_SCHEME: "UXFeedbackSDK"
-  TEST_DESTINATION: "platform=iOS Simulator,name=iPhone 17,OS=26.2"
+  TEST_SIM_NAME: "iPhone 17"
+  TEST_SIM_OS_PREFIX: "26."
 
 smoke:
   stage: smoke
@@ -34,7 +35,9 @@ test:
   script:
     - set -o pipefail
     - echo "SKIPPED known legacy failures - see TEST_COVERAGE_REPORT.md"
-    - xcodebuild test -project "$PROJECT" -scheme "$TEST_SCHEME" -destination "$TEST_DESTINATION" -resultBundlePath build/tests.xcresult BUILD_LIBRARY_FOR_DISTRIBUTION=NO TEST_HOST= BUNDLE_LOADER= -skip-testing:UXFeedbackSDKTests/APIWebRouterTests/testHeadersWithSettings -skip-testing:UXFeedbackSDKTests/NSAttributedStringExtensionTests/testHeightForEmptyString -skip-testing:UXFeedbackSDKTests/UIColorHexTests/testInvalidLengthThrows -skip-testing:UXFeedbackSDKTests/PrivacyTests/testPrivacyCodable
+    - 'UDID=$(xcrun simctl list devices available | sed -n "/-- iOS ${TEST_SIM_OS_PREFIX}/,/^-- /p" | grep "${TEST_SIM_NAME} (" | grep -oE "[0-9A-F-]{36}" | head -1)'
+    - 'echo "Simulator: ${TEST_SIM_NAME} iOS ${TEST_SIM_OS_PREFIX}x UDID=$UDID"; test -n "$UDID"'
+    - xcodebuild test -project "$PROJECT" -scheme "$TEST_SCHEME" -destination "id=$UDID" -resultBundlePath build/tests.xcresult BUILD_LIBRARY_FOR_DISTRIBUTION=NO TEST_HOST= BUNDLE_LOADER= -skip-testing:UXFeedbackSDKTests/APIWebRouterTests/testHeadersWithSettings -skip-testing:UXFeedbackSDKTests/NSAttributedStringExtensionTests/testHeightForEmptyString -skip-testing:UXFeedbackSDKTests/UIColorHexTests/testInvalidLengthThrows -skip-testing:UXFeedbackSDKTests/PrivacyTests/testPrivacyCodable
   retry:
     max: 1
     when: script_failure
