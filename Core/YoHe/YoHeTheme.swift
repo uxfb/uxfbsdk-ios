@@ -105,8 +105,9 @@ open class YoHeTheme: NSObject, ThemeProtocol {
      open var fontBtn: UIFont = .systemFont(ofSize: 16,
                                               weight: .semibold)
     
-    var fontCaption: UIFont = .systemFont(ofSize: 16,
-                                          weight: .regular)
+    /// Caption font. Default System:Regular:16
+    open var fontCaption: UIFont = .systemFont(ofSize: 16,
+                                               weight: .regular)
     
     /// Initialize theme object
     public override init() {
