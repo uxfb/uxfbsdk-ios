@@ -151,6 +151,7 @@
 		BFB509992D50E6D000021998 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5ED7E42559DB1900A1698E /* Parser.swift */; };
 		BFB5099A2D50E6D000021998 /* Targeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB17FC52BB804050024FED5 /* Targeting.swift */; };
 		BFB5099B2D50E6D000021998 /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6DEFD27044E4300732D29 /* Data+.swift */; };
+		AA000000000000B1 /* Dictionary+lowercasedKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000B0 /* Dictionary+lowercasedKeys.swift */; };
 		BFB5099D2D50E6D000021998 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA54F8327AA86A2003D6411 /* Crypto.swift */; };
 		BFB5099E2D50E6D000021998 /* CampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2806A32562B18F006F2D61 /* CampaignViewController.swift */; };
 		BFB509A02D50E6D000021998 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF02FD3E255C65B000C794E6 /* Transform.swift */; };
@@ -223,6 +224,7 @@
 		BFBACC1230513E1C00E80A80 /* CampaignCoverageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBACC1130513E1C00E80A80 /* CampaignCoverageTests.swift */; };
 		BFBACC143051432A00E80A80 /* NetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBACC133051432A00E80A80 /* NetworkLayerTests.swift */; };
 		BFBACC163051460900E80A80 /* UXFeedbackFacadeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBACC153051460900E80A80 /* UXFeedbackFacadeTests.swift */; };
+		AA000000000000B2 /* Dictionary+lowercasedKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000B0 /* Dictionary+lowercasedKeys.swift */; };
 		BFBAFA952ADFE99B003CC167 /* Copyright.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBAFA942ADFE99B003CC167 /* Copyright.swift */; };
 		BFBECCDB2BFCAFE300279A5B /* Encodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBECCDA2BFCAFE300279A5B /* Encodable+.swift */; };
 		BFBF357D2C469B2200B3D263 /* ToggleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF357C2C469B2200B3D263 /* ToggleStatus.swift */; };
@@ -459,6 +461,7 @@
 		BFB509EF2D50E6D000021998 /* YoHeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YoHeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFB6DEFB27043D7200732D29 /* Screenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screenshot.swift; sourceTree = "<group>"; };
 		BFB6DEFD27044E4300732D29 /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
+		AA000000000000B0 /* Dictionary+lowercasedKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+lowercasedKeys.swift"; sourceTree = "<group>"; };
 		BFB85E792A42D7E5000208D2 /* YoHe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoHe.swift; sourceTree = "<group>"; };
 		BFB85E822A42D817000208D2 /* YoHeSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YoHeSDK.h; sourceTree = "<group>"; };
 		BFBACC0F30513A1300E80A80 /* HeaderHeightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderHeightTests.swift; sourceTree = "<group>"; };
@@ -622,6 +625,7 @@
 			children = (
 				BF01BDFA25618234008C641B /* CGFloat+.swift */,
 				BFB6DEFD27044E4300732D29 /* Data+.swift */,
+				AA000000000000B0 /* Dictionary+lowercasedKeys.swift */,
 				BF01BDF625613254008C641B /* Decodable+.swift */,
 				BFBECCDA2BFCAFE300279A5B /* Encodable+.swift */,
 				0A019A6122367EF2002FD4F8 /* NSLayoutConstraint+additions.swift */,
@@ -1422,6 +1426,7 @@
 				BFB17FC62BB804050024FED5 /* Targeting.swift in Sources */,
 				BF178C402EB152FF00AD08CE /* Gesture.swift in Sources */,
 				BFB6DEFE27044E4300732D29 /* Data+.swift in Sources */,
+				AA000000000000B2 /* Dictionary+lowercasedKeys.swift in Sources */,
 				BFF304302A42F5A900E513EA /* UXFeedbackDelegate.swift in Sources */,
 				BFA54F8427AA86A2003D6411 /* Crypto.swift in Sources */,
 				BF2806C22562B18F006F2D61 /* CampaignViewController.swift in Sources */,
@@ -1556,6 +1561,7 @@
 				BFB5099A2D50E6D000021998 /* Targeting.swift in Sources */,
 				BF178C412EB152FF00AD08CE /* Gesture.swift in Sources */,
 				BFB5099B2D50E6D000021998 /* Data+.swift in Sources */,
+				AA000000000000B1 /* Dictionary+lowercasedKeys.swift in Sources */,
 				BFB5099D2D50E6D000021998 /* Crypto.swift in Sources */,
 				BFB5099E2D50E6D000021998 /* CampaignViewController.swift in Sources */,
 				BFB509A02D50E6D000021998 /* Transform.swift in Sources */,

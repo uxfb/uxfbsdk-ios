@@ -42,7 +42,9 @@ open class UXFeedback: NSObject {
     open var theme: UXFBTheme = UXFBTheme()
     
     /// Дополнительные параметры, которые будут переданы при завершении прохождения опроса
-    open var properties: [String: Any] = [:]
+    open var properties: [String: Any] = [:] {
+        didSet { properties = properties.lowercasedKeys() }
+    }
     
     
     private var appId: String?
@@ -343,7 +345,7 @@ open class UXFeedback: NSObject {
                         }
                         
                         self.DDLog("Show form for event: \(eventName)")
-                        self.localProps[campaign.campaignId] = localProps
+                        self.localProps[campaign.campaignId] = localProps?.lowercasedKeys()
                         
                         
                         var properties = self.properties
@@ -412,7 +414,7 @@ open class UXFeedback: NSObject {
     
     /// Метод добавления глобального property
     open func removeGlobalProperty(key: String) {
-        properties.removeValue(forKey: key)
+        properties.removeValue(forKey: key.lowercased())
     }
     /// Метод удаления глобального property
     open func clearGlobalProperties() {

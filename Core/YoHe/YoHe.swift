@@ -41,7 +41,9 @@ open class YoHe: NSObject {
     open var theme: YoHeTheme = YoHeTheme()
     
     /// Additional parameters that will be passed when the poll is completed
-    open var properties: [String: Any] = [:]
+    open var properties: [String: Any] = [:] {
+        didSet { properties = properties.lowercasedKeys() }
+    }
     
     private var appId: String?
     
