@@ -225,6 +225,7 @@ internal class CampaignViewController: UIViewController {
     var titleViewHeightConstaint: NSLayoutConstraint!
     
     var presentationAnimated = true
+    private var lastLaidOutTableWidth: CGFloat = 0
     var state: ViewControllerState = .presenting
     var blackout: Blackout?
     
@@ -364,6 +365,12 @@ internal class CampaignViewController: UIViewController {
     open override func viewDidLayoutSubviews() {
         DispatchQueue.main.async {
             self.updateLayouts()
+        }
+        let tableWidth = tableView.bounds.width
+        if tableWidth > 0, tableWidth != lastLaidOutTableWidth {
+            lastLaidOutTableWidth = tableWidth
+            reloadTableView()
+            updateHeight()
         }
     }
     
@@ -799,7 +806,8 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if dataManager?.fieldForRow(indexPath: indexPath).type == .header {
+        if tableView.bounds.width > 0,
+           dataManager?.fieldForRow(indexPath: indexPath).type == .header {
             return UITableView.automaticDimension
         }
         return dataManager?.heightForFieldCell(indexPath: indexPath) ?? 0
