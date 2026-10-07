@@ -573,6 +573,12 @@ class DataManager: FieldDelegate {
                 return 40
                 
             case .header:
+                let tableWidth = viewController?.tableView.bounds.width ?? 0
+                if tableWidth > 0 {
+                    return HeaderCell.fittingHeight(field: field,
+                                                    theme: campaign!.theme,
+                                                    width: tableWidth)
+                }
                 return Self.headerBlockHeight(field: field,
                                               theme: campaign!.theme,
                                               contentWidth: headerContentWidth,

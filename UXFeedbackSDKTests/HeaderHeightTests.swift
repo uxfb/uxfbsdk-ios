@@ -341,4 +341,59 @@ final class HeaderHeightTests: XCTestCase {
                                         "При ширине таблицы \(tableWidth) рассчитанная высота меньше требуемой — текст будет обрезан")
         }
     }
+
+    // MARK: - Строка хедера в реальной таблице
+
+    func testHeaderRowFitsContentAfterZeroWidthReload() throws {
+        let longDescription = "Ваши ответы помогут нам сделать приложение удобнее и понятнее. Мы внимательно читаем каждый отзыв и учитываем его при планировании новых функций. Опрос займёт не больше двух минут, а ваше мнение поможет тысячам других пользователей получить качественный сервис в ближайшем будущем"
+
+        let page = try Page(from: [
+            "id": "p1",
+            "fields": [
+                ["id": "fH", "type": "header",
+                 "value": "Расскажите, пожалуйста, насколько удобно вам было пользоваться нашим приложением сегодня",
+                 "description": longDescription]
+            ],
+            "buttons": [["id": "bNext", "type": "button", "value": "Ответить"]]
+        ])
+        let campaign = Campaign(campaignId: 1,
+                                theme: Theme(),
+                                pages: [page],
+                                type: .slidein,
+                                targeting: Targeting(value: "event"),
+                                transforms: [],
+                                autoclose: 0,
+                                privacy: nil,
+                                progress: false)
+
+        let vc = CampaignViewController()
+        vc.campaign = campaign
+        vc.completeHandler = { _, _ in }
+        vc.didCloseHandler = { }
+        vc.loadViewIfNeeded()
+
+        // Первая перезагрузка при нулевой ширине таблицы — как при презентации формы
+        vc.tableView.reloadData()
+        vc.tableView.layoutIfNeeded()
+
+        vc.view.frame = UIScreen.main.bounds
+        vc.view.layoutIfNeeded()
+        vc.viewDidLayoutSubviews()
+        vc.tableView.layoutIfNeeded()
+
+        let headerPath = IndexPath(row: 0, section: 0)
+        let rowRect = vc.tableView.rectForRow(at: headerPath)
+        XCTAssertGreaterThan(rowRect.height, 200, "Строка хедера схлопнулась")
+
+        guard let cell = vc.tableView.cellForRow(at: headerPath) as? HeaderCell else {
+            XCTFail("Нет ячейки хедера")
+            return
+        }
+        cell.layoutIfNeeded()
+        let maxLabelBottom = cell.contentView.subviews.compactMap { $0 as? UILabel }.map { $0.frame.maxY }.max() ?? 0
+        XCTAssertLessThanOrEqual(maxLabelBottom, rowRect.height + 1, "Текст вылезает за строку хедера")
+
+        let buttonRect = vc.tableView.rectForRow(at: IndexPath(row: 0, section: 1))
+        XCTAssertGreaterThanOrEqual(buttonRect.minY, rowRect.maxY - 1, "Кнопка наезжает на хедер")
+    }
 }

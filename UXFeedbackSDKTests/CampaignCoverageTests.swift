@@ -571,10 +571,7 @@ final class CampaignViewControllerTests: XCTestCase {
         XCTAssertTrue(cell is HeaderCell)
 
         let height = vc.tableView(vc.tableView, heightForRowAt: IndexPath(row: 0, section: 0))
-        XCTAssertEqual(height, UITableView.automaticDimension)
-
-        let estimated = vc.tableView(vc.tableView, estimatedHeightForRowAt: IndexPath(row: 0, section: 0))
-        XCTAssertGreaterThan(estimated, 80) // текст + картинка 80pt + отступы
+        XCTAssertGreaterThan(height, 80) // текст + картинка 80pt + отступы
     }
 
     // MARK: Delegate heights & views
@@ -586,11 +583,9 @@ final class CampaignViewControllerTests: XCTestCase {
             let indexPath = IndexPath(row: 0, section: section)
             let height = vc.tableView(vc.tableView, heightForRowAt: indexPath)
             let estimated = vc.tableView(vc.tableView, estimatedHeightForRowAt: indexPath)
+            XCTAssertGreaterThan(height, 0, "Секция \(section)")
             XCTAssertGreaterThan(estimated, 0, "Секция \(section)")
-            if section == 0 {
-                XCTAssertEqual(height, UITableView.automaticDimension, "Секция \(section)")
-            } else {
-                XCTAssertGreaterThan(height, 0, "Секция \(section)")
+            if section != 0 {
                 XCTAssertEqual(height, estimated, "Секция \(section)")
             }
         }

@@ -806,10 +806,6 @@ extension CampaignViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if tableView.bounds.width > 0,
-           dataManager?.fieldForRow(indexPath: indexPath).type == .header {
-            return UITableView.automaticDimension
-        }
         return dataManager?.heightForFieldCell(indexPath: indexPath) ?? 0
     }
     

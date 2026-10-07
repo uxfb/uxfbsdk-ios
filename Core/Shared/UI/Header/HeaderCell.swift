@@ -33,8 +33,26 @@ class HeaderCell: BaseCell {
     private var alignment: String = "left"
     private var position: String = "topHeader"
     private var isDefault: Bool = false
+    private var isSizingCell: Bool = false
     private var imageHeightConstraint: NSLayoutConstraint?
     private var imageWidthConstraint: NSLayoutConstraint?
+
+    private static let sizingCell: HeaderCell = {
+        let cell = HeaderCell(style: .default, reuseIdentifier: nil)
+        cell.isSizingCell = true
+        return cell
+    }()
+
+    static func fittingHeight(field: Field, theme: ThemeProtocol, width: CGFloat) -> CGFloat {
+        let cell = sizingCell
+        cell.field = field
+        cell.theme = theme
+        cell.updateUI()
+        let size = cell.systemLayoutSizeFitting(CGSize(width: width, height: UIView.layoutFittingCompressedSize.height),
+                                                withHorizontalFittingPriority: .required,
+                                                verticalFittingPriority: .fittingSizeLevel)
+        return ceil(size.height)
+    }
     
     override func setupSubviews() {
         contentView.addSubview(label)
@@ -221,7 +239,9 @@ class HeaderCell: BaseCell {
             self.position = position
             self.alignment = alignment
             self.updateImageConstraints()
-            self.updateImage(url: url)
+            if !isSizingCell {
+                self.updateImage(url: url)
+            }
         } else {
             self.headerImageView.image = nil
             imageHeightConstraint?.isActive = false
