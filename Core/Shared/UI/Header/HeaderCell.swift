@@ -34,6 +34,7 @@ class HeaderCell: BaseCell {
     private var position: String = "topHeader"
     private var isDefault: Bool = false
     private var imageHeightConstraint: NSLayoutConstraint?
+    private var imageWidthConstraint: NSLayoutConstraint?
     
     override func setupSubviews() {
         contentView.addSubview(label)
@@ -59,10 +60,12 @@ class HeaderCell: BaseCell {
         }
         
         let width = self.getImageConstraint(for: image.size )
-        
-        NSLayoutConstraint.activate([
-            headerImageView.widthAnchor.constraint(lessThanOrEqualToConstant: width)
-        ])
+
+        imageWidthConstraint?.isActive = false
+        let constraint = headerImageView.widthAnchor.constraint(lessThanOrEqualToConstant: width)
+        constraint.priority = UILayoutPriority(999)
+        imageWidthConstraint = constraint
+        constraint.isActive = true
     }
     
     private func getImageConstraint(for size: CGSize) -> CGFloat {
@@ -221,6 +224,8 @@ class HeaderCell: BaseCell {
             self.updateImage(url: url)
         } else {
             self.headerImageView.image = nil
+            imageHeightConstraint?.isActive = false
+            imageWidthConstraint?.isActive = false
             NSLayoutConstraint.activate([
                 label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
                 descriptionLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
